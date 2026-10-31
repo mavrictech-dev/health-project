@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se decide finalizar una estancia o circuito asistencial."]) --> N1
+    N1["Profesional clínico: Preparar resumen, indicaciones y pendientes"]
+    N2{"Sistema Health Project: ¿Cada pendiente tiene responsable/destino?"}
+    N3["Profesional clínico: Revisar y emitir alta clínica"]
+    N4["Paciente humano: Recibir documentos autorizados y confirmación registrada"]
+    N5["Asistente o enfermería: Registrar egreso físico y entrega de información"]
+    N6["Sistema Health Project: Cerrar ocupación y actualizar estado de recurso"]
+    N7["Recepción: Gestionar controles y trámites económicos separados"]
+    END(["Egreso documentado y seguimiento conservado; caja no determina el estado clínico."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> N7
+    N7 --> END
+    N2 -->|"No"| A1["Solicitar asignación antes de completar el plan de alta"]
+    A1 --> N1
+    N5 -->|"Salida aún no realizada"| A2["Conservar alta clínica y plaza ocupada con estado explícito"]
+    A2 --> E2(["Alta clínica emitida; egreso físico pendiente."])

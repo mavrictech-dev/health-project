@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se recibe pago, anticipo, respuesta de pasarela o devolución autorizada."]) --> N1
+    N1["Caja y administración financiera: Abrir caja o seleccionar operación en caja vigente"]
+    N2["Caja y administración financiera: Identificar pagador, cargos/anticipo y medios de pago"]
+    N3{"Sistema Health Project: ¿Pago confirmado y referencia sin duplicar?"}
+    N4["Caja y administración financiera: Asignar importes y confirmar registro"]
+    N5["Sistema Health Project: Actualizar saldo y conservar comprobación del medio"]
+    N6["Caja y administración financiera: Conciliar y cerrar caja con diferencias registradas"]
+    END(["Pago/devolución y caja conciliados o pendientes reales visibles."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No; pasarela pendiente"| A1["Mantener pago pendiente hasta confirmación verificable"]
+    A1 --> E1(["Sin acreditar cobro."])
+    N4 -->|"Devolución"| A2["Referenciar pago original, autorizar monto/motivo y registrar reverso"]
+    A2 --> N5
+    N6 -->|"Diferencia"| A3["Registrar diferencia y revisión por responsable"]
+    A3 --> E3(["Cierre registrado con revisión pendiente."])

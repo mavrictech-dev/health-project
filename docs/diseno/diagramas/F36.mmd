@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Farmacia recibe orden o devolución autorizada."]) --> N1
+    N1["Farmacia: Verificar paciente, orden y cantidad pendiente"]
+    N2["Farmacia: Seleccionar producto/presentación y lotes compatibles"]
+    N3{"Sistema Health Project: ¿Stock y datos de entrega válidos?"}
+    N4["Farmacia: Confirmar cantidad total o parcial entregada"]
+    N5["Sistema Health Project: Registrar dispensación y movimiento de stock una sola vez"]
+    N6["Sistema Health Project: Actualizar pendiente y evidencia de entrega"]
+    END(["Entrega/devolución trazable; dispensar no prueba administración."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Mantener pendiente y mostrar alternativas operativas autorizadas"]
+    A1 --> N2
+    N4 -->|"Devolución"| A2["Registrar referencia original, cantidad y destino del producto según política"]
+    A2 --> N5
+    N4 -->|"Cancelar"| A3["Liberar reserva sin registrar entrega"]
+    A3 --> E3(["Sin dispensación."])

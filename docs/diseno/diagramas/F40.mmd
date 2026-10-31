@@ -1,0 +1,23 @@
+flowchart TD
+    START(["Un profesional decide compartir un documento con paciente/responsable."]) --> N1
+    N1["Profesional clínico: Seleccionar documento y versión exacta"]
+    N2["Profesional clínico: Elegir destinatario verificado y alcance"]
+    N3{"Sistema Health Project: ¿Contenido y publicación autorizados?"}
+    N4["Profesional clínico: Revisar lo que verá el destinatario y confirmar"]
+    N5["Sistema Health Project: Registrar publicación y notificar con información mínima"]
+    N6["Sistema Health Project: Conservar estado de entrega y acceso auditado"]
+    END(["Publicación concreta autorizada; no abre la historia interna completa."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Explicar bloqueo y revisar vínculo o documento"]
+    A1 --> N1
+    N4 -->|"Cancelar"| A2["Conservar documento interno sin publicar"]
+    A2 --> E2(["Documento no publicado."])
+    N5 -->|"Versión corregida"| A3["Publicar nueva versión explícita y marcar sustitución visible sin borrar la anterior"]
+    A3 --> N6
+    N6 -->|"Retirar publicación"| A4["Revocar acceso futuro con motivo; preservar documento interno y auditoría"]
+    A4 --> E4(["Publicación retirada."])

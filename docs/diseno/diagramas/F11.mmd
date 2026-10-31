@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se registra un animal para atención veterinaria."]) --> N1
+    N1["Recepción: Buscar animal por identificador y responsable sin exigir microchip"]
+    N2{"Sistema Health Project: ¿Existe animal coincidente verificado?"}
+    N3["Recepción: Registrar especie, perfil, nacimiento conocido o estimado"]
+    N4["Representante o responsable: Aportar datos y facultades del responsable, contacto y pagador"]
+    N5["Recepción: Verificar relaciones y preferencias de contacto"]
+    N6["Sistema Health Project: Guardar animal y relaciones con vigencia"]
+    END(["Animal registrado; persona responsable y paciente conservan identidades distintas."])
+    N1 --> N2
+    N2 -->|"No"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N2 -->|"Sí"| A1["Seleccionar ficha del mismo animal; confirmar identidad"]
+    A1 --> E1(["Animal existente seleccionado."])
+    N5 -->|"Vínculo no verificado"| A2["Registrar declaración pendiente sin conceder acceso al portal"]
+    A2 --> N6

@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se crea un espacio nuevo para clínica o profesional independiente."]) --> N1
+    N1["Administrador de la organización: Registrar organización, vertical y emisor autorizado"]
+    N2{"Sistema Health Project: ¿Datos de identidad y registro consistentes?"}
+    N3["Administrador de la organización: Crear sucursales o sucursal lógica personal"]
+    N4["Administrador de la organización: Configurar horarios, recursos y especialidades"]
+    N5["Administrador de la organización: Invitar profesionales y revisar configuración mínima"]
+    N6{"Sistema Health Project: ¿Configuración mínima completa?"}
+    N7["Sistema Health Project: Activar espacio y mostrar tareas pendientes"]
+    END(["Espacio configurado para iniciar recorridos habilitados."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 -->|"Sí"| N7
+    N7 --> END
+    N2 -->|"No"| A1["Presentar discrepancias para corrección; no duplicar organización"]
+    A1 --> N1
+    N6 -->|"No"| A2["Guardar configuración incompleta y señalar faltantes"]
+    A2 --> N3

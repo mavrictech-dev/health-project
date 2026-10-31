@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Recepción o profesional agenda una atención."]) --> N1
+    N1["Recepción: Seleccionar paciente, servicio, sucursal y profesional"]
+    N2["Sistema Health Project: Presentar horarios y recursos compatibles"]
+    N3["Recepción: Elegir intervalo y datos mínimos de la cita"]
+    N4{"Sistema Health Project: ¿Disponibilidad vigente y recursos libres?"}
+    N5["Sistema Health Project: Confirmar reserva sin duplicarla"]
+    N6["Sistema Health Project: Mostrar comprobante de cita y notificación según preferencias"]
+    END(["Cita reservada con organización, profesional y lugar identificados."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"No"| A1["Actualizar disponibilidad y ofrecer alternativas"]
+    A1 --> N2
+    N3 -->|"Cancelar"| A2["Salir sin reservar"]
+    A2 --> E2(["Sin cita creada."])
+    N6 -->|"Notificación fallida"| A3["Conservar cita confirmada y registrar aviso pendiente"]
+    A3 --> E3(["Cita reservada; comunicación pendiente."])

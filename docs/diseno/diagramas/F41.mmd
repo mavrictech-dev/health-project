@@ -1,0 +1,23 @@
+flowchart TD
+    START(["Se indica control, se recibe respuesta o queda un pendiente después de una visita."]) --> N1
+    N1["Profesional clínico: Crear tarea de control, contacto o respuesta esperada"]
+    N2["Sistema Health Project: Asignar responsable/suplente y fecha operativa"]
+    N3["Recepción: Enviar mensaje o gestionar cita según autorización"]
+    N4["Paciente humano: Responder o confirmar solicitud"]
+    N5{"Sistema Health Project: ¿Respuesta resuelve la tarea?"}
+    N6["Profesional clínico: Registrar revisión, actuación o siguiente tarea"]
+    N7["Sistema Health Project: Cerrar tarea resuelta y conservar pendientes no resueltos"]
+    END(["Seguimiento resuelto o pendiente trazable; no confundir mensaje enviado con atención realizada."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"Sí"| N6
+    N6 --> N7
+    N7 --> END
+    N5 -->|"No"| A1["Mantener pendiente y asignar siguiente actuación"]
+    A1 --> N6
+    N4 -->|"Sin respuesta"| A2["Aplicar política de seguimiento configurada con responsable; no marcar completada"]
+    A2 --> E2(["Seguimiento pendiente o cerrado con motivo explícito."])
+    N3 -->|"Canal no consentido"| A3["Usar canal autorizado o dejar tarea para contacto alternativo"]
+    A3 --> E3(["Comunicación pendiente."])

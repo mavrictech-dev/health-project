@@ -1,0 +1,431 @@
+# ID de flujo | patrón | operación específica | resultado visible previsto
+# Orden dentro de cada flujo = A01, A02...; generar_plan.py comprueba identidad y cantidad.
+F01|A|identity.login|Inicia sesión con una persona ficticia y muestra sus espacios permitidos.
+F01|S|identity.selectWorkspace|Selecciona una membresía de demo válida y muestra sus sucursales.
+F01|C|identity.enterWorkspace|Activa contexto y abre el inicio correspondiente al rol elegido.
+F02|F|context.chooseWorkspace|Abre selección de organización y resuelve antes los borradores abiertos.
+F02|F|context.chooseBranch|Abre selección de sucursal dentro de la organización activa.
+F02|R|context.saveAndSwitch|Guarda borrador válido, cambia contexto y vuelve a consultar vistas del destino.
+F02|R|context.discardDraft|Descarta solo cambios locales tras revisión; conserva registros ya guardados.
+F02|L|context.keepCurrent|Cierra la revisión de cambio y conserva contexto y captura actuales.
+F03|N|identity.openRecovery|Abre la ruta de recuperación con cuenta ficticia de ejemplo.
+F03|J|identity.requestRecovery|Crea un trabajo simulado y muestra un enlace o código de recuperación de demo.
+F03|C|identity.completeRecovery|Actualiza el estado de recuperación demo sin almacenar una contraseña real.
+F03|N|identity.returnToLogin|Vuelve al acceso de origen preservando la elección profesional o portal.
+F04|A|identity.resumeLogin|Reanuda identidad ficticia manteniendo un borrador local separado.
+F04|J|drafts.retrySave|Reintenta el mismo guardado simulado sin duplicar la revisión.
+F04|V|drafts.compareRevisions|Muestra versión base, local y remota ficticia y sus diferencias.
+F04|R|drafts.saveResolution|Confirma la combinación elegida y crea una revisión resuelta explícita.
+F04|L|drafts.leaveEditor|Revisa salida con captura pendiente y vuelve a una ruta segura.
+F05|W|organization.beginSetup|Abre alta guiada de organización ficticia con datos y pasos esenciales.
+F05|C|organization.saveSetupStep|Guarda el paso válido del alta y avanza conservando el resumen.
+F05|F|organization.addBranch|Añade sucursal con zona horaria y datos de atención al espacio de demo.
+F05|F|membership.inviteTeam|Captura integrantes y crea invitaciones simuladas visibles en el equipo.
+F05|R|organization.activate|Activa organización configurada y habilita su contexto en los selectores.
+F06|F|membership.inviteProfessional|Crea invitación demo con rol, sucursales y alcance propuestos.
+F06|R|membership.acceptInvitation|Vincula la identidad ficticia invitada y registra aceptación.
+F06|V|membership.reviewCredentials|Muestra credenciales ficticias y estado de revisión del integrante.
+F06|R|membership.activate|Activa membresía según revisión y recalcula sus acciones disponibles.
+F06|J|membership.resendInvitation|Crea un intento de envío simulado para la misma invitación, sin otra membresía.
+F07|F|permissions.editDraft|Abre edición de alcance y permisos de la membresía seleccionada.
+F07|V|permissions.previewImpact|Muestra vistas, sucursales y tareas afectadas por el cambio propuesto.
+F07|R|permissions.commit|Aplica los permisos demo revisados y actualiza la disponibilidad por acción.
+F07|R|membership.revoke|Revoca acceso futuro conservando autoría y muestra pendientes a reasignar.
+F07|F|membership.assignSubstitute|Reasigna pendientes elegidos a un miembro vigente del mismo espacio.
+F08|F|templates.createRevision|Crea borrador de una versión con campos, perfil y atlas referenciados.
+F08|V|templates.preview|Muestra formulario y gráficos con respuestas ficticias de ejemplo.
+F08|R|templates.submitReview|Pasa el borrador a revisión demo con responsable y evidencia preparada.
+F08|R|templates.publishRevision|Publica versión inmutable para nuevas capturas sin cambiar visitas anteriores.
+F08|R|templates.enablePackage|Habilita el paquete revisado para especialidades y sucursales indicadas.
+F08|R|templates.retireRevision|Retira una versión de nuevas capturas y conserva su lectura histórica.
+F09|F|availability.addSchedule|Añade horario de profesional con sucursal, lugar y zona horaria.
+F09|F|availability.blockInterval|Registra bloqueo y muestra las reservas afectadas antes de confirmarlo.
+F09|F|availability.addResource|Añade consultorio o recurso con capacidad y dominio apropiado.
+F09|V|availability.previewImpact|Presenta citas, recursos y conflictos de los cambios pendientes.
+F09|R|availability.publish|Publica disponibilidad ficticia y actualiza horarios ofrecidos en agenda y portal.
+F10|I|patients.searchHuman|Filtra humanos de la organización por identidad, contacto o identificador ficticio.
+F10|F|patients.beginHuman|Abre alta humana con búsqueda de coincidencias y borrador administrativo.
+F10|S|patients.selectExisting|Usa la ficha existente seleccionada y evita crear un duplicado.
+F10|F|relationships.addRepresentative|Captura relación y alcance del representante en el borrador o ficha elegidos.
+F10|C|patients.saveHuman|Guarda paciente humano y relaciones válidas; aparece en directorio y selectores.
+F11|F|patients.beginAnimal|Abre alta de animal con especie, identificación y datos específicos.
+F11|I|relationships.searchResponsible|Busca personas responsables ficticias dentro del alcance permitido.
+F11|F|relationships.addResponsible|Captura una relación diferenciada de propiedad, autorización y contacto.
+F11|C|patients.saveAnimal|Guarda animal y relaciones; permite seleccionarlo en la agenda veterinaria.
+F11|J|relationships.requestVerification|Crea verificación de demo pendiente y muestra su resultado simulado.
+F12|F|relationships.editDraft|Abre relación seleccionada con alcance, tipo y datos actuales.
+F12|R|relationships.verify|Marca verificación ficticia con actor, fecha y evidencia de ejemplo.
+F12|F|relationships.setValidity|Captura fechas de vigencia en el borrador de relación.
+F12|R|relationships.revoke|Revoca la relación y recalcula contenido accesible del portal demo.
+F12|R|relationships.commitChange|Guarda los cambios revisados de alcance y vigencia sin borrar historia.
+F12|F|relationships.requestRevocation|Crea solicitud de revocación visible para el rol interno correspondiente.
+F13|V|patients.compareDuplicates|Muestra fichas, documentos identificadores ficticios y referencias lado a lado.
+F13|S|patients.chooseSurvivor|Selecciona la ficha conservada en una propuesta de fusión, sin fusionar aún.
+F13|V|patients.previewMerge|Muestra atenciones, citas y relaciones que se consolidarán y discrepancias.
+F13|R|patients.merge|Consolida referencias en la misma organización y conserva fichas fuente y evento.
+F13|F|patients.requestCorrection|Registra solicitud de corrección con motivo sin ejecutar una fusión dudosa.
+F14|F|populations.create|Crea población veterinaria con tipo, alcance y ubicación ficticios.
+F14|F|populations.addIndividual|Añade individuo con inicio y fin de pertenencia, sin duplicar paciente.
+F14|F|populations.recordTransfer|Registra salida y entrada de pertenencia con fechas y poblaciones.
+F14|F|populations.recordExit|Registra baja de pertenencia y motivo; conserva historia del individuo.
+F14|C|populations.commitMemberships|Guarda intervalos revisados y actualiza integrantes de la población.
+F15|I|patients.search|Filtra por identificadores y dominio dentro de la organización activa.
+F15|N|patients.openProfile|Abre ficha del ID elegido, conservando lista y filtro de origen.
+F15|N|record.openHistory|Abre historia longitudinal compartida entre sucursales autorizadas del espacio.
+F15|I|record.filterDates|Filtra eventos por rango sin modificar el expediente.
+F15|V|record.showProvenance|Muestra organización custodio, sucursal de origen, autor y versiones del evento.
+F16|F|appointments.beginBooking|Abre borrador de cita con paciente, servicio, profesional y contexto.
+F16|V|appointments.showAvailability|Muestra horarios calculados desde disponibilidad, bloqueos y reservas demo.
+F16|R|appointments.reserve|Confirma reserva única y actualiza agenda; si hay conflicto mantiene captura.
+F16|V|appointments.showConfirmation|Muestra reserva, paciente, horario, lugar y estado confirmados.
+F16|J|appointments.sendReminder|Crea un recordatorio simulado y muestra estado de entrega en la cita.
+F17|W|requests.beginPortalBooking|Abre solicitud desde portal para vínculos vigentes de la persona ficticia.
+F17|S|requests.choosePatient|Selecciona el paciente o animal autorizado y actualiza servicios disponibles.
+F17|V|requests.showSlots|Muestra horarios de la organización y perfil de solicitud elegidos.
+F17|R|requests.submit|Crea solicitud revisada visible en portal y bandeja de recepción.
+F17|R|requests.acceptAlternative|Acepta oferta vigente y crea la reserva enlazada a la solicitud.
+F18|R|appointments.confirmAttendance|Registra confirmación de asistencia y actualiza estado en clínica y portal.
+F18|F|appointments.beginReschedule|Abre nueva selección de horario conservando la cita original hasta confirmar.
+F18|R|appointments.cancel|Cancela con motivo, libera intervalo y conserva historial de la cita.
+F18|R|appointments.commitReschedule|Mueve la reserva si el horario sigue libre y registra cambio de fecha.
+F18|L|appointments.keepBooking|Cierra propuesta sin modificar la reserva ni liberar su intervalo.
+F19|F|waitlist.add|Registra necesidad, prioridad de ejemplo y disponibilidad aceptable del paciente.
+F19|F|waitlist.offerSlot|Crea oferta con intervalo y vigencia y la muestra al destinatario demo.
+F19|R|waitlist.acceptOffer|Convierte oferta vigente en cita sin reservar dos veces el recurso.
+F19|R|waitlist.rejectOffer|Registra rechazo y libera la oferta conservando posición según regla demo.
+F19|R|waitlist.leave|Cierra participación con motivo sin cancelar otras citas del paciente.
+F20|F|queue.recordArrival|Registra llegada ligada a cita y verifica paciente y contexto.
+F20|F|queue.beginWalkIn|Captura ingreso sin cita y servicio sin inventar una reserva anterior.
+F20|C|queue.enqueue|Crea entrada de cola única y la muestra a recepción y profesional asignado.
+F20|C|queue.call|Cambia entrada a llamada y muestra quién la llamó y cuándo.
+F20|R|queue.recordWithdrawal|Registra retiro con motivo y resuelve su entrada de cola.
+F20|C|encounters.startFromQueue|Crea o abre atención ligada a la llegada sin duplicar un encuentro activo.
+F21|C|encounters.start|Activa atención del paciente elegido con profesional y sucursal de origen.
+F21|C|encounters.saveDraft|Guarda respuestas y anotaciones como borrador de una revisión clínica.
+F21|V|encounters.reviewSummary|Presenta contenido, pendientes, documentos y campos faltantes antes del cierre.
+F21|R|encounters.finalize|Cierra la visita revisada y conserva pendientes asignados y versiones de documentos.
+F21|C|encounters.keepPending|Mantiene atención pendiente con motivo o tarea sin declarar cierre satisfactorio.
+F22|S|forms.openSection|Activa sección de la plantilla versionada y conserva el resto de respuestas.
+F22|F|forms.addMeasurement|Captura observación con unidad, fecha, método y origen cuando corresponde.
+F22|S|forms.markUnknown|Distingue dato desconocido o no disponible de un valor negativo o normal.
+F22|C|forms.saveDraft|Guarda respuestas contra su versión de esquema sin cambiar la plantilla original.
+F22|V|forms.compareVersions|Muestra diferencias de respuestas y esquema entre versiones o visitas elegidas.
+F23|G|anatomy.chooseView|Cambia atlas o vista compatible con órgano, dominio y especie.
+F23|G|anatomy.selectRegion|Selecciona una estructura con ID semántico y lateralidad; se resalta y anuncia.
+F23|F|anatomy.addFinding|Captura hallazgo ligado a estructura y visita con estado y descripción.
+F23|F|anatomy.linkProcedure|Vincula procedimiento registrado a la anotación sin marcarlo realizado por defecto.
+F23|B|anatomy.undoLocal|Revierte el último cambio local antes de guardar, sin alterar versiones confirmadas.
+F23|V|anatomy.compareEvolution|Compara anotaciones equivalentes en visitas con leyenda y tabla de cambios.
+F24|G|dental.selectTooth|Selecciona pieza válida de la dentición humana o atlas de especie elegido.
+F24|G|dental.selectSurface|Selecciona cara disponible y muestra pieza, cara y leyenda activas.
+F24|F|dental.recordCondition|Captura condición semántica por pieza/cara con fecha y estado registrado.
+F24|F|dental.recordProcedure|Registra procedimiento y su estado, vinculado al hallazgo y atención.
+F24|V|dental.showChanges|Muestra cambios locales o de revisión con tabla por pieza/cara.
+F24|V|dental.compareOdontograms|Compara denticiones y versiones compatibles y muestra diferencias de registros.
+F25|F|observations.add|Captura valor, unidad, tiempo y origen de medición sin convertir datos desconocidos.
+F25|S|observations.chooseUnit|Selecciona unidad permitida y explica cualquier conversión de demo aplicada.
+F25|F|instruments.apply|Abre instrumento versionado con respuestas y resultado de demostración identificado.
+F25|V|observations.showReference|Muestra referencia, población, unidad y origen del ejemplo sin inferir diagnóstico.
+F25|S|observations.showTrend|Cambia a serie temporal filtrada del mismo parámetro y unidad compatible.
+F25|S|observations.showTable|Presenta los mismos valores, fechas y unidades en tabla equivalente.
+F26|F|attachments.attachLocal|Selecciona archivo ficticio, valida tipo/tamaño y lo asocia a la visita al guardar.
+F26|V|attachments.preview|Muestra el archivo local de ejemplo y sus metadatos sin enviarlo a un proveedor.
+F26|V|attachments.compareImages|Presenta dos imágenes ficticias elegidas con fecha y controles de comparación.
+F26|X|attachments.download|Descarga el archivo local permitido por contexto de demo.
+F26|R|attachments.detach|Retira asociación revisada sin borrar otras referencias o versiones que la usan.
+F27|V|documents.review|Muestra revisión concreta, autor, contenido y comprobaciones antes de firma demo.
+F27|R|documents.signRevisionDemo|Fija la revisión como firmada de demostración con evidencia ficticia visible.
+F27|L|documents.returnToDraft|Vuelve a edición si la revisión aún no está firmada y conserva captura.
+F27|V|documents.showSignatureEvidence|Muestra identidad, instante y versión de la firma simulada, rotulada como demo.
+F28|F|documents.beginAddendum|Abre adenda vinculada al documento firmado y exige motivo de corrección.
+F28|V|documents.showOriginal|Muestra revisión original inmutable de demo junto a su procedencia.
+F28|V|documents.reviewCorrection|Compara original, motivo y contenido de adenda antes de confirmar.
+F28|R|documents.signAddendumDemo|Fija adenda simulada y actualiza cadena de versiones sin sobrescribir original.
+F28|V|documents.showVersions|Presenta revisión original y adendas en orden con estado y autor.
+F29|F|episodes.create|Crea episodio longitudinal del paciente con tipo, inicio y responsable.
+F29|F|history.addBackground|Añade antecedente con origen, fecha y grado de certeza registrado.
+F29|F|problems.record|Registra problema con estado y vínculo a la atención cuando corresponde.
+F29|F|allergies.record|Registra alergia o estado desconocido con sustancia, reacción y procedencia.
+F29|F|episodes.linkEncounter|Vincula atención existente del mismo paciente y espacio al episodio elegido.
+F29|F|problems.updateState|Actualiza estado con fecha y motivo, conservando el evento anterior.
+F30|F|orders.begin|Abre orden de estudio, procedimiento o remisión con paciente y atención.
+F30|S|orders.chooseService|Selecciona servicio compatible y muestra requisitos de captura del ejemplo.
+F30|R|orders.issue|Emite orden demo y genera las tareas requeridas sin declararlas completadas.
+F30|F|orders.createReferral|Crea remisión con resumen, destino ficticio y entregas previstas.
+F30|N|orders.showTasks|Abre lista filtrada de tareas y estados ligados a la orden.
+F30|R|orders.cancel|Cancela lo permitido con motivo y expone tareas ya realizadas que se conservan.
+F31|C|diagnostic.acceptTask|Asigna tarea válida al equipo o persona demo y cambia su estado.
+F31|F|specimens.recordCollection|Registra obtención con identificador, tipo, actor, fecha y condiciones de ejemplo.
+F31|P|specimens.printLabel|Abre impresión de identificación ficticia con paciente, orden y muestra.
+F31|R|specimens.accept|Registra aceptación de muestra según revisión, con trazabilidad.
+F31|R|specimens.reject|Registra rechazo y motivo y genera pendiente apropiado sin resultado válido falso.
+F31|F|specimens.recordHandoff|Registra entrega y receptor de la muestra manteniendo cadena de eventos.
+F32|F|laboratory.enterResults|Captura valores, unidades, referencias y estado para la muestra elegida.
+F32|C|laboratory.savePreliminary|Guarda versión preliminar identificada sin publicarla como final.
+F32|R|laboratory.issueReport|Emite informe demo y crea pendiente de revisión para el profesional.
+F32|F|laboratory.correctReport|Abre corrección vinculada a la revisión emitida conservando su original.
+F32|V|laboratory.showTrace|Muestra orden, muestra, estados, revisiones y responsables del informe.
+F33|N|imaging.openStudy|Abre estudio ficticio con paciente, orden, modalidad y adquisiciones asociadas.
+F33|F|imaging.linkAcquisition|Asocia archivo o adquisición demo tras revisar identidad y orden.
+F33|C|imaging.saveReport|Guarda borrador del informe de imágenes de la revisión activa.
+F33|R|imaging.signReportDemo|Firma informe de demostración y crea pendiente clínico de revisión.
+F33|V|imaging.viewImages|Muestra visor de material ficticio preparado, metadatos y controles locales.
+F33|F|imaging.requestReconciliation|Crea tarea por discrepancia de identidad o asociación sin forzar una coincidencia.
+F34|V|results.review|Muestra informe, orden y contexto clínico con su versión actual.
+F34|F|results.recordReview|Registra revisión explícita del profesional y estado del pendiente.
+F34|F|results.assignFollowup|Crea seguimiento con responsable y fecha ligado al resultado revisado.
+F34|F|results.reassignPending|Reasigna pendiente a miembro vigente y conserva responsables anteriores.
+F34|F|results.requestClarification|Crea solicitud de aclaración ligada al informe y visible al equipo emisor.
+F35|F|medication.reconcile|Compara tratamientos registrados y captura conciliación con procedencia.
+F35|F|prescriptions.addItem|Añade medicamento con dosis, unidad, vía, frecuencia y duración de ejemplo.
+F35|C|prescriptions.saveDraft|Guarda receta en borrador ligada a la visita y paciente.
+F35|V|prescriptions.review|Muestra ítems, datos del paciente y alertas registradas antes de emitir.
+F35|R|prescriptions.issue|Emite receta de demo, fija versión y la habilita para dispensación simulada.
+F35|V|prescriptions.showVersions|Muestra borradores, receta emitida y correcciones con autor y fecha.
+F36|F|dispensing.prepare|Abre selección de cantidades y productos para la receta emitida.
+F36|S|dispensing.chooseLot|Selecciona lote permitido y muestra existencia, vencimiento y cantidades.
+F36|R|dispensing.deliverPartial|Registra entrega parcial y movimiento de stock; conserva saldo por dispensar.
+F36|R|dispensing.confirm|Confirma cantidades revisadas y reduce stock una sola vez por operación.
+F36|F|dispensing.return|Registra devolución vinculada a entrega con estado y movimiento correspondiente.
+F37|V|administration.verifyOrder|Muestra orden vigente, paciente, dosis y verificaciones registradas para revisar.
+F37|F|administration.recordGiven|Captura dosis administrada, hora y actor y actualiza historial de cuidados.
+F37|F|administration.recordNotGiven|Registra no realizada con motivo; no incrementa dosis administradas.
+F37|F|administration.requestReview|Crea pendiente de revisión de orden o dosis para el profesional.
+F37|V|administration.showHistory|Presenta dosis realizadas y excepciones con orden y fechas.
+F38|F|documents.createDraft|Abre documento basado en plantilla con emisor, paciente y revisión.
+F38|V|documents.preview|Muestra contenido preparado, destinatario y formato de impresión.
+F38|F|consent.capture|Registra alcance, participante, evidencia ficticia y estado del consentimiento.
+F38|F|consent.recordDecision|Registra aceptación, rechazo o retiro con fecha y alcance explícitos.
+F38|R|documents.close|Cierra la revisión válida del documento sin confundirla con publicación portal.
+F38|F|documents.chooseDelivery|Define canal y destinatario de entrega demo sin envío real automático.
+F39|F|portal.invite|Crea invitación ficticia asociada a una identidad y paciente o animal.
+F39|F|portal.defineScope|Captura contenido, acciones y vigencia de la delegación propuesta.
+F39|R|portal.verifyIdentityDemo|Registra verificación de ejemplo de identidad y relación con evidencia preparada.
+F39|R|portal.acceptLink|Activa vínculo demo revisado y habilita su selector en el portal.
+F39|R|portal.revokeDelegation|Revoca alcance futuro y recalcula citas y publicaciones visibles de la sesión.
+F40|W|publication.prepare|Abre selección de versión, destinatarios y alcance de publicación, aún privada.
+F40|V|publication.previewRecipient|Muestra exactamente el contenido que vería el destinatario elegido.
+F40|R|publication.publish|Publica versión revisada solo a vínculos vigentes y la muestra en el portal.
+F40|V|publication.showDeliveries|Muestra publicación y trabajos de entrega simulados con estado y destinatarios.
+F40|R|publication.withdraw|Retira visibilidad futura de la publicación con motivo y conserva evidencia demo.
+F41|F|followup.scheduleControl|Programa control o solicitud con fecha y vínculo a la atención o resultado.
+F41|F|followup.createTask|Crea pendiente con propósito, prioridad de ejemplo y vencimiento.
+F41|F|followup.assignOwner|Asigna pendiente a un responsable vigente y lo muestra en su bandeja.
+F41|F|messages.sendDemo|Guarda mensaje en conversación de demo y crea entrega simulada con destinatario.
+F41|F|messages.recordReply|Registra respuesta recibida ficticia y la vincula a conversación y tarea.
+F41|R|followup.resolve|Resuelve tarea con resultado y conserva su historial y seguimiento asociado.
+F41|F|messages.replyDemo|Añade respuesta del paciente o responsable autorizado, visible a la bandeja interna.
+F42|F|estimates.create|Crea presupuesto versionado con paciente, servicios y pagador propuestos.
+F42|F|estimates.addStage|Añade etapa, partidas y condiciones de ejemplo sin crear cargos automáticamente.
+F42|F|estimates.requestDiscount|Crea solicitud de descuento y estado de aprobación, sin aplicarlo aún.
+F42|R|estimates.sendDemo|Fija versión enviada, registra entrega simulada y la muestra al destinatario portal.
+F42|R|estimates.recordAcceptance|Registra aceptación de una versión concreta con actor, fecha y condiciones.
+F42|F|estimates.newRevision|Copia una versión a un borrador nuevo conservando condiciones anteriores.
+F43|F|charges.addDraft|Captura cargo, servicio, precio y procedencia ligado a la cuenta del paciente.
+F43|V|charges.reviewProposals|Muestra cargos sugeridos por actuaciones sin contabilizarlos automáticamente.
+F43|R|charges.confirm|Confirma cargo revisado y actualiza cuenta y saldo por cobrar.
+F43|F|charges.adjust|Registra ajuste con motivo y recalcula saldo preservando la partida anterior.
+F43|R|charges.reverse|Crea reverso ligado al cargo y motivo, sin eliminar evidencia del movimiento.
+F43|N|accounts.open|Abre cuenta con cargos, pagos, anticipos y saldo derivado de movimientos.
+F44|F|cash.open|Abre caja demo con sucursal, responsable y saldo inicial de ejemplo.
+F44|F|payments.recordDemo|Registra pago ficticio revisado y asignación a cuenta; actualiza saldo y caja.
+F44|F|payments.allocateAdvance|Asigna anticipo disponible sin exceder su saldo ni duplicar aplicación.
+F44|R|payments.reconcileDemo|Registra conciliación de un pago simulado y conserva diferencias explícitas.
+F44|F|payments.requestRefund|Crea solicitud de devolución con movimiento original, cantidad y motivo.
+F44|R|payments.confirmRefundDemo|Confirma devolución ficticia y su reverso de saldo/caja una sola vez.
+F44|R|cash.close|Cierra caja con arqueo, resumen y diferencias registradas.
+F45|F|invoices.prepareDemo|Prepara comprobante ficticio con emisor, destinatario y cargos elegidos.
+F45|V|invoices.preview|Muestra contenido e importes del comprobante antes de emisión simulada.
+F45|R|invoices.issueDemo|Crea comprobante y trabajo externo demo pendiente, sin cambiar por sí solo el cobro.
+F45|J|invoices.checkDemoStatus|Avanza o consulta trabajo fiscal simulado y muestra respuesta preparada.
+F45|F|invoices.handleRejection|Abre revisión del rechazo y correcciones permitidas conservando el intento original.
+F45|F|invoices.createCorrection|Crea documento correctivo ficticio ligado al comprobante y su motivo.
+F46|C|settlements.generateProposal|Genera propuesta desde actuaciones y reglas ficticias del periodo seleccionado.
+F46|V|settlements.showDetail|Muestra partidas, regla, base y ajustes de honorarios de la propuesta.
+F46|F|settlements.adjust|Registra ajuste justificado sin modificar actuaciones clínicas fuente.
+F46|R|settlements.approve|Fija liquidación aprobada con importe y periodo revisados.
+F46|F|settlements.recordPaymentDemo|Registra pago ficticio de liquidación sin efectuar transferencia externa.
+F46|X|settlements.deliverDetail|Genera detalle local de la liquidación y registra entrega de demo.
+F47|F|purchasing.createRequest|Crea solicitud con productos, cantidades y motivo para aprobación.
+F47|R|purchasing.approve|Aprueba compra revisada dentro del alcance demo y conserva solicitud fuente.
+F47|R|purchasing.issueOrder|Emite orden de compra ficticia con proveedor y condiciones de ejemplo.
+F47|F|purchasing.receive|Registra recepción, lote, vencimiento y cantidades; crea entrada de stock.
+F47|F|purchasing.recordDiscrepancy|Registra diferencia entre pedido y recepción sin forzar cumplimiento.
+F47|N|purchasing.showPending|Abre solicitudes, órdenes y recepciones pendientes filtradas.
+F48|F|inventory.consume|Registra consumo ligado a actuación o motivo y reduce lote disponible.
+F48|F|inventory.transfer|Prepara transferencia de cantidades entre almacenes y estado en tránsito.
+F48|R|inventory.confirmReceipt|Confirma recepción de transferencia y actualiza ambos almacenes una sola vez.
+F48|F|inventory.requestAdjustment|Crea ajuste propuesto con cantidad, lote, evidencia ficticia y motivo.
+F48|R|inventory.approveAdjustment|Aplica ajuste revisado y recalcula existencias con evento de trazabilidad.
+F48|R|inventory.reverseMovement|Crea movimiento reverso permitido sin borrar historial ni crear stock duplicado.
+F49|F|admissions.request|Crea solicitud con paciente, indicación, dominio y necesidades de recurso.
+F49|V|occupancy.showPlaces|Muestra camas o jaulas compatibles y ocupaciones vigentes.
+F49|R|occupancy.reserve|Reserva plaza compatible sin solapamiento de ocupación.
+F49|R|admissions.confirm|Crea estancia y ocupación activas para la solicitud revisada.
+F49|F|admissions.recordReception|Registra recepción en unidad con responsable y comprobaciones de ejemplo.
+F49|R|admissions.cancelRequest|Cancela solicitud o reserva permitida y libera recurso; conserva motivo.
+F50|F|care.record|Registra cuidado con fecha, actor, orden o propósito y observaciones.
+F50|F|care.recordException|Conserva excepción y motivo, sin marcar cuidado completado.
+F50|W|transfers.prepare|Prepara traslado con origen, destino, receptor y pendientes de la estancia.
+F50|W|handover.prepare|Construye resumen de turno con tareas, medicación y eventos registrados.
+F50|R|handover.accept|Registra aceptación por receptor demo y entrega de responsabilidades revisadas.
+F50|N|care.showPending|Abre bandeja filtrada de cuidados, resultados y tareas de la estancia.
+F51|F|emergency.register|Registra urgencia y encuentro con identidad conocida o temporal explícita.
+F51|F|emergency.classify|Captura clasificación realizada por profesional; no calcula prioridad clínica real.
+F51|F|emergency.reevaluate|Añade reevaluación fechada sin reemplazar la inicial.
+F51|F|emergency.setDestination|Registra destino propuesto y sus requisitos de recepción.
+F51|R|emergency.confirmTransfer|Confirma entrega al destino demo y actualiza estado sin duplicar estancia.
+F51|F|emergency.resolveIdentity|Concilia identidad temporal con ficha revisada y preserva referencias originales.
+F52|F|surgery.propose|Crea propuesta quirúrgica con paciente, procedimiento y preparación prevista.
+F52|V|surgery.showAvailability|Muestra salas, equipos y horarios ficticios compatibles y libres.
+F52|V|surgery.showPreparation|Muestra checklist, documentos y pendientes sin marcar verificaciones no realizadas.
+F52|R|surgery.schedule|Programa caso revisado con recursos y fecha, evitando solapamientos.
+F52|F|surgery.reschedule|Captura nuevo horario y confirma cambio manteniendo historia del caso.
+F52|R|surgery.cancelSchedule|Cancela programación con motivo y libera recursos futuros.
+F53|V|surgery.verifyCase|Muestra identidad, procedimiento, sitio, consentimiento y verificaciones registradas.
+F53|R|surgery.start|Inicia fase del procedimiento tras revisión de requisitos de demo.
+F53|F|surgery.recordImplant|Registra dispositivo, lote y ubicación vinculados al caso.
+F53|F|surgery.recordSpecimen|Crea registro de muestra quirúrgica y su tarea de entrega.
+F53|F|surgery.recordInterruption|Registra interrupción, motivo y estado sin inventar cierre satisfactorio.
+F53|R|surgery.closeReport|Fija parte de demo con actuaciones y pendientes de recuperación.
+F54|F|anesthesia.evaluate|Captura evaluación preanestésica de ejemplo con autor y revisión.
+F54|C|anesthesia.startRecord|Activa registro anestésico ligado al caso y reloj de demo.
+F54|F|anesthesia.addObservation|Añade medición u observación fechada a hoja y tendencia.
+F54|F|anesthesia.recordAdministration|Registra medicamento/dosis de ejemplo ligado a orden y fase.
+F54|F|anesthesia.recordEvent|Añade evento con instante, descripción y respuesta registrada.
+F54|R|anesthesia.confirmRecoveryExit|Cierra recuperación revisada con receptor y pendientes, sin recomendación automática.
+F55|W|discharge.prepare|Abre preparación de alta con resumen, medicación, entregas y pendientes.
+F55|F|discharge.assignPending|Asigna cada pendiente a responsable y plazo antes del egreso.
+F55|R|discharge.issueSummary|Emite resumen de alta demo versionado y ligado a la estancia.
+F55|F|discharge.recordDelivery|Registra destinatario, documento y canal de entrega simulada.
+F55|R|discharge.confirmExit|Cierra estancia, libera recurso y conserva tareas de seguimiento asignadas.
+F55|F|discharge.scheduleControl|Crea seguimiento o cita propuesta posterior al egreso.
+F56|F|courses.create|Crea curso de sesiones con perfil, propósito y plan inicial.
+F56|F|courses.versionPlan|Crea nueva versión del plan conservando sesiones vinculadas a su versión anterior.
+F56|F|courses.scheduleSession|Reserva sesión y recursos compatibles con el plan seleccionado.
+F56|F|courses.recordSession|Registra sesión realizada, observaciones y relación con el plan de demo.
+F56|F|courses.recordInterruption|Registra interrupción con motivo y decisiones de continuidad capturadas.
+F56|R|courses.close|Cierra curso con resumen y seguimiento preservando cada sesión.
+F57|F|transfusion.request|Crea solicitud de componente con paciente, indicación registrada y trazabilidad.
+F57|V|transfusion.reviewChecks|Muestra verificaciones ficticias de unidad/paciente; no certifica compatibilidad real.
+F57|F|transfusion.recordDelivery|Registra unidad, lote, entrega y receptor en cadena de eventos.
+F57|F|transfusion.recordActuation|Captura actuación con inicio/fin y verificaciones registradas por usuario demo.
+F57|F|transfusion.recordEvent|Registra evento y respuesta sin generar indicaciones clínicas automáticas.
+F57|R|transfusion.reconcileUnit|Concilia unidad y destino final, conservando cantidades y eventos.
+F58|F|transplant.createEpisode|Crea episodio especializado con participantes y etapas ficticias.
+F58|F|transplant.evaluate|Registra evaluación fechada dentro del episodio.
+F58|V|transplant.showRequirements|Muestra checklist y pendientes del ejemplo sin afirmar elegibilidad clínica.
+F58|F|transplant.coordinateStage|Coordina etapa con responsables, recursos y fecha.
+F58|F|transplant.recordActuation|Registra actuación ligada al episodio y su etapa.
+F58|F|transplant.scheduleFollowup|Crea controles y tareas de seguimiento enlazados al episodio.
+F59|F|reproduction.createCycle|Crea ciclo humano o animal según perfil y participantes autorizados.
+F59|F|reproduction.linkParticipants|Vincula participantes y relaciones con alcance y vigencia explícitos.
+F59|F|reproduction.recordCustody|Registra muestra, identificador, entrega y receptor de custodia ficticia.
+F59|V|reproduction.reviewStage|Muestra etapa, documentos, requisitos y estados del ciclo.
+F59|F|reproduction.recordActuation|Registra actuación vinculada a etapa, participantes y muestras correspondientes.
+F59|R|reproduction.suspend|Suspende ciclo con motivo y tratamiento explícito de pendientes y custodia.
+F60|F|populationHealth.createIntervention|Crea intervención veterinaria con población, fecha y propósito.
+F60|S|populationHealth.choosePopulation|Selecciona población y pertenencias válidas al momento del evento.
+F60|F|populationHealth.recordDenominator|Captura denominador, criterios y fuente del conjunto intervenido.
+F60|F|populationHealth.recordActuation|Registra actuación grupal y excepciones por individuo cuando corresponda.
+F60|R|populationHealth.issueReport|Emite informe demo con denominador, cobertura, eventos y procedencia.
+F60|F|populationHealth.createFollowup|Crea seguimiento de población y responsables sin reemplazar historias individuales.
+F61|J|dictation.startDemo|Activa reproductor de dictado preparado; no envía audio ni requiere micrófono real.
+F61|C|dictation.stopDemo|Detiene secuencia simulada y presenta transcripción ficticia pendiente de revisión.
+F61|V|dictation.reviewTranscript|Muestra texto propuesto y permite seleccionar fragmentos con contexto.
+F61|C|dictation.acceptSelection|Copia solo fragmentos revisados al borrador, sin firmar ni finalizar visita.
+F61|R|dictation.discardProposal|Descarta propuesta de IA demo y conserva la nota previa.
+F62|V|integrations.show|Muestra conexión demo, alcance y trabajos de esa integración.
+F62|V|integrations.showFailure|Muestra fallo preparado, payload ficticio resumido y operación afectada.
+F62|J|integrations.retry|Reintenta el mismo trabajo simulado con ID de operación y sin duplicar su efecto.
+F62|F|integrations.resolveDiscrepancy|Registra resolución explícita de diferencias entre estados ficticios.
+F62|R|integrations.disconnect|Desactiva conexión demo, conserva evidencia y explica trabajos pendientes.
+F63|V|assistedBooking.review|Muestra solicitud asistida ficticia y distingue propuesta de cita confirmada.
+F63|W|assistedBooking.continue|Reanuda captura de reserva con paciente, disponibilidad y propuesta revisados.
+F63|V|assistedBooking.showTerms|Muestra condiciones ficticias de anticipo, cancelación y responsable de pago.
+F63|R|assistedBooking.payAdvanceDemo|Registra anticipo ficticio y resultado de pasarela demo sin datos de tarjeta reales.
+F63|F|assistedBooking.handoffReception|Crea tarea de recepción con captura y motivo cuando la propuesta no se resuelve.
+F64|W|data.beginImport|Abre importación local de CSV/JSON ficticio con origen y esquema de ejemplo.
+F64|S|data.chooseFormat|Selecciona formato y muestra columnas, límites y archivo ficticio descargable.
+F64|V|data.previewImport|Analiza archivo local y muestra filas válidas, errores y coincidencias sin aplicar cambios.
+F64|R|data.commitBatch|Aplica filas válidas revisadas una sola vez, guarda resumen y rechazos por fila.
+F64|W|data.prepareExport|Prepara exportación local con contexto, contenido y manifiesto revisados.
+F64|X|data.downloadManifest|Descarga manifiesto y paquete ficticio autorizado de esa exportación.
+F65|N|reports.open|Abre reporte elegido con definición, filtros, periodo y datos derivados del store.
+F65|I|reports.filter|Recalcula filas y métricas con filtros del ámbito permitido de demo.
+F65|V|reports.showDefinition|Muestra fórmula de reporte, unidad, fuente y fecha de actualización del ejemplo.
+F65|V|audit.inspectEvent|Muestra actor demo, contexto, acción y referencias del evento seleccionado.
+F65|X|reports.export|Descarga CSV/JSON local del conjunto filtrado y registra exportación demo.
+F66|F|support.createCase|Crea caso técnico ficticio con propósito y alcance del problema.
+F66|F|support.addEvidence|Adjunta evidencia local ficticia al caso sin abrir acceso clínico automático.
+F66|R|support.authorizeTemporaryAccess|Concede acceso demo al caso con finalidad, datos, actor y vencimiento explícitos.
+F66|R|support.rejectAccess|Rechaza solicitud y mantiene datos fuera del alcance del operador demo.
+F66|V|support.showActivity|Muestra eventos del caso y de cualquier concesión temporal de demo.
+F66|R|support.closeCase|Cierra caso, revoca concesión vinculada y conserva evidencia y resolución.
+F67|V|subscription.showPlan|Muestra plan ficticio vigente, condiciones y capacidades del espacio.
+F67|V|subscription.showUsage|Muestra consumo de ejemplo por periodo y recurso con definición de límites.
+F67|F|subscription.requestChange|Crea propuesta de cambio de plan con estado pendiente de revisión.
+F67|V|subscription.reviewTerms|Muestra importe ficticio, vigencia, condiciones y efecto del cambio.
+F67|R|subscription.confirmDemo|Activa contratación de demo y trabajo de pago simulado sin cobro externo.
+F67|V|subscription.showPaymentState|Muestra pago de suscripción ficticio y resultado preparado de su trabajo.
+F68|W|offboarding.request|Abre baja guiada con motivo, fecha y entregables de datos de demo.
+F68|V|offboarding.showImpact|Muestra accesos, actividad, pendientes y conservación previstos para el espacio.
+F68|W|offboarding.prepareDelivery|Prepara paquete local y manifiesto de entrega con contenido revisado.
+F68|R|offboarding.confirmReceipt|Registra recepción ficticia del paquete y evidencia de ejemplo.
+F68|R|offboarding.close|Cierra organización en el escenario demo según revisión, sin eliminación silenciosa.
+F68|R|offboarding.cancelRequest|Cancela proceso de baja pendiente y conserva el estado previo del espacio.
+F69|F|incidents.register|Crea incidente ficticio con alcance, inicio y responsables.
+F69|V|incidents.showImpact|Muestra servicios, espacios y tareas afectados por el escenario preparado.
+F69|F|incidents.recordRecovery|Registra acciones de recuperación simulada, tiempos y resultados capturados.
+F69|F|incidents.attachEvidence|Añade evidencia local de ejemplo a la comprobación de recuperación.
+F69|R|incidents.confirmReturn|Marca retorno revisado del servicio demo y conserva pendientes posteriores.
+F69|F|incidents.createTask|Crea acción correctiva con responsable, fecha y vínculo al incidente.
+F70|A|portal.loginDemo|Inicia sesión ficticia de paciente o responsable y muestra vínculos autorizados.
+F70|W|portal.completeInvitation|Completa invitación demo con identidad, relación y alcance preparados.
+F70|S|portal.choosePatient|Selecciona humano o animal de un vínculo vigente sin mezclar sus documentos.
+F70|S|portal.chooseOrganization|Cambia organización del vínculo y vuelve a consultar contenido publicado para ella.
+F70|N|portal.showAppointments|Abre citas del paciente y organización seleccionados.
+F71|V|portal.viewDocument|Muestra exclusivamente la revisión publicada accesible por vínculo demo vigente.
+F71|V|portal.viewCurrentVersion|Muestra versión publicada actual y su relación con versiones retiradas o corregidas.
+F71|X|portal.downloadDocument|Descarga archivo o documento HTML local de la versión publicada y registra evento demo.
+F71|V|portal.showIssuer|Muestra emisor, organización custodio y profesional de la publicación.
+F72|S|specialty.openComponent|Activa componente requerido del perfil con esquema, atlas y fixture adecuados.
+F72|G|specialty.chooseStructure|Selecciona estructura semántica compatible con órgano, especie y vista.
+F72|F|specialty.addRecord|Captura registro especializado con contexto, unidad y campos propios del perfil.
+F72|S|specialty.showEquivalentTable|Muestra los mismos registros del gráfico en una tabla accesible.
+F72|V|specialty.compareVisits|Compara visitas y componentes compatibles conservando versiones de esquema y atlas.
+F72|V|specialty.reviewChanges|Presenta diferencia de registros especializados antes del guardado de la revisión.
+F73|W|connections.connectDemo|Abre conexión ficticia con proveedor, finalidad y alcance; no realiza OAuth real.
+F73|V|connections.reviewPermissions|Muestra datos y operaciones propuestos para el proveedor de demo.
+F73|J|connections.testDemo|Ejecuta trabajo de prueba con resultado preparado, latencia y error seleccionables.
+F73|R|connections.activateDemo|Activa conexión simulada y habilita sus trabajos en el espacio elegido.
+F73|R|connections.revokeDemo|Revoca conexión de demo y conserva historial y trabajos que requieren resolución.
+F74|F|account.edit|Edita datos ficticios de cuenta, idioma y preferencias del usuario demo.
+F74|F|account.changeChannel|Captura nuevo canal ficticio y lo mantiene pendiente de verificación.
+F74|J|account.verifyChannelDemo|Muestra código preparado y registra verificación simulada sin enviar mensajes reales.
+F74|C|account.savePreferences|Guarda preferencias y actualiza vistas de cuenta y avisos de demo.
+F74|V|account.reviewSessions|Muestra sesiones ficticias, contexto y estado de la sesión actual.
+F75|F|services.create|Crea servicio con dominio, duración, especialidad y recursos de ejemplo.
+F75|F|pricing.create|Crea tarifa con importe en unidades menores, moneda y vigencia.
+F75|F|issuers.edit|Edita emisor ficticio y datos mostrados en documentos de demo.
+F75|F|services.setValidity|Define vigencia en el borrador de servicio, tarifa o emisor elegido.
+F75|V|services.previewImpact|Muestra agenda, documentos y presupuestos afectados por la configuración propuesta.
+F75|R|services.publish|Publica configuración para operaciones nuevas conservando versiones usadas antes.
+F76|V|prevention.showHistory|Muestra actuaciones y excepciones preventivas según dominio y paciente.
+F76|F|prevention.recordActuation|Registra actuación con producto/lote cuando corresponda, fecha y profesional.
+F76|F|prevention.recordNotDone|Registra no realizada con motivo sin marcar protección o actuación completada.
+F76|R|prevention.issueCertificate|Emite constancia ficticia versionada y lista para entrega revisada.
+F76|F|prevention.scheduleControl|Crea control propuesto según fecha registrada, sin recomendación clínica automática.
+F77|F|payers.createAgreement|Crea convenio ficticio con partes, servicios, reglas y vigencia.
+F77|V|payers.checkRecordedCoverage|Muestra cobertura registrada del ejemplo; no consulta aseguradora real.
+F77|F|payers.requestAuthorizationDemo|Crea solicitud y trabajo simulado ligado a servicio, convenio y paciente.
+F77|F|payers.recordResponse|Registra respuesta preparada con condiciones y estado de autorización.
+F77|F|payers.assign|Asigna pagador y distribución de importe revisados en la cuenta seleccionada.
+F77|N|payers.showBalance|Abre saldo institucional derivado de cargos, asignaciones y pagos ficticios.
+F78|A|operations.loginDemo|Inicia acceso ficticio a consola separado del contexto clínico profesional.
+F78|C|operations.completeCheckDemo|Completa comprobación preparada y habilita el rol operador en la consola.
+F78|N|operations.openCase|Abre caso operativo permitido y solo datos incluidos en su alcance demo.
+F79|R|identity.reviewLogout|Revisa borradores y operaciones pendientes antes de terminar sesión demo.
+F79|R|identity.saveAndLogout|Guarda borradores válidos, termina sesión y vuelve al acceso correspondiente.
+F79|R|identity.discardAndLogout|Descarta solo cambios locales tras revisión y termina sesión ficticia.
+F79|L|identity.keepWorking|Cierra revisión de salida y restaura foco en el trabajo actual.

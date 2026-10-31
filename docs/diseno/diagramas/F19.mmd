@@ -1,0 +1,19 @@
+flowchart TD
+    START(["No hay horario o se libera un intervalo."]) --> N1
+    N1["Recepción: Registrar solicitud y preferencias de espera"]
+    N2["Sistema Health Project: Detectar intervalo compatible sin prometer reserva"]
+    N3["Recepción: Ofrecer intervalo con vigencia configurada"]
+    N4["Paciente humano: Aceptar o rechazar oferta"]
+    N5{"Sistema Health Project: ¿Oferta vigente y recurso disponible?"}
+    N6["Sistema Health Project: Confirmar cita y retirar solicitud cumplida"]
+    END(["Solicitud convertida en cita o mantenida/cerrada con motivo."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"Sí"| N6
+    N6 --> END
+    N4 -->|"Rechazo"| A1["Actualizar preferencias o mantener espera"]
+    A1 --> E1(["Solicitud continúa en espera."])
+    N5 -->|"No"| A2["Informar vencimiento y mantener solicitud cuando corresponda"]
+    A2 --> E2(["Sin reserva; espera vigente."])

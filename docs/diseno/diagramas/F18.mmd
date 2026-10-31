@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Un actor autorizado solicita modificar una reserva."]) --> N1
+    N1["Recepción: Abrir cita y elegir confirmar, reprogramar o cancelar"]
+    N2{"Sistema Health Project: ¿Acción permitida por estado y rol?"}
+    N3["Recepción: Indicar nueva fecha o motivo según operación"]
+    N4["Sistema Health Project: Mostrar impacto y validar nuevo intervalo cuando aplique"]
+    N5["Recepción: Confirmar modificación"]
+    N6["Sistema Health Project: Aplicar cambio, conservar anterior, actualizar recursos y avisos"]
+    END(["Cita actualizada con historial; no borrar atención ya realizada."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N2 -->|"No"| A1["Mostrar motivo y ofrecer contactar a recepción"]
+    A1 --> E1(["Cita sin cambios."])
+    N4 -->|"Intervalo ocupado"| A2["Conservar reserva anterior y ofrecer otras horas"]
+    A2 --> N3
+    N5 -->|"Volver"| A3["Conservar cita original"]
+    A3 --> E3(["Modificación cancelada."])

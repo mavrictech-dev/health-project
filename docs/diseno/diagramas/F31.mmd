@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Una orden interna entra en la lista de trabajo."]) --> N1
+    N1["Equipo de diagnóstico: Aceptar tarea y confirmar paciente/orden"]
+    N2["Equipo de diagnóstico: Registrar obtención, responsable y tiempos"]
+    N3["Sistema Health Project: Asignar identidad de muestra/adquisición y trazabilidad"]
+    N4["Equipo de diagnóstico: Evaluar aceptación según procedimiento definido"]
+    N5{"Sistema Health Project: ¿Muestra o adquisición aceptada?"}
+    N6["Equipo de diagnóstico: Completar tarea de obtención y entregar a procesamiento"]
+    END(["Muestra/adquisición identificada y entrega trazada."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"Sí"| N6
+    N6 --> END
+    N5 -->|"No"| A1["Registrar rechazo con motivo y solicitar nuevo intento identificado"]
+    A1 --> N2
+    N1 -->|"Tarea rechazada"| A2["Registrar motivo y reasignar a cola con responsable"]
+    A2 --> E2(["Tarea pendiente de asignación."])
+    N2 -->|"Orden cancelada"| A3["Detener nuevas ejecuciones y conservar hechos parciales"]
+    A3 --> E3(["Ejecución detenida con evidencia."])

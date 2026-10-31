@@ -1,0 +1,17 @@
+flowchart TD
+    START(["Se atiende un rebaño, lote, colonia o grupo."]) --> N1
+    N1["Profesional clínico: Crear población con tipo, contexto y responsable"]
+    N2["Recepción: Registrar individuos o denominador cuando aplique"]
+    N3["Profesional clínico: Definir pertenencias con intervalo y procedencia"]
+    N4{"Sistema Health Project: ¿Sujetos y períodos consistentes?"}
+    N5["Profesional clínico: Registrar ingreso, traslado o baja de miembros"]
+    N6["Sistema Health Project: Guardar historial poblacional e individual sin mezclarlos"]
+    END(["Población identificada y membresías temporales registradas."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"No"| A1["Solicitar corrección de duplicación o períodos"]
+    A1 --> N3

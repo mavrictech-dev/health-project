@@ -1,0 +1,23 @@
+flowchart TD
+    START(["Se utiliza el componente dental de una atención."]) --> N1
+    N1["Sistema Health Project: Cargar perfil, nomenclatura y atlas humano o veterinario correspondiente"]
+    N2["Profesional clínico: Elegir pieza, cara o estado general de la pieza"]
+    N3["Profesional clínico: Registrar hallazgo o procedimiento y estado observado, planeado o realizado"]
+    N4{"Sistema Health Project: ¿Pieza, cara, dentición y dato compatibles?"}
+    N5["Profesional clínico: Revisar leyenda y listado textual de cambios"]
+    N6["Sistema Health Project: Guardar eventos clínicos y revisión del gráfico"]
+    N7["Profesional clínico: Comparar estado previo con la atención actual"]
+    END(["Evolución dental guardada por pieza y cara, sin sustituir hechos previos por colores."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> N7
+    N7 --> END
+    N4 -->|"No"| A1["Solicitar pieza/cara o dato válido según atlas seleccionado"]
+    A1 --> N2
+    N1 -->|"Dentición o anatomía especial"| A2["Registrar variante mediante catálogo autorizado y atlas correspondiente"]
+    A2 --> N2
+    N5 -->|"Corregir registro firmado"| A3["Abrir adenda sobre la revisión original"]
+    A3 --> E3(["Corrección derivada al flujo de adenda."])

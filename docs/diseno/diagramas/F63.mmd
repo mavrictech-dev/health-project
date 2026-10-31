@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se solicita cita por canal asistido habilitado."]) --> N1
+    N1["Paciente humano: Indicar paciente y servicio mediante canal permitido"]
+    N2["Sistema Health Project: Verificar vínculo antes de exponer datos específicos"]
+    N3["Sistema Health Project: Ofrecer disponibilidad y condiciones de reserva/anticipo"]
+    N4["Paciente humano: Elegir y confirmar solicitud"]
+    N5["Proveedor o destinatario externo: Confirmar pago cuando corresponda mediante respuesta verificable"]
+    N6{"Sistema Health Project: ¿Reserva y condiciones completas?"}
+    N7["Sistema Health Project: Confirmar cita o entregar solicitud a recepción con estado real"]
+    END(["Reserva/pago trazables; canal asistido no accede a historia interna."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 -->|"Sí"| N7
+    N7 --> END
+    N6 -->|"No"| A1["Mantener pendiente y ofrecer resolución por recepción; liberar reserva temporal según política"]
+    A1 --> E1(["Cita no confirmada o pendiente explícita."])
+    N2 -->|"Identidad no verificada"| A2["Atender consulta general sin revelar datos del paciente; derivar verificación"]
+    A2 --> E2(["Solicitud sin acceso clínico."])

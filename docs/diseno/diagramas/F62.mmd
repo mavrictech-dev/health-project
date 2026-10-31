@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Una operación confirmada necesita calendario, comunicación, pago o emisión externa."]) --> N1
+    N1["Sistema Health Project: Registrar tarea externa después de operación local confirmada"]
+    N2["Sistema Health Project: Enviar solicitud identificada al proveedor"]
+    N3["Proveedor o destinatario externo: Responder o notificar evento verificable"]
+    N4{"Sistema Health Project: ¿Respuesta válida y operación identificada?"}
+    N5["Sistema Health Project: Actualizar solo el estado correspondiente"]
+    N6["Administrador de la organización: Resolver fallos pendientes o revocar integración según permiso"]
+    END(["Estado externo conciliado o pendiente asignado; no deshacer atención por fallo de notificación."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"No; temporal"| A1["Reintentar la misma operación sin duplicar efecto"]
+    A1 --> N2
+    N4 -->|"Discrepancia"| A2["Conservar estado local y asignar conciliación"]
+    A2 --> E2(["Integración pendiente de conciliación."])

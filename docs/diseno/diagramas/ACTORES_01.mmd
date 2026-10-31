@@ -1,0 +1,13 @@
+flowchart LR
+    ADM[Administrador] --> CFG[Configurar organización, equipo y capacidades]
+    REC[Recepción] --> AG[Registrar pacientes, citas y llegadas]
+    PRO[Profesional] --> CL[Atender, registrar, firmar y revisar pendientes]
+    ASI[Asistencia] --> CT[Capturas y tareas autorizadas]
+    DIA[Diagnóstico] --> DX[Ejecutar estudios y emitir informes]
+    FAR[Farmacia] --> MED[Dispensar y conservar trazabilidad]
+    CAJ[Caja] --> FIN[Cargos, cobros y comprobantes]
+    ALM[Almacén] --> INV[Compras y movimientos]
+    PAC[Paciente o responsable] --> PORT[Citas y publicaciones del portal]
+    AUD[Auditor] --> AUDIT[Inspeccionar evidencia autorizada]
+    SOP[Soporte MAVRIC] --> OPS[Soporte, contratos e incidentes]
+    EXT[Proveedor externo] --> INTEG[Operaciones externas autorizadas]

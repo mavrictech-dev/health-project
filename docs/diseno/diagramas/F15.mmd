@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Un actor busca un paciente para una operación permitida."]) --> N1
+    N1["Profesional clínico: Buscar paciente en la organización"]
+    N2["Sistema Health Project: Mostrar coincidencias según permiso administrativo"]
+    N3["Profesional clínico: Seleccionar paciente y solicitar historia"]
+    N4{"Sistema Health Project: ¿Permiso clínico y alcance de contenido suficientes?"}
+    N5["Sistema Health Project: Mostrar historia de sucursales autorizadas con procedencia y restricciones"]
+    N6["Sistema Health Project: Registrar acceso auditado"]
+    END(["Historia visible dentro del tenant con alcance explícito."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"No"| A1["Mostrar solo ficha administrativa permitida o acceso restringido"]
+    A1 --> E1(["Historia clínica sin abrir."])
+    N2 -->|"Sin coincidencias"| A2["Ofrecer registro si el actor tiene permiso"]
+    A2 --> E2(["Búsqueda sin paciente seleccionado."])

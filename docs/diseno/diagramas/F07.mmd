@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se modifica una función, sucursal o continuidad de un miembro."]) --> N1
+    N1["Administrador de la organización: Seleccionar miembro y revisar permisos actuales"]
+    N2["Administrador de la organización: Proponer cambios y motivo"]
+    N3["Sistema Health Project: Mostrar recursos y tareas afectadas"]
+    N4["Administrador de la organización: Confirmar cambio o revocación"]
+    N5["Sistema Health Project: Revalidar autorización y aplicar cambio"]
+    N6["Sistema Health Project: Revocar acceso correspondiente y reasignar pendientes a responsable"]
+    END(["Permisos actualizados y auditados; los registros clínicos conservan autoría."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"Cancelar"| A1["Conservar la asignación vigente"]
+    A1 --> E1(["Sin cambios."])
+    N5 -->|"Sin autorización vigente"| A2["Rechazar cambio y actualizar sesión"]
+    A2 --> E2(["Cambio rechazado."])
+    N6 -->|"Sin suplente definido"| A3["Crear pendiente para administrador; no conceder acceso al revocado"]
+    A3 --> E3(["Revocación aplicada; reasignación pendiente visible."])

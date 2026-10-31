@@ -1,0 +1,5641 @@
+[
+  {
+    "code": "H_FAMILY",
+    "name": "Medicina familiar y comunitaria",
+    "group": "Atención integral",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Antecedentes personales y familiares",
+      "Entorno familiar y social",
+      "Problemas y cuidados longitudinales",
+      "Prevención y vacunación registrada",
+      "Visitas domiciliarias y referencias"
+    ],
+    "components": [
+      "family_genogram",
+      "care_timeline",
+      "vital_trends"
+    ],
+    "workflows": [
+      "outpatient_visit",
+      "home_visit",
+      "preventive_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "appointments",
+      "orders",
+      "vaccination"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "ABMS",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_INTERNAL",
+    "name": "Medicina interna",
+    "group": "Atención integral",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Revisión por sistemas",
+      "Problemas y comorbilidades",
+      "Conciliación farmacológica",
+      "Laboratorio e imágenes",
+      "Evolución, interconsultas y alta"
+    ],
+    "components": [
+      "problem_list",
+      "vital_trends",
+      "lab_trends"
+    ],
+    "workflows": [
+      "outpatient_visit",
+      "inpatient_round",
+      "consultation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "imaging",
+      "pharmacy",
+      "inpatient"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "ABMS_IM",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_GERIATRICS",
+    "name": "Geriatría",
+    "group": "Atención integral",
+    "entryType": "especialidad",
+    "parentCode": "H_INTERNAL",
+    "capture": [
+      "Autonomía y actividades diarias",
+      "Estado cognitivo y ánimo",
+      "Fragilidad, movilidad y caídas",
+      "Medicaciones y cuidador",
+      "Objetivos y seguimiento"
+    ],
+    "components": [
+      "functional_scales",
+      "falls_timeline",
+      "caregiver_panel"
+    ],
+    "workflows": [
+      "comprehensive_assessment",
+      "medication_review",
+      "care_coordination"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "scales",
+      "pharmacy",
+      "care_plans"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_IM",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_ADOLESCENT",
+    "name": "Adolescentología",
+    "group": "Atención integral",
+    "entryType": "especialidad",
+    "parentCode": "H_FAMILY",
+    "capture": [
+      "Crecimiento y desarrollo puberal",
+      "Antecedentes y entorno familiar",
+      "Entrevista y confidencialidad por campo",
+      "Escolaridad, hábitos y bienestar",
+      "Seguimiento y derivaciones"
+    ],
+    "components": [
+      "growth_curves",
+      "puberty_record",
+      "confidential_sections"
+    ],
+    "workflows": [
+      "adolescent_visit",
+      "guardian_consent",
+      "care_transition"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "growth_reference",
+      "consent",
+      "sensitive_access"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_PED",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PREVENTIVE",
+    "name": "Medicina preventiva y salud pública",
+    "group": "Atención integral",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Cohorte y factores de riesgo",
+      "Antecedentes preventivos",
+      "Tamizajes y resultados registrados",
+      "Vacunación y acciones comunitarias",
+      "Indicadores agregados"
+    ],
+    "components": [
+      "screening_timeline",
+      "population_dashboard"
+    ],
+    "workflows": [
+      "preventive_visit",
+      "cohort_followup",
+      "campaign"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "vaccination",
+      "population_registry",
+      "analytics"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PREV"
+    ]
+  },
+  {
+    "code": "H_OCCUPATIONAL",
+    "name": "Medicina ocupacional y del medio ambiente",
+    "group": "Atención integral",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Puesto y exposición laboral",
+      "Historia ocupacional y ambiental",
+      "Exámenes y pruebas funcionales",
+      "Dictamen emitido y restricciones",
+      "Eventos y vigilancia longitudinal"
+    ],
+    "components": [
+      "exposure_timeline",
+      "occupational_exam",
+      "fitness_certificate"
+    ],
+    "workflows": [
+      "occupational_assessment",
+      "surveillance",
+      "certificate_issue"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "imaging",
+      "certificates",
+      "employer_access"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PREV",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_SPORTS",
+    "name": "Medicina del deporte",
+    "group": "Atención integral",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Actividad y carga deportiva",
+      "Lesión, mecanismo y localización",
+      "Examen funcional y esfuerzo",
+      "Restricciones documentadas",
+      "Evolución y retorno registrado"
+    ],
+    "components": [
+      "musculoskeletal_map",
+      "functional_trends",
+      "exercise_test_report"
+    ],
+    "workflows": [
+      "sports_assessment",
+      "injury_followup",
+      "return_review"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "procedures",
+      "imaging",
+      "care_plans"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_REHAB",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_AEROSPACE",
+    "name": "Medicina aeroespacial",
+    "group": "Atención integral",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Actividad aérea y exposición",
+      "Historia y examen de aptitud",
+      "Pruebas y dictámenes documentados",
+      "Limitaciones y vigencia",
+      "Incidentes y seguimiento"
+    ],
+    "components": [
+      "exposure_timeline",
+      "fitness_certificate"
+    ],
+    "workflows": [
+      "aeromedical_assessment",
+      "certificate_issue",
+      "incident_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "certificates",
+      "laboratory",
+      "sensitive_access"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_PREV"
+    ]
+  },
+  {
+    "code": "H_FORENSIC",
+    "name": "Medicina legal",
+    "group": "Atención integral",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Solicitud y autoridad requirente",
+      "Identidad y examen documentado",
+      "Lesiones y localización",
+      "Evidencia, muestras y custodia",
+      "Dictamen y versiones firmadas"
+    ],
+    "components": [
+      "body_map",
+      "evidence_gallery",
+      "custody_timeline"
+    ],
+    "workflows": [
+      "forensic_assessment",
+      "evidence_intake",
+      "signed_report"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "chain_of_custody",
+      "consent",
+      "sensitive_access",
+      "signatures"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_GENETICS",
+    "name": "Genética médica y genómica clínica",
+    "group": "Atención integral",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Árbol familiar y fenotipo",
+      "Antecedentes gestacionales y desarrollo",
+      "Pruebas y variantes informadas",
+      "Consejería registrada",
+      "Consentimiento y reevaluación"
+    ],
+    "components": [
+      "pedigree",
+      "phenotype_panel",
+      "variant_report"
+    ],
+    "workflows": [
+      "genetics_assessment",
+      "test_order",
+      "counseling_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "genetic_data",
+      "laboratory",
+      "consent",
+      "sensitive_access"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_GEN",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_BIOCHEM_GENETICS",
+    "name": "Genética bioquímica médica",
+    "group": "Atención integral",
+    "entryType": "subespecialidad",
+    "parentCode": "H_GENETICS",
+    "capture": [
+      "Hallazgos metabólicos",
+      "Antecedentes familiares y tamizaje",
+      "Analitos y pruebas confirmatorias",
+      "Episodios clínicos y evolución",
+      "Plan documentado por especialista"
+    ],
+    "components": [
+      "metabolic_trends",
+      "pedigree",
+      "screening_timeline"
+    ],
+    "workflows": [
+      "metabolic_assessment",
+      "test_review",
+      "longitudinal_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "genetic_data",
+      "laboratory",
+      "care_plans"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_GEN"
+    ]
+  },
+  {
+    "code": "H_LAB_GENETICS",
+    "name": "Genética y genómica de laboratorio",
+    "group": "Atención integral",
+    "entryType": "especialidad",
+    "parentCode": "H_GENETICS",
+    "capture": [
+      "Muestra y método",
+      "Región, gen o cromosoma estudiado",
+      "Variantes y clasificación reportada",
+      "Limitaciones analíticas",
+      "Versiones y reanálisis",
+      "Análisis bioquímicos de trastornos metabólicos"
+    ],
+    "components": [
+      "variant_report",
+      "karyotype_attachment",
+      "specimen_timeline",
+      "metabolic_lab_report"
+    ],
+    "workflows": [
+      "specimen_intake",
+      "genetic_analysis",
+      "result_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "genetic_data",
+      "laboratory",
+      "specimen_tracking"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_GEN"
+    ]
+  },
+  {
+    "code": "H_ADMIN_HEALTH",
+    "name": "Administración y gestión en salud",
+    "group": "Atención integral",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Unidad y cartera de servicios",
+      "Capacidad y recursos",
+      "Indicadores y periodos",
+      "Incidentes y acciones registradas",
+      "Responsables y acuerdos"
+    ],
+    "components": [
+      "service_dashboard",
+      "capacity_board",
+      "quality_register"
+    ],
+    "workflows": [
+      "service_review",
+      "quality_action",
+      "capacity_planning"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "analytics",
+      "resource_management",
+      "quality"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_PREV",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_CARDIOLOGY",
+    "name": "Cardiología",
+    "group": "Medicina clínica",
+    "entryType": "especialidad",
+    "parentCode": "H_INTERNAL",
+    "capture": [
+      "Síntomas y factores cardiovasculares",
+      "Exploración y presión arterial",
+      "ECG, ecocardiograma y estudios",
+      "Hallazgos por estructura y segmento",
+      "Procedimientos y evolución"
+    ],
+    "components": [
+      "heart_map",
+      "ecg_viewer",
+      "echo_report",
+      "vital_trends"
+    ],
+    "workflows": [
+      "cardiology_visit",
+      "diagnostic_study",
+      "followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "signal_store",
+      "laboratory",
+      "procedures"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "ABMS_IM",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_INTERV_CARDIO",
+    "name": "Cardiología intervencionista",
+    "group": "Medicina clínica",
+    "entryType": "subespecialidad",
+    "parentCode": "H_CARDIOLOGY",
+    "capture": [
+      "Indicación y consentimiento",
+      "Acceso y anatomía vascular",
+      "Lesiones y mediciones",
+      "Dispositivos y procedimiento realizado",
+      "Eventos y control posterior"
+    ],
+    "components": [
+      "coronary_map",
+      "hemodynamic_report",
+      "device_register"
+    ],
+    "workflows": [
+      "procedure_planning",
+      "catheterization",
+      "postprocedure_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "procedures",
+      "imaging",
+      "device_tracking",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_IM"
+    ]
+  },
+  {
+    "code": "H_ELECTROPHYS",
+    "name": "Electrofisiología cardíaca",
+    "group": "Medicina clínica",
+    "entryType": "subespecialidad",
+    "parentCode": "H_CARDIOLOGY",
+    "capture": [
+      "Arritmias y episodios",
+      "ECG y registros ambulatorios",
+      "Mapa y mediciones eléctricas",
+      "Dispositivos y programación registrada",
+      "Procedimientos y controles"
+    ],
+    "components": [
+      "ecg_viewer",
+      "rhythm_timeline",
+      "electrophysiology_map",
+      "device_register"
+    ],
+    "workflows": [
+      "electrophysiology_study",
+      "device_followup",
+      "postprocedure_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "signal_store",
+      "procedures",
+      "device_tracking"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_IM"
+    ]
+  },
+  {
+    "code": "H_HEART_FAILURE",
+    "name": "Insuficiencia cardíaca avanzada y cardiología de trasplante",
+    "group": "Medicina clínica",
+    "entryType": "subespecialidad",
+    "parentCode": "H_CARDIOLOGY",
+    "capture": [
+      "Estado funcional y síntomas",
+      "Función ventricular y biomarcadores",
+      "Hospitalizaciones y dispositivos",
+      "Evaluación de trasplante",
+      "Evolución posterior y eventos"
+    ],
+    "components": [
+      "functional_trends",
+      "echo_report",
+      "transplant_timeline"
+    ],
+    "workflows": [
+      "multidisciplinary_assessment",
+      "transplant_followup",
+      "device_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "inpatient",
+      "laboratory",
+      "imaging",
+      "transplant_registry"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_IM"
+    ]
+  },
+  {
+    "code": "H_ADULT_CONGENITAL",
+    "name": "Cardiopatías congénitas del adulto",
+    "group": "Medicina clínica",
+    "entryType": "subespecialidad",
+    "parentCode": "H_CARDIOLOGY",
+    "capture": [
+      "Anatomía congénita y reparaciones previas",
+      "Estudios y circulación documentada",
+      "Estado funcional",
+      "Dispositivos y procedimientos",
+      "Transición y vigilancia longitudinal"
+    ],
+    "components": [
+      "congenital_heart_map",
+      "procedure_timeline",
+      "echo_report"
+    ],
+    "workflows": [
+      "care_transition",
+      "congenital_followup",
+      "multidisciplinary_review"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "procedures",
+      "device_tracking"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_IM"
+    ]
+  },
+  {
+    "code": "H_ENDOCRINOLOGY",
+    "name": "Endocrinología, diabetes y metabolismo",
+    "group": "Medicina clínica",
+    "entryType": "especialidad",
+    "parentCode": "H_INTERNAL",
+    "capture": [
+      "Síntomas y antecedentes endocrinos",
+      "Antropometría y examen glandular",
+      "Hormonas y pruebas metabólicas",
+      "Glucemias y dispositivos registrados",
+      "Complicaciones y seguimiento"
+    ],
+    "components": [
+      "gland_map",
+      "glucose_trends",
+      "hormone_trends",
+      "anthropometry"
+    ],
+    "workflows": [
+      "endocrine_visit",
+      "metabolic_followup",
+      "test_review"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "device_tracking",
+      "pharmacy"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_IM",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_GASTRO",
+    "name": "Gastroenterología",
+    "group": "Medicina clínica",
+    "entryType": "especialidad",
+    "parentCode": "H_INTERNAL",
+    "capture": [
+      "Síntomas digestivos y antecedentes",
+      "Exploración abdominal",
+      "Hallazgos por segmento",
+      "Endoscopia, biopsias y laboratorio",
+      "Procedimientos y evolución"
+    ],
+    "components": [
+      "digestive_map",
+      "endoscopy_report",
+      "lab_trends"
+    ],
+    "workflows": [
+      "gastro_visit",
+      "endoscopy",
+      "biopsy_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "procedures",
+      "laboratory",
+      "imaging",
+      "specimen_tracking"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_IM",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_HEPATOLOGY",
+    "name": "Hepatología y hepatología de trasplante",
+    "group": "Medicina clínica",
+    "entryType": "subespecialidad",
+    "parentCode": "H_GASTRO",
+    "capture": [
+      "Etiología y antecedentes hepáticos",
+      "Función y evolución hepática",
+      "Imágenes y biopsias",
+      "Evaluación pretrasplante",
+      "Trasplante y seguimiento documentado"
+    ],
+    "components": [
+      "liver_map",
+      "lab_trends",
+      "transplant_timeline"
+    ],
+    "workflows": [
+      "hepatic_followup",
+      "transplant_assessment",
+      "transplant_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "imaging",
+      "transplant_registry"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_IM"
+    ]
+  },
+  {
+    "code": "H_ENDOSCOPY",
+    "name": "Endoscopia digestiva",
+    "group": "Medicina clínica",
+    "entryType": "servicio",
+    "parentCode": "H_GASTRO",
+    "capture": [
+      "Indicación y preparación registrada",
+      "Procedimiento y sedación vinculada",
+      "Hallazgos y localización",
+      "Intervenciones y muestras",
+      "Informe y control posterior"
+    ],
+    "components": [
+      "digestive_map",
+      "endoscopy_media",
+      "procedure_report"
+    ],
+    "workflows": [
+      "procedure_planning",
+      "endoscopy",
+      "specimen_dispatch"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "procedures",
+      "consent",
+      "anesthesia",
+      "specimen_tracking"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "H_NEPHROLOGY",
+    "name": "Nefrología",
+    "group": "Medicina clínica",
+    "entryType": "especialidad",
+    "parentCode": "H_INTERNAL",
+    "capture": [
+      "Función renal y comorbilidades",
+      "Diuresis y balance",
+      "Laboratorio y orina",
+      "Acceso, diálisis o trasplante registrado",
+      "Evolución y eventos"
+    ],
+    "components": [
+      "renal_map",
+      "renal_trends",
+      "fluid_balance"
+    ],
+    "workflows": [
+      "nephrology_visit",
+      "renal_followup",
+      "replacement_review"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "inpatient",
+      "procedures"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_IM",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_DIALYSIS",
+    "name": "Unidad de diálisis",
+    "group": "Medicina clínica",
+    "entryType": "servicio",
+    "parentCode": "H_NEPHROLOGY",
+    "capture": [
+      "Prescripción firmada y modalidad",
+      "Acceso y equipo",
+      "Sesión y parámetros observados",
+      "Balance y eventos",
+      "Consumibles y seguimiento"
+    ],
+    "components": [
+      "dialysis_session",
+      "fluid_balance",
+      "access_map"
+    ],
+    "workflows": [
+      "session_scheduling",
+      "dialysis_session",
+      "session_closure"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "procedures",
+      "device_tracking",
+      "inventory",
+      "inpatient"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "H_RHEUMATOLOGY",
+    "name": "Reumatología",
+    "group": "Medicina clínica",
+    "entryType": "especialidad",
+    "parentCode": "H_INTERNAL",
+    "capture": [
+      "Dolor, rigidez y síntomas sistémicos",
+      "Articulaciones y lateralidad",
+      "Actividad y función registrada",
+      "Laboratorio e imágenes",
+      "Medicaciones y evolución"
+    ],
+    "components": [
+      "joint_map",
+      "functional_scales",
+      "lab_trends"
+    ],
+    "workflows": [
+      "rheumatology_visit",
+      "activity_review",
+      "longitudinal_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "scales",
+      "laboratory",
+      "imaging",
+      "pharmacy"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_IM",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PULMONOLOGY",
+    "name": "Neumología",
+    "group": "Medicina clínica",
+    "entryType": "especialidad",
+    "parentCode": "H_INTERNAL",
+    "capture": [
+      "Síntomas y exposición respiratoria",
+      "Exploración y oxigenación",
+      "Pruebas funcionales",
+      "Imágenes, broncoscopia y muestras",
+      "Dispositivos y evolución"
+    ],
+    "components": [
+      "lung_map",
+      "spirometry_report",
+      "oxygen_trends",
+      "bronchoscopy_report"
+    ],
+    "workflows": [
+      "pulmonary_visit",
+      "functional_study",
+      "bronchoscopy"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "signal_store",
+      "imaging",
+      "procedures",
+      "laboratory"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_IM",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PULMONARY_ONCO",
+    "name": "Neumología oncológica",
+    "group": "Medicina clínica",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PULMONOLOGY",
+    "capture": [
+      "Lesiones torácicas y localización",
+      "Histología y pruebas vinculadas",
+      "Estudios de extensión documentados",
+      "Procedimientos y muestras",
+      "Evolución y comité multidisciplinario"
+    ],
+    "components": [
+      "lung_map",
+      "lesion_timeline",
+      "bronchoscopy_report"
+    ],
+    "workflows": [
+      "oncologic_assessment",
+      "biopsy_followup",
+      "tumor_board"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "oncology",
+      "imaging",
+      "specimen_tracking",
+      "procedures"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_HEMATOLOGY",
+    "name": "Hematología",
+    "group": "Medicina clínica",
+    "entryType": "especialidad",
+    "parentCode": "H_INTERNAL",
+    "capture": [
+      "Síntomas, sangrado y antecedentes",
+      "Hemogramas y coagulación",
+      "Médula, ganglios y muestras",
+      "Transfusiones y eventos",
+      "Diagnóstico y evolución"
+    ],
+    "components": [
+      "blood_count_trends",
+      "coagulation_trends",
+      "marrow_report"
+    ],
+    "workflows": [
+      "hematology_visit",
+      "specimen_review",
+      "transfusion_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "specimen_tracking",
+      "transfusion",
+      "pharmacy"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_IM",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_ONCOLOGY",
+    "name": "Oncología médica (medicina oncológica)",
+    "group": "Medicina clínica",
+    "entryType": "especialidad",
+    "parentCode": "H_INTERNAL",
+    "capture": [
+      "Tumor primario, histología y biomarcadores",
+      "Extensión y estadio registrados",
+      "Plan prescrito y ciclos",
+      "Toxicidad y eventos",
+      "Respuesta y comité multidisciplinario"
+    ],
+    "components": [
+      "tumor_map",
+      "lesion_timeline",
+      "treatment_cycles",
+      "toxicity_record"
+    ],
+    "workflows": [
+      "oncologic_assessment",
+      "tumor_board",
+      "cycle_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "oncology",
+      "laboratory",
+      "imaging",
+      "pharmacy",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_IM",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_INFECTIOUS",
+    "name": "Infectología y enfermedades tropicales",
+    "group": "Medicina clínica",
+    "entryType": "especialidad",
+    "parentCode": "H_INTERNAL",
+    "capture": [
+      "Exposición, viajes y contactos",
+      "Focos y síntomas",
+      "Microbiología y susceptibilidad",
+      "Tratamientos y eventos registrados",
+      "Evolución y seguimiento de contactos"
+    ],
+    "components": [
+      "infection_map",
+      "microbiology_report",
+      "exposure_timeline"
+    ],
+    "workflows": [
+      "infection_assessment",
+      "microbiology_review",
+      "infection_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "infection_control",
+      "pharmacy"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_IM",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_ALLERGY",
+    "name": "Inmunología y alergia",
+    "group": "Medicina clínica",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Alérgenos y reacciones previas",
+      "Síntomas y órganos afectados",
+      "Pruebas alérgicas e inmunológicas",
+      "Exposiciones y procedimientos registrados",
+      "Evolución y eventos"
+    ],
+    "components": [
+      "allergen_panel",
+      "reaction_timeline",
+      "skin_test_map"
+    ],
+    "workflows": [
+      "allergy_visit",
+      "test_session",
+      "reaction_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "procedures",
+      "pharmacy"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_DERMATOLOGY",
+    "name": "Dermatología",
+    "group": "Medicina clínica",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Lesión, morfología y distribución",
+      "Piel, cabello, uñas y mucosas",
+      "Fotografías y dermatoscopia",
+      "Biopsias y procedimientos",
+      "Evolución por lesión"
+    ],
+    "components": [
+      "body_map",
+      "lesion_gallery",
+      "dermoscopy_viewer"
+    ],
+    "workflows": [
+      "dermatology_visit",
+      "lesion_followup",
+      "biopsy_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "media_store",
+      "procedures",
+      "specimen_tracking",
+      "consent"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "ABMS_DERM",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_MICROGRAPHIC_DERM",
+    "name": "Cirugía dermatológica micrográfica",
+    "group": "Medicina clínica",
+    "entryType": "subespecialidad",
+    "parentCode": "H_DERMATOLOGY",
+    "capture": [
+      "Lesión e indicación",
+      "Sitio y orientación",
+      "Etapas y márgenes registrados",
+      "Muestras y reconstrucción",
+      "Complicaciones y evolución"
+    ],
+    "components": [
+      "skin_margin_map",
+      "specimen_orientation",
+      "procedure_report"
+    ],
+    "workflows": [
+      "surgical_planning",
+      "margin_stage_record",
+      "postoperative_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "pathology",
+      "specimen_tracking",
+      "consent"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_DERM"
+    ]
+  },
+  {
+    "code": "H_SLEEP",
+    "name": "Medicina del sueño",
+    "group": "Medicina clínica",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PULMONOLOGY",
+    "capture": [
+      "Horario y síntomas del sueño",
+      "Hábitos y comorbilidades",
+      "Polisomnografía y registros",
+      "Dispositivos y uso informado",
+      "Evolución y escalas registradas"
+    ],
+    "components": [
+      "sleep_diary",
+      "polysomnography_report",
+      "device_trends"
+    ],
+    "workflows": [
+      "sleep_assessment",
+      "sleep_study",
+      "device_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "signal_store",
+      "scales",
+      "device_tracking"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_IM"
+    ]
+  },
+  {
+    "code": "H_PALLIATIVE",
+    "name": "Medicina paliativa",
+    "group": "Medicina clínica",
+    "entryType": "subespecialidad",
+    "parentCode": "H_INTERNAL",
+    "capture": [
+      "Síntomas y carga funcional",
+      "Objetivos y preferencias",
+      "Decisiones y participantes",
+      "Medicaciones y cuidados registrados",
+      "Apoyo familiar y evolución"
+    ],
+    "components": [
+      "symptom_trends",
+      "care_goals",
+      "caregiver_panel"
+    ],
+    "workflows": [
+      "palliative_assessment",
+      "goals_review",
+      "home_visit"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "care_plans",
+      "pharmacy",
+      "consent",
+      "sensitive_access"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_IM"
+    ]
+  },
+  {
+    "code": "H_PAIN",
+    "name": "Medicina del dolor",
+    "group": "Medicina clínica",
+    "entryType": "subespecialidad",
+    "parentCode": "H_INTERNAL",
+    "capture": [
+      "Localización y características del dolor",
+      "Impacto funcional",
+      "Escalas y evolución",
+      "Procedimientos y respuesta registrada",
+      "Medicaciones y eventos"
+    ],
+    "components": [
+      "pain_body_map",
+      "pain_trends",
+      "functional_scales"
+    ],
+    "workflows": [
+      "pain_assessment",
+      "procedure_session",
+      "pain_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "scales",
+      "procedures",
+      "pharmacy",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_ANES"
+    ]
+  },
+  {
+    "code": "H_TOXICOLOGY",
+    "name": "Toxicología médica",
+    "group": "Medicina clínica",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Agente, vía y tiempo de exposición",
+      "Síntomas y examen",
+      "Pruebas y concentraciones",
+      "Intervenciones realizadas",
+      "Eventos y seguimiento"
+    ],
+    "components": [
+      "exposure_timeline",
+      "toxicology_trends",
+      "body_map"
+    ],
+    "workflows": [
+      "toxicology_assessment",
+      "observation",
+      "exposure_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "emergency",
+      "inpatient"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_PREV"
+    ]
+  },
+  {
+    "code": "H_HYPERBARIC",
+    "name": "Medicina hiperbárica y subacuática",
+    "group": "Medicina clínica",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Antecedentes y exposición de buceo",
+      "Indicación y valoración registrada",
+      "Sesiones, equipo y parámetros",
+      "Eventos y tolerancia",
+      "Evolución y controles"
+    ],
+    "components": [
+      "dive_profile",
+      "session_timeline",
+      "wound_gallery"
+    ],
+    "workflows": [
+      "hyperbaric_assessment",
+      "hyperbaric_session",
+      "session_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "procedures",
+      "device_tracking",
+      "media_store",
+      "consent"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_PREV",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_NEUROLOGY",
+    "name": "Neurología",
+    "group": "Neurología y psiquiatría",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Síntomas y cronología",
+      "Examen neurológico",
+      "Localización anatómica y lateralidad",
+      "EEG, EMG e imágenes",
+      "Función y evolución"
+    ],
+    "components": [
+      "neuro_map",
+      "neurological_exam",
+      "signal_viewer",
+      "functional_trends"
+    ],
+    "workflows": [
+      "neurology_visit",
+      "diagnostic_study",
+      "neurology_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "signal_store",
+      "scales"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABPN",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_NEUROPHYS",
+    "name": "Neurofisiología clínica",
+    "group": "Neurología y psiquiatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_NEUROLOGY",
+    "capture": [
+      "Indicación y técnica",
+      "Electrodos y regiones",
+      "Señales y mediciones",
+      "Eventos durante el estudio",
+      "Interpretación y versiones"
+    ],
+    "components": [
+      "signal_viewer",
+      "electrode_map",
+      "neurophysiology_report"
+    ],
+    "workflows": [
+      "study_preparation",
+      "signal_acquisition",
+      "study_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "signal_store",
+      "procedures",
+      "device_tracking"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABPN"
+    ]
+  },
+  {
+    "code": "H_EPILEPSY",
+    "name": "Epileptología",
+    "group": "Neurología y psiquiatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_NEUROLOGY",
+    "capture": [
+      "Eventos y descripción de crisis",
+      "Cronología y factores asociados",
+      "EEG, video e imágenes",
+      "Medicaciones y eventos",
+      "Frecuencia y evolución"
+    ],
+    "components": [
+      "seizure_diary",
+      "eeg_viewer",
+      "event_video"
+    ],
+    "workflows": [
+      "epilepsy_visit",
+      "video_eeg_study",
+      "seizure_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "signal_store",
+      "media_store",
+      "imaging",
+      "pharmacy"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABPN"
+    ]
+  },
+  {
+    "code": "H_VASCULAR_NEURO",
+    "name": "Neurología vascular",
+    "group": "Neurología y psiquiatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_NEUROLOGY",
+    "capture": [
+      "Inicio y evolución de síntomas",
+      "Examen y escalas registradas",
+      "Territorios vasculares y lesiones",
+      "Estudios y procedimientos",
+      "Función, secuelas y seguimiento"
+    ],
+    "components": [
+      "brain_vascular_map",
+      "event_timeline",
+      "functional_scales"
+    ],
+    "workflows": [
+      "vascular_neurology_assessment",
+      "inpatient_consultation",
+      "stroke_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "emergency",
+      "imaging",
+      "inpatient",
+      "scales"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABPN"
+    ]
+  },
+  {
+    "code": "H_NEUROMUSCULAR",
+    "name": "Medicina neuromuscular",
+    "group": "Neurología y psiquiatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_NEUROLOGY",
+    "capture": [
+      "Debilidad y distribución",
+      "Examen de fuerza y sensibilidad",
+      "EMG, conducción y pruebas",
+      "Función respiratoria y autonomía",
+      "Evolución y ayudas"
+    ],
+    "components": [
+      "muscle_map",
+      "strength_chart",
+      "emg_report"
+    ],
+    "workflows": [
+      "neuromuscular_assessment",
+      "electrodiagnostic_study",
+      "functional_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "signal_store",
+      "laboratory",
+      "imaging",
+      "care_plans"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABPN",
+      "ABMS_REHAB"
+    ]
+  },
+  {
+    "code": "H_NEURODEVELOPMENT",
+    "name": "Discapacidades del neurodesarrollo",
+    "group": "Neurología y psiquiatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_NEUROLOGY",
+    "capture": [
+      "Historia del desarrollo",
+      "Perfil funcional y neurológico",
+      "Evaluaciones e informes escolares",
+      "Estudios y condiciones asociadas",
+      "Metas y seguimiento"
+    ],
+    "components": [
+      "development_timeline",
+      "functional_profile",
+      "care_goals"
+    ],
+    "workflows": [
+      "neurodevelopment_assessment",
+      "multidisciplinary_review",
+      "care_transition"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "scales",
+      "care_plans",
+      "consent"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABPN"
+    ]
+  },
+  {
+    "code": "H_PSYCHIATRY",
+    "name": "Psiquiatría",
+    "group": "Neurología y psiquiatría",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Historia psiquiátrica y contexto",
+      "Examen mental",
+      "Valoración de riesgo documentada",
+      "Medicaciones y eventos",
+      "Plan, evolución y red de apoyo"
+    ],
+    "components": [
+      "mental_status_exam",
+      "symptom_trends",
+      "confidential_sections"
+    ],
+    "workflows": [
+      "psychiatric_assessment",
+      "psychiatric_followup",
+      "care_coordination"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "sensitive_access",
+      "scales",
+      "pharmacy",
+      "care_plans"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABPN",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_CHILD_PSYCHIATRY",
+    "name": "Psiquiatría del niño y del adolescente",
+    "group": "Neurología y psiquiatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PSYCHIATRY",
+    "capture": [
+      "Desarrollo y entorno familiar",
+      "Síntomas por contexto",
+      "Entrevistas de paciente y responsables",
+      "Examen mental e informes escolares",
+      "Consentimientos y evolución"
+    ],
+    "components": [
+      "development_timeline",
+      "family_genogram",
+      "confidential_sections"
+    ],
+    "workflows": [
+      "child_psychiatric_assessment",
+      "guardian_consent",
+      "multidisciplinary_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "sensitive_access",
+      "consent",
+      "scales",
+      "care_plans"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABPN",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_ADDICTION_PSYCHIATRY",
+    "name": "Psiquiatría de adicciones",
+    "group": "Neurología y psiquiatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PSYCHIATRY",
+    "capture": [
+      "Sustancias y patrón de uso",
+      "Historia y condiciones asociadas",
+      "Entorno y apoyo",
+      "Eventos y atención registrada",
+      "Evolución y objetivos acordados"
+    ],
+    "components": [
+      "substance_use_timeline",
+      "symptom_trends",
+      "care_goals"
+    ],
+    "workflows": [
+      "addiction_assessment",
+      "addiction_followup",
+      "care_coordination"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "sensitive_access",
+      "scales",
+      "pharmacy"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABPN",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_LIAISON_PSYCHIATRY",
+    "name": "Psiquiatría de enlace",
+    "group": "Neurología y psiquiatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PSYCHIATRY",
+    "capture": [
+      "Solicitud de interconsulta",
+      "Contexto médico y medicaciones",
+      "Examen mental",
+      "Capacidad decisional evaluada",
+      "Conclusiones y seguimiento"
+    ],
+    "components": [
+      "consultation_panel",
+      "mental_status_exam",
+      "medication_timeline"
+    ],
+    "workflows": [
+      "inpatient_consultation",
+      "consultation_response",
+      "shared_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "inpatient",
+      "pharmacy",
+      "sensitive_access",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABPN"
+    ]
+  },
+  {
+    "code": "H_FORENSIC_PSYCHIATRY",
+    "name": "Psiquiatría forense",
+    "group": "Neurología y psiquiatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PSYCHIATRY",
+    "capture": [
+      "Objeto de pericia y solicitante",
+      "Fuentes y entrevistas",
+      "Examen mental y hallazgos",
+      "Documentación y pruebas revisadas",
+      "Dictamen y firma"
+    ],
+    "components": [
+      "evidence_register",
+      "mental_status_exam",
+      "confidential_sections"
+    ],
+    "workflows": [
+      "forensic_assessment",
+      "expert_report",
+      "signed_report"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "sensitive_access",
+      "chain_of_custody",
+      "signatures"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABPN"
+    ]
+  },
+  {
+    "code": "H_GERIATRIC_PSYCHIATRY",
+    "name": "Psiquiatría geriátrica",
+    "group": "Neurología y psiquiatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PSYCHIATRY",
+    "capture": [
+      "Historia y síntomas actuales",
+      "Cognición y ánimo",
+      "Funcionalidad y cuidador",
+      "Medicaciones y comorbilidades",
+      "Evolución y apoyo"
+    ],
+    "components": [
+      "cognitive_trends",
+      "mental_status_exam",
+      "caregiver_panel"
+    ],
+    "workflows": [
+      "geriatric_psychiatric_assessment",
+      "medication_review",
+      "caregiver_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "scales",
+      "pharmacy",
+      "sensitive_access",
+      "care_plans"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABPN"
+    ]
+  },
+  {
+    "code": "H_ADDICTION_MED",
+    "name": "Medicina de adicciones",
+    "group": "Neurología y psiquiatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PREVENTIVE",
+    "capture": [
+      "Patrón de uso y exposición",
+      "Estado general y comorbilidades",
+      "Pruebas y eventos registrados",
+      "Tratamientos y derivaciones",
+      "Metas y seguimiento"
+    ],
+    "components": [
+      "substance_use_timeline",
+      "lab_trends",
+      "care_goals"
+    ],
+    "workflows": [
+      "addiction_medical_assessment",
+      "shared_followup",
+      "care_coordination"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "sensitive_access",
+      "laboratory",
+      "pharmacy"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_PREV"
+    ]
+  },
+  {
+    "code": "H_OBGYN",
+    "name": "Ginecología y obstetricia",
+    "group": "Salud reproductiva",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Antecedentes ginecológicos y obstétricos",
+      "Síntomas y examen",
+      "Gestaciones, controles y parto",
+      "Citología, imágenes y pruebas",
+      "Procedimientos y evolución",
+      "Climaterio y salud reproductiva longitudinal"
+    ],
+    "components": [
+      "gynecologic_map",
+      "obstetric_history",
+      "pregnancy_timeline",
+      "partogram"
+    ],
+    "workflows": [
+      "gynecologic_visit",
+      "prenatal_visit",
+      "delivery_record",
+      "postpartum_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "pregnancy_registry",
+      "laboratory",
+      "imaging",
+      "procedures",
+      "consent"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "ABMS_OBG",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_MATERNAL_FETAL",
+    "name": "Medicina materno fetal",
+    "group": "Salud reproductiva",
+    "entryType": "subespecialidad",
+    "parentCode": "H_OBGYN",
+    "capture": [
+      "Condiciones maternas y gestacionales",
+      "Biometría, anatomía y estudios fetales",
+      "Hallazgos y riesgos registrados",
+      "Procedimientos y decisiones documentadas",
+      "Evolución materna y fetal"
+    ],
+    "components": [
+      "fetal_anatomy_map",
+      "fetal_growth_curves",
+      "pregnancy_timeline"
+    ],
+    "workflows": [
+      "high_risk_pregnancy_review",
+      "fetal_study",
+      "multidisciplinary_delivery_planning"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "pregnancy_registry",
+      "imaging",
+      "laboratory",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_OBG"
+    ]
+  },
+  {
+    "code": "H_GYNE_ONCO",
+    "name": "Ginecología oncológica",
+    "group": "Salud reproductiva",
+    "entryType": "subespecialidad",
+    "parentCode": "H_OBGYN",
+    "capture": [
+      "Sitio tumoral y hallazgos",
+      "Histología y biomarcadores",
+      "Extensión y estadio registrados",
+      "Cirugía y tratamientos vinculados",
+      "Respuesta y comité"
+    ],
+    "components": [
+      "gynecologic_map",
+      "tumor_map",
+      "treatment_cycles"
+    ],
+    "workflows": [
+      "oncologic_assessment",
+      "tumor_board",
+      "posttreatment_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "oncology",
+      "surgery",
+      "pathology",
+      "imaging"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_OBG",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_REPRODUCTIVE_ENDO",
+    "name": "Endocrinología reproductiva e infertilidad",
+    "group": "Salud reproductiva",
+    "entryType": "subespecialidad",
+    "parentCode": "H_OBGYN",
+    "capture": [
+      "Historia reproductiva y antecedentes",
+      "Evaluación de ambos miembros cuando aplique",
+      "Hormonas y estudios",
+      "Ciclos y procedimientos registrados",
+      "Muestras, consentimientos y resultados"
+    ],
+    "components": [
+      "cycle_timeline",
+      "hormone_trends",
+      "embryology_report"
+    ],
+    "workflows": [
+      "fertility_assessment",
+      "cycle_followup",
+      "procedure_record"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "imaging",
+      "consent",
+      "specimen_tracking",
+      "sensitive_access"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_OBG"
+    ]
+  },
+  {
+    "code": "H_UROGYNE",
+    "name": "Uroginecología y cirugía reconstructiva pélvica",
+    "group": "Salud reproductiva",
+    "entryType": "subespecialidad",
+    "parentCode": "H_OBGYN",
+    "capture": [
+      "Síntomas urinarios y pélvicos",
+      "Examen y hallazgos por compartimento",
+      "Pruebas funcionales",
+      "Procedimientos y dispositivos",
+      "Función y evolución"
+    ],
+    "components": [
+      "pelvic_compartment_map",
+      "voiding_diary",
+      "urodynamic_report"
+    ],
+    "workflows": [
+      "pelvic_floor_assessment",
+      "functional_study",
+      "postoperative_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "procedures",
+      "surgery",
+      "device_tracking",
+      "sensitive_access"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_OBG"
+    ]
+  },
+  {
+    "code": "H_FAMILY_PLANNING",
+    "name": "Planificación familiar compleja",
+    "group": "Salud reproductiva",
+    "entryType": "subespecialidad",
+    "parentCode": "H_OBGYN",
+    "capture": [
+      "Preferencias y objetivos reproductivos",
+      "Antecedentes y valoración",
+      "Consejería y decisión registrada",
+      "Procedimientos y dispositivos",
+      "Consentimientos y controles"
+    ],
+    "components": [
+      "reproductive_timeline",
+      "contraception_record",
+      "device_register"
+    ],
+    "workflows": [
+      "counseling_visit",
+      "procedure_record",
+      "device_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "consent",
+      "procedures",
+      "device_tracking",
+      "sensitive_access"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_OBG"
+    ]
+  },
+  {
+    "code": "H_PED_GYNE",
+    "name": "Ginecología de la niña y adolescente",
+    "group": "Salud reproductiva",
+    "entryType": "subespecialidad",
+    "parentCode": "H_OBGYN",
+    "capture": [
+      "Desarrollo puberal",
+      "Síntomas y antecedentes",
+      "Entrevista y examen documentados",
+      "Pruebas e imágenes",
+      "Consentimiento, privacidad y evolución"
+    ],
+    "components": [
+      "puberty_record",
+      "gynecologic_map",
+      "confidential_sections"
+    ],
+    "workflows": [
+      "adolescent_gynecologic_visit",
+      "guardian_consent",
+      "followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "consent",
+      "sensitive_access",
+      "laboratory",
+      "imaging"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PEDIATRICS",
+    "name": "Pediatría",
+    "group": "Pediatría",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Historia prenatal, nacimiento y antecedentes",
+      "Crecimiento y desarrollo",
+      "Alimentación y vacunación registrada",
+      "Exploración y problemas activos",
+      "Responsables y evolución"
+    ],
+    "components": [
+      "growth_curves",
+      "development_timeline",
+      "vaccine_card",
+      "pediatric_exam"
+    ],
+    "workflows": [
+      "pediatric_visit",
+      "well_child_visit",
+      "guardian_consent"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "growth_reference",
+      "vaccination",
+      "consent",
+      "laboratory"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "ABMS_PED",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_NEONATAL",
+    "name": "Neonatología",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Edad gestacional y antecedentes perinatales",
+      "Nacimiento, adaptación y antropometría",
+      "Alimentación, balance y soporte registrado",
+      "Exámenes y estudios",
+      "Evolución, alta y vínculo materno"
+    ],
+    "components": [
+      "neonatal_growth",
+      "perinatal_record",
+      "fluid_balance",
+      "neonatal_monitoring"
+    ],
+    "workflows": [
+      "neonatal_admission",
+      "neonatal_round",
+      "neonatal_discharge"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "inpatient",
+      "pregnancy_registry",
+      "growth_reference",
+      "laboratory",
+      "device_tracking"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PED",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_CARDIO",
+    "name": "Cardiología pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Historia perinatal y síntomas",
+      "Anatomía congénita y exploración",
+      "Estudios y función cardíaca",
+      "Intervenciones previas y dispositivos",
+      "Crecimiento y transición"
+    ],
+    "components": [
+      "congenital_heart_map",
+      "echo_report",
+      "growth_curves"
+    ],
+    "workflows": [
+      "pediatric_cardiology_visit",
+      "diagnostic_study",
+      "care_transition"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "signal_store",
+      "growth_reference",
+      "procedures"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PED",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_ENDO",
+    "name": "Endocrinología pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Crecimiento y edad ósea",
+      "Desarrollo puberal",
+      "Hormonas y mediciones metabólicas",
+      "Glucemias y dispositivos",
+      "Antecedentes familiares y evolución"
+    ],
+    "components": [
+      "growth_curves",
+      "puberty_record",
+      "glucose_trends",
+      "hormone_trends"
+    ],
+    "workflows": [
+      "pediatric_endocrine_visit",
+      "growth_followup",
+      "metabolic_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "growth_reference",
+      "laboratory",
+      "imaging",
+      "device_tracking"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PED",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_GASTRO",
+    "name": "Gastroenterología pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Alimentación y síntomas digestivos",
+      "Crecimiento y exploración",
+      "Hallazgos por segmento",
+      "Endoscopia y muestras",
+      "Evolución y controles"
+    ],
+    "components": [
+      "digestive_map",
+      "growth_curves",
+      "endoscopy_report"
+    ],
+    "workflows": [
+      "pediatric_gastro_visit",
+      "endoscopy",
+      "growth_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "growth_reference",
+      "procedures",
+      "specimen_tracking",
+      "laboratory"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PED",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_HEMATOLOGY",
+    "name": "Hematología pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Antecedentes familiares y sangrado",
+      "Hemogramas y coagulación",
+      "Médula y pruebas vinculadas",
+      "Transfusiones y eventos",
+      "Crecimiento y evolución"
+    ],
+    "components": [
+      "blood_count_trends",
+      "coagulation_trends",
+      "growth_curves"
+    ],
+    "workflows": [
+      "pediatric_hematology_visit",
+      "specimen_review",
+      "transfusion_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "transfusion",
+      "specimen_tracking",
+      "growth_reference"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_ONCOLOGY",
+    "name": "Oncología pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Tumor e histología",
+      "Extensión y estadio registrados",
+      "Plan, ciclos y respuesta documentados",
+      "Eventos y toxicidad",
+      "Crecimiento, responsables y seguimiento"
+    ],
+    "components": [
+      "tumor_map",
+      "treatment_cycles",
+      "toxicity_record",
+      "growth_curves"
+    ],
+    "workflows": [
+      "pediatric_oncology_assessment",
+      "tumor_board",
+      "survivorship_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "oncology",
+      "growth_reference",
+      "pharmacy",
+      "laboratory",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_INFECTIOUS",
+    "name": "Infectología pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Historia perinatal y exposiciones",
+      "Foco y síntomas",
+      "Microbiología y pruebas",
+      "Vacunación y tratamientos registrados",
+      "Crecimiento y evolución"
+    ],
+    "components": [
+      "infection_map",
+      "microbiology_report",
+      "vaccine_card"
+    ],
+    "workflows": [
+      "pediatric_infection_assessment",
+      "microbiology_review",
+      "infection_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "vaccination",
+      "growth_reference",
+      "infection_control"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PED",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_NEPHRO",
+    "name": "Nefrología pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Historia renal y desarrollo",
+      "Presión, diuresis y balance",
+      "Laboratorio y tracto urinario",
+      "Diálisis o trasplante registrados",
+      "Crecimiento y evolución"
+    ],
+    "components": [
+      "renal_map",
+      "renal_trends",
+      "fluid_balance",
+      "growth_curves"
+    ],
+    "workflows": [
+      "pediatric_nephrology_visit",
+      "replacement_review",
+      "growth_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "growth_reference",
+      "imaging",
+      "procedures"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PED",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_PULMONARY",
+    "name": "Neumología pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Antecedentes perinatales y síntomas",
+      "Exploración y oxigenación",
+      "Pruebas funcionales",
+      "Imágenes, muestras y dispositivos",
+      "Crecimiento y evolución"
+    ],
+    "components": [
+      "lung_map",
+      "spirometry_report",
+      "oxygen_trends",
+      "growth_curves"
+    ],
+    "workflows": [
+      "pediatric_pulmonary_visit",
+      "functional_study",
+      "respiratory_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "signal_store",
+      "imaging",
+      "laboratory",
+      "growth_reference"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PED",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_RHEUMATOLOGY",
+    "name": "Reumatología pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Articulaciones y síntomas sistémicos",
+      "Función y actividad registrada",
+      "Crecimiento y desarrollo",
+      "Laboratorio e imágenes",
+      "Medicaciones y evolución"
+    ],
+    "components": [
+      "joint_map",
+      "functional_scales",
+      "growth_curves"
+    ],
+    "workflows": [
+      "pediatric_rheumatology_visit",
+      "activity_review",
+      "growth_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "growth_reference",
+      "scales",
+      "laboratory",
+      "imaging"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PED"
+    ]
+  },
+  {
+    "code": "H_PED_CRITICAL",
+    "name": "Medicina intensiva pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Ingreso y estado clínico",
+      "Peso y parámetros monitorizados",
+      "Soportes y dispositivos",
+      "Balance, laboratorio y eventos",
+      "Evolución y transición de cuidados"
+    ],
+    "components": [
+      "pediatric_monitoring",
+      "fluid_balance",
+      "device_timeline"
+    ],
+    "workflows": [
+      "pediatric_icu_admission",
+      "icu_round",
+      "care_transfer"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "inpatient",
+      "device_tracking",
+      "laboratory",
+      "medication_administration",
+      "growth_reference"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PED",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_EMERGENCY",
+    "name": "Emergencias pediátricas y desastres",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Motivo, triage registrado y hora",
+      "Peso, edad y responsables",
+      "Examen y pruebas",
+      "Intervenciones y eventos",
+      "Destino y entrega de atención"
+    ],
+    "components": [
+      "pediatric_triage",
+      "event_timeline",
+      "vital_trends"
+    ],
+    "workflows": [
+      "pediatric_triage",
+      "emergency_visit",
+      "observation",
+      "care_transfer"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "emergency",
+      "laboratory",
+      "imaging",
+      "medication_administration",
+      "consent"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_PED",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_HOSPITAL",
+    "name": "Medicina hospitalaria pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Motivo y fecha de ingreso",
+      "Problemas y rondas",
+      "Crecimiento, alimentación y balance",
+      "Interconsultas y tratamientos",
+      "Alta y seguimiento"
+    ],
+    "components": [
+      "pediatric_ward_board",
+      "fluid_balance",
+      "growth_curves"
+    ],
+    "workflows": [
+      "pediatric_admission",
+      "inpatient_round",
+      "pediatric_discharge"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "inpatient",
+      "care_plans",
+      "laboratory",
+      "medication_administration"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PED"
+    ]
+  },
+  {
+    "code": "H_PED_DEVELOPMENT",
+    "name": "Pediatría del desarrollo y conducta",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Hitos y antecedentes",
+      "Conducta en casa y escuela",
+      "Evaluaciones e informantes",
+      "Perfil funcional",
+      "Metas y evolución"
+    ],
+    "components": [
+      "development_timeline",
+      "behavior_record",
+      "functional_profile"
+    ],
+    "workflows": [
+      "development_assessment",
+      "multidisciplinary_review",
+      "development_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "scales",
+      "care_plans",
+      "consent",
+      "sensitive_access"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PED"
+    ]
+  },
+  {
+    "code": "H_PED_PROTECTION",
+    "name": "Pediatría de protección infantil",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Motivo y relato con fuente identificada",
+      "Examen y lesiones",
+      "Pruebas y evidencia",
+      "Entorno y medidas documentadas",
+      "Interconsultas y seguimiento"
+    ],
+    "components": [
+      "body_map",
+      "evidence_gallery",
+      "source_attributed_notes"
+    ],
+    "workflows": [
+      "child_protection_assessment",
+      "evidence_intake",
+      "multidisciplinary_review"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "sensitive_access",
+      "consent",
+      "chain_of_custody",
+      "media_store"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_PED"
+    ]
+  },
+  {
+    "code": "H_PED_HEPATOLOGY",
+    "name": "Hepatología pediátrica de trasplante",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Historia y enfermedad hepática",
+      "Función y pruebas",
+      "Crecimiento y estado nutricional",
+      "Evaluación y trasplante registrado",
+      "Eventos y evolución"
+    ],
+    "components": [
+      "lab_trends",
+      "growth_curves",
+      "transplant_timeline"
+    ],
+    "workflows": [
+      "pediatric_transplant_assessment",
+      "transplant_followup",
+      "care_transition"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "transplant_registry",
+      "laboratory",
+      "growth_reference",
+      "imaging"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_PED"
+    ]
+  },
+  {
+    "code": "H_PED_NEUROLOGY",
+    "name": "Neurología pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Historia perinatal y desarrollo",
+      "Examen neurológico",
+      "Eventos y cronología",
+      "EEG, imágenes y pruebas",
+      "Función y evolución"
+    ],
+    "components": [
+      "development_timeline",
+      "neuro_map",
+      "eeg_viewer"
+    ],
+    "workflows": [
+      "pediatric_neurology_visit",
+      "diagnostic_study",
+      "development_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "signal_store",
+      "imaging",
+      "scales",
+      "growth_reference"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABPN",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_DERM",
+    "name": "Dermatología pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Lesiones y distribución",
+      "Antecedentes y edad de aparición",
+      "Fotografías y pruebas",
+      "Procedimientos realizados",
+      "Evolución y responsables"
+    ],
+    "components": [
+      "pediatric_body_map",
+      "lesion_gallery",
+      "dermoscopy_viewer"
+    ],
+    "workflows": [
+      "pediatric_dermatology_visit",
+      "lesion_followup",
+      "guardian_consent"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "media_store",
+      "specimen_tracking",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_DERM",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_REHAB",
+    "name": "Medicina de rehabilitación pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Desarrollo y discapacidad",
+      "Examen y movilidad",
+      "Función en hogar y escuela",
+      "Órtesis y ayudas",
+      "Metas y evolución interdisciplinaria"
+    ],
+    "components": [
+      "development_timeline",
+      "functional_profile",
+      "range_of_motion",
+      "care_goals"
+    ],
+    "workflows": [
+      "pediatric_rehabilitation_assessment",
+      "team_review",
+      "functional_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "care_plans",
+      "scales",
+      "device_tracking",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_REHAB"
+    ]
+  },
+  {
+    "code": "H_PED_ANESTHESIA",
+    "name": "Anestesiología pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Historia y valoración preanestésica",
+      "Peso, vía aérea y consentimiento",
+      "Técnica y medicaciones administradas",
+      "Monitorización y eventos",
+      "Recuperación y entrega"
+    ],
+    "components": [
+      "pediatric_anesthesia_chart",
+      "airway_record",
+      "vital_trends"
+    ],
+    "workflows": [
+      "preanesthetic_assessment",
+      "anesthesia_record",
+      "recovery_record"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "anesthesia",
+      "surgery",
+      "medication_administration",
+      "device_tracking",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_ANES"
+    ]
+  },
+  {
+    "code": "H_PED_RADIOLOGY",
+    "name": "Radiología pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Indicación y antecedentes",
+      "Modalidad, técnica y exposición registrada",
+      "Hallazgos y localización",
+      "Imágenes y comparación",
+      "Informe y comunicaciones"
+    ],
+    "components": [
+      "dicom_viewer",
+      "pediatric_anatomy_map",
+      "radiology_report"
+    ],
+    "workflows": [
+      "imaging_order",
+      "study_acquisition",
+      "report_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "pacs_integration",
+      "device_tracking",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_RAD"
+    ]
+  },
+  {
+    "code": "H_PED_SURGERY",
+    "name": "Cirugía pediátrica",
+    "group": "Pediatría",
+    "entryType": "especialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Diagnóstico y anatomía",
+      "Valoración y consentimiento",
+      "Procedimiento y hallazgos",
+      "Muestras, dispositivos y eventos",
+      "Crecimiento y evolución posoperatoria"
+    ],
+    "components": [
+      "pediatric_anatomy_map",
+      "operative_report",
+      "growth_curves"
+    ],
+    "workflows": [
+      "surgical_planning",
+      "pediatric_operation",
+      "postoperative_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "anesthesia",
+      "specimen_tracking",
+      "consent",
+      "growth_reference"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_SURG",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_UROLOGY",
+    "name": "Urología pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Historia y anomalías urinarias",
+      "Examen por región",
+      "Imágenes y función urinaria",
+      "Procedimientos realizados",
+      "Crecimiento y evolución"
+    ],
+    "components": [
+      "pediatric_uro_map",
+      "voiding_diary",
+      "operative_report"
+    ],
+    "workflows": [
+      "pediatric_urology_visit",
+      "functional_study",
+      "postoperative_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "procedures",
+      "surgery",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_NEUROSURGERY",
+    "name": "Neurocirugía pediátrica",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Malformación, lesión y localización",
+      "Examen y desarrollo",
+      "Imágenes y dispositivos",
+      "Operación y eventos",
+      "Evolución y función"
+    ],
+    "components": [
+      "pediatric_neuro_map",
+      "device_timeline",
+      "operative_report"
+    ],
+    "workflows": [
+      "surgical_planning",
+      "pediatric_neurosurgery",
+      "device_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "imaging",
+      "device_tracking",
+      "consent"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_OPHTH",
+    "name": "Oftalmología pediátrica y estrabismo",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Antecedentes y desarrollo visual",
+      "Agudeza y refracción",
+      "Alineación y motilidad ocular",
+      "Hallazgos por ojo",
+      "Procedimientos y evolución"
+    ],
+    "components": [
+      "eye_pair_map",
+      "ocular_alignment",
+      "visual_trends"
+    ],
+    "workflows": [
+      "pediatric_eye_exam",
+      "strabismus_assessment",
+      "vision_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "procedures",
+      "imaging",
+      "consent",
+      "device_tracking"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_PED_ENT",
+    "name": "Otorrinolaringología pediátrica compleja",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Síntomas y desarrollo",
+      "Oído, nariz, garganta y vía aérea",
+      "Audición y estudios",
+      "Procedimientos realizados",
+      "Función y evolución"
+    ],
+    "components": [
+      "ent_map",
+      "audiogram_report",
+      "airway_record"
+    ],
+    "workflows": [
+      "pediatric_ent_visit",
+      "hearing_study",
+      "postprocedure_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "signal_store",
+      "procedures",
+      "imaging",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_ENT"
+    ]
+  },
+  {
+    "code": "H_PED_CARDIAC_SURG",
+    "name": "Cirugía cardiovascular pediátrica y congénita",
+    "group": "Pediatría",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PEDIATRICS",
+    "capture": [
+      "Anatomía y cardiopatía",
+      "Estudios preoperatorios",
+      "Cirugía y circulación registradas",
+      "Dispositivos y eventos",
+      "Evolución y reparaciones previas"
+    ],
+    "components": [
+      "congenital_heart_map",
+      "operative_report",
+      "device_timeline"
+    ],
+    "workflows": [
+      "congenital_surgical_planning",
+      "cardiac_operation",
+      "postoperative_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "anesthesia",
+      "imaging",
+      "device_tracking",
+      "inpatient"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_GENERAL_SURGERY",
+    "name": "Cirugía general",
+    "group": "Cirugía",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Diagnóstico e indicación",
+      "Valoración y consentimiento",
+      "Anatomía, hallazgos y técnica realizada",
+      "Muestras, implantes y eventos",
+      "Evolución y alta"
+    ],
+    "components": [
+      "body_map",
+      "operative_report",
+      "surgical_timeline"
+    ],
+    "workflows": [
+      "surgical_planning",
+      "operation",
+      "postoperative_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "anesthesia",
+      "specimen_tracking",
+      "consent",
+      "inpatient"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_SURG",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_COLORECTAL",
+    "name": "Cirugía de colon, recto y ano",
+    "group": "Cirugía",
+    "entryType": "subespecialidad",
+    "parentCode": "H_GENERAL_SURGERY",
+    "capture": [
+      "Síntomas y examen",
+      "Segmento y localización",
+      "Endoscopia e imágenes",
+      "Cirugía y anatomía resultante",
+      "Función y evolución"
+    ],
+    "components": [
+      "colorectal_map",
+      "stoma_map",
+      "operative_report"
+    ],
+    "workflows": [
+      "colorectal_assessment",
+      "operation",
+      "stoma_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "procedures",
+      "imaging",
+      "specimen_tracking",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_VASCULAR_SURGERY",
+    "name": "Cirugía vascular",
+    "group": "Cirugía",
+    "entryType": "subespecialidad",
+    "parentCode": "H_GENERAL_SURGERY",
+    "capture": [
+      "Síntomas y territorios",
+      "Pulsos, lesiones y perfusión",
+      "Estudios vasculares",
+      "Procedimiento y dispositivos",
+      "Evolución vascular y heridas"
+    ],
+    "components": [
+      "vascular_map",
+      "vascular_study_report",
+      "wound_gallery"
+    ],
+    "workflows": [
+      "vascular_assessment",
+      "vascular_procedure",
+      "vascular_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "imaging",
+      "device_tracking",
+      "media_store"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_SURG"
+    ]
+  },
+  {
+    "code": "H_THORACIC_CARDIAC",
+    "name": "Cirugía de tórax y cardiovascular",
+    "group": "Cirugía",
+    "entryType": "especialidad",
+    "parentCode": "H_GENERAL_SURGERY",
+    "capture": [
+      "Indicación y estructura afectada",
+      "Estudios preoperatorios",
+      "Técnica y hallazgos",
+      "Circulación, dispositivos y eventos",
+      "Evolución y función"
+    ],
+    "components": [
+      "thoracic_map",
+      "heart_map",
+      "operative_report"
+    ],
+    "workflows": [
+      "cardiothoracic_planning",
+      "cardiothoracic_operation",
+      "postoperative_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "anesthesia",
+      "imaging",
+      "device_tracking",
+      "inpatient"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_THORACIC_ONCO_SURG",
+    "name": "Cirugía de tórax oncológica",
+    "group": "Cirugía",
+    "entryType": "subespecialidad",
+    "parentCode": "H_THORACIC_CARDIAC",
+    "capture": [
+      "Tumor y localización",
+      "Extensión e histología",
+      "Procedimiento y márgenes registrados",
+      "Muestras y reconstrucción",
+      "Evolución y comité"
+    ],
+    "components": [
+      "lung_segment_map",
+      "tumor_map",
+      "operative_report"
+    ],
+    "workflows": [
+      "tumor_board",
+      "thoracic_operation",
+      "oncologic_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "oncology",
+      "surgery",
+      "pathology",
+      "specimen_tracking"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_SURG_ONCOLOGY",
+    "name": "Cirugía oncológica",
+    "group": "Cirugía",
+    "entryType": "especialidad",
+    "parentCode": "H_GENERAL_SURGERY",
+    "capture": [
+      "Tumor e indicación",
+      "Extensión e histología",
+      "Resección y márgenes registrados",
+      "Muestras y reconstrucción",
+      "Evolución y comité"
+    ],
+    "components": [
+      "tumor_map",
+      "specimen_orientation",
+      "operative_report"
+    ],
+    "workflows": [
+      "tumor_board",
+      "oncologic_operation",
+      "postoperative_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "oncology",
+      "surgery",
+      "pathology",
+      "specimen_tracking"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_SURG",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_SURG_ONCO_ABD",
+    "name": "Cirugía oncológica abdominal",
+    "group": "Cirugía",
+    "entryType": "subespecialidad",
+    "parentCode": "H_SURG_ONCOLOGY",
+    "capture": [
+      "Órgano y extensión tumoral",
+      "Estudios e histología",
+      "Resección y anatomía resultante",
+      "Márgenes y muestras",
+      "Evolución y comité"
+    ],
+    "components": [
+      "abdominal_tumor_map",
+      "specimen_orientation",
+      "operative_report"
+    ],
+    "workflows": [
+      "tumor_board",
+      "abdominal_oncologic_operation",
+      "oncologic_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "oncology",
+      "surgery",
+      "pathology",
+      "imaging"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_SURG_ONCO_HEAD",
+    "name": "Cirugía oncológica de cabeza y cuello",
+    "group": "Cirugía",
+    "entryType": "subespecialidad",
+    "parentCode": "H_SURG_ONCOLOGY",
+    "capture": [
+      "Sitio tumoral y lateralidad",
+      "Extensión y ganglios",
+      "Resección y márgenes registrados",
+      "Reconstrucción y muestras",
+      "Función y evolución"
+    ],
+    "components": [
+      "head_neck_map",
+      "lymph_node_map",
+      "operative_report"
+    ],
+    "workflows": [
+      "tumor_board",
+      "head_neck_operation",
+      "functional_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "oncology",
+      "surgery",
+      "pathology",
+      "imaging"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_SURG_ONCO_BREAST",
+    "name": "Cirugía oncológica de mamas, tejidos blandos y piel",
+    "group": "Cirugía",
+    "entryType": "subespecialidad",
+    "parentCode": "H_SURG_ONCOLOGY",
+    "capture": [
+      "Lesión y localización",
+      "Imágenes e histología",
+      "Resección y márgenes registrados",
+      "Muestras y reconstrucción",
+      "Evolución y comité"
+    ],
+    "components": [
+      "breast_map",
+      "soft_tissue_map",
+      "specimen_orientation"
+    ],
+    "workflows": [
+      "tumor_board",
+      "oncologic_operation",
+      "postoperative_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "oncology",
+      "surgery",
+      "pathology",
+      "media_store"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_HPB_SURGERY",
+    "name": "Cirugía hepatopancreatobiliar y trasplante",
+    "group": "Cirugía",
+    "entryType": "subespecialidad",
+    "parentCode": "H_GENERAL_SURGERY",
+    "capture": [
+      "Anatomía e indicación",
+      "Función y estudios",
+      "Resección o trasplante registrado",
+      "Muestras, injertos y eventos",
+      "Evolución y seguimiento"
+    ],
+    "components": [
+      "hepatobiliary_map",
+      "operative_report",
+      "transplant_timeline"
+    ],
+    "workflows": [
+      "hpb_surgical_planning",
+      "hpb_operation",
+      "transplant_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "transplant_registry",
+      "laboratory",
+      "pathology",
+      "inpatient"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_NEUROSURGERY",
+    "name": "Neurocirugía",
+    "group": "Cirugía",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Lesión y localización",
+      "Examen y función",
+      "Imágenes y planificación",
+      "Operación y dispositivos",
+      "Evolución neurológica"
+    ],
+    "components": [
+      "neuro_map",
+      "spinal_map",
+      "operative_report"
+    ],
+    "workflows": [
+      "neurosurgical_planning",
+      "neurosurgical_operation",
+      "postoperative_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "imaging",
+      "device_tracking",
+      "inpatient"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_ORTHOPEDICS",
+    "name": "Ortopedia y traumatología",
+    "group": "Cirugía",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Lesión y mecanismo",
+      "Hueso, articulación y lateralidad",
+      "Examen y función",
+      "Imágenes, operaciones e implantes",
+      "Consolidación y evolución",
+      "Columna y alineación documentadas"
+    ],
+    "components": [
+      "skeleton_map",
+      "fracture_map",
+      "range_of_motion",
+      "implant_register"
+    ],
+    "workflows": [
+      "orthopedic_visit",
+      "fracture_followup",
+      "orthopedic_operation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "surgery",
+      "device_tracking",
+      "care_plans"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_HAND_SURGERY",
+    "name": "Cirugía de mano",
+    "group": "Cirugía",
+    "entryType": "subespecialidad",
+    "parentCode": "H_ORTHOPEDICS",
+    "capture": [
+      "Dedo, estructura y lateralidad",
+      "Mecanismo y lesión",
+      "Función sensitiva y motora",
+      "Operación y reparación registrada",
+      "Rehabilitación y evolución"
+    ],
+    "components": [
+      "hand_map",
+      "range_of_motion",
+      "sensory_map"
+    ],
+    "workflows": [
+      "hand_assessment",
+      "hand_operation",
+      "functional_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "imaging",
+      "care_plans",
+      "device_tracking"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_ORTHO_SPORTS",
+    "name": "Medicina deportiva ortopédica",
+    "group": "Cirugía",
+    "entryType": "subespecialidad",
+    "parentCode": "H_ORTHOPEDICS",
+    "capture": [
+      "Actividad y mecanismo",
+      "Lesión y lateralidad",
+      "Estabilidad y función",
+      "Imágenes y procedimientos",
+      "Evolución y retorno registrado"
+    ],
+    "components": [
+      "joint_map",
+      "functional_scales",
+      "range_of_motion"
+    ],
+    "workflows": [
+      "sports_orthopedic_assessment",
+      "arthroscopic_procedure",
+      "return_review"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "imaging",
+      "scales",
+      "care_plans"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS"
+    ]
+  },
+  {
+    "code": "H_PED_ORTHOPEDICS",
+    "name": "Ortopedia pediátrica",
+    "group": "Cirugía",
+    "entryType": "area_practica",
+    "parentCode": "H_ORTHOPEDICS",
+    "capture": [
+      "Crecimiento y deformidad",
+      "Hueso o articulación y lateralidad",
+      "Marcha y función",
+      "Imágenes y procedimientos",
+      "Crecimiento y evolución"
+    ],
+    "components": [
+      "pediatric_skeleton_map",
+      "gait_record",
+      "growth_curves"
+    ],
+    "workflows": [
+      "pediatric_orthopedic_assessment",
+      "orthopedic_operation",
+      "growth_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "imaging",
+      "growth_reference",
+      "care_plans"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "H_PLASTIC_SURGERY",
+    "name": "Cirugía plástica y reconstructiva",
+    "group": "Cirugía",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Objetivo, lesión y región",
+      "Examen y fotografías",
+      "Consentimiento y planificación",
+      "Procedimiento y reconstrucción",
+      "Evolución y resultados registrados"
+    ],
+    "components": [
+      "body_map",
+      "photo_comparison",
+      "operative_report"
+    ],
+    "workflows": [
+      "plastic_surgical_assessment",
+      "reconstructive_operation",
+      "postoperative_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "media_store",
+      "consent",
+      "device_tracking"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_FACIAL_PLASTIC",
+    "name": "Cirugía plástica de cabeza y cuello",
+    "group": "Cirugía",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PLASTIC_SURGERY",
+    "capture": [
+      "Región, defecto y función",
+      "Fotografías y evaluación",
+      "Plan y consentimiento",
+      "Reconstrucción y dispositivos",
+      "Evolución estética y funcional"
+    ],
+    "components": [
+      "face_map",
+      "photo_comparison",
+      "operative_report"
+    ],
+    "workflows": [
+      "facial_surgical_assessment",
+      "facial_operation",
+      "functional_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "media_store",
+      "consent",
+      "device_tracking"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_ENT"
+    ]
+  },
+  {
+    "code": "H_BURNS",
+    "name": "Cirugía y atención de quemaduras",
+    "group": "Cirugía",
+    "entryType": "area_practica",
+    "parentCode": "H_PLASTIC_SURGERY",
+    "capture": [
+      "Mecanismo, fecha y áreas",
+      "Profundidad y extensión documentadas",
+      "Heridas y fotografías",
+      "Cirugía, injertos y dispositivos",
+      "Función y evolución"
+    ],
+    "components": [
+      "burn_body_map",
+      "wound_gallery",
+      "graft_map"
+    ],
+    "workflows": [
+      "burn_assessment",
+      "wound_session",
+      "reconstructive_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "inpatient",
+      "media_store",
+      "care_plans"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "H_HEAD_NECK_MAXILLO",
+    "name": "Cirugía de cabeza, cuello y maxilofacial",
+    "group": "Cirugía",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Región y lesión",
+      "Anatomía, función y lateralidad",
+      "Imágenes y muestras",
+      "Cirugía y reconstrucción",
+      "Evolución y controles"
+    ],
+    "components": [
+      "head_neck_map",
+      "jaw_map",
+      "operative_report"
+    ],
+    "workflows": [
+      "head_neck_assessment",
+      "maxillofacial_operation",
+      "postoperative_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "surgery",
+      "imaging",
+      "specimen_tracking",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_TRAUMA_SURGERY",
+    "name": "Cirugía de trauma",
+    "group": "Cirugía",
+    "entryType": "area_practica",
+    "parentCode": "H_GENERAL_SURGERY",
+    "capture": [
+      "Mecanismo y cronología",
+      "Lesiones por región",
+      "Estudios y intervenciones",
+      "Operaciones y eventos",
+      "Evolución y transferencias"
+    ],
+    "components": [
+      "trauma_body_map",
+      "event_timeline",
+      "operative_report"
+    ],
+    "workflows": [
+      "trauma_assessment",
+      "trauma_operation",
+      "care_transfer"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "emergency",
+      "surgery",
+      "inpatient",
+      "imaging"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "H_OPHTHALMOLOGY",
+    "name": "Oftalmología",
+    "group": "Oftalmología, ORL y urología",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Síntomas y antecedentes",
+      "Agudeza, refracción y presión ocular",
+      "Hallazgos por ojo y estructura",
+      "Estudios y procedimientos",
+      "Evolución visual"
+    ],
+    "components": [
+      "eye_pair_map",
+      "visual_trends",
+      "fundus_viewer",
+      "ocular_pressure_trends"
+    ],
+    "workflows": [
+      "eye_exam",
+      "ocular_study",
+      "vision_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "procedures",
+      "signal_store",
+      "device_tracking"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_RETINA",
+    "name": "Cirugía de retina y vítreo",
+    "group": "Oftalmología, ORL y urología",
+    "entryType": "subespecialidad",
+    "parentCode": "H_OPHTHALMOLOGY",
+    "capture": [
+      "Ojo, región y lesión",
+      "Imágenes y función visual",
+      "Procedimiento y dispositivos",
+      "Eventos y medios oculares",
+      "Evolución anatómica y visual"
+    ],
+    "components": [
+      "retinal_map",
+      "oct_viewer",
+      "fundus_viewer"
+    ],
+    "workflows": [
+      "retina_assessment",
+      "retinal_operation",
+      "retina_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "surgery",
+      "device_tracking",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_OCULAR_ONCOLOGY",
+    "name": "Oftalmología oncológica",
+    "group": "Oftalmología, ORL y urología",
+    "entryType": "subespecialidad",
+    "parentCode": "H_OPHTHALMOLOGY",
+    "capture": [
+      "Tumor y estructura ocular",
+      "Ojo y localización",
+      "Imágenes e histología",
+      "Procedimientos y tratamientos registrados",
+      "Función y evolución"
+    ],
+    "components": [
+      "ocular_tumor_map",
+      "fundus_viewer",
+      "lesion_timeline"
+    ],
+    "workflows": [
+      "ocular_oncology_assessment",
+      "tumor_board",
+      "oncologic_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "oncology",
+      "imaging",
+      "pathology",
+      "surgery"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_CORNEA",
+    "name": "Córnea y superficie ocular",
+    "group": "Oftalmología, ORL y urología",
+    "entryType": "area_practica",
+    "parentCode": "H_OPHTHALMOLOGY",
+    "capture": [
+      "Ojo, superficie y síntomas",
+      "Agudeza y examen",
+      "Topografía y pruebas",
+      "Procedimientos e injertos",
+      "Evolución y eventos"
+    ],
+    "components": [
+      "corneal_map",
+      "topography_viewer",
+      "visual_trends"
+    ],
+    "workflows": [
+      "corneal_assessment",
+      "corneal_procedure",
+      "corneal_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "procedures",
+      "surgery",
+      "device_tracking"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "H_GLAUCOMA",
+    "name": "Glaucoma",
+    "group": "Oftalmología, ORL y urología",
+    "entryType": "area_practica",
+    "parentCode": "H_OPHTHALMOLOGY",
+    "capture": [
+      "Presión y antecedentes",
+      "Nervio óptico y campo visual",
+      "Pruebas y mediciones",
+      "Medicaciones y procedimientos",
+      "Evolución por ojo"
+    ],
+    "components": [
+      "ocular_pressure_trends",
+      "visual_field_viewer",
+      "oct_viewer"
+    ],
+    "workflows": [
+      "glaucoma_assessment",
+      "visual_field_study",
+      "glaucoma_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "signal_store",
+      "procedures",
+      "pharmacy"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "H_ENT",
+    "name": "Otorrinolaringología",
+    "group": "Oftalmología, ORL y urología",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Oído, nariz y garganta",
+      "Audición, equilibrio, voz y deglución",
+      "Examen y endoscopia",
+      "Estudios y procedimientos",
+      "Evolución por estructura"
+    ],
+    "components": [
+      "ent_map",
+      "audiogram_report",
+      "endoscopy_media",
+      "voice_report"
+    ],
+    "workflows": [
+      "ent_visit",
+      "hearing_study",
+      "ent_procedure"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "signal_store",
+      "media_store",
+      "procedures",
+      "imaging"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_ENT",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_NEUROTOLOGY",
+    "name": "Neurotología",
+    "group": "Oftalmología, ORL y urología",
+    "entryType": "subespecialidad",
+    "parentCode": "H_ENT",
+    "capture": [
+      "Síntomas auditivos y vestibulares",
+      "Oído y lateralidad",
+      "Pruebas y base de cráneo",
+      "Procedimientos y dispositivos",
+      "Evolución funcional"
+    ],
+    "components": [
+      "temporal_bone_map",
+      "audiogram_report",
+      "vestibular_report"
+    ],
+    "workflows": [
+      "neurotology_assessment",
+      "vestibular_study",
+      "device_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "signal_store",
+      "imaging",
+      "surgery",
+      "device_tracking"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_ENT"
+    ]
+  },
+  {
+    "code": "H_RHINOLOGY",
+    "name": "Rinología y cirugía nasosinusal",
+    "group": "Oftalmología, ORL y urología",
+    "entryType": "area_practica",
+    "parentCode": "H_ENT",
+    "capture": [
+      "Síntomas y lado",
+      "Hallazgos nasales y sinusales",
+      "Endoscopia e imágenes",
+      "Procedimientos realizados",
+      "Evolución y controles"
+    ],
+    "components": [
+      "sinus_map",
+      "endoscopy_media",
+      "operative_report"
+    ],
+    "workflows": [
+      "rhinology_assessment",
+      "sinus_operation",
+      "postoperative_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "procedures",
+      "surgery",
+      "media_store"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "H_LARYNGOLOGY",
+    "name": "Laringología y patología de la voz",
+    "group": "Oftalmología, ORL y urología",
+    "entryType": "area_practica",
+    "parentCode": "H_ENT",
+    "capture": [
+      "Voz, deglución y síntomas",
+      "Estructuras y movilidad",
+      "Laringoscopia y señales",
+      "Procedimientos realizados",
+      "Función y evolución"
+    ],
+    "components": [
+      "larynx_map",
+      "voice_report",
+      "endoscopy_media"
+    ],
+    "workflows": [
+      "voice_assessment",
+      "laryngeal_study",
+      "functional_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "signal_store",
+      "media_store",
+      "procedures",
+      "care_plans"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "H_UROLOGY",
+    "name": "Urología",
+    "group": "Oftalmología, ORL y urología",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Síntomas urinarios y antecedentes",
+      "Examen y anatomía",
+      "Diarios, laboratorio e imágenes",
+      "Endoscopia y procedimientos",
+      "Evolución funcional",
+      "Salud sexual y reproductiva documentada"
+    ],
+    "components": [
+      "uro_map",
+      "voiding_diary",
+      "urodynamic_report"
+    ],
+    "workflows": [
+      "urology_visit",
+      "functional_study",
+      "urologic_procedure"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "imaging",
+      "procedures",
+      "surgery",
+      "sensitive_access"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_URO_ONCOLOGY",
+    "name": "Urología oncológica",
+    "group": "Oftalmología, ORL y urología",
+    "entryType": "subespecialidad",
+    "parentCode": "H_UROLOGY",
+    "capture": [
+      "Tumor y órgano",
+      "Extensión e histología",
+      "Marcadores y estudios",
+      "Cirugía y tratamientos registrados",
+      "Respuesta y comité"
+    ],
+    "components": [
+      "uro_tumor_map",
+      "lesion_timeline",
+      "operative_report"
+    ],
+    "workflows": [
+      "urologic_oncology_assessment",
+      "tumor_board",
+      "oncologic_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "oncology",
+      "surgery",
+      "pathology",
+      "laboratory"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_ENDOUROLOGY",
+    "name": "Endourología y litiasis",
+    "group": "Oftalmología, ORL y urología",
+    "entryType": "area_practica",
+    "parentCode": "H_UROLOGY",
+    "capture": [
+      "Cálculo o lesión y ubicación",
+      "Anatomía e imágenes",
+      "Procedimiento endoscópico",
+      "Dispositivos y muestras",
+      "Evolución y controles"
+    ],
+    "components": [
+      "uro_map",
+      "stone_map",
+      "device_register"
+    ],
+    "workflows": [
+      "endourology_assessment",
+      "endourologic_procedure",
+      "device_removal_record"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "procedures",
+      "surgery",
+      "imaging",
+      "device_tracking"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "H_ANESTHESIA",
+    "name": "Anestesiología",
+    "group": "Emergencia, anestesia y cuidados críticos",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Valoración preanestésica y vía aérea",
+      "Técnica y procedimiento vinculado",
+      "Medicaciones y tiempos de administración",
+      "Monitorización y eventos",
+      "Recuperación y entrega"
+    ],
+    "components": [
+      "anesthesia_chart",
+      "airway_record",
+      "vital_trends"
+    ],
+    "workflows": [
+      "preanesthetic_assessment",
+      "anesthesia_record",
+      "recovery_record"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "anesthesia",
+      "surgery",
+      "device_tracking",
+      "medication_administration",
+      "consent"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_ANES",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_OBST_ANESTHESIA",
+    "name": "Anestesiología obstétrica",
+    "group": "Emergencia, anestesia y cuidados críticos",
+    "entryType": "subespecialidad",
+    "parentCode": "H_ANESTHESIA",
+    "capture": [
+      "Gestación y valoración materna",
+      "Procedimiento obstétrico vinculado",
+      "Técnica y administraciones",
+      "Monitorización materna y fetal vinculada",
+      "Recuperación y eventos"
+    ],
+    "components": [
+      "obstetric_anesthesia_chart",
+      "pregnancy_timeline",
+      "vital_trends"
+    ],
+    "workflows": [
+      "obstetric_preanesthetic_assessment",
+      "anesthesia_record",
+      "recovery_record"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "anesthesia",
+      "pregnancy_registry",
+      "medication_administration",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_CARDIAC_ANESTHESIA",
+    "name": "Anestesiología cardiovascular",
+    "group": "Emergencia, anestesia y cuidados críticos",
+    "entryType": "subespecialidad",
+    "parentCode": "H_ANESTHESIA",
+    "capture": [
+      "Condición y función cardíaca",
+      "Valoración y procedimiento",
+      "Monitorización y circulación registradas",
+      "Medicaciones, líquidos y eventos",
+      "Recuperación y transferencia"
+    ],
+    "components": [
+      "cardiac_anesthesia_chart",
+      "hemodynamic_trends",
+      "fluid_balance"
+    ],
+    "workflows": [
+      "cardiac_preanesthetic_assessment",
+      "anesthesia_record",
+      "icu_transfer"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "anesthesia",
+      "surgery",
+      "device_tracking",
+      "inpatient",
+      "medication_administration"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_ANES",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_CRITICAL_CARE",
+    "name": "Medicina intensiva",
+    "group": "Emergencia, anestesia y cuidados críticos",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Diagnóstico e ingreso",
+      "Signos y parámetros seriados",
+      "Soportes, accesos y dispositivos",
+      "Balance, pruebas y eventos",
+      "Rondas, objetivos y transferencias"
+    ],
+    "components": [
+      "icu_monitoring",
+      "fluid_balance",
+      "device_timeline",
+      "icu_board"
+    ],
+    "workflows": [
+      "icu_admission",
+      "icu_round",
+      "care_transfer"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "inpatient",
+      "device_tracking",
+      "laboratory",
+      "medication_administration"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_IM",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_SURG_CRITICAL",
+    "name": "Cuidados intensivos quirúrgicos",
+    "group": "Emergencia, anestesia y cuidados críticos",
+    "entryType": "subespecialidad",
+    "parentCode": "H_CRITICAL_CARE",
+    "capture": [
+      "Cirugía o trauma vinculado",
+      "Problemas y monitorización",
+      "Heridas, drenajes y dispositivos",
+      "Balance y eventos",
+      "Evolución y transferencia"
+    ],
+    "components": [
+      "surgical_icu_chart",
+      "drain_map",
+      "fluid_balance"
+    ],
+    "workflows": [
+      "surgical_icu_admission",
+      "icu_round",
+      "care_transfer"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "inpatient",
+      "surgery",
+      "device_tracking",
+      "medication_administration"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_SURG"
+    ]
+  },
+  {
+    "code": "H_NEURO_CRITICAL",
+    "name": "Cuidados neurocríticos",
+    "group": "Emergencia, anestesia y cuidados críticos",
+    "entryType": "subespecialidad",
+    "parentCode": "H_CRITICAL_CARE",
+    "capture": [
+      "Lesión y localización",
+      "Examen y evolución neurológica",
+      "Señales y parámetros monitorizados",
+      "Soportes y procedimientos",
+      "Eventos y función"
+    ],
+    "components": [
+      "neuro_monitoring",
+      "neurological_exam",
+      "signal_viewer"
+    ],
+    "workflows": [
+      "neuro_icu_admission",
+      "neuro_icu_round",
+      "care_transfer"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "inpatient",
+      "signal_store",
+      "imaging",
+      "device_tracking"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABPN",
+      "ABMS_IM"
+    ]
+  },
+  {
+    "code": "H_EMERGENCY",
+    "name": "Medicina de emergencias y desastres",
+    "group": "Emergencia, anestesia y cuidados críticos",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Motivo y tiempos",
+      "Triage y valoración registrados",
+      "Signos, pruebas e intervenciones",
+      "Eventos y responsables",
+      "Observación, alta o transferencia"
+    ],
+    "components": [
+      "triage_board",
+      "event_timeline",
+      "vital_trends",
+      "trauma_body_map"
+    ],
+    "workflows": [
+      "triage",
+      "emergency_visit",
+      "observation",
+      "care_transfer",
+      "disaster_response"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "emergency",
+      "inpatient",
+      "laboratory",
+      "imaging",
+      "medication_administration"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_EMS",
+    "name": "Medicina prehospitalaria y servicios de emergencia",
+    "group": "Emergencia, anestesia y cuidados críticos",
+    "entryType": "subespecialidad",
+    "parentCode": "H_EMERGENCY",
+    "capture": [
+      "Activación y ubicación",
+      "Equipo y tiempos de atención",
+      "Valoración e intervenciones",
+      "Transporte y eventos",
+      "Entrega y receptor"
+    ],
+    "components": [
+      "dispatch_map",
+      "prehospital_timeline",
+      "handoff_record"
+    ],
+    "workflows": [
+      "dispatch",
+      "prehospital_visit",
+      "transport",
+      "care_transfer"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "emergency",
+      "dispatch",
+      "medication_administration",
+      "mobile_capture"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS"
+    ]
+  },
+  {
+    "code": "H_RADIOLOGY",
+    "name": "Radiología diagnóstica",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Solicitud e indicación",
+      "Modalidad, técnica y estudio",
+      "Hallazgos por región",
+      "Comparación y conclusión",
+      "Validación y comunicación registrada"
+    ],
+    "components": [
+      "dicom_viewer",
+      "anatomic_map",
+      "radiology_report"
+    ],
+    "workflows": [
+      "imaging_order",
+      "study_acquisition",
+      "report_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "pacs_integration",
+      "device_tracking"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_RAD",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_INTERV_RADIOLOGY",
+    "name": "Radiología intervencionista",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "subespecialidad",
+    "parentCode": "H_RADIOLOGY",
+    "capture": [
+      "Indicación y región",
+      "Plan e imágenes guía",
+      "Acceso y procedimiento realizado",
+      "Materiales, muestras y eventos",
+      "Control e informe"
+    ],
+    "components": [
+      "dicom_viewer",
+      "vascular_map",
+      "procedure_report"
+    ],
+    "workflows": [
+      "interventional_planning",
+      "image_guided_procedure",
+      "postprocedure_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "procedures",
+      "device_tracking",
+      "specimen_tracking",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_RAD",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_NEURORADIOLOGY",
+    "name": "Neurorradiología",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "subespecialidad",
+    "parentCode": "H_RADIOLOGY",
+    "capture": [
+      "Indicación y región neurológica",
+      "Modalidad y técnica",
+      "Lesiones y territorios",
+      "Comparación de estudios",
+      "Informe y comunicación"
+    ],
+    "components": [
+      "neuro_map",
+      "dicom_viewer",
+      "lesion_timeline"
+    ],
+    "workflows": [
+      "neuroimaging_order",
+      "study_acquisition",
+      "report_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "pacs_integration"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_RAD"
+    ]
+  },
+  {
+    "code": "H_NUCLEAR_RADIOLOGY",
+    "name": "Radiología nuclear",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "subespecialidad",
+    "parentCode": "H_RADIOLOGY",
+    "capture": [
+      "Indicación y estudio",
+      "Radiofármaco y administración registrada",
+      "Adquisición y mediciones",
+      "Distribución y hallazgos",
+      "Informe y comparación"
+    ],
+    "components": [
+      "pet_spect_viewer",
+      "uptake_map",
+      "nuclear_study_report"
+    ],
+    "workflows": [
+      "nuclear_study_preparation",
+      "study_acquisition",
+      "report_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "nuclear_material_tracking",
+      "medication_administration"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_RAD"
+    ]
+  },
+  {
+    "code": "H_NUCLEAR_MED",
+    "name": "Medicina nuclear",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Indicación y valoración",
+      "Radiofármaco, lote y actividad registrada",
+      "Estudio o procedimiento realizado",
+      "Hallazgos, medidas y eventos",
+      "Informe y seguimiento"
+    ],
+    "components": [
+      "pet_spect_viewer",
+      "uptake_map",
+      "activity_register"
+    ],
+    "workflows": [
+      "nuclear_med_assessment",
+      "nuclear_procedure",
+      "report_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "imaging",
+      "nuclear_material_tracking",
+      "procedures",
+      "consent"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_RADIOTHERAPY",
+    "name": "Radioterapia y oncología radioterápica",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Indicación y diagnóstico",
+      "Volúmenes y planificación vinculada",
+      "Plan aprobado y sesiones",
+      "Dosis entregada y eventos registrados",
+      "Evaluación y evolución"
+    ],
+    "components": [
+      "radiotherapy_plan_viewer",
+      "treatment_fractions",
+      "toxicity_record"
+    ],
+    "workflows": [
+      "radiotherapy_planning",
+      "plan_approval",
+      "fraction_record",
+      "radiotherapy_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "oncology",
+      "imaging",
+      "radiotherapy_integration",
+      "device_tracking",
+      "consent"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_RAD",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_ANATOMIC_PATH",
+    "name": "Anatomía patológica",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Muestra, órgano y localización",
+      "Recepción, procesamiento y custodia",
+      "Macroscopia y microscopia",
+      "Pruebas complementarias",
+      "Diagnóstico y versiones firmadas"
+    ],
+    "components": [
+      "specimen_timeline",
+      "slide_viewer",
+      "pathology_report"
+    ],
+    "workflows": [
+      "specimen_intake",
+      "specimen_processing",
+      "pathology_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "pathology",
+      "specimen_tracking",
+      "laboratory",
+      "signatures"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PATH",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_CLINICAL_PATH",
+    "name": "Patología clínica",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Solicitud y muestra",
+      "Analitos, métodos y unidades",
+      "Resultados y rangos vinculados",
+      "Control de calidad y validación",
+      "Observaciones y comunicaciones"
+    ],
+    "components": [
+      "lab_results",
+      "lab_trends",
+      "quality_control_chart"
+    ],
+    "workflows": [
+      "specimen_intake",
+      "laboratory_processing",
+      "result_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "specimen_tracking",
+      "lab_integration",
+      "quality"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_PATH",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_CYTOPATH",
+    "name": "Citopatología",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "subespecialidad",
+    "parentCode": "H_ANATOMIC_PATH",
+    "capture": [
+      "Origen y tipo de muestra",
+      "Técnica y adecuación",
+      "Hallazgos celulares",
+      "Pruebas complementarias",
+      "Conclusión y correlación"
+    ],
+    "components": [
+      "cytology_report",
+      "slide_viewer",
+      "specimen_timeline"
+    ],
+    "workflows": [
+      "cytology_intake",
+      "cytology_review",
+      "pathology_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "pathology",
+      "specimen_tracking",
+      "laboratory"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PATH"
+    ]
+  },
+  {
+    "code": "H_DERMATOPATH",
+    "name": "Dermatopatología",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "subespecialidad",
+    "parentCode": "H_ANATOMIC_PATH",
+    "capture": [
+      "Sitio, lesión y orientación",
+      "Muestra y procesamiento",
+      "Hallazgos histológicos",
+      "Pruebas complementarias",
+      "Conclusión y correlación clínica"
+    ],
+    "components": [
+      "skin_biopsy_map",
+      "slide_viewer",
+      "pathology_report"
+    ],
+    "workflows": [
+      "specimen_intake",
+      "dermatopathology_review",
+      "pathology_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "pathology",
+      "specimen_tracking",
+      "media_store"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PATH",
+      "ABMS_DERM"
+    ]
+  },
+  {
+    "code": "H_HEMATOPATH",
+    "name": "Hematopatología",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "subespecialidad",
+    "parentCode": "H_ANATOMIC_PATH",
+    "capture": [
+      "Muestra y órgano",
+      "Morfología e inmunofenotipo",
+      "Citometría y pruebas vinculadas",
+      "Correlación hematológica",
+      "Conclusión y versiones"
+    ],
+    "components": [
+      "marrow_report",
+      "flow_cytometry_report",
+      "slide_viewer"
+    ],
+    "workflows": [
+      "specimen_intake",
+      "hematopathology_review",
+      "pathology_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "pathology",
+      "laboratory",
+      "specimen_tracking",
+      "genetic_data"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PATH"
+    ]
+  },
+  {
+    "code": "H_NEUROPATH",
+    "name": "Neuropatología",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "subespecialidad",
+    "parentCode": "H_ANATOMIC_PATH",
+    "capture": [
+      "Tejido y localización",
+      "Historia e imágenes vinculadas",
+      "Hallazgos morfológicos",
+      "Pruebas complementarias",
+      "Conclusión y correlación"
+    ],
+    "components": [
+      "neuro_specimen_map",
+      "slide_viewer",
+      "pathology_report"
+    ],
+    "workflows": [
+      "specimen_intake",
+      "neuropathology_review",
+      "pathology_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "pathology",
+      "specimen_tracking",
+      "imaging"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_PATH"
+    ]
+  },
+  {
+    "code": "H_ONCO_PATH",
+    "name": "Patología oncológica",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "subespecialidad",
+    "parentCode": "H_ANATOMIC_PATH",
+    "capture": [
+      "Tumor y espécimen",
+      "Tipo, grado y márgenes registrados",
+      "Ganglios y hallazgos",
+      "Biomarcadores y pruebas",
+      "Informe y correlación"
+    ],
+    "components": [
+      "specimen_orientation",
+      "biomarker_report",
+      "synoptic_pathology_report"
+    ],
+    "workflows": [
+      "oncologic_specimen_review",
+      "biomarker_validation",
+      "pathology_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "pathology",
+      "oncology",
+      "specimen_tracking",
+      "genetic_data"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_FORENSIC_PATH",
+    "name": "Patología forense",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "subespecialidad",
+    "parentCode": "H_ANATOMIC_PATH",
+    "capture": [
+      "Identidad y solicitud",
+      "Circunstancias documentadas",
+      "Autopsia y lesiones",
+      "Muestras, evidencias y custodia",
+      "Conclusión y dictamen firmado"
+    ],
+    "components": [
+      "autopsy_body_map",
+      "custody_timeline",
+      "autopsy_report"
+    ],
+    "workflows": [
+      "forensic_intake",
+      "autopsy_record",
+      "expert_report"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "pathology",
+      "chain_of_custody",
+      "sensitive_access",
+      "signatures"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_PATH"
+    ]
+  },
+  {
+    "code": "H_MICROBIOLOGY",
+    "name": "Microbiología médica",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "subespecialidad",
+    "parentCode": "H_CLINICAL_PATH",
+    "capture": [
+      "Muestra, origen y fecha",
+      "Métodos y microorganismos",
+      "Cultivo y susceptibilidad",
+      "Control y validación",
+      "Correlación y comunicación"
+    ],
+    "components": [
+      "microbiology_report",
+      "susceptibility_table",
+      "specimen_timeline"
+    ],
+    "workflows": [
+      "microbiology_intake",
+      "microbiology_processing",
+      "result_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "specimen_tracking",
+      "infection_control",
+      "lab_integration"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PATH"
+    ]
+  },
+  {
+    "code": "H_CHEMICAL_PATH",
+    "name": "Patología química",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "subespecialidad",
+    "parentCode": "H_CLINICAL_PATH",
+    "capture": [
+      "Analitos y muestra",
+      "Métodos y unidades",
+      "Resultados y rangos vinculados",
+      "Interferencias y calidad",
+      "Interpretación y validación"
+    ],
+    "components": [
+      "biochemistry_results",
+      "lab_trends",
+      "quality_control_chart"
+    ],
+    "workflows": [
+      "biochemistry_processing",
+      "analytic_review",
+      "result_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "laboratory",
+      "lab_integration",
+      "quality",
+      "specimen_tracking"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PATH"
+    ]
+  },
+  {
+    "code": "H_MOLECULAR_PATH",
+    "name": "Patología genética molecular",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "subespecialidad",
+    "parentCode": "H_ANATOMIC_PATH",
+    "capture": [
+      "Muestra y método",
+      "Genes, variantes y biomarcadores",
+      "Calidad y limitaciones",
+      "Interpretación reportada",
+      "Versiones y correlación"
+    ],
+    "components": [
+      "variant_report",
+      "biomarker_report",
+      "specimen_timeline"
+    ],
+    "workflows": [
+      "molecular_specimen_intake",
+      "molecular_analysis",
+      "molecular_validation"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "pathology",
+      "laboratory",
+      "genetic_data",
+      "specimen_tracking",
+      "consent"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_PATH",
+      "ABMS_GEN"
+    ]
+  },
+  {
+    "code": "H_PED_PATH",
+    "name": "Patología pediátrica",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "subespecialidad",
+    "parentCode": "H_ANATOMIC_PATH",
+    "capture": [
+      "Muestra y edad gestacional o cronológica",
+      "Historia perinatal y clínica",
+      "Hallazgos y desarrollo tisular",
+      "Pruebas complementarias",
+      "Conclusión y correlación"
+    ],
+    "components": [
+      "pediatric_pathology_report",
+      "slide_viewer",
+      "specimen_timeline"
+    ],
+    "workflows": [
+      "pediatric_specimen_review",
+      "pathology_validation",
+      "clinicopathologic_review"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "pathology",
+      "specimen_tracking",
+      "laboratory"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_PATH"
+    ]
+  },
+  {
+    "code": "H_TRANSFUSION_MED",
+    "name": "Medicina transfusional y banco de sangre",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "subespecialidad",
+    "parentCode": "H_CLINICAL_PATH",
+    "capture": [
+      "Donante o receptor y evaluación",
+      "Componentes, lotes y disponibilidad",
+      "Compatibilidad y pruebas",
+      "Entrega y administración vinculada",
+      "Reacciones y trazabilidad"
+    ],
+    "components": [
+      "blood_inventory",
+      "compatibility_report",
+      "transfusion_timeline"
+    ],
+    "workflows": [
+      "donor_assessment",
+      "component_processing",
+      "crossmatch",
+      "transfusion_record"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "transfusion",
+      "laboratory",
+      "inventory",
+      "medication_administration",
+      "consent"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABMS_PATH"
+    ]
+  },
+  {
+    "code": "H_CLINICAL_INFORMATICS",
+    "name": "Informática clínica",
+    "group": "Diagnóstico y laboratorio",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PREVENTIVE",
+    "capture": [
+      "Proceso y necesidad clínica",
+      "Diccionarios y formularios versionados",
+      "Calidad y trazabilidad de datos",
+      "Indicadores de uso y resultados",
+      "Validaciones y cambios aprobados"
+    ],
+    "components": [
+      "form_version_panel",
+      "data_quality_dashboard",
+      "clinical_workflow_map"
+    ],
+    "workflows": [
+      "clinical_process_review",
+      "configuration_validation",
+      "quality_review"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "clinical_configuration",
+      "analytics",
+      "quality",
+      "audit"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_PREV",
+      "ABMS_PATH"
+    ]
+  },
+  {
+    "code": "H_PHYSICAL_MED",
+    "name": "Medicina física y rehabilitación",
+    "group": "Rehabilitación médica y hospital",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Deficiencia y antecedentes",
+      "Examen neuromusculoesquelético",
+      "Función, movilidad y autonomía",
+      "Órtesis y ayudas",
+      "Metas y evolución interdisciplinaria"
+    ],
+    "components": [
+      "functional_profile",
+      "range_of_motion",
+      "muscle_map",
+      "care_goals"
+    ],
+    "workflows": [
+      "rehabilitation_assessment",
+      "team_review",
+      "functional_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "care_plans",
+      "scales",
+      "device_tracking",
+      "signal_store"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABMS_REHAB",
+      "CONAREME"
+    ]
+  },
+  {
+    "code": "H_BRAIN_INJURY",
+    "name": "Medicina de lesión cerebral",
+    "group": "Rehabilitación médica y hospital",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PHYSICAL_MED",
+    "capture": [
+      "Lesión y cronología",
+      "Estado cognitivo y conductual",
+      "Función y participación",
+      "Estudios y apoyos",
+      "Metas y evolución"
+    ],
+    "components": [
+      "cognitive_trends",
+      "functional_profile",
+      "care_goals"
+    ],
+    "workflows": [
+      "brain_injury_assessment",
+      "team_review",
+      "functional_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "care_plans",
+      "scales",
+      "imaging",
+      "sensitive_access"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_REHAB"
+    ]
+  },
+  {
+    "code": "H_SPINAL_INJURY",
+    "name": "Medicina de lesión medular",
+    "group": "Rehabilitación médica y hospital",
+    "entryType": "subespecialidad",
+    "parentCode": "H_PHYSICAL_MED",
+    "capture": [
+      "Nivel y características de lesión",
+      "Examen motor y sensitivo",
+      "Función vesical, intestinal y movilidad",
+      "Complicaciones y ayudas",
+      "Metas y seguimiento"
+    ],
+    "components": [
+      "spinal_map",
+      "sensory_map",
+      "functional_profile",
+      "care_goals"
+    ],
+    "workflows": [
+      "spinal_injury_assessment",
+      "team_review",
+      "functional_followup"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "care_plans",
+      "scales",
+      "device_tracking",
+      "imaging"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABMS_REHAB"
+    ]
+  },
+  {
+    "code": "H_HOSPITAL_MED",
+    "name": "Medicina hospitalaria del adulto",
+    "group": "Rehabilitación médica y hospital",
+    "entryType": "area_practica",
+    "parentCode": "H_INTERNAL",
+    "capture": [
+      "Ingreso y problemas activos",
+      "Rondas, evolución e interconsultas",
+      "Medicaciones, pruebas y eventos",
+      "Transferencias y conciliación",
+      "Alta y continuidad"
+    ],
+    "components": [
+      "ward_board",
+      "inpatient_timeline",
+      "discharge_summary"
+    ],
+    "workflows": [
+      "adult_admission",
+      "inpatient_round",
+      "care_transfer",
+      "discharge"
+    ],
+    "dependencies": [
+      "clinical_core",
+      "structured_forms",
+      "document_store",
+      "inpatient",
+      "pharmacy",
+      "laboratory",
+      "medication_administration"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  }
+]

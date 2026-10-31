@@ -1,0 +1,21 @@
+flowchart TD
+    START(["La especialidad requiere periodontograma, conductos, oclusión, mapa ocular, audiograma u otro componente específico."]) --> N1
+    N1["Sistema Health Project: Cargar componente, versión, esquema y perfil compatibles"]
+    N2["Profesional clínico: Seleccionar estructura, sitio, dimensión o estudio según componente"]
+    N3["Profesional clínico: Introducir datos semánticos y estado clínico"]
+    N4{"Sistema Health Project: ¿Datos e interacción válidos según reglas específicas?"}
+    N5["Profesional clínico: Revisar gráfico junto con tabla/listado equivalente"]
+    N6["Sistema Health Project: Guardar revisión y vínculos clínicos"]
+    N7["Profesional clínico: Comparar versiones/visitas y cerrar mediante flujo documental"]
+    END(["Datos especializados persistibles y reproducibles; interacción particular documentada por familia."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> N7
+    N7 --> END
+    N4 -->|"No"| A1["Conservar captura y mostrar error específico del componente"]
+    A1 --> N2
+    N1 -->|"Capacidad aún no validada"| A2["Mostrar alcance disponible sin habilitar operación dependiente"]
+    A2 --> E2(["Componente no operativo para esa capacidad."])

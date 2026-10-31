@@ -1,0 +1,19 @@
+flowchart TD
+    START(["El usuario selecciona recuperación de cuenta."]) --> N1
+    N1["Profesional clínico: Indicar identificador y canal de recuperación"]
+    N2["Sistema Health Project: Responder de forma uniforme y enviar enlace si corresponde"]
+    N3["Profesional clínico: Abrir enlace recibido"]
+    N4{"Sistema Health Project: ¿Enlace válido, vigente y sin usar?"}
+    N5["Profesional clínico: Definir nueva contraseña según política visible"]
+    N6["Sistema Health Project: Guardar cambio, invalidar enlace y aplicar revocación de sesiones definida"]
+    END(["Acceso recuperado; el usuario vuelve al login."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"No"| A1["Informar que el enlace no sirve y ofrecer solicitar otro"]
+    A1 --> N1
+    N5 -->|"Validación incompleta"| A2["Explicar requisitos junto al campo"]
+    A2 --> N5

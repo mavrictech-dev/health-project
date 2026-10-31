@@ -1,0 +1,17 @@
+flowchart TD
+    START(["Una empresa o aseguradora interviene como pagador."]) --> N1
+    N1["Administrador de la organización: Registrar convenio y condiciones versionadas"]
+    N2["Recepción: Verificar pagador/cobertura registrada para servicio solicitado"]
+    N3["Caja y administración financiera: Solicitar autorización o documentar referencia recibida"]
+    N4{"Sistema Health Project: ¿Autorización válida y alcance económico definido?"}
+    N5["Caja y administración financiera: Asignar cargos al pagador y parte paciente según acuerdo"]
+    N6["Sistema Health Project: Seguir documentación, respuesta y saldo institucional sin conceder acceso clínico"]
+    END(["Responsabilidad económica y autorización registradas con seguimiento."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"No"| A1["Mantener autorización pendiente/rechazada y asignar resolución administrativa"]
+    A1 --> E1(["Pago institucional sin confirmar; no decidir automáticamente atención clínica."])

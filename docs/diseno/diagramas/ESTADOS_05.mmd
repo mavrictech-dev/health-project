@@ -1,0 +1,9 @@
+stateDiagram-v2
+    [*] --> BORRADOR
+    BORRADOR --> EN_REVISION: Solicitar cierre
+    EN_REVISION --> BORRADOR: Corregir antes de firma
+    EN_REVISION --> FIRMA_PENDIENTE: Mecanismo externo requerido
+    FIRMA_PENDIENTE --> FIRMADA: Evidencia confirmada
+    FIRMA_PENDIENTE --> EN_REVISION: Fallo resuelto sin firma
+    EN_REVISION --> FIRMADA: Cierre autorizado confirmado
+    FIRMADA --> [*]

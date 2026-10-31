@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se abre una sección clínica de la atención."]) --> N1
+    N1["Sistema Health Project: Cargar versión de plantilla y datos de procedencia explícita"]
+    N2["Profesional clínico: Completar campos, unidades y datos ausentes o negados"]
+    N3{"Sistema Health Project: ¿Reglas del formulario y perfil válidas?"}
+    N4["Profesional clínico: Revisar valores y asociaciones a datos clínicos comunes"]
+    N5["Sistema Health Project: Guardar borrador y revisión esperada"]
+    N6["Sistema Health Project: Mostrar guardado confirmado y valores estructurados relacionados"]
+    END(["Captura versionada vinculada a atención, sin firma automática."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Marcar campos y explicar corrección sin borrar capturas"]
+    A1 --> N2
+    N5 -->|"Otra revisión guardada"| A2["Mostrar conflicto y abrir comparación"]
+    A2 --> E2(["Guardado pendiente de resolución."])
+    N1 -->|"Componente no disponible"| A3["Indicar alcance de la plantilla; impedir publicar captura incompatible"]
+    A3 --> E3(["Sección no habilitada para esa capacidad."])

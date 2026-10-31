@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se inicia curso de radioterapia, oncología u otro tratamiento por sesiones."]) --> N1
+    N1["Profesional clínico: Crear curso y plan versionado según decisión profesional"]
+    N2["Profesional clínico: Asignar equipo, recursos y sesiones previstas"]
+    N3{"Sistema Health Project: ¿Requisitos de la sesión y autorización completos?"}
+    N4["Asistente o enfermería: Registrar ejecución real y observaciones de sesión"]
+    N5["Profesional clínico: Registrar evaluación y cambios prospectivos del plan"]
+    N6["Sistema Health Project: Cerrar sesión/curso con pendientes y documentación"]
+    END(["Curso y sesiones trazables; ningún cálculo o protocolo se presume implementado."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Mantener sesión pendiente con faltantes y responsable"]
+    A1 --> E1(["Sesión no iniciada."])
+    N4 -->|"No realizada o interrumpida"| A2["Registrar motivo y hechos parciales; reprogramación explícita"]
+    A2 --> N5

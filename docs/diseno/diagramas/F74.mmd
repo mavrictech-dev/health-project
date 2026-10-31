@@ -1,0 +1,19 @@
+flowchart TD
+    START(["El usuario modifica datos de su cuenta o preferencias de comunicación."]) --> N1
+    N1["Profesional clínico: Abrir cuenta y elegir dato o preferencia"]
+    N2["Profesional clínico: Registrar cambio y finalidad visible"]
+    N3{"Sistema Health Project: ¿Cambio requiere verificación de canal o reautenticación?"}
+    N4["Profesional clínico: Completar comprobación solicitada"]
+    N5["Sistema Health Project: Guardar cambio confirmado y preferencias"]
+    N6["Sistema Health Project: Aplicar a comunicaciones futuras sin reescribir documentos clínicos"]
+    END(["Preferencias/canal confirmados; cuenta y filiación clínica permanecen conceptos diferentes."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Guardar preferencia de forma directa"]
+    A1 --> N5
+    N4 -->|"No verifica"| A2["Mantener canal original y cambio pendiente"]
+    A2 --> E2(["Datos de cuenta sin sustituir."])

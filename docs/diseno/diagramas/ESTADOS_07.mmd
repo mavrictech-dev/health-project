@@ -1,0 +1,12 @@
+stateDiagram-v2
+    [*] --> PENDIENTE
+    PENDIENTE --> ASIGNADA: Responsable designado
+    ASIGNADA --> EN_CURSO: Aceptar e iniciar
+    ASIGNADA --> PENDIENTE: Rechazo o reasignación registrada
+    EN_CURSO --> COMPLETADA: Evidencia de ejecución
+    EN_CURSO --> FALLIDA: Motivo y responsable
+    FALLIDA --> PENDIENTE: Nuevo intento identificado
+    PENDIENTE --> CANCELADA: Orden y estado lo permiten
+    ASIGNADA --> CANCELADA: Cancelación autorizada
+    COMPLETADA --> [*]
+    CANCELADA --> [*]

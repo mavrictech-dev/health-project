@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se requieren insumos o productos."]) --> N1
+    N1["Compras y almacén: Crear solicitud y justificar cantidades"]
+    N2["Administrador de la organización: Revisar y autorizar compra"]
+    N3["Compras y almacén: Emitir orden y registrar proveedor"]
+    N4["Compras y almacén: Registrar recepción real, lotes y vencimientos cuando aplique"]
+    N5{"Sistema Health Project: ¿Recepción coincide o diferencia aceptada con motivo?"}
+    N6["Sistema Health Project: Crear stock recibido y pendientes de compra restantes"]
+    END(["Recepción trazable y cantidades pendientes explícitas."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"Sí"| N6
+    N6 --> END
+    N2 -->|"No autoriza"| A1["Registrar rechazo y cerrar solicitud"]
+    A1 --> E1(["Sin compra."])
+    N5 -->|"No"| A2["Registrar discrepancia y separar cantidad aceptada/rechazada"]
+    A2 --> N4

@@ -1,0 +1,23 @@
+flowchart TD
+    START(["Se necesita comprobante fiscal o documento correctivo."]) --> N1
+    N1["Caja y administración financiera: Seleccionar cargos y datos del comprobante"]
+    N2{"Sistema Health Project: ¿Emisor, numeración y datos completos?"}
+    N3["Caja y administración financiera: Revisar vista previa y autorizar emisión"]
+    N4["Sistema Health Project: Emitir documento y enviar mediante adaptador autorizado"]
+    N5["Proveedor o destinatario externo: Responder aceptación, observación, rechazo o estado pendiente"]
+    N6["Sistema Health Project: Guardar evidencia y asignar errores a responsable"]
+    END(["Estado fiscal y evidencia conservados; pago permanece independiente."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N2 -->|"No"| A1["Solicitar corrección de datos antes de emisión"]
+    A1 --> N1
+    N5 -->|"Rechazo"| A2["Conservar documento/estado y gestionar subsanación conforme al tipo aplicable"]
+    A2 --> E2(["Comprobante con resolución pendiente."])
+    N5 -->|"Pendiente"| A3["Consultar respuesta sin emitir duplicado"]
+    A3 --> E3(["Comprobante en espera de respuesta."])
+    N6 -->|"Corrección posterior"| A4["Crear documento correctivo autorizado vinculado al original"]
+    A4 --> E4(["Corrección fiscal trazable."])

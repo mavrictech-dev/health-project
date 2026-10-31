@@ -1,0 +1,17 @@
+flowchart TD
+    START(["Un operador accede al entorno de administración de plataforma."]) --> N1
+    N1["Operador o soporte de MAVRIC: Ingresar mediante acceso específico de operador"]
+    N2{"Sistema Health Project: ¿Credenciales y comprobaciones requeridas válidas?"}
+    N3["Sistema Health Project: Cargar funciones operativas asignadas"]
+    N4{"Sistema Health Project: ¿Permiso de consola vigente?"}
+    N5["Sistema Health Project: Abrir consola y registrar acceso sin abrir historias de clientes"]
+    END(["Operador autenticado en consola técnica; datos clínicos requieren autorización excepcional aparte."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> END
+    N2 -->|"No"| A1["Mostrar rechazo uniforme y mantener consola cerrada"]
+    A1 --> N1
+    N4 -->|"No"| A2["Denegar funciones operativas y ofrecer soporte de cuenta"]
+    A2 --> E2(["Consola sin acceso."])

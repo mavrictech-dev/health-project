@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se presupuestan servicios o tratamiento por etapas."]) --> N1
+    N1["Profesional clínico: Identificar plan clínico y servicios propuestos"]
+    N2["Caja y administración financiera: Crear presupuesto con etapas, precios y condiciones"]
+    N3{"Sistema Health Project: ¿Importes y descuentos autorizados?"}
+    N4["Paciente humano: Revisar y aceptar o rechazar versión del presupuesto"]
+    N5["Caja y administración financiera: Registrar aceptación y modalidad de cobro"]
+    N6["Sistema Health Project: Conservar versión comercial y relación con plan clínico"]
+    END(["Presupuesto aceptado/versionado; ejecución clínica todavía independiente."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Solicitar revisión o autorización del descuento"]
+    A1 --> N2
+    N4 -->|"Rechazo"| A2["Guardar respuesta sin crear ejecución clínica ni cargos reales automáticamente"]
+    A2 --> E2(["Presupuesto rechazado o por revisar."])

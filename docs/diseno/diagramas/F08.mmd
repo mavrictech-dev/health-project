@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se incorpora o cambia un paquete de especialidad."]) --> N1
+    N1["Administrador de la organización: Crear versión en borrador de campos, componentes y reglas"]
+    N2["Profesional clínico: Revisar casos de uso y pruebas de captura"]
+    N3{"Sistema Health Project: ¿Componentes y reglas obligatorios disponibles y validados?"}
+    N4["Administrador de la organización: Publicar versión y registrar revisión"]
+    N5["Administrador de la organización: Habilitar paquete para organización, sucursales y profesionales autorizados"]
+    N6["Sistema Health Project: Mantener versiones anteriores para atenciones históricas"]
+    END(["Paquete utilizable solo dentro de su alcance validado; historia anterior sin reinterpretación."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Conservar borrador y marcar capacidades pendientes"]
+    A1 --> N1
+    N4 -->|"Retirar versión"| A2["Bloquear nuevas capturas con ella; preservar lectura histórica"]
+    A2 --> E2(["Versión retirada con trazabilidad."])

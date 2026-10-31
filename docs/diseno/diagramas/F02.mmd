@@ -1,0 +1,21 @@
+flowchart TD
+    START(["El usuario selecciona el contexto visible en la cabecera."]) --> N1
+    N1["Profesional clínico: Solicitar cambio de espacio o sucursal"]
+    N2{"Sistema Health Project: ¿Hay cambios sin guardar?"}
+    N3["Profesional clínico: Guardar borrador o descartar cambios locales expresamente"]
+    N4["Sistema Health Project: Validar pertenencia al contexto destino"]
+    N5{"Sistema Health Project: ¿Contexto autorizado?"}
+    N6["Sistema Health Project: Vaciar vistas del contexto anterior y abrir el destino"]
+    END(["Nuevo contexto seleccionado; no se copian pacientes ni historias."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"Sí"| N6
+    N6 --> END
+    N2 -->|"No"| A1["Continuar directamente a validar destino"]
+    A1 --> N4
+    N5 -->|"No"| A2["Conservar contexto original y mostrar restricción"]
+    A2 --> E2(["Cambio rechazado; registros sin traslado."])
+    N3 -->|"Cancelar cambio"| A3["Volver a la pantalla original"]
+    A3 --> E3(["Contexto conservado."])

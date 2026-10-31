@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Llega paciente que requiere circuito de urgencia."]) --> N1
+    N1["Recepción: Registrar llegada e identidad provisional si hace falta"]
+    N2["Asistente o enfermería: Registrar valoración/clasificación según procedimiento validado"]
+    N3["Profesional clínico: Iniciar atención y registrar actuaciones"]
+    N4["Profesional clínico: Registrar reevaluaciones como eventos nuevos"]
+    N5["Profesional clínico: Definir observación, hospitalización, traslado o egreso"]
+    N6{"Sistema Health Project: ¿Destino y receptor confirmados cuando corresponda?"}
+    N7["Sistema Health Project: Cerrar transición y conservar tiempos, órdenes y pendientes"]
+    END(["Destino registrado y transferencia confirmada o pendiente explícito."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 -->|"Sí"| N7
+    N7 --> END
+    N6 -->|"No"| A1["Mantener circuito/responsabilidad vigente y escalar coordinación"]
+    A1 --> E1(["Destino pendiente; atención continúa bajo equipo emisor."])
+    N1 -->|"Identidad resuelta después"| A2["Vincular identidad mediante revisión trazable sin duplicar actuación"]
+    A2 --> N3

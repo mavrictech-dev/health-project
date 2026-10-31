@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se configura jornada, lugar o recurso reservable."]) --> N1
+    N1["Profesional clínico: Elegir sucursal o lugar propio y profesional"]
+    N2["Profesional clínico: Definir horario, servicios, duración y excepciones"]
+    N3["Administrador de la organización: Asignar consultorio, sillón u otro recurso requerido"]
+    N4{"Sistema Health Project: ¿Reglas y citas existentes compatibles?"}
+    N5["Profesional clínico: Resolver impacto en reservas existentes"]
+    N6["Sistema Health Project: Publicar disponibilidad y conservar bloqueos"]
+    END(["Agenda disponible con reservas existentes conservadas o reprogramadas explícitamente."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"No"| N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"Sí; sin impacto"| A1["Publicar horario directamente"]
+    A1 --> N6
+    N5 -->|"No resolver todavía"| A2["Guardar propuesta sin modificar reservas existentes"]
+    A2 --> E2(["Cambio de horario pendiente."])

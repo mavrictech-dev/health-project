@@ -1,0 +1,10 @@
+stateDiagram-v2
+    [*] --> PREPARADA
+    PREPARADA --> EN_CURSO: Profesional inicia
+    EN_CURSO --> PENDIENTE: Interrupción documentada
+    PENDIENTE --> EN_CURSO: Retomar con permiso
+    EN_CURSO --> FINALIZADA: Resumen y pendientes revisados
+    PREPARADA --> ANULADA: Motivo documentado
+    EN_CURSO --> ANULADA: Conservar hechos previos y motivo
+    FINALIZADA --> [*]
+    ANULADA --> [*]

@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se crea o cambia una oferta comercial o emisor permitido."]) --> N1
+    N1["Administrador de la organización: Seleccionar servicio, tarifa, emisor o condición"]
+    N2["Administrador de la organización: Crear versión con valores, vigencia y ámbito"]
+    N3{"Sistema Health Project: ¿Datos coherentes y cambio autorizado?"}
+    N4["Caja y administración financiera: Revisar efecto sobre operaciones futuras"]
+    N5["Administrador de la organización: Confirmar publicación de configuración"]
+    N6["Sistema Health Project: Aplicar prospectivamente y conservar precios/documentos usados anteriormente"]
+    END(["Configuración versionada para operaciones nuevas."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Señalar inconsistencia y conservar propuesta sin publicar"]
+    A1 --> N2
+    N5 -->|"Cancelar"| A2["Mantener configuración vigente"]
+    A2 --> E2(["Sin cambio publicado."])

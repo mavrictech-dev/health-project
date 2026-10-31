@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se realiza una actuación preventiva humana o veterinaria."]) --> N1
+    N1["Profesional clínico: Revisar historial preventivo y perfil del paciente"]
+    N2["Profesional clínico: Registrar decisión/orden profesional cuando corresponda"]
+    N3["Asistente o enfermería: Registrar actuación real, producto, lote, cantidad y fecha según evento"]
+    N4{"Sistema Health Project: ¿Datos, ejecutor y vínculo clínico válidos?"}
+    N5["Sistema Health Project: Guardar evento distinto de una mera indicación o receta"]
+    N6["Profesional clínico: Definir control posterior y documento para destinatario autorizado"]
+    END(["Evento preventivo trazable y seguimiento/documento definidos."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"No"| A1["Conservar borrador y solicitar corrección"]
+    A1 --> N3
+    N3 -->|"No realizada"| A2["Registrar motivo y seguimiento sin afirmar vacunación realizada"]
+    A2 --> E2(["Actuación no realizada documentada."])

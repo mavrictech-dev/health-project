@@ -1,0 +1,21 @@
+flowchart TD
+    START(["El responsable autorizado solicita salida de la plataforma."]) --> N1
+    N1["Administrador de la organización: Solicitar baja y revisar obligaciones/impacto"]
+    N2["Sistema Health Project: Identificar cuentas, integraciones y pendientes afectados"]
+    N3["Administrador de la organización: Solicitar exportación y confirmar recepción autorizada"]
+    N4["Operador o soporte de MAVRIC: Acordar fecha y condiciones de cierre"]
+    N5["Sistema Health Project: Revocar accesos/integraciones según acuerdo y conservar evidencia"]
+    N6["Sistema Health Project: Aplicar conservación y eliminación solo según política validada"]
+    END(["Salida documentada con datos entregados y política de conservación aplicada."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"Entrega incompleta"| A1["Reconciliar exportación antes de cerrar entrega"]
+    A1 --> N3
+    N4 -->|"Desistir"| A2["Conservar servicio según condiciones vigentes"]
+    A2 --> E2(["Baja cancelada."])
+    N6 -->|"Conservación requerida"| A3["Mantener datos bajo custodia definida y acceso limitado"]
+    A3 --> E3(["Espacio cerrado; datos conservados conforme a política."])

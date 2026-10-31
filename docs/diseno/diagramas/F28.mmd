@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se requiere corregir o ampliar un registro clínico firmado."]) --> N1
+    N1["Profesional clínico: Abrir revisión original y solicitar adenda"]
+    N2["Profesional clínico: Indicar motivo y contenido corregido o adicional"]
+    N3{"Sistema Health Project: ¿Adenda válida y vinculada al original correcto?"}
+    N4["Profesional clínico: Revisar y firmar nueva revisión"]
+    N5["Sistema Health Project: Conservar original, adenda, motivo y referencias"]
+    N6["Sistema Health Project: Actualizar pendientes/publicaciones afectadas con nueva versión explícita"]
+    END(["Corrección trazable; ninguna versión firmada sobrescrita."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Mostrar errores y conservar borrador de adenda"]
+    A1 --> N2
+    N4 -->|"Cancelar"| A2["Conservar original sin cambios"]
+    A2 --> E2(["Adenda sin emitir."])

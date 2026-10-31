@@ -1,0 +1,17 @@
+flowchart TD
+    START(["Se detecta incidente o se realiza simulacro de recuperación."]) --> N1
+    N1["Operador o soporte de MAVRIC: Registrar incidente, alcance y responsable"]
+    N2["Operador o soporte de MAVRIC: Evaluar impacto y comunicar por canales establecidos"]
+    N3["Operador o soporte de MAVRIC: Aplicar procedimiento de recuperación autorizado"]
+    N4["Sistema Health Project: Comprobar consistencia de base, archivos, claves y configuración"]
+    N5{"Operador o soporte de MAVRIC: ¿Evidencias cumplen objetivos acordados?"}
+    N6["Operador o soporte de MAVRIC: Restablecer operación y documentar retorno/acciones pendientes"]
+    END(["Operación recuperada con evidencia o incidente activo; no inferir recuperación por existir backup."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"Sí"| N6
+    N6 --> END
+    N5 -->|"No"| A1["Mantener incidente activo y corregir recuperación con responsable"]
+    A1 --> N3

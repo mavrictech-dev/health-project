@@ -1,0 +1,19 @@
+flowchart TD
+    START(["El equipo inicia un caso programado o autorizado."]) --> N1
+    N1["Asistente o enfermería: Confirmar paciente, caso y verificaciones registradas"]
+    N2{"Sistema Health Project: ¿Caso habilitado para iniciar según comprobaciones?"}
+    N3["Profesional clínico: Iniciar y registrar tiempos, participantes y actuación realizada"]
+    N4["Asistente o enfermería: Registrar materiales, implantes y muestras vinculadas"]
+    N5["Profesional clínico: Registrar eventos e interrupciones y cerrar parte quirúrgico"]
+    N6["Sistema Health Project: Vincular recuperación, órdenes y pendientes"]
+    END(["Parte de lo realmente realizado conservado, con recuperación y pendientes."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N2 -->|"No"| A1["Detener inicio y asignar resolución de faltantes"]
+    A1 --> E1(["Caso no iniciado."])
+    N3 -->|"Interrumpir tras inicio"| A2["Conservar actuación parcial y motivo; dirigir al destino clínico decidido"]
+    A2 --> N5

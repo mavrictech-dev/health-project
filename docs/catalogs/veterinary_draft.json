@@ -1,0 +1,2007 @@
+[
+  {
+    "code": "V_GENERAL",
+    "name": "Medicina veterinaria general",
+    "group": "Clínica general",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Especie, raza, sexo, estado reproductivo y etapa de vida",
+      "Identificación individual y responsables",
+      "Motivo, antecedentes y exploración",
+      "Peso, condición corporal y observaciones por especie",
+      "Problemas activos y evolución"
+    ],
+    "components": [
+      "species_profile",
+      "animal_body_map",
+      "clinical_timeline"
+    ],
+    "workflows": [
+      "consultation",
+      "follow_up",
+      "referral"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "V_PREVENTIVE",
+    "name": "Medicina preventiva veterinaria",
+    "group": "Prevención y población",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Historial sanitario y exposiciones",
+      "Vacunaciones con producto, lote y fecha",
+      "Eventos de control antiparasitario",
+      "Riesgos ambientales y de convivencia",
+      "Calendario de controles registrado"
+    ],
+    "components": [
+      "vaccination_timeline",
+      "preventive_calendar",
+      "risk_form"
+    ],
+    "workflows": [
+      "preventive_visit",
+      "vaccination_record",
+      "preventive_follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "inventory"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_INTERNAL",
+    "name": "Medicina interna veterinaria",
+    "group": "Clínica por sistemas",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Problemas multisistémicos",
+      "Antecedentes y examen por sistemas",
+      "Series de observaciones y unidades",
+      "Resultados de estudios y valoración",
+      "Interconsultas y evolución"
+    ],
+    "components": [
+      "problem_list",
+      "observation_series",
+      "animal_body_map"
+    ],
+    "workflows": [
+      "consultation",
+      "diagnostic_workup",
+      "follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_INTERNAL_SMALL",
+    "name": "Medicina interna de pequeños animales",
+    "group": "Clínica por sistemas",
+    "entryType": "subespecialidad",
+    "parentCode": "V_INTERNAL",
+    "capture": [
+      "Perfil anatómico y especie",
+      "Problemas multisistémicos",
+      "Exploración y observaciones seriadas",
+      "Estudios y evolución por problema"
+    ],
+    "components": [
+      "species_profile",
+      "problem_list",
+      "observation_series"
+    ],
+    "workflows": [
+      "consultation",
+      "diagnostic_workup",
+      "follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_INTERNAL_LARGE",
+    "name": "Medicina interna de grandes animales",
+    "group": "Clínica por sistemas",
+    "entryType": "subespecialidad",
+    "parentCode": "V_INTERNAL",
+    "capture": [
+      "Identidad individual y pertenencia al establecimiento",
+      "Especie y manejo productivo o deportivo",
+      "Exploración y observaciones por sistema",
+      "Exposiciones del grupo e historia individual",
+      "Resultados de estudios y evolución"
+    ],
+    "components": [
+      "species_profile",
+      "population_link",
+      "problem_list"
+    ],
+    "workflows": [
+      "field_consultation",
+      "diagnostic_workup",
+      "follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_CARDIO",
+    "name": "Cardiología veterinaria",
+    "group": "Clínica por sistemas",
+    "entryType": "subespecialidad",
+    "parentCode": "V_INTERNAL",
+    "capture": [
+      "Auscultación y hallazgos cardiovasculares",
+      "Presión y otras observaciones con método",
+      "ECG con trazado e informe",
+      "Ecocardiografía con mediciones y referencias por especie",
+      "Evolución de los hallazgos"
+    ],
+    "components": [
+      "cardiac_anatomy_map",
+      "ecg_viewer",
+      "echocardiography_form",
+      "observation_series"
+    ],
+    "workflows": [
+      "consultation",
+      "diagnostic_study",
+      "serial_comparison"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "integrations"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_NEURO",
+    "name": "Neurología veterinaria",
+    "group": "Clínica por sistemas",
+    "entryType": "subespecialidad",
+    "parentCode": "V_INTERNAL",
+    "capture": [
+      "Estado mental, marcha y postura",
+      "Reflejos y pares craneales",
+      "Localización neuroanatómica",
+      "Eventos con fecha, duración y video",
+      "Pruebas e imágenes asociadas"
+    ],
+    "components": [
+      "neurologic_exam",
+      "animal_neuro_map",
+      "event_diary"
+    ],
+    "workflows": [
+      "consultation",
+      "diagnostic_workup",
+      "serial_comparison"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_GASTRO",
+    "name": "Gastroenterología y hepatología veterinaria",
+    "group": "Clínica por sistemas",
+    "entryType": "area_practica",
+    "parentCode": "V_INTERNAL",
+    "capture": [
+      "Signos digestivos y cronología",
+      "Dieta y hábitos de ingesta",
+      "Hallazgos abdominales",
+      "Resultados hepáticos y digestivos",
+      "Endoscopia, muestras e informes"
+    ],
+    "components": [
+      "digestive_anatomy_map",
+      "symptom_diary",
+      "endoscopy_report"
+    ],
+    "workflows": [
+      "consultation",
+      "diagnostic_study",
+      "sample_review"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "V_ENDO",
+    "name": "Endocrinología veterinaria",
+    "group": "Clínica por sistemas",
+    "entryType": "area_practica",
+    "parentCode": "V_INTERNAL",
+    "capture": [
+      "Peso, condición corporal y cambios",
+      "Observaciones endocrinas seriadas",
+      "Resultados hormonales con contexto de toma",
+      "Pruebas dinámicas registradas y tiempos",
+      "Evolución por problema"
+    ],
+    "components": [
+      "observation_series",
+      "dynamic_test_timeline",
+      "body_condition_chart"
+    ],
+    "workflows": [
+      "consultation",
+      "timed_sampling",
+      "serial_comparison"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "V_RENAL",
+    "name": "Nefrología y urología veterinaria",
+    "group": "Clínica por sistemas",
+    "entryType": "area_practica",
+    "parentCode": "V_INTERNAL",
+    "capture": [
+      "Diuresis y balance registrados",
+      "Observaciones renales y urinarias",
+      "Uroanálisis con método y muestra",
+      "Imagen urogenital y localización",
+      "Estudios y evolución"
+    ],
+    "components": [
+      "urogenital_anatomy_map",
+      "fluid_balance",
+      "observation_series"
+    ],
+    "workflows": [
+      "consultation",
+      "sample_review",
+      "serial_comparison"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "V_RESP",
+    "name": "Medicina respiratoria veterinaria",
+    "group": "Clínica por sistemas",
+    "entryType": "area_practica",
+    "parentCode": "V_INTERNAL",
+    "capture": [
+      "Cronología de signos respiratorios",
+      "Frecuencia y patrón respiratorio",
+      "Exposiciones y entorno",
+      "Imágenes y estudios funcionales",
+      "Muestras e informes"
+    ],
+    "components": [
+      "respiratory_anatomy_map",
+      "observation_series",
+      "study_report"
+    ],
+    "workflows": [
+      "consultation",
+      "diagnostic_workup",
+      "serial_comparison"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "V_ONCO",
+    "name": "Oncología veterinaria",
+    "group": "Clínica por sistemas",
+    "entryType": "subespecialidad",
+    "parentCode": "V_INTERNAL",
+    "capture": [
+      "Lesión identificada y localización",
+      "Tamaño y evolución seriada",
+      "Citología, histología y estadio registrado",
+      "Estudios e informes asociados",
+      "Procedimientos realizados y eventos observados"
+    ],
+    "components": [
+      "tumor_map",
+      "lesion_series",
+      "oncology_timeline"
+    ],
+    "workflows": [
+      "consultation",
+      "staging_record",
+      "serial_comparison",
+      "procedure_follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_DERM",
+    "name": "Dermatología veterinaria",
+    "group": "Clínica por sistemas",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Lesiones identificadas y distribución",
+      "Prurito y evolución",
+      "Piel, oídos, uñas o cascos según especie",
+      "Fotografías fechadas",
+      "Pruebas, muestras y resultados"
+    ],
+    "components": [
+      "animal_skin_map",
+      "lesion_series",
+      "photo_comparison"
+    ],
+    "workflows": [
+      "consultation",
+      "sample_review",
+      "serial_comparison"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_OPHTH",
+    "name": "Oftalmología veterinaria",
+    "group": "Clínica por sistemas",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Hallazgos por ojo y estructura",
+      "Pruebas oculares con método y unidades",
+      "Presión ocular y lateralidad",
+      "Imágenes e informes",
+      "Procedimientos y evolución"
+    ],
+    "components": [
+      "eye_anatomy_map",
+      "ocular_exam",
+      "photo_comparison"
+    ],
+    "workflows": [
+      "consultation",
+      "diagnostic_study",
+      "serial_comparison"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_DENTAL",
+    "name": "Odontología y cirugía oral veterinaria",
+    "group": "Clínica por sistemas",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Sistema Triadan modificado y versión de nomenclatura",
+      "Especie, dentición y piezas anatómicamente válidas",
+      "Pieza, superficie y hallazgos",
+      "Sondaje y observaciones periodontales",
+      "Radiografías intraorales enlazadas a piezas",
+      "Procedimientos registrados por pieza y atención",
+      "Identificador y versión del atlas dental"
+    ],
+    "components": [
+      "veterinary_odontogram",
+      "veterinary_periodontogram",
+      "intraoral_image_links",
+      "species_dental_atlas"
+    ],
+    "workflows": [
+      "dental_exam",
+      "dental_procedure",
+      "serial_comparison"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "AVDC",
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_DENTAL_EQUINE",
+    "name": "Odontología equina",
+    "group": "Clínica por sistemas",
+    "entryType": "area_practica",
+    "parentCode": "V_DENTAL",
+    "capture": [
+      "Perfil dental equino y dentición",
+      "Identificación de piezas con Triadan modificado",
+      "Desgaste, oclusión y hallazgos por pieza",
+      "Imágenes y exploración oral",
+      "Procedimientos registrados",
+      "Identificador y versión del atlas equino"
+    ],
+    "components": [
+      "equine_odontogram",
+      "species_dental_atlas",
+      "dental_occlusion_view"
+    ],
+    "workflows": [
+      "dental_exam",
+      "dental_procedure",
+      "serial_comparison"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "AVDC",
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "V_EMERGENCY",
+    "name": "Urgencias veterinarias",
+    "group": "Urgencias y hospital",
+    "entryType": "servicio",
+    "parentCode": null,
+    "capture": [
+      "Motivo y tiempos de llegada y evaluación",
+      "Prioridad de triaje registrada",
+      "Observaciones iniciales y reevaluaciones",
+      "Procedimientos y eventos con tiempos",
+      "Destino del paciente y transferencia"
+    ],
+    "components": [
+      "veterinary_triage",
+      "emergency_timeline",
+      "observation_series"
+    ],
+    "workflows": [
+      "triage",
+      "emergency_encounter",
+      "handoff"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_CRITICAL",
+    "name": "Cuidados intensivos veterinarios",
+    "group": "Urgencias y hospital",
+    "entryType": "servicio",
+    "parentCode": "V_EMERGENCY",
+    "capture": [
+      "Ubicación y estado durante hospitalización",
+      "Observaciones seriadas y dispositivos",
+      "Balance de ingresos y egresos",
+      "Eventos, procedimientos y administración registrada",
+      "Valoraciones, transferencias y egreso"
+    ],
+    "components": [
+      "icu_flowsheet",
+      "fluid_balance",
+      "device_timeline",
+      "handoff_form"
+    ],
+    "workflows": [
+      "admission",
+      "critical_monitoring",
+      "handoff",
+      "discharge"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "inventory"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_ANESTH",
+    "name": "Anestesiología veterinaria",
+    "group": "Urgencias y hospital",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Evaluación y riesgo anestésico registrado",
+      "Consentimiento y responsables",
+      "Agentes administrados con tiempos y responsable",
+      "Observaciones y eventos intraoperatorios",
+      "Recuperación y seguimiento"
+    ],
+    "components": [
+      "anesthesia_record",
+      "monitoring_chart",
+      "recovery_form"
+    ],
+    "workflows": [
+      "preanesthetic_assessment",
+      "anesthesia_event",
+      "recovery"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "inventory"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_PAIN",
+    "name": "Evaluación del dolor y cuidados paliativos veterinarios",
+    "group": "Urgencias y hospital",
+    "entryType": "area_practica",
+    "parentCode": "V_ANESTH",
+    "capture": [
+      "Escala de dolor con nombre, versión y especie aplicable",
+      "Calidad de vida y observaciones funcionales",
+      "Signos y evolución seriada",
+      "Preferencias y decisiones documentadas del responsable",
+      "Cuidados realizados y eventos observados"
+    ],
+    "components": [
+      "species_pain_scale",
+      "quality_of_life_form",
+      "symptom_diary"
+    ],
+    "workflows": [
+      "pain_assessment",
+      "palliative_follow_up",
+      "decision_record"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "V_SURGERY",
+    "name": "Cirugía veterinaria",
+    "group": "Cirugía",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Indicación y evaluación preoperatoria",
+      "Consentimiento y equipo interviniente",
+      "Región, técnica realizada y tiempos",
+      "Materiales, implantes y muestras",
+      "Hallazgos, incidencias y seguimiento"
+    ],
+    "components": [
+      "surgical_anatomy_map",
+      "operative_report",
+      "implant_record"
+    ],
+    "workflows": [
+      "preoperative_assessment",
+      "surgical_event",
+      "postoperative_follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "inventory",
+      "laboratory"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_SURG_SMALL",
+    "name": "Cirugía de pequeños animales",
+    "group": "Cirugía",
+    "entryType": "subespecialidad",
+    "parentCode": "V_SURGERY",
+    "capture": [
+      "Especie y región anatómica",
+      "Hallazgos y procedimiento realizado",
+      "Equipo, tiempos y materiales",
+      "Muestras e incidencias",
+      "Evolución posoperatoria"
+    ],
+    "components": [
+      "surgical_anatomy_map",
+      "operative_report",
+      "implant_record"
+    ],
+    "workflows": [
+      "preoperative_assessment",
+      "surgical_event",
+      "postoperative_follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "inventory"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_SURG_LARGE",
+    "name": "Cirugía de grandes animales",
+    "group": "Cirugía",
+    "entryType": "subespecialidad",
+    "parentCode": "V_SURGERY",
+    "capture": [
+      "Especie y región anatómica",
+      "Condiciones del lugar y manejo registrado",
+      "Hallazgos y procedimiento realizado",
+      "Equipo, tiempos y materiales",
+      "Incidencias y evolución posoperatoria"
+    ],
+    "components": [
+      "surgical_anatomy_map",
+      "operative_report",
+      "field_procedure_form"
+    ],
+    "workflows": [
+      "preoperative_assessment",
+      "surgical_event",
+      "postoperative_follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "inventory"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_ORTHO",
+    "name": "Ortopedia y traumatología veterinaria",
+    "group": "Cirugía",
+    "entryType": "area_practica",
+    "parentCode": "V_SURGERY",
+    "capture": [
+      "Hueso, articulación y lateralidad",
+      "Lesión y clasificación registrada",
+      "Marcha y mediciones funcionales",
+      "Imágenes seriadas",
+      "Procedimiento e implantes con trazabilidad"
+    ],
+    "components": [
+      "animal_skeletal_map",
+      "gait_assessment",
+      "implant_record"
+    ],
+    "workflows": [
+      "orthopedic_exam",
+      "surgical_event",
+      "serial_comparison"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "inventory"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_SOFT",
+    "name": "Cirugía de tejidos blandos veterinaria",
+    "group": "Cirugía",
+    "entryType": "area_practica",
+    "parentCode": "V_SURGERY",
+    "capture": [
+      "Órgano y región intervenida",
+      "Hallazgos preoperatorios e intraoperatorios",
+      "Procedimiento realizado y equipo",
+      "Muestras, dispositivos y materiales",
+      "Incidencias y evolución"
+    ],
+    "components": [
+      "animal_body_map",
+      "operative_report",
+      "device_timeline"
+    ],
+    "workflows": [
+      "preoperative_assessment",
+      "surgical_event",
+      "postoperative_follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "inventory",
+      "laboratory"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_NEUROSURG",
+    "name": "Neurocirugía veterinaria",
+    "group": "Cirugía",
+    "entryType": "area_practica",
+    "parentCode": "V_SURGERY",
+    "capture": [
+      "Localización neuroanatómica y lateralidad",
+      "Valoración funcional previa",
+      "Estudios e imágenes de referencia",
+      "Procedimiento realizado e implantes",
+      "Evolución neurológica posterior"
+    ],
+    "components": [
+      "animal_neuro_map",
+      "neurologic_exam",
+      "operative_report"
+    ],
+    "workflows": [
+      "preoperative_assessment",
+      "surgical_event",
+      "serial_comparison"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "inventory"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_REHAB",
+    "name": "Medicina deportiva y rehabilitación veterinaria",
+    "group": "Función y conducta",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Actividad y exigencia deportiva o funcional",
+      "Marcha y limitaciones funcionales",
+      "Dolor y mediciones seriadas",
+      "Sesiones realizadas y respuesta observada",
+      "Objetivos y evolución"
+    ],
+    "components": [
+      "gait_assessment",
+      "functional_scale",
+      "rehabilitation_timeline"
+    ],
+    "workflows": [
+      "functional_assessment",
+      "rehabilitation_session",
+      "serial_comparison"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "scheduling"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_BEHAV",
+    "name": "Medicina del comportamiento y etología clínica",
+    "group": "Función y conducta",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Conductas y contexto observado",
+      "Historia de convivencia y ambiente",
+      "Eventos con duración, frecuencia y video",
+      "Valoraciones estructuradas y versión",
+      "Sesiones y evolución reportada"
+    ],
+    "components": [
+      "behavior_diary",
+      "environment_form",
+      "video_event_links"
+    ],
+    "workflows": [
+      "behavioral_consultation",
+      "behavioral_follow_up",
+      "caregiver_report"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_REPRO",
+    "name": "Reproducción y teriogenología veterinaria",
+    "group": "Reproducción",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Estado reproductivo y ciclo",
+      "Historia de cruces y progenitores",
+      "Evaluación reproductiva y estudios",
+      "Gestación con fechas, imágenes y observaciones",
+      "Parto, camada o cría y vínculos",
+      "Eventos neonatales y evolución"
+    ],
+    "components": [
+      "reproductive_timeline",
+      "gestation_chart",
+      "offspring_links"
+    ],
+    "workflows": [
+      "reproductive_assessment",
+      "gestation_follow_up",
+      "birth_record",
+      "neonatal_follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_NUTR",
+    "name": "Nutrición clínica veterinaria",
+    "group": "Función y conducta",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Dieta y patrón de ingesta",
+      "Peso y condición corporal por especie",
+      "Requerimientos registrados por el profesional",
+      "Composición y cantidades del plan documentado",
+      "Evolución y tolerancia reportada"
+    ],
+    "components": [
+      "body_condition_chart",
+      "diet_record",
+      "observation_series"
+    ],
+    "workflows": [
+      "nutritional_assessment",
+      "diet_plan_record",
+      "serial_comparison"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_TOXIC",
+    "name": "Toxicología veterinaria",
+    "group": "Diagnóstico y estudios",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Agente sospechado y evidencia",
+      "Vía, cantidad estimada y tiempo de exposición",
+      "Signos y cronología",
+      "Resultados toxicológicos y muestras",
+      "Eventos y evolución"
+    ],
+    "components": [
+      "exposure_timeline",
+      "toxicology_form",
+      "sample_links"
+    ],
+    "workflows": [
+      "exposure_assessment",
+      "sample_review",
+      "follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_PHARMA",
+    "name": "Farmacología clínica veterinaria",
+    "group": "Diagnóstico y estudios",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Medicamento, formulación y especie",
+      "Administración documentada y responsable",
+      "Peso de referencia y unidad",
+      "Concentraciones y resultados cuando se midan",
+      "Eventos adversos e interacciones evaluadas",
+      "Periodo de retiro registrado para animales productivos"
+    ],
+    "components": [
+      "medication_timeline",
+      "adverse_event_form",
+      "withdrawal_period_record"
+    ],
+    "workflows": [
+      "pharmacologic_review",
+      "administration_record",
+      "adverse_event_record"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "inventory"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_IMAGING",
+    "name": "Diagnóstico por imágenes veterinario",
+    "group": "Diagnóstico y estudios",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Modalidad y región anatómica por especie",
+      "Orden e indicación registrada",
+      "Adquisición, equipo y metadatos",
+      "Imágenes e informe firmado",
+      "Comparación con estudios previos"
+    ],
+    "components": [
+      "medical_image_viewer",
+      "animal_body_map",
+      "structured_imaging_report"
+    ],
+    "workflows": [
+      "imaging_order",
+      "study_acquisition",
+      "report_review",
+      "serial_comparison"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "integrations"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_RAD_ONCO",
+    "name": "Oncología radioterápica veterinaria",
+    "group": "Diagnóstico y estudios",
+    "entryType": "subespecialidad",
+    "parentCode": "V_IMAGING",
+    "capture": [
+      "Lesión, estadio registrado y región",
+      "Plan validado por el profesional y versión",
+      "Sesiones realizadas con parámetros registrados",
+      "Imágenes de referencia",
+      "Eventos observados y seguimiento"
+    ],
+    "components": [
+      "radiotherapy_course",
+      "tumor_map",
+      "treatment_session_record"
+    ],
+    "workflows": [
+      "course_plan_record",
+      "session_record",
+      "follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "integrations"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_CLINPATH",
+    "name": "Patología clínica veterinaria",
+    "group": "Diagnóstico y estudios",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Muestra, origen y condiciones de toma",
+      "Prueba, método y equipo",
+      "Resultado, unidad y referencia por especie",
+      "Observaciones morfológicas e imágenes",
+      "Validación, revisión y trazabilidad"
+    ],
+    "components": [
+      "laboratory_result_panel",
+      "microscopy_viewer",
+      "sample_chain"
+    ],
+    "workflows": [
+      "sample_collection",
+      "laboratory_processing",
+      "result_validation"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_ANATPATH",
+    "name": "Anatomía patológica veterinaria",
+    "group": "Diagnóstico y estudios",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Órgano, región y pieza remitida",
+      "Identificación y conservación de muestras",
+      "Hallazgos macro y microscópicos",
+      "Informe, diagnóstico registrado y autor",
+      "Imágenes y necropsia cuando corresponda"
+    ],
+    "components": [
+      "specimen_map",
+      "pathology_report",
+      "microscopy_viewer"
+    ],
+    "workflows": [
+      "specimen_reception",
+      "histopathology_review",
+      "necropsy_record"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_MICRO",
+    "name": "Microbiología, inmunología y parasitología veterinarias",
+    "group": "Diagnóstico y estudios",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Disciplina y organismo investigado",
+      "Origen de la muestra y contexto epidemiológico",
+      "Método, cultivo, PCR o prueba inmunológica registrada",
+      "Identificación, susceptibilidad y resultados",
+      "Validación e informe"
+    ],
+    "components": [
+      "microbiology_panel",
+      "sample_chain",
+      "susceptibility_grid"
+    ],
+    "workflows": [
+      "sample_collection",
+      "laboratory_processing",
+      "result_validation"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_EPI",
+    "name": "Epidemiología, zoonosis y salud pública veterinaria",
+    "group": "Prevención y población",
+    "entryType": "area_practica",
+    "parentCode": "V_PREVENTIVE",
+    "capture": [
+      "Caso individual y vínculos de exposición",
+      "Población, establecimiento y denominadores",
+      "Eventos por fecha y ubicación",
+      "Muestras, resultados y clasificación de caso",
+      "Investigación y reportes sanitarios registrados"
+    ],
+    "components": [
+      "population_dashboard",
+      "outbreak_timeline",
+      "exposure_links"
+    ],
+    "workflows": [
+      "surveillance_record",
+      "outbreak_investigation",
+      "sanitary_report"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory",
+      "reporting"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_WELFARE",
+    "name": "Bienestar animal",
+    "group": "Prevención y población",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Condiciones de alojamiento y manejo",
+      "Indicadores de bienestar con escala y versión",
+      "Hallazgos físicos y conductuales",
+      "Evidencias fechadas y responsables",
+      "Acciones registradas y reevaluación"
+    ],
+    "components": [
+      "welfare_assessment",
+      "environment_form",
+      "evidence_gallery"
+    ],
+    "workflows": [
+      "welfare_assessment",
+      "inspection_record",
+      "reassessment"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "reporting"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_FORENSICS",
+    "name": "Medicina veterinaria forense",
+    "group": "Prevención y población",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Identidad y contexto del caso",
+      "Lesiones y localización anatómica",
+      "Evidencia con autor, fecha y procedencia",
+      "Custodia de muestras y documentos",
+      "Peritaje y versiones del informe"
+    ],
+    "components": [
+      "forensic_lesion_map",
+      "evidence_chain",
+      "forensic_report"
+    ],
+    "workflows": [
+      "forensic_exam",
+      "evidence_registration",
+      "expert_report"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory",
+      "audit"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "V_LAB_ANIMALS",
+    "name": "Medicina de animales de laboratorio",
+    "group": "Prácticas y entornos",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Identidad, especie y colonia",
+      "Protocolo autorizado y responsable",
+      "Estado sanitario y condiciones ambientales",
+      "Procedimientos realizados e incidencias",
+      "Indicadores de bienestar y registros de destino"
+    ],
+    "components": [
+      "colony_registry",
+      "protocol_link",
+      "welfare_assessment"
+    ],
+    "workflows": [
+      "colony_health_review",
+      "procedure_record",
+      "welfare_monitoring"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "audit",
+      "reporting"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_ZOO",
+    "name": "Medicina zoológica y de fauna silvestre",
+    "group": "Prácticas y entornos",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Taxón, identificación y procedencia",
+      "Recinto, hábitat y ambiente",
+      "Manejo, dieta y observaciones por especie",
+      "Captura o inmovilización registradas",
+      "Muestras, cuarentena y evolución",
+      "Destino, traslado o liberación documentados"
+    ],
+    "components": [
+      "taxon_profile",
+      "habitat_form",
+      "wildlife_case_timeline"
+    ],
+    "workflows": [
+      "wildlife_consultation",
+      "quarantine_record",
+      "transfer_record",
+      "release_record"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "WV_AVMA"
+    ]
+  },
+  {
+    "code": "V_AVIAN",
+    "name": "Práctica clínica de aves",
+    "group": "Prácticas y entornos",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Especie e identificación individual",
+      "Hábitat, dieta y convivencia",
+      "Peso y exploración aviar",
+      "Plumaje, pico, garras y hallazgos",
+      "Pruebas y evolución"
+    ],
+    "components": [
+      "avian_body_map",
+      "habitat_form",
+      "species_profile"
+    ],
+    "workflows": [
+      "consultation",
+      "husbandry_assessment",
+      "follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABVP"
+    ],
+    "patientProfiles": [
+      "aves de compañía",
+      "aves de colección"
+    ]
+  },
+  {
+    "code": "V_BEEF",
+    "name": "Práctica de bovinos de carne",
+    "group": "Prácticas y entornos",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Identidad y lote o rebaño",
+      "Etapa productiva y peso",
+      "Exploración y antecedentes individuales",
+      "Eventos sanitarios y resultados del grupo",
+      "Movimiento y periodos de retiro registrados"
+    ],
+    "components": [
+      "herd_registry",
+      "production_stage_form",
+      "population_dashboard"
+    ],
+    "workflows": [
+      "field_consultation",
+      "herd_health_review",
+      "sanitary_event_record"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "inventory",
+      "reporting"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABVP"
+    ],
+    "patientProfiles": [
+      "bovinos"
+    ]
+  },
+  {
+    "code": "V_CANINE_FELINE",
+    "name": "Práctica clínica canina y felina",
+    "group": "Prácticas y entornos",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Identidad, raza y etapa de vida",
+      "Responsables y convivencia",
+      "Anamnesis y exploración por especie",
+      "Peso y condición corporal",
+      "Vacunas, estudios y evolución"
+    ],
+    "components": [
+      "species_profile",
+      "animal_body_map",
+      "body_condition_chart"
+    ],
+    "workflows": [
+      "consultation",
+      "preventive_visit",
+      "follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "ABVP"
+    ],
+    "patientProfiles": [
+      "perros",
+      "gatos"
+    ]
+  },
+  {
+    "code": "V_DAIRY",
+    "name": "Práctica de bovinos lecheros",
+    "group": "Prácticas y entornos",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Identidad y pertenencia al hato",
+      "Lactación y etapa reproductiva",
+      "Producción individual y del grupo",
+      "Hallazgos de ubre y muestras",
+      "Eventos sanitarios y periodos de retiro"
+    ],
+    "components": [
+      "herd_registry",
+      "udder_map",
+      "lactation_timeline"
+    ],
+    "workflows": [
+      "field_consultation",
+      "herd_health_review",
+      "lactation_follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory",
+      "reporting"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABVP"
+    ],
+    "patientProfiles": [
+      "bovinos"
+    ]
+  },
+  {
+    "code": "V_EQUINE",
+    "name": "Práctica clínica equina",
+    "group": "Prácticas y entornos",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Identificación, raza y uso registrado",
+      "Manejo y antecedentes deportivos",
+      "Exploración y locomoción",
+      "Cascos, dentición y hallazgos",
+      "Eventos, estudios y evolución"
+    ],
+    "components": [
+      "equine_body_map",
+      "gait_assessment",
+      "hoof_map"
+    ],
+    "workflows": [
+      "field_consultation",
+      "performance_assessment",
+      "follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABVP"
+    ],
+    "patientProfiles": [
+      "caballos",
+      "asnos",
+      "mulas"
+    ]
+  },
+  {
+    "code": "V_EXOTIC_MAMMAL",
+    "name": "Práctica de mamíferos exóticos de compañía",
+    "group": "Prácticas y entornos",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Especie e identificación",
+      "Recinto, temperatura y condiciones de manejo",
+      "Dieta y exploración específica",
+      "Peso y hallazgos anatómicos",
+      "Estudios y evolución"
+    ],
+    "components": [
+      "taxon_profile",
+      "habitat_form",
+      "species_body_map"
+    ],
+    "workflows": [
+      "consultation",
+      "husbandry_assessment",
+      "follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABVP"
+    ],
+    "patientProfiles": [
+      "conejos",
+      "hurones",
+      "roedores",
+      "otros mamíferos de compañía"
+    ]
+  },
+  {
+    "code": "V_FELINE",
+    "name": "Práctica clínica felina",
+    "group": "Prácticas y entornos",
+    "entryType": "area_practica",
+    "parentCode": "V_CANINE_FELINE",
+    "capture": [
+      "Identidad y etapa de vida",
+      "Ambiente y convivencia",
+      "Anamnesis y exploración felina",
+      "Peso, condición corporal y conducta",
+      "Estudios y evolución"
+    ],
+    "components": [
+      "species_profile",
+      "feline_body_map",
+      "environment_form"
+    ],
+    "workflows": [
+      "consultation",
+      "preventive_visit",
+      "follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ABVP"
+    ],
+    "patientProfiles": [
+      "gatos"
+    ]
+  },
+  {
+    "code": "V_FISH",
+    "name": "Práctica clínica de peces y salud de poblaciones de peces",
+    "group": "Prácticas y entornos",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Especie y unidad individual o poblacional",
+      "Acuario, estanque o centro y lotes",
+      "Calidad de agua y condiciones ambientales",
+      "Signos, mortalidad y denominadores",
+      "Muestras, resultados y movimientos"
+    ],
+    "components": [
+      "aquatic_environment_form",
+      "population_dashboard",
+      "fish_body_map"
+    ],
+    "workflows": [
+      "aquatic_consultation",
+      "population_health_review",
+      "sample_review"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory",
+      "reporting"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABVP"
+    ],
+    "patientProfiles": [
+      "peces ornamentales",
+      "peces de producción",
+      "peces silvestres"
+    ]
+  },
+  {
+    "code": "V_FOOD",
+    "name": "Práctica de animales de producción alimentaria",
+    "group": "Prácticas y entornos",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Especie, identificación y establecimiento",
+      "Unidad individual, lote o rebaño",
+      "Etapa productiva y manejo",
+      "Eventos sanitarios y reproductivos",
+      "Muestras y resultados",
+      "Trazabilidad y periodos de retiro registrados"
+    ],
+    "components": [
+      "herd_registry",
+      "production_stage_form",
+      "withdrawal_period_record"
+    ],
+    "workflows": [
+      "field_consultation",
+      "population_health_review",
+      "sanitary_event_record"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory",
+      "inventory",
+      "reporting"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABVP"
+    ],
+    "patientProfiles": [
+      "bovinos",
+      "ovinos",
+      "caprinos",
+      "porcinos"
+    ]
+  },
+  {
+    "code": "V_REPTILE_AMPH",
+    "name": "Práctica clínica de reptiles y anfibios",
+    "group": "Prácticas y entornos",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Taxón e identificación",
+      "Recinto, temperatura, humedad e iluminación",
+      "Dieta y exploración específica",
+      "Muda, piel, caparazón y hallazgos pertinentes",
+      "Estudios y evolución"
+    ],
+    "components": [
+      "taxon_profile",
+      "habitat_form",
+      "species_body_map"
+    ],
+    "workflows": [
+      "consultation",
+      "husbandry_assessment",
+      "follow_up"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABVP"
+    ],
+    "patientProfiles": [
+      "serpientes",
+      "lagartos",
+      "quelonios",
+      "crocodilianos",
+      "anfibios"
+    ]
+  },
+  {
+    "code": "V_SHELTER",
+    "name": "Medicina de refugios y albergues",
+    "group": "Prácticas y entornos",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Ingreso, procedencia y custodia",
+      "Identidad individual y grupo de convivencia",
+      "Estado sanitario, conducta y bienestar",
+      "Vacunaciones, procedimientos y cuarentena",
+      "Eventos poblacionales",
+      "Adopción, traslado o destino documentados"
+    ],
+    "components": [
+      "shelter_population_board",
+      "quarantine_timeline",
+      "welfare_assessment"
+    ],
+    "workflows": [
+      "intake",
+      "population_health_review",
+      "quarantine_record",
+      "adoption_record"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "inventory",
+      "reporting"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ABVP"
+    ],
+    "patientProfiles": [
+      "perros",
+      "gatos",
+      "otros animales alojados"
+    ]
+  },
+  {
+    "code": "V_SWINE",
+    "name": "Gestión sanitaria porcina",
+    "group": "Prácticas y entornos",
+    "entryType": "area_practica",
+    "parentCode": "V_FOOD",
+    "capture": [
+      "Establecimiento, lote e identificación",
+      "Etapa productiva y reproducción",
+      "Morbilidad y mortalidad con denominadores",
+      "Bioseguridad y movimientos",
+      "Muestras y resultados",
+      "Periodos de retiro registrados"
+    ],
+    "components": [
+      "herd_registry",
+      "biosecurity_form",
+      "population_dashboard"
+    ],
+    "workflows": [
+      "herd_health_review",
+      "sanitary_event_record",
+      "movement_record"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory",
+      "inventory",
+      "reporting"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "ABVP"
+    ],
+    "patientProfiles": [
+      "porcinos"
+    ]
+  },
+  {
+    "code": "V_POULTRY",
+    "name": "Medicina avícola y sanidad de producción",
+    "group": "Prácticas y entornos",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Granja, galpón y lote",
+      "Especie, edad y etapa productiva",
+      "Producción, morbilidad y mortalidad",
+      "Bioseguridad y ambiente",
+      "Muestras y resultados",
+      "Movimientos y periodos de retiro registrados"
+    ],
+    "components": [
+      "flock_registry",
+      "biosecurity_form",
+      "population_dashboard"
+    ],
+    "workflows": [
+      "flock_health_review",
+      "sanitary_event_record",
+      "sample_review"
+    ],
+    "dependencies": [
+      "patients",
+      "clinical",
+      "specialties",
+      "documents",
+      "laboratory",
+      "inventory",
+      "reporting"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "WV_AVMA"
+    ],
+    "patientProfiles": [
+      "gallinas",
+      "pavos",
+      "patos",
+      "otras aves de producción"
+    ]
+  }
+]

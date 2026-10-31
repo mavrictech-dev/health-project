@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se incorpora fotografía, informe, audio, video o estudio autorizado."]) --> N1
+    N1["Profesional clínico: Seleccionar recurso clínico y tipo de archivo"]
+    N2["Profesional clínico: Aportar archivo, procedencia, fecha y consentimiento requerido"]
+    N3{"Sistema Health Project: ¿Tipo, tamaño e integridad aceptables?"}
+    N4["Sistema Health Project: Guardar privado y enlazar metadatos a la atención"]
+    N5["Profesional clínico: Revisar vista previa, descripción y localización si aplica"]
+    N6["Sistema Health Project: Confirmar adjunto y habilitar comparación/descarga según permisos"]
+    END(["Archivo privado identificado y vinculado con procedencia."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Explicar rechazo y permitir archivo compatible"]
+    A1 --> N2
+    N4 -->|"Carga interrumpida"| A2["Conservar estado de carga pendiente sin afirmar adjunto guardado"]
+    A2 --> E2(["Carga pendiente de reintento."])
+    N5 -->|"Archivo equivocado"| A3["Retirar asociación de borrador con motivo y trazabilidad; original firmado requiere corrección"]
+    A3 --> E3(["Asociación corregida o adenda requerida."])

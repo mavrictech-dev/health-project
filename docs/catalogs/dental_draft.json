@@ -1,0 +1,1254 @@
+[
+  {
+    "code": "D_ODONTOLOGIA_GENERAL",
+    "name": "Odontología general",
+    "group": "Atención dental",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Antecedentes médicos y odontológicos",
+      "Dentición y nomenclatura de piezas",
+      "Hallazgos por pieza y superficie",
+      "Motivo de consulta y evaluación oral",
+      "Procedimientos realizados y evolución"
+    ],
+    "components": [
+      "odontograma_humano_fdi",
+      "superficies_dentales",
+      "registro_oclusion",
+      "galeria_intraoral"
+    ],
+    "workflows": [
+      "consulta_dental",
+      "plan_dental_por_pieza",
+      "seguimiento_dental"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "encuentros",
+      "diagnosticos",
+      "procedimientos",
+      "imagenes_clinicas",
+      "agenda"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "D_ANESTESIOLOGIA_DENTAL",
+    "name": "Anestesiología dental",
+    "group": "Perioperatorio dental",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Evaluación preanestésica y antecedentes",
+      "Técnica y consentimiento documentados",
+      "Fármacos y administraciones registradas",
+      "Signos vitales durante el procedimiento",
+      "Eventos y recuperación posanestésica"
+    ],
+    "components": [
+      "evaluacion_preanestesica",
+      "registro_anestesia",
+      "monitorizacion_temporal",
+      "recuperacion_posanestesica"
+    ],
+    "workflows": [
+      "evaluacion_preprocedimiento",
+      "registro_perioperatorio",
+      "cierre_recuperacion"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "consentimientos",
+      "medicamentos",
+      "administraciones",
+      "procedimientos",
+      "enfermeria"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ADA_NC"
+    ]
+  },
+  {
+    "code": "D_SALUD_PUBLICA_DENTAL",
+    "name": "Salud pública dental",
+    "group": "Salud poblacional",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Población y ámbito del programa",
+      "Evaluaciones e indicadores agregados",
+      "Actividades comunitarias realizadas",
+      "Cobertura y participantes",
+      "Derivaciones y seguimiento del programa"
+    ],
+    "components": [
+      "cohortes_dentales",
+      "formularios_tamizaje_oral",
+      "tablero_indicadores_orales",
+      "registro_programas_comunitarios"
+    ],
+    "workflows": [
+      "programa_salud_oral",
+      "tamizaje_comunitario",
+      "derivacion_desde_tamizaje"
+    ],
+    "dependencies": [
+      "pacientes",
+      "campanas",
+      "formularios",
+      "referencias",
+      "reportes",
+      "consentimientos"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ADA_NC",
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Salud pública estomatológica",
+        "relation": "scope_mapping",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_ENDODONCIA",
+    "name": "Endodoncia",
+    "group": "Conservación dental",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Pieza, raíces y conductos identificados",
+      "Pruebas y hallazgos pulpares o periapicales",
+      "Longitudes de trabajo registradas",
+      "Sesiones y procedimientos por conducto",
+      "Materiales utilizados y evolución radiográfica"
+    ],
+    "components": [
+      "mapa_raices_conductos",
+      "registro_pruebas_pulpares",
+      "hoja_endodoncia",
+      "comparador_radiografias_dentales"
+    ],
+    "workflows": [
+      "episodio_endodoncia",
+      "sesiones_por_conducto",
+      "control_endodontico"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "procedimientos",
+      "imagenes_clinicas",
+      "inventario",
+      "documentos"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "ADA_NC",
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Endodoncia",
+        "relation": "exact_name",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_PATOLOGIA_ORAL_MAXILOFACIAL",
+    "name": "Patología oral y maxilofacial",
+    "group": "Diagnóstico oral",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Localización y características de lesión",
+      "Descripción y evolución de la muestra",
+      "Solicitud de estudio y cadena de trazabilidad",
+      "Resultados microscópicos y complementarios",
+      "Informe y correlación clínica documentada"
+    ],
+    "components": [
+      "mapa_lesiones_orales",
+      "ficha_muestra_anatomopatologica",
+      "informe_patologia_oral",
+      "galeria_lesiones"
+    ],
+    "workflows": [
+      "biopsia_y_muestra",
+      "informe_anatomopatologico",
+      "seguimiento_lesion_oral"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "procedimientos",
+      "anatomia_patologica",
+      "laboratorio",
+      "imagenes_clinicas",
+      "documentos"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ADA_NC",
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Medicina y patología estomatológica",
+        "relation": "scope_mapping",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_RADIOLOGIA_ORAL_MAXILOFACIAL",
+    "name": "Radiología oral y maxilofacial",
+    "group": "Diagnóstico por imagen",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Indicación y región solicitada",
+      "Modalidad y metadatos del estudio",
+      "Imágenes originales y series disponibles",
+      "Hallazgos y mediciones informados",
+      "Interpretación, firma y estudios previos"
+    ],
+    "components": [
+      "visor_imagen_dental",
+      "visor_dicom",
+      "serie_cbct",
+      "informe_radiologia_dental"
+    ],
+    "workflows": [
+      "orden_imagen_dental",
+      "adquisicion_estudio",
+      "informe_imagen_firmado"
+    ],
+    "dependencies": [
+      "ordenes_clinicas",
+      "imagenes_clinicas",
+      "pacs",
+      "informes",
+      "documentos"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ADA_NC",
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Radiología bucal y maxilofacial",
+        "relation": "scope_mapping",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_CIRUGIA_ORAL_MAXILOFACIAL",
+    "name": "Cirugía oral y maxilofacial",
+    "group": "Cirugía dental",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Evaluación y región quirúrgica",
+      "Plan, consentimiento y equipo documentados",
+      "Procedimiento y hallazgos operatorios",
+      "Piezas extraídas, muestras y materiales",
+      "Eventos perioperatorios y evolución"
+    ],
+    "components": [
+      "mapa_anatomico_maxilofacial",
+      "registro_quirurgico_dental",
+      "lista_verificacion_quirurgica",
+      "seguimiento_posoperatorio"
+    ],
+    "workflows": [
+      "programacion_cirugia",
+      "acto_quirurgico",
+      "control_posoperatorio"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "cirugia",
+      "consentimientos",
+      "anestesia",
+      "inventario",
+      "anatomia_patologica"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ADA_NC",
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Cirugía bucal y maxilofacial",
+        "relation": "scope_mapping",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_MEDICINA_ORAL",
+    "name": "Medicina oral",
+    "group": "Diagnóstico oral",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Antecedentes sistémicos relevantes",
+      "Hallazgos en mucosas y tejidos orales",
+      "Síntomas y evolución temporal",
+      "Resultados de estudios complementarios",
+      "Interconsultas y plan documentado"
+    ],
+    "components": [
+      "mapa_lesiones_orales",
+      "cronologia_sintomas_orales",
+      "ficha_mucosa_oral",
+      "galeria_lesiones"
+    ],
+    "workflows": [
+      "evaluacion_medicina_oral",
+      "interconsulta_medico_dental",
+      "seguimiento_lesion_oral"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "diagnosticos",
+      "laboratorio",
+      "referencias",
+      "imagenes_clinicas"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "ADA_NC",
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Medicina y patología estomatológica",
+        "relation": "scope_mapping",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_DOLOR_OROFACIAL",
+    "name": "Dolor orofacial",
+    "group": "Dolor y función",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Localización, intensidad y patrón del dolor",
+      "Función mandibular y apertura medida",
+      "Hallazgos articulares y musculares",
+      "Factores asociados y cuestionarios utilizados",
+      "Intervenciones registradas y evolución"
+    ],
+    "components": [
+      "mapa_dolor_craneofacial",
+      "evaluacion_atm",
+      "registro_movimientos_mandibulares",
+      "escalas_dolor",
+      "diario_dolor"
+    ],
+    "workflows": [
+      "evaluacion_dolor_orofacial",
+      "seguimiento_dolor_funcion",
+      "interconsulta_multidisciplinaria"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "formularios",
+      "mediciones",
+      "procedimientos",
+      "referencias"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ADA_NC"
+    ]
+  },
+  {
+    "code": "D_ORTODONCIA_ORTOPEDIA_DENTOFACIAL",
+    "name": "Ortodoncia y ortopedia dentofacial",
+    "group": "Oclusión y crecimiento",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Dentición, oclusión y relaciones dentofaciales",
+      "Mediciones cefalométricas y análisis utilizados",
+      "Fotografías, modelos y estudios seriados",
+      "Aparatos instalados y modificaciones",
+      "Etapas, controles y evolución"
+    ],
+    "components": [
+      "registro_oclusion",
+      "cefalometria_analisis",
+      "galeria_extraoral_intraoral",
+      "modelos_dentales_3d",
+      "seguimiento_aparatos",
+      "cronologia_ortodoncia"
+    ],
+    "workflows": [
+      "estudio_ortodontico",
+      "plan_ortodontico",
+      "controles_ortodoncia",
+      "fase_retencion"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "mediciones",
+      "imagenes_clinicas",
+      "documentos",
+      "agenda",
+      "laboratorio_dental"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ADA_NC",
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Ortodoncia y ortopedia maxilar",
+        "relation": "scope_mapping",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_ODONTOPEDIATRIA",
+    "name": "Odontopediatría",
+    "group": "Atención por edad",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Dentición temporal, permanente o mixta",
+      "Erupción y desarrollo dental observado",
+      "Responsables y autorizaciones",
+      "Antecedentes, hábitos y conducta registrada",
+      "Hallazgos por pieza y seguimiento"
+    ],
+    "components": [
+      "odontograma_denticion_mixta",
+      "cronologia_erupcion",
+      "ficha_habitos_orales",
+      "registro_conducta_dental",
+      "vinculo_responsables"
+    ],
+    "workflows": [
+      "consulta_dental_pediatrica",
+      "seguimiento_denticion",
+      "consentimiento_responsable"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "responsables",
+      "consentimientos",
+      "formularios",
+      "procedimientos",
+      "agenda"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "ADA_NC",
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Odontopediatría",
+        "relation": "exact_name",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_PERIODONCIA",
+    "name": "Periodoncia",
+    "group": "Conservación dental",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Sondaje por sitio y pieza",
+      "Recesión, inserción y sangrado registrados",
+      "Movilidad, furcaciones y placa",
+      "Hallazgos periimplantarios",
+      "Procedimientos y cambios entre evaluaciones"
+    ],
+    "components": [
+      "periodontograma_6_sitios",
+      "mapa_furcaciones",
+      "registro_movilidad_dental",
+      "comparador_periodontal",
+      "registro_periimplantario"
+    ],
+    "workflows": [
+      "evaluacion_periodontal",
+      "sesiones_periodontales",
+      "reevaluacion_periodontal",
+      "mantenimiento_registrado"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "mediciones",
+      "procedimientos",
+      "imagenes_clinicas",
+      "agenda"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "ADA_NC",
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Periodoncia e implantología",
+        "relation": "scope_mapping",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_PROSTODONCIA",
+    "name": "Prostodoncia",
+    "group": "Rehabilitación oral",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Piezas ausentes o deficientes y tejidos involucrados",
+      "Diseño y características de la rehabilitación",
+      "Registros oclusales e impresiones",
+      "Órdenes, pruebas y entregas de laboratorio",
+      "Materiales, ajustes y evolución funcional"
+    ],
+    "components": [
+      "mapa_rehabilitacion_oral",
+      "registro_oclusion",
+      "orden_laboratorio_dental",
+      "seguimiento_pruebas_protesicas",
+      "trazabilidad_protesis"
+    ],
+    "workflows": [
+      "plan_rehabilitacion_oral",
+      "orden_y_pruebas_laboratorio",
+      "entrega_protesis",
+      "control_protesis"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "procedimientos",
+      "laboratorio_dental",
+      "inventario",
+      "documentos",
+      "agenda"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "ADA_NC",
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Rehabilitación oral",
+        "relation": "scope_mapping",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_IMPLANTOLOGIA",
+    "name": "Implantología oral integral",
+    "group": "Rehabilitación oral",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Sitio y condiciones anatómicas documentadas",
+      "Implante, fabricante, lote y dimensiones",
+      "Procedimientos y fechas por fase",
+      "Componentes protésicos y torque registrado",
+      "Hallazgos periimplantarios y seguimiento"
+    ],
+    "components": [
+      "mapa_implantes",
+      "trazabilidad_implante",
+      "cronologia_implantologica",
+      "registro_periimplantario"
+    ],
+    "workflows": [
+      "episodio_implante",
+      "registro_colocacion_implante",
+      "fase_protesica_implante",
+      "control_implante"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "cirugia",
+      "imagenes_clinicas",
+      "inventario",
+      "laboratorio_dental",
+      "consentimientos"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Implantología oral integral",
+        "relation": "exact_name",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_ODONTOLOGIA_RESTAURADORA",
+    "name": "Odontología restauradora y estética",
+    "group": "Conservación dental",
+    "entryType": "especialidad",
+    "parentCode": "D_ODONTOLOGIA_GENERAL",
+    "capture": [
+      "Pieza y superficies involucradas",
+      "Hallazgos y condición previa",
+      "Restauración realizada y material",
+      "Aislamiento y técnica documentados",
+      "Estado posterior y controles"
+    ],
+    "components": [
+      "odontograma_humano_fdi",
+      "superficies_dentales",
+      "mapa_restauraciones",
+      "comparador_fotos_dentales"
+    ],
+    "workflows": [
+      "restauracion_por_superficie",
+      "registro_material_restaurador",
+      "control_restauracion"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "procedimientos",
+      "inventario",
+      "imagenes_clinicas"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Odontología restauradora y estética",
+        "relation": "exact_name",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_ODONTOLOGIA_ESTETICA",
+    "name": "Odontología estética",
+    "group": "Rehabilitación oral",
+    "entryType": "area_practica",
+    "parentCode": "D_ODONTOLOGIA_RESTAURADORA",
+    "capture": [
+      "Objetivos expresados por el paciente",
+      "Fotografías y parámetros de sonrisa",
+      "Color y materiales registrados",
+      "Propuestas y consentimiento documentados",
+      "Resultados y comparación temporal"
+    ],
+    "components": [
+      "galeria_sonrisa",
+      "registro_color_dental",
+      "comparador_fotos_dentales",
+      "diseno_sonrisa_documentado"
+    ],
+    "workflows": [
+      "evaluacion_estetica_dental",
+      "documentacion_propuesta_estetica",
+      "registro_resultado_estetico"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "imagenes_clinicas",
+      "consentimientos",
+      "procedimientos",
+      "laboratorio_dental"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT",
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Odontología restauradora y estética",
+        "relation": "scope_mapping",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_GERODONTOLOGIA",
+    "name": "Odontogeriatría",
+    "group": "Atención por edad",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Historia médica y medicación vigente",
+      "Estado funcional y apoyos requeridos",
+      "Dentición, prótesis y función oral",
+      "Síntomas de mucosa y saliva registrados",
+      "Responsables y continuidad de atención"
+    ],
+    "components": [
+      "evaluacion_oral_persona_mayor",
+      "mapa_rehabilitacion_oral",
+      "ficha_funcion_oral",
+      "vinculo_cuidadores"
+    ],
+    "workflows": [
+      "consulta_dental_persona_mayor",
+      "coordinacion_cuidadores",
+      "seguimiento_funcion_oral"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "medicamentos",
+      "responsables",
+      "referencias",
+      "formularios",
+      "agenda"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Odontogeriatría",
+        "relation": "exact_name",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_CUIDADOS_ESPECIALES",
+    "name": "Estomatología de pacientes especiales",
+    "group": "Atención adaptada",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Necesidades de comunicación y acceso",
+      "Apoyos, responsables y representación",
+      "Historia médica relevante",
+      "Adaptaciones utilizadas en la consulta",
+      "Consentimiento y respuesta documentados"
+    ],
+    "components": [
+      "perfil_apoyos_accesibilidad",
+      "ficha_comunicacion_clinica",
+      "registro_adaptaciones_consulta",
+      "vinculo_responsables"
+    ],
+    "workflows": [
+      "consulta_dental_adaptada",
+      "coordinacion_apoyos",
+      "consentimiento_con_apoyos"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "responsables",
+      "consentimientos",
+      "agenda",
+      "formularios",
+      "referencias"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Estomatología de pacientes especiales",
+        "relation": "exact_name",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_ODONTOLOGIA_HOSPITALARIA",
+    "name": "Odontología hospitalaria",
+    "group": "Atención hospitalaria",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Hospitalización y equipo solicitante",
+      "Motivo de interconsulta y situación clínica",
+      "Hallazgos orales e intervenciones realizadas",
+      "Coordinación perioperatoria documentada",
+      "Seguimiento y resumen al alta"
+    ],
+    "components": [
+      "interconsulta_dental_hospitalaria",
+      "ficha_oral_hospitalizacion",
+      "registro_dental_cabecera",
+      "resumen_dental_alta"
+    ],
+    "workflows": [
+      "interconsulta_hospitalaria",
+      "atencion_dental_hospitalaria",
+      "continuidad_tras_alta"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "hospitalizacion",
+      "referencias",
+      "cirugia",
+      "medicamentos",
+      "documentos"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "D_ODONTOLOGIA_SUENO",
+    "name": "Odontología del sueño",
+    "group": "Dolor y función",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Síntomas y antecedentes de sueño registrados",
+      "Informes diagnósticos aportados",
+      "Evaluación oral, oclusal y mandibular",
+      "Dispositivo, configuración y ajustes",
+      "Uso referido, eventos y seguimiento conjunto"
+    ],
+    "components": [
+      "ficha_sueno_dental",
+      "registro_dispositivo_oral",
+      "seguimiento_aparatos",
+      "evaluacion_atm"
+    ],
+    "workflows": [
+      "interconsulta_sueno_dental",
+      "registro_dispositivo_sueno",
+      "control_dispositivo_sueno"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "referencias",
+      "documentos",
+      "laboratorio_dental",
+      "mediciones",
+      "agenda"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "D_ODONTOLOGIA_FORENSE",
+    "name": "Odontología forense",
+    "group": "Evaluación pericial",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Identificación del caso y autoridad solicitante",
+      "Registro dental e imágenes aportadas",
+      "Hallazgos y comparaciones documentados",
+      "Muestras, evidencias y cadena de custodia",
+      "Informe pericial y control de acceso"
+    ],
+    "components": [
+      "odontograma_pericial",
+      "comparador_registros_dentales",
+      "cadena_custodia_evidencia",
+      "informe_pericial_dental"
+    ],
+    "workflows": [
+      "recepcion_caso_pericial",
+      "registro_evidencia_dental",
+      "informe_pericial_firmado"
+    ],
+    "dependencies": [
+      "identidad",
+      "documentos",
+      "imagenes_clinicas",
+      "auditoria",
+      "permisos",
+      "cadena_custodia"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "COP_LIMA"
+    ],
+    "recognitionAliases": [
+      {
+        "scheme": "PE_COP_LIMA_RNE_2026",
+        "name": "Odontología forense",
+        "relation": "exact_name",
+        "sourceId": "COP_LIMA"
+      }
+    ]
+  },
+  {
+    "code": "D_TRAUMATOLOGIA_DENTOALVEOLAR",
+    "name": "Traumatología dentoalveolar",
+    "group": "Urgencia dental",
+    "entryType": "area_practica",
+    "parentCode": null,
+    "capture": [
+      "Fecha, mecanismo y contexto del traumatismo",
+      "Piezas y tejidos afectados",
+      "Pruebas e imágenes seriadas",
+      "Procedimientos, dispositivos y tiempos registrados",
+      "Evolución por pieza y controles"
+    ],
+    "components": [
+      "mapa_trauma_dental",
+      "cronologia_traumatismo",
+      "registro_pruebas_pulpares",
+      "seguimiento_aparatos"
+    ],
+    "workflows": [
+      "atencion_trauma_dental",
+      "seguimiento_pieza_traumatizada",
+      "derivacion_trauma_maxilofacial"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "urgencias",
+      "procedimientos",
+      "imagenes_clinicas",
+      "agenda",
+      "referencias"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "D_PREVENCION_HIGIENE_ORAL",
+    "name": "Prevención e higiene oral",
+    "group": "Salud oral preventiva",
+    "entryType": "servicio",
+    "parentCode": null,
+    "capture": [
+      "Hallazgos de higiene y placa",
+      "Evaluaciones y cuestionarios empleados",
+      "Hábitos y educación registrados",
+      "Actividades preventivas realizadas",
+      "Cambios y continuidad de seguimiento"
+    ],
+    "components": [
+      "indices_higiene_oral",
+      "ficha_habitos_orales",
+      "registro_educacion_oral",
+      "comparador_indices_orales"
+    ],
+    "workflows": [
+      "evaluacion_preventiva_oral",
+      "sesion_higiene_oral",
+      "seguimiento_preventivo"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "formularios",
+      "procedimientos",
+      "agenda",
+      "campanas"
+    ],
+    "priority": "P1",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "D_LABORATORIO_DENTAL",
+    "name": "Laboratorio dental",
+    "group": "Servicios auxiliares",
+    "entryType": "servicio",
+    "parentCode": null,
+    "capture": [
+      "Orden, prescriptor y paciente",
+      "Piezas, diseño, color y materiales solicitados",
+      "Impresiones, modelos y archivos recibidos",
+      "Etapas, pruebas, incidencias y responsables",
+      "Lotes, entrega y aceptación clínica"
+    ],
+    "components": [
+      "orden_laboratorio_dental",
+      "tablero_trabajos_dentales",
+      "modelos_dentales_3d",
+      "trazabilidad_protesis",
+      "registro_color_dental"
+    ],
+    "workflows": [
+      "recepcion_orden_laboratorio",
+      "fabricacion_y_pruebas",
+      "entrega_trabajo_dental",
+      "correccion_trabajo_dental"
+    ],
+    "dependencies": [
+      "ordenes_clinicas",
+      "laboratorio_dental",
+      "inventario",
+      "documentos",
+      "imagenes_clinicas",
+      "proveedores"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "D_PROTESIS_FIJA",
+    "name": "Prótesis fija",
+    "group": "Rehabilitación oral",
+    "entryType": "area_practica",
+    "parentCode": "D_PROSTODONCIA",
+    "capture": [
+      "Piezas pilares y unidades protésicas",
+      "Diseño, color y materiales",
+      "Registros de preparación e impresión",
+      "Pruebas, ajuste y cementación registrados",
+      "Lotes y controles posteriores"
+    ],
+    "components": [
+      "mapa_rehabilitacion_oral",
+      "registro_color_dental",
+      "seguimiento_pruebas_protesicas",
+      "trazabilidad_protesis"
+    ],
+    "workflows": [
+      "episodio_protesis_fija",
+      "orden_y_pruebas_laboratorio",
+      "entrega_protesis_fija"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "procedimientos",
+      "laboratorio_dental",
+      "inventario",
+      "imagenes_clinicas"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "D_PROTESIS_REMOVIBLE",
+    "name": "Prótesis removible",
+    "group": "Rehabilitación oral",
+    "entryType": "area_practica",
+    "parentCode": "D_PROSTODONCIA",
+    "capture": [
+      "Arcada, soporte y tipo de prótesis",
+      "Diseño y materiales utilizados",
+      "Impresiones y registros intermaxilares",
+      "Pruebas, entrega y ajustes",
+      "Estado funcional y mantenimiento registrado"
+    ],
+    "components": [
+      "diseno_protesis_removible",
+      "registro_oclusion",
+      "seguimiento_pruebas_protesicas",
+      "trazabilidad_protesis"
+    ],
+    "workflows": [
+      "episodio_protesis_removible",
+      "orden_y_pruebas_laboratorio",
+      "entrega_protesis_removible",
+      "control_protesis"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "procedimientos",
+      "laboratorio_dental",
+      "inventario",
+      "agenda"
+    ],
+    "priority": "P2",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "D_PROTESIS_MAXILOFACIAL",
+    "name": "Prótesis maxilofacial",
+    "group": "Rehabilitación oral",
+    "entryType": "area_practica",
+    "parentCode": "D_PROSTODONCIA",
+    "capture": [
+      "Región y defecto documentados",
+      "Antecedentes quirúrgicos y estudios",
+      "Diseño y medios de soporte",
+      "Materiales, pruebas y entrega",
+      "Función, adaptación y revisiones"
+    ],
+    "components": [
+      "mapa_anatomico_maxilofacial",
+      "diseno_protesis_maxilofacial",
+      "seguimiento_pruebas_protesicas",
+      "trazabilidad_protesis"
+    ],
+    "workflows": [
+      "evaluacion_protesis_maxilofacial",
+      "orden_y_pruebas_laboratorio",
+      "entrega_protesis_maxilofacial",
+      "seguimiento_funcional"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "cirugia",
+      "referencias",
+      "laboratorio_dental",
+      "imagenes_clinicas",
+      "inventario"
+    ],
+    "priority": "P4",
+    "sourceIds": [
+      "PRODUCT"
+    ]
+  },
+  {
+    "code": "D_SALUD_FAMILIAR_COMUNITARIA",
+    "name": "Salud familiar y comunitaria en odontología",
+    "group": "Salud poblacional",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Contexto familiar y comunitario",
+      "Vínculos entre pacientes, hogares y responsables",
+      "Evaluaciones orales individuales",
+      "Actividades y visitas realizadas",
+      "Derivaciones y continuidad de atención"
+    ],
+    "components": [
+      "ficha_familiar_oral",
+      "registro_visita_comunitaria",
+      "mapa_red_apoyos",
+      "cohortes_dentales"
+    ],
+    "workflows": [
+      "atencion_oral_familiar",
+      "visita_comunitaria_dental",
+      "seguimiento_familiar_oral"
+    ],
+    "dependencies": [
+      "pacientes",
+      "historia_clinica",
+      "responsables",
+      "campanas",
+      "referencias",
+      "agenda"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "COP_LIMA"
+    ]
+  },
+  {
+    "code": "D_ADMINISTRACION_GESTION",
+    "name": "Administración y gestión en estomatología",
+    "group": "Gestión dental",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Servicios y recursos del establecimiento",
+      "Capacidad, turnos y asignaciones",
+      "Indicadores de actividad y calidad",
+      "Costos y utilización de recursos",
+      "Planes, responsables y avances documentados"
+    ],
+    "components": [
+      "tablero_gestion_dental",
+      "indicadores_actividad_dental",
+      "plan_operativo_dental",
+      "registro_capacidad_servicios"
+    ],
+    "workflows": [
+      "planificacion_servicio_dental",
+      "seguimiento_indicadores",
+      "gestion_capacidad_dental"
+    ],
+    "dependencies": [
+      "agenda",
+      "personal",
+      "inventario",
+      "caja",
+      "reportes",
+      "calidad"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "COP_LIMA"
+    ]
+  },
+  {
+    "code": "D_AUDITORIA_ODONTOLOGICA",
+    "name": "Auditoría odontológica",
+    "group": "Calidad y auditoría",
+    "entryType": "especialidad",
+    "parentCode": null,
+    "capture": [
+      "Objeto, alcance y criterios de revisión",
+      "Expedientes y evidencias consultadas",
+      "Hallazgos y observaciones documentados",
+      "Descargos, responsables y acciones",
+      "Seguimiento, resultado y firma del informe"
+    ],
+    "components": [
+      "lista_revision_expediente_dental",
+      "ficha_hallazgos_auditoria",
+      "seguimiento_acciones_auditoria",
+      "informe_auditoria_dental"
+    ],
+    "workflows": [
+      "apertura_auditoria_dental",
+      "revision_evidencia_dental",
+      "cierre_y_seguimiento_auditoria"
+    ],
+    "dependencies": [
+      "historia_clinica",
+      "documentos",
+      "auditoria",
+      "permisos",
+      "calidad",
+      "reportes"
+    ],
+    "priority": "P3",
+    "sourceIds": [
+      "COP_LIMA"
+    ]
+  }
+]

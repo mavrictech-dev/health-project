@@ -1,0 +1,17 @@
+flowchart TD
+    START(["El destinatario abre un documento o información publicada."]) --> N1
+    N1["Paciente humano: Seleccionar paciente/contexto y publicación"]
+    N2{"Sistema Health Project: ¿Acceso vigente a esta versión concreta?"}
+    N3["Sistema Health Project: Mostrar contenido, emisor, fecha y versión"]
+    N4["Paciente humano: Consultar o solicitar descarga autorizada"]
+    N5["Sistema Health Project: Verificar permiso de entrega y registrar acceso/descarga"]
+    END(["Contenido entregado al destinatario permitido, sin acceso a notas internas por defecto."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> END
+    N2 -->|"No"| A1["Explicar disponibilidad restringida sin revelar contenido; actualizar lista"]
+    A1 --> E1(["Documento sin abrir."])
+    N3 -->|"Versión sustituida"| A2["Indicar corrección y ofrecer versión publicada actual con procedencia"]
+    A2 --> N4

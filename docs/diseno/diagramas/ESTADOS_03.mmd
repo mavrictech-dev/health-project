@@ -1,0 +1,13 @@
+stateDiagram-v2
+    [*] --> SOLICITADA
+    SOLICITADA --> CONFIRMADA: Reserva validada
+    SOLICITADA --> RECHAZADA: Motivo registrado
+    SOLICITADA --> CANCELADA: Actor autorizado
+    CONFIRMADA --> CONFIRMADA: Reprogramación con historial
+    CONFIRMADA --> CANCELADA: Regla de cambio y motivo
+    CONFIRMADA --> AUSENCIA: Ausencia registrada
+    CONFIRMADA --> ATENDIDA: Atención realizada y vinculada
+    ATENDIDA --> [*]
+    AUSENCIA --> [*]
+    CANCELADA --> [*]
+    RECHAZADA --> [*]

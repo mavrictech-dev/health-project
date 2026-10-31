@@ -1,0 +1,17 @@
+flowchart TD
+    START(["Se inicia evaluación o seguimiento de un episodio de trasplante."]) --> N1
+    N1["Profesional clínico: Crear episodio y roles de participantes con identidad separada"]
+    N2["Profesional clínico: Registrar evaluaciones, solicitudes y documentos"]
+    N3{"Sistema Health Project: ¿Permisos y requisitos para etapa correspondiente completos?"}
+    N4["Recepción: Coordinar etapa con centro/equipo autorizado"]
+    N5["Profesional clínico: Registrar procedimiento o seguimiento realmente realizado"]
+    N6["Sistema Health Project: Conservar procedencias, restricciones y pendientes del episodio"]
+    END(["Etapa del episodio documentada sin asumir decisiones clínicas o asignación automática."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Mantener etapa pendiente; no avanzar por estado automático"]
+    A1 --> E1(["Etapa pendiente de decisión autorizada."])

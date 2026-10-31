@@ -1,0 +1,6215 @@
+{
+  "version": "1.0.0",
+  "date": "2026-10-13",
+  "status": "PROPOSED_DESIGN_NO_APP_IMPLEMENTATION",
+  "confirmedDecisions": [
+    "Historia por organización, compartida entre sus sucursales con permisos y auditoría",
+    "Sin acceso clínico automático entre organizaciones",
+    "Consulta externa humana, odontológica y veterinaria como primera versión",
+    "Portal de pacientes y responsables de animales",
+    "Todo el catálogo de especialidades y gráficos requeridos en el alcance final"
+  ],
+  "actors": [
+    {
+      "id": "ADM",
+      "name": "Administrador de la organización",
+      "scope": "Configura su organización y sucursales; el acceso clínico requiere permiso específico."
+    },
+    {
+      "id": "REC",
+      "name": "Recepción",
+      "scope": "Registro administrativo, agenda, recepción y cola."
+    },
+    {
+      "id": "PRO",
+      "name": "Profesional clínico",
+      "scope": "Médico, odontólogo o veterinario autorizado; puede trabajar en varios espacios con permisos independientes."
+    },
+    {
+      "id": "ASI",
+      "name": "Asistente o enfermería",
+      "scope": "Captura y tareas según rol, competencia y autorización."
+    },
+    {
+      "id": "DIA",
+      "name": "Equipo de diagnóstico",
+      "scope": "Órdenes, muestras, estudios e informes dentro de su alcance."
+    },
+    {
+      "id": "FAR",
+      "name": "Farmacia",
+      "scope": "Revisión y dispensación autorizadas; trazabilidad de productos."
+    },
+    {
+      "id": "CAJ",
+      "name": "Caja y administración financiera",
+      "scope": "Cargos, cobros, saldos, comprobantes y liquidaciones."
+    },
+    {
+      "id": "ALM",
+      "name": "Compras y almacén",
+      "scope": "Compras, recepciones, inventario y transferencias."
+    },
+    {
+      "id": "PAC",
+      "name": "Paciente humano",
+      "scope": "Citas y contenido publicado vinculado a su identidad verificada."
+    },
+    {
+      "id": "RES",
+      "name": "Representante o responsable",
+      "scope": "Actúa para una persona o animal solo con relación verificada, alcance y vigencia."
+    },
+    {
+      "id": "AUD",
+      "name": "Auditor autorizado",
+      "scope": "Lectura de evidencia dentro de su finalidad; no modifica registros clínicos."
+    },
+    {
+      "id": "SOP",
+      "name": "Operador o soporte de MAVRIC",
+      "scope": "Operación del SaaS y soporte técnico; acceso excepcional a datos requiere autorización temporal."
+    },
+    {
+      "id": "SYS",
+      "name": "Sistema Health Project",
+      "scope": "Valida, registra, mantiene estados, entrega tareas y notifica dentro de reglas autorizadas."
+    },
+    {
+      "id": "EXT",
+      "name": "Proveedor o destinatario externo",
+      "scope": "Calendario, pagos, firma, IA, estudios externos o centro receptor según integración y autorización."
+    }
+  ],
+  "phases": {
+    "CE": "Consulta externa y portal",
+    "AD": "Operación administrativa posterior o piloto acotado",
+    "DI": "Diagnóstico interno y farmacia",
+    "HO": "Hospitalización, urgencias y cirugía",
+    "AV": "Capacidades especializadas avanzadas",
+    "TR": "Transversal; profundidad según release"
+  },
+  "flows": [
+    {
+      "id": "F01",
+      "name": "Ingresar al espacio profesional",
+      "group": "Acceso y organización",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "REC",
+        "ADM",
+        "ASI",
+        "DIA",
+        "FAR",
+        "CAJ",
+        "ALM",
+        "AUD",
+        "SYS"
+      ],
+      "trigger": "El usuario abre el acceso profesional.",
+      "preconditions": [
+        "Cuenta activa; RUC de un espacio al que pertenece."
+      ],
+      "steps": [
+        "PRO|Ingresar RUC, usuario y contraseña",
+        "SYS|¿Credenciales y cuenta válidas?",
+        "SYS|Mostrar espacios autorizados",
+        "PRO|Elegir organización y sucursal operativa",
+        "SYS|¿Membresía vigente y contexto permitido?",
+        "SYS|Abrir inicio del rol y registrar acceso"
+      ],
+      "decisions": [
+        2,
+        5
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Mostrar error sin revelar cuentas existentes; conservar RUC y usuario, no contraseña",
+          "resume": 1
+        },
+        {
+          "step": 5,
+          "label": "No",
+          "action": "Actualizar espacios disponibles y explicar que no hay acceso a ese contexto",
+          "resume": 3
+        }
+      ],
+      "end": "Sesión activa en contexto explícito; no se inicia una atención.",
+      "screens": [
+        "S01",
+        "S03",
+        "S17"
+      ],
+      "buttons": [
+        "Ingresar",
+        "Elegir espacio",
+        "Continuar"
+      ],
+      "handoffs": [
+        "F02",
+        "F03"
+      ]
+    },
+    {
+      "id": "F02",
+      "name": "Cambiar organización o sucursal",
+      "group": "Acceso y organización",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "REC",
+        "ADM",
+        "SYS"
+      ],
+      "trigger": "El usuario selecciona el contexto visible en la cabecera.",
+      "preconditions": [
+        "Sesión activa y membresías vigentes."
+      ],
+      "steps": [
+        "PRO|Solicitar cambio de espacio o sucursal",
+        "SYS|¿Hay cambios sin guardar?",
+        "PRO|Guardar borrador o descartar cambios locales expresamente",
+        "SYS|Validar pertenencia al contexto destino",
+        "SYS|¿Contexto autorizado?",
+        "SYS|Vaciar vistas del contexto anterior y abrir el destino"
+      ],
+      "decisions": [
+        2,
+        5
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Continuar directamente a validar destino",
+          "resume": 4
+        },
+        {
+          "step": 5,
+          "label": "No",
+          "action": "Conservar contexto original y mostrar restricción",
+          "terminal": "Cambio rechazado; registros sin traslado."
+        },
+        {
+          "step": 3,
+          "label": "Cancelar cambio",
+          "action": "Volver a la pantalla original",
+          "terminal": "Contexto conservado."
+        }
+      ],
+      "end": "Nuevo contexto seleccionado; no se copian pacientes ni historias.",
+      "screens": [
+        "S03",
+        "S18"
+      ],
+      "buttons": [
+        "Cambiar espacio",
+        "Cambiar sucursal",
+        "Guardar y cambiar",
+        "Descartar cambios locales",
+        "Seguir aquí"
+      ],
+      "handoffs": [
+        "F15"
+      ]
+    },
+    {
+      "id": "F03",
+      "name": "Recuperar acceso",
+      "group": "Acceso y organización",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "REC",
+        "ADM",
+        "ASI",
+        "DIA",
+        "FAR",
+        "CAJ",
+        "ALM",
+        "AUD",
+        "PAC",
+        "RES",
+        "SYS"
+      ],
+      "trigger": "El usuario selecciona recuperación de cuenta.",
+      "preconditions": [
+        "Canal de recuperación previamente vinculado."
+      ],
+      "steps": [
+        "PRO|Indicar identificador y canal de recuperación",
+        "SYS|Responder de forma uniforme y enviar enlace si corresponde",
+        "PRO|Abrir enlace recibido",
+        "SYS|¿Enlace válido, vigente y sin usar?",
+        "PRO|Definir nueva contraseña según política visible",
+        "SYS|Guardar cambio, invalidar enlace y aplicar revocación de sesiones definida"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Informar que el enlace no sirve y ofrecer solicitar otro",
+          "resume": 1
+        },
+        {
+          "step": 5,
+          "label": "Validación incompleta",
+          "action": "Explicar requisitos junto al campo",
+          "resume": 5
+        }
+      ],
+      "end": "Acceso recuperado; el usuario vuelve al login.",
+      "screens": [
+        "S01",
+        "S02",
+        "S04"
+      ],
+      "buttons": [
+        "Recuperar acceso",
+        "Enviar enlace",
+        "Guardar nueva contraseña",
+        "Volver al acceso"
+      ],
+      "handoffs": [
+        "F01",
+        "F70"
+      ]
+    },
+    {
+      "id": "F04",
+      "name": "Reanudar trabajo tras expiración o fallo de guardado",
+      "group": "Acceso y organización",
+      "phase": "TR",
+      "actors": [
+        "PRO",
+        "REC",
+        "ADM",
+        "ASI",
+        "DIA",
+        "FAR",
+        "CAJ",
+        "ALM",
+        "AUD",
+        "SYS"
+      ],
+      "trigger": "La sesión caduca o la aplicación no recibe confirmación de guardado.",
+      "preconditions": [
+        "El usuario trabaja sobre una revisión identificada."
+      ],
+      "steps": [
+        "SYS|Mostrar estado real: pendiente de guardar o sesión vencida",
+        "PRO|Reautenticarse o reintentar según causa",
+        "SYS|Verificar si la operación anterior ya quedó confirmada",
+        "SYS|¿El servidor contiene una revisión posterior?",
+        "PRO|Comparar versiones y resolver conflicto sin sobrescribir",
+        "SYS|Confirmar revisión guardada y devolver al trabajo permitido"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Reintentar sobre la misma revisión y operación identificada",
+          "resume": 6
+        },
+        {
+          "step": 2,
+          "label": "Acceso revocado",
+          "action": "Bloquear escritura y derivar al responsable autorizado",
+          "terminal": "Trabajo detenido; no se muestran recursos ajenos."
+        },
+        {
+          "step": 5,
+          "label": "Salir",
+          "action": "Conservar solo el último guardado confirmado; señalar cambios no persistidos",
+          "terminal": "Pantalla cerrada sin afirmar guardado inexistente."
+        }
+      ],
+      "end": "Trabajo reanudado sobre una revisión confirmada o detenido con motivo.",
+      "screens": [
+        "S01",
+        "S18"
+      ],
+      "buttons": [
+        "Volver a ingresar",
+        "Reintentar",
+        "Comparar versiones",
+        "Guardar revisión resuelta",
+        "Salir"
+      ],
+      "handoffs": [
+        "F01",
+        "F21"
+      ]
+    },
+    {
+      "id": "F05",
+      "name": "Dar de alta y configurar una organización",
+      "group": "Acceso y organización",
+      "phase": "CE",
+      "actors": [
+        "ADM",
+        "SOP",
+        "SYS"
+      ],
+      "trigger": "Se crea un espacio nuevo para clínica o profesional independiente.",
+      "preconditions": [
+        "Responsable verificado y condiciones de contratación definidas."
+      ],
+      "steps": [
+        "ADM|Registrar organización, vertical y emisor autorizado",
+        "SYS|¿Datos de identidad y registro consistentes?",
+        "ADM|Crear sucursales o sucursal lógica personal",
+        "ADM|Configurar horarios, recursos y especialidades",
+        "ADM|Invitar profesionales y revisar configuración mínima",
+        "SYS|¿Configuración mínima completa?",
+        "SYS|Activar espacio y mostrar tareas pendientes"
+      ],
+      "decisions": [
+        2,
+        6
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Presentar discrepancias para corrección; no duplicar organización",
+          "resume": 1
+        },
+        {
+          "step": 6,
+          "label": "No",
+          "action": "Guardar configuración incompleta y señalar faltantes",
+          "resume": 3
+        }
+      ],
+      "end": "Espacio configurado para iniciar recorridos habilitados.",
+      "screens": [
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S55"
+      ],
+      "buttons": [
+        "Crear organización",
+        "Guardar y continuar",
+        "Añadir sucursal",
+        "Invitar equipo",
+        "Activar espacio"
+      ],
+      "handoffs": [
+        "F06",
+        "F08",
+        "F09"
+      ]
+    },
+    {
+      "id": "F06",
+      "name": "Invitar y asignar a un profesional",
+      "group": "Acceso y organización",
+      "phase": "CE",
+      "actors": [
+        "ADM",
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Un administrador invita a un profesional a su organización.",
+      "preconditions": [
+        "Administrador con permiso para gestionar equipo."
+      ],
+      "steps": [
+        "ADM|Elegir profesional o enviar invitación a identidad verificable",
+        "ADM|Asignar rol, sucursales, especialidades y alcance",
+        "PRO|Aceptar invitación e iniciar o crear su cuenta",
+        "SYS|¿Invitación válida y destinatario verificado?",
+        "ADM|Registrar evidencias y estado de revisión de credenciales",
+        "SYS|Activar membresía y funciones que correspondan"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Bloquear aceptación y ofrecer reemisión al administrador",
+          "terminal": "Invitación sin activar."
+        },
+        {
+          "step": 5,
+          "label": "Comprobación pendiente",
+          "action": "Mantener capacidades que requieren esa revisión sin habilitar",
+          "terminal": "Membresía registrada con restricciones visibles."
+        }
+      ],
+      "end": "Una identidad tiene una nueva membresía, sin duplicar sus otras cuentas.",
+      "screens": [
+        "S06",
+        "S04"
+      ],
+      "buttons": [
+        "Invitar profesional",
+        "Aceptar invitación",
+        "Revisar credenciales",
+        "Activar membresía",
+        "Reenviar invitación"
+      ],
+      "handoffs": [
+        "F01",
+        "F07"
+      ]
+    },
+    {
+      "id": "F07",
+      "name": "Cambiar permisos o revocar membresía",
+      "group": "Acceso y organización",
+      "phase": "CE",
+      "actors": [
+        "ADM",
+        "SYS"
+      ],
+      "trigger": "Se modifica una función, sucursal o continuidad de un miembro.",
+      "preconditions": [
+        "Actor autorizado para gestionar permisos."
+      ],
+      "steps": [
+        "ADM|Seleccionar miembro y revisar permisos actuales",
+        "ADM|Proponer cambios y motivo",
+        "SYS|Mostrar recursos y tareas afectadas",
+        "ADM|Confirmar cambio o revocación",
+        "SYS|Revalidar autorización y aplicar cambio",
+        "SYS|Revocar acceso correspondiente y reasignar pendientes a responsable"
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "Cancelar",
+          "action": "Conservar la asignación vigente",
+          "terminal": "Sin cambios."
+        },
+        {
+          "step": 5,
+          "label": "Sin autorización vigente",
+          "action": "Rechazar cambio y actualizar sesión",
+          "terminal": "Cambio rechazado."
+        },
+        {
+          "step": 6,
+          "label": "Sin suplente definido",
+          "action": "Crear pendiente para administrador; no conceder acceso al revocado",
+          "terminal": "Revocación aplicada; reasignación pendiente visible."
+        }
+      ],
+      "end": "Permisos actualizados y auditados; los registros clínicos conservan autoría.",
+      "screens": [
+        "S06",
+        "S50"
+      ],
+      "buttons": [
+        "Editar permisos",
+        "Ver impacto",
+        "Guardar cambios",
+        "Revocar membresía",
+        "Asignar suplente"
+      ],
+      "handoffs": [
+        "F34",
+        "F65"
+      ]
+    },
+    {
+      "id": "F08",
+      "name": "Diseñar, publicar y habilitar una plantilla de especialidad",
+      "group": "Acceso y organización",
+      "phase": "TR",
+      "actors": [
+        "ADM",
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Se incorpora o cambia un paquete de especialidad.",
+      "preconditions": [
+        "Catálogo existente; autor y revisor de plantilla asignados."
+      ],
+      "steps": [
+        "ADM|Crear versión en borrador de campos, componentes y reglas",
+        "PRO|Revisar casos de uso y pruebas de captura",
+        "SYS|¿Componentes y reglas obligatorios disponibles y validados?",
+        "ADM|Publicar versión y registrar revisión",
+        "ADM|Habilitar paquete para organización, sucursales y profesionales autorizados",
+        "SYS|Mantener versiones anteriores para atenciones históricas"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Conservar borrador y marcar capacidades pendientes",
+          "resume": 1
+        },
+        {
+          "step": 4,
+          "label": "Retirar versión",
+          "action": "Bloquear nuevas capturas con ella; preservar lectura histórica",
+          "terminal": "Versión retirada con trazabilidad."
+        }
+      ],
+      "end": "Paquete utilizable solo dentro de su alcance validado; historia anterior sin reinterpretación.",
+      "screens": [
+        "S08"
+      ],
+      "buttons": [
+        "Nueva versión",
+        "Vista de ejemplo",
+        "Enviar a revisión",
+        "Publicar versión",
+        "Habilitar paquete",
+        "Retirar versión"
+      ],
+      "handoffs": [
+        "F22",
+        "F23",
+        "F24"
+      ]
+    },
+    {
+      "id": "F09",
+      "name": "Definir disponibilidad y recursos de agenda",
+      "group": "Acceso y organización",
+      "phase": "CE",
+      "actors": [
+        "ADM",
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Se configura jornada, lugar o recurso reservable.",
+      "preconditions": [
+        "Contexto y recursos de la organización autorizados."
+      ],
+      "steps": [
+        "PRO|Elegir sucursal o lugar propio y profesional",
+        "PRO|Definir horario, servicios, duración y excepciones",
+        "ADM|Asignar consultorio, sillón u otro recurso requerido",
+        "SYS|¿Reglas y citas existentes compatibles?",
+        "PRO|Resolver impacto en reservas existentes",
+        "SYS|Publicar disponibilidad y conservar bloqueos"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "Sí; sin impacto",
+          "action": "Publicar horario directamente",
+          "resume": 6
+        },
+        {
+          "step": 5,
+          "label": "No resolver todavía",
+          "action": "Guardar propuesta sin modificar reservas existentes",
+          "terminal": "Cambio de horario pendiente."
+        }
+      ],
+      "end": "Agenda disponible con reservas existentes conservadas o reprogramadas explícitamente.",
+      "screens": [
+        "S55",
+        "S14"
+      ],
+      "buttons": [
+        "Añadir horario",
+        "Bloquear intervalo",
+        "Añadir recurso",
+        "Ver impacto",
+        "Publicar disponibilidad"
+      ],
+      "handoffs": [
+        "F16",
+        "F18"
+      ]
+    },
+    {
+      "id": "F10",
+      "name": "Registrar un paciente humano",
+      "group": "Pacientes y responsables",
+      "phase": "CE",
+      "actors": [
+        "REC",
+        "SYS"
+      ],
+      "trigger": "Recepción necesita registrar o identificar a una persona.",
+      "preconditions": [
+        "Permiso de registro en la organización."
+      ],
+      "steps": [
+        "REC|Buscar por identificador o datos permitidos",
+        "SYS|¿Existe paciente o candidato a duplicado?",
+        "REC|Crear ficha humana con identificador interno si no tiene documento",
+        "REC|Registrar contactos y representante cuando corresponda",
+        "SYS|Validar campos, identidad y relaciones",
+        "SYS|Guardar paciente y acceso al expediente permitido"
+      ],
+      "decisions": [
+        2
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "Sí",
+          "action": "Comparar candidatos y seleccionar paciente existente",
+          "terminal": "Paciente existente seleccionado; no crear otro."
+        },
+        {
+          "step": 5,
+          "label": "Datos inconsistentes",
+          "action": "Señalar campos y conservar borrador",
+          "resume": 3
+        }
+      ],
+      "end": "Paciente humano registrado en la organización.",
+      "screens": [
+        "S09",
+        "S10"
+      ],
+      "buttons": [
+        "Buscar paciente",
+        "Registrar humano",
+        "Seleccionar existente",
+        "Añadir representante",
+        "Guardar paciente"
+      ],
+      "handoffs": [
+        "F13",
+        "F16",
+        "F20"
+      ]
+    },
+    {
+      "id": "F11",
+      "name": "Registrar un animal y sus responsables",
+      "group": "Pacientes y responsables",
+      "phase": "CE",
+      "actors": [
+        "REC",
+        "RES",
+        "SYS"
+      ],
+      "trigger": "Se registra un animal para atención veterinaria.",
+      "preconditions": [
+        "Organización habilitada para atención veterinaria."
+      ],
+      "steps": [
+        "REC|Buscar animal por identificador y responsable sin exigir microchip",
+        "SYS|¿Existe animal coincidente verificado?",
+        "REC|Registrar especie, perfil, nacimiento conocido o estimado",
+        "RES|Aportar datos y facultades del responsable, contacto y pagador",
+        "REC|Verificar relaciones y preferencias de contacto",
+        "SYS|Guardar animal y relaciones con vigencia"
+      ],
+      "decisions": [
+        2
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "Sí",
+          "action": "Seleccionar ficha del mismo animal; confirmar identidad",
+          "terminal": "Animal existente seleccionado."
+        },
+        {
+          "step": 5,
+          "label": "Vínculo no verificado",
+          "action": "Registrar declaración pendiente sin conceder acceso al portal",
+          "resume": 6
+        }
+      ],
+      "end": "Animal registrado; persona responsable y paciente conservan identidades distintas.",
+      "screens": [
+        "S09",
+        "S11"
+      ],
+      "buttons": [
+        "Registrar animal",
+        "Buscar responsable",
+        "Añadir responsable",
+        "Guardar animal",
+        "Enviar verificación"
+      ],
+      "handoffs": [
+        "F12",
+        "F16",
+        "F39"
+      ]
+    },
+    {
+      "id": "F12",
+      "name": "Actualizar o revocar una relación de responsable",
+      "group": "Pacientes y responsables",
+      "phase": "CE",
+      "actors": [
+        "REC",
+        "ADM",
+        "RES",
+        "SYS",
+        "PAC"
+      ],
+      "trigger": "Cambia un tutor, representante, contacto o autorización.",
+      "preconditions": [
+        "Actor con permiso de verificar y gestionar relaciones."
+      ],
+      "steps": [
+        "REC|Identificar paciente y relación vigente",
+        "REC|Registrar solicitud y evidencia del cambio",
+        "ADM|Definir alcance, vigencia y contenido permitido",
+        "SYS|¿Verificación suficiente según política aplicable?",
+        "ADM|Confirmar nueva relación o revocación",
+        "SYS|Actualizar accesos, publicaciones y pendientes afectados; conservar historia"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Mantener solicitud pendiente; no habilitar acceso nuevo",
+          "terminal": "Relación por verificar."
+        },
+        {
+          "step": 5,
+          "label": "Cancelar",
+          "action": "Conservar relación vigente",
+          "terminal": "Sin cambios."
+        }
+      ],
+      "end": "Relaciones y accesos consistentes con alcance verificado.",
+      "screens": [
+        "S10",
+        "S11",
+        "S32"
+      ],
+      "buttons": [
+        "Editar relación",
+        "Verificar relación",
+        "Establecer vigencia",
+        "Revocar acceso",
+        "Confirmar cambio",
+        "Solicitar revocación"
+      ],
+      "handoffs": [
+        "F39",
+        "F71"
+      ]
+    },
+    {
+      "id": "F13",
+      "name": "Revisar y fusionar pacientes duplicados",
+      "group": "Pacientes y responsables",
+      "phase": "TR",
+      "actors": [
+        "ADM",
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Se detectan dos fichas posiblemente del mismo paciente.",
+      "preconditions": [
+        "Mismo tenant; permiso especial de revisión de identidad."
+      ],
+      "steps": [
+        "ADM|Seleccionar candidatos y comparar evidencias",
+        "PRO|Revisar discrepancias clínicas cuando corresponda",
+        "SYS|¿Identidad suficientemente confirmada?",
+        "ADM|Seleccionar ficha conservada y revisar impacto",
+        "ADM|Confirmar fusión con motivo",
+        "SYS|Reasociar referencias permitidas y conservar IDs, originales y auditoría"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Mantener fichas separadas y registrar revisión",
+          "terminal": "Sin fusión."
+        },
+        {
+          "step": 5,
+          "label": "Cancelar",
+          "action": "Conservar fichas originales",
+          "terminal": "Sin cambios."
+        },
+        {
+          "step": 6,
+          "label": "Fusión incorrecta detectada",
+          "action": "Iniciar revisión y reparación de asociaciones con evidencia",
+          "terminal": "Corrección de identidad pendiente; no borrar registros."
+        }
+      ],
+      "end": "Identidad consolidada con procedencia y trazabilidad.",
+      "screens": [
+        "S12",
+        "S19"
+      ],
+      "buttons": [
+        "Comparar fichas",
+        "Elegir ficha conservada",
+        "Ver impacto",
+        "Confirmar fusión",
+        "Solicitar corrección"
+      ],
+      "handoffs": [
+        "F15",
+        "F65"
+      ]
+    },
+    {
+      "id": "F14",
+      "name": "Registrar población animal y pertenencias",
+      "group": "Pacientes y responsables",
+      "phase": "AV",
+      "actors": [
+        "PRO",
+        "REC",
+        "SYS"
+      ],
+      "trigger": "Se atiende un rebaño, lote, colonia o grupo.",
+      "preconditions": [
+        "Capacidad poblacional implementada y permisos correspondientes."
+      ],
+      "steps": [
+        "PRO|Crear población con tipo, contexto y responsable",
+        "REC|Registrar individuos o denominador cuando aplique",
+        "PRO|Definir pertenencias con intervalo y procedencia",
+        "SYS|¿Sujetos y períodos consistentes?",
+        "PRO|Registrar ingreso, traslado o baja de miembros",
+        "SYS|Guardar historial poblacional e individual sin mezclarlos"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Solicitar corrección de duplicación o períodos",
+          "resume": 3
+        }
+      ],
+      "end": "Población identificada y membresías temporales registradas.",
+      "screens": [
+        "S13",
+        "S47"
+      ],
+      "buttons": [
+        "Crear población",
+        "Añadir individuo",
+        "Registrar traslado",
+        "Registrar baja",
+        "Guardar pertenencias"
+      ],
+      "handoffs": [
+        "F60"
+      ]
+    },
+    {
+      "id": "F15",
+      "name": "Buscar paciente y abrir historia compartida",
+      "group": "Pacientes y responsables",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "REC",
+        "SYS"
+      ],
+      "trigger": "Un actor busca un paciente para una operación permitida.",
+      "preconditions": [
+        "Contexto de organización confirmado."
+      ],
+      "steps": [
+        "PRO|Buscar paciente en la organización",
+        "SYS|Mostrar coincidencias según permiso administrativo",
+        "PRO|Seleccionar paciente y solicitar historia",
+        "SYS|¿Permiso clínico y alcance de contenido suficientes?",
+        "SYS|Mostrar historia de sucursales autorizadas con procedencia y restricciones",
+        "SYS|Registrar acceso auditado"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Mostrar solo ficha administrativa permitida o acceso restringido",
+          "terminal": "Historia clínica sin abrir."
+        },
+        {
+          "step": 2,
+          "label": "Sin coincidencias",
+          "action": "Ofrecer registro si el actor tiene permiso",
+          "terminal": "Búsqueda sin paciente seleccionado."
+        }
+      ],
+      "end": "Historia visible dentro del tenant con alcance explícito.",
+      "screens": [
+        "S09",
+        "S10",
+        "S11",
+        "S19"
+      ],
+      "buttons": [
+        "Buscar",
+        "Abrir ficha",
+        "Ver historia",
+        "Filtrar por fecha",
+        "Ver procedencia"
+      ],
+      "handoffs": [
+        "F10",
+        "F11",
+        "F21"
+      ]
+    },
+    {
+      "id": "F16",
+      "name": "Reservar una cita desde la clínica",
+      "group": "Agenda y recepción",
+      "phase": "CE",
+      "actors": [
+        "REC",
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Recepción o profesional agenda una atención.",
+      "preconditions": [
+        "Paciente identificado y agenda publicada."
+      ],
+      "steps": [
+        "REC|Seleccionar paciente, servicio, sucursal y profesional",
+        "SYS|Presentar horarios y recursos compatibles",
+        "REC|Elegir intervalo y datos mínimos de la cita",
+        "SYS|¿Disponibilidad vigente y recursos libres?",
+        "SYS|Confirmar reserva sin duplicarla",
+        "SYS|Mostrar comprobante de cita y notificación según preferencias"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Actualizar disponibilidad y ofrecer alternativas",
+          "resume": 2
+        },
+        {
+          "step": 3,
+          "label": "Cancelar",
+          "action": "Salir sin reservar",
+          "terminal": "Sin cita creada."
+        },
+        {
+          "step": 6,
+          "label": "Notificación fallida",
+          "action": "Conservar cita confirmada y registrar aviso pendiente",
+          "terminal": "Cita reservada; comunicación pendiente."
+        }
+      ],
+      "end": "Cita reservada con organización, profesional y lugar identificados.",
+      "screens": [
+        "S14",
+        "S09"
+      ],
+      "buttons": [
+        "Nueva cita",
+        "Ver disponibilidad",
+        "Reservar cita",
+        "Ver confirmación",
+        "Enviar recordatorio"
+      ],
+      "handoffs": [
+        "F18",
+        "F20"
+      ]
+    },
+    {
+      "id": "F17",
+      "name": "Solicitar una cita desde el portal",
+      "group": "Agenda y recepción",
+      "phase": "CE",
+      "actors": [
+        "PAC",
+        "RES",
+        "REC",
+        "SYS"
+      ],
+      "trigger": "Paciente o responsable solicita atención en el portal.",
+      "preconditions": [
+        "Cuenta y vínculo verificados; agenda pública habilitada."
+      ],
+      "steps": [
+        "PAC|Elegir paciente o animal autorizado y organización",
+        "PAC|Seleccionar servicio, sede y preferencias",
+        "SYS|Mostrar intervalos publicables",
+        "PAC|Solicitar intervalo disponible",
+        "SYS|¿La política permite confirmación automática?",
+        "REC|Revisar solicitud y confirmar intervalo autorizado",
+        "SYS|Publicar estado real y notificar al solicitante"
+      ],
+      "decisions": [
+        5
+      ],
+      "branches": [
+        {
+          "step": 5,
+          "label": "Sí",
+          "action": "Validar disponibilidad y confirmar reserva",
+          "resume": 7
+        },
+        {
+          "step": 6,
+          "label": "Sin disponibilidad",
+          "action": "Ofrecer alternativas o lista de espera al solicitante",
+          "terminal": "Solicitud pendiente de elección; sin reserva confirmada."
+        },
+        {
+          "step": 1,
+          "label": "Vínculo no autorizado",
+          "action": "Solicitar verificación sin mostrar pacientes ajenos",
+          "terminal": "Solicitud detenida."
+        }
+      ],
+      "end": "Cita confirmada o solicitud pendiente con estado explícito.",
+      "screens": [
+        "S29",
+        "S30",
+        "S15"
+      ],
+      "buttons": [
+        "Solicitar cita",
+        "Elegir paciente",
+        "Ver horarios",
+        "Enviar solicitud",
+        "Aceptar alternativa"
+      ],
+      "handoffs": [
+        "F18",
+        "F19",
+        "F39"
+      ]
+    },
+    {
+      "id": "F18",
+      "name": "Confirmar, reprogramar o cancelar una cita",
+      "group": "Agenda y recepción",
+      "phase": "CE",
+      "actors": [
+        "REC",
+        "PAC",
+        "RES",
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Un actor autorizado solicita modificar una reserva.",
+      "preconditions": [
+        "Cita vigente y política de cambios visible."
+      ],
+      "steps": [
+        "REC|Abrir cita y elegir confirmar, reprogramar o cancelar",
+        "SYS|¿Acción permitida por estado y rol?",
+        "REC|Indicar nueva fecha o motivo según operación",
+        "SYS|Mostrar impacto y validar nuevo intervalo cuando aplique",
+        "REC|Confirmar modificación",
+        "SYS|Aplicar cambio, conservar anterior, actualizar recursos y avisos"
+      ],
+      "decisions": [
+        2
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Mostrar motivo y ofrecer contactar a recepción",
+          "terminal": "Cita sin cambios."
+        },
+        {
+          "step": 4,
+          "label": "Intervalo ocupado",
+          "action": "Conservar reserva anterior y ofrecer otras horas",
+          "resume": 3
+        },
+        {
+          "step": 5,
+          "label": "Volver",
+          "action": "Conservar cita original",
+          "terminal": "Modificación cancelada."
+        }
+      ],
+      "end": "Cita actualizada con historial; no borrar atención ya realizada.",
+      "screens": [
+        "S14",
+        "S30"
+      ],
+      "buttons": [
+        "Confirmar asistencia",
+        "Reprogramar",
+        "Cancelar cita",
+        "Guardar cambio",
+        "Conservar cita"
+      ],
+      "handoffs": [
+        "F19",
+        "F20"
+      ]
+    },
+    {
+      "id": "F19",
+      "name": "Gestionar lista de espera",
+      "group": "Agenda y recepción",
+      "phase": "CE",
+      "actors": [
+        "REC",
+        "PAC",
+        "RES",
+        "SYS"
+      ],
+      "trigger": "No hay horario o se libera un intervalo.",
+      "preconditions": [
+        "Preferencias y canales de contacto registrados."
+      ],
+      "steps": [
+        "REC|Registrar solicitud y preferencias de espera",
+        "SYS|Detectar intervalo compatible sin prometer reserva",
+        "REC|Ofrecer intervalo con vigencia configurada",
+        "PAC|Aceptar o rechazar oferta",
+        "SYS|¿Oferta vigente y recurso disponible?",
+        "SYS|Confirmar cita y retirar solicitud cumplida"
+      ],
+      "decisions": [
+        5
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "Rechazo",
+          "action": "Actualizar preferencias o mantener espera",
+          "terminal": "Solicitud continúa en espera."
+        },
+        {
+          "step": 5,
+          "label": "No",
+          "action": "Informar vencimiento y mantener solicitud cuando corresponda",
+          "terminal": "Sin reserva; espera vigente."
+        }
+      ],
+      "end": "Solicitud convertida en cita o mantenida/cerrada con motivo.",
+      "screens": [
+        "S15",
+        "S30"
+      ],
+      "buttons": [
+        "Añadir a espera",
+        "Ofrecer intervalo",
+        "Aceptar oferta",
+        "Rechazar oferta",
+        "Salir de espera"
+      ],
+      "handoffs": [
+        "F16",
+        "F18"
+      ]
+    },
+    {
+      "id": "F20",
+      "name": "Registrar llegada, cola y atención sin cita",
+      "group": "Agenda y recepción",
+      "phase": "CE",
+      "actors": [
+        "REC",
+        "ASI",
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "El paciente llega a la clínica con o sin reserva.",
+      "preconditions": [
+        "Sucursal operativa y paciente confirmado."
+      ],
+      "steps": [
+        "REC|Identificar paciente y cita si existe",
+        "SYS|¿Qué tipo de ingreso corresponde?",
+        "REC|Registrar llegada o ingreso directo con motivo administrativo mínimo",
+        "SYS|Añadir a cola correspondiente sin duplicar ingreso",
+        "ASI|Preparar datos y capturas autorizadas",
+        "PRO|Llamar paciente y confirmar identidad antes de iniciar atención"
+      ],
+      "decisions": [
+        2
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "Llegada existente",
+          "action": "Abrir ingreso existente y su posición",
+          "resume": 5
+        },
+        {
+          "step": 2,
+          "label": "Sin cita",
+          "action": "Validar atención directa y capacidad del servicio",
+          "resume": 3
+        },
+        {
+          "step": 4,
+          "label": "Paciente se retira",
+          "action": "Registrar retiro y conservar cita/ingreso con estado real",
+          "terminal": "Ingreso terminado sin atención clínica."
+        }
+      ],
+      "end": "Paciente preparado para atención o retiro registrado.",
+      "screens": [
+        "S16",
+        "S17",
+        "S09"
+      ],
+      "buttons": [
+        "Registrar llegada",
+        "Ingreso sin cita",
+        "Enviar a cola",
+        "Llamar paciente",
+        "Registrar retiro",
+        "Iniciar atención"
+      ],
+      "handoffs": [
+        "F21",
+        "F51"
+      ]
+    },
+    {
+      "id": "F21",
+      "name": "Realizar una consulta y finalizar la visita",
+      "group": "Atención y expediente",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "ASI",
+        "SYS"
+      ],
+      "trigger": "El profesional inicia una consulta desde agenda o recepción.",
+      "preconditions": [
+        "Paciente/contexto confirmados; permiso asistencial y paquete apropiado."
+      ],
+      "steps": [
+        "PRO|Confirmar paciente, organización, sucursal y lugar",
+        "SYS|¿Puede iniciar atención sobre este expediente?",
+        "PRO|Revisar antecedentes, problemas y datos visibles de otras sedes",
+        "PRO|Registrar motivo, exploración, formularios y gráficos",
+        "PRO|Crear diagnósticos, procedimientos, órdenes o receta según lo ocurrido",
+        "SYS|¿Capturas obligatorias y cierre documental cumplidos?",
+        "PRO|Revisar resumen y finalizar visita con pendientes asignados",
+        "SYS|Conservar evolución y estados separados de notas, órdenes y episodio"
+      ],
+      "decisions": [
+        2,
+        6
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Impedir apertura y mostrar restricción de contexto",
+          "terminal": "Consulta no iniciada."
+        },
+        {
+          "step": 6,
+          "label": "No",
+          "action": "Mostrar faltantes y conservar borrador",
+          "resume": 4
+        },
+        {
+          "step": 7,
+          "label": "Interrumpir atención",
+          "action": "Guardar borrador y registrar interrupción con responsable",
+          "terminal": "Atención pendiente de retomar."
+        }
+      ],
+      "end": "Visita finalizada; notas y tareas conservan sus estados reales.",
+      "screens": [
+        "S17",
+        "S18",
+        "S19"
+      ],
+      "buttons": [
+        "Iniciar atención",
+        "Guardar borrador",
+        "Revisar resumen",
+        "Finalizar visita",
+        "Dejar pendiente"
+      ],
+      "handoffs": [
+        "F22",
+        "F23",
+        "F24",
+        "F27",
+        "F30",
+        "F35",
+        "F41"
+      ]
+    },
+    {
+      "id": "F22",
+      "name": "Capturar un formulario de especialidad",
+      "group": "Atención y expediente",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "ASI",
+        "SYS"
+      ],
+      "trigger": "Se abre una sección clínica de la atención.",
+      "preconditions": [
+        "Atención editable; versión y perfil humano/animal compatibles."
+      ],
+      "steps": [
+        "SYS|Cargar versión de plantilla y datos de procedencia explícita",
+        "PRO|Completar campos, unidades y datos ausentes o negados",
+        "SYS|¿Reglas del formulario y perfil válidas?",
+        "PRO|Revisar valores y asociaciones a datos clínicos comunes",
+        "SYS|Guardar borrador y revisión esperada",
+        "SYS|Mostrar guardado confirmado y valores estructurados relacionados"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Marcar campos y explicar corrección sin borrar capturas",
+          "resume": 2
+        },
+        {
+          "step": 5,
+          "label": "Otra revisión guardada",
+          "action": "Mostrar conflicto y abrir comparación",
+          "terminal": "Guardado pendiente de resolución."
+        },
+        {
+          "step": 1,
+          "label": "Componente no disponible",
+          "action": "Indicar alcance de la plantilla; impedir publicar captura incompatible",
+          "terminal": "Sección no habilitada para esa capacidad."
+        }
+      ],
+      "end": "Captura versionada vinculada a atención, sin firma automática.",
+      "screens": [
+        "S18"
+      ],
+      "buttons": [
+        "Abrir sección",
+        "Añadir medición",
+        "Marcar dato desconocido",
+        "Guardar borrador",
+        "Comparar versiones"
+      ],
+      "handoffs": [
+        "F04",
+        "F27",
+        "F25"
+      ]
+    },
+    {
+      "id": "F23",
+      "name": "Marcar un hallazgo en un mapa anatómico",
+      "group": "Atención y expediente",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "El profesional abre un gráfico anatómico de la especialidad.",
+      "preconditions": [
+        "Atlas validado para perfil/especie y atención editable."
+      ],
+      "steps": [
+        "SYS|Mostrar atlas, versión, orientación y leyenda",
+        "PRO|Seleccionar región y lateralidad por gráfico o tabla",
+        "PRO|Elegir hallazgo, observación o procedimiento relacionado",
+        "SYS|¿Localización, significado y estado compatibles?",
+        "PRO|Añadir detalle y revisar la marca semántica",
+        "SYS|Guardar marca con autor, fecha y atención",
+        "PRO|Comparar con registros previos dentro del alcance"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Explicar incompatibilidad y conservar selección para corregir",
+          "resume": 2
+        },
+        {
+          "step": 5,
+          "label": "Deshacer marca local",
+          "action": "Retirar solo cambio no confirmado de este borrador",
+          "resume": 2
+        },
+        {
+          "step": 1,
+          "label": "Atlas histórico distinto",
+          "action": "Mostrar versión original o comparación explícita; no reubicar marcas automáticamente",
+          "resume": 2
+        }
+      ],
+      "end": "Hallazgo localizado y reproducible; dibujo y dato clínico relacionados.",
+      "screens": [
+        "S18",
+        "S19"
+      ],
+      "buttons": [
+        "Elegir vista anatómica",
+        "Marcar región",
+        "Añadir hallazgo",
+        "Vincular procedimiento",
+        "Deshacer cambio local",
+        "Comparar evolución"
+      ],
+      "handoffs": [
+        "F22",
+        "F27",
+        "F72"
+      ]
+    },
+    {
+      "id": "F24",
+      "name": "Registrar odontograma y evolución dental humana o animal",
+      "group": "Atención y expediente",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Se utiliza el componente dental de una atención.",
+      "preconditions": [
+        "Paquete dental validado; paciente y dentición seleccionados."
+      ],
+      "steps": [
+        "SYS|Cargar perfil, nomenclatura y atlas humano o veterinario correspondiente",
+        "PRO|Elegir pieza, cara o estado general de la pieza",
+        "PRO|Registrar hallazgo o procedimiento y estado observado, planeado o realizado",
+        "SYS|¿Pieza, cara, dentición y dato compatibles?",
+        "PRO|Revisar leyenda y listado textual de cambios",
+        "SYS|Guardar eventos clínicos y revisión del gráfico",
+        "PRO|Comparar estado previo con la atención actual"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Solicitar pieza/cara o dato válido según atlas seleccionado",
+          "resume": 2
+        },
+        {
+          "step": 1,
+          "label": "Dentición o anatomía especial",
+          "action": "Registrar variante mediante catálogo autorizado y atlas correspondiente",
+          "resume": 2
+        },
+        {
+          "step": 5,
+          "label": "Corregir registro firmado",
+          "action": "Abrir adenda sobre la revisión original",
+          "terminal": "Corrección derivada al flujo de adenda."
+        }
+      ],
+      "end": "Evolución dental guardada por pieza y cara, sin sustituir hechos previos por colores.",
+      "screens": [
+        "S18",
+        "S19"
+      ],
+      "buttons": [
+        "Seleccionar pieza",
+        "Seleccionar cara",
+        "Registrar condición",
+        "Registrar procedimiento",
+        "Ver cambios",
+        "Comparar odontogramas"
+      ],
+      "handoffs": [
+        "F27",
+        "F28",
+        "F42",
+        "F72"
+      ]
+    },
+    {
+      "id": "F25",
+      "name": "Registrar mediciones, curvas y escalas",
+      "group": "Atención y expediente",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "ASI",
+        "SYS"
+      ],
+      "trigger": "Se registra una medida o se consulta un cálculo/gráfico.",
+      "preconditions": [
+        "Tipo de medida, unidad e instrumento/refencia definidos."
+      ],
+      "steps": [
+        "PRO|Elegir medición o instrumento y registrar momento clínico",
+        "PRO|Introducir valores originales, unidades y método",
+        "SYS|¿Referencia e inputs válidos para población/especie?",
+        "SYS|Calcular solo indicadores implementados y validados, mostrando referencia",
+        "PRO|Revisar valores e interpretación profesional separada",
+        "SYS|Guardar observaciones y cálculo versionado",
+        "PRO|Consultar curva o tendencia con tabla de datos"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Conservar medidas originales y explicar por qué no se calcula indicador",
+          "terminal": "Medición registrada; indicador no calculado."
+        },
+        {
+          "step": 2,
+          "label": "Dato no disponible",
+          "action": "Registrar causa de ausencia en lugar de asignar valor normal",
+          "resume": 5
+        }
+      ],
+      "end": "Valores y referencias conservados; gráficos reconstruibles.",
+      "screens": [
+        "S18",
+        "S19"
+      ],
+      "buttons": [
+        "Añadir medición",
+        "Elegir unidad",
+        "Aplicar instrumento",
+        "Ver referencia",
+        "Ver tendencia",
+        "Ver tabla"
+      ],
+      "handoffs": [
+        "F22",
+        "F27",
+        "F72"
+      ]
+    },
+    {
+      "id": "F26",
+      "name": "Adjuntar y comparar archivos clínicos",
+      "group": "Atención y expediente",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "DIA",
+        "SYS"
+      ],
+      "trigger": "Se incorpora fotografía, informe, audio, video o estudio autorizado.",
+      "preconditions": [
+        "Paciente/recurso y permiso de adjuntar confirmados."
+      ],
+      "steps": [
+        "PRO|Seleccionar recurso clínico y tipo de archivo",
+        "PRO|Aportar archivo, procedencia, fecha y consentimiento requerido",
+        "SYS|¿Tipo, tamaño e integridad aceptables?",
+        "SYS|Guardar privado y enlazar metadatos a la atención",
+        "PRO|Revisar vista previa, descripción y localización si aplica",
+        "SYS|Confirmar adjunto y habilitar comparación/descarga según permisos"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Explicar rechazo y permitir archivo compatible",
+          "resume": 2
+        },
+        {
+          "step": 4,
+          "label": "Carga interrumpida",
+          "action": "Conservar estado de carga pendiente sin afirmar adjunto guardado",
+          "terminal": "Carga pendiente de reintento."
+        },
+        {
+          "step": 5,
+          "label": "Archivo equivocado",
+          "action": "Retirar asociación de borrador con motivo y trazabilidad; original firmado requiere corrección",
+          "terminal": "Asociación corregida o adenda requerida."
+        }
+      ],
+      "end": "Archivo privado identificado y vinculado con procedencia.",
+      "screens": [
+        "S18",
+        "S24",
+        "S28"
+      ],
+      "buttons": [
+        "Adjuntar archivo",
+        "Ver vista previa",
+        "Comparar imágenes",
+        "Descargar autorizado",
+        "Retirar asociación"
+      ],
+      "handoffs": [
+        "F28",
+        "F40"
+      ]
+    },
+    {
+      "id": "F27",
+      "name": "Revisar y firmar una nota o documento clínico",
+      "group": "Atención y expediente",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "SYS",
+        "EXT"
+      ],
+      "trigger": "El autor solicita cerrar una revisión clínica.",
+      "preconditions": [
+        "Autor habilitado; revisión guardada y requisitos documentales definidos."
+      ],
+      "steps": [
+        "PRO|Abrir resumen de la revisión guardada",
+        "SYS|¿Datos y permisos de cierre válidos?",
+        "PRO|Confirmar contenido, autoría y revisión a cerrar",
+        "SYS|Aplicar mecanismo de firma definido y guardar evidencia",
+        "SYS|¿Firma y persistencia confirmadas?",
+        "SYS|Marcar revisión firmada, impedir edición y registrar auditoría"
+      ],
+      "decisions": [
+        2,
+        5
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Mostrar faltantes o conflicto y volver a revisión editable",
+          "resume": 1
+        },
+        {
+          "step": 3,
+          "label": "Cancelar",
+          "action": "Conservar borrador sin firma",
+          "terminal": "Documento sin firmar."
+        },
+        {
+          "step": 5,
+          "label": "No",
+          "action": "Mantener estado pendiente y verificar resultado del proveedor antes de reintentar",
+          "terminal": "Firma pendiente; no anunciar documento firmado."
+        }
+      ],
+      "end": "Revisión firmada y conservada; finalizar visita es una acción separada.",
+      "screens": [
+        "S18",
+        "S28"
+      ],
+      "buttons": [
+        "Revisar documento",
+        "Firmar revisión",
+        "Volver al borrador",
+        "Ver evidencia de firma"
+      ],
+      "handoffs": [
+        "F21",
+        "F28",
+        "F40"
+      ]
+    },
+    {
+      "id": "F28",
+      "name": "Corregir contenido firmado mediante adenda",
+      "group": "Atención y expediente",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Se requiere corregir o ampliar un registro clínico firmado.",
+      "preconditions": [
+        "Permiso de adenda; original y autoría visibles."
+      ],
+      "steps": [
+        "PRO|Abrir revisión original y solicitar adenda",
+        "PRO|Indicar motivo y contenido corregido o adicional",
+        "SYS|¿Adenda válida y vinculada al original correcto?",
+        "PRO|Revisar y firmar nueva revisión",
+        "SYS|Conservar original, adenda, motivo y referencias",
+        "SYS|Actualizar pendientes/publicaciones afectadas con nueva versión explícita"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Mostrar errores y conservar borrador de adenda",
+          "resume": 2
+        },
+        {
+          "step": 4,
+          "label": "Cancelar",
+          "action": "Conservar original sin cambios",
+          "terminal": "Adenda sin emitir."
+        }
+      ],
+      "end": "Corrección trazable; ninguna versión firmada sobrescrita.",
+      "screens": [
+        "S19",
+        "S28"
+      ],
+      "buttons": [
+        "Crear adenda",
+        "Ver original",
+        "Revisar corrección",
+        "Firmar adenda",
+        "Ver versiones"
+      ],
+      "handoffs": [
+        "F34",
+        "F40"
+      ]
+    },
+    {
+      "id": "F29",
+      "name": "Mantener episodios, problemas y antecedentes longitudinales",
+      "group": "Atención y expediente",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Se incorpora o cambia un problema, antecedente o episodio de cuidado.",
+      "preconditions": [
+        "Expediente autorizado; procedencia y registros relacionados disponibles."
+      ],
+      "steps": [
+        "PRO|Seleccionar episodio o crear uno dentro de la organización",
+        "PRO|Registrar problema, antecedente o alergia con estado y fuente",
+        "SYS|¿Relaciones y contexto clínico coherentes?",
+        "PRO|Vincular atención y participantes autorizados",
+        "PRO|Actualizar estado con fecha y motivo sin borrar historia",
+        "SYS|Guardar evolución y pendientes de seguimiento"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Pedir corrección de asociación y fuente",
+          "resume": 2
+        },
+        {
+          "step": 5,
+          "label": "Dato dudoso",
+          "action": "Registrar incertidumbre/revisión pendiente con responsable",
+          "terminal": "Dato por revisar; no convertirlo en confirmado."
+        }
+      ],
+      "end": "Datos longitudinales actualizados con origen y fechas.",
+      "screens": [
+        "S19",
+        "S18"
+      ],
+      "buttons": [
+        "Crear episodio",
+        "Añadir antecedente",
+        "Registrar problema",
+        "Registrar alergia",
+        "Vincular atención",
+        "Actualizar estado"
+      ],
+      "handoffs": [
+        "F21",
+        "F41"
+      ]
+    },
+    {
+      "id": "F30",
+      "name": "Crear orden de estudio, procedimiento o remisión",
+      "group": "Órdenes y diagnóstico",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "SYS",
+        "EXT"
+      ],
+      "trigger": "El profesional solicita un servicio o una derivación.",
+      "preconditions": [
+        "Paciente/atención y catálogo de servicios clínicos disponibles."
+      ],
+      "steps": [
+        "PRO|Elegir servicio, motivo y destinatario",
+        "PRO|Indicar prioridad operativa y datos necesarios",
+        "SYS|¿Orden completa y destinatario permitido?",
+        "PRO|Revisar y emitir orden",
+        "SYS|Crear tareas y asignar responsable de resultados",
+        "SYS|Entregar orden o paquete externo seleccionado y conservar estado"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Mostrar faltantes o destinatario incompatible",
+          "resume": 1
+        },
+        {
+          "step": 6,
+          "label": "Servicio externo",
+          "action": "Publicar documento seleccionado y esperar respuesta con procedencia",
+          "terminal": "Orden externa emitida; resultado pendiente."
+        },
+        {
+          "step": 4,
+          "label": "Cancelar antes de emitir",
+          "action": "Conservar borrador o descartarlo expresamente",
+          "terminal": "Sin orden activa."
+        }
+      ],
+      "end": "Orden emitida con responsables de ejecución y revisión.",
+      "screens": [
+        "S20",
+        "S18"
+      ],
+      "buttons": [
+        "Nueva orden",
+        "Elegir servicio",
+        "Emitir orden",
+        "Generar remisión",
+        "Ver tareas",
+        "Cancelar orden"
+      ],
+      "handoffs": [
+        "F31",
+        "F32",
+        "F33",
+        "F34"
+      ]
+    },
+    {
+      "id": "F31",
+      "name": "Asignar tarea y obtener muestra o adquisición",
+      "group": "Órdenes y diagnóstico",
+      "phase": "DI",
+      "actors": [
+        "DIA",
+        "SYS"
+      ],
+      "trigger": "Una orden interna entra en la lista de trabajo.",
+      "preconditions": [
+        "Permiso de ejecución y orden activa."
+      ],
+      "steps": [
+        "DIA|Aceptar tarea y confirmar paciente/orden",
+        "DIA|Registrar obtención, responsable y tiempos",
+        "SYS|Asignar identidad de muestra/adquisición y trazabilidad",
+        "DIA|Evaluar aceptación según procedimiento definido",
+        "SYS|¿Muestra o adquisición aceptada?",
+        "DIA|Completar tarea de obtención y entregar a procesamiento"
+      ],
+      "decisions": [
+        5
+      ],
+      "branches": [
+        {
+          "step": 5,
+          "label": "No",
+          "action": "Registrar rechazo con motivo y solicitar nuevo intento identificado",
+          "resume": 2
+        },
+        {
+          "step": 1,
+          "label": "Tarea rechazada",
+          "action": "Registrar motivo y reasignar a cola con responsable",
+          "terminal": "Tarea pendiente de asignación."
+        },
+        {
+          "step": 2,
+          "label": "Orden cancelada",
+          "action": "Detener nuevas ejecuciones y conservar hechos parciales",
+          "terminal": "Ejecución detenida con evidencia."
+        }
+      ],
+      "end": "Muestra/adquisición identificada y entrega trazada.",
+      "screens": [
+        "S21",
+        "S22",
+        "S24"
+      ],
+      "buttons": [
+        "Aceptar tarea",
+        "Registrar obtención",
+        "Imprimir identificación",
+        "Aceptar muestra",
+        "Rechazar muestra",
+        "Registrar entrega"
+      ],
+      "handoffs": [
+        "F32",
+        "F33"
+      ]
+    },
+    {
+      "id": "F32",
+      "name": "Procesar y emitir resultado de laboratorio",
+      "group": "Órdenes y diagnóstico",
+      "phase": "DI",
+      "actors": [
+        "DIA",
+        "SYS"
+      ],
+      "trigger": "Se procesa muestra aceptada o se incorpora informe externo.",
+      "preconditions": [
+        "Orden, muestra/procedencia y profesionales responsables definidos."
+      ],
+      "steps": [
+        "DIA|Registrar método, resultados originales y unidades",
+        "SYS|¿Validación técnica y referencias aplicables completas?",
+        "DIA|Revisar informe preliminar",
+        "DIA|Emitir informe final autorizado",
+        "SYS|Crear pendiente de revisión para el profesional solicitante",
+        "SYS|Conservar informe y trazabilidad de versiones"
+      ],
+      "decisions": [
+        2
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Marcar revisión técnica pendiente; no publicar como final",
+          "resume": 1
+        },
+        {
+          "step": 4,
+          "label": "Corregir informe emitido",
+          "action": "Crear versión corregida con motivo y nuevo pendiente de revisión",
+          "resume": 5
+        },
+        {
+          "step": 1,
+          "label": "Informe externo",
+          "action": "Guardar fuente e integridad sin atribuir ejecución a la clínica",
+          "resume": 3
+        }
+      ],
+      "end": "Informe emitido; revisión clínica aún pendiente.",
+      "screens": [
+        "S23",
+        "S22",
+        "S20"
+      ],
+      "buttons": [
+        "Registrar resultados",
+        "Guardar preliminar",
+        "Emitir informe",
+        "Corregir informe",
+        "Ver trazabilidad"
+      ],
+      "handoffs": [
+        "F34",
+        "F40"
+      ]
+    },
+    {
+      "id": "F33",
+      "name": "Adquirir estudio de imagen y emitir informe",
+      "group": "Órdenes y diagnóstico",
+      "phase": "DI",
+      "actors": [
+        "DIA",
+        "PRO",
+        "SYS",
+        "EXT"
+      ],
+      "trigger": "Se realiza un estudio o se recibe uno externo.",
+      "preconditions": [
+        "Orden/contexto verificados; capacidades de visor/adquisición habilitadas."
+      ],
+      "steps": [
+        "DIA|Confirmar orden, paciente y región del estudio",
+        "DIA|Registrar adquisición o procedencia externa",
+        "SYS|Relacionar estudio e imágenes con identificadores correctos",
+        "PRO|Interpretar y redactar informe con hallazgos localizados",
+        "SYS|¿Informe revisado y listo para cierre autorizado?",
+        "PRO|Firmar informe y enviar a revisión del solicitante"
+      ],
+      "decisions": [
+        5
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "Identidad o estudio discrepante",
+          "action": "Detener asociación y abrir revisión antes de mostrar como estudio del paciente",
+          "terminal": "Estudio por conciliar."
+        },
+        {
+          "step": 5,
+          "label": "No",
+          "action": "Conservar informe preliminar con estado visible",
+          "resume": 4
+        },
+        {
+          "step": 2,
+          "label": "Adquisición no completada",
+          "action": "Registrar intento y motivo; reasignar ejecución",
+          "terminal": "Estudio pendiente o cancelado con motivo."
+        }
+      ],
+      "end": "Estudio e informe vinculados; revisión clínica asignada.",
+      "screens": [
+        "S24",
+        "S21",
+        "S20"
+      ],
+      "buttons": [
+        "Abrir estudio",
+        "Vincular adquisición",
+        "Guardar informe",
+        "Firmar informe",
+        "Ver imágenes",
+        "Solicitar conciliación"
+      ],
+      "handoffs": [
+        "F26",
+        "F34",
+        "F40"
+      ]
+    },
+    {
+      "id": "F34",
+      "name": "Revisar resultados y resolver pendientes clínicos",
+      "group": "Órdenes y diagnóstico",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Llega un informe o una versión corregida a la bandeja clínica.",
+      "preconditions": [
+        "Responsable o suplente vigente; permiso sobre paciente e informe."
+      ],
+      "steps": [
+        "SYS|Incluir informe y versión en bandeja con responsable",
+        "PRO|Abrir resultado y antecedentes autorizados",
+        "PRO|Registrar revisión e interpretación profesional",
+        "PRO|Definir actuación, comunicación o control posterior",
+        "SYS|¿Pendiente tiene resolución o siguiente responsable?",
+        "SYS|Guardar revisión y conservar seguimiento vinculado"
+      ],
+      "decisions": [
+        5
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "Responsable no disponible",
+          "action": "Reasignar a suplente autorizado conservando trazabilidad",
+          "resume": 1
+        },
+        {
+          "step": 5,
+          "label": "No",
+          "action": "Mantener pendiente visible y solicitar asignación",
+          "resume": 4
+        },
+        {
+          "step": 6,
+          "label": "Nuevo informe corregido",
+          "action": "Crear revisión pendiente de la nueva versión",
+          "resume": 1
+        }
+      ],
+      "end": "Resultado revisado o pendiente explícito bajo responsable; recibir no equivale a revisar.",
+      "screens": [
+        "S17",
+        "S20",
+        "S23",
+        "S24"
+      ],
+      "buttons": [
+        "Revisar resultado",
+        "Registrar revisión",
+        "Asignar seguimiento",
+        "Reasignar pendiente",
+        "Solicitar aclaración"
+      ],
+      "handoffs": [
+        "F30",
+        "F35",
+        "F40",
+        "F41"
+      ]
+    },
+    {
+      "id": "F35",
+      "name": "Conciliar medicación y emitir receta",
+      "group": "Medicamentos y documentos",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "El profesional registra medicación referida o prescribe.",
+      "preconditions": [
+        "Paciente/contexto y permiso de prescripción verificados."
+      ],
+      "steps": [
+        "PRO|Revisar medicación referida y registros visibles",
+        "PRO|Registrar producto, presentación y pauta indicada por el profesional",
+        "SYS|¿Campos, unidades y controles implementados completos?",
+        "PRO|Resolver discrepancias y revisar receta",
+        "PRO|Cerrar o firmar receta con emisor autorizado",
+        "SYS|Guardar prescripción versionada y opciones de entrega"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Explicar faltantes o advertencias implementadas sin generar decisión terapéutica automática",
+          "resume": 2
+        },
+        {
+          "step": 5,
+          "label": "Guardar para después",
+          "action": "Conservar receta como borrador",
+          "terminal": "Receta sin emitir."
+        },
+        {
+          "step": 2,
+          "label": "Solo medicación referida",
+          "action": "Registrar fuente; no generar prescripción ni administración",
+          "terminal": "Conciliación registrada."
+        }
+      ],
+      "end": "Receta emitida o medicación referida registrada como hecho distinto.",
+      "screens": [
+        "S25",
+        "S18",
+        "S28"
+      ],
+      "buttons": [
+        "Conciliar medicación",
+        "Añadir medicamento",
+        "Guardar receta en borrador",
+        "Revisar receta",
+        "Emitir receta",
+        "Ver versiones"
+      ],
+      "handoffs": [
+        "F36",
+        "F38",
+        "F40"
+      ]
+    },
+    {
+      "id": "F36",
+      "name": "Dispensar medicamentos y registrar devoluciones",
+      "group": "Medicamentos y documentos",
+      "phase": "DI",
+      "actors": [
+        "FAR",
+        "SYS"
+      ],
+      "trigger": "Farmacia recibe orden o devolución autorizada.",
+      "preconditions": [
+        "Permiso de dispensación; productos, lotes y cantidades disponibles."
+      ],
+      "steps": [
+        "FAR|Verificar paciente, orden y cantidad pendiente",
+        "FAR|Seleccionar producto/presentación y lotes compatibles",
+        "SYS|¿Stock y datos de entrega válidos?",
+        "FAR|Confirmar cantidad total o parcial entregada",
+        "SYS|Registrar dispensación y movimiento de stock una sola vez",
+        "SYS|Actualizar pendiente y evidencia de entrega"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Mantener pendiente y mostrar alternativas operativas autorizadas",
+          "resume": 2
+        },
+        {
+          "step": 4,
+          "label": "Devolución",
+          "action": "Registrar referencia original, cantidad y destino del producto según política",
+          "resume": 5
+        },
+        {
+          "step": 4,
+          "label": "Cancelar",
+          "action": "Liberar reserva sin registrar entrega",
+          "terminal": "Sin dispensación."
+        }
+      ],
+      "end": "Entrega/devolución trazable; dispensar no prueba administración.",
+      "screens": [
+        "S26",
+        "S39"
+      ],
+      "buttons": [
+        "Preparar entrega",
+        "Elegir lote",
+        "Registrar entrega parcial",
+        "Confirmar dispensación",
+        "Registrar devolución"
+      ],
+      "handoffs": [
+        "F37",
+        "F48"
+      ]
+    },
+    {
+      "id": "F37",
+      "name": "Registrar administración o dosis no realizada",
+      "group": "Medicamentos y documentos",
+      "phase": "HO",
+      "actors": [
+        "ASI",
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Corresponde ejecutar una administración autorizada.",
+      "preconditions": [
+        "Orden vigente y rol competente; paciente y registro de administración verificados."
+      ],
+      "steps": [
+        "ASI|Seleccionar administración programada y paciente",
+        "SYS|¿Orden/revisión vigente y ejecución autorizada?",
+        "ASI|Registrar producto, cantidad, vía, tiempos reales y ejecutor",
+        "ASI|Indicar realizada o no realizada con motivo",
+        "SYS|Guardar evento y movimientos asociados sin duplicación",
+        "SYS|Actualizar hoja y pendientes para revisión"
+      ],
+      "decisions": [
+        2
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Detener ejecución y crear revisión con responsable",
+          "terminal": "Administración pendiente de revisión."
+        },
+        {
+          "step": 4,
+          "label": "No realizada",
+          "action": "Conservar motivo y asignar seguimiento; no marcar como administrada",
+          "resume": 5
+        }
+      ],
+      "end": "Hecho de administración o excepción documentado.",
+      "screens": [
+        "S27",
+        "S42"
+      ],
+      "buttons": [
+        "Verificar orden",
+        "Registrar administración",
+        "Registrar no realizada",
+        "Solicitar revisión",
+        "Ver historial de dosis"
+      ],
+      "handoffs": [
+        "F34",
+        "F50",
+        "F54"
+      ]
+    },
+    {
+      "id": "F38",
+      "name": "Preparar documentos y gestionar consentimiento",
+      "group": "Medicamentos y documentos",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "PAC",
+        "RES",
+        "SYS",
+        "EXT"
+      ],
+      "trigger": "Se emite receta, certificado, informe, indicación o consentimiento.",
+      "preconditions": [
+        "Tipo documental, versión y emisor autorizado definidos."
+      ],
+      "steps": [
+        "PRO|Elegir tipo documental y contenido clínico pertinente",
+        "SYS|Generar vista previa con paciente, emisor y referencias",
+        "PRO|Revisar contenido y destinatario",
+        "SYS|¿Requiere consentimiento o firma externa?",
+        "PAC|Recibir explicación y registrar decisión mediante mecanismo definido",
+        "SYS|Guardar documento y evidencia con versión exacta",
+        "PRO|Elegir entrega o publicación autorizada"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Cerrar documento mediante mecanismo autorizado",
+          "resume": 6
+        },
+        {
+          "step": 5,
+          "label": "No acepta o retira consentimiento",
+          "action": "Registrar decisión y derivar actuación clínica al profesional",
+          "terminal": "Consentimiento no concedido; proceso clínico por decidir."
+        },
+        {
+          "step": 6,
+          "label": "Firma externa pendiente",
+          "action": "Mostrar pendiente y verificar confirmación antes de emitir",
+          "terminal": "Documento pendiente de firma."
+        }
+      ],
+      "end": "Documento/evidencia conservado o decisión pendiente explícita.",
+      "screens": [
+        "S28",
+        "S31"
+      ],
+      "buttons": [
+        "Nuevo documento",
+        "Ver vista previa",
+        "Registrar consentimiento",
+        "Registrar decisión",
+        "Cerrar documento",
+        "Elegir entrega"
+      ],
+      "handoffs": [
+        "F27",
+        "F40",
+        "F71"
+      ]
+    },
+    {
+      "id": "F39",
+      "name": "Vincular portal y conceder delegación verificada",
+      "group": "Portal y seguimiento",
+      "phase": "CE",
+      "actors": [
+        "REC",
+        "PAC",
+        "RES",
+        "ADM",
+        "SYS"
+      ],
+      "trigger": "Se invita al paciente o responsable a su portal.",
+      "preconditions": [
+        "Identidad/relación verificable y política de representación definida."
+      ],
+      "steps": [
+        "REC|Seleccionar persona destinataria y pacientes/animales permitidos",
+        "REC|Definir alcance y vigencia de vínculo",
+        "SYS|Enviar invitación de uso controlado",
+        "PAC|Verificar identidad y aceptar vínculo",
+        "SYS|¿Identidad, relación e invitación vigentes?",
+        "SYS|Activar portal con acceso limitado a publicaciones autorizadas"
+      ],
+      "decisions": [
+        5
+      ],
+      "branches": [
+        {
+          "step": 5,
+          "label": "No",
+          "action": "Mantener vínculo pendiente y ofrecer revisión por personal autorizado",
+          "terminal": "Portal sin acceso a ese paciente."
+        },
+        {
+          "step": 2,
+          "label": "Delegación",
+          "action": "Registrar quién autoriza y facultades comprobadas",
+          "resume": 3
+        },
+        {
+          "step": 5,
+          "label": "Vínculo revocado",
+          "action": "Retirar acceso y conservar historial de autorización",
+          "terminal": "Acceso revocado."
+        }
+      ],
+      "end": "Cuenta externa vinculada con alcance verificable; no por coincidencia de DNI o correo.",
+      "screens": [
+        "S10",
+        "S11",
+        "S32",
+        "S02"
+      ],
+      "buttons": [
+        "Invitar al portal",
+        "Definir alcance",
+        "Verificar identidad",
+        "Aceptar vínculo",
+        "Revocar delegación"
+      ],
+      "handoffs": [
+        "F12",
+        "F70",
+        "F71"
+      ]
+    },
+    {
+      "id": "F40",
+      "name": "Publicar una versión documental para el portal",
+      "group": "Portal y seguimiento",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Un profesional decide compartir un documento con paciente/responsable.",
+      "preconditions": [
+        "Documento emitido y permiso de publicación; destinatario autorizado."
+      ],
+      "steps": [
+        "PRO|Seleccionar documento y versión exacta",
+        "PRO|Elegir destinatario verificado y alcance",
+        "SYS|¿Contenido y publicación autorizados?",
+        "PRO|Revisar lo que verá el destinatario y confirmar",
+        "SYS|Registrar publicación y notificar con información mínima",
+        "SYS|Conservar estado de entrega y acceso auditado"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Explicar bloqueo y revisar vínculo o documento",
+          "resume": 1
+        },
+        {
+          "step": 4,
+          "label": "Cancelar",
+          "action": "Conservar documento interno sin publicar",
+          "terminal": "Documento no publicado."
+        },
+        {
+          "step": 5,
+          "label": "Versión corregida",
+          "action": "Publicar nueva versión explícita y marcar sustitución visible sin borrar la anterior",
+          "resume": 6
+        },
+        {
+          "step": 6,
+          "label": "Retirar publicación",
+          "action": "Revocar acceso futuro con motivo; preservar documento interno y auditoría",
+          "terminal": "Publicación retirada."
+        }
+      ],
+      "end": "Publicación concreta autorizada; no abre la historia interna completa.",
+      "screens": [
+        "S28",
+        "S31"
+      ],
+      "buttons": [
+        "Preparar publicación",
+        "Ver como destinatario",
+        "Publicar documento",
+        "Ver entregas",
+        "Retirar publicación"
+      ],
+      "handoffs": [
+        "F71",
+        "F41"
+      ]
+    },
+    {
+      "id": "F41",
+      "name": "Organizar seguimiento y comunicación",
+      "group": "Portal y seguimiento",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "REC",
+        "PAC",
+        "RES",
+        "SYS"
+      ],
+      "trigger": "Se indica control, se recibe respuesta o queda un pendiente después de una visita.",
+      "preconditions": [
+        "Responsable de seguimiento y canal/plazo definidos."
+      ],
+      "steps": [
+        "PRO|Crear tarea de control, contacto o respuesta esperada",
+        "SYS|Asignar responsable/suplente y fecha operativa",
+        "REC|Enviar mensaje o gestionar cita según autorización",
+        "PAC|Responder o confirmar solicitud",
+        "SYS|¿Respuesta resuelve la tarea?",
+        "PRO|Registrar revisión, actuación o siguiente tarea",
+        "SYS|Cerrar tarea resuelta y conservar pendientes no resueltos"
+      ],
+      "decisions": [
+        5
+      ],
+      "branches": [
+        {
+          "step": 5,
+          "label": "No",
+          "action": "Mantener pendiente y asignar siguiente actuación",
+          "resume": 6
+        },
+        {
+          "step": 4,
+          "label": "Sin respuesta",
+          "action": "Aplicar política de seguimiento configurada con responsable; no marcar completada",
+          "terminal": "Seguimiento pendiente o cerrado con motivo explícito."
+        },
+        {
+          "step": 3,
+          "label": "Canal no consentido",
+          "action": "Usar canal autorizado o dejar tarea para contacto alternativo",
+          "terminal": "Comunicación pendiente."
+        }
+      ],
+      "end": "Seguimiento resuelto o pendiente trazable; no confundir mensaje enviado con atención realizada.",
+      "screens": [
+        "S33",
+        "S17",
+        "S29"
+      ],
+      "buttons": [
+        "Programar control",
+        "Crear pendiente",
+        "Asignar responsable",
+        "Enviar mensaje",
+        "Registrar respuesta",
+        "Resolver tarea",
+        "Enviar respuesta"
+      ],
+      "handoffs": [
+        "F16",
+        "F18",
+        "F34"
+      ]
+    },
+    {
+      "id": "F42",
+      "name": "Preparar plan comercial y presupuesto",
+      "group": "Administración financiera",
+      "phase": "AD",
+      "actors": [
+        "PRO",
+        "CAJ",
+        "PAC",
+        "RES",
+        "SYS"
+      ],
+      "trigger": "Se presupuestan servicios o tratamiento por etapas.",
+      "preconditions": [
+        "Servicios, precios, moneda y vigencias configurados."
+      ],
+      "steps": [
+        "PRO|Identificar plan clínico y servicios propuestos",
+        "CAJ|Crear presupuesto con etapas, precios y condiciones",
+        "SYS|¿Importes y descuentos autorizados?",
+        "PAC|Revisar y aceptar o rechazar versión del presupuesto",
+        "CAJ|Registrar aceptación y modalidad de cobro",
+        "SYS|Conservar versión comercial y relación con plan clínico"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Solicitar revisión o autorización del descuento",
+          "resume": 2
+        },
+        {
+          "step": 4,
+          "label": "Rechazo",
+          "action": "Guardar respuesta sin crear ejecución clínica ni cargos reales automáticamente",
+          "terminal": "Presupuesto rechazado o por revisar."
+        }
+      ],
+      "end": "Presupuesto aceptado/versionado; ejecución clínica todavía independiente.",
+      "screens": [
+        "S34",
+        "S18",
+        "S29"
+      ],
+      "buttons": [
+        "Crear presupuesto",
+        "Añadir etapa",
+        "Solicitar descuento",
+        "Enviar presupuesto",
+        "Registrar aceptación",
+        "Crear nueva versión"
+      ],
+      "handoffs": [
+        "F43",
+        "F21"
+      ]
+    },
+    {
+      "id": "F43",
+      "name": "Registrar cargos y cuenta por cobrar",
+      "group": "Administración financiera",
+      "phase": "AD",
+      "actors": [
+        "CAJ",
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Se realiza un servicio/producto o se registra cargo autorizado.",
+      "preconditions": [
+        "Responsable de pago, tarifa y referencia del servicio identificados."
+      ],
+      "steps": [
+        "SYS|Proponer cargo desde hecho o autorización comercial",
+        "CAJ|Revisar paciente, pagador, concepto, cantidad y precio aplicado",
+        "SYS|¿Cargo válido y sin registro duplicado?",
+        "CAJ|Confirmar o ajustar con motivo y permiso",
+        "SYS|Registrar cargo y saldo pendiente",
+        "SYS|Mostrar cuenta y referencias de origen"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Mostrar discrepancia o cargo existente",
+          "terminal": "Cargo nuevo sin registrar."
+        },
+        {
+          "step": 4,
+          "label": "Anular cargo permitido",
+          "action": "Registrar reverso con motivo y verificar pagos/comprobante afectados",
+          "terminal": "Cargo revertido mediante movimiento trazable."
+        }
+      ],
+      "end": "Cuenta actualizada sin acreditar automáticamente pago ni atención.",
+      "screens": [
+        "S35",
+        "S34"
+      ],
+      "buttons": [
+        "Añadir cargo",
+        "Revisar cargos propuestos",
+        "Confirmar cargo",
+        "Ajustar cargo",
+        "Revertir cargo",
+        "Ver cuenta"
+      ],
+      "handoffs": [
+        "F44",
+        "F45"
+      ]
+    },
+    {
+      "id": "F44",
+      "name": "Cobrar, conciliar caja y devolver pagos",
+      "group": "Administración financiera",
+      "phase": "AD",
+      "actors": [
+        "CAJ",
+        "PAC",
+        "RES",
+        "SYS",
+        "EXT"
+      ],
+      "trigger": "Se recibe pago, anticipo, respuesta de pasarela o devolución autorizada.",
+      "preconditions": [
+        "Caja/operador habilitados y referencias financieras verificadas."
+      ],
+      "steps": [
+        "CAJ|Abrir caja o seleccionar operación en caja vigente",
+        "CAJ|Identificar pagador, cargos/anticipo y medios de pago",
+        "SYS|¿Pago confirmado y referencia sin duplicar?",
+        "CAJ|Asignar importes y confirmar registro",
+        "SYS|Actualizar saldo y conservar comprobación del medio",
+        "CAJ|Conciliar y cerrar caja con diferencias registradas"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No; pasarela pendiente",
+          "action": "Mantener pago pendiente hasta confirmación verificable",
+          "terminal": "Sin acreditar cobro."
+        },
+        {
+          "step": 4,
+          "label": "Devolución",
+          "action": "Referenciar pago original, autorizar monto/motivo y registrar reverso",
+          "resume": 5
+        },
+        {
+          "step": 6,
+          "label": "Diferencia",
+          "action": "Registrar diferencia y revisión por responsable",
+          "terminal": "Cierre registrado con revisión pendiente."
+        }
+      ],
+      "end": "Pago/devolución y caja conciliados o pendientes reales visibles.",
+      "screens": [
+        "S35",
+        "S29"
+      ],
+      "buttons": [
+        "Abrir caja",
+        "Registrar pago",
+        "Asignar anticipo",
+        "Conciliar pago",
+        "Solicitar devolución",
+        "Confirmar devolución",
+        "Cerrar caja"
+      ],
+      "handoffs": [
+        "F45",
+        "F46"
+      ]
+    },
+    {
+      "id": "F45",
+      "name": "Emitir comprobante y tratar rechazo o corrección",
+      "group": "Administración financiera",
+      "phase": "AD",
+      "actors": [
+        "CAJ",
+        "SYS",
+        "EXT"
+      ],
+      "trigger": "Se necesita comprobante fiscal o documento correctivo.",
+      "preconditions": [
+        "Emisor, tipo, reglas y adaptador fiscal definidos para el caso."
+      ],
+      "steps": [
+        "CAJ|Seleccionar cargos y datos del comprobante",
+        "SYS|¿Emisor, numeración y datos completos?",
+        "CAJ|Revisar vista previa y autorizar emisión",
+        "SYS|Emitir documento y enviar mediante adaptador autorizado",
+        "EXT|Responder aceptación, observación, rechazo o estado pendiente",
+        "SYS|Guardar evidencia y asignar errores a responsable"
+      ],
+      "decisions": [
+        2
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Solicitar corrección de datos antes de emisión",
+          "resume": 1
+        },
+        {
+          "step": 5,
+          "label": "Rechazo",
+          "action": "Conservar documento/estado y gestionar subsanación conforme al tipo aplicable",
+          "terminal": "Comprobante con resolución pendiente."
+        },
+        {
+          "step": 5,
+          "label": "Pendiente",
+          "action": "Consultar respuesta sin emitir duplicado",
+          "terminal": "Comprobante en espera de respuesta."
+        },
+        {
+          "step": 6,
+          "label": "Corrección posterior",
+          "action": "Crear documento correctivo autorizado vinculado al original",
+          "terminal": "Corrección fiscal trazable."
+        }
+      ],
+      "end": "Estado fiscal y evidencia conservados; pago permanece independiente.",
+      "screens": [
+        "S36",
+        "S35"
+      ],
+      "buttons": [
+        "Preparar comprobante",
+        "Ver vista previa",
+        "Emitir comprobante",
+        "Consultar estado",
+        "Gestionar rechazo",
+        "Crear documento correctivo"
+      ],
+      "handoffs": [
+        "F44",
+        "F62"
+      ]
+    },
+    {
+      "id": "F46",
+      "name": "Calcular y pagar honorarios profesionales",
+      "group": "Administración financiera",
+      "phase": "AD",
+      "actors": [
+        "ADM",
+        "CAJ",
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Se liquida un periodo de acuerdo profesional.",
+      "preconditions": [
+        "Contrato/base de cálculo y periodo definidos."
+      ],
+      "steps": [
+        "CAJ|Elegir profesional, periodo y acuerdo vigente",
+        "SYS|Calcular propuesta desde realizado, facturado o cobrado según contrato",
+        "CAJ|Revisar partidas y ajustes autorizados",
+        "SYS|¿Cálculo y documentación completos?",
+        "ADM|Aprobar liquidación",
+        "CAJ|Registrar pago y entregar detalle autorizado"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Conservar propuesta y solicitar aclaración",
+          "resume": 3
+        },
+        {
+          "step": 5,
+          "label": "Rechazo",
+          "action": "Devolver propuesta con motivo; no pagar",
+          "terminal": "Liquidación pendiente de revisión."
+        }
+      ],
+      "end": "Liquidación revisada y pago identificado o saldo pendiente.",
+      "screens": [
+        "S37"
+      ],
+      "buttons": [
+        "Generar propuesta",
+        "Ver detalle",
+        "Registrar ajuste",
+        "Aprobar liquidación",
+        "Registrar pago",
+        "Entregar detalle"
+      ],
+      "handoffs": [
+        "F44"
+      ]
+    },
+    {
+      "id": "F47",
+      "name": "Solicitar, comprar y recibir productos",
+      "group": "Compras e inventario",
+      "phase": "AD",
+      "actors": [
+        "ALM",
+        "ADM",
+        "SYS",
+        "EXT"
+      ],
+      "trigger": "Se requieren insumos o productos.",
+      "preconditions": [
+        "Productos/unidades y proveedor identificados."
+      ],
+      "steps": [
+        "ALM|Crear solicitud y justificar cantidades",
+        "ADM|Revisar y autorizar compra",
+        "ALM|Emitir orden y registrar proveedor",
+        "ALM|Registrar recepción real, lotes y vencimientos cuando aplique",
+        "SYS|¿Recepción coincide o diferencia aceptada con motivo?",
+        "SYS|Crear stock recibido y pendientes de compra restantes"
+      ],
+      "decisions": [
+        5
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No autoriza",
+          "action": "Registrar rechazo y cerrar solicitud",
+          "terminal": "Sin compra."
+        },
+        {
+          "step": 5,
+          "label": "No",
+          "action": "Registrar discrepancia y separar cantidad aceptada/rechazada",
+          "resume": 4
+        }
+      ],
+      "end": "Recepción trazable y cantidades pendientes explícitas.",
+      "screens": [
+        "S38",
+        "S39"
+      ],
+      "buttons": [
+        "Nueva solicitud",
+        "Aprobar compra",
+        "Emitir orden",
+        "Registrar recepción",
+        "Registrar discrepancia",
+        "Ver pendientes"
+      ],
+      "handoffs": [
+        "F48"
+      ]
+    },
+    {
+      "id": "F48",
+      "name": "Mover, consumir, transferir o ajustar inventario",
+      "group": "Compras e inventario",
+      "phase": "AD",
+      "actors": [
+        "ALM",
+        "FAR",
+        "ASI",
+        "SYS",
+        "ADM"
+      ],
+      "trigger": "Se registra movimiento autorizado de stock.",
+      "preconditions": [
+        "Almacén, producto, unidad, lote y actor identificados."
+      ],
+      "steps": [
+        "ALM|Elegir movimiento, origen y referencia",
+        "ALM|Indicar cantidades y destino cuando corresponda",
+        "SYS|¿Stock, conversión y permisos válidos?",
+        "ALM|Confirmar salida o ajuste con motivo",
+        "SYS|Registrar movimientos vinculados sin duplicación",
+        "ALM|Confirmar recepción destino si existe transferencia"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Bloquear movimiento y mostrar inconsistencia",
+          "resume": 2
+        },
+        {
+          "step": 6,
+          "label": "Diferencia destino",
+          "action": "Conservar tránsito y registrar discrepancia con responsable",
+          "terminal": "Transferencia por conciliar."
+        },
+        {
+          "step": 4,
+          "label": "Reverso",
+          "action": "Crear movimiento inverso autorizado referenciado al original",
+          "resume": 5
+        }
+      ],
+      "end": "Stock trazable o movimiento en tránsito/revisión con responsable.",
+      "screens": [
+        "S39",
+        "S26"
+      ],
+      "buttons": [
+        "Registrar consumo",
+        "Transferir stock",
+        "Confirmar recepción",
+        "Solicitar ajuste",
+        "Aprobar ajuste",
+        "Registrar reverso"
+      ],
+      "handoffs": [
+        "F36",
+        "F47"
+      ]
+    },
+    {
+      "id": "F49",
+      "name": "Admitir paciente y asignar cama o jaula",
+      "group": "Hospitalización y urgencias",
+      "phase": "HO",
+      "actors": [
+        "PRO",
+        "REC",
+        "ASI",
+        "SYS"
+      ],
+      "trigger": "Se indica ingreso hospitalario humano o veterinario.",
+      "preconditions": [
+        "Decisión clínica registrada; recursos y permisos hospitalarios habilitados."
+      ],
+      "steps": [
+        "PRO|Registrar solicitud de ingreso y unidad adecuada",
+        "REC|Confirmar paciente y responsable administrativo",
+        "SYS|Presentar plazas compatibles y estado real",
+        "ASI|Seleccionar cama/jaula y comprobar preparación",
+        "SYS|¿Plaza sigue disponible y compatible?",
+        "SYS|Crear estancia y ocupación sin solapar asignaciones",
+        "ASI|Recibir paciente, órdenes y pendientes"
+      ],
+      "decisions": [
+        5
+      ],
+      "branches": [
+        {
+          "step": 5,
+          "label": "No",
+          "action": "Ofrecer otra plaza o dejar ingreso pendiente con responsable",
+          "resume": 3
+        },
+        {
+          "step": 1,
+          "label": "Ingreso cancelado",
+          "action": "Registrar motivo y liberar reserva aún no ocupada",
+          "terminal": "Sin estancia activa."
+        }
+      ],
+      "end": "Estancia activa con ubicación y equipo responsable.",
+      "screens": [
+        "S40",
+        "S41",
+        "S42"
+      ],
+      "buttons": [
+        "Solicitar ingreso",
+        "Ver plazas",
+        "Reservar plaza",
+        "Confirmar admisión",
+        "Registrar recepción",
+        "Cancelar solicitud"
+      ],
+      "handoffs": [
+        "F50",
+        "F55"
+      ]
+    },
+    {
+      "id": "F50",
+      "name": "Registrar cuidados, traslado y entrega de turno",
+      "group": "Hospitalización y urgencias",
+      "phase": "HO",
+      "actors": [
+        "ASI",
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Se ejecutan tareas de estancia, traslado o relevo de equipo.",
+      "preconditions": [
+        "Estancia activa y equipo autorizado."
+      ],
+      "steps": [
+        "ASI|Abrir estancia y tareas asignadas",
+        "ASI|Registrar observaciones, ejecución o excepción de cuidados",
+        "PRO|Actualizar órdenes y pendientes con responsables",
+        "ASI|Preparar traslado o entrega de turno con pendientes",
+        "SYS|¿Destino/equipo receptor disponible y autorizado?",
+        "ASI|Confirmar recepción y movimientos necesarios",
+        "SYS|Conservar intervalos, entrega y tareas aún abiertas"
+      ],
+      "decisions": [
+        5
+      ],
+      "branches": [
+        {
+          "step": 5,
+          "label": "No",
+          "action": "Mantener responsabilidad del equipo emisor y tarea de transferencia pendiente",
+          "terminal": "Entrega/traslado no confirmado."
+        },
+        {
+          "step": 2,
+          "label": "Tarea no realizada",
+          "action": "Registrar motivo y reasignar revisión",
+          "resume": 3
+        }
+      ],
+      "end": "Cuidados registrados y responsabilidad transferida solo con recepción confirmada.",
+      "screens": [
+        "S42",
+        "S41",
+        "S27"
+      ],
+      "buttons": [
+        "Registrar cuidado",
+        "Registrar excepción",
+        "Preparar traslado",
+        "Preparar entrega de turno",
+        "Aceptar entrega",
+        "Ver pendientes"
+      ],
+      "handoffs": [
+        "F37",
+        "F55"
+      ]
+    },
+    {
+      "id": "F51",
+      "name": "Recibir urgencia, reevaluar y decidir destino",
+      "group": "Hospitalización y urgencias",
+      "phase": "HO",
+      "actors": [
+        "REC",
+        "ASI",
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "Llega paciente que requiere circuito de urgencia.",
+      "preconditions": [
+        "Circuito de urgencias, clasificación y roles definidos por equipo clínico."
+      ],
+      "steps": [
+        "REC|Registrar llegada e identidad provisional si hace falta",
+        "ASI|Registrar valoración/clasificación según procedimiento validado",
+        "PRO|Iniciar atención y registrar actuaciones",
+        "PRO|Registrar reevaluaciones como eventos nuevos",
+        "PRO|Definir observación, hospitalización, traslado o egreso",
+        "SYS|¿Destino y receptor confirmados cuando corresponda?",
+        "SYS|Cerrar transición y conservar tiempos, órdenes y pendientes"
+      ],
+      "decisions": [
+        6
+      ],
+      "branches": [
+        {
+          "step": 6,
+          "label": "No",
+          "action": "Mantener circuito/responsabilidad vigente y escalar coordinación",
+          "terminal": "Destino pendiente; atención continúa bajo equipo emisor."
+        },
+        {
+          "step": 1,
+          "label": "Identidad resuelta después",
+          "action": "Vincular identidad mediante revisión trazable sin duplicar actuación",
+          "resume": 3
+        }
+      ],
+      "end": "Destino registrado y transferencia confirmada o pendiente explícito.",
+      "screens": [
+        "S45",
+        "S18",
+        "S40"
+      ],
+      "buttons": [
+        "Registrar urgencia",
+        "Registrar clasificación",
+        "Añadir reevaluación",
+        "Indicar destino",
+        "Confirmar transferencia",
+        "Resolver identidad"
+      ],
+      "handoffs": [
+        "F13",
+        "F49",
+        "F55"
+      ]
+    },
+    {
+      "id": "F52",
+      "name": "Proponer y programar un caso quirúrgico",
+      "group": "Cirugía y anestesia",
+      "phase": "HO",
+      "actors": [
+        "PRO",
+        "REC",
+        "ASI",
+        "SYS"
+      ],
+      "trigger": "Se propone procedimiento que necesita circuito quirúrgico.",
+      "preconditions": [
+        "Caso clínico y recursos/profesionales habilitados."
+      ],
+      "steps": [
+        "PRO|Crear caso con paciente, procedimiento y localización",
+        "REC|Proponer fecha, sala, equipo y recursos",
+        "SYS|¿Disponibilidad y requisitos de preparación completos?",
+        "PRO|Revisar preparación y consentimientos aplicables",
+        "REC|Confirmar programación",
+        "SYS|Reservar recursos y crear tareas preoperatorias"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Registrar faltantes o conflicto y mantener propuesta",
+          "resume": 2
+        },
+        {
+          "step": 5,
+          "label": "Cancelar/reprogramar",
+          "action": "Registrar motivo y liberar/reasignar recursos conservando historia",
+          "terminal": "Caso cancelado o reprogramado, sin ejecución registrada."
+        }
+      ],
+      "end": "Caso programado con tareas y responsables.",
+      "screens": [
+        "S43",
+        "S14",
+        "S28"
+      ],
+      "buttons": [
+        "Proponer cirugía",
+        "Ver disponibilidad",
+        "Ver preparación",
+        "Programar caso",
+        "Reprogramar caso",
+        "Cancelar programación"
+      ],
+      "handoffs": [
+        "F53",
+        "F54"
+      ]
+    },
+    {
+      "id": "F53",
+      "name": "Ejecutar procedimiento quirúrgico y cerrar parte",
+      "group": "Cirugía y anestesia",
+      "phase": "HO",
+      "actors": [
+        "PRO",
+        "ASI",
+        "SYS"
+      ],
+      "trigger": "El equipo inicia un caso programado o autorizado.",
+      "preconditions": [
+        "Identidad, caso, equipo y requisitos clínicos confirmados."
+      ],
+      "steps": [
+        "ASI|Confirmar paciente, caso y verificaciones registradas",
+        "SYS|¿Caso habilitado para iniciar según comprobaciones?",
+        "PRO|Iniciar y registrar tiempos, participantes y actuación realizada",
+        "ASI|Registrar materiales, implantes y muestras vinculadas",
+        "PRO|Registrar eventos e interrupciones y cerrar parte quirúrgico",
+        "SYS|Vincular recuperación, órdenes y pendientes"
+      ],
+      "decisions": [
+        2
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Detener inicio y asignar resolución de faltantes",
+          "terminal": "Caso no iniciado."
+        },
+        {
+          "step": 3,
+          "label": "Interrumpir tras inicio",
+          "action": "Conservar actuación parcial y motivo; dirigir al destino clínico decidido",
+          "resume": 5
+        }
+      ],
+      "end": "Parte de lo realmente realizado conservado, con recuperación y pendientes.",
+      "screens": [
+        "S43",
+        "S44",
+        "S22"
+      ],
+      "buttons": [
+        "Verificar caso",
+        "Iniciar procedimiento",
+        "Registrar implante",
+        "Registrar muestra",
+        "Registrar interrupción",
+        "Cerrar parte"
+      ],
+      "handoffs": [
+        "F31",
+        "F48",
+        "F54",
+        "F55"
+      ]
+    },
+    {
+      "id": "F54",
+      "name": "Registrar anestesia y recuperación",
+      "group": "Cirugía y anestesia",
+      "phase": "HO",
+      "actors": [
+        "PRO",
+        "ASI",
+        "SYS"
+      ],
+      "trigger": "Se inicia evaluación/cuidado anestésico de un caso.",
+      "preconditions": [
+        "Profesional habilitado y vínculo al caso/paciente correcto."
+      ],
+      "steps": [
+        "PRO|Registrar evaluación y plan profesional",
+        "PRO|Confirmar inicio autorizado y contexto del caso",
+        "ASI|Registrar tiempos, observaciones y administraciones efectivas",
+        "PRO|Registrar eventos y finalización de actuación",
+        "ASI|Recibir en recuperación y registrar evolución",
+        "SYS|¿Criterio de salida registrado por actor autorizado?",
+        "SYS|Cerrar recuperación y entregar órdenes/pendientes al destino"
+      ],
+      "decisions": [
+        6
+      ],
+      "branches": [
+        {
+          "step": 6,
+          "label": "No",
+          "action": "Mantener recuperación activa con responsable",
+          "resume": 5
+        },
+        {
+          "step": 3,
+          "label": "Cambio o interrupción",
+          "action": "Registrar evento y decisión profesional sin alterar hechos anteriores",
+          "resume": 4
+        }
+      ],
+      "end": "Registro anestésico/recuperación cerrado o activo con estado real.",
+      "screens": [
+        "S44",
+        "S27",
+        "S42"
+      ],
+      "buttons": [
+        "Registrar evaluación",
+        "Iniciar registro",
+        "Añadir observación",
+        "Registrar administración",
+        "Registrar evento",
+        "Confirmar salida de recuperación"
+      ],
+      "handoffs": [
+        "F37",
+        "F50",
+        "F55"
+      ]
+    },
+    {
+      "id": "F55",
+      "name": "Preparar alta, egreso y seguimiento",
+      "group": "Hospitalización y urgencias",
+      "phase": "HO",
+      "actors": [
+        "PRO",
+        "ASI",
+        "REC",
+        "PAC",
+        "RES",
+        "SYS"
+      ],
+      "trigger": "Se decide finalizar una estancia o circuito asistencial.",
+      "preconditions": [
+        "Decisión de alta clínica y responsables identificados."
+      ],
+      "steps": [
+        "PRO|Preparar resumen, indicaciones y pendientes",
+        "SYS|¿Cada pendiente tiene responsable/destino?",
+        "PRO|Revisar y emitir alta clínica",
+        "PAC|Recibir documentos autorizados y confirmación registrada",
+        "ASI|Registrar egreso físico y entrega de información",
+        "SYS|Cerrar ocupación y actualizar estado de recurso",
+        "REC|Gestionar controles y trámites económicos separados"
+      ],
+      "decisions": [
+        2
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Solicitar asignación antes de completar el plan de alta",
+          "resume": 1
+        },
+        {
+          "step": 5,
+          "label": "Salida aún no realizada",
+          "action": "Conservar alta clínica y plaza ocupada con estado explícito",
+          "terminal": "Alta clínica emitida; egreso físico pendiente."
+        }
+      ],
+      "end": "Egreso documentado y seguimiento conservado; caja no determina el estado clínico.",
+      "screens": [
+        "S42",
+        "S40",
+        "S28",
+        "S33"
+      ],
+      "buttons": [
+        "Preparar alta",
+        "Asignar pendientes",
+        "Emitir resumen",
+        "Registrar entrega",
+        "Confirmar egreso",
+        "Programar control"
+      ],
+      "handoffs": [
+        "F34",
+        "F40",
+        "F41",
+        "F44"
+      ]
+    },
+    {
+      "id": "F56",
+      "name": "Planificar y registrar curso de sesiones especializadas",
+      "group": "Capacidades avanzadas",
+      "phase": "AV",
+      "actors": [
+        "PRO",
+        "ASI",
+        "SYS"
+      ],
+      "trigger": "Se inicia curso de radioterapia, oncología u otro tratamiento por sesiones.",
+      "preconditions": [
+        "Paquete/flujo específico y validación clínica implementados."
+      ],
+      "steps": [
+        "PRO|Crear curso y plan versionado según decisión profesional",
+        "PRO|Asignar equipo, recursos y sesiones previstas",
+        "SYS|¿Requisitos de la sesión y autorización completos?",
+        "ASI|Registrar ejecución real y observaciones de sesión",
+        "PRO|Registrar evaluación y cambios prospectivos del plan",
+        "SYS|Cerrar sesión/curso con pendientes y documentación"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Mantener sesión pendiente con faltantes y responsable",
+          "terminal": "Sesión no iniciada."
+        },
+        {
+          "step": 4,
+          "label": "No realizada o interrumpida",
+          "action": "Registrar motivo y hechos parciales; reprogramación explícita",
+          "resume": 5
+        }
+      ],
+      "end": "Curso y sesiones trazables; ningún cálculo o protocolo se presume implementado.",
+      "screens": [
+        "S46",
+        "S18",
+        "S14"
+      ],
+      "buttons": [
+        "Crear curso",
+        "Versionar plan",
+        "Programar sesión",
+        "Registrar sesión",
+        "Registrar interrupción",
+        "Cerrar curso"
+      ],
+      "handoffs": [
+        "F25",
+        "F27",
+        "F41"
+      ]
+    },
+    {
+      "id": "F57",
+      "name": "Gestionar componente sanguíneo y transfusión",
+      "group": "Capacidades avanzadas",
+      "phase": "AV",
+      "actors": [
+        "DIA",
+        "PRO",
+        "ASI",
+        "SYS"
+      ],
+      "trigger": "Se solicita componente sanguíneo para un paciente.",
+      "preconditions": [
+        "Flujo validado y roles/identificación/trazabilidad disponibles."
+      ],
+      "steps": [
+        "PRO|Registrar solicitud y contexto clínico",
+        "DIA|Asignar unidad, pruebas y revisión requerida",
+        "SYS|¿Identificación y verificaciones profesionales completas?",
+        "DIA|Registrar liberación y entrega de componente",
+        "ASI|Registrar actuación real, tiempos y observaciones",
+        "SYS|Conciliar unidad utilizada/devuelta y documentar eventos"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Bloquear liberación y asignar revisión",
+          "terminal": "Solicitud pendiente de resolución."
+        },
+        {
+          "step": 5,
+          "label": "No realizada o evento",
+          "action": "Registrar hechos y revisión profesional; no cerrar como realizada completa",
+          "resume": 6
+        }
+      ],
+      "end": "Solicitud, unidad y evento vinculados con trazabilidad.",
+      "screens": [
+        "S46",
+        "S23",
+        "S27"
+      ],
+      "buttons": [
+        "Solicitar componente",
+        "Revisar verificaciones",
+        "Registrar entrega",
+        "Registrar actuación",
+        "Registrar evento",
+        "Conciliar unidad"
+      ],
+      "handoffs": [
+        "F34",
+        "F37"
+      ]
+    },
+    {
+      "id": "F58",
+      "name": "Gestionar episodio de trasplante",
+      "group": "Capacidades avanzadas",
+      "phase": "AV",
+      "actors": [
+        "PRO",
+        "REC",
+        "SYS",
+        "EXT"
+      ],
+      "trigger": "Se inicia evaluación o seguimiento de un episodio de trasplante.",
+      "preconditions": [
+        "Flujo especializado, permisos y requisitos legales/clinicos concretados."
+      ],
+      "steps": [
+        "PRO|Crear episodio y roles de participantes con identidad separada",
+        "PRO|Registrar evaluaciones, solicitudes y documentos",
+        "SYS|¿Permisos y requisitos para etapa correspondiente completos?",
+        "REC|Coordinar etapa con centro/equipo autorizado",
+        "PRO|Registrar procedimiento o seguimiento realmente realizado",
+        "SYS|Conservar procedencias, restricciones y pendientes del episodio"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Mantener etapa pendiente; no avanzar por estado automático",
+          "terminal": "Etapa pendiente de decisión autorizada."
+        }
+      ],
+      "end": "Etapa del episodio documentada sin asumir decisiones clínicas o asignación automática.",
+      "screens": [
+        "S46",
+        "S19",
+        "S20",
+        "S43"
+      ],
+      "buttons": [
+        "Crear episodio especializado",
+        "Registrar evaluación",
+        "Ver requisitos",
+        "Coordinar etapa",
+        "Registrar actuación",
+        "Programar seguimiento"
+      ],
+      "handoffs": [
+        "F30",
+        "F52",
+        "F55"
+      ]
+    },
+    {
+      "id": "F59",
+      "name": "Gestionar ciclo reproductivo y muestras vinculadas",
+      "group": "Capacidades avanzadas",
+      "phase": "AV",
+      "actors": [
+        "PRO",
+        "DIA",
+        "PAC",
+        "RES",
+        "SYS"
+      ],
+      "trigger": "Se inicia ciclo reproductivo humano o veterinario autorizado.",
+      "preconditions": [
+        "Paquete, sujetos, permisos, consentimientos y trazabilidad específica definidos."
+      ],
+      "steps": [
+        "PRO|Crear ciclo y participantes/pacientes con vínculos autorizados",
+        "PRO|Registrar plan profesional y consentimientos aplicables",
+        "DIA|Identificar muestras, procedencia, custodia y etapas",
+        "SYS|¿Identificación y autorizaciones suficientes para continuar?",
+        "PRO|Registrar etapas y actuaciones realizadas",
+        "SYS|Conservar resultados, vínculos de descendencia cuando proceda y seguimiento"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Detener etapa y asignar revisión sin perder trazabilidad",
+          "terminal": "Ciclo en espera de resolución."
+        },
+        {
+          "step": 5,
+          "label": "Cancelación o suspensión",
+          "action": "Registrar decisión y destino autorizado de recursos/muestras",
+          "terminal": "Ciclo suspendido/cancelado con evidencia."
+        }
+      ],
+      "end": "Etapas y sujetos vinculados sin fusionar identidades ni historiales.",
+      "screens": [
+        "S46",
+        "S22",
+        "S28"
+      ],
+      "buttons": [
+        "Crear ciclo",
+        "Vincular participantes",
+        "Registrar custodia",
+        "Revisar etapa",
+        "Registrar actuación",
+        "Suspender ciclo"
+      ],
+      "handoffs": [
+        "F31",
+        "F38",
+        "F41"
+      ]
+    },
+    {
+      "id": "F60",
+      "name": "Registrar intervención sanitaria poblacional veterinaria",
+      "group": "Capacidades avanzadas",
+      "phase": "AV",
+      "actors": [
+        "PRO",
+        "ASI",
+        "RES",
+        "SYS"
+      ],
+      "trigger": "Se planifica una intervención o estudio de población animal.",
+      "preconditions": [
+        "Población y pertenencias identificadas; permiso poblacional."
+      ],
+      "steps": [
+        "PRO|Seleccionar población, periodo y alcance",
+        "PRO|Registrar plan, denominador y unidades",
+        "ASI|Registrar muestras, observaciones y actuaciones grupales/individuales",
+        "SYS|¿Datos y sujetos consistentes?",
+        "PRO|Revisar resultados y registrar decisiones profesionales",
+        "SYS|Guardar informe y tareas de seguimiento de población"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Solicitar reconciliación de sujetos, periodo o denominador",
+          "resume": 3
+        },
+        {
+          "step": 3,
+          "label": "Animal sale del grupo",
+          "action": "Cerrar pertenencia temporal sin perder actuaciones anteriores",
+          "resume": 4
+        }
+      ],
+      "end": "Intervención trazable con datos colectivos separados de individuos.",
+      "screens": [
+        "S47",
+        "S13",
+        "S23"
+      ],
+      "buttons": [
+        "Crear intervención",
+        "Seleccionar población",
+        "Registrar denominador",
+        "Registrar actuación grupal",
+        "Emitir informe poblacional",
+        "Crear seguimiento"
+      ],
+      "handoffs": [
+        "F14",
+        "F31",
+        "F41"
+      ]
+    },
+    {
+      "id": "F61",
+      "name": "Dictar y revisar un borrador asistido por IA",
+      "group": "Integraciones y operación SaaS",
+      "phase": "TR",
+      "actors": [
+        "PRO",
+        "SYS",
+        "EXT"
+      ],
+      "trigger": "El profesional utiliza dictado habilitado sobre atención editable.",
+      "preconditions": [
+        "Proveedor, tratamiento de audio y permisos definidos; contexto confirmado."
+      ],
+      "steps": [
+        "PRO|Elegir sección y activar dictado autorizado",
+        "SYS|Mostrar captura y permitir detenerla",
+        "EXT|Producir transcripción/propuesta de campos",
+        "PRO|Comparar, corregir y aceptar contenido seleccionado",
+        "SYS|¿Valores aceptados cumplen reglas de captura?",
+        "SYS|Guardar como borrador bajo autoría y revisión profesional"
+      ],
+      "decisions": [
+        5
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "Proveedor falla",
+          "action": "Permitir captura manual; indicar audio/propuesta no incorporados",
+          "terminal": "Dictado sin incorporación automática."
+        },
+        {
+          "step": 4,
+          "label": "Descartar",
+          "action": "No incorporar propuesta y aplicar política de audio definida",
+          "terminal": "Propuesta descartada."
+        },
+        {
+          "step": 5,
+          "label": "No",
+          "action": "Señalar campos incompatibles para revisión",
+          "resume": 4
+        }
+      ],
+      "end": "Borrador revisado por profesional; sin firma automática ni datos inventados incorporados.",
+      "screens": [
+        "S18",
+        "S54"
+      ],
+      "buttons": [
+        "Iniciar dictado",
+        "Detener dictado",
+        "Revisar transcripción",
+        "Aceptar selección",
+        "Descartar propuesta"
+      ],
+      "handoffs": [
+        "F22",
+        "F27"
+      ]
+    },
+    {
+      "id": "F62",
+      "name": "Ejecutar integración y resolver fallos",
+      "group": "Integraciones y operación SaaS",
+      "phase": "TR",
+      "actors": [
+        "ADM",
+        "SYS",
+        "EXT"
+      ],
+      "trigger": "Una operación confirmada necesita calendario, comunicación, pago o emisión externa.",
+      "preconditions": [
+        "Integración habilitada con alcance definido."
+      ],
+      "steps": [
+        "SYS|Registrar tarea externa después de operación local confirmada",
+        "SYS|Enviar solicitud identificada al proveedor",
+        "EXT|Responder o notificar evento verificable",
+        "SYS|¿Respuesta válida y operación identificada?",
+        "SYS|Actualizar solo el estado correspondiente",
+        "ADM|Resolver fallos pendientes o revocar integración según permiso"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No; temporal",
+          "action": "Reintentar la misma operación sin duplicar efecto",
+          "resume": 2
+        },
+        {
+          "step": 4,
+          "label": "Discrepancia",
+          "action": "Conservar estado local y asignar conciliación",
+          "terminal": "Integración pendiente de conciliación."
+        }
+      ],
+      "end": "Estado externo conciliado o pendiente asignado; no deshacer atención por fallo de notificación.",
+      "screens": [
+        "S54",
+        "S51"
+      ],
+      "buttons": [
+        "Ver integración",
+        "Ver tarea fallida",
+        "Reintentar operación",
+        "Resolver discrepancia",
+        "Desconectar integración"
+      ],
+      "handoffs": [
+        "F18",
+        "F45",
+        "F73"
+      ]
+    },
+    {
+      "id": "F63",
+      "name": "Gestionar reserva asistida y cobro anticipado",
+      "group": "Integraciones y operación SaaS",
+      "phase": "AD",
+      "actors": [
+        "PAC",
+        "RES",
+        "REC",
+        "SYS",
+        "EXT"
+      ],
+      "trigger": "Se solicita cita por canal asistido habilitado.",
+      "preconditions": [
+        "Política de agenda, identificación y anticipo definidas; proveedor autorizado."
+      ],
+      "steps": [
+        "PAC|Indicar paciente y servicio mediante canal permitido",
+        "SYS|Verificar vínculo antes de exponer datos específicos",
+        "SYS|Ofrecer disponibilidad y condiciones de reserva/anticipo",
+        "PAC|Elegir y confirmar solicitud",
+        "EXT|Confirmar pago cuando corresponda mediante respuesta verificable",
+        "SYS|¿Reserva y condiciones completas?",
+        "SYS|Confirmar cita o entregar solicitud a recepción con estado real"
+      ],
+      "decisions": [
+        6
+      ],
+      "branches": [
+        {
+          "step": 6,
+          "label": "No",
+          "action": "Mantener pendiente y ofrecer resolución por recepción; liberar reserva temporal según política",
+          "terminal": "Cita no confirmada o pendiente explícita."
+        },
+        {
+          "step": 2,
+          "label": "Identidad no verificada",
+          "action": "Atender consulta general sin revelar datos del paciente; derivar verificación",
+          "terminal": "Solicitud sin acceso clínico."
+        }
+      ],
+      "end": "Reserva/pago trazables; canal asistido no accede a historia interna.",
+      "screens": [
+        "S15",
+        "S30",
+        "S35",
+        "S54"
+      ],
+      "buttons": [
+        "Revisar solicitud asistida",
+        "Continuar reserva",
+        "Ver condiciones",
+        "Pagar anticipo",
+        "Derivar a recepción"
+      ],
+      "handoffs": [
+        "F17",
+        "F44",
+        "F62"
+      ]
+    },
+    {
+      "id": "F64",
+      "name": "Importar o exportar datos de una organización",
+      "group": "Integraciones y operación SaaS",
+      "phase": "TR",
+      "actors": [
+        "ADM",
+        "SOP",
+        "SYS"
+      ],
+      "trigger": "Se incorpora información histórica o se solicita exportación autorizada.",
+      "preconditions": [
+        "Actor, finalidad y alcance verificados."
+      ],
+      "steps": [
+        "ADM|Elegir operación, alcance y formato versionado",
+        "SYS|¿Permisos y contexto correctos?",
+        "ADM|Revisar vista previa, totales y datos excluidos/rechazados",
+        "ADM|Confirmar lote de importación o exportación",
+        "SYS|Procesar con procedencia, referencias e identificación del lote",
+        "SYS|Entregar reporte/manifiesto y archivo privado autorizado"
+      ],
+      "decisions": [
+        2
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Denegar operación sin crear archivo ni exponer información",
+          "terminal": "Operación rechazada."
+        },
+        {
+          "step": 3,
+          "label": "Errores de importación",
+          "action": "Permitir corregir entradas; no confirmar lote incompatible",
+          "resume": 1
+        },
+        {
+          "step": 5,
+          "label": "Mismo lote",
+          "action": "Informar resultado existente sin duplicar registros",
+          "resume": 6
+        }
+      ],
+      "end": "Lote reconciliado o exportación auditable, incluyendo versiones/documentos y unidades.",
+      "screens": [
+        "S48"
+      ],
+      "buttons": [
+        "Nueva importación",
+        "Seleccionar formato",
+        "Ver vista previa",
+        "Confirmar lote",
+        "Solicitar exportación",
+        "Descargar manifiesto"
+      ],
+      "handoffs": [
+        "F13",
+        "F68"
+      ]
+    },
+    {
+      "id": "F65",
+      "name": "Consultar reportes y auditar acceso o cambios",
+      "group": "Integraciones y operación SaaS",
+      "phase": "TR",
+      "actors": [
+        "ADM",
+        "AUD",
+        "PRO",
+        "SYS",
+        "CAJ"
+      ],
+      "trigger": "Se solicita indicador, reporte o evidencia de una operación.",
+      "preconditions": [
+        "Permiso, finalidad y alcance del reporte establecidos."
+      ],
+      "steps": [
+        "AUD|Seleccionar reporte/evidencia y ámbito permitido",
+        "SYS|Aplicar permisos y datos mínimos para finalidad",
+        "AUD|Elegir filtros y periodo",
+        "SYS|¿Consulta/exportación autorizada?",
+        "SYS|Mostrar resultados con definición, alcance y fecha",
+        "AUD|Inspeccionar detalle o exportar con auditoría"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Rechazar exportación o mostrar solo vista permitida",
+          "terminal": "Sin entrega fuera de alcance."
+        },
+        {
+          "step": 5,
+          "label": "Sin resultados",
+          "action": "Mostrar estado vacío y filtros aplicados; distinguirlo de acceso limitado",
+          "terminal": "Consulta sin resultados visibles."
+        }
+      ],
+      "end": "Reporte/evidencia consultado con trazabilidad y alcance explícito.",
+      "screens": [
+        "S49",
+        "S50"
+      ],
+      "buttons": [
+        "Ver reporte",
+        "Aplicar filtros",
+        "Ver definición",
+        "Inspeccionar evento",
+        "Exportar autorizado"
+      ],
+      "handoffs": [
+        "F64"
+      ]
+    },
+    {
+      "id": "F66",
+      "name": "Solicitar soporte y conceder acceso temporal",
+      "group": "Integraciones y operación SaaS",
+      "phase": "TR",
+      "actors": [
+        "ADM",
+        "PRO",
+        "SOP",
+        "SYS"
+      ],
+      "trigger": "Un usuario reporta un problema o requiere asistencia.",
+      "preconditions": [
+        "Cuenta activa o canal de soporte autorizado; evidencia mínima necesaria."
+      ],
+      "steps": [
+        "PRO|Crear caso con descripción y referencias sin datos sensibles innecesarios",
+        "SOP|Clasificar y asignar responsable",
+        "SYS|¿Resolver requiere acceso excepcional a datos?",
+        "ADM|Autorizar alcance, duración y finalidad del acceso si procede",
+        "SOP|Investigar y registrar acciones realizadas",
+        "SYS|Revocar acceso temporal y registrar resolución o pendientes"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Investigar mediante evidencias técnicas permitidas",
+          "resume": 5
+        },
+        {
+          "step": 4,
+          "label": "No autoriza",
+          "action": "Continuar con evidencia permitida o solicitar alternativa concreta",
+          "terminal": "Caso abierto con limitación de acceso."
+        }
+      ],
+      "end": "Caso resuelto o pendiente; acceso excepcional terminado y auditado.",
+      "screens": [
+        "S51",
+        "S52"
+      ],
+      "buttons": [
+        "Crear caso",
+        "Añadir evidencia",
+        "Autorizar acceso temporal",
+        "Rechazar acceso",
+        "Ver actividad",
+        "Cerrar caso"
+      ],
+      "handoffs": [
+        "F65",
+        "F69"
+      ]
+    },
+    {
+      "id": "F67",
+      "name": "Gestionar plan, consumo y suscripción SaaS",
+      "group": "Integraciones y operación SaaS",
+      "phase": "TR",
+      "actors": [
+        "ADM",
+        "CAJ",
+        "SOP",
+        "SYS",
+        "EXT"
+      ],
+      "trigger": "Se contrata, cambia o renueva el servicio de Health Project.",
+      "preconditions": [
+        "Condiciones comerciales, límites y políticas documentadas."
+      ],
+      "steps": [
+        "ADM|Revisar plan, capacidades disponibles y consumo",
+        "ADM|Solicitar alta, cambio o renovación",
+        "SYS|Mostrar costo, vigencia e impacto en habilitación",
+        "ADM|Aceptar condiciones aplicables",
+        "SYS|Registrar contratación y respuesta de cobro verificable",
+        "SYS|Aplicar derechos conforme a vigencia y disponibilidad real"
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "Cancelar",
+          "action": "Mantener plan vigente",
+          "terminal": "Sin cambio comercial."
+        },
+        {
+          "step": 5,
+          "label": "Pago pendiente o impago",
+          "action": "Mostrar estado y aplicar política definida preservando custodia/continuidad acordada",
+          "terminal": "Suscripción con resolución pendiente."
+        }
+      ],
+      "end": "Plan y derechos trazables; factura SaaS separada de comprobantes de la clínica.",
+      "screens": [
+        "S51",
+        "S52"
+      ],
+      "buttons": [
+        "Ver plan",
+        "Ver consumo",
+        "Solicitar cambio",
+        "Revisar condiciones",
+        "Confirmar contratación",
+        "Ver estado de pago"
+      ],
+      "handoffs": [
+        "F68"
+      ]
+    },
+    {
+      "id": "F68",
+      "name": "Dar de baja organización y entregar sus datos",
+      "group": "Integraciones y operación SaaS",
+      "phase": "TR",
+      "actors": [
+        "ADM",
+        "SOP",
+        "SYS"
+      ],
+      "trigger": "El responsable autorizado solicita salida de la plataforma.",
+      "preconditions": [
+        "Identidad y facultad de solicitud verificadas; política de conservación definida."
+      ],
+      "steps": [
+        "ADM|Solicitar baja y revisar obligaciones/impacto",
+        "SYS|Identificar cuentas, integraciones y pendientes afectados",
+        "ADM|Solicitar exportación y confirmar recepción autorizada",
+        "SOP|Acordar fecha y condiciones de cierre",
+        "SYS|Revocar accesos/integraciones según acuerdo y conservar evidencia",
+        "SYS|Aplicar conservación y eliminación solo según política validada"
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "Entrega incompleta",
+          "action": "Reconciliar exportación antes de cerrar entrega",
+          "resume": 3
+        },
+        {
+          "step": 4,
+          "label": "Desistir",
+          "action": "Conservar servicio según condiciones vigentes",
+          "terminal": "Baja cancelada."
+        },
+        {
+          "step": 6,
+          "label": "Conservación requerida",
+          "action": "Mantener datos bajo custodia definida y acceso limitado",
+          "terminal": "Espacio cerrado; datos conservados conforme a política."
+        }
+      ],
+      "end": "Salida documentada con datos entregados y política de conservación aplicada.",
+      "screens": [
+        "S51",
+        "S48",
+        "S52"
+      ],
+      "buttons": [
+        "Solicitar baja",
+        "Ver impacto",
+        "Preparar entrega",
+        "Confirmar recepción",
+        "Confirmar cierre",
+        "Cancelar solicitud"
+      ],
+      "handoffs": [
+        "F64",
+        "F65"
+      ]
+    },
+    {
+      "id": "F69",
+      "name": "Gestionar incidente y comprobar recuperación",
+      "group": "Integraciones y operación SaaS",
+      "phase": "TR",
+      "actors": [
+        "SOP",
+        "ADM",
+        "SYS"
+      ],
+      "trigger": "Se detecta incidente o se realiza simulacro de recuperación.",
+      "preconditions": [
+        "Responsables, objetivos y procedimiento operativo definidos."
+      ],
+      "steps": [
+        "SOP|Registrar incidente, alcance y responsable",
+        "SOP|Evaluar impacto y comunicar por canales establecidos",
+        "SOP|Aplicar procedimiento de recuperación autorizado",
+        "SYS|Comprobar consistencia de base, archivos, claves y configuración",
+        "SOP|¿Evidencias cumplen objetivos acordados?",
+        "SOP|Restablecer operación y documentar retorno/acciones pendientes"
+      ],
+      "decisions": [
+        5
+      ],
+      "branches": [
+        {
+          "step": 5,
+          "label": "No",
+          "action": "Mantener incidente activo y corregir recuperación con responsable",
+          "resume": 3
+        }
+      ],
+      "end": "Operación recuperada con evidencia o incidente activo; no inferir recuperación por existir backup.",
+      "screens": [
+        "S52",
+        "S51"
+      ],
+      "buttons": [
+        "Registrar incidente",
+        "Ver impacto",
+        "Registrar recuperación",
+        "Adjuntar evidencia",
+        "Confirmar retorno",
+        "Crear acción pendiente"
+      ],
+      "handoffs": [
+        "F66",
+        "F65"
+      ]
+    },
+    {
+      "id": "F70",
+      "name": "Ingresar al portal de paciente o responsable",
+      "group": "Portal y seguimiento",
+      "phase": "CE",
+      "actors": [
+        "PAC",
+        "RES",
+        "SYS"
+      ],
+      "trigger": "Una persona accede al portal externo.",
+      "preconditions": [
+        "Cuenta externa o invitación válida; contexto de portal identificado."
+      ],
+      "steps": [
+        "PAC|Ingresar con su cuenta externa o completar invitación",
+        "SYS|¿Cuenta válida y vínculo vigente?",
+        "SYS|Mostrar personas/animales y organizaciones autorizados",
+        "PAC|Elegir paciente/animal y organización",
+        "SYS|Abrir inicio de portal con citas y documentos publicados"
+      ],
+      "decisions": [
+        2
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Solicitar recuperación o verificación sin revelar identidades ajenas",
+          "terminal": "Portal sin datos clínicos abiertos."
+        },
+        {
+          "step": 3,
+          "label": "Sin vínculos",
+          "action": "Mostrar estado sin pacientes y opción de verificar invitación",
+          "terminal": "Cuenta válida sin acceso a paciente."
+        }
+      ],
+      "end": "Portal abierto bajo vínculo y contexto verificables; login externo no exige RUC del paciente.",
+      "screens": [
+        "S02",
+        "S29",
+        "S32"
+      ],
+      "buttons": [
+        "Ingresar al portal",
+        "Completar invitación",
+        "Elegir paciente",
+        "Elegir organización",
+        "Ver mis citas"
+      ],
+      "handoffs": [
+        "F03",
+        "F39",
+        "F17",
+        "F71"
+      ]
+    },
+    {
+      "id": "F71",
+      "name": "Consultar y descargar contenido publicado",
+      "group": "Portal y seguimiento",
+      "phase": "CE",
+      "actors": [
+        "PAC",
+        "RES",
+        "SYS"
+      ],
+      "trigger": "El destinatario abre un documento o información publicada.",
+      "preconditions": [
+        "Cuenta, vínculo y publicación vigentes."
+      ],
+      "steps": [
+        "PAC|Seleccionar paciente/contexto y publicación",
+        "SYS|¿Acceso vigente a esta versión concreta?",
+        "SYS|Mostrar contenido, emisor, fecha y versión",
+        "PAC|Consultar o solicitar descarga autorizada",
+        "SYS|Verificar permiso de entrega y registrar acceso/descarga"
+      ],
+      "decisions": [
+        2
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Explicar disponibilidad restringida sin revelar contenido; actualizar lista",
+          "terminal": "Documento sin abrir."
+        },
+        {
+          "step": 3,
+          "label": "Versión sustituida",
+          "action": "Indicar corrección y ofrecer versión publicada actual con procedencia",
+          "resume": 4
+        }
+      ],
+      "end": "Contenido entregado al destinatario permitido, sin acceso a notas internas por defecto.",
+      "screens": [
+        "S31",
+        "S29"
+      ],
+      "buttons": [
+        "Ver documento",
+        "Ver versión actual",
+        "Descargar documento",
+        "Ver emisor"
+      ],
+      "handoffs": [
+        "F41"
+      ]
+    },
+    {
+      "id": "F72",
+      "name": "Utilizar componente gráfico especializado",
+      "group": "Atención y expediente",
+      "phase": "TR",
+      "actors": [
+        "PRO",
+        "SYS"
+      ],
+      "trigger": "La especialidad requiere periodontograma, conductos, oclusión, mapa ocular, audiograma u otro componente específico.",
+      "preconditions": [
+        "Capacidad de interacción y datos validada para ese paquete/perfil."
+      ],
+      "steps": [
+        "SYS|Cargar componente, versión, esquema y perfil compatibles",
+        "PRO|Seleccionar estructura, sitio, dimensión o estudio según componente",
+        "PRO|Introducir datos semánticos y estado clínico",
+        "SYS|¿Datos e interacción válidos según reglas específicas?",
+        "PRO|Revisar gráfico junto con tabla/listado equivalente",
+        "SYS|Guardar revisión y vínculos clínicos",
+        "PRO|Comparar versiones/visitas y cerrar mediante flujo documental"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Conservar captura y mostrar error específico del componente",
+          "resume": 2
+        },
+        {
+          "step": 1,
+          "label": "Capacidad aún no validada",
+          "action": "Mostrar alcance disponible sin habilitar operación dependiente",
+          "terminal": "Componente no operativo para esa capacidad."
+        }
+      ],
+      "end": "Datos especializados persistibles y reproducibles; interacción particular documentada por familia.",
+      "screens": [
+        "S18",
+        "S19",
+        "S24"
+      ],
+      "buttons": [
+        "Abrir componente",
+        "Elegir estructura",
+        "Añadir registro",
+        "Ver tabla equivalente",
+        "Comparar visitas",
+        "Revisar cambios"
+      ],
+      "handoffs": [
+        "F23",
+        "F24",
+        "F25",
+        "F27"
+      ]
+    },
+    {
+      "id": "F73",
+      "name": "Conectar o revocar proveedor externo",
+      "group": "Integraciones y operación SaaS",
+      "phase": "TR",
+      "actors": [
+        "ADM",
+        "PRO",
+        "SYS",
+        "EXT"
+      ],
+      "trigger": "Se habilita calendario, firma, IA, pagos, mensajería u otro proveedor.",
+      "preconditions": [
+        "Proveedor y tratamiento de datos aprobados para el uso previsto."
+      ],
+      "steps": [
+        "ADM|Elegir integración y contexto de uso",
+        "SYS|Mostrar permisos, datos y responsable de conexión",
+        "ADM|Autorizar mediante mecanismo del proveedor",
+        "EXT|Confirmar vinculación y alcance concedido",
+        "SYS|¿Conexión y prueba operativa válidas?",
+        "SYS|Activar capacidades previstas y conservar estado",
+        "ADM|Elegir conservar conexión o solicitar revocación"
+      ],
+      "decisions": [
+        5
+      ],
+      "branches": [
+        {
+          "step": 5,
+          "label": "No",
+          "action": "Conservar integración inactiva y mostrar fallo resoluble",
+          "terminal": "Conexión no habilitada."
+        },
+        {
+          "step": 7,
+          "label": "Revocar",
+          "action": "Detener nuevas tareas, revisar pendientes y retirar credenciales de uso",
+          "terminal": "Integración desconectada; historia local conservada."
+        }
+      ],
+      "end": "Integración conectada con alcance explícito o revocada con pendientes gestionados.",
+      "screens": [
+        "S54"
+      ],
+      "buttons": [
+        "Conectar proveedor",
+        "Revisar permisos",
+        "Probar conexión",
+        "Activar integración",
+        "Revocar conexión"
+      ],
+      "handoffs": [
+        "F61",
+        "F62",
+        "F63"
+      ]
+    },
+    {
+      "id": "F74",
+      "name": "Actualizar cuenta, canales y preferencias",
+      "group": "Acceso y organización",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "REC",
+        "ADM",
+        "PAC",
+        "RES",
+        "SYS"
+      ],
+      "trigger": "El usuario modifica datos de su cuenta o preferencias de comunicación.",
+      "preconditions": [
+        "Cuenta propia autenticada y canal actual verificable."
+      ],
+      "steps": [
+        "PRO|Abrir cuenta y elegir dato o preferencia",
+        "PRO|Registrar cambio y finalidad visible",
+        "SYS|¿Cambio requiere verificación de canal o reautenticación?",
+        "PRO|Completar comprobación solicitada",
+        "SYS|Guardar cambio confirmado y preferencias",
+        "SYS|Aplicar a comunicaciones futuras sin reescribir documentos clínicos"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Guardar preferencia de forma directa",
+          "resume": 5
+        },
+        {
+          "step": 4,
+          "label": "No verifica",
+          "action": "Mantener canal original y cambio pendiente",
+          "terminal": "Datos de cuenta sin sustituir."
+        }
+      ],
+      "end": "Preferencias/canal confirmados; cuenta y filiación clínica permanecen conceptos diferentes.",
+      "screens": [
+        "S53"
+      ],
+      "buttons": [
+        "Editar cuenta",
+        "Cambiar canal",
+        "Verificar nuevo canal",
+        "Guardar preferencias",
+        "Revisar sesiones"
+      ],
+      "handoffs": [
+        "F03",
+        "F41"
+      ]
+    },
+    {
+      "id": "F75",
+      "name": "Configurar servicios, tarifas y emisión documental",
+      "group": "Acceso y organización",
+      "phase": "AD",
+      "actors": [
+        "ADM",
+        "CAJ",
+        "SYS"
+      ],
+      "trigger": "Se crea o cambia una oferta comercial o emisor permitido.",
+      "preconditions": [
+        "Permiso de configuración y reglas comerciales/fiscales concretadas."
+      ],
+      "steps": [
+        "ADM|Seleccionar servicio, tarifa, emisor o condición",
+        "ADM|Crear versión con valores, vigencia y ámbito",
+        "SYS|¿Datos coherentes y cambio autorizado?",
+        "CAJ|Revisar efecto sobre operaciones futuras",
+        "ADM|Confirmar publicación de configuración",
+        "SYS|Aplicar prospectivamente y conservar precios/documentos usados anteriormente"
+      ],
+      "decisions": [
+        3
+      ],
+      "branches": [
+        {
+          "step": 3,
+          "label": "No",
+          "action": "Señalar inconsistencia y conservar propuesta sin publicar",
+          "resume": 2
+        },
+        {
+          "step": 5,
+          "label": "Cancelar",
+          "action": "Mantener configuración vigente",
+          "terminal": "Sin cambio publicado."
+        }
+      ],
+      "end": "Configuración versionada para operaciones nuevas.",
+      "screens": [
+        "S07"
+      ],
+      "buttons": [
+        "Crear servicio",
+        "Crear tarifa",
+        "Editar emisor",
+        "Definir vigencia",
+        "Ver impacto",
+        "Publicar configuración"
+      ],
+      "handoffs": [
+        "F42",
+        "F43",
+        "F45"
+      ]
+    },
+    {
+      "id": "F76",
+      "name": "Registrar vacunación y control preventivo",
+      "group": "Atención y expediente",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "ASI",
+        "SYS"
+      ],
+      "trigger": "Se realiza una actuación preventiva humana o veterinaria.",
+      "preconditions": [
+        "Paciente, facultad profesional y evento realmente efectuado confirmados."
+      ],
+      "steps": [
+        "PRO|Revisar historial preventivo y perfil del paciente",
+        "PRO|Registrar decisión/orden profesional cuando corresponda",
+        "ASI|Registrar actuación real, producto, lote, cantidad y fecha según evento",
+        "SYS|¿Datos, ejecutor y vínculo clínico válidos?",
+        "SYS|Guardar evento distinto de una mera indicación o receta",
+        "PRO|Definir control posterior y documento para destinatario autorizado"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Conservar borrador y solicitar corrección",
+          "resume": 3
+        },
+        {
+          "step": 3,
+          "label": "No realizada",
+          "action": "Registrar motivo y seguimiento sin afirmar vacunación realizada",
+          "terminal": "Actuación no realizada documentada."
+        }
+      ],
+      "end": "Evento preventivo trazable y seguimiento/documento definidos.",
+      "screens": [
+        "S18",
+        "S25",
+        "S28",
+        "S27"
+      ],
+      "buttons": [
+        "Ver historial preventivo",
+        "Registrar actuación preventiva",
+        "Registrar no realizada",
+        "Emitir constancia",
+        "Programar próximo control"
+      ],
+      "handoffs": [
+        "F38",
+        "F40",
+        "F41",
+        "F48"
+      ]
+    },
+    {
+      "id": "F77",
+      "name": "Gestionar convenio, autorización de pagador y saldo institucional",
+      "group": "Administración financiera",
+      "phase": "AD",
+      "actors": [
+        "ADM",
+        "CAJ",
+        "REC",
+        "SYS",
+        "EXT"
+      ],
+      "trigger": "Una empresa o aseguradora interviene como pagador.",
+      "preconditions": [
+        "Convenio, condiciones, identidad y consentimiento de entrega pertinente definidos."
+      ],
+      "steps": [
+        "ADM|Registrar convenio y condiciones versionadas",
+        "REC|Verificar pagador/cobertura registrada para servicio solicitado",
+        "CAJ|Solicitar autorización o documentar referencia recibida",
+        "SYS|¿Autorización válida y alcance económico definido?",
+        "CAJ|Asignar cargos al pagador y parte paciente según acuerdo",
+        "SYS|Seguir documentación, respuesta y saldo institucional sin conceder acceso clínico"
+      ],
+      "decisions": [
+        4
+      ],
+      "branches": [
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Mantener autorización pendiente/rechazada y asignar resolución administrativa",
+          "terminal": "Pago institucional sin confirmar; no decidir automáticamente atención clínica."
+        }
+      ],
+      "end": "Responsabilidad económica y autorización registradas con seguimiento.",
+      "screens": [
+        "S07",
+        "S35",
+        "S36"
+      ],
+      "buttons": [
+        "Crear convenio",
+        "Verificar cobertura registrada",
+        "Solicitar autorización",
+        "Registrar respuesta",
+        "Asignar pagador",
+        "Ver saldo institucional"
+      ],
+      "handoffs": [
+        "F43",
+        "F44",
+        "F45"
+      ]
+    },
+    {
+      "id": "F78",
+      "name": "Ingresar a la consola de operación MAVRIC",
+      "group": "Integraciones y operación SaaS",
+      "phase": "TR",
+      "actors": [
+        "SOP",
+        "SYS"
+      ],
+      "trigger": "Un operador accede al entorno de administración de plataforma.",
+      "preconditions": [
+        "Cuenta de operador activa y política de autenticación definida."
+      ],
+      "steps": [
+        "SOP|Ingresar mediante acceso específico de operador",
+        "SYS|¿Credenciales y comprobaciones requeridas válidas?",
+        "SYS|Cargar funciones operativas asignadas",
+        "SYS|¿Permiso de consola vigente?",
+        "SYS|Abrir consola y registrar acceso sin abrir historias de clientes"
+      ],
+      "decisions": [
+        2,
+        4
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Mostrar rechazo uniforme y mantener consola cerrada",
+          "resume": 1
+        },
+        {
+          "step": 4,
+          "label": "No",
+          "action": "Denegar funciones operativas y ofrecer soporte de cuenta",
+          "terminal": "Consola sin acceso."
+        }
+      ],
+      "end": "Operador autenticado en consola técnica; datos clínicos requieren autorización excepcional aparte.",
+      "screens": [
+        "S56",
+        "S52"
+      ],
+      "buttons": [
+        "Ingresar a consola",
+        "Completar comprobación",
+        "Abrir caso operativo"
+      ],
+      "handoffs": [
+        "F66",
+        "F69",
+        "F79"
+      ]
+    },
+    {
+      "id": "F79",
+      "name": "Cerrar sesión con trabajo pendiente",
+      "group": "Acceso y organización",
+      "phase": "TR",
+      "actors": [
+        "PRO",
+        "REC",
+        "ADM",
+        "ASI",
+        "DIA",
+        "FAR",
+        "CAJ",
+        "ALM",
+        "AUD",
+        "PAC",
+        "RES",
+        "SOP",
+        "SYS"
+      ],
+      "trigger": "El usuario solicita salir de la cuenta actual.",
+      "preconditions": [
+        "Sesión identificada; estado de operaciones en curso visible."
+      ],
+      "steps": [
+        "PRO|Solicitar cierre de sesión",
+        "SYS|¿Hay cambios locales o confirmaciones pendientes?",
+        "PRO|Guardar, resolver estado incierto o descartar cambios locales explícitamente",
+        "SYS|Revocar sesión y detener nuevas solicitudes con ella",
+        "SYS|Limpiar vistas sensibles y volver al acceso apropiado"
+      ],
+      "decisions": [
+        2
+      ],
+      "branches": [
+        {
+          "step": 2,
+          "label": "No",
+          "action": "Revocar sesión directamente",
+          "resume": 4
+        },
+        {
+          "step": 3,
+          "label": "Seguir trabajando",
+          "action": "Cancelar salida y mantener contexto autorizado",
+          "terminal": "Sesión conservada."
+        },
+        {
+          "step": 3,
+          "label": "No puede guardar",
+          "action": "Explicar qué quedó confirmado y qué no; permitir volver o descartar lo local",
+          "terminal": "Salida por resolver; no afirmar guardado inexistente."
+        }
+      ],
+      "end": "Sesión cerrada; trabajo confirmado conservado y vista clínica retirada.",
+      "screens": [
+        "S53",
+        "S03",
+        "S29",
+        "S52"
+      ],
+      "buttons": [
+        "Cerrar sesión",
+        "Guardar y salir",
+        "Descartar cambios locales y salir",
+        "Seguir trabajando"
+      ],
+      "handoffs": [
+        "F01",
+        "F04",
+        "F70",
+        "F78"
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "id": "S01",
+      "name": "Acceso profesional",
+      "area": "Acceso",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "REC",
+        "ADM",
+        "ASI",
+        "DIA",
+        "FAR",
+        "CAJ",
+        "ALM",
+        "AUD"
+      ],
+      "purpose": "Identificar cuenta y abrir un contexto de trabajo autorizado.",
+      "contents": [
+        "RUC del espacio",
+        "Usuario",
+        "Contraseña",
+        "Estado de acceso y recuperación"
+      ],
+      "flows": [
+        "F01",
+        "F03",
+        "F04"
+      ],
+      "layout": "Formulario centrado; una acción principal de ingreso; recuperación visible."
+    },
+    {
+      "id": "S02",
+      "name": "Acceso e invitación del portal",
+      "area": "Portal",
+      "phase": "CE",
+      "actors": [
+        "PAC",
+        "RES"
+      ],
+      "purpose": "Autenticar cuenta externa y aceptar vínculo verificable.",
+      "contents": [
+        "Identificador de cuenta",
+        "Contraseña o mecanismo acordado",
+        "Invitación",
+        "Estado de verificación"
+      ],
+      "flows": [
+        "F70",
+        "F03",
+        "F39"
+      ],
+      "layout": "Formulario simple; contexto de la organización si el enlace lo proporciona."
+    },
+    {
+      "id": "S03",
+      "name": "Selector de organización y sucursal",
+      "area": "Acceso",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "REC",
+        "ADM",
+        "ASI",
+        "DIA",
+        "FAR",
+        "CAJ",
+        "ALM",
+        "AUD"
+      ],
+      "purpose": "Elegir contexto sin trasladar registros entre organizaciones.",
+      "contents": [
+        "Membresías vigentes",
+        "Sucursal operativa",
+        "Lugar de atención",
+        "Aviso de borrador pendiente"
+      ],
+      "flows": [
+        "F02",
+        "F01",
+        "F79"
+      ],
+      "layout": "Selector de cabecera y diálogo de cambio si existe trabajo pendiente."
+    },
+    {
+      "id": "S04",
+      "name": "Recuperación y aceptación de invitación",
+      "area": "Acceso",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "REC",
+        "ADM",
+        "PAC",
+        "RES"
+      ],
+      "purpose": "Recuperar acceso o resolver alta/invitación sin exponer datos de otra cuenta.",
+      "contents": [
+        "Canal verificado",
+        "Estado del enlace",
+        "Requisitos de contraseña",
+        "Destino después de completar"
+      ],
+      "flows": [
+        "F03",
+        "F06"
+      ],
+      "layout": "Pasos cortos; requisitos visibles; estados de enlace usado o vencido."
+    },
+    {
+      "id": "S05",
+      "name": "Alta y configuración de organización",
+      "area": "Configuración",
+      "phase": "CE",
+      "actors": [
+        "ADM",
+        "SOP"
+      ],
+      "purpose": "Preparar un espacio operativo y sus datos de emisión.",
+      "contents": [
+        "Organización/vertical",
+        "Emisor",
+        "Sucursales y lugares",
+        "Pendientes de activación"
+      ],
+      "flows": [
+        "F05"
+      ],
+      "layout": "Asistente por pasos con resumen y posibilidad de guardar configuración incompleta."
+    },
+    {
+      "id": "S06",
+      "name": "Equipo, credenciales y permisos",
+      "area": "Configuración",
+      "phase": "CE",
+      "actors": [
+        "ADM"
+      ],
+      "purpose": "Invitar, revisar y gestionar accesos del equipo.",
+      "contents": [
+        "Miembros y estados",
+        "Credenciales y evidencias",
+        "Roles/sucursales/alcance clínico",
+        "Tareas afectadas por revocación"
+      ],
+      "flows": [
+        "F06",
+        "F07",
+        "F05"
+      ],
+      "layout": "Listado con ficha lateral o página de detalle y resumen de impacto."
+    },
+    {
+      "id": "S07",
+      "name": "Servicios, precios y emisores",
+      "area": "Configuración",
+      "phase": "AD",
+      "actors": [
+        "ADM",
+        "CAJ"
+      ],
+      "purpose": "Configurar oferta comercial y datos usados en documentos financieros.",
+      "contents": [
+        "Servicios y duración",
+        "Precio y moneda",
+        "Vigencias, descuentos y convenios",
+        "Emisores autorizados"
+      ],
+      "flows": [
+        "F75",
+        "F77"
+      ],
+      "layout": "Tablas de configuración con versiones; separar servicios clínicos de tarifas."
+    },
+    {
+      "id": "S08",
+      "name": "Catálogo, plantillas y paquetes de especialidad",
+      "area": "Configuración",
+      "phase": "TR",
+      "actors": [
+        "ADM",
+        "PRO"
+      ],
+      "purpose": "Diseñar, revisar, publicar y habilitar capacidades por versión.",
+      "contents": [
+        "Paquetes y alcance",
+        "Versiones/estados",
+        "Campos y componentes",
+        "Evidencias de validación"
+      ],
+      "flows": [
+        "F08"
+      ],
+      "layout": "Listado de paquetes, detalle de versión y vista de ejemplo con perfil de paciente."
+    },
+    {
+      "id": "S09",
+      "name": "Directorio de pacientes de la organización",
+      "area": "Pacientes",
+      "phase": "CE",
+      "actors": [
+        "REC",
+        "PRO",
+        "ASI"
+      ],
+      "purpose": "Buscar y seleccionar humano o animal correcto.",
+      "contents": [
+        "Búsqueda permitida",
+        "Coincidencias",
+        "Identificadores",
+        "Acciones según rol"
+      ],
+      "flows": [
+        "F10",
+        "F11",
+        "F15",
+        "F16",
+        "F20"
+      ],
+      "layout": "Búsqueda y listado con dominio visible; ficha seleccionada antes de acciones clínicas."
+    },
+    {
+      "id": "S10",
+      "name": "Ficha administrativa humana",
+      "area": "Pacientes",
+      "phase": "CE",
+      "actors": [
+        "REC",
+        "PRO",
+        "ADM"
+      ],
+      "purpose": "Registrar identidad, contactos, representantes y acceso al portal.",
+      "contents": [
+        "Identificación y nacimiento",
+        "Contactos locales",
+        "Representantes/pagador",
+        "Relaciones y verificaciones"
+      ],
+      "flows": [
+        "F10",
+        "F12",
+        "F39",
+        "F15"
+      ],
+      "layout": "Secciones de filiación, contactos y relaciones; acceso clínico como acción autorizada aparte."
+    },
+    {
+      "id": "S11",
+      "name": "Ficha del animal y responsables",
+      "area": "Pacientes",
+      "phase": "CE",
+      "actors": [
+        "REC",
+        "PRO",
+        "ADM"
+      ],
+      "purpose": "Identificar paciente animal y relaciones vigentes.",
+      "contents": [
+        "Especie, perfil y nacimiento",
+        "Microchip opcional",
+        "Responsables y pagador",
+        "Historial de relaciones"
+      ],
+      "flows": [
+        "F11",
+        "F12",
+        "F39",
+        "F15"
+      ],
+      "layout": "Resumen animal destacado; personas responsables en sección separada con alcance y vigencia."
+    },
+    {
+      "id": "S12",
+      "name": "Revisión de identidad y duplicados",
+      "area": "Pacientes",
+      "phase": "TR",
+      "actors": [
+        "ADM",
+        "PRO"
+      ],
+      "purpose": "Comparar candidatos y resolver identidad con evidencia.",
+      "contents": [
+        "Fichas candidatas",
+        "Diferencias",
+        "Referencias afectadas",
+        "Motivo y revisión"
+      ],
+      "flows": [
+        "F13"
+      ],
+      "layout": "Comparación en dos columnas; resumen explícito del impacto antes de confirmar."
+    },
+    {
+      "id": "S13",
+      "name": "Población animal y membresías",
+      "area": "Veterinaria avanzada",
+      "phase": "AV",
+      "actors": [
+        "PRO",
+        "REC"
+      ],
+      "purpose": "Gestionar sujeto colectivo y pertenencias temporales.",
+      "contents": [
+        "Tipo de población",
+        "Responsable",
+        "Individuos/denominador",
+        "Ingresos, traslados y bajas"
+      ],
+      "flows": [
+        "F14",
+        "F60"
+      ],
+      "layout": "Ficha poblacional con línea de tiempo de membresías y acceso a individuos autorizados."
+    },
+    {
+      "id": "S14",
+      "name": "Agenda operativa",
+      "area": "Agenda",
+      "phase": "CE",
+      "actors": [
+        "REC",
+        "PRO",
+        "ADM"
+      ],
+      "purpose": "Reservar y modificar citas según profesionales y recursos.",
+      "contents": [
+        "Día/semana",
+        "Profesional y sucursal",
+        "Disponibilidad y recursos",
+        "Detalle de cita"
+      ],
+      "flows": [
+        "F16",
+        "F18",
+        "F09",
+        "F52"
+      ],
+      "layout": "Calendario con alternativa en lista; creación/detalle en panel, paciente/contexto siempre visibles."
+    },
+    {
+      "id": "S15",
+      "name": "Solicitudes y lista de espera",
+      "area": "Agenda",
+      "phase": "CE",
+      "actors": [
+        "REC"
+      ],
+      "purpose": "Resolver peticiones de portal/canal asistido y ofrecer intervalos.",
+      "contents": [
+        "Solicitudes y antigüedad",
+        "Preferencias",
+        "Ofertas/vigencia",
+        "Responsable y siguiente paso"
+      ],
+      "flows": [
+        "F17",
+        "F19",
+        "F63"
+      ],
+      "layout": "Bandeja de pendientes con detalle y acción de resolución; no aparentar reserva inexistente."
+    },
+    {
+      "id": "S16",
+      "name": "Recepción y cola",
+      "area": "Agenda",
+      "phase": "CE",
+      "actors": [
+        "REC",
+        "ASI",
+        "PRO"
+      ],
+      "purpose": "Registrar llegada y mover ingreso a atención sin duplicaciones.",
+      "contents": [
+        "Citas esperadas",
+        "Ingresos directos",
+        "Colas por servicio",
+        "Llamada, retiro y preparación"
+      ],
+      "flows": [
+        "F20"
+      ],
+      "layout": "Lista por estado; acciones por fila y detalle suficiente para confirmar identidad."
+    },
+    {
+      "id": "S17",
+      "name": "Inicio profesional y bandeja clínica",
+      "area": "Clínica",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "ASI"
+      ],
+      "purpose": "Ver trabajo del día y pendientes con responsable.",
+      "contents": [
+        "Atenciones del día",
+        "Borradores propios",
+        "Resultados por revisar",
+        "Seguimientos y suplencias"
+      ],
+      "flows": [
+        "F21",
+        "F34",
+        "F41",
+        "F20"
+      ],
+      "layout": "Bandejas priorizadas por estado operativo con acceso directo a atención o pendiente."
+    },
+    {
+      "id": "S18",
+      "name": "Espacio de atención clínica",
+      "area": "Clínica",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "ASI"
+      ],
+      "purpose": "Capturar consulta, revisar y completar contenido sin confundir visita y firma.",
+      "contents": [
+        "Cabecera paciente/contexto",
+        "Resumen clínico autorizado",
+        "Formulario/gráfico de especialidad",
+        "Órdenes, receta, documentos y pendientes"
+      ],
+      "flows": [
+        "F21",
+        "F22",
+        "F23",
+        "F24",
+        "F25",
+        "F26",
+        "F27",
+        "F30",
+        "F35",
+        "F61",
+        "F72",
+        "F76"
+      ],
+      "layout": "Cabecera persistente; navegación por secciones; zona principal de captura; acciones de guardado y revisión visibles."
+    },
+    {
+      "id": "S19",
+      "name": "Expediente y evolución compartida",
+      "area": "Clínica",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "ASI",
+        "AUD"
+      ],
+      "purpose": "Consultar evolución de la organización y procedencia por sucursal.",
+      "contents": [
+        "Línea de tiempo",
+        "Episodios/problemas/antecedentes",
+        "Comparación de gráficos",
+        "Versiones, adendas y origen"
+      ],
+      "flows": [
+        "F15",
+        "F23",
+        "F24",
+        "F25",
+        "F28",
+        "F29",
+        "F72",
+        "F76"
+      ],
+      "layout": "Resumen longitudinal y eventos filtrables; indicar restricciones y distinguirlos de ausencia de datos."
+    },
+    {
+      "id": "S20",
+      "name": "Órdenes y resultados pendientes",
+      "area": "Diagnóstico",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "DIA"
+      ],
+      "purpose": "Emitir órdenes y seguir ejecución/revisión por separado.",
+      "contents": [
+        "Órdenes y estados",
+        "Tareas/ejecutores",
+        "Informes/versiones",
+        "Responsable de revisión"
+      ],
+      "flows": [
+        "F30",
+        "F34"
+      ],
+      "layout": "Lista de órdenes con detalle de etapas; pestañas o secciones para ejecución e informe."
+    },
+    {
+      "id": "S21",
+      "name": "Lista de trabajo diagnóstico",
+      "area": "Diagnóstico",
+      "phase": "DI",
+      "actors": [
+        "DIA",
+        "PRO"
+      ],
+      "purpose": "Asignar y ejecutar tareas autorizadas.",
+      "contents": [
+        "Pendientes/aceptadas",
+        "Paciente y orden",
+        "Intentos",
+        "Responsable y tiempos"
+      ],
+      "flows": [
+        "F31",
+        "F33"
+      ],
+      "layout": "Bandeja de tareas; aceptar antes de ejecutar; estado de identidad y orden destacado."
+    },
+    {
+      "id": "S22",
+      "name": "Muestras y trazabilidad",
+      "area": "Diagnóstico",
+      "phase": "DI",
+      "actors": [
+        "DIA",
+        "ASI",
+        "PRO"
+      ],
+      "purpose": "Identificar, aceptar, rechazar y entregar muestras con procedencia.",
+      "contents": [
+        "ID y origen de muestra",
+        "Obtención/entregas",
+        "Aceptación/rechazo",
+        "Vínculo a orden/caso"
+      ],
+      "flows": [
+        "F31",
+        "F32",
+        "F53",
+        "F59"
+      ],
+      "layout": "Ficha de muestra y cronología de custodia; operaciones de entrega con receptor identificado."
+    },
+    {
+      "id": "S23",
+      "name": "Resultados e informe de laboratorio",
+      "area": "Diagnóstico",
+      "phase": "DI",
+      "actors": [
+        "DIA",
+        "PRO"
+      ],
+      "purpose": "Registrar, revisar, emitir y corregir resultados.",
+      "contents": [
+        "Valores, unidades y referencias",
+        "Métodos/procedencia",
+        "Informe preliminar/final",
+        "Correcciones y revisión clínica"
+      ],
+      "flows": [
+        "F32",
+        "F34",
+        "F57",
+        "F60"
+      ],
+      "layout": "Resultados estructurados y documento de informe; versión y estado siempre visibles."
+    },
+    {
+      "id": "S24",
+      "name": "Estudios, imágenes y visor autorizado",
+      "area": "Diagnóstico",
+      "phase": "DI",
+      "actors": [
+        "DIA",
+        "PRO"
+      ],
+      "purpose": "Relacionar adquisiciones, revisar estudios e informes.",
+      "contents": [
+        "Lista de estudios",
+        "Paciente/orden/adquisición",
+        "Imagen/serie o adjunto",
+        "Informe y procedencia"
+      ],
+      "flows": [
+        "F26",
+        "F33",
+        "F72",
+        "F34"
+      ],
+      "layout": "Lista de estudios y zona de visualización; identificación persistente y acceso al informe asociado."
+    },
+    {
+      "id": "S25",
+      "name": "Medicación y receta",
+      "area": "Clínica",
+      "phase": "CE",
+      "actors": [
+        "PRO"
+      ],
+      "purpose": "Conciliar medicación y emitir prescripción versionada.",
+      "contents": [
+        "Medicación referida y fuentes",
+        "Items de receta",
+        "Pauta registrada",
+        "Emisor y versión"
+      ],
+      "flows": [
+        "F35"
+      ],
+      "layout": "Conciliación separada de la receta nueva; vista previa antes de cierre."
+    },
+    {
+      "id": "S26",
+      "name": "Farmacia y dispensación",
+      "area": "Farmacia",
+      "phase": "DI",
+      "actors": [
+        "FAR"
+      ],
+      "purpose": "Entregar cantidades/lotes y registrar devoluciones.",
+      "contents": [
+        "Orden y cantidades pendientes",
+        "Productos y lotes",
+        "Entrega parcial/total",
+        "Devoluciones y stock"
+      ],
+      "flows": [
+        "F36",
+        "F48"
+      ],
+      "layout": "Cola de órdenes y detalle de entrega con revisión de lote/cantidad."
+    },
+    {
+      "id": "S27",
+      "name": "Administración de medicación",
+      "area": "Hospital",
+      "phase": "HO",
+      "actors": [
+        "ASI",
+        "PRO"
+      ],
+      "purpose": "Registrar dosis realmente administradas o no realizadas.",
+      "contents": [
+        "Orden vigente",
+        "Programación",
+        "Registro real",
+        "Excepciones y revisión"
+      ],
+      "flows": [
+        "F37",
+        "F54",
+        "F57"
+      ],
+      "layout": "Hoja temporal con acción de verificación; no permitir marcar varias dosis como realizadas sin evidencia individual."
+    },
+    {
+      "id": "S28",
+      "name": "Documentos, firma y consentimientos",
+      "area": "Clínica",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "REC"
+      ],
+      "purpose": "Revisar, emitir y publicar versiones documentales autorizadas.",
+      "contents": [
+        "Tipo y plantilla",
+        "Vista previa",
+        "Firma/decisión/evidencia",
+        "Publicación y destinatario"
+      ],
+      "flows": [
+        "F26",
+        "F27",
+        "F28",
+        "F38",
+        "F40",
+        "F55",
+        "F76"
+      ],
+      "layout": "Listado documental y vista previa; separar estado de firma de estado de publicación."
+    },
+    {
+      "id": "S29",
+      "name": "Inicio del portal",
+      "area": "Portal",
+      "phase": "CE",
+      "actors": [
+        "PAC",
+        "RES"
+      ],
+      "purpose": "Consultar citas y contenido disponible del paciente/contexto elegido.",
+      "contents": [
+        "Paciente/animal y organización",
+        "Próxima cita",
+        "Documentos publicados",
+        "Seguimiento; saldos cuando exista módulo"
+      ],
+      "flows": [
+        "F70",
+        "F17",
+        "F41",
+        "F42",
+        "F44",
+        "F71",
+        "F63",
+        "F79"
+      ],
+      "layout": "Inicio sencillo adaptado a móvil; contexto y selector de paciente claros, sin chrome interno de clínica."
+    },
+    {
+      "id": "S30",
+      "name": "Citas del portal",
+      "area": "Portal",
+      "phase": "CE",
+      "actors": [
+        "PAC",
+        "RES"
+      ],
+      "purpose": "Solicitar cita y gestionar cambios permitidos.",
+      "contents": [
+        "Servicio/sede/profesional",
+        "Horarios publicables",
+        "Estado de solicitud/reserva",
+        "Política de cambio y oferta"
+      ],
+      "flows": [
+        "F17",
+        "F18",
+        "F19",
+        "F63"
+      ],
+      "layout": "Paso de elección y confirmación; presentar solicitado y confirmado como estados diferentes."
+    },
+    {
+      "id": "S31",
+      "name": "Documentos publicados en portal",
+      "area": "Portal",
+      "phase": "CE",
+      "actors": [
+        "PAC",
+        "RES"
+      ],
+      "purpose": "Consultar contenido publicado y descargar versiones autorizadas.",
+      "contents": [
+        "Documento y fecha",
+        "Emisor",
+        "Versión/correcciones",
+        "Estado de acceso"
+      ],
+      "flows": [
+        "F71",
+        "F38"
+      ],
+      "layout": "Lista y detalle legibles en móvil; procedencia y versión visibles antes de descarga."
+    },
+    {
+      "id": "S32",
+      "name": "Vínculos y delegaciones del portal",
+      "area": "Portal",
+      "phase": "CE",
+      "actors": [
+        "REC",
+        "ADM",
+        "PAC",
+        "RES"
+      ],
+      "purpose": "Gestionar personas/animales autorizados y vigencia de representación.",
+      "contents": [
+        "Vínculos verificados",
+        "Invitaciones pendientes",
+        "Alcance y vigencia",
+        "Revocación y evidencia"
+      ],
+      "flows": [
+        "F12",
+        "F39",
+        "F70"
+      ],
+      "layout": "Listado de relaciones; las acciones dependen de facultades comprobadas y contexto interno/externo."
+    },
+    {
+      "id": "S33",
+      "name": "Seguimiento y comunicaciones",
+      "area": "Clínica y portal",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "REC",
+        "PAC",
+        "RES"
+      ],
+      "purpose": "Gestionar tareas y mensajes con responsable, estado y plazo.",
+      "contents": [
+        "Tareas y responsable",
+        "Canal/autorización",
+        "Mensajes/respuestas",
+        "Próxima actuación"
+      ],
+      "flows": [
+        "F41",
+        "F55"
+      ],
+      "layout": "Bandeja interna y vista externa diferenciadas; mostrar horarios/tiempos del canal acordado."
+    },
+    {
+      "id": "S34",
+      "name": "Presupuestos y etapas de tratamiento",
+      "area": "Finanzas",
+      "phase": "AD",
+      "actors": [
+        "PRO",
+        "CAJ",
+        "PAC",
+        "RES"
+      ],
+      "purpose": "Versionar propuesta comercial y aceptación.",
+      "contents": [
+        "Servicios y etapas",
+        "Precios/descuentos",
+        "Condiciones",
+        "Aceptación y versiones"
+      ],
+      "flows": [
+        "F42"
+      ],
+      "layout": "Presupuesto detallado con total y condiciones; revisión externa separada del editor interno."
+    },
+    {
+      "id": "S35",
+      "name": "Cuenta, pagos y caja",
+      "area": "Finanzas",
+      "phase": "AD",
+      "actors": [
+        "CAJ"
+      ],
+      "purpose": "Registrar cargos, pagos, reversos y cierres de caja.",
+      "contents": [
+        "Cuenta/pagador",
+        "Cargos y saldos",
+        "Pagos y asignaciones",
+        "Caja y conciliación"
+      ],
+      "flows": [
+        "F43",
+        "F44",
+        "F77"
+      ],
+      "layout": "Cuenta con movimientos; cobro en formulario; caja como ámbito operativo separado."
+    },
+    {
+      "id": "S36",
+      "name": "Comprobantes y estados externos",
+      "area": "Finanzas",
+      "phase": "AD",
+      "actors": [
+        "CAJ"
+      ],
+      "purpose": "Emitir comprobantes y gestionar respuestas/correcciones.",
+      "contents": [
+        "Emisor y numeración",
+        "Vista previa",
+        "Estado fiscal/evidencia",
+        "Errores y correctivos"
+      ],
+      "flows": [
+        "F45"
+      ],
+      "layout": "Lista de documentos y detalle de respuesta; acciones condicionadas al estado real del comprobante."
+    },
+    {
+      "id": "S37",
+      "name": "Honorarios y liquidaciones",
+      "area": "Finanzas",
+      "phase": "AD",
+      "actors": [
+        "CAJ",
+        "ADM",
+        "PRO"
+      ],
+      "purpose": "Revisar base contractual, calcular y pagar liquidación.",
+      "contents": [
+        "Acuerdo/vigencia",
+        "Periodo y partidas",
+        "Ajustes/aprobación",
+        "Pago y detalle"
+      ],
+      "flows": [
+        "F46"
+      ],
+      "layout": "Resumen y partidas auditables; profesional consulta solo su detalle autorizado."
+    },
+    {
+      "id": "S38",
+      "name": "Solicitudes y órdenes de compra",
+      "area": "Almacén",
+      "phase": "AD",
+      "actors": [
+        "ALM",
+        "ADM"
+      ],
+      "purpose": "Solicitar, aprobar y recibir compras.",
+      "contents": [
+        "Necesidad/productos",
+        "Proveedor",
+        "Aprobación/orden",
+        "Recepciones y diferencias"
+      ],
+      "flows": [
+        "F47"
+      ],
+      "layout": "Bandeja por etapa y detalle con cantidades solicitadas/ordenadas/recibidas."
+    },
+    {
+      "id": "S39",
+      "name": "Inventario, lotes y transferencias",
+      "area": "Almacén",
+      "phase": "AD",
+      "actors": [
+        "ALM",
+        "FAR",
+        "ADM"
+      ],
+      "purpose": "Conocer existencias y registrar movimientos autorizados.",
+      "contents": [
+        "Stock por almacén/lote",
+        "Vencimientos",
+        "Movimientos y referencias",
+        "Tránsito y discrepancias"
+      ],
+      "flows": [
+        "F48",
+        "F36"
+      ],
+      "layout": "Listado y ficha de producto/lote; movimientos con origen, cantidad, destino y motivo."
+    },
+    {
+      "id": "S40",
+      "name": "Admisiones y estancias",
+      "area": "Hospital",
+      "phase": "HO",
+      "actors": [
+        "REC",
+        "PRO",
+        "ASI"
+      ],
+      "purpose": "Admitir y seguir estado clínico/administrativo de estancia.",
+      "contents": [
+        "Solicitud e identidad",
+        "Unidad/plaza",
+        "Estado de estancia",
+        "Alta y egreso"
+      ],
+      "flows": [
+        "F49",
+        "F55"
+      ],
+      "layout": "Bandeja de ingresos y detalle de estancia con transición y responsables."
+    },
+    {
+      "id": "S41",
+      "name": "Camas, jaulas y ubicación",
+      "area": "Hospital",
+      "phase": "HO",
+      "actors": [
+        "REC",
+        "ASI",
+        "PRO"
+      ],
+      "purpose": "Asignar recurso compatible y conservar ocupación histórica.",
+      "contents": [
+        "Unidad y plazas",
+        "Disponible/reservada/ocupada/limpieza",
+        "Compatibilidad",
+        "Movimientos"
+      ],
+      "flows": [
+        "F49",
+        "F50"
+      ],
+      "layout": "Vista de recursos con etiquetas y alternativa en tabla; confirmar disponibilidad antes de asignar."
+    },
+    {
+      "id": "S42",
+      "name": "Hoja de estancia y turnos",
+      "area": "Hospital",
+      "phase": "HO",
+      "actors": [
+        "ASI",
+        "PRO"
+      ],
+      "purpose": "Registrar cuidados, órdenes, pendientes y entregas de responsabilidad.",
+      "contents": [
+        "Paciente/ubicación",
+        "Observaciones y tareas",
+        "Órdenes y administraciones",
+        "Entrega, traslados y alta"
+      ],
+      "flows": [
+        "F50",
+        "F37",
+        "F55",
+        "F49"
+      ],
+      "layout": "Hoja longitudinal/temporal con bandeja de pendientes; entrega requiere receptor."
+    },
+    {
+      "id": "S43",
+      "name": "Caso quirúrgico",
+      "area": "Hospital",
+      "phase": "HO",
+      "actors": [
+        "PRO",
+        "ASI",
+        "REC"
+      ],
+      "purpose": "Programar y documentar lo previsto y realizado en cirugía.",
+      "contents": [
+        "Caso/procedimiento/región",
+        "Equipo y sala",
+        "Preparación/consentimientos",
+        "Parte, implantes y muestras"
+      ],
+      "flows": [
+        "F52",
+        "F53"
+      ],
+      "layout": "Caso con etapas; planificación separada del registro de ejecución."
+    },
+    {
+      "id": "S44",
+      "name": "Registro anestésico y recuperación",
+      "area": "Hospital",
+      "phase": "HO",
+      "actors": [
+        "PRO",
+        "ASI"
+      ],
+      "purpose": "Conservar evaluación, tiempos, eventos y salida de recuperación.",
+      "contents": [
+        "Caso y evaluación",
+        "Observaciones/administraciones",
+        "Eventos",
+        "Recuperación/destino"
+      ],
+      "flows": [
+        "F54"
+      ],
+      "layout": "Hoja temporal vinculada al caso; mostrar estado de actuación y recuperación por separado."
+    },
+    {
+      "id": "S45",
+      "name": "Circuito de urgencias",
+      "area": "Hospital",
+      "phase": "HO",
+      "actors": [
+        "REC",
+        "ASI",
+        "PRO"
+      ],
+      "purpose": "Registrar llegada, clasificación, atención, reevaluaciones y destino.",
+      "contents": [
+        "Identidad provisional/confirmada",
+        "Clasificaciones con fecha",
+        "Estado de atención",
+        "Destino/aceptación"
+      ],
+      "flows": [
+        "F51"
+      ],
+      "layout": "Bandeja de urgencias con tiempos y estado textual; acceso inmediato a paciente correcto."
+    },
+    {
+      "id": "S46",
+      "name": "Cursos y episodios especializados avanzados",
+      "area": "Especialidades avanzadas",
+      "phase": "AV",
+      "actors": [
+        "PRO",
+        "DIA",
+        "ASI",
+        "REC"
+      ],
+      "purpose": "Entrar a flujos específicos de curso, transfusión, trasplante o reproducción.",
+      "contents": [
+        "Tipo y alcance del paquete",
+        "Plan y etapas",
+        "Participantes/recursos/muestras",
+        "Resultados y seguimientos"
+      ],
+      "flows": [
+        "F56",
+        "F57",
+        "F58",
+        "F59"
+      ],
+      "layout": "Entrada común con subpantallas propias por flujo; no mezclar datos ni estados de procesos diferentes."
+    },
+    {
+      "id": "S47",
+      "name": "Salud poblacional veterinaria",
+      "area": "Veterinaria avanzada",
+      "phase": "AV",
+      "actors": [
+        "PRO",
+        "ASI"
+      ],
+      "purpose": "Registrar programas, intervenciones y resultados colectivos.",
+      "contents": [
+        "Población/periodo",
+        "Denominador y método",
+        "Actuaciones/muestras",
+        "Informe y pendientes"
+      ],
+      "flows": [
+        "F60",
+        "F14"
+      ],
+      "layout": "Programa y eventos grupales con referencias a individuos; tabla y tendencia cuando corresponda."
+    },
+    {
+      "id": "S48",
+      "name": "Importaciones y exportaciones",
+      "area": "Administración",
+      "phase": "TR",
+      "actors": [
+        "ADM",
+        "SOP"
+      ],
+      "purpose": "Procesar lotes con alcance, errores y reconciliación.",
+      "contents": [
+        "Operación/formato",
+        "Vista previa",
+        "Rechazos y totales",
+        "Manifiesto/entrega"
+      ],
+      "flows": [
+        "F64",
+        "F68"
+      ],
+      "layout": "Asistente de lote y historial de ejecuciones; confirmación solo después de vista previa."
+    },
+    {
+      "id": "S49",
+      "name": "Reportes autorizados",
+      "area": "Administración",
+      "phase": "TR",
+      "actors": [
+        "ADM",
+        "CAJ",
+        "PRO",
+        "AUD"
+      ],
+      "purpose": "Consultar indicadores con definiciones y alcance.",
+      "contents": [
+        "Tipo de reporte",
+        "Filtros",
+        "Definición de medidas",
+        "Resultados y permiso de exportación"
+      ],
+      "flows": [
+        "F65"
+      ],
+      "layout": "Filtros y resultado en tabla/gráfico según finalidad; mostrar periodo y procedencia."
+    },
+    {
+      "id": "S50",
+      "name": "Auditoría y evidencia",
+      "area": "Administración",
+      "phase": "TR",
+      "actors": [
+        "AUD",
+        "ADM"
+      ],
+      "purpose": "Inspeccionar accesos, cambios y autorizaciones.",
+      "contents": [
+        "Actor/acción/recurso",
+        "Contexto y fecha",
+        "Versiones relacionadas",
+        "Finalidad y exportación autorizada"
+      ],
+      "flows": [
+        "F65",
+        "F07"
+      ],
+      "layout": "Eventos filtrables y detalle de evidencia; lectura sin acciones de modificación clínica."
+    },
+    {
+      "id": "S51",
+      "name": "Plan, consumo y soporte del cliente",
+      "area": "SaaS",
+      "phase": "TR",
+      "actors": [
+        "ADM",
+        "PRO",
+        "CAJ"
+      ],
+      "purpose": "Gestionar contratación, ayuda y salida de la plataforma.",
+      "contents": [
+        "Plan y derechos reales",
+        "Consumo/estado comercial",
+        "Casos de soporte",
+        "Entrega/baja autorizada"
+      ],
+      "flows": [
+        "F66",
+        "F67",
+        "F68",
+        "F62"
+      ],
+      "layout": "Secciones de contratación y ayuda separadas; acceso de profesionales limitado a sus casos permitidos."
+    },
+    {
+      "id": "S52",
+      "name": "Operación de plataforma MAVRIC",
+      "area": "SaaS",
+      "phase": "TR",
+      "actors": [
+        "SOP"
+      ],
+      "purpose": "Gestionar soporte, accesos temporales e incidentes sin acceso clínico implícito.",
+      "contents": [
+        "Clientes y estado técnico",
+        "Casos y autorizaciones",
+        "Incidentes/recuperación",
+        "Evidencia de acciones"
+      ],
+      "flows": [
+        "F66",
+        "F67",
+        "F68",
+        "F69",
+        "F78",
+        "F79"
+      ],
+      "layout": "Consola operativa separada del espacio clínico; ninguna vista global de historias por defecto."
+    },
+    {
+      "id": "S53",
+      "name": "Cuenta y preferencias de comunicación",
+      "area": "Cuenta",
+      "phase": "CE",
+      "actors": [
+        "PRO",
+        "REC",
+        "ADM",
+        "PAC",
+        "RES"
+      ],
+      "purpose": "Gestionar canales y preferencias verificadas de la cuenta.",
+      "contents": [
+        "Identidad de cuenta",
+        "Canales verificados",
+        "Preferencias/consentimientos",
+        "Sesiones y recuperación"
+      ],
+      "flows": [
+        "F74",
+        "F03",
+        "F79"
+      ],
+      "layout": "Configuración de cuenta diferenciada de filiación clínica; cambios de canal exigen verificación."
+    },
+    {
+      "id": "S54",
+      "name": "Integraciones y tareas externas",
+      "area": "Configuración",
+      "phase": "TR",
+      "actors": [
+        "ADM",
+        "PRO"
+      ],
+      "purpose": "Conectar proveedores y resolver estados externos con alcance explícito.",
+      "contents": [
+        "Proveedor y permisos",
+        "Cuenta/contexto vinculado",
+        "Estado y prueba",
+        "Tareas/reintentos/conciliación"
+      ],
+      "flows": [
+        "F73",
+        "F62",
+        "F61",
+        "F63"
+      ],
+      "layout": "Tarjetas o listado de conexiones y detalle de tareas; autorización vinculada al actor correcto."
+    },
+    {
+      "id": "S55",
+      "name": "Disponibilidad, lugares y recursos",
+      "area": "Configuración",
+      "phase": "CE",
+      "actors": [
+        "ADM",
+        "PRO"
+      ],
+      "purpose": "Configurar jornadas y recursos sin alterar reservas silenciosamente.",
+      "contents": [
+        "Profesional/lugar",
+        "Horarios y excepciones",
+        "Recursos y duración",
+        "Impacto en citas existentes"
+      ],
+      "flows": [
+        "F09",
+        "F05"
+      ],
+      "layout": "Editor horario con resumen de excepciones y vista de impacto antes de publicación."
+    },
+    {
+      "id": "S56",
+      "name": "Acceso de operador MAVRIC",
+      "area": "SaaS",
+      "phase": "TR",
+      "actors": [
+        "SOP"
+      ],
+      "purpose": "Autenticar al operador de plataforma sin conceder acceso clínico de clientes.",
+      "contents": [
+        "Cuenta de operador",
+        "Comprobaciones definidas por política",
+        "Estado de acceso",
+        "Ayuda de cuenta"
+      ],
+      "flows": [
+        "F78"
+      ],
+      "layout": "Acceso específico a consola operativa; el destino no es un expediente global."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se invita al paciente o responsable a su portal."]) --> N1
+    N1["Recepción: Seleccionar persona destinataria y pacientes/animales permitidos"]
+    N2["Recepción: Definir alcance y vigencia de vínculo"]
+    N3["Sistema Health Project: Enviar invitación de uso controlado"]
+    N4["Paciente humano: Verificar identidad y aceptar vínculo"]
+    N5{"Sistema Health Project: ¿Identidad, relación e invitación vigentes?"}
+    N6["Sistema Health Project: Activar portal con acceso limitado a publicaciones autorizadas"]
+    END(["Cuenta externa vinculada con alcance verificable; no por coincidencia de DNI o correo."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"Sí"| N6
+    N6 --> END
+    N5 -->|"No"| A1["Mantener vínculo pendiente y ofrecer revisión por personal autorizado"]
+    A1 --> E1(["Portal sin acceso a ese paciente."])
+    N2 -->|"Delegación"| A2["Registrar quién autoriza y facultades comprobadas"]
+    A2 --> N3
+    N5 -->|"Vínculo revocado"| A3["Retirar acceso y conservar historial de autorización"]
+    A3 --> E3(["Acceso revocado."])

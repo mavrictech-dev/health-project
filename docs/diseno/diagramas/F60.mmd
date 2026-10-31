@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se planifica una intervención o estudio de población animal."]) --> N1
+    N1["Profesional clínico: Seleccionar población, periodo y alcance"]
+    N2["Profesional clínico: Registrar plan, denominador y unidades"]
+    N3["Asistente o enfermería: Registrar muestras, observaciones y actuaciones grupales/individuales"]
+    N4{"Sistema Health Project: ¿Datos y sujetos consistentes?"}
+    N5["Profesional clínico: Revisar resultados y registrar decisiones profesionales"]
+    N6["Sistema Health Project: Guardar informe y tareas de seguimiento de población"]
+    END(["Intervención trazable con datos colectivos separados de individuos."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"No"| A1["Solicitar reconciliación de sujetos, periodo o denominador"]
+    A1 --> N3
+    N3 -->|"Animal sale del grupo"| A2["Cerrar pertenencia temporal sin perder actuaciones anteriores"]
+    A2 --> N4

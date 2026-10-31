@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se indica ingreso hospitalario humano o veterinario."]) --> N1
+    N1["Profesional clínico: Registrar solicitud de ingreso y unidad adecuada"]
+    N2["Recepción: Confirmar paciente y responsable administrativo"]
+    N3["Sistema Health Project: Presentar plazas compatibles y estado real"]
+    N4["Asistente o enfermería: Seleccionar cama/jaula y comprobar preparación"]
+    N5{"Sistema Health Project: ¿Plaza sigue disponible y compatible?"}
+    N6["Sistema Health Project: Crear estancia y ocupación sin solapar asignaciones"]
+    N7["Asistente o enfermería: Recibir paciente, órdenes y pendientes"]
+    END(["Estancia activa con ubicación y equipo responsable."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"Sí"| N6
+    N6 --> N7
+    N7 --> END
+    N5 -->|"No"| A1["Ofrecer otra plaza o dejar ingreso pendiente con responsable"]
+    A1 --> N3
+    N1 -->|"Ingreso cancelado"| A2["Registrar motivo y liberar reserva aún no ocupada"]
+    A2 --> E2(["Sin estancia activa."])

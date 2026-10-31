@@ -1,0 +1,21 @@
+flowchart TD
+    START(["El profesional solicita un servicio o una derivación."]) --> N1
+    N1["Profesional clínico: Elegir servicio, motivo y destinatario"]
+    N2["Profesional clínico: Indicar prioridad operativa y datos necesarios"]
+    N3{"Sistema Health Project: ¿Orden completa y destinatario permitido?"}
+    N4["Profesional clínico: Revisar y emitir orden"]
+    N5["Sistema Health Project: Crear tareas y asignar responsable de resultados"]
+    N6["Sistema Health Project: Entregar orden o paquete externo seleccionado y conservar estado"]
+    END(["Orden emitida con responsables de ejecución y revisión."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Mostrar faltantes o destinatario incompatible"]
+    A1 --> N1
+    N6 -->|"Servicio externo"| A2["Publicar documento seleccionado y esperar respuesta con procedencia"]
+    A2 --> E2(["Orden externa emitida; resultado pendiente."])
+    N4 -->|"Cancelar antes de emitir"| A3["Conservar borrador o descartarlo expresamente"]
+    A3 --> E3(["Sin orden activa."])

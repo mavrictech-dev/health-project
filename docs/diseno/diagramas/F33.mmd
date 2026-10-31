@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se realiza un estudio o se recibe uno externo."]) --> N1
+    N1["Equipo de diagnóstico: Confirmar orden, paciente y región del estudio"]
+    N2["Equipo de diagnóstico: Registrar adquisición o procedencia externa"]
+    N3["Sistema Health Project: Relacionar estudio e imágenes con identificadores correctos"]
+    N4["Profesional clínico: Interpretar y redactar informe con hallazgos localizados"]
+    N5{"Sistema Health Project: ¿Informe revisado y listo para cierre autorizado?"}
+    N6["Profesional clínico: Firmar informe y enviar a revisión del solicitante"]
+    END(["Estudio e informe vinculados; revisión clínica asignada."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"Sí"| N6
+    N6 --> END
+    N3 -->|"Identidad o estudio discrepante"| A1["Detener asociación y abrir revisión antes de mostrar como estudio del paciente"]
+    A1 --> E1(["Estudio por conciliar."])
+    N5 -->|"No"| A2["Conservar informe preliminar con estado visible"]
+    A2 --> N4
+    N2 -->|"Adquisición no completada"| A3["Registrar intento y motivo; reasignar ejecución"]
+    A3 --> E3(["Estudio pendiente o cancelado con motivo."])

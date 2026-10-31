@@ -1,0 +1,15 @@
+sequenceDiagram
+    actor P as Paciente o responsable
+    participant S as Sistema
+    actor R as Recepción
+    P->>S: Selecciona contexto, servicio e intervalo
+    S->>S: Verifica vínculo y disponibilidad vigente
+    alt Confirmación automática habilitada
+        S->>S: Confirma reserva sin duplicación
+        S-->>P: Cita confirmada y condiciones
+    else Revisión de recepción requerida
+        S-->>P: Solicitud recibida, aún sin cita confirmada
+        S->>R: Asigna solicitud pendiente
+        R->>S: Confirma u ofrece alternativa
+        S-->>P: Estado real y siguiente acción
+    end

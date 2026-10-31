@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se registra movimiento autorizado de stock."]) --> N1
+    N1["Compras y almacén: Elegir movimiento, origen y referencia"]
+    N2["Compras y almacén: Indicar cantidades y destino cuando corresponda"]
+    N3{"Sistema Health Project: ¿Stock, conversión y permisos válidos?"}
+    N4["Compras y almacén: Confirmar salida o ajuste con motivo"]
+    N5["Sistema Health Project: Registrar movimientos vinculados sin duplicación"]
+    N6["Compras y almacén: Confirmar recepción destino si existe transferencia"]
+    END(["Stock trazable o movimiento en tránsito/revisión con responsable."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Bloquear movimiento y mostrar inconsistencia"]
+    A1 --> N2
+    N6 -->|"Diferencia destino"| A2["Conservar tránsito y registrar discrepancia con responsable"]
+    A2 --> E2(["Transferencia por conciliar."])
+    N4 -->|"Reverso"| A3["Crear movimiento inverso autorizado referenciado al original"]
+    A3 --> N5

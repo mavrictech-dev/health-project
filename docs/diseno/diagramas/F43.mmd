@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se realiza un servicio/producto o se registra cargo autorizado."]) --> N1
+    N1["Sistema Health Project: Proponer cargo desde hecho o autorización comercial"]
+    N2["Caja y administración financiera: Revisar paciente, pagador, concepto, cantidad y precio aplicado"]
+    N3{"Sistema Health Project: ¿Cargo válido y sin registro duplicado?"}
+    N4["Caja y administración financiera: Confirmar o ajustar con motivo y permiso"]
+    N5["Sistema Health Project: Registrar cargo y saldo pendiente"]
+    N6["Sistema Health Project: Mostrar cuenta y referencias de origen"]
+    END(["Cuenta actualizada sin acreditar automáticamente pago ni atención."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Mostrar discrepancia o cargo existente"]
+    A1 --> E1(["Cargo nuevo sin registrar."])
+    N4 -->|"Anular cargo permitido"| A2["Registrar reverso con motivo y verificar pagos/comprobante afectados"]
+    A2 --> E2(["Cargo revertido mediante movimiento trazable."])

@@ -1,0 +1,25 @@
+flowchart TD
+    START(["El profesional inicia una consulta desde agenda o recepción."]) --> N1
+    N1["Profesional clínico: Confirmar paciente, organización, sucursal y lugar"]
+    N2{"Sistema Health Project: ¿Puede iniciar atención sobre este expediente?"}
+    N3["Profesional clínico: Revisar antecedentes, problemas y datos visibles de otras sedes"]
+    N4["Profesional clínico: Registrar motivo, exploración, formularios y gráficos"]
+    N5["Profesional clínico: Crear diagnósticos, procedimientos, órdenes o receta según lo ocurrido"]
+    N6{"Sistema Health Project: ¿Capturas obligatorias y cierre documental cumplidos?"}
+    N7["Profesional clínico: Revisar resumen y finalizar visita con pendientes asignados"]
+    N8["Sistema Health Project: Conservar evolución y estados separados de notas, órdenes y episodio"]
+    END(["Visita finalizada; notas y tareas conservan sus estados reales."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 -->|"Sí"| N7
+    N7 --> N8
+    N8 --> END
+    N2 -->|"No"| A1["Impedir apertura y mostrar restricción de contexto"]
+    A1 --> E1(["Consulta no iniciada."])
+    N6 -->|"No"| A2["Mostrar faltantes y conservar borrador"]
+    A2 --> N4
+    N7 -->|"Interrumpir atención"| A3["Guardar borrador y registrar interrupción con responsable"]
+    A3 --> E3(["Atención pendiente de retomar."])

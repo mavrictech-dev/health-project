@@ -1,0 +1,21 @@
+flowchart TD
+    START(["La sesión caduca o la aplicación no recibe confirmación de guardado."]) --> N1
+    N1["Sistema Health Project: Mostrar estado real: pendiente de guardar o sesión vencida"]
+    N2["Profesional clínico: Reautenticarse o reintentar según causa"]
+    N3["Sistema Health Project: Verificar si la operación anterior ya quedó confirmada"]
+    N4{"Sistema Health Project: ¿El servidor contiene una revisión posterior?"}
+    N5["Profesional clínico: Comparar versiones y resolver conflicto sin sobrescribir"]
+    N6["Sistema Health Project: Confirmar revisión guardada y devolver al trabajo permitido"]
+    END(["Trabajo reanudado sobre una revisión confirmada o detenido con motivo."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"No"| A1["Reintentar sobre la misma revisión y operación identificada"]
+    A1 --> N6
+    N2 -->|"Acceso revocado"| A2["Bloquear escritura y derivar al responsable autorizado"]
+    A2 --> E2(["Trabajo detenido; no se muestran recursos ajenos."])
+    N5 -->|"Salir"| A3["Conservar solo el último guardado confirmado; señalar cambios no persistidos"]
+    A3 --> E3(["Pantalla cerrada sin afirmar guardado inexistente."])

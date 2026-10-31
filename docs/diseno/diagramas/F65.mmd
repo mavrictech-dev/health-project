@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se solicita indicador, reporte o evidencia de una operación."]) --> N1
+    N1["Auditor autorizado: Seleccionar reporte/evidencia y ámbito permitido"]
+    N2["Sistema Health Project: Aplicar permisos y datos mínimos para finalidad"]
+    N3["Auditor autorizado: Elegir filtros y periodo"]
+    N4{"Sistema Health Project: ¿Consulta/exportación autorizada?"}
+    N5["Sistema Health Project: Mostrar resultados con definición, alcance y fecha"]
+    N6["Auditor autorizado: Inspeccionar detalle o exportar con auditoría"]
+    END(["Reporte/evidencia consultado con trazabilidad y alcance explícito."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"No"| A1["Rechazar exportación o mostrar solo vista permitida"]
+    A1 --> E1(["Sin entrega fuera de alcance."])
+    N5 -->|"Sin resultados"| A2["Mostrar estado vacío y filtros aplicados; distinguirlo de acceso limitado"]
+    A2 --> E2(["Consulta sin resultados visibles."])

@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Recepción necesita registrar o identificar a una persona."]) --> N1
+    N1["Recepción: Buscar por identificador o datos permitidos"]
+    N2{"Sistema Health Project: ¿Existe paciente o candidato a duplicado?"}
+    N3["Recepción: Crear ficha humana con identificador interno si no tiene documento"]
+    N4["Recepción: Registrar contactos y representante cuando corresponda"]
+    N5["Sistema Health Project: Validar campos, identidad y relaciones"]
+    N6["Sistema Health Project: Guardar paciente y acceso al expediente permitido"]
+    END(["Paciente humano registrado en la organización."])
+    N1 --> N2
+    N2 -->|"No"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N2 -->|"Sí"| A1["Comparar candidatos y seleccionar paciente existente"]
+    A1 --> E1(["Paciente existente seleccionado; no crear otro."])
+    N5 -->|"Datos inconsistentes"| A2["Señalar campos y conservar borrador"]
+    A2 --> N3

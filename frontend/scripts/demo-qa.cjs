@@ -1,0 +1,77 @@
+const { chromium } = require('playwright');
+const { mkdirSync, writeFileSync } = require('node:fs');
+const assert = require('node:assert/strict');
+const base = process.env.HEALTH_PREVIEW_URL || 'http://127.0.0.1:3002';
+(async () => {
+  const browser = await chromium.launch({ channel: 'msedge', headless: true });
+  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, reducedMotion: 'reduce' });
+  const page = await context.newPage(), errors = [], apiRequests = [], results = [];
+  page.setDefaultTimeout(30000);
+  page.on('pageerror', e => errors.push(e.message));
+  await context.route('**/api/**', route => { apiRequests.push(route.request().url()); return route.abort(); });
+  mkdirSync('test-results', { recursive: true });
+  const go = async path => { await page.goto(base + path, { waitUntil: 'networkidle' }); };
+  const hub = async text => { await go('/'); await page.locator('.review-journey').filter({ hasText: text }).click(); };
+  const shot = async name => page.screenshot({ path: `test-results/review-${name}.png`, fullPage: true });
+  try {
+    await go('/'); await page.getByRole('heading', { level: 1 }).filter({ hasText: 'Cada forma de cuidar' }).waitFor();
+    assert.equal(await page.locator('.review-journey').count(), 6); await shot('home-light');
+    results.push('Direct entry without server or credentials');
+    await hub('Administración SaaS'); await page.getByRole('heading', { name: 'Una plataforma, muchos espacios' }).waitFor();
+    await page.getByRole('link', { name: 'Clientes y tenants', exact: true }).click();
+    await page.locator('.saas-tenant-card,.data-table').first().waitFor();
+    await go('/saas/planes/'); await page.getByRole('button', { name: 'Crear plan', exact: true }).click();
+    await page.locator('#saas-name').fill('Plan de revisión');
+    await page.getByRole('button', { name: 'Revisar configuración', exact: true }).click();
+    await page.getByRole('button', { name: 'Confirmar configuración', exact: true }).click();
+    await page.getByRole('heading', { name: 'Configuración lista' }).waitFor();
+    await page.getByRole('button', { name: 'Volver a la pantalla', exact: true }).click();
+    await page.reload({ waitUntil: 'networkidle' }); await page.getByRole('heading', { name: 'Plan de revisión', exact: true }).waitFor();
+    results.push('SaaS plans: edit flow and reload persistence');
+    await go('/saas/trazabilidad/'); await page.getByRole('heading', { name: 'Trazabilidad', exact: true }).waitFor();
+    await page.getByRole('button', { name: 'Ver recorrido' }).first().click(); await page.getByRole('heading', { name: 'Recorrido de la operación' }).waitFor();
+    assert.ok(await page.locator('.runtime-timeline li').count() >= 3); await shot('trace');
+    await page.getByRole('button', { name: 'Cerrar', exact: true }).click();
+    const download = page.waitForEvent('download'); await page.getByRole('button', { name: 'Exportar página' }).click(); assert.equal((await download).suggestedFilename(), 'trazabilidad.csv');
+    await page.getByRole('tab', { name: 'Solicitudes y accesos' }).click(); await page.getByLabel('Solo errores y rechazos').check(); await page.getByText('401', { exact: true }).waitFor();
+    results.push('Trace: command bridge, steps, export and rejected requests');
+    await go('/saas/monitor/'); await page.getByRole('button', { name: 'Cambiar estado', exact: true }).click();
+    await page.locator('#app-mode').selectOption('READ_ONLY'); await page.locator('#app-mode-reason').fill('Revisión de la presentación');
+    await page.getByRole('button', { name: 'Confirmar cambio de estado', exact: true }).click(); await page.getByRole('heading', { name: 'Aplicación en solo lectura' }).waitFor();
+    await page.reload({ waitUntil: 'networkidle' }); await page.getByRole('heading', { name: 'Aplicación en solo lectura' }).waitFor();
+    for (const theme of ['blanco','negro','navy']) { await page.getByRole('button', { name: `Tema ${theme}`, exact: true }).click(); await shot(`monitor-${theme}`); }
+    await page.getByRole('button', { name: 'Cambiar estado', exact: true }).click(); await page.locator('#app-mode').selectOption('OPEN'); await page.getByRole('button', { name: 'Confirmar cambio de estado' }).click();
+    results.push('Monitor state changes persist locally; three themes');
+    await go('/saas/soporte/'); await page.getByRole('button', { name: 'Solicitar soporte', exact: true }).first().click();
+    await page.locator('#support-subject').fill('Revisión de pantalla'); await page.locator('#support-message').fill('Ejemplo de solicitud para revisar el recorrido completo.');
+    await page.getByRole('button', { name: 'Enviar solicitud', exact: true }).click(); await page.getByRole('heading', { name: 'Solicitud registrada' }).waitFor();
+    assert.equal(await page.locator('[data-slot="sheet-overlay"]').evaluate(el => getComputedStyle(el).backdropFilter), 'blur(8px)'); await shot('support');
+    await page.getByRole('button', { name: 'Cerrar', exact: true }).last().click(); await page.getByRole('button', { name: 'Actualizar', exact: true }).click();
+    await page.getByRole('row').filter({ hasText: 'Revisión de pantalla' }).getByRole('button', { name: 'Ver solicitud' }).click();
+    await page.locator('#ticket-status').selectOption('RESOLVED'); await page.locator('#ticket-comment').fill('Revisión completada.'); await page.getByRole('button', { name: 'Guardar respuesta' }).click();
+    await page.getByText('Revisión completada.', { exact: true }).waitFor(); results.push('Support: right drawer with blur, create, reply and resolve');
+    await hub('Medicina humana'); await page.getByRole('heading', { name: 'Buen día, Dr. Mateo' }).waitFor();
+    await page.getByRole('link', { name: 'Agenda', exact: true }).click(); await page.locator('.calendar-professional').first().waitFor(); results.push('Human dashboard and agenda');
+    await hub('Odontología'); await page.getByRole('heading', { name: 'Un espacio para cuidar' }).waitFor(); assert.ok((await page.locator('body').innerText()).includes('Diego')); await shot('dental'); results.push('Dental patient and workspace');
+    await hub('Veterinaria'); await page.getByRole('heading', { name: 'Un espacio para cuidar' }).waitFor(); assert.ok((await page.locator('body').innerText()).includes('Luna')); await shot('veterinary'); results.push('Veterinary patient and workspace');
+    await hub('Portal del paciente'); await page.getByRole('link', { name: 'Mis citas', exact: true }).click(); await page.locator('main').waitFor(); results.push('Patient portal and appointments');
+    await hub('Administración SaaS'); await go('/saas/cuenta/'); await page.getByText('Otro acceso', { exact: true }).waitFor();
+    await page.locator('.session-row').filter({ hasText: 'Otro acceso' }).getByRole('button', { name: 'Revocar' }).click(); await page.getByText('Sesión revocada', { exact: true }).waitFor(); results.push('Simulated session revocation');
+    await go('/saas/acceso/'); await page.locator('#auth-password').fill('SoloDemostracion!'); await page.getByRole('button', { name: 'Iniciar sesión', exact: true }).click(); await page.getByRole('heading', { name: 'Una plataforma, muchos espacios' }).waitFor();
+    await go('/recuperar/'); await page.locator('#auth-email').fill('jefe@example.test'); await page.getByRole('button', { name: 'Enviar enlace de recuperación' }).click();
+    await page.getByRole('link', { name: 'Abrir enlace simulado' }).first().click(); await page.locator('#auth-password').fill('NuevaFicticia123!'); await page.locator('#auth-confirm').fill('NuevaFicticia123!');
+    await page.getByRole('button', { name: 'Guardar contraseña' }).click(); await page.getByRole('status').filter({ hasText: 'Recuperación completada' }).waitFor(); results.push('Access and recovery with simulated inbox');
+    await go('/registro/'); await page.locator('#auth-name').fill('Revisor Demo'); await page.locator('#auth-organization').fill('Consulta de revisión'); await page.locator('#auth-slug').fill('revision-' + Date.now());
+    await page.locator('#auth-email').fill('registro@example.test'); await page.locator('#auth-password').fill('CuentaFicticia123!'); await page.locator('#auth-confirm').fill('CuentaFicticia123!'); await page.locator('.auth-consent input').check();
+    await page.getByRole('button', { name: 'Crear cuenta', exact: true }).click(); await page.getByRole('status').filter({ hasText: 'Cuenta de ejemplo preparada' }).waitFor();
+    await page.getByRole('link', { name: 'Abrir enlace simulado' }).first().click(); await page.getByRole('button', { name: 'Confirmar correo', exact: true }).click(); await page.getByRole('status').filter({ hasText: 'Correo confirmado' }).waitFor();
+    results.push('Registration creates local tenant and verification link');
+    await go('/'); await page.setViewportSize({ width: 390, height: 844 });
+    for (const theme of ['light','dark','navy']) { await page.getByLabel('Tema de la presentación').selectOption(theme); assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)); await shot(`mobile-${theme}`); }
+    results.push('390px presentation landing in three themes');
+    assert.deepEqual(apiRequests, [], 'Mock mode attempted real API calls'); assert.deepEqual(errors, [], 'Browser JavaScript errors');
+    writeFileSync('test-results/review-qa.json', JSON.stringify({ passed: results.length, results, apiRequests, errors }, null, 2));
+    console.log(JSON.stringify({ passed: results.length, apiRequests: apiRequests.length, errors }));
+  } catch (error) { await shot('failure'); console.error('Visible alerts:', await page.getByRole('alert').allTextContents()); throw error; }
+  finally { await browser.close(); }
+})().catch(error => { console.error(error); process.exitCode = 1; });

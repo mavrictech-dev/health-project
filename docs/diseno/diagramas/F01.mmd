@@ -1,0 +1,19 @@
+flowchart TD
+    START(["El usuario abre el acceso profesional."]) --> N1
+    N1["Profesional clínico: Ingresar RUC, usuario y contraseña"]
+    N2{"Sistema Health Project: ¿Credenciales y cuenta válidas?"}
+    N3["Sistema Health Project: Mostrar espacios autorizados"]
+    N4["Profesional clínico: Elegir organización y sucursal operativa"]
+    N5{"Sistema Health Project: ¿Membresía vigente y contexto permitido?"}
+    N6["Sistema Health Project: Abrir inicio del rol y registrar acceso"]
+    END(["Sesión activa en contexto explícito; no se inicia una atención."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"Sí"| N6
+    N6 --> END
+    N2 -->|"No"| A1["Mostrar error sin revelar cuentas existentes; conservar RUC y usuario, no contraseña"]
+    A1 --> N1
+    N5 -->|"No"| A2["Actualizar espacios disponibles y explicar que no hay acceso a ese contexto"]
+    A2 --> N3

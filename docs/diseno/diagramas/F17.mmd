@@ -1,0 +1,23 @@
+flowchart TD
+    START(["Paciente o responsable solicita atención en el portal."]) --> N1
+    N1["Paciente humano: Elegir paciente o animal autorizado y organización"]
+    N2["Paciente humano: Seleccionar servicio, sede y preferencias"]
+    N3["Sistema Health Project: Mostrar intervalos publicables"]
+    N4["Paciente humano: Solicitar intervalo disponible"]
+    N5{"Sistema Health Project: ¿La política permite confirmación automática?"}
+    N6["Recepción: Revisar solicitud y confirmar intervalo autorizado"]
+    N7["Sistema Health Project: Publicar estado real y notificar al solicitante"]
+    END(["Cita confirmada o solicitud pendiente con estado explícito."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"No"| N6
+    N6 --> N7
+    N7 --> END
+    N5 -->|"Sí"| A1["Validar disponibilidad y confirmar reserva"]
+    A1 --> N7
+    N6 -->|"Sin disponibilidad"| A2["Ofrecer alternativas o lista de espera al solicitante"]
+    A2 --> E2(["Solicitud pendiente de elección; sin reserva confirmada."])
+    N1 -->|"Vínculo no autorizado"| A3["Solicitar verificación sin mostrar pacientes ajenos"]
+    A3 --> E3(["Solicitud detenida."])

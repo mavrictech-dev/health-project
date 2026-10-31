@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se inicia ciclo reproductivo humano o veterinario autorizado."]) --> N1
+    N1["Profesional clínico: Crear ciclo y participantes/pacientes con vínculos autorizados"]
+    N2["Profesional clínico: Registrar plan profesional y consentimientos aplicables"]
+    N3["Equipo de diagnóstico: Identificar muestras, procedencia, custodia y etapas"]
+    N4{"Sistema Health Project: ¿Identificación y autorizaciones suficientes para continuar?"}
+    N5["Profesional clínico: Registrar etapas y actuaciones realizadas"]
+    N6["Sistema Health Project: Conservar resultados, vínculos de descendencia cuando proceda y seguimiento"]
+    END(["Etapas y sujetos vinculados sin fusionar identidades ni historiales."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"No"| A1["Detener etapa y asignar revisión sin perder trazabilidad"]
+    A1 --> E1(["Ciclo en espera de resolución."])
+    N5 -->|"Cancelación o suspensión"| A2["Registrar decisión y destino autorizado de recursos/muestras"]
+    A2 --> E2(["Ciclo suspendido/cancelado con evidencia."])

@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Llega un informe o una versión corregida a la bandeja clínica."]) --> N1
+    N1["Sistema Health Project: Incluir informe y versión en bandeja con responsable"]
+    N2["Profesional clínico: Abrir resultado y antecedentes autorizados"]
+    N3["Profesional clínico: Registrar revisión e interpretación profesional"]
+    N4["Profesional clínico: Definir actuación, comunicación o control posterior"]
+    N5{"Sistema Health Project: ¿Pendiente tiene resolución o siguiente responsable?"}
+    N6["Sistema Health Project: Guardar revisión y conservar seguimiento vinculado"]
+    END(["Resultado revisado o pendiente explícito bajo responsable; recibir no equivale a revisar."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"Sí"| N6
+    N6 --> END
+    N2 -->|"Responsable no disponible"| A1["Reasignar a suplente autorizado conservando trazabilidad"]
+    A1 --> N1
+    N5 -->|"No"| A2["Mantener pendiente visible y solicitar asignación"]
+    A2 --> N4
+    N6 -->|"Nuevo informe corregido"| A3["Crear revisión pendiente de la nueva versión"]
+    A3 --> N1

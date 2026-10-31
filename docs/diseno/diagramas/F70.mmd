@@ -1,0 +1,17 @@
+flowchart TD
+    START(["Una persona accede al portal externo."]) --> N1
+    N1["Paciente humano: Ingresar con su cuenta externa o completar invitación"]
+    N2{"Sistema Health Project: ¿Cuenta válida y vínculo vigente?"}
+    N3["Sistema Health Project: Mostrar personas/animales y organizaciones autorizados"]
+    N4["Paciente humano: Elegir paciente/animal y organización"]
+    N5["Sistema Health Project: Abrir inicio de portal con citas y documentos publicados"]
+    END(["Portal abierto bajo vínculo y contexto verificables; login externo no exige RUC del paciente."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> END
+    N2 -->|"No"| A1["Solicitar recuperación o verificación sin revelar identidades ajenas"]
+    A1 --> E1(["Portal sin datos clínicos abiertos."])
+    N3 -->|"Sin vínculos"| A2["Mostrar estado sin pacientes y opción de verificar invitación"]
+    A2 --> E2(["Cuenta válida sin acceso a paciente."])

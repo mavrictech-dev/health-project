@@ -1,0 +1,10 @@
+stateDiagram-v2
+    [*] --> BORRADOR
+    BORRADOR --> ACTIVA: Emitir orden
+    ACTIVA --> SUSPENDIDA: Suspensión autorizada
+    SUSPENDIDA --> ACTIVA: Reanudación autorizada
+    ACTIVA --> COMPLETADA: Cumplimiento registrado
+    ACTIVA --> CANCELADA: Cancelación con motivo
+    BORRADOR --> CANCELADA: Descartar solicitud
+    COMPLETADA --> [*]
+    CANCELADA --> [*]

@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Corresponde ejecutar una administración autorizada."]) --> N1
+    N1["Asistente o enfermería: Seleccionar administración programada y paciente"]
+    N2{"Sistema Health Project: ¿Orden/revisión vigente y ejecución autorizada?"}
+    N3["Asistente o enfermería: Registrar producto, cantidad, vía, tiempos reales y ejecutor"]
+    N4["Asistente o enfermería: Indicar realizada o no realizada con motivo"]
+    N5["Sistema Health Project: Guardar evento y movimientos asociados sin duplicación"]
+    N6["Sistema Health Project: Actualizar hoja y pendientes para revisión"]
+    END(["Hecho de administración o excepción documentado."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N2 -->|"No"| A1["Detener ejecución y crear revisión con responsable"]
+    A1 --> E1(["Administración pendiente de revisión."])
+    N4 -->|"No realizada"| A2["Conservar motivo y asignar seguimiento; no marcar como administrada"]
+    A2 --> N5

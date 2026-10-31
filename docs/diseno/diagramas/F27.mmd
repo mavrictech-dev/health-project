@@ -1,0 +1,21 @@
+flowchart TD
+    START(["El autor solicita cerrar una revisión clínica."]) --> N1
+    N1["Profesional clínico: Abrir resumen de la revisión guardada"]
+    N2{"Sistema Health Project: ¿Datos y permisos de cierre válidos?"}
+    N3["Profesional clínico: Confirmar contenido, autoría y revisión a cerrar"]
+    N4["Sistema Health Project: Aplicar mecanismo de firma definido y guardar evidencia"]
+    N5{"Sistema Health Project: ¿Firma y persistencia confirmadas?"}
+    N6["Sistema Health Project: Marcar revisión firmada, impedir edición y registrar auditoría"]
+    END(["Revisión firmada y conservada; finalizar visita es una acción separada."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"Sí"| N6
+    N6 --> END
+    N2 -->|"No"| A1["Mostrar faltantes o conflicto y volver a revisión editable"]
+    A1 --> N1
+    N3 -->|"Cancelar"| A2["Conservar borrador sin firma"]
+    A2 --> E2(["Documento sin firmar."])
+    N5 -->|"No"| A3["Mantener estado pendiente y verificar resultado del proveedor antes de reintentar"]
+    A3 --> E3(["Firma pendiente; no anunciar documento firmado."])

@@ -1,0 +1,7914 @@
+{
+  "F01_A01": {
+    "fields": [
+      {
+        "key": "personaDemo",
+        "label": "Identidad de demostración",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos · Profesional",
+          "Camila Torres · Recepción",
+          "Daniel Salas · Administración"
+        ]
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "sesion_activa"
+  },
+  "F01_A02": {
+    "fields": [
+      {
+        "key": "membresia",
+        "label": "Espacio de trabajo",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Clínica Aurora · Profesional",
+          "VetCare · Veterinaria"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F01_A03": {
+    "fields": [
+      {
+        "key": "sucursal",
+        "label": "Sucursal",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sede Miraflores",
+          "Sede San Isidro"
+        ]
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "sesion_activa"
+  },
+  "F02_A01": {
+    "fields": [
+      {
+        "key": "organizacion",
+        "label": "Organización",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Clínica Aurora",
+          "VetCare",
+          "Consultorio Ríos"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F02_A02": {
+    "fields": [
+      {
+        "key": "sucursal",
+        "label": "Sucursal",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sede Miraflores",
+          "Sede San Isidro"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F02_A03": {
+    "fields": [],
+    "reviewRequired": true
+  },
+  "F02_A04": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F02_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F03_A01": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F03_A02": {
+    "fields": [
+      {
+        "key": "cuentaFicticia",
+        "label": "Cuenta de ejemplo",
+        "type": "text",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F03_A03": {
+    "fields": [
+      {
+        "key": "codigoDemo",
+        "label": "Código de demostración",
+        "type": "text",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F03_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F04_A01": {
+    "fields": [
+      {
+        "key": "personaDemo",
+        "label": "Identidad de demostración",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos · Profesional",
+          "Camila Torres · Recepción",
+          "Daniel Salas · Administración"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F04_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F04_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F04_A04": {
+    "fields": [
+      {
+        "key": "camposResueltos",
+        "label": "Contenido resuelto",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F04_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F05_A01": {
+    "fields": [
+      {
+        "key": "nombre",
+        "label": "Nombre",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "tipo",
+        "label": "Tipo de organización",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Clínica humana",
+          "Clínica veterinaria",
+          "Consultorio independiente"
+        ]
+      },
+      {
+        "key": "identificadorFicticio",
+        "label": "Identificador de demostración",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "zonaHoraria",
+        "label": "Zona horaria",
+        "type": "select",
+        "required": true,
+        "options": [
+          "America/Lima"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F05_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F05_A03": {
+    "fields": [
+      {
+        "key": "nombre",
+        "label": "Nombre",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "direccion",
+        "label": "Dirección",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "zonaHoraria",
+        "label": "Zona horaria",
+        "type": "select",
+        "required": true,
+        "options": [
+          "America/Lima"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F05_A04": {
+    "fields": [
+      {
+        "key": "personaFicticia",
+        "label": "Persona ficticia",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Lucía Vargas"
+        ]
+      },
+      {
+        "key": "rol",
+        "label": "Rol",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Profesional clínico",
+          "Recepción",
+          "Administración",
+          "Asistencia",
+          "Diagnóstico",
+          "Farmacia",
+          "Caja",
+          "Almacén",
+          "Auditoría"
+        ]
+      },
+      {
+        "key": "sucursales",
+        "label": "Sucursales autorizadas",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Todas las sedes de la organización",
+          "Sede Miraflores",
+          "Sede San Isidro"
+        ]
+      },
+      {
+        "key": "alcance",
+        "label": "Alcance permitido",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F05_A05": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "activa"
+  },
+  "F06_A01": {
+    "fields": [
+      {
+        "key": "personaFicticia",
+        "label": "Persona ficticia",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Lucía Vargas"
+        ]
+      },
+      {
+        "key": "rol",
+        "label": "Rol",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Profesional clínico",
+          "Recepción",
+          "Administración",
+          "Asistencia",
+          "Diagnóstico",
+          "Farmacia",
+          "Caja",
+          "Almacén",
+          "Auditoría"
+        ]
+      },
+      {
+        "key": "sucursales",
+        "label": "Sucursales autorizadas",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Todas las sedes de la organización",
+          "Sede Miraflores",
+          "Sede San Isidro"
+        ]
+      },
+      {
+        "key": "alcance",
+        "label": "Alcance permitido",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F06_A02": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "aceptada"
+  },
+  "F06_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F06_A04": {
+    "fields": [
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "activa"
+  },
+  "F06_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F07_A01": {
+    "fields": [
+      {
+        "key": "membresia",
+        "label": "Espacio de trabajo",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Clínica Aurora · Profesional",
+          "VetCare · Veterinaria"
+        ]
+      },
+      {
+        "key": "accionesPermitidas",
+        "label": "Acciones permitidas",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "sucursales",
+        "label": "Sucursales autorizadas",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Todas las sedes de la organización",
+          "Sede Miraflores",
+          "Sede San Isidro"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F07_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F07_A03": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F07_A04": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "revocada"
+  },
+  "F07_A05": {
+    "fields": [
+      {
+        "key": "suplente",
+        "label": "Profesional suplente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Andrés Molina",
+          "Elena Soto"
+        ]
+      },
+      {
+        "key": "pendientes",
+        "label": "Pendientes y responsables",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F08_A01": {
+    "fields": [
+      {
+        "key": "perfil",
+        "label": "Perfil de especialidad",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Medicina general",
+          "Odontología",
+          "Cardiología",
+          "Medicina veterinaria"
+        ]
+      },
+      {
+        "key": "version",
+        "label": "Versión",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "campos",
+        "label": "Campos de la plantilla",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "atlas",
+        "label": "Atlas de demostración",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Humano adulto",
+          "Dentición humana permanente",
+          "Canino",
+          "Felino"
+        ]
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "borrador"
+  },
+  "F08_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F08_A03": {
+    "fields": [
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "en_revision"
+  },
+  "F08_A04": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "publicada"
+  },
+  "F08_A05": {
+    "fields": [
+      {
+        "key": "paquete",
+        "label": "Paquete clínico",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consulta externa humana",
+          "Odontología",
+          "Veterinaria"
+        ]
+      },
+      {
+        "key": "alcance",
+        "label": "Alcance permitido",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F08_A06": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "retirada"
+  },
+  "F09_A01": {
+    "fields": [
+      {
+        "key": "profesional",
+        "label": "Profesional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Andrés Molina",
+          "Elena Soto"
+        ]
+      },
+      {
+        "key": "sucursal",
+        "label": "Sucursal",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sede Miraflores",
+          "Sede San Isidro"
+        ]
+      },
+      {
+        "key": "recurso",
+        "label": "Recurso",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consultorio 01",
+          "Consultorio 02",
+          "Sala de procedimientos"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "inicioHora",
+        "label": "Hora de inicio",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "finHora",
+        "label": "Hora de fin",
+        "type": "time",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F09_A02": {
+    "fields": [
+      {
+        "key": "profesional",
+        "label": "Profesional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Andrés Molina",
+          "Elena Soto"
+        ]
+      },
+      {
+        "key": "sucursal",
+        "label": "Sucursal",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sede Miraflores",
+          "Sede San Isidro"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "inicioHora",
+        "label": "Hora de inicio",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "finHora",
+        "label": "Hora de fin",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F09_A03": {
+    "fields": [
+      {
+        "key": "nombre",
+        "label": "Nombre",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "tipo",
+        "label": "Tipo de recurso",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consultorio",
+          "Equipo",
+          "Sala",
+          "Recurso compartido"
+        ]
+      },
+      {
+        "key": "capacidad",
+        "label": "Capacidad",
+        "type": "number",
+        "required": true,
+        "min": 1
+      },
+      {
+        "key": "dominio",
+        "label": "Tipo de paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Humano",
+          "Animal"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F09_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F09_A05": {
+    "fields": [],
+    "reviewRequired": true
+  },
+  "F10_A01": {
+    "fields": [
+      {
+        "key": "busqueda",
+        "label": "Buscar por nombre o identificador",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F10_A02": {
+    "fields": [
+      {
+        "key": "nombre",
+        "label": "Nombre",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "identificacion",
+        "label": "Identificación ficticia",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "fechaNacimiento",
+        "label": "Fecha de nacimiento",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "sexo",
+        "label": "Sexo registrado",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Femenino",
+          "Masculino",
+          "Desconocido"
+        ]
+      },
+      {
+        "key": "telefono",
+        "label": "Teléfono ficticio",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "correo",
+        "label": "Correo ficticio",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F10_A03": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F10_A04": {
+    "fields": [
+      {
+        "key": "persona",
+        "label": "Persona vinculada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas",
+          "Marcos Vega"
+        ]
+      },
+      {
+        "key": "tipo",
+        "label": "Relación del representante",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Representante legal",
+          "Tutor",
+          "Persona autorizada"
+        ]
+      },
+      {
+        "key": "alcance",
+        "label": "Alcance permitido",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F10_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F11_A01": {
+    "fields": [
+      {
+        "key": "nombre",
+        "label": "Nombre",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "identificacion",
+        "label": "Identificación ficticia",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "especie",
+        "label": "Especie",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Canino",
+          "Felino",
+          "Equino",
+          "Bovino",
+          "Ave",
+          "Otra"
+        ]
+      },
+      {
+        "key": "raza",
+        "label": "Raza",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "sexo",
+        "label": "Sexo registrado",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Femenino",
+          "Masculino",
+          "Desconocido"
+        ]
+      },
+      {
+        "key": "fechaNacimiento",
+        "label": "Fecha de nacimiento",
+        "type": "date",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F11_A02": {
+    "fields": [
+      {
+        "key": "busqueda",
+        "label": "Buscar por nombre o identificador",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F11_A03": {
+    "fields": [
+      {
+        "key": "persona",
+        "label": "Persona vinculada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas",
+          "Marcos Vega"
+        ]
+      },
+      {
+        "key": "tipo",
+        "label": "Relación con el animal",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Propietario",
+          "Responsable autorizado",
+          "Contacto"
+        ]
+      },
+      {
+        "key": "alcance",
+        "label": "Alcance permitido",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "telefono",
+        "label": "Teléfono ficticio",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F11_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F11_A05": {
+    "fields": [
+      {
+        "key": "evidenciaDemo",
+        "label": "Evidencia de demostración",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F12_A01": {
+    "fields": [
+      {
+        "key": "persona",
+        "label": "Persona vinculada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas",
+          "Marcos Vega"
+        ]
+      },
+      {
+        "key": "tipo",
+        "label": "Tipo de relación",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Representante legal",
+          "Propietario",
+          "Responsable autorizado",
+          "Contacto"
+        ]
+      },
+      {
+        "key": "alcance",
+        "label": "Alcance permitido",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F12_A02": {
+    "fields": [
+      {
+        "key": "evidenciaDemo",
+        "label": "Evidencia de demostración",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "verificada"
+  },
+  "F12_A03": {
+    "fields": [
+      {
+        "key": "inicioVigencia",
+        "label": "Inicio de vigencia",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "finVigencia",
+        "label": "Fin de vigencia",
+        "type": "date",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F12_A04": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "revocada"
+  },
+  "F12_A05": {
+    "fields": [],
+    "reviewRequired": true
+  },
+  "F12_A06": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F13_A01": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F13_A02": {
+    "fields": [
+      {
+        "key": "fichaConservada",
+        "label": "Ficha que se conservará",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Ficha principal",
+          "Ficha secundaria"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F13_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F13_A04": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F13_A05": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "correccion",
+        "label": "Corrección propuesta",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F14_A01": {
+    "fields": [
+      {
+        "key": "nombre",
+        "label": "Nombre",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "tipo",
+        "label": "Tipo de población",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Refugio",
+          "Hato",
+          "Granja",
+          "Programa sanitario"
+        ]
+      },
+      {
+        "key": "ubicacion",
+        "label": "Ubicación",
+        "type": "text",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F14_A02": {
+    "fields": [
+      {
+        "key": "animal",
+        "label": "Animal",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Luna · Felino",
+          "Toby · Canino"
+        ]
+      },
+      {
+        "key": "inicioVigencia",
+        "label": "Inicio de vigencia",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "finVigencia",
+        "label": "Fin de vigencia",
+        "type": "date",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F14_A03": {
+    "fields": [
+      {
+        "key": "animal",
+        "label": "Animal",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Luna · Felino",
+          "Toby · Canino"
+        ]
+      },
+      {
+        "key": "destino",
+        "label": "Destino",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sede San Isidro",
+          "Hospitalización",
+          "Consulta externa",
+          "Destino externo de ejemplo"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F14_A04": {
+    "fields": [
+      {
+        "key": "animal",
+        "label": "Animal",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Luna · Felino",
+          "Toby · Canino"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F14_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F15_A01": {
+    "fields": [
+      {
+        "key": "busqueda",
+        "label": "Buscar por nombre o identificador",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "dominio",
+        "label": "Tipo de paciente",
+        "type": "select",
+        "required": false,
+        "options": [
+          "Humano",
+          "Animal"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F15_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F15_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F15_A04": {
+    "fields": [
+      {
+        "key": "fechaDesde",
+        "label": "Desde",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "fechaHasta",
+        "label": "Hasta",
+        "type": "date",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F15_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F16_A01": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "servicio",
+        "label": "Servicio",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consulta general",
+          "Consulta odontológica",
+          "Consulta veterinaria",
+          "Hemograma de ejemplo",
+          "Ecografía de ejemplo"
+        ]
+      },
+      {
+        "key": "profesional",
+        "label": "Profesional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Andrés Molina",
+          "Elena Soto"
+        ]
+      },
+      {
+        "key": "sucursal",
+        "label": "Sucursal",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sede Miraflores",
+          "Sede San Isidro"
+        ]
+      },
+      {
+        "key": "recurso",
+        "label": "Recurso",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consultorio 01",
+          "Consultorio 02",
+          "Sala de procedimientos"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "inicioHora",
+        "label": "Hora de inicio",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "finHora",
+        "label": "Hora de fin",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F16_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F16_A03": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "reservada"
+  },
+  "F16_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F16_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F17_A01": {
+    "fields": [
+      {
+        "key": "servicio",
+        "label": "Servicio",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consulta general",
+          "Consulta odontológica",
+          "Consulta veterinaria",
+          "Hemograma de ejemplo",
+          "Ecografía de ejemplo"
+        ]
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F17_A02": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F17_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F17_A04": {
+    "fields": [
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "inicioHora",
+        "label": "Hora de inicio",
+        "type": "time",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "pendiente"
+  },
+  "F17_A05": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "reservada"
+  },
+  "F18_A01": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "confirmada"
+  },
+  "F18_A02": {
+    "fields": [
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "inicioHora",
+        "label": "Hora de inicio",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "finHora",
+        "label": "Hora de fin",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F18_A03": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "cancelada"
+  },
+  "F18_A04": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "reprogramada"
+  },
+  "F18_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F19_A01": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "servicio",
+        "label": "Servicio",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consulta general",
+          "Consulta odontológica",
+          "Consulta veterinaria",
+          "Hemograma de ejemplo",
+          "Ecografía de ejemplo"
+        ]
+      },
+      {
+        "key": "preferencias",
+        "label": "Preferencias",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "activa"
+  },
+  "F19_A02": {
+    "fields": [
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "inicioHora",
+        "label": "Hora de inicio",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "finHora",
+        "label": "Hora de fin",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "vencimiento",
+        "label": "Vencimiento",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "ofertada"
+  },
+  "F19_A03": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "aceptada"
+  },
+  "F19_A04": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "rechazada"
+  },
+  "F19_A05": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "cerrada"
+  },
+  "F20_A01": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "cita",
+        "label": "Cita",
+        "type": "select",
+        "required": false,
+        "options": [
+          "Cita de Lucía · 09:30",
+          "Cita de Luna · 11:00"
+        ]
+      },
+      {
+        "key": "llegada",
+        "label": "Hora de llegada",
+        "type": "time",
+        "required": true
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "llegada"
+  },
+  "F20_A02": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "servicio",
+        "label": "Servicio",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consulta general",
+          "Consulta odontológica",
+          "Consulta veterinaria",
+          "Hemograma de ejemplo",
+          "Ecografía de ejemplo"
+        ]
+      },
+      {
+        "key": "profesional",
+        "label": "Profesional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Andrés Molina",
+          "Elena Soto"
+        ]
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F20_A03": {
+    "fields": [],
+    "reviewRequired": false,
+    "targetStatus": "en_espera"
+  },
+  "F20_A04": {
+    "fields": [],
+    "reviewRequired": false,
+    "targetStatus": "llamada"
+  },
+  "F20_A05": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "retirada"
+  },
+  "F20_A06": {
+    "fields": [],
+    "reviewRequired": false,
+    "targetStatus": "en_atencion"
+  },
+  "F21_A01": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "especialidad",
+        "label": "Especialidad",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Medicina general",
+          "Odontología",
+          "Cardiología",
+          "Veterinaria"
+        ]
+      },
+      {
+        "key": "profesional",
+        "label": "Profesional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Andrés Molina",
+          "Elena Soto"
+        ]
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "en_atencion"
+  },
+  "F21_A02": {
+    "fields": [
+      {
+        "key": "resumen",
+        "label": "Resumen",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "borrador"
+  },
+  "F21_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F21_A04": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "finalizada"
+  },
+  "F21_A05": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "pendiente"
+  },
+  "F22_A01": {
+    "fields": [
+      {
+        "key": "seccion",
+        "label": "Sección",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Motivo de consulta",
+          "Antecedentes",
+          "Exploración",
+          "Plan"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F22_A02": {
+    "fields": [
+      {
+        "key": "parametro",
+        "label": "Parámetro",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "valor",
+        "label": "Valor",
+        "type": "number",
+        "required": true
+      },
+      {
+        "key": "unidad",
+        "label": "Unidad",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Unidad registrada",
+          "mg",
+          "mL",
+          "kg",
+          "mmHg",
+          "°C"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "metodo",
+        "label": "Método de medición",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F22_A03": {
+    "fields": [
+      {
+        "key": "seccion",
+        "label": "Sección",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Motivo de consulta",
+          "Antecedentes",
+          "Exploración",
+          "Plan"
+        ]
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F22_A04": {
+    "fields": [
+      {
+        "key": "respuestas",
+        "label": "Respuestas del formulario",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "borrador"
+  },
+  "F22_A05": {
+    "fields": [
+      {
+        "key": "revisionBase",
+        "label": "Versión inicial",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Visita anterior",
+          "Revisión 1"
+        ]
+      },
+      {
+        "key": "revisionRemota",
+        "label": "Versión comparada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Visita actual",
+          "Revisión 2"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F23_A01": {
+    "fields": [
+      {
+        "key": "vista",
+        "label": "Vista anatómica",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Anterior",
+          "Posterior",
+          "Lateral derecha",
+          "Lateral izquierda"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F23_A02": {
+    "fields": [
+      {
+        "key": "estructura",
+        "label": "Estructura anatómica",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Región seleccionada",
+          "Estructura del atlas"
+        ]
+      },
+      {
+        "key": "lateralidad",
+        "label": "Lateralidad",
+        "type": "select",
+        "required": false,
+        "options": [
+          "Derecha",
+          "Izquierda",
+          "Bilateral",
+          "Central",
+          "No aplica"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F23_A03": {
+    "fields": [
+      {
+        "key": "hallazgo",
+        "label": "Hallazgo registrado",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "estado",
+        "label": "Estado del hallazgo o procedimiento",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Observado",
+          "Planificado",
+          "Realizado",
+          "No realizado",
+          "Desconocido"
+        ]
+      },
+      {
+        "key": "descripcion",
+        "label": "Descripción",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F23_A04": {
+    "fields": [
+      {
+        "key": "procedimiento",
+        "label": "Procedimiento",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Procedimiento de ejemplo",
+          "Evaluación",
+          "Control"
+        ]
+      },
+      {
+        "key": "estado",
+        "label": "Estado del hallazgo o procedimiento",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Observado",
+          "Planificado",
+          "Realizado",
+          "No realizado",
+          "Desconocido"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F23_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F23_A06": {
+    "fields": [
+      {
+        "key": "visitaInicial",
+        "label": "Visita inicial",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Visita anterior"
+        ]
+      },
+      {
+        "key": "visitaFinal",
+        "label": "Visita final",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Visita actual"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F24_A01": {
+    "fields": [
+      {
+        "key": "pieza",
+        "label": "Pieza dental",
+        "type": "select",
+        "required": true,
+        "options": [
+          "11",
+          "12",
+          "13",
+          "14",
+          "21",
+          "22",
+          "23",
+          "24",
+          "31",
+          "32",
+          "33",
+          "34",
+          "41",
+          "42",
+          "43",
+          "44"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F24_A02": {
+    "fields": [
+      {
+        "key": "cara",
+        "label": "Cara dental",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Vestibular",
+          "Lingual / palatina",
+          "Mesial",
+          "Distal",
+          "Oclusal / incisal"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F24_A03": {
+    "fields": [
+      {
+        "key": "condicion",
+        "label": "Condición dental",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sano registrado",
+          "Caries registrada",
+          "Restauración",
+          "Ausencia",
+          "Fractura",
+          "Otra"
+        ]
+      },
+      {
+        "key": "estado",
+        "label": "Estado del registro dental",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Observado",
+          "Planificado",
+          "Realizado",
+          "No realizado",
+          "Desconocido"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F24_A04": {
+    "fields": [
+      {
+        "key": "procedimiento",
+        "label": "Procedimiento",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Procedimiento de ejemplo",
+          "Evaluación",
+          "Control"
+        ]
+      },
+      {
+        "key": "estado",
+        "label": "Estado del registro dental",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Observado",
+          "Planificado",
+          "Realizado",
+          "No realizado",
+          "Desconocido"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F24_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F24_A06": {
+    "fields": [
+      {
+        "key": "revisionBase",
+        "label": "Versión inicial",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Visita anterior",
+          "Revisión 1"
+        ]
+      },
+      {
+        "key": "revisionRemota",
+        "label": "Versión comparada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Visita actual",
+          "Revisión 2"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F25_A01": {
+    "fields": [
+      {
+        "key": "parametro",
+        "label": "Parámetro",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "valor",
+        "label": "Valor",
+        "type": "number",
+        "required": true
+      },
+      {
+        "key": "unidad",
+        "label": "Unidad",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Unidad registrada",
+          "mg",
+          "mL",
+          "kg",
+          "mmHg",
+          "°C"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "origen",
+        "label": "Origen",
+        "type": "select",
+        "required": false,
+        "options": [
+          "Registrado por profesional",
+          "Referido por paciente / responsable",
+          "Documento previo",
+          "Atención actual"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F25_A02": {
+    "fields": [
+      {
+        "key": "unidad",
+        "label": "Unidad",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Unidad registrada",
+          "mg",
+          "mL",
+          "kg",
+          "mmHg",
+          "°C"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F25_A03": {
+    "fields": [
+      {
+        "key": "instrumentoVersion",
+        "label": "Instrumento de demostración",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Escala preparada · v1",
+          "Formulario preparado · v1"
+        ]
+      },
+      {
+        "key": "respuestas",
+        "label": "Respuestas del formulario",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F25_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F25_A05": {
+    "fields": [
+      {
+        "key": "parametro",
+        "label": "Parámetro",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "fechaDesde",
+        "label": "Desde",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "fechaHasta",
+        "label": "Hasta",
+        "type": "date",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F25_A06": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F26_A01": {
+    "fields": [
+      {
+        "key": "archivoFicticio",
+        "label": "Archivo ficticio local",
+        "type": "file",
+        "required": true
+      },
+      {
+        "key": "tipo",
+        "label": "Tipo de archivo",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Imagen",
+          "PDF",
+          "Documento",
+          "Otro"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "descripcion",
+        "label": "Descripción",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F26_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F26_A03": {
+    "fields": [
+      {
+        "key": "archivoInicial",
+        "label": "Imagen inicial",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Imagen de ejemplo · anterior"
+        ]
+      },
+      {
+        "key": "archivoFinal",
+        "label": "Imagen comparada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Imagen de ejemplo · actual"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F26_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F26_A05": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F27_A01": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F27_A02": {
+    "fields": [
+      {
+        "key": "confirmacionFirma",
+        "label": "He revisado esta versión y confirmo la firma de demostración",
+        "type": "checkbox",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "firmada_demo"
+  },
+  "F27_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F27_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F28_A01": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "correccion",
+        "label": "Corrección propuesta",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F28_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F28_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F28_A04": {
+    "fields": [
+      {
+        "key": "confirmacionFirma",
+        "label": "He revisado esta versión y confirmo la firma de demostración",
+        "type": "checkbox",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "firmada_demo"
+  },
+  "F28_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F29_A01": {
+    "fields": [
+      {
+        "key": "tipo",
+        "label": "Tipo de episodio",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consulta externa",
+          "Seguimiento",
+          "Proceso clínico"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F29_A02": {
+    "fields": [
+      {
+        "key": "antecedente",
+        "label": "Antecedente",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "origen",
+        "label": "Origen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Registrado por profesional",
+          "Referido por paciente / responsable",
+          "Documento previo",
+          "Atención actual"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "certeza",
+        "label": "Certeza registrada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Confirmado por registro",
+          "Referido",
+          "Desconocido"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F29_A03": {
+    "fields": [
+      {
+        "key": "problema",
+        "label": "Problema registrado",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "estado",
+        "label": "Estado registrado",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Registrado",
+          "Pendiente",
+          "Desconocido"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F29_A04": {
+    "fields": [
+      {
+        "key": "sustancia",
+        "label": "Sustancia",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "reaccion",
+        "label": "Reacción registrada",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "key": "estado",
+        "label": "Estado registrado",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Registrado",
+          "Pendiente",
+          "Desconocido"
+        ]
+      },
+      {
+        "key": "origen",
+        "label": "Origen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Registrado por profesional",
+          "Referido por paciente / responsable",
+          "Documento previo",
+          "Atención actual"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F29_A05": {
+    "fields": [
+      {
+        "key": "atencion",
+        "label": "Atención",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Atención actual",
+          "Atención anterior"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F29_A06": {
+    "fields": [
+      {
+        "key": "estado",
+        "label": "Estado registrado",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Registrado",
+          "Pendiente",
+          "Desconocido"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F30_A01": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "tipo",
+        "label": "Tipo de orden",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Laboratorio",
+          "Imágenes",
+          "Procedimiento",
+          "Remisión"
+        ]
+      },
+      {
+        "key": "servicio",
+        "label": "Servicio",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consulta general",
+          "Consulta odontológica",
+          "Consulta veterinaria",
+          "Hemograma de ejemplo",
+          "Ecografía de ejemplo"
+        ]
+      },
+      {
+        "key": "prioridadEjemplo",
+        "label": "Prioridad registrada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Programada",
+          "Preferente",
+          "Prioridad de ejemplo"
+        ]
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F30_A02": {
+    "fields": [
+      {
+        "key": "servicio",
+        "label": "Servicio",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consulta general",
+          "Consulta odontológica",
+          "Consulta veterinaria",
+          "Hemograma de ejemplo",
+          "Ecografía de ejemplo"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F30_A03": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "emitida"
+  },
+  "F30_A04": {
+    "fields": [
+      {
+        "key": "destino",
+        "label": "Destino",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sede San Isidro",
+          "Hospitalización",
+          "Consulta externa",
+          "Destino externo de ejemplo"
+        ]
+      },
+      {
+        "key": "resumen",
+        "label": "Resumen",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F30_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F30_A06": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "cancelada"
+  },
+  "F31_A01": {
+    "fields": [
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "asignada"
+  },
+  "F31_A02": {
+    "fields": [
+      {
+        "key": "tipo",
+        "label": "Tipo de muestra",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sangre",
+          "Orina",
+          "Tejido",
+          "Otra"
+        ]
+      },
+      {
+        "key": "identificador",
+        "label": "Identificador de muestra",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "hora",
+        "label": "Hora",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "condiciones",
+        "label": "Condiciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F31_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F31_A04": {
+    "fields": [
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "aceptada"
+  },
+  "F31_A05": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "rechazada"
+  },
+  "F31_A06": {
+    "fields": [
+      {
+        "key": "receptor",
+        "label": "Receptor",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Andrés Molina",
+          "Elena Soto",
+          "Camila Torres"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "hora",
+        "label": "Hora",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "condiciones",
+        "label": "Condiciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F32_A01": {
+    "fields": [
+      {
+        "key": "parametro",
+        "label": "Parámetro",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "valor",
+        "label": "Valor",
+        "type": "number",
+        "required": true
+      },
+      {
+        "key": "unidad",
+        "label": "Unidad",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Unidad registrada",
+          "mg",
+          "mL",
+          "kg",
+          "mmHg",
+          "°C"
+        ]
+      },
+      {
+        "key": "referencia",
+        "label": "Referencia registrada",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "estado",
+        "label": "Estado del parámetro",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Medido",
+          "No disponible",
+          "Pendiente",
+          "Invalidado"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F32_A02": {
+    "fields": [],
+    "reviewRequired": false,
+    "targetStatus": "preliminar"
+  },
+  "F32_A03": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "emitido"
+  },
+  "F32_A04": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "correccion",
+        "label": "Corrección propuesta",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F32_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F33_A01": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F33_A02": {
+    "fields": [
+      {
+        "key": "archivoFicticio",
+        "label": "Archivo ficticio local",
+        "type": "file",
+        "required": true
+      },
+      {
+        "key": "estudio",
+        "label": "Estudio",
+        "type": "select",
+        "required": false,
+        "options": [
+          "Estudio de ejemplo · orden actual"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F33_A03": {
+    "fields": [
+      {
+        "key": "informe",
+        "label": "Informe",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "borrador"
+  },
+  "F33_A04": {
+    "fields": [
+      {
+        "key": "confirmacionFirma",
+        "label": "He revisado esta versión y confirmo la firma de demostración",
+        "type": "checkbox",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "firmado_demo"
+  },
+  "F33_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F33_A06": {
+    "fields": [
+      {
+        "key": "discrepancia",
+        "label": "Discrepancia identificada",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F34_A01": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F34_A02": {
+    "fields": [
+      {
+        "key": "revisionClinica",
+        "label": "Revisión clínica",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F34_A03": {
+    "fields": [
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "seguimiento",
+        "label": "Seguimiento",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F34_A04": {
+    "fields": [
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F34_A05": {
+    "fields": [
+      {
+        "key": "aclaracion",
+        "label": "Solicitud de aclaración",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F35_A01": {
+    "fields": [
+      {
+        "key": "medicaciones",
+        "label": "Medicación registrada",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "origen",
+        "label": "Origen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Registrado por profesional",
+          "Referido por paciente / responsable",
+          "Documento previo",
+          "Atención actual"
+        ]
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F35_A02": {
+    "fields": [
+      {
+        "key": "producto",
+        "label": "Producto",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Producto de demostración A",
+          "Producto de demostración B"
+        ]
+      },
+      {
+        "key": "dosis",
+        "label": "Dosis registrada",
+        "type": "number",
+        "required": true,
+        "min": 0
+      },
+      {
+        "key": "unidad",
+        "label": "Unidad de dosis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "mg",
+          "mL",
+          "UI",
+          "Unidad registrada"
+        ]
+      },
+      {
+        "key": "via",
+        "label": "Vía registrada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Oral",
+          "Tópica",
+          "Intramuscular",
+          "Intravenosa",
+          "Otra"
+        ]
+      },
+      {
+        "key": "frecuencia",
+        "label": "Frecuencia registrada",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "duracion",
+        "label": "Duración",
+        "type": "number",
+        "required": true,
+        "min": 1
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F35_A03": {
+    "fields": [],
+    "reviewRequired": false,
+    "targetStatus": "borrador"
+  },
+  "F35_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F35_A05": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "emitida"
+  },
+  "F35_A06": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F36_A01": {
+    "fields": [
+      {
+        "key": "producto",
+        "label": "Producto",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Producto de demostración A",
+          "Producto de demostración B"
+        ]
+      },
+      {
+        "key": "cantidad",
+        "label": "Cantidad",
+        "type": "number",
+        "required": true,
+        "min": 1
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F36_A02": {
+    "fields": [
+      {
+        "key": "lote",
+        "label": "Lote",
+        "type": "text",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F36_A03": {
+    "fields": [
+      {
+        "key": "cantidad",
+        "label": "Cantidad",
+        "type": "number",
+        "required": true,
+        "min": 1
+      },
+      {
+        "key": "receptor",
+        "label": "Receptor",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Andrés Molina",
+          "Elena Soto",
+          "Camila Torres"
+        ]
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "parcial"
+  },
+  "F36_A04": {
+    "fields": [
+      {
+        "key": "confirmacionEntrega",
+        "label": "Confirmo las cantidades y el destinatario revisados",
+        "type": "checkbox",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "entregada"
+  },
+  "F36_A05": {
+    "fields": [
+      {
+        "key": "cantidad",
+        "label": "Cantidad",
+        "type": "number",
+        "required": true,
+        "min": 1
+      },
+      {
+        "key": "motivoDevolucion",
+        "label": "Motivo de devolución",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "estadoDevolucion",
+        "label": "Destino de devolución",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Cuarentena",
+          "Reintegrable tras revisión",
+          "No reintegrable"
+        ]
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F37_A01": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F37_A02": {
+    "fields": [
+      {
+        "key": "dosis",
+        "label": "Dosis registrada",
+        "type": "number",
+        "required": true,
+        "min": 0
+      },
+      {
+        "key": "unidad",
+        "label": "Unidad de dosis",
+        "type": "select",
+        "required": true,
+        "options": [
+          "mg",
+          "mL",
+          "UI",
+          "Unidad registrada"
+        ]
+      },
+      {
+        "key": "hora",
+        "label": "Hora",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "administrada"
+  },
+  "F37_A03": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "hora",
+        "label": "Hora",
+        "type": "time",
+        "required": true
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "no_realizada"
+  },
+  "F37_A04": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F37_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F38_A01": {
+    "fields": [
+      {
+        "key": "plantilla",
+        "label": "Plantilla documental",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Informe clínico",
+          "Constancia",
+          "Consentimiento",
+          "Resumen de atención"
+        ]
+      },
+      {
+        "key": "emisor",
+        "label": "Emisor",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Clínica Aurora",
+          "VetCare"
+        ]
+      },
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "contenido",
+        "label": "Contenido",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F38_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F38_A03": {
+    "fields": [
+      {
+        "key": "participante",
+        "label": "Participante",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Paciente",
+          "Responsable autorizado",
+          "Representante"
+        ]
+      },
+      {
+        "key": "alcance",
+        "label": "Alcance permitido",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "evidenciaDemo",
+        "label": "Evidencia de demostración",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F38_A04": {
+    "fields": [
+      {
+        "key": "decision",
+        "label": "Decisión registrada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Acepta",
+          "Rechaza",
+          "Retira"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F38_A05": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "cerrada"
+  },
+  "F38_A06": {
+    "fields": [
+      {
+        "key": "canal",
+        "label": "Canal de entrega de demostración",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Portal",
+          "Correo ficticio",
+          "Entrega impresa"
+        ]
+      },
+      {
+        "key": "destinatario",
+        "label": "Destinatario",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Paciente",
+          "Responsable autorizado"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F39_A01": {
+    "fields": [
+      {
+        "key": "persona",
+        "label": "Persona vinculada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas",
+          "Marcos Vega"
+        ]
+      },
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "canal",
+        "label": "Canal de entrega de demostración",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Portal",
+          "Correo ficticio",
+          "Entrega impresa"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F39_A02": {
+    "fields": [
+      {
+        "key": "alcance",
+        "label": "Alcance permitido",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "inicioVigencia",
+        "label": "Inicio de vigencia",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "finVigencia",
+        "label": "Fin de vigencia",
+        "type": "date",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F39_A03": {
+    "fields": [
+      {
+        "key": "evidenciaDemo",
+        "label": "Evidencia de demostración",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F39_A04": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "activo"
+  },
+  "F39_A05": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "revocada"
+  },
+  "F40_A01": {
+    "fields": [
+      {
+        "key": "documentoVersion",
+        "label": "Versión documental",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Informe firmado de demostración · v1",
+          "Constancia de ejemplo · v1"
+        ]
+      },
+      {
+        "key": "destinatarios",
+        "label": "Destinatarios",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Paciente vinculado",
+          "Responsable autorizado",
+          "Paciente y representante"
+        ]
+      },
+      {
+        "key": "alcance",
+        "label": "Alcance permitido",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "canal",
+        "label": "Canal de entrega de demostración",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Portal",
+          "Correo ficticio",
+          "Entrega impresa"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F40_A02": {
+    "fields": [
+      {
+        "key": "destinatario",
+        "label": "Destinatario",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Paciente",
+          "Responsable autorizado"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F40_A03": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "publicada"
+  },
+  "F40_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F40_A05": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "retirada"
+  },
+  "F41_A01": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      },
+      {
+        "key": "seguimiento",
+        "label": "Seguimiento",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F41_A02": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "tarea",
+        "label": "Tarea",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Revisar resultado",
+          "Contactar al paciente",
+          "Coordinar control",
+          "Tarea de demostración"
+        ]
+      },
+      {
+        "key": "prioridadEjemplo",
+        "label": "Prioridad registrada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Programada",
+          "Preferente",
+          "Prioridad de ejemplo"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F41_A03": {
+    "fields": [
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F41_A04": {
+    "fields": [
+      {
+        "key": "destinatario",
+        "label": "Destinatario",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Paciente",
+          "Responsable autorizado"
+        ]
+      },
+      {
+        "key": "mensaje",
+        "label": "Mensaje",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F41_A05": {
+    "fields": [
+      {
+        "key": "mensaje",
+        "label": "Mensaje",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F41_A06": {
+    "fields": [
+      {
+        "key": "resultado",
+        "label": "Resultado registrado",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "resuelta"
+  },
+  "F41_A07": {
+    "fields": [
+      {
+        "key": "mensaje",
+        "label": "Mensaje",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F42_A01": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "pagador",
+        "label": "Pagador",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Paciente / responsable",
+          "Convenio de ejemplo",
+          "Aseguradora ficticia"
+        ]
+      },
+      {
+        "key": "condiciones",
+        "label": "Condiciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F42_A02": {
+    "fields": [
+      {
+        "key": "etapa",
+        "label": "Etapa",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inicial",
+          "Tratamiento",
+          "Seguimiento"
+        ]
+      },
+      {
+        "key": "servicio",
+        "label": "Servicio",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consulta general",
+          "Consulta odontológica",
+          "Consulta veterinaria",
+          "Hemograma de ejemplo",
+          "Ecografía de ejemplo"
+        ]
+      },
+      {
+        "key": "cantidad",
+        "label": "Cantidad",
+        "type": "number",
+        "required": true,
+        "min": 1
+      },
+      {
+        "key": "tarifa",
+        "label": "Tarifa (S/)",
+        "type": "number",
+        "required": true,
+        "min": 0
+      },
+      {
+        "key": "condiciones",
+        "label": "Condiciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F42_A03": {
+    "fields": [
+      {
+        "key": "descuento",
+        "label": "Descuento solicitado (%)",
+        "type": "number",
+        "required": true,
+        "min": 0
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F42_A04": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "enviada"
+  },
+  "F42_A05": {
+    "fields": [
+      {
+        "key": "decision",
+        "label": "Decisión registrada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Acepta",
+          "Rechaza",
+          "Retira"
+        ]
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "aceptada"
+  },
+  "F42_A06": {
+    "fields": [
+      {
+        "key": "condiciones",
+        "label": "Condiciones",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "borrador"
+  },
+  "F43_A01": {
+    "fields": [
+      {
+        "key": "servicio",
+        "label": "Servicio",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consulta general",
+          "Consulta odontológica",
+          "Consulta veterinaria",
+          "Hemograma de ejemplo",
+          "Ecografía de ejemplo"
+        ]
+      },
+      {
+        "key": "importe",
+        "label": "Importe (S/)",
+        "type": "number",
+        "required": true,
+        "min": 0.01
+      },
+      {
+        "key": "origen",
+        "label": "Origen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Registrado por profesional",
+          "Referido por paciente / responsable",
+          "Documento previo",
+          "Atención actual"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F43_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F43_A03": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "confirmado"
+  },
+  "F43_A04": {
+    "fields": [
+      {
+        "key": "ajuste",
+        "label": "Ajuste (S/)",
+        "type": "number",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F43_A05": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "reversado"
+  },
+  "F43_A06": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F44_A01": {
+    "fields": [
+      {
+        "key": "sucursal",
+        "label": "Sucursal",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sede Miraflores",
+          "Sede San Isidro"
+        ]
+      },
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      },
+      {
+        "key": "saldoInicial",
+        "label": "Saldo inicial (S/)",
+        "type": "number",
+        "required": true,
+        "min": 0
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "abierta"
+  },
+  "F44_A02": {
+    "fields": [
+      {
+        "key": "importe",
+        "label": "Importe (S/)",
+        "type": "number",
+        "required": true,
+        "min": 0.01
+      },
+      {
+        "key": "medioFicticio",
+        "label": "Medio de pago simulado",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Efectivo de demostración",
+          "Transferencia ficticia",
+          "Pasarela simulada"
+        ]
+      },
+      {
+        "key": "referenciaPago",
+        "label": "Referencia del pago ficticio",
+        "type": "text",
+        "required": false
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "registrado"
+  },
+  "F44_A03": {
+    "fields": [
+      {
+        "key": "anticipo",
+        "label": "Anticipo disponible",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Anticipo de demostración"
+        ]
+      },
+      {
+        "key": "importe",
+        "label": "Importe (S/)",
+        "type": "number",
+        "required": true,
+        "min": 0.01
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F44_A04": {
+    "fields": [
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "conciliado"
+  },
+  "F44_A05": {
+    "fields": [
+      {
+        "key": "importe",
+        "label": "Importe (S/)",
+        "type": "number",
+        "required": true,
+        "min": 0.01
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F44_A06": {
+    "fields": [
+      {
+        "key": "confirmacionDevolucion",
+        "label": "Confirmo la devolución ficticia revisada",
+        "type": "checkbox",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "devuelto"
+  },
+  "F44_A07": {
+    "fields": [
+      {
+        "key": "saldoContado",
+        "label": "Saldo contado (S/)",
+        "type": "number",
+        "required": true,
+        "min": 0
+      },
+      {
+        "key": "diferencia",
+        "label": "Diferencia (S/)",
+        "type": "number",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "cerrada"
+  },
+  "F45_A01": {
+    "fields": [
+      {
+        "key": "emisor",
+        "label": "Emisor",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Clínica Aurora",
+          "VetCare"
+        ]
+      },
+      {
+        "key": "destinatario",
+        "label": "Destinatario",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Paciente",
+          "Responsable autorizado"
+        ]
+      },
+      {
+        "key": "serieFicticia",
+        "label": "Serie de demostración",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "cargos",
+        "label": "Cargos",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Cargos pendientes de la cuenta",
+          "Cargo seleccionado"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F45_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F45_A03": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "pendiente_demo"
+  },
+  "F45_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F45_A05": {
+    "fields": [
+      {
+        "key": "correccion",
+        "label": "Corrección propuesta",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F45_A06": {
+    "fields": [
+      {
+        "key": "tipoCorreccion",
+        "label": "Tipo de documento correctivo",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Nota de crédito ficticia",
+          "Nota de débito ficticia"
+        ]
+      },
+      {
+        "key": "correccion",
+        "label": "Corrección propuesta",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F46_A01": {
+    "fields": [
+      {
+        "key": "profesional",
+        "label": "Profesional",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Andrés Molina",
+          "Elena Soto"
+        ]
+      },
+      {
+        "key": "fechaDesde",
+        "label": "Desde",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "fechaHasta",
+        "label": "Hasta",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F46_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F46_A03": {
+    "fields": [
+      {
+        "key": "ajuste",
+        "label": "Ajuste (S/)",
+        "type": "number",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F46_A04": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "aprobada"
+  },
+  "F46_A05": {
+    "fields": [
+      {
+        "key": "importe",
+        "label": "Importe (S/)",
+        "type": "number",
+        "required": true,
+        "min": 0.01
+      },
+      {
+        "key": "medioFicticio",
+        "label": "Medio de pago simulado",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Efectivo de demostración",
+          "Transferencia ficticia",
+          "Pasarela simulada"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "pagada_demo"
+  },
+  "F46_A06": {
+    "fields": [
+      {
+        "key": "formato",
+        "label": "Formato",
+        "type": "select",
+        "required": true,
+        "options": [
+          "CSV",
+          "JSON"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F47_A01": {
+    "fields": [
+      {
+        "key": "producto",
+        "label": "Producto",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Producto de demostración A",
+          "Producto de demostración B"
+        ]
+      },
+      {
+        "key": "cantidad",
+        "label": "Cantidad",
+        "type": "number",
+        "required": true,
+        "min": 1
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F47_A02": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "aprobada"
+  },
+  "F47_A03": {
+    "fields": [
+      {
+        "key": "proveedorFicticio",
+        "label": "Proveedor ficticio",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Distribuidora Demo",
+          "Proveedor de ejemplo"
+        ]
+      },
+      {
+        "key": "condiciones",
+        "label": "Condiciones",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "emitida"
+  },
+  "F47_A04": {
+    "fields": [
+      {
+        "key": "producto",
+        "label": "Producto",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Producto de demostración A",
+          "Producto de demostración B"
+        ]
+      },
+      {
+        "key": "cantidad",
+        "label": "Cantidad",
+        "type": "number",
+        "required": true,
+        "min": 1
+      },
+      {
+        "key": "lote",
+        "label": "Lote",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "vencimiento",
+        "label": "Vencimiento",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "recibida"
+  },
+  "F47_A05": {
+    "fields": [
+      {
+        "key": "discrepancia",
+        "label": "Discrepancia identificada",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F47_A06": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F48_A01": {
+    "fields": [
+      {
+        "key": "producto",
+        "label": "Producto",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Producto de demostración A",
+          "Producto de demostración B"
+        ]
+      },
+      {
+        "key": "lote",
+        "label": "Lote",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "cantidad",
+        "label": "Cantidad",
+        "type": "number",
+        "required": true,
+        "min": 1
+      },
+      {
+        "key": "actuacion",
+        "label": "Actuación",
+        "type": "select",
+        "required": false,
+        "options": [
+          "Atención registrada",
+          "Procedimiento de demostración",
+          "Control"
+        ]
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F48_A02": {
+    "fields": [
+      {
+        "key": "producto",
+        "label": "Producto",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Producto de demostración A",
+          "Producto de demostración B"
+        ]
+      },
+      {
+        "key": "lote",
+        "label": "Lote",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "origen",
+        "label": "Origen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Registrado por profesional",
+          "Referido por paciente / responsable",
+          "Documento previo",
+          "Atención actual"
+        ]
+      },
+      {
+        "key": "destino",
+        "label": "Destino",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sede San Isidro",
+          "Hospitalización",
+          "Consulta externa",
+          "Destino externo de ejemplo"
+        ]
+      },
+      {
+        "key": "cantidad",
+        "label": "Cantidad",
+        "type": "number",
+        "required": true,
+        "min": 1
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "en_transito"
+  },
+  "F48_A03": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "recibida"
+  },
+  "F48_A04": {
+    "fields": [
+      {
+        "key": "producto",
+        "label": "Producto",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Producto de demostración A",
+          "Producto de demostración B"
+        ]
+      },
+      {
+        "key": "lote",
+        "label": "Lote",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "cantidadAjuste",
+        "label": "Variación de unidades",
+        "type": "number",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "evidenciaDemo",
+        "label": "Evidencia de demostración",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "pendiente"
+  },
+  "F48_A05": {
+    "fields": [],
+    "reviewRequired": true
+  },
+  "F48_A06": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F49_A01": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "dominio",
+        "label": "Tipo de paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Humano",
+          "Animal"
+        ]
+      },
+      {
+        "key": "unidad",
+        "label": "Unidad de admisión",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Hospitalización humana",
+          "Hospitalización veterinaria",
+          "Cuidados de ejemplo"
+        ]
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "solicitada"
+  },
+  "F49_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F49_A03": {
+    "fields": [
+      {
+        "key": "recurso",
+        "label": "Recurso",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consultorio 01",
+          "Consultorio 02",
+          "Sala de procedimientos"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "inicioHora",
+        "label": "Hora de inicio",
+        "type": "time",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "reservada"
+  },
+  "F49_A04": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "activa"
+  },
+  "F49_A05": {
+    "fields": [
+      {
+        "key": "receptor",
+        "label": "Receptor",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Andrés Molina",
+          "Elena Soto",
+          "Camila Torres"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F49_A06": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "cancelada"
+  },
+  "F50_A01": {
+    "fields": [
+      {
+        "key": "cuidado",
+        "label": "Cuidado",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Observación",
+          "Control de signos",
+          "Cuidados generales",
+          "Cuidado registrado"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "hora",
+        "label": "Hora",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F50_A02": {
+    "fields": [
+      {
+        "key": "cuidado",
+        "label": "Cuidado",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Observación",
+          "Control de signos",
+          "Cuidados generales",
+          "Cuidado registrado"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "hora",
+        "label": "Hora",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "excepcion",
+        "label": "Excepción registrada",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F50_A03": {
+    "fields": [
+      {
+        "key": "destino",
+        "label": "Destino",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sede San Isidro",
+          "Hospitalización",
+          "Consulta externa",
+          "Destino externo de ejemplo"
+        ]
+      },
+      {
+        "key": "receptor",
+        "label": "Receptor",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Andrés Molina",
+          "Elena Soto",
+          "Camila Torres"
+        ]
+      },
+      {
+        "key": "pendientes",
+        "label": "Pendientes y responsables",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F50_A04": {
+    "fields": [
+      {
+        "key": "resumen",
+        "label": "Resumen",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "receptor",
+        "label": "Receptor",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Andrés Molina",
+          "Elena Soto",
+          "Camila Torres"
+        ]
+      },
+      {
+        "key": "pendientes",
+        "label": "Pendientes y responsables",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F50_A05": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "aceptada"
+  },
+  "F50_A06": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F51_A01": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": false,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "identidadTemporal",
+        "label": "Identidad temporal",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F51_A02": {
+    "fields": [
+      {
+        "key": "clasificacionRegistrada",
+        "label": "Clasificación registrada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Clasificación de ejemplo 1",
+          "Clasificación de ejemplo 2",
+          "Pendiente"
+        ]
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F51_A03": {
+    "fields": [
+      {
+        "key": "reevaluacion",
+        "label": "Reevaluación",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "hora",
+        "label": "Hora",
+        "type": "time",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F51_A04": {
+    "fields": [
+      {
+        "key": "destino",
+        "label": "Destino",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sede San Isidro",
+          "Hospitalización",
+          "Consulta externa",
+          "Destino externo de ejemplo"
+        ]
+      },
+      {
+        "key": "receptor",
+        "label": "Receptor",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Andrés Molina",
+          "Elena Soto",
+          "Camila Torres"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F51_A05": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "trasladada"
+  },
+  "F51_A06": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F52_A01": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "procedimiento",
+        "label": "Procedimiento",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Procedimiento de ejemplo",
+          "Evaluación",
+          "Control"
+        ]
+      },
+      {
+        "key": "sitio",
+        "label": "Sitio anatómico",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "preparacion",
+        "label": "Preparación requerida",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F52_A02": {
+    "fields": [
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "recurso",
+        "label": "Recurso",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consultorio 01",
+          "Consultorio 02",
+          "Sala de procedimientos"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F52_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F52_A04": {
+    "fields": [
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "inicioHora",
+        "label": "Hora de inicio",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "finHora",
+        "label": "Hora de fin",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "recurso",
+        "label": "Recurso",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consultorio 01",
+          "Consultorio 02",
+          "Sala de procedimientos"
+        ]
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "programada"
+  },
+  "F52_A05": {
+    "fields": [
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "inicioHora",
+        "label": "Hora de inicio",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "finHora",
+        "label": "Hora de fin",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F52_A06": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "cancelada"
+  },
+  "F53_A01": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F53_A02": {
+    "fields": [
+      {
+        "key": "confirmacionVerificacion",
+        "label": "Confirmo las verificaciones registradas del caso",
+        "type": "checkbox",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "iniciada"
+  },
+  "F53_A03": {
+    "fields": [
+      {
+        "key": "implante",
+        "label": "Dispositivo de ejemplo",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Dispositivo de demostración A",
+          "Dispositivo de demostración B"
+        ]
+      },
+      {
+        "key": "lote",
+        "label": "Lote",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "sitio",
+        "label": "Sitio anatómico",
+        "type": "text",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F53_A04": {
+    "fields": [
+      {
+        "key": "tipo",
+        "label": "Tipo de muestra quirúrgica",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Tejido",
+          "Líquido",
+          "Otra"
+        ]
+      },
+      {
+        "key": "identificador",
+        "label": "Identificador de muestra",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "receptor",
+        "label": "Receptor",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Andrés Molina",
+          "Elena Soto",
+          "Camila Torres"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F53_A05": {
+    "fields": [
+      {
+        "key": "interrupcion",
+        "label": "Interrupción registrada",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F53_A06": {
+    "fields": [
+      {
+        "key": "parte",
+        "label": "Parte quirúrgico",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "pendientes",
+        "label": "Pendientes y responsables",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "cerrado"
+  },
+  "F54_A01": {
+    "fields": [
+      {
+        "key": "evaluacion",
+        "label": "Evaluación registrada",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F54_A02": {
+    "fields": [],
+    "reviewRequired": false,
+    "targetStatus": "activo"
+  },
+  "F54_A03": {
+    "fields": [
+      {
+        "key": "parametro",
+        "label": "Parámetro",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "valor",
+        "label": "Valor",
+        "type": "number",
+        "required": true
+      },
+      {
+        "key": "unidad",
+        "label": "Unidad registrada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "mg",
+          "mL",
+          "mmHg",
+          "°C",
+          "Unidad registrada"
+        ]
+      },
+      {
+        "key": "hora",
+        "label": "Hora",
+        "type": "time",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F54_A04": {
+    "fields": [
+      {
+        "key": "producto",
+        "label": "Producto",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Producto de demostración A",
+          "Producto de demostración B"
+        ]
+      },
+      {
+        "key": "dosis",
+        "label": "Dosis registrada",
+        "type": "number",
+        "required": true,
+        "min": 0
+      },
+      {
+        "key": "unidad",
+        "label": "Unidad registrada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "mg",
+          "mL",
+          "mmHg",
+          "°C",
+          "Unidad registrada"
+        ]
+      },
+      {
+        "key": "via",
+        "label": "Vía registrada",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Oral",
+          "Tópica",
+          "Intramuscular",
+          "Intravenosa",
+          "Otra"
+        ]
+      },
+      {
+        "key": "hora",
+        "label": "Hora",
+        "type": "time",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F54_A05": {
+    "fields": [
+      {
+        "key": "eventos",
+        "label": "Evento registrado",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "hora",
+        "label": "Hora",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "respuesta",
+        "label": "Respuesta registrada",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F54_A06": {
+    "fields": [
+      {
+        "key": "receptor",
+        "label": "Receptor",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Andrés Molina",
+          "Elena Soto",
+          "Camila Torres"
+        ]
+      },
+      {
+        "key": "recuperacion",
+        "label": "Recuperación",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "pendientes",
+        "label": "Pendientes y responsables",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "cerrada"
+  },
+  "F55_A01": {
+    "fields": [
+      {
+        "key": "resumen",
+        "label": "Resumen",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "medicacion",
+        "label": "Medicación al egreso",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "pendientes",
+        "label": "Pendientes y responsables",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "responsables",
+        "label": "Responsables y alcances",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F55_A02": {
+    "fields": [
+      {
+        "key": "pendientes",
+        "label": "Pendientes y responsables",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F55_A03": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "emitido"
+  },
+  "F55_A04": {
+    "fields": [
+      {
+        "key": "destinatario",
+        "label": "Destinatario",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Paciente",
+          "Responsable autorizado"
+        ]
+      },
+      {
+        "key": "canal",
+        "label": "Canal de entrega de demostración",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Portal",
+          "Correo ficticio",
+          "Entrega impresa"
+        ]
+      },
+      {
+        "key": "entregas",
+        "label": "Documentos entregados",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F55_A05": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "egresada"
+  },
+  "F55_A06": {
+    "fields": [
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      },
+      {
+        "key": "control",
+        "label": "Control propuesto",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F56_A01": {
+    "fields": [
+      {
+        "key": "perfil",
+        "label": "Perfil de especialidad",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Medicina general",
+          "Odontología",
+          "Cardiología",
+          "Medicina veterinaria"
+        ]
+      },
+      {
+        "key": "nombre",
+        "label": "Nombre",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "proposito",
+        "label": "Propósito",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "sesiones",
+        "label": "Número de sesiones",
+        "type": "number",
+        "required": true,
+        "min": 1
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F56_A02": {
+    "fields": [
+      {
+        "key": "planVersion",
+        "label": "Versión del plan",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "descripcion",
+        "label": "Descripción",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F56_A03": {
+    "fields": [
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "inicioHora",
+        "label": "Hora de inicio",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "recurso",
+        "label": "Recurso",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consultorio 01",
+          "Consultorio 02",
+          "Sala de procedimientos"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F56_A04": {
+    "fields": [
+      {
+        "key": "actuacion",
+        "label": "Actuación",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Atención registrada",
+          "Procedimiento de demostración",
+          "Control"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F56_A05": {
+    "fields": [
+      {
+        "key": "interrupcion",
+        "label": "Interrupción registrada",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F56_A06": {
+    "fields": [
+      {
+        "key": "resumen",
+        "label": "Resumen",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "seguimiento",
+        "label": "Seguimiento",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "cerrado"
+  },
+  "F57_A01": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "componente",
+        "label": "Componente solicitado",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Componente sanguíneo de ejemplo A",
+          "Componente sanguíneo de ejemplo B"
+        ]
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F57_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F57_A03": {
+    "fields": [
+      {
+        "key": "unidad",
+        "label": "Unidad de componente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Unidad ficticia A",
+          "Unidad ficticia B"
+        ]
+      },
+      {
+        "key": "lote",
+        "label": "Lote",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "receptor",
+        "label": "Receptor",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Andrés Molina",
+          "Elena Soto",
+          "Camila Torres"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F57_A04": {
+    "fields": [
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "inicioHora",
+        "label": "Hora de inicio",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "finHora",
+        "label": "Hora de fin",
+        "type": "time",
+        "required": true
+      },
+      {
+        "key": "verificacionesDemo",
+        "label": "Verificaciones de demostración",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F57_A05": {
+    "fields": [
+      {
+        "key": "eventos",
+        "label": "Evento registrado",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "respuesta",
+        "label": "Respuesta registrada",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "hora",
+        "label": "Hora",
+        "type": "time",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F57_A06": {
+    "fields": [
+      {
+        "key": "destino",
+        "label": "Destino",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Sede San Isidro",
+          "Hospitalización",
+          "Consulta externa",
+          "Destino externo de ejemplo"
+        ]
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F58_A01": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "participantes",
+        "label": "Participantes",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "tipo",
+        "label": "Tipo de episodio de trasplante",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Episodio de demostración"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F58_A02": {
+    "fields": [
+      {
+        "key": "evaluacion",
+        "label": "Evaluación registrada",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F58_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F58_A04": {
+    "fields": [
+      {
+        "key": "etapa",
+        "label": "Etapa",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inicial",
+          "Tratamiento",
+          "Seguimiento"
+        ]
+      },
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "recursos",
+        "label": "Recursos requeridos",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consultorio",
+          "Sala de procedimientos",
+          "Equipo especializado"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F58_A05": {
+    "fields": [
+      {
+        "key": "actuacion",
+        "label": "Actuación",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Atención registrada",
+          "Procedimiento de demostración",
+          "Control"
+        ]
+      },
+      {
+        "key": "etapa",
+        "label": "Etapa",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inicial",
+          "Tratamiento",
+          "Seguimiento"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F58_A06": {
+    "fields": [
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      },
+      {
+        "key": "seguimiento",
+        "label": "Seguimiento",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F59_A01": {
+    "fields": [
+      {
+        "key": "nombre",
+        "label": "Nombre",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "dominio",
+        "label": "Tipo de paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Humano",
+          "Animal"
+        ]
+      },
+      {
+        "key": "participantes",
+        "label": "Participantes",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F59_A02": {
+    "fields": [
+      {
+        "key": "participantes",
+        "label": "Participantes",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "relaciones",
+        "label": "Relaciones autorizadas",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "alcance",
+        "label": "Alcance permitido",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F59_A03": {
+    "fields": [
+      {
+        "key": "identificador",
+        "label": "Identificador de muestra",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "muestra",
+        "label": "Identificador de muestra",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "receptor",
+        "label": "Receptor",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Andrés Molina",
+          "Elena Soto",
+          "Camila Torres"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "hora",
+        "label": "Hora",
+        "type": "time",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F59_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F59_A05": {
+    "fields": [
+      {
+        "key": "actuacion",
+        "label": "Actuación",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Atención registrada",
+          "Procedimiento de demostración",
+          "Control"
+        ]
+      },
+      {
+        "key": "etapa",
+        "label": "Etapa",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Inicial",
+          "Tratamiento",
+          "Seguimiento"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F59_A06": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "pendientes",
+        "label": "Pendientes y responsables",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "suspendido"
+  },
+  "F60_A01": {
+    "fields": [
+      {
+        "key": "poblacion",
+        "label": "Población",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Refugio Los Olivos",
+          "Programa de caninos",
+          "Hato de demostración"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "proposito",
+        "label": "Propósito",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F60_A02": {
+    "fields": [
+      {
+        "key": "poblacion",
+        "label": "Población",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Refugio Los Olivos",
+          "Programa de caninos",
+          "Hato de demostración"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F60_A03": {
+    "fields": [
+      {
+        "key": "denominador",
+        "label": "Individuos del conjunto",
+        "type": "number",
+        "required": true,
+        "min": 1
+      },
+      {
+        "key": "criterios",
+        "label": "Criterios del conjunto intervenido",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "origen",
+        "label": "Origen",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Registrado por profesional",
+          "Referido por paciente / responsable",
+          "Documento previo",
+          "Atención actual"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F60_A04": {
+    "fields": [
+      {
+        "key": "actuacion",
+        "label": "Actuación",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Atención registrada",
+          "Procedimiento de demostración",
+          "Control"
+        ]
+      },
+      {
+        "key": "excepciones",
+        "label": "Excepciones individuales",
+        "type": "textarea",
+        "required": false
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F60_A05": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "emitido"
+  },
+  "F60_A06": {
+    "fields": [
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "seguimiento",
+        "label": "Seguimiento",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F61_A01": {
+    "fields": [
+      {
+        "key": "audioPreparado",
+        "label": "Dictado preparado",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consulta general de ejemplo",
+          "Consulta veterinaria de ejemplo"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F61_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F61_A03": {
+    "fields": [
+      {
+        "key": "fragmentos",
+        "label": "Fragmentos de transcripción revisados",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F61_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F61_A05": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F62_A01": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F62_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F62_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F62_A04": {
+    "fields": [
+      {
+        "key": "resolucion",
+        "label": "Resolución",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F62_A05": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "desconectada"
+  },
+  "F63_A01": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F63_A02": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "inicioHora",
+        "label": "Hora de inicio",
+        "type": "time",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F63_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F63_A04": {
+    "fields": [
+      {
+        "key": "importe",
+        "label": "Importe (S/)",
+        "type": "number",
+        "required": true,
+        "min": 0.01
+      },
+      {
+        "key": "medioFicticio",
+        "label": "Medio de pago simulado",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Efectivo de demostración",
+          "Transferencia ficticia",
+          "Pasarela simulada"
+        ]
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F63_A05": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "tarea",
+        "label": "Tarea",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Revisar resultado",
+          "Contactar al paciente",
+          "Coordinar control",
+          "Tarea de demostración"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F64_A01": {
+    "fields": [
+      {
+        "key": "archivoFicticio",
+        "label": "Archivo ficticio local",
+        "type": "file",
+        "required": true
+      },
+      {
+        "key": "esquema",
+        "label": "Esquema de importación",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pacientes",
+          "Citas",
+          "Inventario"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F64_A02": {
+    "fields": [
+      {
+        "key": "formato",
+        "label": "Formato",
+        "type": "select",
+        "required": true,
+        "options": [
+          "CSV",
+          "JSON"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F64_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F64_A04": {
+    "fields": [],
+    "reviewRequired": true
+  },
+  "F64_A05": {
+    "fields": [
+      {
+        "key": "contenido",
+        "label": "Contenido de exportación",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Pacientes ficticios",
+          "Citas de ejemplo",
+          "Inventario de demostración",
+          "Paquete completo de demo"
+        ]
+      },
+      {
+        "key": "formato",
+        "label": "Formato",
+        "type": "select",
+        "required": true,
+        "options": [
+          "CSV",
+          "JSON"
+        ]
+      },
+      {
+        "key": "fechaDesde",
+        "label": "Desde",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "fechaHasta",
+        "label": "Hasta",
+        "type": "date",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F64_A06": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F65_A01": {
+    "fields": [
+      {
+        "key": "reporte",
+        "label": "Reporte",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Actividad clínica",
+          "Agenda",
+          "Caja",
+          "Inventario"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F65_A02": {
+    "fields": [
+      {
+        "key": "fechaDesde",
+        "label": "Desde",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "fechaHasta",
+        "label": "Hasta",
+        "type": "date",
+        "required": false
+      },
+      {
+        "key": "sucursal",
+        "label": "Sucursal",
+        "type": "select",
+        "required": false,
+        "options": [
+          "Sede Miraflores",
+          "Sede San Isidro"
+        ]
+      },
+      {
+        "key": "dominio",
+        "label": "Tipo de paciente",
+        "type": "select",
+        "required": false,
+        "options": [
+          "Humano",
+          "Animal"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F65_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F65_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F65_A05": {
+    "fields": [
+      {
+        "key": "formato",
+        "label": "Formato",
+        "type": "select",
+        "required": true,
+        "options": [
+          "CSV",
+          "JSON"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F66_A01": {
+    "fields": [
+      {
+        "key": "titulo",
+        "label": "Título",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "finalidad",
+        "label": "Finalidad",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "descripcion",
+        "label": "Descripción",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F66_A02": {
+    "fields": [
+      {
+        "key": "archivoFicticio",
+        "label": "Archivo ficticio local",
+        "type": "file",
+        "required": true
+      },
+      {
+        "key": "descripcion",
+        "label": "Descripción",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F66_A03": {
+    "fields": [
+      {
+        "key": "operador",
+        "label": "Operador autorizado",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mateo Cruz · Soporte"
+        ]
+      },
+      {
+        "key": "finalidad",
+        "label": "Finalidad",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "datos",
+        "label": "Datos incluidos en el alcance",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "vencimiento",
+        "label": "Vencimiento",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "autorizado"
+  },
+  "F66_A04": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "rechazado"
+  },
+  "F66_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F66_A06": {
+    "fields": [
+      {
+        "key": "resolucion",
+        "label": "Resolución",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "cerrado"
+  },
+  "F67_A01": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F67_A02": {
+    "fields": [
+      {
+        "key": "periodo",
+        "label": "Periodo",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Octubre 2026",
+          "Septiembre 2026"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F67_A03": {
+    "fields": [
+      {
+        "key": "plan",
+        "label": "Plan de demostración",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Esencial",
+          "Clínica",
+          "Organización"
+        ]
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F67_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F67_A05": {
+    "fields": [
+      {
+        "key": "confirmacionContrato",
+        "label": "He revisado y acepto las condiciones de demostración",
+        "type": "checkbox",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "activa_demo"
+  },
+  "F67_A06": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F68_A01": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "solicitada"
+  },
+  "F68_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F68_A03": {
+    "fields": [
+      {
+        "key": "contenido",
+        "label": "Contenido de entrega",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Paquete completo de demostración"
+        ]
+      },
+      {
+        "key": "formato",
+        "label": "Formato",
+        "type": "select",
+        "required": true,
+        "options": [
+          "CSV",
+          "JSON"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F68_A04": {
+    "fields": [
+      {
+        "key": "recepcion",
+        "label": "Constancia de recepción ficticia",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "evidenciaDemo",
+        "label": "Evidencia de demostración",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F68_A05": {
+    "fields": [
+      {
+        "key": "confirmacionBaja",
+        "label": "Confirmo la baja del espacio de demostración",
+        "type": "checkbox",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "cerrada"
+  },
+  "F68_A06": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "cancelada"
+  },
+  "F69_A01": {
+    "fields": [
+      {
+        "key": "titulo",
+        "label": "Título",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "ambito",
+        "label": "Ámbito",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Organización actual",
+          "Sucursal actual",
+          "Servicio seleccionado"
+        ]
+      },
+      {
+        "key": "impacto",
+        "label": "Impacto",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F69_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F69_A03": {
+    "fields": [
+      {
+        "key": "recuperacion",
+        "label": "Recuperación",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "resultado",
+        "label": "Resultado registrado",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F69_A04": {
+    "fields": [
+      {
+        "key": "archivoFicticio",
+        "label": "Archivo ficticio local",
+        "type": "file",
+        "required": true
+      },
+      {
+        "key": "descripcion",
+        "label": "Descripción",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F69_A05": {
+    "fields": [
+      {
+        "key": "confirmacionRecuperacion",
+        "label": "Confirmo la comprobación de recuperación de demostración",
+        "type": "checkbox",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "recuperado"
+  },
+  "F69_A06": {
+    "fields": [
+      {
+        "key": "tarea",
+        "label": "Tarea",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Revisar resultado",
+          "Contactar al paciente",
+          "Coordinar control",
+          "Tarea de demostración"
+        ]
+      },
+      {
+        "key": "responsable",
+        "label": "Responsable",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Andrés Molina"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F70_A01": {
+    "fields": [
+      {
+        "key": "personaFicticia",
+        "label": "Persona ficticia",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Lucía Vargas"
+        ]
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "sesion_activa"
+  },
+  "F70_A02": {
+    "fields": [
+      {
+        "key": "personaFicticia",
+        "label": "Persona ficticia",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Valeria Ríos",
+          "Camila Torres",
+          "Lucía Vargas"
+        ]
+      },
+      {
+        "key": "evidenciaDemo",
+        "label": "Evidencia de demostración",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F70_A03": {
+    "fields": [
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F70_A04": {
+    "fields": [
+      {
+        "key": "organizacion",
+        "label": "Organización",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Clínica Aurora",
+          "VetCare",
+          "Consultorio Ríos"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F70_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F71_A01": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F71_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F71_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F71_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F72_A01": {
+    "fields": [
+      {
+        "key": "componente",
+        "label": "Componente del perfil",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mapa anatómico del perfil",
+          "Registro especializado",
+          "Tendencia del perfil"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F72_A02": {
+    "fields": [
+      {
+        "key": "estructura",
+        "label": "Estructura anatómica",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Región seleccionada",
+          "Estructura del atlas"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F72_A03": {
+    "fields": [
+      {
+        "key": "hallazgo",
+        "label": "Hallazgo registrado",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "valor",
+        "label": "Valor",
+        "type": "number",
+        "required": false
+      },
+      {
+        "key": "unidad",
+        "label": "Unidad",
+        "type": "select",
+        "required": false,
+        "options": [
+          "Unidad registrada",
+          "mg",
+          "mL",
+          "kg",
+          "mmHg",
+          "°C"
+        ]
+      },
+      {
+        "key": "descripcion",
+        "label": "Descripción",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F72_A04": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F72_A05": {
+    "fields": [
+      {
+        "key": "visitaInicial",
+        "label": "Visita inicial",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Visita anterior"
+        ]
+      },
+      {
+        "key": "visitaFinal",
+        "label": "Visita final",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Visita actual"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F72_A06": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F73_A01": {
+    "fields": [
+      {
+        "key": "proveedor",
+        "label": "Proveedor de demostración",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Correo demo",
+          "Calendario demo",
+          "Facturación demo"
+        ]
+      },
+      {
+        "key": "finalidad",
+        "label": "Finalidad",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "alcance",
+        "label": "Alcance permitido",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F73_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F73_A03": {
+    "fields": [
+      {
+        "key": "resultadoPrueba",
+        "label": "Resultado de prueba",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Aceptado",
+          "Pendiente",
+          "Rechazado",
+          "Error recuperable"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F73_A04": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "activa_demo"
+  },
+  "F73_A05": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "revocada"
+  },
+  "F74_A01": {
+    "fields": [
+      {
+        "key": "nombre",
+        "label": "Nombre",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "correo",
+        "label": "Correo ficticio",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "telefono",
+        "label": "Teléfono ficticio",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "idioma",
+        "label": "Idioma",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Español"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F74_A02": {
+    "fields": [
+      {
+        "key": "canalFicticio",
+        "label": "Canal ficticio",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Correo de ejemplo",
+          "Teléfono de ejemplo"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F74_A03": {
+    "fields": [
+      {
+        "key": "codigoDemo",
+        "label": "Código de demostración",
+        "type": "text",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F74_A04": {
+    "fields": [
+      {
+        "key": "preferencias",
+        "label": "Preferencias",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F74_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F75_A01": {
+    "fields": [
+      {
+        "key": "nombre",
+        "label": "Nombre",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "dominio",
+        "label": "Tipo de paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Humano",
+          "Animal"
+        ]
+      },
+      {
+        "key": "especialidad",
+        "label": "Especialidad",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Medicina general",
+          "Odontología",
+          "Cardiología",
+          "Veterinaria"
+        ]
+      },
+      {
+        "key": "duracion",
+        "label": "Duración",
+        "type": "number",
+        "required": true,
+        "min": 1
+      },
+      {
+        "key": "recursos",
+        "label": "Recursos requeridos",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consultorio",
+          "Sala de procedimientos",
+          "Equipo especializado"
+        ]
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F75_A02": {
+    "fields": [
+      {
+        "key": "servicio",
+        "label": "Servicio",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consulta general",
+          "Consulta odontológica",
+          "Consulta veterinaria",
+          "Hemograma de ejemplo",
+          "Ecografía de ejemplo"
+        ]
+      },
+      {
+        "key": "tarifa",
+        "label": "Tarifa (S/)",
+        "type": "number",
+        "required": true,
+        "min": 0
+      },
+      {
+        "key": "inicioVigencia",
+        "label": "Inicio de vigencia",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "finVigencia",
+        "label": "Fin de vigencia",
+        "type": "date",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F75_A03": {
+    "fields": [
+      {
+        "key": "nombre",
+        "label": "Nombre",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "identificadorFicticio",
+        "label": "Identificador de demostración",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "direccion",
+        "label": "Dirección",
+        "type": "text",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F75_A04": {
+    "fields": [
+      {
+        "key": "inicioVigencia",
+        "label": "Inicio de vigencia",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "finVigencia",
+        "label": "Fin de vigencia",
+        "type": "date",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F75_A05": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F75_A06": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "publicada"
+  },
+  "F76_A01": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F76_A02": {
+    "fields": [
+      {
+        "key": "actuacion",
+        "label": "Actuación",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Atención registrada",
+          "Procedimiento de demostración",
+          "Control"
+        ]
+      },
+      {
+        "key": "producto",
+        "label": "Producto",
+        "type": "select",
+        "required": false,
+        "options": [
+          "Producto de demostración A",
+          "Producto de demostración B"
+        ]
+      },
+      {
+        "key": "lote",
+        "label": "Lote",
+        "type": "text",
+        "required": false
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F76_A03": {
+    "fields": [
+      {
+        "key": "actuacion",
+        "label": "Actuación",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Atención registrada",
+          "Procedimiento de demostración",
+          "Control"
+        ]
+      },
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "no_realizada"
+  },
+  "F76_A04": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "emitida"
+  },
+  "F76_A05": {
+    "fields": [
+      {
+        "key": "fecha",
+        "label": "Fecha",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "control",
+        "label": "Control propuesto",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F77_A01": {
+    "fields": [
+      {
+        "key": "nombre",
+        "label": "Nombre",
+        "type": "text",
+        "required": true
+      },
+      {
+        "key": "pagador",
+        "label": "Pagador",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Paciente / responsable",
+          "Convenio de ejemplo",
+          "Aseguradora ficticia"
+        ]
+      },
+      {
+        "key": "servicio",
+        "label": "Servicio",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consulta general",
+          "Consulta odontológica",
+          "Consulta veterinaria",
+          "Hemograma de ejemplo",
+          "Ecografía de ejemplo"
+        ]
+      },
+      {
+        "key": "coberturaFicticia",
+        "label": "Cobertura registrada de ejemplo",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "inicioVigencia",
+        "label": "Inicio de vigencia",
+        "type": "date",
+        "required": true
+      },
+      {
+        "key": "finVigencia",
+        "label": "Fin de vigencia",
+        "type": "date",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F77_A02": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F77_A03": {
+    "fields": [
+      {
+        "key": "convenio",
+        "label": "Convenio",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Convenio de ejemplo A",
+          "Convenio de ejemplo B"
+        ]
+      },
+      {
+        "key": "paciente",
+        "label": "Paciente",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Lucía Vargas · Humano",
+          "Diego Mendoza · Humano",
+          "Luna · Animal",
+          "Toby · Animal"
+        ]
+      },
+      {
+        "key": "servicio",
+        "label": "Servicio",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Consulta general",
+          "Consulta odontológica",
+          "Consulta veterinaria",
+          "Hemograma de ejemplo",
+          "Ecografía de ejemplo"
+        ]
+      },
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F77_A04": {
+    "fields": [
+      {
+        "key": "respuesta",
+        "label": "Respuesta de autorización",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Autorizada",
+          "Autorizada parcialmente",
+          "Rechazada",
+          "Pendiente"
+        ]
+      },
+      {
+        "key": "coberturaFicticia",
+        "label": "Cobertura registrada de ejemplo",
+        "type": "textarea",
+        "required": true
+      },
+      {
+        "key": "observacion",
+        "label": "Observaciones",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F77_A05": {
+    "fields": [
+      {
+        "key": "pagador",
+        "label": "Pagador",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Paciente / responsable",
+          "Convenio de ejemplo",
+          "Aseguradora ficticia"
+        ]
+      },
+      {
+        "key": "importe",
+        "label": "Importe (S/)",
+        "type": "number",
+        "required": true,
+        "min": 0.01
+      }
+    ],
+    "reviewRequired": true
+  },
+  "F77_A06": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F78_A01": {
+    "fields": [
+      {
+        "key": "operadorFicticio",
+        "label": "Operador de demostración",
+        "type": "select",
+        "required": true,
+        "options": [
+          "Mateo Cruz · Soporte"
+        ]
+      }
+    ],
+    "reviewRequired": false,
+    "targetStatus": "sesion_operador"
+  },
+  "F78_A02": {
+    "fields": [
+      {
+        "key": "codigoDemo",
+        "label": "Código de demostración",
+        "type": "text",
+        "required": true
+      }
+    ],
+    "reviewRequired": false
+  },
+  "F78_A03": {
+    "fields": [],
+    "reviewRequired": false
+  },
+  "F79_A01": {
+    "fields": [],
+    "reviewRequired": true
+  },
+  "F79_A02": {
+    "fields": [],
+    "reviewRequired": true,
+    "targetStatus": "sesion_cerrada"
+  },
+  "F79_A03": {
+    "fields": [
+      {
+        "key": "motivo",
+        "label": "Motivo",
+        "type": "textarea",
+        "required": false
+      }
+    ],
+    "reviewRequired": true,
+    "targetStatus": "sesion_cerrada"
+  },
+  "F79_A04": {
+    "fields": [],
+    "reviewRequired": false
+  }
+}

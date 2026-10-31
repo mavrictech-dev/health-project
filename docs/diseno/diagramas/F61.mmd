@@ -1,0 +1,21 @@
+flowchart TD
+    START(["El profesional utiliza dictado habilitado sobre atención editable."]) --> N1
+    N1["Profesional clínico: Elegir sección y activar dictado autorizado"]
+    N2["Sistema Health Project: Mostrar captura y permitir detenerla"]
+    N3["Proveedor o destinatario externo: Producir transcripción/propuesta de campos"]
+    N4["Profesional clínico: Comparar, corregir y aceptar contenido seleccionado"]
+    N5{"Sistema Health Project: ¿Valores aceptados cumplen reglas de captura?"}
+    N6["Sistema Health Project: Guardar como borrador bajo autoría y revisión profesional"]
+    END(["Borrador revisado por profesional; sin firma automática ni datos inventados incorporados."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"Sí"| N6
+    N6 --> END
+    N3 -->|"Proveedor falla"| A1["Permitir captura manual; indicar audio/propuesta no incorporados"]
+    A1 --> E1(["Dictado sin incorporación automática."])
+    N4 -->|"Descartar"| A2["No incorporar propuesta y aplicar política de audio definida"]
+    A2 --> E2(["Propuesta descartada."])
+    N5 -->|"No"| A3["Señalar campos incompatibles para revisión"]
+    A3 --> N4

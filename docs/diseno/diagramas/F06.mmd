@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Un administrador invita a un profesional a su organización."]) --> N1
+    N1["Administrador de la organización: Elegir profesional o enviar invitación a identidad verificable"]
+    N2["Administrador de la organización: Asignar rol, sucursales, especialidades y alcance"]
+    N3["Profesional clínico: Aceptar invitación e iniciar o crear su cuenta"]
+    N4{"Sistema Health Project: ¿Invitación válida y destinatario verificado?"}
+    N5["Administrador de la organización: Registrar evidencias y estado de revisión de credenciales"]
+    N6["Sistema Health Project: Activar membresía y funciones que correspondan"]
+    END(["Una identidad tiene una nueva membresía, sin duplicar sus otras cuentas."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"No"| A1["Bloquear aceptación y ofrecer reemisión al administrador"]
+    A1 --> E1(["Invitación sin activar."])
+    N5 -->|"Comprobación pendiente"| A2["Mantener capacidades que requieren esa revisión sin habilitar"]
+    A2 --> E2(["Membresía registrada con restricciones visibles."])

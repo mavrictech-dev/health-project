@@ -1,0 +1,5 @@
+stateDiagram-v2
+    [*] --> PREPARADA
+    PREPARADA --> PUBLICADA: Destinatario y versión autorizados
+    PUBLICADA --> RETIRADA: Revocar publicación con motivo
+    RETIRADA --> [*]

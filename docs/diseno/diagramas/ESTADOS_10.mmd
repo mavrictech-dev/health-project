@@ -1,0 +1,9 @@
+stateDiagram-v2
+    [*] --> DISPONIBLE
+    DISPONIBLE --> RESERVADA: Reserva autorizada
+    RESERVADA --> OCUPADA: Admisión y recepción
+    RESERVADA --> DISPONIBLE: Liberación de reserva
+    OCUPADA --> LIMPIEZA: Egreso o traslado registrado
+    LIMPIEZA --> DISPONIBLE: Preparación confirmada
+    DISPONIBLE --> BLOQUEADA: Motivo operativo
+    BLOQUEADA --> DISPONIBLE: Habilitación autorizada

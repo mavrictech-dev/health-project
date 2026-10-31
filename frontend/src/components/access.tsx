@@ -1,0 +1,16 @@
+'use client';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { ArrowRight, HeartPulse, ShieldCheck } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Logo } from './shell';
+import { useDemo } from '@/store/demo';
+import { ProcessTray } from './modules';
+import { screens } from '@/lib/spec';
+import type { Role } from '@/lib/types';
+
+export function AccessView({ platform = false, portal = false, operator = false, recovery = false }: { platform?: boolean; portal?: boolean; operator?: boolean; recovery?: boolean }) {
+  const { setRole, open } = useDemo(); const router = useRouter(); const [email, setEmail] = useState(portal ? 'paciente@example.test' : 'mateo@example.test'); const [role, setSelectedRole] = useState<Role>(platform ? 'SAD' : operator ? 'SOP' : portal ? 'PAC' : 'PRO');
+  return <div className="access-screen"><div className="access-story"><Logo /><div><p className="eyebrow">HEALTH PROJECT</p><h1>Cada historia<br />merece su espacio.</h1><p>Personas, profesionales y animales.<br />Una plataforma para acompañar cada atención.</p><div className="access-art"><HeartPulse size={110} strokeWidth={.7} /><span className="access-orbit orbit-one" /><span className="access-orbit orbit-two" /></div></div><span className="access-story-footer"><ShieldCheck size={14} />Contexto, continuidad y cuidado.</span></div><div className="access-form-wrapper"><form className="access-form" onSubmit={e => { e.preventDefault(); setRole(role); router.push(platform ? '/saas/inicio' : operator ? '/operacion/inicio' : portal ? '/portal/inicio' : '/app/inicio'); }}><span className="access-tag">ESPACIO DE DEMOSTRACIÓN</span><h2>{recovery ? 'Recupera tu acceso' : platform ? 'Administración general SaaS' : operator ? 'Operación MAVRIC' : portal ? 'Bienvenido a tu portal' : 'Bienvenido de nuevo'}</h2><p>{recovery ? 'Completa el recorrido con una cuenta ficticia.' : 'Entra a tu espacio y continúa donde lo dejaste.'}</p><div className="form-field"><label htmlFor="access-email">Cuenta ficticia</label><Input id="access-email" value={email} onChange={e => setEmail(e.target.value)} type="email" required /></div><div className="form-field"><label htmlFor="access-role">Vista de presentación</label><select id="access-role" value={role} onChange={e => setSelectedRole(e.target.value as Role)}>{(platform ? [['SAD', 'Administrador general SaaS']] : operator ? [['SOP', 'Operador MAVRIC']] : portal ? [['PAC', 'Paciente'], ['RES', 'Responsable de animal / representante']] : [['PRO', 'Profesional clínico'], ['REC', 'Recepción'], ['ADM', 'Administración']]).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select></div><Button type="submit">{recovery ? 'Continuar recuperación demo' : 'Entrar a la demo'}<ArrowRight size={15} /></Button><button type="button" className="access-link" onClick={() => open({ kind: 'action', actionId: 'F03_A02' })}>Recuperar acceso simulado</button><p className="access-note">Utiliza datos ficticios. Esta presentación no verifica identidades reales.</p><ProcessTray screen={screens.find(s => s.id === (platform ? 'S64' : recovery ? 'S04' : operator ? 'S56' : portal ? 'S02' : 'S01'))!} /></form></div></div>;
+}

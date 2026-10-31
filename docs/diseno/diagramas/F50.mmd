@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se ejecutan tareas de estancia, traslado o relevo de equipo."]) --> N1
+    N1["Asistente o enfermería: Abrir estancia y tareas asignadas"]
+    N2["Asistente o enfermería: Registrar observaciones, ejecución o excepción de cuidados"]
+    N3["Profesional clínico: Actualizar órdenes y pendientes con responsables"]
+    N4["Asistente o enfermería: Preparar traslado o entrega de turno con pendientes"]
+    N5{"Sistema Health Project: ¿Destino/equipo receptor disponible y autorizado?"}
+    N6["Asistente o enfermería: Confirmar recepción y movimientos necesarios"]
+    N7["Sistema Health Project: Conservar intervalos, entrega y tareas aún abiertas"]
+    END(["Cuidados registrados y responsabilidad transferida solo con recepción confirmada."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"Sí"| N6
+    N6 --> N7
+    N7 --> END
+    N5 -->|"No"| A1["Mantener responsabilidad del equipo emisor y tarea de transferencia pendiente"]
+    A1 --> E1(["Entrega/traslado no confirmado."])
+    N2 -->|"Tarea no realizada"| A2["Registrar motivo y reasignar revisión"]
+    A2 --> N3

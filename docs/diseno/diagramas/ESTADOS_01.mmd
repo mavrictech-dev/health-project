@@ -1,0 +1,22 @@
+flowchart TB
+    subgraph PERSONA[Paciente o responsable]
+        P1[Solicita atención y confirma identidad]
+        P2[Recibe documentos publicados y seguimiento]
+    end
+    subgraph RECEPCION[Recepción]
+        R1[Registra paciente y cita o ingreso directo]
+        R2[Registra llegada y cola]
+    end
+    subgraph CLINICO[Profesional clínico]
+        C1[Confirma contexto y abre historia autorizada]
+        C2[Registra atención y gráfico específico]
+        C3[Revisa documentos y finaliza visita]
+        C4[Revisa resultado posterior y seguimiento]
+    end
+    subgraph SISTEMA[Sistema]
+        S1[Valida disponibilidad, identidad y permisos]
+        S2[Guarda versiones y asigna pendientes]
+        S3[Entrega solo publicaciones autorizadas]
+    end
+    P1 --> R1 --> S1 --> R2 --> C1 --> C2 --> S2 --> C3 --> S3 --> P2
+    S2 --> C4 --> S3

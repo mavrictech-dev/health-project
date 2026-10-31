@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se habilita calendario, firma, IA, pagos, mensajería u otro proveedor."]) --> N1
+    N1["Administrador de la organización: Elegir integración y contexto de uso"]
+    N2["Sistema Health Project: Mostrar permisos, datos y responsable de conexión"]
+    N3["Administrador de la organización: Autorizar mediante mecanismo del proveedor"]
+    N4["Proveedor o destinatario externo: Confirmar vinculación y alcance concedido"]
+    N5{"Sistema Health Project: ¿Conexión y prueba operativa válidas?"}
+    N6["Sistema Health Project: Activar capacidades previstas y conservar estado"]
+    N7["Administrador de la organización: Elegir conservar conexión o solicitar revocación"]
+    END(["Integración conectada con alcance explícito o revocada con pendientes gestionados."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 -->|"Sí"| N6
+    N6 --> N7
+    N7 --> END
+    N5 -->|"No"| A1["Conservar integración inactiva y mostrar fallo resoluble"]
+    A1 --> E1(["Conexión no habilitada."])
+    N7 -->|"Revocar"| A2["Detener nuevas tareas, revisar pendientes y retirar credenciales de uso"]
+    A2 --> E2(["Integración desconectada; historia local conservada."])

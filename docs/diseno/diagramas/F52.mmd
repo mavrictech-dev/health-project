@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se propone procedimiento que necesita circuito quirúrgico."]) --> N1
+    N1["Profesional clínico: Crear caso con paciente, procedimiento y localización"]
+    N2["Recepción: Proponer fecha, sala, equipo y recursos"]
+    N3{"Sistema Health Project: ¿Disponibilidad y requisitos de preparación completos?"}
+    N4["Profesional clínico: Revisar preparación y consentimientos aplicables"]
+    N5["Recepción: Confirmar programación"]
+    N6["Sistema Health Project: Reservar recursos y crear tareas preoperatorias"]
+    END(["Caso programado con tareas y responsables."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Registrar faltantes o conflicto y mantener propuesta"]
+    A1 --> N2
+    N5 -->|"Cancelar/reprogramar"| A2["Registrar motivo y liberar/reasignar recursos conservando historia"]
+    A2 --> E2(["Caso cancelado o reprogramado, sin ejecución registrada."])

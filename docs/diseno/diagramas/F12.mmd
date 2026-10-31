@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Cambia un tutor, representante, contacto o autorización."]) --> N1
+    N1["Recepción: Identificar paciente y relación vigente"]
+    N2["Recepción: Registrar solicitud y evidencia del cambio"]
+    N3["Administrador de la organización: Definir alcance, vigencia y contenido permitido"]
+    N4{"Sistema Health Project: ¿Verificación suficiente según política aplicable?"}
+    N5["Administrador de la organización: Confirmar nueva relación o revocación"]
+    N6["Sistema Health Project: Actualizar accesos, publicaciones y pendientes afectados; conservar historia"]
+    END(["Relaciones y accesos consistentes con alcance verificado."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"No"| A1["Mantener solicitud pendiente; no habilitar acceso nuevo"]
+    A1 --> E1(["Relación por verificar."])
+    N5 -->|"Cancelar"| A2["Conservar relación vigente"]
+    A2 --> E2(["Sin cambios."])

@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se detectan dos fichas posiblemente del mismo paciente."]) --> N1
+    N1["Administrador de la organización: Seleccionar candidatos y comparar evidencias"]
+    N2["Profesional clínico: Revisar discrepancias clínicas cuando corresponda"]
+    N3{"Sistema Health Project: ¿Identidad suficientemente confirmada?"}
+    N4["Administrador de la organización: Seleccionar ficha conservada y revisar impacto"]
+    N5["Administrador de la organización: Confirmar fusión con motivo"]
+    N6["Sistema Health Project: Reasociar referencias permitidas y conservar IDs, originales y auditoría"]
+    END(["Identidad consolidada con procedencia y trazabilidad."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Mantener fichas separadas y registrar revisión"]
+    A1 --> E1(["Sin fusión."])
+    N5 -->|"Cancelar"| A2["Conservar fichas originales"]
+    A2 --> E2(["Sin cambios."])
+    N6 -->|"Fusión incorrecta detectada"| A3["Iniciar revisión y reparación de asociaciones con evidencia"]
+    A3 --> E3(["Corrección de identidad pendiente; no borrar registros."])

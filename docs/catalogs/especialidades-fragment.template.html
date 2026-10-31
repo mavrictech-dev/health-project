@@ -1,0 +1,99 @@
+<div id="hp-specialty-map">
+  <style>
+    #hp-specialty-map .hp-heading { padding-right: 90px; }
+    #hp-specialty-map .hp-detail { margin-top: 16px; }
+    #hp-specialty-map .hp-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 24px; }
+    #hp-specialty-map .hp-fields dt { font-weight: 500; margin-bottom: 6px; }
+    #hp-specialty-map .hp-fields dd { margin: 0; }
+    #hp-specialty-map .hp-fields ul { margin: 0; padding-left: 20px; }
+    #hp-specialty-map .hp-context { color: var(--muted-foreground); }
+    #hp-specialty-map .hp-title { font-weight: 500; }
+    #hp-specialty-map .hp-relations { margin-top: 12px; }
+    #hp-specialty-map .hp-selection { width: 100%; min-width: 0; }
+    @media (max-width: 560px) { #hp-specialty-map .hp-fields { grid-template-columns: minmax(0, 1fr); } }
+  </style>
+  <h2 class="hp-heading">Mapa de especialidades</h2>
+  <p id="hp-map-counts" class="text-small"></p>
+  <label class="form-label hp-selection" for="hp-map-specialty">Especialidad
+    <select class="form-select" id="hp-map-specialty"></select>
+  </label>
+  <div class="card hp-detail" aria-live="polite" aria-atomic="true">
+    <h3 id="hp-map-name"></h3>
+    <p id="hp-map-context" class="hp-context"></p>
+    <dl class="hp-fields">
+      <div><dt>Información que registra</dt><dd><ul id="hp-map-capture"></ul></dd></div>
+      <div><dt>Gráficos y componentes</dt><dd><ul id="hp-map-components"></ul></dd></div>
+      <div><dt>Flujos</dt><dd><ul id="hp-map-workflows"></ul></dd></div>
+      <div><dt>Módulos que requiere</dt><dd><ul id="hp-map-dependencies"></ul></dd></div>
+    </dl>
+    <p id="hp-map-relations" class="hp-relations text-small"></p>
+    <p class="text-small">Estado: mapeado · Validación clínica: pendiente</p>
+  </div>
+  <script type="application/json" id="hp-map-data">
+__CATALOG_DATA__
+  </script>
+  <script>
+    (() => {
+      const root = document.getElementById('hp-specialty-map');
+      const dataset = JSON.parse(root.querySelector('#hp-map-data').textContent);
+      const byCode = new Map(dataset.entries.map(entry => [entry.code, entry]));
+      const control = root.querySelector('#hp-map-specialty');
+      const families = new Map(dataset.componentFamilies.map(item => [item.code, item.name]));
+      const workflows = new Map(dataset.workflowFamilies.map(item => [item.code, item.name]));
+      const modules = new Map(dataset.modules.map(item => [item.code, item.name]));
+      const groups = new Map();
+      const counts = new Map();
+      dataset.entries.forEach(entry => {
+        const groupKey = entry.catalogDomainLabel + ' · ' + entry.group;
+        if (!groups.has(groupKey)) groups.set(groupKey, []);
+        groups.get(groupKey).push(entry);
+        counts.set(entry.catalogDomainLabel, (counts.get(entry.catalogDomainLabel) || 0) + 1);
+      });
+      root.querySelector('#hp-map-counts').textContent = Array.from(counts, ([name, count]) => name + ': ' + count).join(' · ');
+      groups.forEach((entries, label) => {
+        const group = document.createElement('optgroup');
+        group.label = label;
+        entries.forEach(entry => {
+          const option = document.createElement('option');
+          option.value = entry.code;
+          option.textContent = entry.name;
+          group.appendChild(option);
+        });
+        control.appendChild(group);
+      });
+      const list = (id, values) => {
+        const target = root.querySelector(id);
+        target.replaceChildren(...values.map(value => {
+          const item = document.createElement('li');
+          item.textContent = value;
+          return item;
+        }));
+      };
+      const show = code => {
+        const entry = byCode.get(code) || byCode.get('H_CARDIOLOGY') || dataset.entries[0];
+        control.value = entry.code;
+        root.querySelector('#hp-map-name').textContent = entry.name;
+        root.querySelector('#hp-map-context').textContent = entry.catalogDomainLabel + ' · ' + entry.group + ' · ' + entry.entryType.replaceAll('_', ' ');
+        list('#hp-map-capture', entry.capture);
+        list('#hp-map-components', entry.componentFamilies.map(code => families.get(code)));
+        list('#hp-map-workflows', entry.workflowFamilies.map(code => workflows.get(code)));
+        const baseModules = new Set(['clinical', 'patients', 'identity', 'organizations', 'specialties', 'documents', 'audit']);
+        list('#hp-map-dependencies', ['Núcleo común: paciente, atención, permisos, documentos y auditoría', ...entry.dependencies.filter(code => !baseModules.has(code)).map(code => modules.get(code))]);
+        const related = [entry.parentCode, ...(entry.relatedCodes || [])].filter(code => byCode.has(code)).map(code => byCode.get(code).name);
+        const profiles = entry.patientProfiles || [];
+        root.querySelector('#hp-map-relations').textContent = [related.length ? 'Áreas relacionadas: ' + related.join('; ') : '', profiles.length ? 'Perfiles: ' + profiles.join('; ') : ''].filter(Boolean).join(' · ');
+      };
+      const stateCode = () => window.openai?.widgetState?.modelContent?.specialtyCode;
+      show(stateCode());
+      control.addEventListener('change', () => {
+        show(control.value);
+        const entry = byCode.get(control.value);
+        if (window.openai?.setWidgetState) window.openai.setWidgetState({modelContent: {specialtyCode: entry.code, specialtyName: entry.name, domain: entry.catalogDomainLabel}, privateContent: null}).catch(() => {});
+      });
+      window.addEventListener('openai:set_globals', event => {
+        const code = event.detail?.globals?.widgetState?.modelContent?.specialtyCode;
+        if (code && byCode.has(code)) show(code);
+      });
+    })();
+  </script>
+</div>

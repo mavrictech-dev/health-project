@@ -1,0 +1,21 @@
+flowchart TD
+    START(["El paciente llega a la clínica con o sin reserva."]) --> N1
+    N1["Recepción: Identificar paciente y cita si existe"]
+    N2{"Sistema Health Project: ¿Qué tipo de ingreso corresponde?"}
+    N3["Recepción: Registrar llegada o ingreso directo con motivo administrativo mínimo"]
+    N4["Sistema Health Project: Añadir a cola correspondiente sin duplicar ingreso"]
+    N5["Asistente o enfermería: Preparar datos y capturas autorizadas"]
+    N6["Profesional clínico: Llamar paciente y confirmar identidad antes de iniciar atención"]
+    END(["Paciente preparado para atención o retiro registrado."])
+    N1 --> N2
+    N2 -->|"Cita sin llegada previa"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N2 -->|"Llegada existente"| A1["Abrir ingreso existente y su posición"]
+    A1 --> N5
+    N2 -->|"Sin cita"| A2["Validar atención directa y capacidad del servicio"]
+    A2 --> N3
+    N4 -->|"Paciente se retira"| A3["Registrar retiro y conservar cita/ingreso con estado real"]
+    A3 --> E3(["Ingreso terminado sin atención clínica."])

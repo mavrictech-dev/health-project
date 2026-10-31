@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se incorpora información histórica o se solicita exportación autorizada."]) --> N1
+    N1["Administrador de la organización: Elegir operación, alcance y formato versionado"]
+    N2{"Sistema Health Project: ¿Permisos y contexto correctos?"}
+    N3["Administrador de la organización: Revisar vista previa, totales y datos excluidos/rechazados"]
+    N4["Administrador de la organización: Confirmar lote de importación o exportación"]
+    N5["Sistema Health Project: Procesar con procedencia, referencias e identificación del lote"]
+    N6["Sistema Health Project: Entregar reporte/manifiesto y archivo privado autorizado"]
+    END(["Lote reconciliado o exportación auditable, incluyendo versiones/documentos y unidades."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N2 -->|"No"| A1["Denegar operación sin crear archivo ni exponer información"]
+    A1 --> E1(["Operación rechazada."])
+    N3 -->|"Errores de importación"| A2["Permitir corregir entradas; no confirmar lote incompatible"]
+    A2 --> N1
+    N5 -->|"Mismo lote"| A3["Informar resultado existente sin duplicar registros"]
+    A3 --> N6

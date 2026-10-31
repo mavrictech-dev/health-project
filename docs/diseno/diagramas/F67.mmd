@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se contrata, cambia o renueva el servicio de Health Project."]) --> N1
+    N1["Administrador de la organización: Revisar plan, capacidades disponibles y consumo"]
+    N2["Administrador de la organización: Solicitar alta, cambio o renovación"]
+    N3["Sistema Health Project: Mostrar costo, vigencia e impacto en habilitación"]
+    N4["Administrador de la organización: Aceptar condiciones aplicables"]
+    N5["Sistema Health Project: Registrar contratación y respuesta de cobro verificable"]
+    N6["Sistema Health Project: Aplicar derechos conforme a vigencia y disponibilidad real"]
+    END(["Plan y derechos trazables; factura SaaS separada de comprobantes de la clínica."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"Cancelar"| A1["Mantener plan vigente"]
+    A1 --> E1(["Sin cambio comercial."])
+    N5 -->|"Pago pendiente o impago"| A2["Mostrar estado y aplicar política definida preservando custodia/continuidad acordada"]
+    A2 --> E2(["Suscripción con resolución pendiente."])

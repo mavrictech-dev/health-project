@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Un usuario reporta un problema o requiere asistencia."]) --> N1
+    N1["Profesional clínico: Crear caso con descripción y referencias sin datos sensibles innecesarios"]
+    N2["Operador o soporte de MAVRIC: Clasificar y asignar responsable"]
+    N3{"Sistema Health Project: ¿Resolver requiere acceso excepcional a datos?"}
+    N4["Administrador de la organización: Autorizar alcance, duración y finalidad del acceso si procede"]
+    N5["Operador o soporte de MAVRIC: Investigar y registrar acciones realizadas"]
+    N6["Sistema Health Project: Revocar acceso temporal y registrar resolución o pendientes"]
+    END(["Caso resuelto o pendiente; acceso excepcional terminado y auditado."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Investigar mediante evidencias técnicas permitidas"]
+    A1 --> N5
+    N4 -->|"No autoriza"| A2["Continuar con evidencia permitida o solicitar alternativa concreta"]
+    A2 --> E2(["Caso abierto con limitación de acceso."])

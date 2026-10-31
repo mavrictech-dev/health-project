@@ -1,0 +1,23 @@
+flowchart TD
+    START(["El profesional abre un gráfico anatómico de la especialidad."]) --> N1
+    N1["Sistema Health Project: Mostrar atlas, versión, orientación y leyenda"]
+    N2["Profesional clínico: Seleccionar región y lateralidad por gráfico o tabla"]
+    N3["Profesional clínico: Elegir hallazgo, observación o procedimiento relacionado"]
+    N4{"Sistema Health Project: ¿Localización, significado y estado compatibles?"}
+    N5["Profesional clínico: Añadir detalle y revisar la marca semántica"]
+    N6["Sistema Health Project: Guardar marca con autor, fecha y atención"]
+    N7["Profesional clínico: Comparar con registros previos dentro del alcance"]
+    END(["Hallazgo localizado y reproducible; dibujo y dato clínico relacionados."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> N7
+    N7 --> END
+    N4 -->|"No"| A1["Explicar incompatibilidad y conservar selección para corregir"]
+    A1 --> N2
+    N5 -->|"Deshacer marca local"| A2["Retirar solo cambio no confirmado de este borrador"]
+    A2 --> N2
+    N1 -->|"Atlas histórico distinto"| A3["Mostrar versión original o comparación explícita; no reubicar marcas automáticamente"]
+    A3 --> N2

@@ -1,0 +1,11 @@
+stateDiagram-v2
+    [*] --> PROPUESTO
+    PROPUESTO --> PENDIENTE_CONFIRMACION: Medio externo
+    PROPUESTO --> CONFIRMADO: Medio registrado y validado
+    PENDIENTE_CONFIRMACION --> CONFIRMADO: Respuesta verificable
+    PENDIENTE_CONFIRMACION --> FALLIDO: Rechazo verificado
+    CONFIRMADO --> REEMBOLSO_PARCIAL: Reverso vinculado
+    CONFIRMADO --> REEMBOLSADO: Reverso total autorizado
+    REEMBOLSO_PARCIAL --> REEMBOLSADO: Completar reverso autorizado
+    FALLIDO --> [*]
+    REEMBOLSADO --> [*]

@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se liquida un periodo de acuerdo profesional."]) --> N1
+    N1["Caja y administración financiera: Elegir profesional, periodo y acuerdo vigente"]
+    N2["Sistema Health Project: Calcular propuesta desde realizado, facturado o cobrado según contrato"]
+    N3["Caja y administración financiera: Revisar partidas y ajustes autorizados"]
+    N4{"Sistema Health Project: ¿Cálculo y documentación completos?"}
+    N5["Administrador de la organización: Aprobar liquidación"]
+    N6["Caja y administración financiera: Registrar pago y entregar detalle autorizado"]
+    END(["Liquidación revisada y pago identificado o saldo pendiente."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> END
+    N4 -->|"No"| A1["Conservar propuesta y solicitar aclaración"]
+    A1 --> N3
+    N5 -->|"Rechazo"| A2["Devolver propuesta con motivo; no pagar"]
+    A2 --> E2(["Liquidación pendiente de revisión."])

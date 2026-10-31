@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se inicia evaluación/cuidado anestésico de un caso."]) --> N1
+    N1["Profesional clínico: Registrar evaluación y plan profesional"]
+    N2["Profesional clínico: Confirmar inicio autorizado y contexto del caso"]
+    N3["Asistente o enfermería: Registrar tiempos, observaciones y administraciones efectivas"]
+    N4["Profesional clínico: Registrar eventos y finalización de actuación"]
+    N5["Asistente o enfermería: Recibir en recuperación y registrar evolución"]
+    N6{"Sistema Health Project: ¿Criterio de salida registrado por actor autorizado?"}
+    N7["Sistema Health Project: Cerrar recuperación y entregar órdenes/pendientes al destino"]
+    END(["Registro anestésico/recuperación cerrado o activo con estado real."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 -->|"Sí"| N7
+    N7 --> END
+    N6 -->|"No"| A1["Mantener recuperación activa con responsable"]
+    A1 --> N5
+    N3 -->|"Cambio o interrupción"| A2["Registrar evento y decisión profesional sin alterar hechos anteriores"]
+    A2 --> N4

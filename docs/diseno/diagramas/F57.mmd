@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se solicita componente sanguíneo para un paciente."]) --> N1
+    N1["Profesional clínico: Registrar solicitud y contexto clínico"]
+    N2["Equipo de diagnóstico: Asignar unidad, pruebas y revisión requerida"]
+    N3{"Sistema Health Project: ¿Identificación y verificaciones profesionales completas?"}
+    N4["Equipo de diagnóstico: Registrar liberación y entrega de componente"]
+    N5["Asistente o enfermería: Registrar actuación real, tiempos y observaciones"]
+    N6["Sistema Health Project: Conciliar unidad utilizada/devuelta y documentar eventos"]
+    END(["Solicitud, unidad y evento vinculados con trazabilidad."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Bloquear liberación y asignar revisión"]
+    A1 --> E1(["Solicitud pendiente de resolución."])
+    N5 -->|"No realizada o evento"| A2["Registrar hechos y revisión profesional; no cerrar como realizada completa"]
+    A2 --> N6

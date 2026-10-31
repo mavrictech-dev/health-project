@@ -1,0 +1,28 @@
+'use client';
+import Link from 'next/link';
+import { ArrowRight, ArrowUpRight, CalendarDays, ClipboardList, Clock3, FileText, ShieldCheck, Stethoscope, Users } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { ActionButton, Metric, PersonAvatar, SectionHeading, Status } from './shared';
+import { useDemo } from '@/store/demo';
+import { getSaas } from '@/lib/saas';
+import { DEMO_DATE, getOrganizations } from '@/mocks/fixtures';
+
+export function Dashboard() {
+  const { data, context, setPatient, open } = useDemo();
+  const appointments = data.appointments.filter(a => a.org === context.org && a.date === DEMO_DATE && a.status !== 'Cancelada').sort((a, b) => a.time.localeCompare(b.time));
+  const waiting = appointments.filter(a => ['En espera', 'Llamada'].includes(a.status));
+  const current = data.patients.find(p => p.id === context.patient && p.org === context.org);
+  const pending = data.records.filter(r => r.org === context.org && ['F34', 'F41', 'F27'].includes(r.flow));
+  const org = getOrganizations(data).find(o => o.id === context.org);
+  const branch = org?.branches.find(b => b.id === context.branch);
+  return <>
+    <SectionHeading eyebrow="MARTES, 13 DE OCTUBRE DE 2026" title={context.role === 'PRO' ? `Buen día, ${getSaas(data).professionals.find(p=>p.id===context.professional || !context.professional && p.id==='pro-mateo')?.name || 'profesional'}` : `Bienvenido a ${org?.name || 'tu espacio'}`} description="Todo lo que necesitas para acompañar a tus pacientes, en un solo espacio." actions={<><Button variant="outline" onClick={() => open({ kind: 'context' })}><CalendarDays size={15} />{branch?.name}</Button><ActionButton id="F16_A01" variant="default" icon>Nueva cita</ActionButton></>} />
+    <div className="metrics-row"><Metric label="Citas para hoy" value={appointments.length} detail={`${appointments.filter(a => a.status === 'Finalizada').length} completadas · ${waiting.length} en espera`} icon={<CalendarDays size={16} />} /><Metric label="Pacientes en espera" value={waiting.length} detail="La recepción mantiene tu cola al día" icon={<Users size={16} />} /><Metric label="Pendientes clínicos" value={pending.filter(r => !['Resuelta', 'Finalizada'].includes(r.status)).length} detail="Resultados, documentos y controles" icon={<ClipboardList size={16} />} /></div>
+    <div className="dashboard-grid"><div className="panel"><div className="panel-header"><div><h2>Tu agenda de hoy</h2><p>Consultas y controles programados</p></div><Link href="/app/agenda">Ver agenda <ArrowUpRight size={13} /></Link></div><div className="schedule-list">{appointments.slice(0, 6).map(a => {
+      const patient = data.patients.find(p => p.id === a.patient)!; const professional = getSaas(data).professionals.find(p => p.id === a.professional);
+      return <div className="schedule-row" key={a.id}><time className="schedule-time">{a.time}</time><div className="schedule-person"><PersonAvatar patient={patient} /><div><strong>{patient.name}</strong><small>{a.service} · {a.duration} min</small></div></div><div className="row-end"><Status value={a.status} /><button className="row-link" aria-label={`Abrir atención de ${patient.name}`} onClick={() => { setPatient(patient.id); open({ kind: 'action', actionId: 'F20_A06', target: { appointmentId: a.id } }); }}><ArrowUpRight size={15} /></button></div><span className="sr-only">{professional?.name}</span></div>;
+    })}</div></div><div className="dashboard-side"><div className="current-visit"><div className="current-top"><span className="live-dot">ATENCIÓN ACTUAL</span><Clock3 size={14} /></div>{current && <div className="current-person"><PersonAvatar patient={current} /><div><h3>{current.name}</h3><p>{current.species || current.age} · {current.identifier}</p></div></div>}<div className="visit-progress"><span /></div><div className="visit-progress-label"><span>Evaluación en curso</span><span>Atención compartida</span></div><Link href={`/app/atencion?atencion=${context.encounter}`}><Button>Continuar atención <ArrowRight size={15} /></Button></Link></div><div className="panel"><div className="panel-header"><h2>Accesos rápidos</h2></div><div className="panel-body quick-grid"><button className="quick-link" onClick={() => open({ kind: 'action', actionId: context.org === 'org-vet' ? 'F11_A01' : 'F10_A02' })}><Users size={19} />Nuevo paciente</button><Link className="quick-link" href="/app/ordenes"><ClipboardList size={19} />Órdenes y resultados</Link><Link className="quick-link" href="/app/documentos"><FileText size={19} />Mis documentos</Link><Link className="quick-link" href="/app/atencion"><Stethoscope size={19} />Historia y evolución</Link></div></div></div></div>
+    <div className="panel tasks-panel"><div className="panel-header"><div><h2>Para continuar cuidando</h2><p>Un vistazo a los próximos pasos de tus pacientes</p></div><Link href="/app/seguimiento">Ver pendientes <ArrowUpRight size={13} /></Link></div>{pending.slice(0, 3).map((r, i) => <div className="task-row" key={r.id}><span className="task-icon">{i === 0 ? <FileText size={15} /> : i === 1 ? <ClipboardList size={15} /> : <Clock3 size={15} />}</span><div><strong>{['Revisar resultado de laboratorio', 'Completar nota de evolución', 'Organizar control de seguimiento'][i]}</strong><p>{data.patients.find(p => p.id === r.patient)?.name} · {r.data.origen || branch?.name}</p></div><time>Hoy</time><Status value={r.status} /><Button variant="ghost" size="icon" aria-label={`Abrir ${r.title}`} onClick={() => open({ kind: 'record', recordId: r.id })}><ArrowUpRight size={15} /></Button></div>)}</div>
+    <p className="footer-note"><ShieldCheck size={12} />Historia compartida entre sucursales · Contexto y procedencia siempre visibles</p>
+  </>;
+}

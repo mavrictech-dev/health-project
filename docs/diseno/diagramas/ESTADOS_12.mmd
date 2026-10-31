@@ -1,0 +1,15 @@
+flowchart LR
+    ACC[Acceso] --> CTX[Contexto y rol]
+    CTX --> AG[Agenda y recepción]
+    CTX --> PAT[Pacientes]
+    PAT --> HC[Expediente compartido]
+    AG --> ENC[Atención]
+    HC --> ENC
+    ENC --> ESP[Formulario y gráfico de especialidad]
+    ENC --> ORD[Órdenes y resultados]
+    ENC --> DOC[Documentos y publicación]
+    ORD --> PEN[Bandeja y seguimiento]
+    DOC --> PORT[Portal autorizado]
+    CTX --> CFG[Configuración]
+    CTX --> ADM[Operación administrativa por fase]
+    CTX --> HOSP[Hospital y capacidades avanzadas por fase]

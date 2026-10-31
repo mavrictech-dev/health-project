@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se procesa muestra aceptada o se incorpora informe externo."]) --> N1
+    N1["Equipo de diagnóstico: Registrar método, resultados originales y unidades"]
+    N2{"Sistema Health Project: ¿Validación técnica y referencias aplicables completas?"}
+    N3["Equipo de diagnóstico: Revisar informe preliminar"]
+    N4["Equipo de diagnóstico: Emitir informe final autorizado"]
+    N5["Sistema Health Project: Crear pendiente de revisión para el profesional solicitante"]
+    N6["Sistema Health Project: Conservar informe y trazabilidad de versiones"]
+    END(["Informe emitido; revisión clínica aún pendiente."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N2 -->|"No"| A1["Marcar revisión técnica pendiente; no publicar como final"]
+    A1 --> N1
+    N4 -->|"Corregir informe emitido"| A2["Crear versión corregida con motivo y nuevo pendiente de revisión"]
+    A2 --> N5
+    N1 -->|"Informe externo"| A3["Guardar fuente e integridad sin atribuir ejecución a la clínica"]
+    A3 --> N3

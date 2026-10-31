@@ -1,0 +1,21 @@
+flowchart TD
+    START(["El profesional registra medicación referida o prescribe."]) --> N1
+    N1["Profesional clínico: Revisar medicación referida y registros visibles"]
+    N2["Profesional clínico: Registrar producto, presentación y pauta indicada por el profesional"]
+    N3{"Sistema Health Project: ¿Campos, unidades y controles implementados completos?"}
+    N4["Profesional clínico: Resolver discrepancias y revisar receta"]
+    N5["Profesional clínico: Cerrar o firmar receta con emisor autorizado"]
+    N6["Sistema Health Project: Guardar prescripción versionada y opciones de entrega"]
+    END(["Receta emitida o medicación referida registrada como hecho distinto."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Explicar faltantes o advertencias implementadas sin generar decisión terapéutica automática"]
+    A1 --> N2
+    N5 -->|"Guardar para después"| A2["Conservar receta como borrador"]
+    A2 --> E2(["Receta sin emitir."])
+    N2 -->|"Solo medicación referida"| A3["Registrar fuente; no generar prescripción ni administración"]
+    A3 --> E3(["Conciliación registrada."])

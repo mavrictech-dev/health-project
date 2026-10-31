@@ -1,0 +1,85 @@
+name: health-project
+services:
+  mailpit:
+    image: axllent/mailpit:v1.27
+    ports:
+      - '127.0.0.1:8025:8025'
+    restart: unless-stopped
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: health_project
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Ejecuta scripts/setup.ps1}
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_USER: health_app
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD:?Ejecuta scripts/setup.ps1}
+    ports:
+      - '127.0.0.1:3307:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/01-privileges.sh:/docker-entrypoint-initdb.d/01-privileges.sh:ro
+    healthcheck:
+      test: ['CMD-SHELL', 'MYSQL_PWD="$$MYSQL_ROOT_PASSWORD" mysqladmin ping -h localhost -uroot --silent']
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+    restart: unless-stopped
+  backend:
+    image: health-project-backend:local
+    build: ./backend
+    environment:
+      DATABASE_URL: jdbc:mysql://mysql:3306/health_project?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true
+      DATABASE_USER: health_app
+      HEALTH_TRUST_GATEWAY: 'true'
+      SMTP_HOST: ${SMTP_HOST:-mailpit}
+      SMTP_PORT: ${SMTP_PORT:-1025}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_AUTH: ${SMTP_AUTH:-false}
+      SMTP_STARTTLS: ${SMTP_STARTTLS:-false}
+      MAIL_FROM: ${MAIL_FROM:-no-reply@health.localhost}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      HEALTH_BASE_DOMAIN: ${HEALTH_BASE_DOMAIN:-health.localhost}
+      HEALTH_PUBLIC_ORIGIN: ${HEALTH_PUBLIC_ORIGIN:-http://health.localhost:8080}
+      BOOTSTRAP_ADMIN_EMAIL: ${BOOTSTRAP_ADMIN_EMAIL:-admin@health.localhost}
+      BOOTSTRAP_ADMIN_PASSWORD: ${BOOTSTRAP_ADMIN_PASSWORD:?Ejecuta scripts/setup.ps1}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -q --header="Host: $$HEALTH_BASE_DOMAIN" -O /dev/null http://127.0.0.1:8080/actuator/health/readiness']
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+    restart: unless-stopped
+  migrate:
+    image: health-project-backend:local
+    build: ./backend
+    command: ['--migrate']
+    environment:
+      DATABASE_URL: jdbc:mysql://mysql:3306/health_project?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true
+      MIGRATION_USER: root
+      MIGRATION_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      mysql:
+        condition: service_healthy
+  gateway:
+    image: nginx:1.28-alpine
+    ports:
+      - '127.0.0.1:8080:80'
+    environment:
+      HEALTH_BASE_DOMAIN: ${HEALTH_BASE_DOMAIN:-health.localhost}
+      NGINX_ENVSUBST_FILTER: HEALTH_BASE_DOMAIN
+    volumes:
+      - ./docker/nginx/default.conf.template:/etc/nginx/templates/default.conf.template:ro
+      - ./frontend/out:/usr/share/nginx/html:ro
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  mysql_data:

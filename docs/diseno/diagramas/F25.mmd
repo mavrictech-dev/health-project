@@ -1,0 +1,21 @@
+flowchart TD
+    START(["Se registra una medida o se consulta un cálculo/gráfico."]) --> N1
+    N1["Profesional clínico: Elegir medición o instrumento y registrar momento clínico"]
+    N2["Profesional clínico: Introducir valores originales, unidades y método"]
+    N3{"Sistema Health Project: ¿Referencia e inputs válidos para población/especie?"}
+    N4["Sistema Health Project: Calcular solo indicadores implementados y validados, mostrando referencia"]
+    N5["Profesional clínico: Revisar valores e interpretación profesional separada"]
+    N6["Sistema Health Project: Guardar observaciones y cálculo versionado"]
+    N7["Profesional clínico: Consultar curva o tendencia con tabla de datos"]
+    END(["Valores y referencias conservados; gráficos reconstruibles."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> N7
+    N7 --> END
+    N3 -->|"No"| A1["Conservar medidas originales y explicar por qué no se calcula indicador"]
+    A1 --> E1(["Medición registrada; indicador no calculado."])
+    N2 -->|"Dato no disponible"| A2["Registrar causa de ausencia en lugar de asignar valor normal"]
+    A2 --> N5

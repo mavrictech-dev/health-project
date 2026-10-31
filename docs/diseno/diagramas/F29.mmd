@@ -1,0 +1,19 @@
+flowchart TD
+    START(["Se incorpora o cambia un problema, antecedente o episodio de cuidado."]) --> N1
+    N1["Profesional clínico: Seleccionar episodio o crear uno dentro de la organización"]
+    N2["Profesional clínico: Registrar problema, antecedente o alergia con estado y fuente"]
+    N3{"Sistema Health Project: ¿Relaciones y contexto clínico coherentes?"}
+    N4["Profesional clínico: Vincular atención y participantes autorizados"]
+    N5["Profesional clínico: Actualizar estado con fecha y motivo sin borrar historia"]
+    N6["Sistema Health Project: Guardar evolución y pendientes de seguimiento"]
+    END(["Datos longitudinales actualizados con origen y fechas."])
+    N1 --> N2
+    N2 --> N3
+    N3 -->|"Sí"| N4
+    N4 --> N5
+    N5 --> N6
+    N6 --> END
+    N3 -->|"No"| A1["Pedir corrección de asociación y fuente"]
+    A1 --> N2
+    N5 -->|"Dato dudoso"| A2["Registrar incertidumbre/revisión pendiente con responsable"]
+    A2 --> E2(["Dato por revisar; no convertirlo en confirmado."])

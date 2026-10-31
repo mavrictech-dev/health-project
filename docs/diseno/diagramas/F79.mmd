@@ -1,0 +1,19 @@
+flowchart TD
+    START(["El usuario solicita salir de la cuenta actual."]) --> N1
+    N1["Profesional clínico: Solicitar cierre de sesión"]
+    N2{"Sistema Health Project: ¿Hay cambios locales o confirmaciones pendientes?"}
+    N3["Profesional clínico: Guardar, resolver estado incierto o descartar cambios locales explícitamente"]
+    N4["Sistema Health Project: Revocar sesión y detener nuevas solicitudes con ella"]
+    N5["Sistema Health Project: Limpiar vistas sensibles y volver al acceso apropiado"]
+    END(["Sesión cerrada; trabajo confirmado conservado y vista clínica retirada."])
+    N1 --> N2
+    N2 -->|"Sí"| N3
+    N3 --> N4
+    N4 --> N5
+    N5 --> END
+    N2 -->|"No"| A1["Revocar sesión directamente"]
+    A1 --> N4
+    N3 -->|"Seguir trabajando"| A2["Cancelar salida y mantener contexto autorizado"]
+    A2 --> E2(["Sesión conservada."])
+    N3 -->|"No puede guardar"| A3["Explicar qué quedó confirmado y qué no; permitir volver o descartar lo local"]
+    A3 --> E3(["Salida por resolver; no afirmar guardado inexistente."])

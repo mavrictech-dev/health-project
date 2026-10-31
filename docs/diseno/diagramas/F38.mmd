@@ -1,0 +1,23 @@
+flowchart TD
+    START(["Se emite receta, certificado, informe, indicación o consentimiento."]) --> N1
+    N1["Profesional clínico: Elegir tipo documental y contenido clínico pertinente"]
+    N2["Sistema Health Project: Generar vista previa con paciente, emisor y referencias"]
+    N3["Profesional clínico: Revisar contenido y destinatario"]
+    N4{"Sistema Health Project: ¿Requiere consentimiento o firma externa?"}
+    N5["Paciente humano: Recibir explicación y registrar decisión mediante mecanismo definido"]
+    N6["Sistema Health Project: Guardar documento y evidencia con versión exacta"]
+    N7["Profesional clínico: Elegir entrega o publicación autorizada"]
+    END(["Documento/evidencia conservado o decisión pendiente explícita."])
+    N1 --> N2
+    N2 --> N3
+    N3 --> N4
+    N4 -->|"Sí"| N5
+    N5 --> N6
+    N6 --> N7
+    N7 --> END
+    N4 -->|"No"| A1["Cerrar documento mediante mecanismo autorizado"]
+    A1 --> N6
+    N5 -->|"No acepta o retira consentimiento"| A2["Registrar decisión y derivar actuación clínica al profesional"]
+    A2 --> E2(["Consentimiento no concedido; proceso clínico por decidir."])
+    N6 -->|"Firma externa pendiente"| A3["Mostrar pendiente y verificar confirmación antes de emitir"]
+    A3 --> E3(["Documento pendiente de firma."])
