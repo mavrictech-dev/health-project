@@ -2,6 +2,8 @@
 
 Plataforma clínica SaaS para organizaciones humanas y veterinarias, con identidades que pueden trabajar en varios clientes, sedes y especialidades.
 
+[Abrir presentación interactiva](https://health-project-demo.vercel.app) · datos ficticios, sin credenciales ni backend.
+
 - [Guía de arquitectura y construcción del backend](docs/backend/01_Plan_Arquitectura_y_Construccion.md)
 - [API y recorridos para integrar el frontend](docs/backend/02_API_y_Recorridos.md)
 - [Ejecutar y probar el backend Docker](backend/README.md)

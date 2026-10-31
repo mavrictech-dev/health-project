@@ -2,6 +2,8 @@
 
 La presentación utiliza `NEXT_PUBLIC_APP_MODE=mock`, se compila como archivos estáticos y no necesita Spring Boot, Docker, MySQL ni las APIs locales. Se puede compartir la URL raíz con un revisor sin entregarle credenciales reales.
 
+**Enlace publicado:** [Health Project · presentación](https://health-project-demo.vercel.app).
+
 ## Recorridos
 
 La entrada permite elegir administración SaaS, medicina humana, odontología, veterinaria, portal del paciente o estado y trazabilidad. El aviso **Presentación · datos ficticios** permite volver al selector. Los cambios se conservan solo en el navegador del visitante; no se comparten entre revisores.
@@ -36,6 +38,8 @@ npm run qa:demo
 
 `qa:demo` usa Edge mediante Playwright. Bloquea y contabiliza `/api/**`: la prueba falla si el modo de presentación intenta usar una API de red. También comprueba creación y persistencia de planes, trazabilidad, exportación CSV, monitor, soporte, sesiones, acceso, registro, verificación, recuperación y las vistas clínicas y móvil.
 
+Verificado el 31 de octubre de 2026: 13 recorridos aprobados tanto en la exportación local como en el dominio público de Vercel, con cero solicitudes a APIs reales y cero errores de JavaScript. La entrada pública responde HTTP 200 sin autenticación de Vercel. Pasaron las 30 pruebas de reglas clínicas/SaaS y ambas compilaciones (real y mock), con 82 páginas exportadas en cada modo. Next.js quedó en 16.4.3; la revisión de dependencias de producción reportó cero vulnerabilidades.
+
 ## Publicar desde GitHub
 
 1. Importa `mavrictech-dev/health-project` en Vercel.
@@ -47,7 +51,7 @@ npm run qa:demo
 Desde una terminal con sesión Vercel iniciada, también puedes publicar desde `frontend`:
 
 ```powershell
-vercel --prod
+npx --yes vercel@latest deploy --prod
 ```
 
 La configuración pública de Next se fija durante la compilación. Cambiar una variable después del despliegue requiere recompilar.

@@ -2,6 +2,8 @@
 
 Demo interactiva en español de un sistema para medicina humana, odontología y veterinaria. Frontend con datos ficticios: Next.js, TypeScript, shadcn/ui sobre Base UI y Tailwind CSS. Incluye temas blanco, negro y navy; formularios en paneles derechos con fondo desenfocado.
 
+**Presentación publicada:** [health-project-demo.vercel.app](https://health-project-demo.vercel.app).
+
 La consola **Administración SaaS** permite crear clientes independientes, hospitales, clínicas, veterinarias y centros de especialidad; configurar planes y contratos por sedes, profesionales, especialidades y módulos; y abrir el espacio de cada tenant. Un profesional puede tener membresías en varias organizaciones. La agenda usa los profesionales activos asignados a la sede y el cliente comienza con su propio directorio.
 
 El modo de presentación tiene una entrada para elegir vista SaaS, medicina humana, odontología, veterinaria, portal o monitor. [Publicar en Vercel](../docs/frontend-demo/08_Demo_Vercel.md) · [Diseño SaaS](../docs/frontend-demo/07_SaaS_Multitenant.md).
