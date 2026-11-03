@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState, useSyncExternalStore } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 import { CheckCircle2, ShieldCheck, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -24,6 +24,8 @@ import { RuntimeWorkspace } from './runtime-workspace';
 import { RuntimeReviewFeature, runtimeReviewTitle } from './runtime-workspace';
 import { isMockMode } from '@/lib/app-mode';
 import { ReviewHome, ReviewBanner, useReviewRoute } from './review-mode';
+import { usePresentation } from './providers';
+import { accessPaths } from '@/lib/live-routes';
 
 const subscribeClient = () => () => {};
 const clientSnapshot = () => true;
@@ -61,10 +63,10 @@ function ReviewApp() {
 
 function LiveHealthApp() {
   const path=usePathname().replace(/\/$/,''),auth=useAuth(),router=useRouter();
-  const [demo,setDemo]=useState(false);
-  useEffect(()=>{if(path==='/demo')sessionStorage.setItem('health-explicit-demo','1');setDemo(sessionStorage.getItem('health-explicit-demo')==='1');},[path]);
-  if(demo) return <><div className="explicit-demo-banner">Presentación clínica · datos ficticios<Button variant="outline" onClick={()=>{sessionStorage.removeItem('health-explicit-demo');setDemo(false);router.push(auth.user?homeFor(auth.user):'/acceso');}}>Volver a mi espacio</Button></div><DemoHealthApp/></>;
-  if(['/acceso','/portal/acceso','/operacion/acceso','/saas/acceso','/recuperar','/registro','/verificar','/restablecer','/invitacion'].includes(path)) return <AuthAccess key={path}/>;
+  const {demo,ready,leave}=usePresentation();
+  if(!ready || path==='/demo'&&!demo) return <div className="boot-screen" role="status">Preparando tu espacio…</div>;
+  if(demo) return <><div className="explicit-demo-banner">Presentación clínica · datos ficticios<Button variant="outline" onClick={()=>{leave();router.push(auth.user?homeFor(auth.user):'/acceso');}}>Volver a mi espacio</Button></div><DemoHealthApp/></>;
+  if(accessPaths.includes(path)) return <AuthAccess key={path}/>;
   if(auth.loading) return <div className="boot-screen" role="status">Conectando con tu espacio…</div>;
   if(!auth.user || auth.error) return <AuthAccess mode="login"/>;
   return <RuntimeWorkspace/>;

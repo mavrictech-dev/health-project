@@ -9,10 +9,15 @@ import secrets
 import subprocess
 import time
 import urllib.request
+import os
+from urllib.parse import urlsplit
+from qa_config import load_config
 
 ROOT=Path(__file__).resolve().parents[2]
-CONFIG=dict(line.split('=',1) for line in (ROOT/'.env').read_text(encoding='utf-8-sig').splitlines() if '=' in line and not line.startswith('#'))
+CONFIG=load_config(ROOT)
 BASE=CONFIG.get('HEALTH_BASE_DOMAIN','health.localhost')
+URL=urlsplit(os.getenv('HEALTH_TEST_URL','http://127.0.0.1:8080'))
+MAIL_URL=os.getenv('HEALTH_MAILPIT_URL','http://127.0.0.1:8025').rstrip('/')
 RUN=secrets.token_hex(5)
 PW='Identity-QA-'+secrets.token_hex(10)
 RESULT=[]
@@ -21,13 +26,14 @@ def check(ok,label):
     RESULT.append(label)
 
 def request(method,path,body=None,host=BASE,cookie=None,csrf=None,bearer=None,expect=200,headers=None):
-    conn=http.client.HTTPConnection('127.0.0.1',8080,timeout=30)
+    connection=http.client.HTTPSConnection if URL.scheme=='https' else http.client.HTTPConnection
+    conn=connection(URL.hostname,URL.port,timeout=30)
     h={'Host':host,'Content-Type':'application/json','User-Agent':'HealthProject-Identity-QA'}
     if cookie:h['Cookie']=cookie
     if csrf:h['X-CSRF-Token']=csrf
     if bearer:h['Authorization']='Bearer '+bearer
     h.update(headers or {})
-    conn.request(method,path,None if body is None else json.dumps(body),h)
+    conn.request(method,URL.path.rstrip('/')+path,None if body is None else json.dumps(body),h)
     res=conn.getresponse();raw=res.read();response_headers=dict(res.getheaders());status=res.status;conn.close()
     data=json.loads(raw) if raw else None
     assert status==expect,f'{method} {path}: {status}, expected {expect}: '+str(data.get('detail','') if isinstance(data,dict) else '')
@@ -43,10 +49,10 @@ def login(email,password,host):
 def mail_token(email,purpose):
     opener=urllib.request.build_opener(urllib.request.ProxyHandler({}))
     for _ in range(30):
-        with opener.open('http://127.0.0.1:8025/api/v1/messages',timeout=10) as res:messages=json.load(res)['messages']
+        with opener.open(MAIL_URL+'/api/v1/messages',timeout=10) as res:messages=json.load(res)['messages']
         for message in messages:
             if not any(person['Address']==email for person in message.get('To',[])):continue
-            with opener.open('http://127.0.0.1:8025/api/v1/message/'+message['ID'],timeout=10) as res:detail=json.load(res)
+            with opener.open(MAIL_URL+'/api/v1/message/'+message['ID'],timeout=10) as res:detail=json.load(res)
             if ('/verificar/' if purpose=='VERIFY' else '/restablecer/') not in detail.get('Text',''):continue
             match=re.search(r'https?://([^/]+)/[^\s]+#token=([A-Za-z0-9_-]+)',detail['Text'])
             if match:return match.group(1).split(':')[0],match.group(2)

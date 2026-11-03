@@ -17,6 +17,7 @@ const spec = {
 };
 writeFileSync(resolve(root, 'src/data/spec.json'), JSON.stringify(spec));
 const saasScreens = JSON.parse(readFileSync(resolve(root, 'src/data/saas-screens.json'), 'utf8'));
-const routes = [...new Set([...spec.screens, ...saasScreens].flatMap(s => s.routes).filter(r => r.startsWith('/')).map(r => r.split('?')[0]))];
+const runtimeRoutes = ['/demo', '/registro', '/verificar', '/restablecer', '/saas/cuenta', '/saas/monitor', '/saas/soporte', '/saas/trazabilidad', '/app/monitor', '/app/soporte', '/app/trazabilidad', '/portal/monitor', '/portal/soporte', '/portal/trazabilidad', '/operacion/soporte', '/operacion/trazabilidad', '/operacion/monitor'];
+const routes = [...new Set([...spec.screens, ...saasScreens].flatMap(s => s.routes).filter(r => r.startsWith('/')).map(r => r.split('?')[0]).concat(runtimeRoutes))];
 writeFileSync(resolve(root, 'src/data/routes.json'), JSON.stringify(routes));
 console.log(`Spec: ${spec.screens.length} pantallas, ${spec.actions.length} acciones, ${spec.specialties.length} perfiles, ${routes.length} rutas`);

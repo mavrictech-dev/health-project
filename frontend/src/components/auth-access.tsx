@@ -7,7 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Logo } from './shell';
 import { useAuth, homeFor } from './auth-session';
-import { api } from '@/lib/api';
+import { api, errorMessage, isAbort } from '@/lib/api';
+import { useVisualPreferences } from './providers';
 import { SupportSheet } from './runtime-support';
 import { useDemo } from '@/store/demo';
 import { isMockMode } from '@/lib/app-mode';
@@ -22,9 +23,9 @@ export function AuthAccess({ mode: forcedMode }: { mode?: string }) {
   const [email, setEmail] = useState(isMockMode ? 'revision@example.test' : ''), [password, setPassword] = useState(''), [confirm, setConfirm] = useState(''), [name, setName] = useState(''), [slug, setSlug] = useState(''), [organizationName, setOrganizationName] = useState('');
   const [show, setShow] = useState(false), [busy, setBusy] = useState(false), [error, setError] = useState(''), [message, setMessage] = useState(''), [support, setSupport] = useState(false), [token, setToken] = useState(''), [terms, setTerms] = useState(false);
   const [kind, setKind] = useState('DOCTOR'), [domain, setDomain] = useState('HUMAN'), [plans, setPlans] = useState<Plan[]>([]), [specialties, setSpecialties] = useState<Specialty[]>([]), [planId, setPlan] = useState(''), [specialtyCode, setSpecialty] = useState('');
-  const theme = useDemo(s => s.theme), setTheme = useDemo(s => s.setTheme);
+  const {theme,setTheme} = useVisualPreferences();
   useEffect(() => { const params = new URLSearchParams(window.location.hash.slice(1)); setToken(params.get('token') || ''); if (window.location.hash) window.history.replaceState(null, '', window.location.pathname); }, []);
-  useEffect(() => { if (mode === 'register' && auth.host?.platform) void api<{ plans: Plan[]; specialties: Specialty[] }>('/public/registration').then(data => { setPlans(data.plans); setSpecialties(data.specialties); }).catch(e => setError(e.message)); }, [mode, auth.host?.platform]);
+  useEffect(() => { const controller=new AbortController(); if (mode === 'register' && auth.host?.platform) void api<{ plans: Plan[]; specialties: Specialty[] }>('/public/registration',{signal:controller.signal}).then(data => { if(!controller.signal.aborted){setPlans(data.plans);setSpecialties(data.specialties);} }).catch(e => {if(!isAbort(e)&&!controller.signal.aborted)setError(errorMessage(e));}); return()=>controller.abort(); }, [mode, auth.host?.platform]);
   const compatible = plans.filter(p => p.kinds.includes(kind) && p.domains.includes(domain));
   const catalog = specialties.filter(s => s.domain === domain && (kind !== 'DENTAL' || s.dental));
   const selectedPlan = compatible.some(p => p.id === planId) ? planId : compatible[0]?.id || '';
@@ -41,9 +42,9 @@ export function AuthAccess({ mode: forcedMode }: { mode?: string }) {
       } else if (mode === 'register') { const result = await api<{ message: string }>('/auth/register', { method: 'POST', body: { name, email, password, kind, domain, organizationName, slug, planId: selectedPlan || null, specialtyCode: selectedSpecialty || null, acceptTerms: terms } }); setMessage(result.message); setPassword(''); setConfirm(''); }
       else if (mode === 'recover') setMessage((await api<{ message: string }>('/auth/recovery/request', { method: 'POST', body: { email } })).message);
       else if (mode === 'verify' || mode === 'reset') { const result = await api<{ message: string }>(mode === 'verify' ? '/auth/verify/complete' : '/auth/recovery/complete', { method: 'POST', body: { token, ...(mode === 'reset' ? { password } : {}) } }); setMessage(result.message); setPassword(''); setConfirm(''); setToken(''); }
-    } catch (e) { setError(e instanceof Error ? e.message : 'No se pudo completar.'); } finally { setBusy(false); }
+    } catch (e) { setError(errorMessage(e)); } finally { setBusy(false); }
   }
-  async function resend() { setBusy(true); setError(''); try { setMessage((await api<{ message: string }>('/auth/verify/request', { method: 'POST', body: { email } })).message); } catch (e) { setError((e as Error).message); } finally { setBusy(false); } }
+  async function resend() { setBusy(true); setError(''); try { setMessage((await api<{ message: string }>('/auth/verify/request', { method: 'POST', body: { email } })).message); } catch (e) { setError(errorMessage(e)); } finally { setBusy(false); } }
   function openWorkspace() {
     if (isMockMode) {
       const store = useDemo.getState(), tenant = getSaas(store.data).tenants.find(tenant => tenant.slug === slug), organization = store.data.organizations.find(org => org.id === tenant?.id);

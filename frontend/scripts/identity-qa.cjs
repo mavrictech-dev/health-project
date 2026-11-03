@@ -2,10 +2,11 @@ const {chromium}=require('playwright');
 const fs=require('node:fs');
 const path=require('node:path');
 const crypto=require('node:crypto');
-const config=Object.fromEntries(fs.readFileSync(path.resolve('..','.env'),'utf8').replace(/^\uFEFF/,'').split(/\r?\n/).filter(l=>l.includes('=')&&!l.startsWith('#')).map(l=>[l.slice(0,l.indexOf('=')),l.slice(l.indexOf('=')+1)]));
-const base='http://health.localhost:8080';
+const config=Object.fromEntries(fs.readFileSync(process.env.HEALTH_ENV_FILE || path.resolve('..','.env'),'utf8').replace(/^\uFEFF/,'').split(/\r?\n/).filter(l=>l.includes('=')&&!l.startsWith('#')).map(l=>[l.slice(0,l.indexOf('=')),l.slice(l.indexOf('=')+1)]));
+const base=(process.env.HEALTH_TEST_URL || 'http://health.localhost:8080').replace(/\/$/,'');
+const mailBase=(process.env.HEALTH_MAILPIT_URL || 'http://127.0.0.1:8025').replace(/\/$/,'');
 const results=[];const errors=[];
-async function mail(email,segment){for(let i=0;i<30;i++){const data=await(await fetch('http://127.0.0.1:8025/api/v1/messages')).json();for(const item of data.messages){if(!item.To?.some(p=>p.Address===email))continue;const detail=await(await fetch('http://127.0.0.1:8025/api/v1/message/'+item.ID)).json();const link=detail.Text?.match(/https?:\/\/[^\s]+/g)?.find(s=>s.includes(segment));if(link)return link;}await new Promise(r=>setTimeout(r,500));}throw Error('Expected local mail was not delivered');}
+async function mail(email,segment){for(let i=0;i<30;i++){const data=await(await fetch(mailBase+'/api/v1/messages')).json();for(const item of data.messages){if(!item.To?.some(p=>p.Address===email))continue;const detail=await(await fetch(mailBase+'/api/v1/message/'+item.ID)).json();const link=detail.Text?.match(/https?:\/\/[^\s]+/g)?.find(s=>s.includes(segment));if(link)return link;}await new Promise(r=>setTimeout(r,500));}throw Error('Expected local mail was not delivered');}
 (async()=>{
   const browser=await chromium.launch({channel:'msedge',headless:true,args:['--host-resolver-rules=MAP *.health.localhost 127.0.0.1,MAP health.localhost 127.0.0.1']});
   const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});const page=await context.newPage();page.setDefaultTimeout(30000);page.on('pageerror',e=>errors.push(e.message));
@@ -25,8 +26,32 @@ async function mail(email,segment){for(let i=0;i<30;i++){const data=await(await 
     const downloadPromise=page.waitForEvent('download');await page.getByRole('button',{name:'Exportar página'}).click();const download=await downloadPromise;await download.saveAs('test-results/identity-trace-export.csv');results.push('trace filtering, detail and CSV export');
     await page.locator('.runtime-nav').getByRole('link',{name:'Estado de la aplicación',exact:true}).click();await page.getByRole('heading',{name:'Servicios operativos',exact:true}).waitFor();await page.screenshot({path:'test-results/identity-monitor-light.png',fullPage:true});
     await page.getByRole('button',{name:'Tema negro',exact:true}).click();await page.screenshot({path:'test-results/identity-monitor-dark.png',fullPage:true});await page.getByRole('button',{name:'Tema navy',exact:true}).click();await page.screenshot({path:'test-results/identity-monitor-navy.png',fullPage:true});results.push('live monitor, white/black/navy');
-    await page.getByRole('button',{name:'Cambiar estado',exact:true}).click();await page.getByLabel('Estado operativo').selectOption('READ_ONLY');await page.getByLabel('Motivo o mensaje').fill('Comprobación UI temporal');await page.getByRole('button',{name:'Confirmar cambio de estado',exact:true}).click();await page.getByRole('heading',{name:'Aplicación en solo lectura',exact:true}).waitFor();
-    await page.getByRole('button',{name:'Cambiar estado',exact:true}).click();await page.getByLabel('Estado operativo').selectOption('OPEN');await page.getByLabel('Motivo o mensaje').fill('Todos los servicios disponibles');await page.getByRole('button',{name:'Confirmar cambio de estado',exact:true}).click();await page.getByRole('heading',{name:'Servicios operativos',exact:true}).waitFor();results.push('application state transitions');
+    let modeFailure;
+    try {
+      await page.getByRole('button',{name:'Cambiar estado',exact:true}).click();await page.getByLabel('Estado operativo').selectOption('READ_ONLY');await page.getByLabel('Motivo o mensaje').fill('Comprobación UI temporal');await page.getByRole('button',{name:'Confirmar cambio de estado',exact:true}).click();await page.getByRole('heading',{name:'Aplicación en solo lectura',exact:true}).waitFor();
+      await page.getByRole('button',{name:'Cambiar estado',exact:true}).click();await page.getByLabel('Estado operativo').selectOption('OPEN');await page.getByLabel('Motivo o mensaje').fill('Todos los servicios disponibles');await page.getByRole('button',{name:'Confirmar cambio de estado',exact:true}).click();await page.getByRole('heading',{name:'Servicios operativos',exact:true}).waitFor();results.push('application state transitions');
+    } catch(error) { modeFailure=error; throw error; }
+    finally {
+      try {
+        // Browser fetch keeps host-only cookies AND Chromium's local DNS mapping.
+        await page.evaluate(async expectedOrigin => {
+          if(location.origin!==expectedOrigin)throw Error('Refusing OPEN restoration outside the selected origin');
+          const sessionResponse=await fetch('/api/auth/browser/session',{credentials:'same-origin'});
+          if(!sessionResponse.ok)throw Error('Could not obtain the administrator session for OPEN restoration');
+          const session=await sessionResponse.json();
+          const stateResponse=await fetch('/api/public/status',{credentials:'same-origin'});
+          if(!stateResponse.ok)throw Error('Could not read application mode for OPEN restoration');
+          const state=await stateResponse.json();
+          if(state.mode!=='OPEN') {
+            const restored=await fetch('/api/monitor/mode',{method:'PUT',credentials:'same-origin',headers:{'Content-Type':'application/json','X-CSRF-Token':session.csrfToken},body:JSON.stringify({expectedRevision:state.revision,mode:'OPEN',message:'Todos los servicios disponibles'})});
+            if(!restored.ok)throw Error('OPEN restoration failed; inspect the selected QA stack');
+          }
+        },new URL(base).origin);
+      } catch(error) {
+        if(modeFailure)console.error('OPEN restoration also failed; original UI error preserved.');
+        else throw error;
+      }
+    }
     await page.locator('.runtime-nav').getByRole('link',{name:'Mi cuenta y sesiones',exact:true}).click();await page.getByRole('heading',{name:'Sesiones de tu identidad'}).waitFor();await page.getByText('Esta sesión',{exact:true}).waitFor();await page.getByRole('button',{name:'Cerrar sesión',exact:true}).click();await page.getByRole('heading',{name:'Bienvenido de nuevo',exact:true}).waitFor();results.push('sessions and real logout');
     const run=crypto.randomBytes(4).toString('hex'),email='ui-'+run+'@example.test',password='Health-UI-'+crypto.randomBytes(10).toString('hex');
     await page.goto(base+'/registro/');await page.getByLabel('Tu nombre',{exact:true}).fill('Profesional UI');await page.getByLabel('Nombre del espacio',{exact:true}).fill('Consulta UI '+run);await page.getByLabel('Tu subdominio',{exact:true}).fill('ui-'+run);await page.getByLabel('Correo electrónico',{exact:true}).fill(email);await page.getByLabel('Contraseña',{exact:true}).fill(password);await page.getByLabel('Confirma la contraseña',{exact:true}).fill(password);await page.locator('.auth-consent input').check();await page.getByRole('button',{name:'Crear cuenta',exact:true}).click();await page.getByRole('status').filter({hasText:'Si la solicitud'}).waitFor();

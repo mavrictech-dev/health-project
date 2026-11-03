@@ -14,9 +14,10 @@ import subprocess
 import time
 import urllib.error
 import urllib.request
+from qa_config import load_config, compose_command
 
 ROOT = Path(__file__).resolve().parents[2]
-CONFIG = dict(line.split("=", 1) for line in (ROOT / ".env").read_text(encoding="utf-8-sig").splitlines() if "=" in line and not line.startswith("#"))
+CONFIG = load_config(ROOT)
 BASE = CONFIG.get("HEALTH_BASE_DOMAIN", "health.localhost")
 URL = os.getenv("HEALTH_TEST_URL", "http://127.0.0.1:8080")
 RUN = secrets.token_hex(5)
@@ -283,7 +284,7 @@ def main():
     race(lambda i: api("PUT", "/api/tenant/members", {"user": user("quota-pro-" + str(i), "HUMAN"), "roles": ["PRO"], "status": "INVITED", "branches": [quota_branch], "specialties": [human]}, quota_host, quota_admin, expected=None), "concurrent invitations cannot exceed professional quota")
     tenants.extend([(independent, None, None, None, None), (quota_tenant, None, None, None, None)])
 
-    cmd = ["docker", "compose", "exec", "-T", "mysql", "sh", "-c", 'MYSQL_PWD="$MYSQL_PASSWORD" mysql -uhealth_app health_project']
+    cmd = compose_command() + ["exec", "-T", "mysql", "sh", "-c", 'MYSQL_PWD="$MYSQL_PASSWORD" mysql -uhealth_app health_project']
     result = subprocess.run(cmd, input="START TRANSACTION; INSERT INTO users(id,name,email,password_hash) VALUES(UUID(),'Unauthorized','blocked@example.test','x'); ROLLBACK;", cwd=ROOT, capture_output=True, text=True, timeout=30)
     check(result.returncode != 0 and "INSERT command denied" in result.stderr, "application DB user cannot write tables directly")
     summary = {"run": RUN, "passed": len(REPORT), "timestamp": dt.datetime.now(dt.timezone.utc).isoformat(), "tenants": [x[0]["id"] for x in tenants], "checks": REPORT}

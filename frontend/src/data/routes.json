@@ -76,5 +76,8 @@
   "/app/soporte",
   "/portal/trazabilidad",
   "/portal/monitor",
-  "/portal/soporte"
+  "/portal/soporte",
+  "/operacion/soporte",
+  "/operacion/trazabilidad",
+  "/operacion/monitor"
 ]
