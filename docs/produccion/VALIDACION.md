@@ -432,3 +432,18 @@ ajenas intactas. Unit fixtures comparten executor/managerdobles con servicios
 y stores reales; no prueba datasourcecomun o permisos en conexion real.
 Sin DB/SMTP/HTTP conectado/navegador ni nuevas capturas. No nueva prueba de
 frontend sin cambios; escenarios de carrera/durabilidad siguen pendientes.
+
+
+### A17 -352 pruebas PASS,no aceptada por incoherencia de fixture
+
+python -B tmp/prepare-sqlserver-a17-review.py:5SHA/111bases,snapshot
+tmp/sqlserver-a17-review/backend. Dentro .\mvnw.cmd -B -ntp verify JDK21,
+exit0,BUILD SUCCESS26.307s,352tests/0failures/0errors/0skipped,jarPASS,
+final2026-11-04T18:36:26-05:00.16suites,reportsXML/log conservados.
+
+Resultado es unitario/modelado y tiene limite adicional R-A17-DOCTOR-QUOTA:
+positivosDOCTOR usan oferta4profesionales contraria a regla1cupoV4. No presentarlo
+como validacion de esos escenarios. Root111bases y5SHA recibidos intactos,
+no copiados. tmp/sqlserver-a17-review-result.json registra devolucion.
+Sin SQL/JDBC/HTTP/SMTP real ni QAvisual nueva. R1 debe corregir solo test y
+repetir verify; ninguna prueba frontend/motor repetida sin cambio pertinente.

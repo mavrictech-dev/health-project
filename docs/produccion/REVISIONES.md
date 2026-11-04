@@ -694,3 +694,25 @@ register nuevos y prefijos de las tres suites:331casos previos intactos.
 111bases comprobadas/106fueraownership intactas,5archivos existentes integrados.
 Acceptance tmp/sqlserver-a16-acceptance.json. Sin defectos abiertos en alcance
 inspeccionado; sin nuevaQAvisual ni SQLServer/JDBC/HTTP/SMTP real.
+
+
+## SQL-01.A17 - DEVUELTA por R-A17-DOCTOR-QUOTA
+
+Informe msg_df099376d7f5 y done msg_95914bd2ae33 revisados.5SHA y snapshot
+independiente352/352+jarPASS26.307s;111bases supervisor sin cambios. Revision
+de servicio/store/SQL y suites: contexto plataforma preservado,11SP,JSON
+servidor/resultadovalidado,ISSUEregistro explicito yMANDATORY presentes.
+
+Defecto QA reproducido por lectura de fixture: REGISTRATION_PLAN devuelve
+includedProfessionals4 en todos los PlatformFlow. Casos positivos DOCTORHUMAN/
+ANIMAL y falloCommitDOCTOR aceptanJSONquota4; V4 plan_save153 y resolve173-176
+exigen1 paraDOCTOR. Un double que acepta esa oferta no valida escenario posible
+con contratos aprobados. Es defecto de evidencia,no prueba de bug de producto
+ni razon para alterarV4 o limitar quotas silenciosamente en Java.
+
+Correccion acotada R1: solo AccountLifecycleServiceSqlServerTest,cuotasfixture
+parametrizadas,positivosDOCTOR1,CLINIC/VETERINARY4. Regresion ofertaCLINIC4
+seleccionada paraDOCTOR con51000inyectado:400seguro,quota4 sinreescribir,rollback
+y sinISSUE/202. Conservar otros4SHA y todasassertions anteriores salvo esas
+cuotas de fixture; volver verify. Spec tmp/sql-01-a17-r1-spec.md.
+A17 no aceptada/integrada; evidencia inicial conservada en review-result.json.

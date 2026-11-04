@@ -432,3 +432,23 @@ A16 aceptada tras msg_f167318ad12c/msg_16d4592647e8,5SHA,snapshot343/343+jar.
 5existentes integrados sin wiring,331tests anteriores intactos. A17 preparada
 tmp/sql-01-a17-spec.md,D-25,misma ownership5archivos. Cuentas/sesion/Sol medium
 y cuota verificados; seguir por follow-up con nuevos IDs en mismo terminal.
+
+
+A17 delegada como Task task_9d9de6607b4a / Dispatch ctx_f6c8f525845a en mismo
+Run/terminal/cuenta/sesion/Sol medium,con dependencia explicita de A16settled.
+Se uso worker-start --spec-file tmp/sql-01-a17-spec.md --deps <JSON A16>
+--terminal/--worktree exactos/--keep-open. Un intento previo de send fue
+rechazado por parsing de comillas nativas de PowerShell (sin nueva Task,
+inventario comprobado); se conservo spec original y se envio por archivo.
+Recibo outcome_unknown/turn_start_unobserved no se repite ni abandona. Lectura
+de terminal confirma Working39s; livenesslive y etapa start_unknown son
+observacion incompleta del arranque,no prueba de salida. Esperar avisoOrca.
+A16 subida como6446c9936bc87115a2df702e28b55e9013effbe8 a rama de trabajo;
+refremota comprobada,main intacta. Cinco archivos A17 reservados al worker.
+
+
+A17 informe/done recibidos (msg_df099376d7f5/msg_95914bd2ae33),5SHA y snapshot
+352/352+jar,pero DEVUELTA por R-A17-DOCTOR-QUOTA. R1 unicamente test servicio
+(tmp/sql-01-a17-r1-spec.md); otros4SHA congelados. Se delegara mediante
+worker-start --spec-file con dependencia de TaskA17settled,en misma terminal
+retenida,cuenta/sesion/Sol medium. No iniciar A18 ni integrar A17 antes de R1.

@@ -312,3 +312,12 @@ y atomicidad en SQLServer real no acreditados. Sin acceso clinico inventado
 ni nueva sesion,cookie o correo enviado. Plataforma sigue guardada hastaA17.
 Configuracion activa permanece legado; otros consumidores/JDBC/Flyway/HTTP
 reales y wiring segregado pendientes. No nueva evidencia visual.
+
+
+## A17 en correccion de QA - 2026-11-04
+
+352/352 pruebas independientes y jar pasan,pero revision encontro fixture
+DOCTORcon4profesionales cuando contratoSP exige1. Se devuelve test para
+correccion; no se integra ni sube codigoA17. A16/6446c99 sigue ultimo corte
+aceptado de producto. R1 unicamente test de servicio,producto y SQL congelados.
+Validacion de motor/conexion/durabilidad y consumidores restantes pendientes.
