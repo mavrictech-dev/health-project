@@ -302,3 +302,13 @@ independientes y5SHA. Catalogo y legado preservados; outbox/token solo validados
 con dobles, sin correo enviado ni SQLServer/JDBC/HTTP conectado. RegisterSQL
 aun guardado. Siguiente A16: alta portal de tenant existente; plataforma se
 reserva paraA17, sin activacion de configuracion ni afirmacion100%SP.
+
+
+## A16 aceptada - 2026-11-04
+
+Alta publica del portal de tenant integrada tras343/343 pruebas independientes
+y5SHA. Identidad pendiente,membresia y outbox agrupados en TX modelada; roles
+y atomicidad en SQLServer real no acreditados. Sin acceso clinico inventado
+ni nueva sesion,cookie o correo enviado. Plataforma sigue guardada hastaA17.
+Configuracion activa permanece legado; otros consumidores/JDBC/Flyway/HTTP
+reales y wiring segregado pendientes. No nueva evidencia visual.

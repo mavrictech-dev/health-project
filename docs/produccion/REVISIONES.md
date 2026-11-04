@@ -673,3 +673,24 @@ Acceptance tmp/sqlserver-a15-acceptance.json. Pruebas con dobles/MockMvc/TX
 modeladas; no SMTP/SQLServer/JDBC/Flyway/HTTP conectado,anonimato de red,
 uso unico/revocacion/rollbackdurable ni concurrencia real. Sin nueva QAvisual
 ni activacion de backend; no aprobacion integral IAM por este corte.
+
+
+## SQL-01.A16 - ACEPTADA con343 pruebas independientes
+
+Informe msg_f167318ad12c y done msg_16d4592647e8 revisados. Supervisor leyo
+diffs servicio/store y tres suites;5SHA contra snapshot independiente343/343
+y jarPASS25.748s. Unidad REQUIRED llama EMAIL_EXISTS,USER_CREATE por entrada
+MANDATORY A11,PENDING,PORTAL_REGISTER eISSUE. Pending/portal MANDATORY propios;
+UserInput domain/credentialNULL,contextoanonimo y hostexacto,duplicado sin
+crear/encoder/outbox. No Actor/cookie/sesion ni paciente/vinculo fabricado.
+
+Pruebas con IdentityService y stores reales,executor/managerdobles,fallos de
+cada etapa y commit,rollback exterior y MVCrequest real de fixture. No prueban
+rolesPAC/RES,tenant,atomicidad durable o permisos de motor. Guardas plataforma
+500 aun conservadas paraA17. Store suma3SP (9totales),sin cambios deV1-V8.
+
+Accept script compara cuerpo de servicio completo retirando solo helper/selector
+register nuevos y prefijos de las tres suites:331casos previos intactos.
+111bases comprobadas/106fueraownership intactas,5archivos existentes integrados.
+Acceptance tmp/sqlserver-a16-acceptance.json. Sin defectos abiertos en alcance
+inspeccionado; sin nuevaQAvisual ni SQLServer/JDBC/HTTP/SMTP real.

@@ -85,4 +85,52 @@ class AccountLifecycleServiceSqlServerTest {
   verify(f.executor,times(5)).execute(any(),any(),any(Object[].class));
  }
 
+ static RegisterHolder portalInput(){return new RegisterHolder();}
+ static class RegisterHolder {
+  final AccountLifecycleService.Register input=new AccountLifecycleService.Register(" Portal Synthetic "," QA@EXAMPLE.TEST ","SyntheticPassword123!","DOCTOR","ANIMAL","Ignored","ignored","ignored","ignored",true);
+ }
+ static class PortalFlow extends Flow {
+  final IdentityService realIdentity=new IdentityService(new com.mavric.health.persistence.sqlserver.SqlServerIdentityStore(executor,manager),mock(Access.class),encoder,new Settings("health.localhost","https://health.localhost",8,null));
+  final AccountLifecycleService portal=new AccountLifecycleService(gateway,realIdentity,new Settings("health.localhost","https://health.localhost",8,null),encoder);
+  boolean duplicate;com.mavric.health.persistence.sqlserver.SqlServerProcedure failure;String created;
+  PortalFlow(){reset(executor);when(encoder.encode("SyntheticPassword123!")).thenReturn("encoded");
+   when(executor.execute(any(),any(),any(Object[].class))).thenAnswer(inv->{
+    assertTrue(org.springframework.transaction.support.TransactionSynchronizationManager.isActualTransactionActive());
+    var sp=inv.<com.mavric.health.persistence.sqlserver.SqlServerProcedure>getArgument(0);var context=inv.<com.mavric.health.persistence.sqlserver.SqlServerContext>getArgument(1);
+    assertEquals(com.mavric.health.persistence.sqlserver.SqlServerContext.Scope.IDENTITY,context.scope());assertNull(context.actorId());assertNull(context.tokenHash());assertEquals(TENANT.id(),context.tenantId());
+    calls.add(sp);var values=Arrays.asList(((Object[])inv.getRawArguments()[2]).clone());args.add(values);
+    if(sp==failure)throw new ApiException(409,"CONFLICT","Safe");
+    if(sp==com.mavric.health.persistence.sqlserver.SqlServerProcedure.USER_CREATE)created=(String)values.getFirst();
+    var rows=duplicate?List.<Map<String,Object>>of(Map.of("id",USER)):List.<Map<String,Object>>of();
+    return new com.mavric.health.persistence.sqlserver.SqlServerExecutor.Result(sp==com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_EMAIL_EXISTS?List.of(rows):List.of(),List.of(0));
+   });
+  }
+ }
+ @Test void tenantPortalRegistrationUsesRealIdentityMandatoryAndSingleUnit(){
+  PortalFlow f=new PortalFlow();var r=request();r.setAttribute("health.tenant",TENANT);
+  org.springframework.security.core.context.SecurityContextHolder.getContext().setAuthentication(new org.springframework.security.authentication.AnonymousAuthenticationToken("synthetic","anonymousUser",List.of(new org.springframework.security.core.authority.SimpleGrantedAuthority("ROLE_ANONYMOUS"))));
+  f.portal.register(portalInput().input,TENANT);
+  assertEquals(List.of(com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_EMAIL_EXISTS,com.mavric.health.persistence.sqlserver.SqlServerProcedure.USER_CREATE,com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_PENDING,com.mavric.health.persistence.sqlserver.SqlServerProcedure.PORTAL_REGISTER,com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_ISSUE),f.calls);
+  assertEquals(List.of("qa@example.test"),f.args.getFirst());assertEquals(Arrays.asList(f.created,"Portal Synthetic","qa@example.test","encoded",null,null),f.args.get(1));assertEquals(List.of(f.created),f.args.get(2));assertEquals(List.of(f.created),f.args.get(3));assertEquals(f.created,f.args.getLast().get(1));assertNull(f.args.getLast().get(7));assertTrue(((String)f.args.getLast().get(6)).contains("https://clinic.health.localhost/verificar/#token="));
+  assertEquals(List.of("begin:0","commit"),f.manager.events);assertNull(r.getAttribute("health.actor"));assertSame(TENANT,r.getAttribute("health.tenant"));verifyNoInteractions(f.identities);
+ }
+ @Test void duplicateIncludingInactiveNeverCreatesOrEncodes(){PortalFlow f=new PortalFlow();f.duplicate=true;var r=request();r.setAttribute("health.tenant",TENANT);f.portal.register(portalInput().input,TENANT);assertEquals(List.of(com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_EMAIL_EXISTS),f.calls);verify(f.encoder,never()).encode(anyString());}
+ @Test void registrationRejectsInvalidInputsHostAndActorBeforeAnySp(){PortalFlow f=new PortalFlow();var r=request();r.setAttribute("health.tenant",TENANT);
+  assertEquals(400,assertThrows(ApiException.class,()->f.portal.register(null,TENANT)).status);
+  for(int mode=0;mode<6;mode++){var p=new AccountLifecycleService.Register(mode==0?null:mode==1?" ":"Synthetic",mode==2?null:mode==3?"x".repeat(255):"qa@example.test",mode==4?"short":"SyntheticPassword123!",null,null,null,null,null,null,mode!=5);assertEquals(400,assertThrows(ApiException.class,()->f.portal.register(p,TENANT)).status);}
+  r.setAttribute("health.actor","forged");assertEquals(403,assertThrows(ApiException.class,()->f.portal.register(portalInput().input,TENANT)).status);r.removeAttribute("health.actor");
+  var actor=new Actor(USER,"Synthetic","qa@example.test",TENANT.id(),List.of("ADM"),"a".repeat(64));org.springframework.security.core.context.SecurityContextHolder.getContext().setAuthentication(new org.springframework.security.authentication.UsernamePasswordAuthenticationToken(actor,null,List.of()));
+  assertEquals(403,assertThrows(ApiException.class,()->f.portal.register(portalInput().input,TENANT)).status);org.springframework.security.core.context.SecurityContextHolder.clearContext();
+  assertEquals(500,assertThrows(ApiException.class,()->f.portal.register(portalInput().input,null)).status);verifyNoInteractions(f.executor);verify(f.encoder,never()).encode(anyString());
+ }
+ @Test void everyRegistrationStageErrorAndCommitFailureNeverPublishesIdentity(){for(var stage:List.of(com.mavric.health.persistence.sqlserver.SqlServerProcedure.USER_CREATE,com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_PENDING,com.mavric.health.persistence.sqlserver.SqlServerProcedure.PORTAL_REGISTER,com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_ISSUE)){PortalFlow f=new PortalFlow();var r=request();r.setAttribute("health.tenant",TENANT);f.failure=stage;assertEquals(409,assertThrows(ApiException.class,()->f.portal.register(portalInput().input,TENANT)).status);assertEquals(stage,f.calls.getLast());assertEquals("rollback",f.manager.events.getLast());assertNull(r.getAttribute("health.actor"));}
+  PortalFlow f=new PortalFlow();var r=request();r.setAttribute("health.tenant",TENANT);f.manager.failCommit=true;assertEquals(500,assertThrows(ApiException.class,()->f.portal.register(portalInput().input,TENANT)).status);assertNull(r.getAttribute("health.actor"));
+ }
+ @Test void outerRequiredCanRollBackWholeRegistrationAndLegacyIdentityNeverFallsBack(){PortalFlow f=new PortalFlow();var r=request();r.setAttribute("health.tenant",TENANT);assertThrows(RuntimeException.class,()->f.manager.outer(()->{f.portal.register(portalInput().input,TENANT);assertFalse(f.manager.events.contains("commit"));throw new RuntimeException("synthetic cancellation");}));assertEquals("rollback",f.manager.events.getLast());
+  var legacyIdentity=new IdentityService(mock(Sql.class),mock(Access.class),mock(PasswordEncoder.class),new Settings("health.localhost","https://health.localhost",8,null),mock(AttemptRecorder.class));
+  var mixed=new AccountLifecycleService(f.gateway,legacyIdentity,new Settings("health.localhost","https://health.localhost",8,null),f.encoder);assertEquals(500,assertThrows(ApiException.class,()->mixed.register(portalInput().input,TENANT)).status);
+ }
+
+ @Test void animalTenantUsesSamePortalSpWithoutDomainFromFormAndHostMustMatch(){PortalFlow f=new PortalFlow();var r=request();var animal=new TenantRef(TENANT.id(),"Synthetic animal","clinic","VETERINARY","ANIMAL","ACTIVE",List.of());r.setAttribute("health.tenant",animal);assertEquals(403,assertThrows(ApiException.class,()->f.portal.register(portalInput().input,TENANT)).status);assertTrue(f.calls.isEmpty());f.portal.register(portalInput().input,animal);assertNull(f.args.get(1).get(4));assertNull(f.args.get(1).get(5));assertEquals(com.mavric.health.persistence.sqlserver.SqlServerProcedure.PORTAL_REGISTER,f.calls.get(3));}
+
 }

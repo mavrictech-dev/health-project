@@ -559,3 +559,27 @@ Error o carrera posterior revierte y preserva400/403/409/500, sin retry/exito fa
 ISSUE registration_tenantNULL,origen tenant validado,TTL86400 y fragmento A15;
 no manipular health.tenant/actor para aparentar otro contexto.
 Encargo tmp/sql-01-a16-spec.md; atomicidad/roles/concurrencia real aun sin probar.
+
+
+### D-25: registro publico de organizacion sin cambiar contexto de host
+
+A16 aceptada343/343. A17 completa registerSQL plataforma,misma ownership5archivos.
+Validacion hostanonimo,basicos y organizacion antes de EMAIL_EXISTS para no
+distinguir email existente con formulario incompleto. Portal/legado/catalogo/
+request/redeem/rate preservados; antiguas guardas500plataforma se actualizan
+conscientemente a validacion400/hostmismatch403 y alta202.
+
+Unidad REQUIRED:EMAIL_EXISTS ->REGISTRATION_PLAN ->createForRegistration A11 ->
+PENDING ->SAAS_TENANT_CREATE ->ISSUEVERIFY. Store suma2SP,11totales; createTenant
+y emisionRegistration MANDATORY. JSON9campos raiz con subscription5campos,
+cuotas incluidas obtenidas del SP,MONTHLY,America/Lima,Sede principal. Propietario
+recien creado,dominio soloDOCTOR; no actor privilegiado o cuotas del cliente.
+Respuesta publica del SP validada contra ids/slug/kind/domain/statusTRIAL.
+
+Host del request sigue plataformaNULL/ActorNULL todaTX. Usar metodo explicito
+ISSUE registration_tenant=tenantIdCREADO soloVERIFY,validado porSP V3; normal
+ISSUE A15/A16 conservaNULL. Enlace Settings.tenantUrl(created.slug),sin sustituir
+health.tenant/actor ni autenticar propietario. Sin camposprivilegiados HTTP.
+Errores/commit abortan sin202falso/retry; no prometer idempotencia o anonimato
+de red bajo carreras por pruebasoffline. Encargo tmp/sql-01-a17-spec.md.
+Sin DB/SMTP/config activa ni aprobacion clinica por crear perfiles.

@@ -14,11 +14,13 @@ import com.mavric.health.shared.ApiException;
  * REQUIRED groups validation and both reads, without promising a snapshot isolation level. */
 public final class SqlServerAccountLifecycleStore {
     private final SqlServerExecutor executor;
-    private final TransactionTemplate transactions;
+    private final TransactionTemplate transactions,registration;
     public SqlServerAccountLifecycleStore(SqlServerExecutor executor,PlatformTransactionManager manager) {
         this.executor=Objects.requireNonNull(executor);
         transactions=new TransactionTemplate(Objects.requireNonNull(manager));
         transactions.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+        registration=new TransactionTemplate(manager);
+        registration.setPropagationBehavior(TransactionDefinition.PROPAGATION_MANDATORY);
     }
     public Map<String,Object> options(HttpServletRequest request) {
         try {
@@ -40,6 +42,33 @@ public final class SqlServerAccountLifecycleStore {
     public <T> T required(Supplier<T> work) {
         try {return transactions.execute(status->work.get());}
         catch(RuntimeException failure) {throw SqlServerErrors.map(failure);}
+    }
+    private static SqlServerContext anonymous(HttpServletRequest request) {
+        if(request==null) throw SqlServerErrors.database();
+        var authentication=org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication();
+        if(request.getAttribute("health.actor")!=null || authentication!=null && authentication.getPrincipal() instanceof com.mavric.health.identity.Actor) throw ApiException.forbidden();
+        return identity(request);
+    }
+    public boolean emailExists(HttpServletRequest request,String email) {
+        return required(()-> {
+            var context=anonymous(request);
+            if(email==null || email.isBlank() || email.length()>254) throw SqlServerErrors.invalid();
+            var values=rows(executor.execute(SqlServerProcedure.IDENTITY_EMAIL_EXISTS,context,email));
+            if(values.size()>1) throw SqlServerErrors.database();
+            if(values.isEmpty()) return false;
+            canonicalResult(text(values.getFirst(),"id"));return true;
+        });
+    }
+    public void pending(HttpServletRequest request,String userId) {registrationWrite(request,userId,false);}
+    public void portalRegister(HttpServletRequest request,String userId) {registrationWrite(request,userId,true);}
+    private void registrationWrite(HttpServletRequest request,String userId,boolean portal) {
+        try {
+            registration.execute(status-> {
+                var context=anonymous(request);Checks.id(userId);
+                if(portal && context.tenantId()==null) throw ApiException.forbidden();
+                noRows(executor.execute(portal?SqlServerProcedure.PORTAL_REGISTER:SqlServerProcedure.IDENTITY_PENDING,context,userId));return null;
+            });
+        } catch(RuntimeException failure) {throw SqlServerErrors.map(failure);}
     }
     private static SqlServerContext identity(HttpServletRequest request) {
         if(request==null) throw SqlServerErrors.database();

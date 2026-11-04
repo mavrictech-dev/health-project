@@ -29,4 +29,19 @@ class AccountLifecycleControllerSqlServerTest {
   var response=mvc(f).perform(post("/api/auth/recovery/complete").contentType("application/json").content("{\"token\":\""+AccountLifecycleServiceSqlServerTest.TOKEN+"\",\"password\":\"SyntheticPassword123!\"}")).andExpect(status().isOk()).andExpect(jsonPath("$.message").value("Contrase\u00f1a actualizada. Inicia sesi\u00f3n con tu nueva contrase\u00f1a.")).andReturn().getResponse();assertNull(response.getHeader("Set-Cookie"));assertFalse(response.getContentAsString().contains(AccountLifecycleServiceSqlServerTest.TOKEN));
  }
 
+ MockMvc portalMvc(AccountLifecycleServiceSqlServerTest.PortalFlow f){return MockMvcBuilders.standaloneSetup(new AccountLifecycleController(f.portal)).setControllerAdvice(new Errors.Advice(new Errors(new ObjectMapper()))).addFilters((jakarta.servlet.Filter)(req,res,chain)->{var request=(jakarta.servlet.http.HttpServletRequest)req;request.setAttribute("health.tenant",AccountLifecycleServiceSqlServerTest.TENANT);TraceContext.REQUEST.set(request);try{chain.doFilter(req,res);}finally{TraceContext.REQUEST.remove();}}).build();}
+ static final String REGISTER="{\"name\":\"Synthetic\",\"email\":\"qa@example.test\",\"password\":\"SyntheticPassword123!\",\"acceptTerms\":true}";
+ @Test void tenantRegisterAndDuplicateReturnSame202WithoutSecretsOrCookie() throws Exception {
+  String expected=null;for(boolean duplicate:new boolean[]{false,true}){var f=new AccountLifecycleServiceSqlServerTest.PortalFlow();f.duplicate=duplicate;var response=portalMvc(f).perform(post("/api/auth/register").contentType("application/json").content(REGISTER)).andExpect(status().isAccepted()).andReturn().getResponse();String body=response.getContentAsString();if(expected==null)expected=body;else assertEquals(expected,body);assertFalse(body.contains("token"));assertFalse(body.contains("qa@example.test"));assertNull(response.getHeader("Set-Cookie"));assertNull(TraceContext.REQUEST.get());}
+ }
+ @Test void tenantRegistrationStageErrorIs409NotAcceptedAndBadTerms400() throws Exception {
+  var f=new AccountLifecycleServiceSqlServerTest.PortalFlow();f.failure=com.mavric.health.persistence.sqlserver.SqlServerProcedure.PORTAL_REGISTER;portalMvc(f).perform(post("/api/auth/register").contentType("application/json").content(REGISTER)).andExpect(status().isConflict()).andExpect(jsonPath("$.title").value("CONFLICT"));
+  f=new AccountLifecycleServiceSqlServerTest.PortalFlow();portalMvc(f).perform(post("/api/auth/register").contentType("application/json").content(REGISTER.replace("true","false"))).andExpect(status().isBadRequest());assertTrue(f.calls.isEmpty());
+ }
+
+ @Test void tenantRegisterActor403AndCommitFailure500NeverReturnCookie() throws Exception {
+  var f=new AccountLifecycleServiceSqlServerTest.PortalFlow();portalMvc(f).perform(post("/api/auth/register").requestAttr("health.actor","forged").contentType("application/json").content(REGISTER)).andExpect(status().isForbidden()).andExpect(header().doesNotExist("Set-Cookie"));assertTrue(f.calls.isEmpty());
+  f=new AccountLifecycleServiceSqlServerTest.PortalFlow();f.manager.failCommit=true;portalMvc(f).perform(post("/api/auth/register").contentType("application/json").content(REGISTER)).andExpect(status().isInternalServerError()).andExpect(jsonPath("$.title").value("DATABASE_ERROR")).andExpect(header().doesNotExist("Set-Cookie"));
+ }
+
 }

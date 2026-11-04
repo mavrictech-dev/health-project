@@ -418,3 +418,17 @@ A15 aceptada tras msg_67322efac936/msg_6b5cd2c87b5a,5SHA,snapshot331/331+jar.
 5archivos integrados sin wiring. A16 preparada tmp/sql-01-a16-spec.md,D-24,
 misma ownership5archivos,alta portal por tenant; sigue por follow-up con IDs
 nuevos,mismo terminal/sesion/cuenta/Sol medium. Cuentas verificadas sin globales.
+
+
+A16 delegada por follow-up de ctx_7812fa307e3d: Task task_0b3bd7656d3b /
+Dispatch ctx_6dd8a9655613,misma terminal/sesion/cuenta/Sol medium. Inventario
+inicial starting/live; no duplicar si recibo consola ausente. Cinco archivos
+reservados al programador; revision supervisora tras entrega,sin aprobacion
+anticipada. A15 subida como de0dc2e9b96c105bbb2e5cbc03c1457a0eece433 a rama
+health/production-wave0,refremota comprobada;main intacta.
+
+
+A16 aceptada tras msg_f167318ad12c/msg_16d4592647e8,5SHA,snapshot343/343+jar.
+5existentes integrados sin wiring,331tests anteriores intactos. A17 preparada
+tmp/sql-01-a17-spec.md,D-25,misma ownership5archivos. Cuentas/sesion/Sol medium
+y cuota verificados; seguir por follow-up con nuevos IDs en mismo terminal.

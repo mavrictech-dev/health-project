@@ -107,4 +107,18 @@ class SqlServerAccountLifecycleStoreTest {
       writeResult();manager.failCommit=true;safe(()->store.redeem(request,HASH,"VERIFY",null));
     }
 
+    @Test void registrationEmailExistsAndMandatoryWritesUseExactContracts(){identityExecutor();results.add(result(List.of()));assertFalse(store.emailExists(request,"qa@example.test"));results.add(result(List.of(Map.of("id",ID))));assertTrue(store.emailExists(request,"qa@example.test"));
+      request.setAttribute("health.tenant",new TenantRef(ID,"Synthetic","clinic","CLINIC","HUMAN","ACTIVE",List.of()));writeResult();writeResult();store.required(()->{store.pending(request,ID);store.portalRegister(request,ID);return null;});
+      verify(executor).execute(eq(SqlServerProcedure.IDENTITY_PENDING),any(),eq(ID));verify(executor).execute(eq(SqlServerProcedure.PORTAL_REGISTER),any(),eq(ID));assertEquals("commit",manager.events.getLast());
+    }
+    @Test void mandatoryWithoutTransactionAndAuthenticatedRegistrationNeverReachExecutor(){identityExecutor();safe(()->store.pending(request,ID));safe(()->store.portalRegister(request,ID));request.setAttribute("health.actor","forged");assertEquals(403,assertThrows(ApiException.class,()->store.emailExists(request,"qa@example.test")).status);assertEquals(403,assertThrows(ApiException.class,()->store.required(()->{store.pending(request,ID);return null;})).status);verifyNoInteractions(executor);}
+    @Test void registrationMalformedResultsAndParametersRollBack(){identityExecutor();for(var row:List.<Map<String,Object>>of(Map.of(),Map.of("id",1),Map.of("id","bad"))){results.add(result(List.of(row)));safe(()->store.emailExists(request,"qa@example.test"));}
+      results.add(result(List.of(Map.of("id",ID),Map.of("id",ID))));safe(()->store.emailExists(request,"qa@example.test"));
+      results.add(new SqlServerExecutor.Result(List.of(),List.of()));safe(()->store.emailExists(request,"qa@example.test"));
+      results.add(result(List.of()));safe(()->store.required(()->{store.pending(request,ID);return null;}));
+      assertEquals(403,assertThrows(ApiException.class,()->store.required(()->{store.portalRegister(request,ID);return null;})).status);
+      for(String email:Arrays.asList(null," ","x".repeat(255)))assertEquals(400,assertThrows(ApiException.class,()->store.emailExists(request,email)).status);
+      assertEquals(400,assertThrows(ApiException.class,()->store.required(()->{store.pending(request,"bad");return null;})).status);assertEquals("rollback",manager.events.getLast());
+    }
+
 }

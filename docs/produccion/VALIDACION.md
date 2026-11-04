@@ -418,3 +418,17 @@ python -B tmp/accept-sqlserver-a15.py confirma hashes/bases,legado/rate y
 pruebas anteriores salvo guarda D-23 y cleanup de sincronizaciones solicitado.
 5archivos integrados;106bases ajenas intactas. Sin DB/app/puerto/SMTP ni nueva
 prueba visual; MockMvc no acredita integracion real o no enumeracion bajo carrera.
+
+
+### A16 -343 pruebas independientes, alta portal modelada
+
+python -B tmp/prepare-sqlserver-a16-review.py confirma5SHA/111bases y prepara
+snapshot tmp/sqlserver-a16-review/backend. Dentro, .\mvnw.cmd -B -ntp verify
+con JDK21:exit0,BUILD SUCCESS25.748s,343tests/0failures/0errors/0skipped,
+jar/repackagePASS,2026-11-04T18:23:20-05:00.12nuevas+331previas.
+Log verify-supervisor.log y XMLSurefire preservados. Acceptance script valida
+hashes/bases y preservacion de servicio/suites;5archivos integrados y106bases
+ajenas intactas. Unit fixtures comparten executor/managerdobles con servicios
+y stores reales; no prueba datasourcecomun o permisos en conexion real.
+Sin DB/SMTP/HTTP conectado/navegador ni nuevas capturas. No nueva prueba de
+frontend sin cambios; escenarios de carrera/durabilidad siguen pendientes.
