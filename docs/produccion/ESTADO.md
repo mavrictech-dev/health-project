@@ -321,3 +321,12 @@ DOCTORcon4profesionales cuando contratoSP exige1. Se devuelve test para
 correccion; no se integra ni sube codigoA17. A16/6446c99 sigue ultimo corte
 aceptado de producto. R1 unicamente test de servicio,producto y SQL congelados.
 Validacion de motor/conexion/durabilidad y consumidores restantes pendientes.
+
+
+## A17 aceptada tras corregir QA - 2026-11-04
+
+Hallazgo de cuotaDOCTOR cerrado conR1 y353/353 pruebas independientes. Alta
+plataforma y portal del ciclo de cuenta en caminoSQL explicito integrados,
+sin activar configuracion ni SMTP. No equivale a recorrido conectado o IAM
+integral validado. Otros consumidores y wiringsegregado siguen pendientes.
+A18 prepara trazasHTTP finales porSP; sin nueva evidencia visual.

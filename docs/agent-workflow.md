@@ -452,3 +452,19 @@ A17 informe/done recibidos (msg_df099376d7f5/msg_95914bd2ae33),5SHA y snapshot
 (tmp/sql-01-a17-r1-spec.md); otros4SHA congelados. Se delegara mediante
 worker-start --spec-file con dependencia de TaskA17settled,en misma terminal
 retenida,cuenta/sesion/Sol medium. No iniciar A18 ni integrar A17 antes de R1.
+
+
+A17.R1 delegada mediante worker-start --spec-file,dependencia A17settled:
+task_36e4178bdb2a / ctx_a3cb4930b7d5,mismo Run/terminal/cuenta/sesion/Sol medium.
+Recibo outcome_unknown/turn_start_unobserved: texto entregado,turno aun no
+observado. No reenviar ni abandonar por ese recibo; esperar avisoOrca. Ownership
+solo test de servicio; otros4SHA A17 congelados. A17 no integrada,352PASS
+iniciales conservados con limite de fixture; A16 ultimo codigo aceptado.
+Hallazgo/tablero subidos en1cc61ab a rama de trabajo,sin main ni despliegue.
+
+
+A17 aceptada trasR1(msg_5ec47062eca4/msg_28d2d264ae80),5SHA compuestos y
+snapshot353/353+jar. Rechazo352/fixture se conserva como historial,ahora resuelto.
+5archivos integrados sin wiring; A18 preparada tmp/sql-01-a18-spec.md,D-26,
+ownership4archivos de traza final. Seguir worker-start --spec-file con
+dependenciaTaskR1settled,mismo terminal/sesion/cuenta/Sol medium.

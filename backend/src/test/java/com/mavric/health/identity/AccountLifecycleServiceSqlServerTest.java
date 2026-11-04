@@ -121,7 +121,7 @@ class AccountLifecycleServiceSqlServerTest {
   r.setAttribute("health.actor","forged");assertEquals(403,assertThrows(ApiException.class,()->f.portal.register(portalInput().input,TENANT)).status);r.removeAttribute("health.actor");
   var actor=new Actor(USER,"Synthetic","qa@example.test",TENANT.id(),List.of("ADM"),"a".repeat(64));org.springframework.security.core.context.SecurityContextHolder.getContext().setAuthentication(new org.springframework.security.authentication.UsernamePasswordAuthenticationToken(actor,null,List.of()));
   assertEquals(403,assertThrows(ApiException.class,()->f.portal.register(portalInput().input,TENANT)).status);org.springframework.security.core.context.SecurityContextHolder.clearContext();
-  assertEquals(500,assertThrows(ApiException.class,()->f.portal.register(portalInput().input,null)).status);verifyNoInteractions(f.executor);verify(f.encoder,never()).encode(anyString());
+  assertEquals(403,assertThrows(ApiException.class,()->f.portal.register(portalInput().input,null)).status);verifyNoInteractions(f.executor);verify(f.encoder,never()).encode(anyString());
  }
  @Test void everyRegistrationStageErrorAndCommitFailureNeverPublishesIdentity(){for(var stage:List.of(com.mavric.health.persistence.sqlserver.SqlServerProcedure.USER_CREATE,com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_PENDING,com.mavric.health.persistence.sqlserver.SqlServerProcedure.PORTAL_REGISTER,com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_ISSUE)){PortalFlow f=new PortalFlow();var r=request();r.setAttribute("health.tenant",TENANT);f.failure=stage;assertEquals(409,assertThrows(ApiException.class,()->f.portal.register(portalInput().input,TENANT)).status);assertEquals(stage,f.calls.getLast());assertEquals("rollback",f.manager.events.getLast());assertNull(r.getAttribute("health.actor"));}
   PortalFlow f=new PortalFlow();var r=request();r.setAttribute("health.tenant",TENANT);f.manager.failCommit=true;assertEquals(500,assertThrows(ApiException.class,()->f.portal.register(portalInput().input,TENANT)).status);assertNull(r.getAttribute("health.actor"));
@@ -132,5 +132,53 @@ class AccountLifecycleServiceSqlServerTest {
  }
 
  @Test void animalTenantUsesSamePortalSpWithoutDomainFromFormAndHostMustMatch(){PortalFlow f=new PortalFlow();var r=request();var animal=new TenantRef(TENANT.id(),"Synthetic animal","clinic","VETERINARY","ANIMAL","ACTIVE",List.of());r.setAttribute("health.tenant",animal);assertEquals(403,assertThrows(ApiException.class,()->f.portal.register(portalInput().input,TENANT)).status);assertTrue(f.calls.isEmpty());f.portal.register(portalInput().input,animal);assertNull(f.args.get(1).get(4));assertNull(f.args.get(1).get(5));assertEquals(com.mavric.health.persistence.sqlserver.SqlServerProcedure.PORTAL_REGISTER,f.calls.get(3));}
+
+ static final String PLAN="cc000000-0000-4000-8000-000000000001";
+ static AccountLifecycleService.Register platformInput(String kind,String domain){return new AccountLifecycleService.Register(" Synthetic "," QA@EXAMPLE.TEST ","SyntheticPassword123!",kind,domain,"Cl\u00ednica \u4e2d\ud83e\uddb7","new-clinic",PLAN,"PROFILE",true);}
+ static class PlatformFlow extends Flow {
+  final IdentityService realIdentity=new IdentityService(new com.mavric.health.persistence.sqlserver.SqlServerIdentityStore(executor,manager),mock(Access.class),encoder,new Settings("health.localhost","https://health.localhost",8,null));
+  final AccountLifecycleService platform=new AccountLifecycleService(gateway,realIdentity,new Settings("health.localhost","https://health.localhost",8,null),encoder);
+  boolean duplicate,missingPlan,badPlan,badCreated;com.mavric.health.persistence.sqlserver.SqlServerProcedure failure;
+  final int offeredProfessionals;
+  RuntimeException tenantCreationFailure;
+  PlatformFlow(){this(4);}
+  PlatformFlow(int offeredProfessionals){this.offeredProfessionals=offeredProfessionals;reset(executor);when(encoder.encode("SyntheticPassword123!")).thenReturn("encoded");when(executor.execute(any(),any(),any(Object[].class))).thenAnswer(inv->{
+   assertTrue(org.springframework.transaction.support.TransactionSynchronizationManager.isActualTransactionActive());var sp=inv.<com.mavric.health.persistence.sqlserver.SqlServerProcedure>getArgument(0);var c=inv.<com.mavric.health.persistence.sqlserver.SqlServerContext>getArgument(1);assertEquals(com.mavric.health.persistence.sqlserver.SqlServerContext.Scope.IDENTITY,c.scope());assertNull(c.actorId());assertNull(c.tenantId());assertNull(c.tokenHash());calls.add(sp);var values=Arrays.asList(((Object[])inv.getRawArguments()[2]).clone());args.add(values);if(sp==failure)throw new ApiException(409,"CONFLICT","Safe");
+   List<Map<String,Object>> rows=List.of();boolean read=false;
+   switch(sp){case IDENTITY_EMAIL_EXISTS->{read=true;if(duplicate)rows=List.of(Map.of("id",USER));}
+    case REGISTRATION_PLAN->{read=true;if(!missingPlan)rows=List.of(Map.of("id",PLAN,"includedBranches",badPlan?0:2,"includedProfessionals",offeredProfessionals,"includedSpecialties",3));}
+    case SAAS_TENANT_CREATE->{read=true;if(tenantCreationFailure!=null)throw tenantCreationFailure;var json=new tools.jackson.databind.ObjectMapper().readTree((String)values.get(3));rows=List.of(Map.of("id",values.get(0),"tenantId",values.get(0),"slug",badCreated?"wrong":json.get("slug").asText(),"kind",json.get("kind").asText(),"domain",json.get("domain").asText(),"status","TRIAL"));}
+    default->{}
+   }
+   return new com.mavric.health.persistence.sqlserver.SqlServerExecutor.Result(read?List.of(rows):List.of(),List.of(0));
+  });}
+ }
+ @Test void platformSixSpTransactionJsonServerQuotasAndRegistrationLink(){
+  for(var types:List.of(List.of("DOCTOR","HUMAN"),List.of("DOCTOR","ANIMAL"),List.of("CLINIC","HUMAN"),List.of("VETERINARY","ANIMAL"))){var f=new PlatformFlow(types.get(0).equals("DOCTOR")?1:4);var r=request();f.platform.register(platformInput(types.get(0),types.get(1)),null);
+   assertEquals(List.of(com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_EMAIL_EXISTS,com.mavric.health.persistence.sqlserver.SqlServerProcedure.REGISTRATION_PLAN,com.mavric.health.persistence.sqlserver.SqlServerProcedure.USER_CREATE,com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_PENDING,com.mavric.health.persistence.sqlserver.SqlServerProcedure.SAAS_TENANT_CREATE,com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_ISSUE),f.calls);
+   var create=f.args.get(2);assertEquals(types.get(0).equals("DOCTOR")?types.get(1):null,create.get(4));assertNull(create.get(5));var tenant=f.args.get(4);assertEquals(create.get(0),tenant.get(2));assertNotEquals(tenant.get(0),tenant.get(1));
+   var json=new tools.jackson.databind.ObjectMapper().readTree((String)tenant.get(3));assertEquals(9,json.size());assertEquals(5,json.get("subscription").size());assertEquals(2,json.at("/subscription/branchQuota").asInt());assertEquals(f.offeredProfessionals,json.at("/subscription/professionalQuota").asInt());assertEquals(3,json.at("/subscription/specialtyQuota").asInt());assertEquals("MONTHLY",json.at("/subscription/cycle").asText());assertEquals("America/Lima",json.get("timezone").asText());assertEquals(platformInput(types.get(0),types.get(1)).organizationName(),json.get("name").asText());assertFalse(json.has("owner"));assertFalse(json.has("password"));
+   var issued=f.args.getLast();assertEquals(tenant.get(0),issued.get(7));assertEquals("VERIFY",issued.get(2));assertTrue(((String)issued.get(6)).contains("https://new-clinic.health.localhost/verificar/#token="));assertEquals(0,((java.time.Instant)issued.get(3)).getNano()%1000);assertEquals(List.of("begin:0","commit"),f.manager.events);assertNull(r.getAttribute("health.tenant"));assertNull(r.getAttribute("health.actor"));
+  }
+ }
+ @Test void platformDuplicateAndInvalidFormNeverCreate(){var f=new PlatformFlow();request();f.duplicate=true;f.platform.register(platformInput("CLINIC","HUMAN"),null);assertEquals(List.of(com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_EMAIL_EXISTS),f.calls);verify(f.encoder,never()).encode(anyString());
+  for(boolean duplicate:List.of(false,true)){f=new PlatformFlow();f.duplicate=duplicate;final var fixture=f;for(var p:List.of(portalInput().input,platformInput("CLINIC","ANIMAL"),platformInput("VETERINARY","HUMAN"),platformInput("OTHER","HUMAN"))){assertEquals(400,assertThrows(ApiException.class,()->fixture.platform.register(p,null)).status);}assertTrue(f.calls.isEmpty());}
+ }
+ @Test void platformPlanAndCreatedMalformedAbortAndEveryStageErrorRollsBack(){for(int mode=0;mode<3;mode++){var f=new PlatformFlow();request();f.missingPlan=mode==0;f.badPlan=mode==1;f.badCreated=mode==2;assertEquals(mode==0?404:500,assertThrows(ApiException.class,()->f.platform.register(platformInput("CLINIC","HUMAN"),null)).status);assertEquals("rollback",f.manager.events.getLast());assertFalse(f.calls.contains(com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_ISSUE));}
+  for(var stage:List.of(com.mavric.health.persistence.sqlserver.SqlServerProcedure.REGISTRATION_PLAN,com.mavric.health.persistence.sqlserver.SqlServerProcedure.USER_CREATE,com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_PENDING,com.mavric.health.persistence.sqlserver.SqlServerProcedure.SAAS_TENANT_CREATE,com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_ISSUE)){var f=new PlatformFlow();request();f.failure=stage;assertEquals(409,assertThrows(ApiException.class,()->f.platform.register(platformInput("CLINIC","HUMAN"),null)).status);assertEquals(stage,f.calls.getLast());assertEquals("rollback",f.manager.events.getLast());}
+ }
+ @Test void platformCommitAndOuterCancellationNeverPublishContext(){var f=new PlatformFlow(1);var r=request();f.manager.failCommit=true;assertEquals(500,assertThrows(ApiException.class,()->f.platform.register(platformInput("DOCTOR","HUMAN"),null)).status);assertEquals(f.offeredProfessionals,new tools.jackson.databind.ObjectMapper().readTree((String)f.args.get(4).get(3)).at("/subscription/professionalQuota").asInt());assertNull(r.getAttribute("health.actor"));var outer=new PlatformFlow();assertThrows(RuntimeException.class,()->outer.manager.outer(()->{outer.platform.register(platformInput("CLINIC","HUMAN"),null);assertEquals(outer.offeredProfessionals,new tools.jackson.databind.ObjectMapper().readTree((String)outer.args.get(4).get(3)).at("/subscription/professionalQuota").asInt());assertFalse(outer.manager.events.contains("commit"));throw new RuntimeException("synthetic cancellation");}));assertEquals("rollback",outer.manager.events.getLast());}
+
+ /** Injected V4:174 incompatibility, not a SQL engine or plan-validation simulation. */
+ @Test void doctorSelectingClinicOnlyOfferKeepsFourAndPropagatesInjected51000(){
+  var f=new PlatformFlow(4);var r=request();
+  f.tenantCreationFailure=new RuntimeException(new java.sql.SQLException("HP_INVALID:Plan incompatible",null,51000));
+  var error=assertThrows(ApiException.class,()->f.platform.register(platformInput("DOCTOR","HUMAN"),null));
+  assertEquals(400,error.status);assertEquals("INVALID",error.code);assertNull(error.getCause());assertFalse(error.getMessage().contains("Plan incompatible"));
+  assertEquals(com.mavric.health.persistence.sqlserver.SqlServerProcedure.SAAS_TENANT_CREATE,f.calls.getLast());
+  var json=new tools.jackson.databind.ObjectMapper().readTree((String)f.args.getLast().get(3));
+  assertEquals("DOCTOR",json.get("kind").asText());assertEquals(4,f.offeredProfessionals);assertEquals(f.offeredProfessionals,json.at("/subscription/professionalQuota").asInt());
+  assertFalse(f.calls.contains(com.mavric.health.persistence.sqlserver.SqlServerProcedure.IDENTITY_ISSUE));assertFalse(f.manager.events.contains("commit"));assertEquals("rollback",f.manager.events.getLast());assertNull(r.getAttribute("health.actor"));
+ }
 
 }

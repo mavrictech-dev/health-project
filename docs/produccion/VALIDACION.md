@@ -447,3 +447,18 @@ como validacion de esos escenarios. Root111bases y5SHA recibidos intactos,
 no copiados. tmp/sqlserver-a17-review-result.json registra devolucion.
 Sin SQL/JDBC/HTTP/SMTP real ni QAvisual nueva. R1 debe corregir solo test y
 repetir verify; ninguna prueba frontend/motor repetida sin cambio pertinente.
+
+
+### A17.R1 -353 pruebas y hallazgo de fixture cerrado
+
+python -B tmp/prepare-sqlserver-a17-r1-review.py confirma5SHA/111bases;4SHA
+originales iguales y solo testservicio actualizado. En snapshot
+tmp/sqlserver-a17-r1-review/backend: .\mvnw.cmd -B -ntp verify,JDK21,exit0,
+BUILD SUCCESS26.946s,353tests/0failures/0errors/0skipped,jar/repackagePASS,
+final2026-11-04T18:44:03-05:00. Log verify-supervisor.log y XMLSurefire.
+
+PositivosDOCTOR coherentes con1profesional y regresion de rechazo51000
+inyectado sin clamping. CasoCommitDOCTOR usa1; cancelacionCLINIC4. Es evidencia
+modelada,NOejecucion de la reglaSP ni prueba de motor. accept-sqlserver-a17-r1.py
+revalida5SHA/111bases y compara legado,integra5existentes;106ajenas intactas.
+No repetir frontend/motor sin cambio,no nuevas capturas ni backend conectado.

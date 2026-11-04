@@ -716,3 +716,24 @@ seleccionada paraDOCTOR con51000inyectado:400seguro,quota4 sinreescribir,rollbac
 y sinISSUE/202. Conservar otros4SHA y todasassertions anteriores salvo esas
 cuotas de fixture; volver verify. Spec tmp/sql-01-a17-r1-spec.md.
 A17 no aceptada/integrada; evidencia inicial conservada en review-result.json.
+
+
+## SQL-01.A17 - ACEPTADA tras R1 y353 pruebas independientes
+
+R1 informe msg_5ec47062eca4/done msg_28d2d264ae80 cierra R-A17-DOCTOR-QUOTA.
+Supervisor revisa diff UN test: fixture offeredProfessionals parametrizado,
+DOCTORHUMAN/ANIMAL y casoCommitDOCTOR1,CLINIC/VETERINARY4. Regresion51000
+inyectada afirma400seguro,quota4 sinreescribir,rollback y sinISSUE. No motor
+real ni simulador de reglas de negocio; otro4SHA A17 congelados/intactos.
+
+Snapshot tmp/sqlserver-a17-r1-review/backend:353/353,0fail/0error/0skip,jar
+PASS26.946s. accept-sqlserver-a17-r1.py compara5SHA/baselines,cuerposlegacy,
+constructores/options/rate y request/redeem previos; integra5archivosexistentes,
+111bases verificadas y106ajenas intactas. Acceptance.json vincula Task/Dispatch
+A17original yR1,conservando rechazo/evidencia352 inicial.
+
+Alta plataformaSQL aceptada con11SP/contextoplataforma constante,JSONservidor,
+cuotas deplan,resultado creado validado,ISSUEregistro explicitoMANDATORY.
+No autenticacion automatica/cookie/hostfalso ni nueva configuracion. Se acepta
+implementacion y mocks/TXmodeladas,NO permisos/cupos/rollback/concurrencia
+reales ni SQLServer/JDBC/Flyway/HTTP/SMTP conectado. Sin nuevaQAvisual.

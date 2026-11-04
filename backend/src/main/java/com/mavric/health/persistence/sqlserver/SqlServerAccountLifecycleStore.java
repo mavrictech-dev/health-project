@@ -70,6 +70,60 @@ public final class SqlServerAccountLifecycleStore {
             });
         } catch(RuntimeException failure) {throw SqlServerErrors.map(failure);}
     }
+    public record RegistrationOrganization(String name,String slug,String kind,String domain,String planId,String specialtyCode) {
+        public RegistrationOrganization {
+            if(name==null || name.isBlank() || name.length()>160 || kind==null || !Set.of("DOCTOR","CLINIC","HOSPITAL","VETERINARY","DENTAL","SPECIALTY_CENTER").contains(kind)
+                    || domain==null || !Set.of("HUMAN","ANIMAL").contains(domain) || specialtyCode==null || specialtyCode.isBlank() || specialtyCode.length()>80) throw SqlServerErrors.invalid();
+            com.mavric.health.tenancy.DomainRules.slug(slug);Checks.id(planId);
+            if("VETERINARY".equals(kind)?!"ANIMAL".equals(domain):!"DOCTOR".equals(kind) && !"HUMAN".equals(domain)) throw SqlServerErrors.invalid();
+        }
+        @Override public String toString() {return "RegistrationOrganization[redacted]";}
+    }
+    public record RegistrationPlan(String id,int includedBranches,int includedProfessionals,int includedSpecialties) {}
+    public record CreatedTenant(String id,String slug,String kind,String domain,String status) {
+        @Override public String toString() {return "CreatedTenant[redacted]";}
+    }
+    private static SqlServerContext platformRegistration(HttpServletRequest request) {
+        var context=anonymous(request);
+        if(context.tenantId()!=null) throw ApiException.forbidden();
+        return context;
+    }
+    public RegistrationPlan registrationPlan(HttpServletRequest request,String id) {
+        return required(()-> {
+            var context=platformRegistration(request);Checks.id(id);
+            var values=rows(executor.execute(SqlServerProcedure.REGISTRATION_PLAN,context,id));
+            if(values.size()>1) throw SqlServerErrors.database();
+            if(values.isEmpty()) throw ApiException.missing();
+            var row=values.getFirst();canonicalResult(text(row,"id"));
+            if(!id.equals(row.get("id"))) throw SqlServerErrors.database();
+            return new RegistrationPlan(id,quota(row,"includedBranches"),quota(row,"includedProfessionals"),quota(row,"includedSpecialties"));
+        });
+    }
+    public CreatedTenant createRegistrationTenant(HttpServletRequest request,String tenant,String branch,String owner,RegistrationOrganization input,RegistrationPlan plan) {
+        return registration(()-> {
+            var context=platformRegistration(request);Checks.id(tenant);Checks.id(branch);Checks.id(owner);
+            if(input==null || plan==null || !input.planId().equals(plan.id()) || plan.includedBranches()<1 || plan.includedProfessionals()<1 || plan.includedSpecialties()<1) throw SqlServerErrors.invalid();
+            var data=Map.of("name",input.name(),"slug",input.slug(),"kind",input.kind(),"domain",input.domain(),"timezone","America/Lima","branchName","Sede principal","address","","specialties",List.of(input.specialtyCode()),"subscription",Map.of("planId",plan.id(),"cycle","MONTHLY","branchQuota",plan.includedBranches(),"professionalQuota",plan.includedProfessionals(),"specialtyQuota",plan.includedSpecialties()));
+            String json=new tools.jackson.databind.ObjectMapper().writeValueAsString(data);
+            var values=rows(executor.execute(SqlServerProcedure.SAAS_TENANT_CREATE,context,tenant,branch,owner,json));
+            if(values.size()!=1) throw SqlServerErrors.database();
+            var row=values.getFirst();
+            if(!tenant.equals(text(row,"id")) || !tenant.equals(text(row,"tenantId")) || !input.slug().equals(text(row,"slug")) || !input.kind().equals(text(row,"kind")) || !input.domain().equals(text(row,"domain")) || !"TRIAL".equals(text(row,"status"))) throw SqlServerErrors.database();
+            return new CreatedTenant(tenant,input.slug(),input.kind(),input.domain(),"TRIAL");
+        });
+    }
+    public void issueRegistration(HttpServletRequest request,String hash,String user,Instant expiry,String mailId,String subject,String body,CreatedTenant created) {
+        registration(()-> {
+            var context=platformRegistration(request);hash(hash);Checks.id(user);Checks.id(mailId);
+            if(created==null) throw SqlServerErrors.invalid();Checks.id(created.id());
+            if(expiry==null || subject==null || subject.isBlank() || subject.length()>200 || body==null || body.isBlank()) throw SqlServerErrors.invalid();
+            noRows(executor.execute(SqlServerProcedure.IDENTITY_ISSUE,context,hash,user,"VERIFY",expiry,mailId,subject,body,created.id()));return null;
+        });
+    }
+    private <T> T registration(Supplier<T> work) {
+        try {return registration.execute(status->work.get());}
+        catch(RuntimeException failure) {throw SqlServerErrors.map(failure);}
+    }
     private static SqlServerContext identity(HttpServletRequest request) {
         if(request==null) throw SqlServerErrors.database();
         return SqlServerRequestContexts.from(request,SqlServerContext.Scope.IDENTITY);

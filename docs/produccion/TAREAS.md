@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A16 aceptadas; A17 devuelta por fixture) | A17 task_9d9de6607b4a / ctx_f6c8f525845a,352/352 supervisor | R-A17-DOCTOR-QUOTA: positivos usan4 profesionales,SP exige1. Corregir evidencia antes de integrar; otros consumidores/wiring/QA real pendientes |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A17 aceptadas conR1; A18 preparado) | A17.R1 task_36e4178bdb2a / ctx_a3cb4930b7d5,353/353 supervisor | R-A17-DOCTOR-QUOTA cerrado; alta plataforma integrada sin wiring. Siguiente persistencia final de trazasHTTP; otros consumidores/wiring/QA real pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -428,3 +428,22 @@ No defecto observado en codigo producto; evidencia de esos escenarios no es
 coherente. No integrar/publicarA17. R1 preparada tmp/sql-01-a17-r1-spec.md,
 ownership UN test servicio; conservar otros4SHA y agregar error oferta
 incompatible51000/400 sin clamping/ISSUE. A16 sigue ultimo codigo aceptado.
+
+
+A17.R1 delegada mediante worker-start --spec-file,dependencia A17settled:
+task_36e4178bdb2a / ctx_a3cb4930b7d5,mismo Run/terminal/cuenta/sesion/Sol medium.
+Recibo outcome_unknown/turn_start_unobserved: texto entregado,turno aun no
+observado. No reenviar ni abandonar por ese recibo; esperar avisoOrca. Ownership
+solo test de servicio; otros4SHA A17 congelados. A17 no integrada,352PASS
+iniciales conservados con limite de fixture; A16 ultimo codigo aceptado.
+Hallazgo/tablero subidos en1cc61ab a rama de trabajo,sin main ni despliegue.
+
+
+A17 ACEPTADA tras R1: informe msg_5ec47062eca4/done msg_28d2d264ae80,
+5SHA compuestos(4originales+testcorregido),verify independiente353/353 y
+jarPASS26.946s.111bases verificadas,106ajenas intactas;5existentes integrados.
+R-A17-DOCTOR-QUOTA cerrado: positivosDOCTOR1,CLINIC/VETERINARY4 y51000inyectado
+para incompatibilidad400 sin clamping/ISSUE. Rechazo inicial queda historico.
+A18 preparada tmp/sql-01-a18-spec.md,D-26,ownership4archivosTraceFilter/store/
+dos suites; traza finalREQUIRES_NEW por SP sin wiring/DB. Cuentas/sesion/
+Sol medium/cuota verificadas; mismo programador retenido.

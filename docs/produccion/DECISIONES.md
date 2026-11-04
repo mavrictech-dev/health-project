@@ -583,3 +583,24 @@ health.tenant/actor ni autenticar propietario. Sin camposprivilegiados HTTP.
 Errores/commit abortan sin202falso/retry; no prometer idempotencia o anonimato
 de red bajo carreras por pruebasoffline. Encargo tmp/sql-01-a17-spec.md.
 Sin DB/SMTP/config activa ni aprobacion clinica por crear perfiles.
+
+
+### D-26: traza HTTP independiente al terminar el filtro
+
+A17 aceptada trasR1/353pruebas. A18 limita ownership aTraceFilter,store nuevo
+y dos suites. Constructor Sql vigente y nuevo SQL explicito,sin beans/config
+activa. UUIDservidor/headers/TraceContext y reglasOrigin/gateway/exclusiones
+se conservan. Persistir SOLO al finalizarchain,con estado final y duracionms.
+
+Store usa unicamente REQUEST_FINISH(status,duration),scopeREQUEST,0RS,contexto
+del request final por helper existente; no SecurityContext que SessionFilter
+ya puede limpiar ni otroThreadLocal. Correlacion debe coincidir con UUIDlocal
+servidor; contexto interno corrupto500 y metricasinvalidas400 sinexecutor.
+
+Decision acotadaREQUIRES_NEW: confirmar traza fuera de TX de negocio y poder
+registrar fallos aun con rollback llamador. No extender TX sobrechain ni cambiar
+otros stores; independencia/pool/locks reales quedan para QAconectada.
+Fallo de persistencia conserva respuesta/excepcion original segun comportamiento
+best-effort actual,con logestatico+ID sin secretos. ThreadLocal siempre limpio,
+incluso fallo del store; no query/body/cookies/tokens claros nuevos en datos.
+Encargo tmp/sql-01-a18-spec.md; gateways/async/pool y SQL/JDBC reales no validados.

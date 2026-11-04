@@ -121,4 +121,21 @@ class SqlServerAccountLifecycleStoreTest {
       assertEquals(400,assertThrows(ApiException.class,()->store.required(()->{store.pending(request,"bad");return null;})).status);assertEquals("rollback",manager.events.getLast());
     }
 
+    static final String TARGET="dd000000-0000-4000-8000-000000000001";
+    SqlServerAccountLifecycleStore.RegistrationOrganization organization(){return new SqlServerAccountLifecycleStore.RegistrationOrganization("Synthetic","new-clinic","CLINIC","HUMAN",ID,"PROFILE");}
+    @Test void platformPlanExactMappingAndMissingCorruptRows(){identityExecutor();results.add(result(List.of(Map.of("id",ID,"includedBranches",1,"includedProfessionals",2,"includedSpecialties",3))));assertEquals(2,store.registrationPlan(request,ID).includedProfessionals());
+      results.add(result(List.of()));assertEquals(404,assertThrows(ApiException.class,()->store.registrationPlan(request,ID)).status);
+      for(var value:List.of(0,1L,"1")){results.add(result(List.of(Map.of("id",ID,"includedBranches",value,"includedProfessionals",2,"includedSpecialties",3))));safe(()->store.registrationPlan(request,ID));}
+      results.add(result(List.of(Map.of("id",TARGET,"includedBranches",1,"includedProfessionals",2,"includedSpecialties",3))));safe(()->store.registrationPlan(request,ID));
+    }
+    @Test void platformMandatoryNoTransactionOrTenantActorNeverExecutor(){identityExecutor();var plan=new SqlServerAccountLifecycleStore.RegistrationPlan(ID,1,2,3);var created=new SqlServerAccountLifecycleStore.CreatedTenant(TARGET,"new-clinic","CLINIC","HUMAN","TRIAL");safe(()->store.createRegistrationTenant(request,TARGET,ID,ID,organization(),plan));safe(()->store.issueRegistration(request,HASH,ID,java.time.Instant.now(),ID,"s","b",created));
+      request.setAttribute("health.tenant",new TenantRef(ID,"x","x","CLINIC","HUMAN","ACTIVE",List.of()));assertEquals(403,assertThrows(ApiException.class,()->store.registrationPlan(request,ID)).status);assertEquals(403,assertThrows(ApiException.class,()->store.required(()->store.createRegistrationTenant(request,TARGET,ID,ID,organization(),plan))).status);request.removeAttribute("health.tenant");request.setAttribute("health.actor","forged");assertEquals(403,assertThrows(ApiException.class,()->store.registrationPlan(request,ID)).status);verifyNoInteractions(executor);
+    }
+    @Test void platformCreatedResultAndRegistrationIssueRequireExactShape(){identityExecutor();var plan=new SqlServerAccountLifecycleStore.RegistrationPlan(ID,1,2,3);
+      var valid=Map.<String,Object>of("id",TARGET,"tenantId",TARGET,"slug","new-clinic","kind","CLINIC","domain","HUMAN","status","TRIAL");
+      for(String key:valid.keySet()){var invalid=new LinkedHashMap<>(valid);invalid.put(key,"wrong");results.add(result(List.of(invalid)));safe(()->store.required(()->store.createRegistrationTenant(request,TARGET,ID,ID,organization(),plan)));}
+      results.add(result(List.of(valid)));writeResult();store.required(()->{var created=store.createRegistrationTenant(request,TARGET,ID,ID,organization(),plan);store.issueRegistration(request,HASH,ID,java.time.Instant.now(),ID,"subject","body",created);return null;});verify(executor).execute(eq(SqlServerProcedure.IDENTITY_ISSUE),any(),eq(HASH),eq(ID),eq("VERIFY"),any(),eq(ID),eq("subject"),eq("body"),eq(TARGET));
+      results.add(result(List.of()));safe(()->store.required(()->{store.issueRegistration(request,HASH,ID,java.time.Instant.now(),ID,"s","b",new SqlServerAccountLifecycleStore.CreatedTenant(TARGET,"new-clinic","CLINIC","HUMAN","TRIAL"));return null;}));
+    }
+
 }
