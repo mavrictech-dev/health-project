@@ -336,3 +336,12 @@ term_cb1b5652-ef88-4fce-8c34-0634faf27a89, conversacion original
 /status confirma programador mendozadeafabisa@gmail.com y arquitecto
 recuperapiura@gmail.com; coordinador term_763b3565-cbc1-4bea-ae87-06e638aededd
 reasociado al Run con run-use --id/--from. Reabrir task_20f587aa9bd6, no nueva Task.
+
+
+A12 reabierta en la misma Task task_20f587aa9bd6: nuevo Dispatch
+ctx_296d15f80886 en terminal term_cb1b5652-ef88-4fce-8c34-0634faf27a89.
+worker-show confirma starting/authority_attached y liveness live; aun no hay
+entrega ni inicio de implementacion confirmado. No duplicar el arranque.
+El corte revisado hasta A11 fue confirmado y subido como
+c3df2692fe80da9009d321726d2f8b95a2e4d608 a origin/health/production-wave0;
+remote ref comprobado, main permanece en0b24487c77055a081f6e76f0b18bc544ce4b1958.

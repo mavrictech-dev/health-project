@@ -284,3 +284,12 @@ recuperapiura@gmail.com. A12 conserva task_20f587aa9bd6; reabrir esa misma Task
 con nuevo Dispatch, sin duplicar el intento abandonado ni afirmar aprobacion.
 El usuario autoriza commit/push del corte revisado hasta A11 en rama de trabajo;
 A12 y validacion real no forman parte del corte aceptado. No merge ni despliegue.
+
+
+A12 reabierta en la misma Task task_20f587aa9bd6: nuevo Dispatch
+ctx_296d15f80886 en terminal term_cb1b5652-ef88-4fce-8c34-0634faf27a89.
+worker-show confirma starting/authority_attached y liveness live; aun no hay
+entrega ni inicio de implementacion confirmado. No duplicar el arranque.
+El corte revisado hasta A11 fue confirmado y subido como
+c3df2692fe80da9009d321726d2f8b95a2e4d608 a origin/health/production-wave0;
+remote ref comprobado, main permanece en0b24487c77055a081f6e76f0b18bc544ce4b1958.
