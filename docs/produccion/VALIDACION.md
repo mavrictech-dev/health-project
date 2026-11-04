@@ -404,3 +404,17 @@ python -B tmp/accept-sqlserver-a14.py verifica de nuevo hashes/baselines y
 cuerpos legado/rate,integra4archivos.106bases ajenas intactas.
 Pruebas con dobles/TransactionTemplate+manager modelado,sin SQL/JDBC/HTTP real.
 No nueva captura ni QAvisual; catalogo aislado de frontend/config activa.
+
+
+### A15 -331 pruebas y MockMvc standalone
+
+python -B tmp/prepare-sqlserver-a15-review.py verifica5SHA/110bases y prepara
+snapshot tmp/sqlserver-a15-review/backend. .\mvnw.cmd -B -ntp verify dentro de
+snapshot con JDK21:exit0,BUILD SUCCESS22.257s,331tests/0failures/0errors/0skipped,
+jar/repackagePASS,2026-11-04T18:11:20-05:00. Servicio14,store12,controller4,
+301otras;15nuevas sobre316 (una guarda anterior reemplazada conscientemente).
+Log verify-supervisor.log y XML Surefire conservados.
+python -B tmp/accept-sqlserver-a15.py confirma hashes/bases,legado/rate y
+pruebas anteriores salvo guarda D-23 y cleanup de sincronizaciones solicitado.
+5archivos integrados;106bases ajenas intactas. Sin DB/app/puerto/SMTP ni nueva
+prueba visual; MockMvc no acredita integracion real o no enumeracion bajo carrera.

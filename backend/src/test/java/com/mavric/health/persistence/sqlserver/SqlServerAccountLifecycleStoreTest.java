@@ -81,4 +81,30 @@ class SqlServerAccountLifecycleStoreTest {
         doThrow(new RuntimeException(new SQLException("secret",null,51003))).when(executor).execute(any(),any(),any(Object[].class));
         assertEquals(409,assertThrows(ApiException.class,()->store.options(request)).status);assertEquals("rollback",manager.events.getLast());
     }
+    static final String HASH="a".repeat(64);
+    void identityExecutor() {reset(executor);when(executor.execute(any(),any(),any(Object[].class))).thenAnswer(inv->{assertTrue(TransactionSynchronizationManager.isActualTransactionActive());var c=inv.<SqlServerContext>getArgument(1);assertEquals(SqlServerContext.Scope.IDENTITY,c.scope());calls.add(inv.getArgument(0));return results.removeFirst();});}
+    Map<String,Object> account(){var row=new LinkedHashMap<String,Object>();row.put("id",ID);row.put("email","qa@example.test");row.put("emailVerified",true);row.put("platformRole",null);return row;}
+    void writeResult(){results.add(new SqlServerExecutor.Result(List.of(),List.of(0)));}
+    @Test void identityFourDescriptorsAndExactArguments(){identityExecutor();results.add(result(List.of(account())));assertEquals("Account[redacted]",store.lookup(request,"qa@example.test").orElseThrow().toString());request.setAttribute("health.tenant",new TenantRef(ID,"Synthetic","clinic","CLINIC","HUMAN","ACTIVE",List.of()));results.add(result(List.of(Map.of("userId",ID,"status","INVITED"))));assertTrue(store.membership(request,ID));writeResult();var expiry=java.time.Instant.now();store.issue(request,HASH,ID,"VERIFY",expiry,ID,"subject","body");writeResult();store.redeem(request,HASH,"VERIFY",null);
+      verify(executor).execute(eq(SqlServerProcedure.IDENTITY_MEMBERSHIP),any(),eq(ID),eq(ID),eq(false));verify(executor).execute(eq(SqlServerProcedure.IDENTITY_ISSUE),any(),eq(HASH),eq(ID),eq("VERIFY"),eq(expiry),eq(ID),eq("subject"),eq("body"),isNull());verify(executor).execute(eq(SqlServerProcedure.IDENTITY_REDEEM),any(),eq(HASH),eq("VERIFY"),isNull());assertEquals(4,calls.size());}
+    @Test void lookupAndMembershipCardinalityTypesAndEmpty(){identityExecutor();results.add(result(List.of()));assertTrue(store.lookup(request,"qa@example.test").isEmpty());
+      for(String key:account().keySet()){var row=account();row.remove(key);results.add(result(List.of(row)));safe(()->store.lookup(request,"qa@example.test"));}
+      for(var replacement:List.of(Map.entry("id","BAD"),Map.entry("email",1),Map.entry("emailVerified",1),Map.entry("platformRole","ADM"))){var row=account();row.put(replacement.getKey(),replacement.getValue());results.add(result(List.of(row)));safe(()->store.lookup(request,"qa@example.test"));}
+      results.add(result(List.of(account(),account())));safe(()->store.lookup(request,"qa@example.test"));
+      request.setAttribute("health.tenant",new TenantRef(ID,"Synthetic","clinic","CLINIC","HUMAN","ACTIVE",List.of()));results.add(result(List.of()));assertFalse(store.membership(request,ID));
+      for(var row:List.<Map<String,Object>>of(Map.of(),Map.of("userId",ID,"status","INACTIVE"),Map.of("userId","other","status","ACTIVE"),Map.of("userId",ID,"status",1))){results.add(result(List.of(row)));safe(()->store.membership(request,ID));assertEquals("rollback",manager.events.getLast());}
+    }
+    @Test void directIdentityParametersRejectedBeforeExecutor(){identityExecutor();var expiry=java.time.Instant.now();for(String hash:Arrays.asList(null,"bad")){assertEquals(400,assertThrows(ApiException.class,()->store.issue(request,hash,ID,"VERIFY",expiry,ID,"s","b")).status);assertEquals(400,assertThrows(ApiException.class,()->store.redeem(request,hash,"VERIFY",null)).status);}
+      for(String purpose:Arrays.asList(null,"OTHER")){assertEquals(400,assertThrows(ApiException.class,()->store.issue(request,HASH,ID,purpose,expiry,ID,"s","b")).status);}
+      assertEquals(400,assertThrows(ApiException.class,()->store.issue(request,HASH,ID,"VERIFY",null,ID,"s","b")).status);
+      assertEquals(400,assertThrows(ApiException.class,()->store.issue(request,HASH,ID,"VERIFY",expiry,ID,"x".repeat(201),"b")).status);
+      assertEquals(400,assertThrows(ApiException.class,()->store.issue(request,HASH,ID,"VERIFY",expiry,ID,"s"," ")).status);
+      for(String password:Arrays.asList(null,"","x".repeat(101)))assertEquals(400,assertThrows(ApiException.class,()->store.redeem(request,HASH,"RESET",password)).status);
+      assertEquals(400,assertThrows(ApiException.class,()->store.redeem(request,HASH,"VERIFY","hash")).status);assertEquals(403,assertThrows(ApiException.class,()->store.membership(request,ID)).status);verifyNoInteractions(executor);
+    }
+    @Test void identityWritesRejectUnexpectedRsAndJoinRequired(){identityExecutor();results.add(result(List.of()));safe(()->store.redeem(request,HASH,"VERIFY",null));results.add(result(List.of()));safe(()->store.issue(request,HASH,ID,"VERIFY",java.time.Instant.now(),ID,"s","b"));
+      writeResult();assertThrows(RuntimeException.class,()->store.required(()->{store.redeem(request,HASH,"RESET","encoded");throw new RuntimeException("synthetic");}));assertEquals("rollback",manager.events.getLast());
+      writeResult();manager.failCommit=true;safe(()->store.redeem(request,HASH,"VERIFY",null));
+    }
+
 }

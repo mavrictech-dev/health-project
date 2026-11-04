@@ -293,3 +293,12 @@ y proyecciones seguras; validacion offline solamente. Guardas impiden usar
 mutadores del nuevo constructor incompleto; default activo sigue legado.
 Siguiente A15 solicitud/canje de enlaces de identidad y outbox, sin SMTP ni
 registro de cuentas, sin activacion del backend. Integracion real pendiente.
+
+
+## A15 aceptada - 2026-11-04
+
+Solicitud y canje de enlaces de identidad por SP integrados tras331/331 pruebas
+independientes y5SHA. Catalogo y legado preservados; outbox/token solo validados
+con dobles, sin correo enviado ni SQLServer/JDBC/HTTP conectado. RegisterSQL
+aun guardado. Siguiente A16: alta portal de tenant existente; plataforma se
+reserva paraA17, sin activacion de configuracion ni afirmacion100%SP.

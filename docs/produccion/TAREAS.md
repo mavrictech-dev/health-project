@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A14 aceptadas; A15 preparado) | A14 task_37c0cc02635d / ctx_16e692b799f1,316/316 supervisor | Catalogo integrado sin wiring. Siguiente solicitud/canje enlaces de identidad; alta,otros consumidores,segregacion/JDBC/Flyway/HTTP reales pendientes |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A15 aceptadas; A16 preparado) | A15 task_bbc70e7c7ca2 / ctx_7812fa307e3d,331/331 supervisor | Enlaces de identidad integrados sin wiring. Siguiente alta portal del tenant; alta plataforma,otros consumidores,segregacion/JDBC/Flyway/HTTP reales pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -366,3 +366,25 @@ Cuerpos legado mutadores/issue/rate comparados sin cambio salvo guarda SQL.
 A15 preparada tmp/sql-01-a15-spec.md,D-23; ownership5archivos para request/
 redeem y outbox tipado, sin SMTP/alta/config activa. Misma cuenta/sesion/modelo
 Sol medium y cuota disponibles verificados antes de preparar delegacion.
+
+
+A15 delegada por follow-up de ctx_16e692b799f1: nueva Task task_bbc70e7c7ca2 /
+Dispatch ctx_7812fa307e3d,misma terminal/sesion/cuenta. Inventario inicial
+starting con liveness unverifiable; no duplicar por falta de recibo de consola
+ni inferir salida del agente. Esperar aviso/respuesta y conservar los IDs.
+A14 subida como6baf8dbd6d2146d53852869b2cb11b2f1add16b0 a la rama de trabajo,
+remote ref comprobado y main intacta. Cinco archivos A15 reservados al worker;
+no aprobacion anticipada ni edicion simultanea.
+
+Lectura posterior de terminal confirma turno A15 trabajando (preflight Git y
+lectura de servicio),mismo Sol medium. worker-show:authority_attached/live.
+La observacion inicial unverifiable no se trato como salida ni se reenvio.
+
+
+A15 ACEPTADA: informe msg_67322efac936/done msg_6b5cd2c87b5a,5SHA y snapshot
+independiente331/331,jarPASS22.257s.110bases verificadas,106fueraownership
+intactas;4existentes+1nuevo integrados por bytes. Legado preservado,315tests
+anteriores sin cambio de assertions y guarda obsoleta sustituida segun D-23.
+A16 preparada tmp/sql-01-a16-spec.md,D-24,ownership mismos5archivos para alta
+portal tenant en unidad atomica modelada; plataforma sigue guardada paraA17.
+Cuentas/sesion/Sol medium/cuota verificados, sin cambios globales.

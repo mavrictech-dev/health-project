@@ -1,6 +1,9 @@
 package com.mavric.health.persistence.sqlserver;
 
 import java.util.*;
+import java.time.Instant;
+import java.util.function.Supplier;
+import com.mavric.health.shared.Checks;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
@@ -30,6 +33,65 @@ public final class SqlServerAccountLifecycleStore {
             return result;
         } catch(RuntimeException error) {throw SqlServerErrors.map(error);}
     }
+    /** Internal identity carrier: never an HTTP response or diagnostic payload. */
+    public record Account(String id,String email,boolean emailVerified,String platformRole) {
+        @Override public String toString() {return "Account[redacted]";}
+    }
+    public <T> T required(Supplier<T> work) {
+        try {return transactions.execute(status->work.get());}
+        catch(RuntimeException failure) {throw SqlServerErrors.map(failure);}
+    }
+    private static SqlServerContext identity(HttpServletRequest request) {
+        if(request==null) throw SqlServerErrors.database();
+        return SqlServerRequestContexts.from(request,SqlServerContext.Scope.IDENTITY);
+    }
+    public Optional<Account> lookup(HttpServletRequest request,String email) {
+        return required(()-> {
+            var context=identity(request);
+            if(email==null || email.isBlank() || email.length()>254) throw SqlServerErrors.invalid();
+            var values=rows(executor.execute(SqlServerProcedure.IDENTITY_ACCOUNT_LOOKUP,context,email));
+            if(values.size()>1) throw SqlServerErrors.database();
+            if(values.isEmpty()) return Optional.empty();
+            var row=values.getFirst();String id=text(row,"id");canonicalResult(id);
+            if(!(row.get("emailVerified") instanceof Boolean verified) || !row.containsKey("platformRole")) throw SqlServerErrors.database();
+            Object role=row.get("platformRole");
+            if(role!=null && (!(role instanceof String) || !Set.of("SAD","SOP").contains(role))) throw SqlServerErrors.database();
+            return Optional.of(new Account(id,text(row,"email"),verified,(String)role));
+        });
+    }
+    public boolean membership(HttpServletRequest request,String userId) {
+        return required(()-> {
+            var context=identity(request);Checks.id(userId);
+            if(context.tenantId()==null) throw ApiException.forbidden();
+            var values=rows(executor.execute(SqlServerProcedure.IDENTITY_MEMBERSHIP,context,userId,context.tenantId(),false));
+            if(values.size()>1) throw SqlServerErrors.database();
+            if(values.isEmpty()) return false;
+            var row=values.getFirst();String id=text(row,"userId");canonicalResult(id);
+            if(!id.equals(userId) || !Set.of("ACTIVE","INVITED").contains(text(row,"status"))) throw SqlServerErrors.database();
+            return true;
+        });
+    }
+    public void issue(HttpServletRequest request,String hash,String user,String purpose,Instant expiry,String mailId,String subject,String body) {
+        required(()-> {
+            var context=identity(request);hash(hash);Checks.id(user);Checks.id(mailId);purpose(purpose);
+            if(expiry==null || subject==null || subject.isBlank() || subject.length()>200 || body==null || body.isBlank()) throw SqlServerErrors.invalid();
+            noRows(executor.execute(SqlServerProcedure.IDENTITY_ISSUE,context,hash,user,purpose,expiry,mailId,subject,body,null));return null;
+        });
+    }
+    public void redeem(HttpServletRequest request,String hash,String purpose,String passwordHash) {
+        required(()-> {
+            var context=identity(request);hash(hash);purpose(purpose);
+            if("VERIFY".equals(purpose)?passwordHash!=null:passwordHash==null || passwordHash.isBlank() || passwordHash.length()>100) throw SqlServerErrors.invalid();
+            noRows(executor.execute(SqlServerProcedure.IDENTITY_REDEEM,context,hash,purpose,passwordHash));return null;
+        });
+    }
+    private static void purpose(String purpose) {if(!"VERIFY".equals(purpose) && !"RESET".equals(purpose)) throw SqlServerErrors.invalid();}
+    private static void hash(String hash) {if(hash==null || !hash.matches("[0-9a-fA-F]{64}")) throw SqlServerErrors.invalid();}
+    private static void canonicalResult(String id) {
+        try {if(!UUID.fromString(id).toString().equals(id)) throw SqlServerErrors.database();}
+        catch(IllegalArgumentException failure) {throw SqlServerErrors.database();}
+    }
+    private static void noRows(SqlServerExecutor.Result result) {if(result==null || !result.resultSets().isEmpty()) throw SqlServerErrors.database();}
     private static List<Map<String,Object>> rows(SqlServerExecutor.Result result) {
         if(result==null || result.resultSets().size()!=1) throw SqlServerErrors.database();
         return result.resultSets().getFirst();

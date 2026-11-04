@@ -399,3 +399,22 @@ A14 aceptada tras msg_9bdf62bea05a/msg_bd01e7fa5b10,4SHA,snapshot316/316+jar.
 store/suites existentes mas controllerTest nuevo. /status confirma Sol medium,
 mendozadeafabisa@gmail.com y sesion original; arquitecto verificado en home
 propio, sin seleccion global. Seguir por follow-up y nuevos IDs.
+
+
+A15 delegada por follow-up de ctx_16e692b799f1: nueva Task task_bbc70e7c7ca2 /
+Dispatch ctx_7812fa307e3d,misma terminal/sesion/cuenta. Inventario inicial
+starting con liveness unverifiable; no duplicar por falta de recibo de consola
+ni inferir salida del agente. Esperar aviso/respuesta y conservar los IDs.
+A14 subida como6baf8dbd6d2146d53852869b2cb11b2f1add16b0 a la rama de trabajo,
+remote ref comprobado y main intacta. Cinco archivos A15 reservados al worker;
+no aprobacion anticipada ni edicion simultanea.
+
+Lectura posterior de terminal confirma turno A15 trabajando (preflight Git y
+lectura de servicio),mismo Sol medium. worker-show:authority_attached/live.
+La observacion inicial unverifiable no se trato como salida ni se reenvio.
+
+
+A15 aceptada tras msg_67322efac936/msg_6b5cd2c87b5a,5SHA,snapshot331/331+jar.
+5archivos integrados sin wiring. A16 preparada tmp/sql-01-a16-spec.md,D-24,
+misma ownership5archivos,alta portal por tenant; sigue por follow-up con IDs
+nuevos,mismo terminal/sesion/cuenta/Sol medium. Cuentas verificadas sin globales.

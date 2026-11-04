@@ -651,3 +651,25 @@ cualquier copia; no defecto de producto ni repeticion de Maven.
 Aceptacion offline: no HTTP/SQLServer/JDBC/Flyway/navegador conectado ni prueba
 de aislamiento/anonimato de red. Constructor SQL no activado; escrituras de
 cuenta siguen guardadas. No se requiere nueva QAvisual de frontend sin cambio.
+
+
+## SQL-01.A15 - ACEPTADA,331 pruebas independientes
+
+Informe msg_67322efac936 y done msg_6b5cd2c87b5a recibidos. Supervisor leyo
+servicio/store y tres suites,contrasto4SP nuevos conV3,5SHA y cuerpo legado.
+REQUEST catalogo intacto,IDENTITY lookup/membership(false)/issue/redeem,6SP
+totales. Elegibilidad normal no revela cuenta en API; errores de carrera no
+se ocultan. Enlaces servidor/fragment/TTL/hash y destinatario resuelto en SP,
+registration_tenantNULL. RESET codifica antes del SP,VERIFYpasswordNULL; sin
+sesion/cookie/autenticar. RegisterSQL sigue guardado.
+
+Snapshot331/331,0fail/0error/0skip,jarPASS22.257s. Acceptance script inicialmente
+exigia header test identico y detecto cleanup adicional de sincronizaciones;
+se inspecciono y acepto ese cambio pedido por contrato, sin alterar assertions
+ni repetir build. Unica expectativa sustituida: guarda request/redeem anterior.
+
+Integrados5SHA,110bases comprobadas,106ajenas intactas,4existentes+1nuevo.
+Acceptance tmp/sqlserver-a15-acceptance.json. Pruebas con dobles/MockMvc/TX
+modeladas; no SMTP/SQLServer/JDBC/Flyway/HTTP conectado,anonimato de red,
+uso unico/revocacion/rollbackdurable ni concurrencia real. Sin nueva QAvisual
+ni activacion de backend; no aprobacion integral IAM por este corte.

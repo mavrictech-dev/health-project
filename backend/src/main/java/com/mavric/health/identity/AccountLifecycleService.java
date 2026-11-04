@@ -20,12 +20,16 @@ public class AccountLifecycleService {
     public AccountLifecycleService(SqlServerAccountLifecycleStore store,IdentityService identity,Settings settings,PasswordEncoder passwords) {this.sqlServer=Objects.requireNonNull(store);this.sql=null;this.identity=identity;this.settings=settings;this.passwords=passwords;}
     private static ApiException unavailable() {return new ApiException(500,"DATABASE_ERROR","No se pudo completar la operacion de datos.");}
     private Map<String,Object> sqlOptions(TenantRef tenant) {
+        var request=validatedRequest(tenant);
+        return tenant!=null?Map.of("portal",true):sqlServer.options(request);
+    }
+    private jakarta.servlet.http.HttpServletRequest validatedRequest(TenantRef tenant) {
         var request=TraceContext.REQUEST.get();
         if(request==null) throw unavailable();
         Object host=request.getAttribute("health.tenant");
         if(host!=null && !(host instanceof TenantRef)) throw unavailable();
         if(!Objects.equals(host,tenant)) throw ApiException.forbidden();
-        return tenant!=null?Map.of("portal",true):sqlServer.options(request);
+        return request;
     }
     public void rate(String address,String operation) {long now=System.currentTimeMillis();if(rate.size()>10000) rate.entrySet().removeIf(e->e.getValue()<now);if(rate.size()>10000) throw new ApiException(429,"RATE_LIMIT","Intenta más tarde.");String key=Checks.hash(address+operation);Long previous=rate.putIfAbsent(key,now+5000);if(previous!=null && previous>now) throw new ApiException(429,"RATE_LIMIT","Espera unos segundos antes de volver a intentarlo.");rate.put(key,now+5000);}
     public Map<String,Object> options(TenantRef tenant) {if(sqlServer!=null) return sqlOptions(tenant);if(tenant!=null) return Map.of("portal",true);return Map.of("plans",sql.rows("SELECT p.id,p.name,v.kinds,v.domains,v.included_branches,v.included_professionals,v.included_specialties,v.base_minor FROM plans p JOIN plan_versions v ON v.plan_id=p.id AND v.version=p.current_version WHERE p.status='PUBLISHED' ORDER BY v.base_minor"),"specialties",sql.rows("SELECT code,name,domain,dental FROM specialties ORDER BY name"));}
@@ -46,7 +50,7 @@ public class AccountLifecycleService {
         issue(u,p.email(),tenant,"VERIFY");
     }
     @Transactional public void request(String email,TenantRef tenant,String purpose) {
-        if(sqlServer!=null) throw unavailable();
+        if(sqlServer!=null) {requestSql(email,tenant,purpose);return;}
         var user=sql.optional("SELECT id,email,email_verified,platform_role FROM users WHERE email=? AND active",email.trim().toLowerCase(Locale.ROOT));if(user.isEmpty()) return;String u=user.get().get("id").toString();
         if(tenant==null && user.get().get("platformRole")==null || tenant!=null && sql.optional("SELECT user_id FROM memberships WHERE tenant_id=? AND user_id=? AND status<>'INACTIVE'",tenant.id(),u).isEmpty()) return;
         if(purpose.equals("RESET") && !Boolean.TRUE.equals(user.get().get("emailVerified"))) return;
@@ -57,5 +61,35 @@ public class AccountLifecycleService {
         String origin=tenant==null?settings.publicOrigin():settings.tenantUrl(tenant.slug());String link=origin+(purpose.equals("VERIFY")?"/verificar/":"/restablecer/")+"#token="+token;
         sql.call("sp_identity_issue",Checks.hash(token),u,tenant==null?null:tenant.id(),purpose,Instant.now().plusSeconds(purpose.equals("RESET")?1800:86400),Checks.id(),email,purpose.equals("RESET")?"Recupera tu acceso a Health Project":"Verifica tu cuenta de Health Project","Health Project\n\n"+(purpose.equals("RESET")?"Restablece tu contraseña":"Confirma tu correo")+":\n"+link+"\n\nEl enlace es de un solo uso. Si no solicitaste este mensaje, puedes ignorarlo.\nMavric Technologies · https://mavrictec.com");
     }
-    @Transactional public void redeem(String token,String password,TenantRef tenant,String purpose) {if(sqlServer!=null) throw unavailable();if(token==null || !token.matches("[A-Za-z0-9_-]{43}")) throw ApiException.invalid("Enlace no válido.");if(purpose.equals("RESET")) Checks.password(password);sql.call("sp_identity_redeem",Checks.hash(token),tenant==null?null:tenant.id(),purpose,purpose.equals("RESET")?passwords.encode(password):null);}
+    @Transactional public void redeem(String token,String password,TenantRef tenant,String purpose) {if(sqlServer!=null) {redeemSql(token,password,tenant,purpose);return;}if(token==null || !token.matches("[A-Za-z0-9_-]{43}")) throw ApiException.invalid("Enlace no válido.");if(purpose.equals("RESET")) Checks.password(password);sql.call("sp_identity_redeem",Checks.hash(token),tenant==null?null:tenant.id(),purpose,purpose.equals("RESET")?passwords.encode(password):null);}
+    private static void validPurpose(String purpose) {if(!"VERIFY".equals(purpose) && !"RESET".equals(purpose)) throw ApiException.invalid("Solicitud no valida.");}
+    private void requestSql(String email,TenantRef tenant,String purpose) {
+        var request=validatedRequest(tenant);validPurpose(purpose);
+        if(email==null || email.isBlank() || email.length()>254) throw ApiException.invalid("Correo no valido.");
+        String normalized=email.trim().toLowerCase(Locale.ROOT);
+        sqlServer.required(()-> {
+            var found=sqlServer.lookup(request,normalized);
+            if(found.isEmpty()) return null;
+            var account=found.get();
+            if(tenant==null?account.platformRole()==null:!sqlServer.membership(request,account.id())) return null;
+            if("RESET".equals(purpose) && !account.emailVerified()) return null;
+            issueSql(request,account.id(),tenant,purpose);return null;
+        });
+    }
+    private void issueSql(jakarta.servlet.http.HttpServletRequest request,String user,TenantRef tenant,String purpose) {
+        byte[] random=new byte[32];new SecureRandom().nextBytes(random);String token=Base64.getUrlEncoder().withoutPadding().encodeToString(random);
+        String origin=tenant==null?settings.publicOrigin():settings.tenantUrl(tenant.slug());
+        String link=origin+(purpose.equals("VERIFY")?"/verificar/":"/restablecer/")+"#token="+token;
+        String subject=purpose.equals("RESET")?"Recupera tu acceso a Health Project":"Verifica tu cuenta de Health Project";
+        String body="Health Project\n\n"+(purpose.equals("RESET")?"Restablece tu contrase\u00f1a":"Confirma tu correo")+":\n"+link+"\n\nEl enlace es de un solo uso. Si no solicitaste este mensaje, puedes ignorarlo.\nMavric Technologies \u00b7 https://mavrictec.com";
+        sqlServer.issue(request,Checks.hash(token),user,purpose,Instant.now().plusSeconds(purpose.equals("RESET")?1800:86400).truncatedTo(java.time.temporal.ChronoUnit.MICROS),Checks.id(),subject,body);
+    }
+    private void redeemSql(String token,String password,TenantRef tenant,String purpose) {
+        var request=validatedRequest(tenant);validPurpose(purpose);
+        if(token==null || !token.matches("[A-Za-z0-9_-]{43}")) throw ApiException.invalid("Enlace no valido.");
+        if("RESET".equals(purpose)) Checks.password(password);
+        String encoded="RESET".equals(purpose)?passwords.encode(password):null;
+        sqlServer.redeem(request,Checks.hash(token),purpose,encoded);
+    }
+
 }

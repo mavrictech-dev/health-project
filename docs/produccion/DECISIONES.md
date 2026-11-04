@@ -536,3 +536,26 @@ presentar aceptacion generica de casos normales como validacion integral IAM.
 Se reemplaza solo testA14 de guardas mutadoras por guarda register y pruebas
 del request/redeem nuevo; demas315pruebas anteriores conservadas.
 Encargo tmp/sql-01-a15-spec.md. No SMTP/DB/HTTP conectado ni100%SP activado.
+
+
+### D-24: alta del portal por tenant, plataforma aun guardada
+
+A15 aceptada331/331. A16 limita registerSQL a tenant existente coherente con
+request interno y sin Actor; plataforma mantiene500 seguro hastaA17. Misma
+ownership5archivos lifecycle/store/tres suites. Legado,options/request/redeem/
+rate conservados; no configuracion,SMTP ni crear organizacion en este corte.
+
+Unidad REQUIRED:EMAIL_EXISTS incluyendo inactivos ->createForRegistration A11
+MANDATORY ->IDENTITY_PENDING ->PORTAL_REGISTER ->issueSqlVERIFY existente.
+TresSP nuevos en lifecycle store,9totales; USER_CREATE permanece en IdentityStore.
+Pending/portal requieren MANDATORY propio para impedir commit aislado. Actor
+ausente,scopeIDENTITY y mismo manager/datasource son contrato previo al wiring.
+
+Nombre/email/password/terms son unicos datos efectivos; tipo/dominio/plan/sede
+del formulario no conceden rol ni tenant. Dominio/credential UserInputNULL;
+SP decide PAC/RES y sede; no paciente/vinculo/historia ni sesion automatica.
+Duplicates normales retornan misma202 sin reactivar/reenviar ni filtrar identidad.
+Error o carrera posterior revierte y preserva400/403/409/500, sin retry/exito falso.
+ISSUE registration_tenantNULL,origen tenant validado,TTL86400 y fragmento A15;
+no manipular health.tenant/actor para aparentar otro contexto.
+Encargo tmp/sql-01-a16-spec.md; atomicidad/roles/concurrencia real aun sin probar.
