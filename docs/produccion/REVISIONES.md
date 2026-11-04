@@ -631,3 +631,23 @@ Access/store y dos suites aceptados para camino SQL explicito; igual autoridad
 request/principal,2SP tipados,404uniforme D-21,REQUIRED y error seguro. No nuevo
 wiring/DB/HTTP/navegador real. /status confirma Sol medium y cuota disponible;
 se conserva seleccion actual de la misma cuenta/sesion, no cambio supervisor.
+
+
+## SQL-01.A14 - ACEPTADA: catalogo publico con316 pruebas
+
+Informe msg_9bdf62bea05a y done msg_bd01e7fa5b10 revisados. Supervisor leyo
+servicio/store y ambas suites,confronto V3/DTO con D-22 y verifico4SHA.
+Store solo2SP/REQUEST,unidadREQUIRED,proyecciones8/4columnas,inmutabilidad
+anidada,INT/BIGINT/BIT exactos,orden/Unicode y sin techo241 preservados.
+Host interno coherente y guardas SQL de mutadores funcionan en mocks.
+Legacy register/request/redeem/issue/rate comparados exactamente salvo guarda.
+
+Snapshot independiente316/316,0fallos/errores/omisiones,jarPASS25.776s.
+Integracion por4SHA,107bases verificadas,106fueraownership intactas;1archivo
+existente+3nuevos. Acceptance tmp/sqlserver-a14-acceptance.json. El script de
+aceptacion tuvo error inicial de lectura cp1252; corregido a UTF8 antes de
+cualquier copia; no defecto de producto ni repeticion de Maven.
+
+Aceptacion offline: no HTTP/SQLServer/JDBC/Flyway/navegador conectado ni prueba
+de aislamiento/anonimato de red. Constructor SQL no activado; escrituras de
+cuenta siguen guardadas. No se requiere nueva QAvisual de frontend sin cambio.

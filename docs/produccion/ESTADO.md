@@ -283,3 +283,13 @@ aEN_CURSO. Misma cuenta/sesion,Sol medium y cuota disponible verificados.
 A14 prepara solo catalogo publico de registro; mutadores de ciclo y Bootstrap
 con principal segregado siguen pendientes. SQLServer/JDBC/HTTP real aun no
 validado; no nueva evidencia visual ni afirmacion de migracion completa.
+
+
+## A14 aceptada - 2026-11-04
+
+Catalogo publico de registro por2SP integrado tras316/316 pruebas independientes
+y4SHA. Tenants reciben portal:true,plataforma planes/especialidades con tipos
+y proyecciones seguras; validacion offline solamente. Guardas impiden usar
+mutadores del nuevo constructor incompleto; default activo sigue legado.
+Siguiente A15 solicitud/canje de enlaces de identidad y outbox, sin SMTP ni
+registro de cuentas, sin activacion del backend. Integracion real pendiente.

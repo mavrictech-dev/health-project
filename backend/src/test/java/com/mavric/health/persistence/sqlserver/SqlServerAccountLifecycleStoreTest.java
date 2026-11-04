@@ -1,0 +1,84 @@
+package com.mavric.health.persistence.sqlserver;
+import java.util.*;
+import java.sql.SQLException;
+import org.junit.jupiter.api.*;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
+import com.mavric.health.audit.TraceContext;
+import com.mavric.health.shared.ApiException;
+import com.mavric.health.tenancy.TenantRef;
+import com.mavric.health.persistence.sqlserver.SqlServerIdentityStoreTest.ModelTransactionManager;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.*;
+
+/** Executor doubles and modeled transactions; no database connection or snapshot guarantee. */
+class SqlServerAccountLifecycleStoreTest {
+    static final String ID="aa000000-0000-4000-8000-000000000001";
+    static Map<String,Object> plan() {return new LinkedHashMap<>(Map.of("id",ID,"name","Cl\u00ednica \u4e2d\ud83e\uddb7","kinds",new ArrayList<>(List.of("CUSTOM")),"domains",List.of("HUMAN"),"includedBranches",1,"includedProfessionals",2,"includedSpecialties",3,"baseMinor",Long.MAX_VALUE));}
+    static Map<String,Object> specialty() {return new LinkedHashMap<>(Map.of("code","x","name","\u00c1rea","domain","HUMAN","dental",true));}
+    static SqlServerExecutor.Result result(List<Map<String,Object>> rows) {return new SqlServerExecutor.Result(List.of(rows),List.of(0));}
+    final SqlServerExecutor executor=mock(SqlServerExecutor.class);
+    final ModelTransactionManager manager=new ModelTransactionManager();
+    final SqlServerAccountLifecycleStore store=new SqlServerAccountLifecycleStore(executor,manager);
+    final MockHttpServletRequest request=new MockHttpServletRequest("GET","/api/public/registration");
+    final List<SqlServerProcedure> calls=new ArrayList<>();
+    final Deque<SqlServerExecutor.Result> results=new ArrayDeque<>();
+    SqlServerAccountLifecycleStoreTest() {
+        when(executor.execute(any(),any(),any(Object[].class))).thenAnswer(inv->{
+            assertTrue(TransactionSynchronizationManager.isActualTransactionActive());
+            calls.add(inv.getArgument(0));
+            SqlServerContext c=inv.getArgument(1);assertEquals(SqlServerContext.Scope.REQUEST,c.scope());assertNull(c.actorId());assertNull(c.tenantId());
+            assertEquals(0,((Object[])inv.getRawArguments()[2]).length);
+            return results.removeFirst();
+        });
+    }
+    void valid() {results.add(result(List.of(plan())));results.add(result(List.of(specialty())));}
+    @AfterEach void cleanup() {TraceContext.REQUEST.remove();TransactionSynchronizationManager.clear();}
+    static void safe(Runnable work) {var e=assertThrows(ApiException.class,work::run);assertEquals(500,e.status);assertEquals("DATABASE_ERROR",e.code);assertNull(e.getCause());assertFalse(e.toString().contains("secret"));}
+    @Test void twoReadsExactOrderImmutableSafeProjectionNoPrecisionLoss() {
+        var p=plan();p.put("passwordHash","secret");var s=specialty();s.put("tokenHash","secret");
+        results.add(result(List.of(p)));results.add(result(List.of(s)));
+        var out=store.options(request);assertEquals(List.of(SqlServerProcedure.REGISTRATION_PLANS,SqlServerProcedure.REGISTRATION_SPECIALTIES),calls);
+        var plans=(List<Map<String,Object>>)out.get("plans");var mapped=plans.getFirst();assertEquals(8,mapped.size());assertEquals(Long.MAX_VALUE,mapped.get("baseMinor"));assertEquals(p.get("name"),mapped.get("name"));
+        assertFalse(out.toString().contains("secret"));assertThrows(UnsupportedOperationException.class,()->out.clear());assertThrows(UnsupportedOperationException.class,()->plans.clear());assertThrows(UnsupportedOperationException.class,()->mapped.clear());
+        assertThrows(UnsupportedOperationException.class,()->((List<?>)mapped.get("kinds")).clear());((List<?>)p.get("kinds")).clear();assertEquals(List.of("CUSTOM"),mapped.get("kinds"));
+        assertEquals(List.of("begin:0","commit"),manager.events);
+    }
+    @Test void emptyAndLargerThan241CatalogPreserveOrder() {
+        results.add(result(List.of()));results.add(result(List.of()));assertEquals(Map.of("plans",List.of(),"specialties",List.of()),store.options(request));
+        var rows=new ArrayList<Map<String,Object>>();for(int i=0;i<300;i++){var p=plan();p.put("name","row"+i);rows.add(p);}
+        results.add(result(rows));results.add(result(List.of()));var out=(List<Map<String,Object>>)store.options(request).get("plans");assertEquals(300,out.size());assertEquals("row299",out.getLast().get("name"));
+    }
+    @Test void malformedPlansRollbackWithoutSecondCall() {
+        for(String key:plan().keySet()) for(Object bad:Arrays.asList(null,Boolean.TRUE,0.5)) {
+            var p=plan();p.put(key,bad);results.add(result(List.of(p)));safe(()->store.options(request));assertEquals("rollback",manager.events.getLast());
+        }
+        for(Object bad:List.of(0,-1,1L)) {var p=plan();p.put("includedBranches",bad);results.add(result(List.of(p)));safe(()->store.options(request));}
+        for(Object bad:List.of(-1L,1,1.0)) {var p=plan();p.put("baseMinor",bad);results.add(result(List.of(p)));safe(()->store.options(request));}
+        for(Object bad:List.of(ID.toUpperCase(Locale.ROOT),"1-1-1-1-1")) {var p=plan();p.put("id",bad);results.add(result(List.of(p)));safe(()->store.options(request));}
+        var p=plan();p.put("kinds",Arrays.asList("ok",null));results.add(result(List.of(p)));safe(()->store.options(request));
+        var missing=plan();missing.remove("name");results.add(result(List.of(missing)));safe(()->store.options(request));
+        assertFalse(calls.contains(SqlServerProcedure.REGISTRATION_SPECIALTIES));
+    }
+    @Test void malformedSpecialtiesAndResultsetCountRollback() {
+        for(String key:specialty().keySet()) for(Object bad:Arrays.asList(null,1)) {var s=specialty();s.put(key,bad);results.add(result(List.of(plan())));results.add(result(List.of(s)));safe(()->store.options(request));assertEquals("rollback",manager.events.getLast());}
+        for(var sets:List.<List<List<Map<String,Object>>>>of(List.of(),List.of(List.of(),List.of()))) {results.add(new SqlServerExecutor.Result(sets,List.of()));safe(()->store.options(request));}
+    }
+    @Test void hostGuardInsideTransactionNeverExecutor() {
+        safe(()->store.options(null));request.setAttribute("health.tenant","forged");safe(()->store.options(request));
+        request.setAttribute("health.tenant",new TenantRef(ID,"x","x","CLINIC","HUMAN","ACTIVE",List.of()));safe(()->store.options(request));verifyNoInteractions(executor);assertEquals(3,Collections.frequency(manager.events,"rollback"));
+    }
+    @Test void joinedRequiredRollbackAndCommitFailure() {
+        valid();assertThrows(RuntimeException.class,()->manager.outer(()->{store.options(request);assertEquals(List.of("begin:0"),manager.events);throw new RuntimeException("synthetic outer failure");}));assertEquals(0,Collections.frequency(manager.events,"commit"));assertEquals("rollback",manager.events.getLast());
+        valid();manager.failCommit=true;safe(()->store.options(request));
+    }
+    @Test void secondCallFailureCannotReturnPartialSuccessAndNoRetry() {
+        doAnswer(inv->{assertTrue(TransactionSynchronizationManager.isActualTransactionActive());if(inv.getArgument(0)==SqlServerProcedure.REGISTRATION_SPECIALTIES)throw new RuntimeException(new SQLException("secret",null,229));return result(List.of(plan()));}).when(executor).execute(any(),any(),any(Object[].class));
+        safe(()->store.options(request));assertEquals("rollback",manager.events.getLast());verify(executor,times(2)).execute(any(),any(),any(Object[].class));
+    }
+    @Test void serverConflictsRemainSafe() {
+        doThrow(new RuntimeException(new SQLException("secret",null,51003))).when(executor).execute(any(),any(),any(Object[].class));
+        assertEquals(409,assertThrows(ApiException.class,()->store.options(request)).status);assertEquals("rollback",manager.events.getLast());
+    }
+}

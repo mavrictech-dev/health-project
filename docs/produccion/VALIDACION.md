@@ -391,3 +391,16 @@ supervisor del15:45, no se presenta como ejecucion nueva. Acceptance
 tmp/sqlserver-a13-acceptance.json verifica104bases/103fueraownership y4SHA.
 No conexionSQL/JDBC/Flyway/HTTP/navegador real. Cuatro archivos integrados sin
 activar SQL; la prueba de permisos/modelos no acredita pertenencia en motor.
+
+
+### A14 -316 pruebas del supervisor y preservacion
+
+python -B tmp/prepare-sqlserver-a14-review.py:4SHA exactos/107bases, snapshot
+tmp/sqlserver-a14-review/backend. Dentro: .\mvnw.cmd -B -ntp verify,JDK21,
+exit0,BUILD SUCCESS25.776s,316tests/0failures/0errors/0skipped,jar/repackagePASS,
+final2026-11-04T17:59:23-05:00.15nuevas+301previas. Log verify-supervisor.log
+y XML target/surefire-reports del snapshot conservados.
+python -B tmp/accept-sqlserver-a14.py verifica de nuevo hashes/baselines y
+cuerpos legado/rate,integra4archivos.106bases ajenas intactas.
+Pruebas con dobles/TransactionTemplate+manager modelado,sin SQL/JDBC/HTTP real.
+No nueva captura ni QAvisual; catalogo aislado de frontend/config activa.

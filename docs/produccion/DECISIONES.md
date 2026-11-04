@@ -509,3 +509,30 @@ siguientes. El legado y rate/issue conservan comportamiento. No tocar rutas
 ni flujo de correo ahora. Bootstrap separado se aborda despues de acordar
 transaccion/principal propio; no reutilizar la TX runtime como setup.
 Encargo tmp/sql-01-a14-spec.md. Pruebas offline no acreditan catalogo/API real.
+
+
+### D-23: enlaces de identidad sin alta ni SMTP
+
+A14 aceptada316/316; siguiente A15 convierte request/redeem con store existente
+y nueva suite controller standalone; ownership5archivos. Legado,options/rate,
+rutas y formatos actuales preservados; registerSQL sigue guardado500.
+Host interno coincide con TenantRef,scopeIDENTITY de helper servidor.
+Store agrega LOOKUP/MEMBERSHIP(active_only=false)/ISSUE/REDEEM:6SPtotales
+con catalogo previo. REQUIRED agrupa elegibilidad,token,outbox; no TX autonoma.
+
+Cuenta ausente/nohost/membresia ausente/RESETunverified retorna normalmente
+sinISSUE,misma aceptacion API generica. Elegibles usan token32bytes/43base64url,
+hash persistido,link fragment y origen Settings,TTL86400VERIFY/1800RESET.
+ISSUE toma userId y resuelve destinatario en DB; registration_tenant siempreNULL,
+no destinatario del cliente ni correo real en A15. Carrier interno redactado.
+Redeem valido manda hashToken,purpose y hashPassword soloRESET;VERIFYNULL.
+Sin sesion/cookie/autenticar ni exponer tokens en respuesta/diagnosticos.
+
+Tipos/cardinalidad/0RS de escrituras y contexto se validan dentroTX; erroresSP
+se preservan sin fallback/retry ni exito ficticio. Si elegibilidad cambia durante
+ISSUE,abortayerrorseguro; no capturar fallo enTXexterna para ocultar rollback.
+Carreras y no enumeracion de red bajo fallos quedan para QA conectada; no
+presentar aceptacion generica de casos normales como validacion integral IAM.
+Se reemplaza solo testA14 de guardas mutadoras por guarda register y pruebas
+del request/redeem nuevo; demas315pruebas anteriores conservadas.
+Encargo tmp/sql-01-a15-spec.md. No SMTP/DB/HTTP conectado ni100%SP activado.
