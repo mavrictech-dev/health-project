@@ -4,13 +4,20 @@ import java.util.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.mavric.health.shared.*;
 import com.mavric.health.tenancy.TenantRef;
+import com.mavric.health.persistence.sqlserver.SqlServerAccessStore;
 
 @Component
 public class Access {
     private final HttpServletRequest request; private final Sql sql;
-    public Access(HttpServletRequest request,Sql sql) { this.request=request; this.sql=sql; }
+    private final SqlServerAccessStore accessStore;
+    @Autowired
+    public Access(HttpServletRequest request,Sql sql) { this.request=request; this.sql=sql;this.accessStore=null; }
+    public Access(HttpServletRequest request,SqlServerAccessStore accessStore) {
+        this.request=Objects.requireNonNull(request);this.sql=null;this.accessStore=Objects.requireNonNull(accessStore);
+    }
     public Actor actor() { var auth=SecurityContextHolder.getContext().getAuthentication(); if(auth==null || !(auth.getPrincipal() instanceof Actor actor)) throw new ApiException(401,"UNAUTHENTICATED","Inicia sesión en este espacio."); return actor; }
     public TenantRef tenant() { Object value=request.getAttribute("health.tenant"); if(!(value instanceof TenantRef t)) throw ApiException.forbidden(); return t; }
     public String tenantId() { return tenant().id(); }
@@ -20,8 +27,29 @@ public class Access {
     public void write(String feature,String... roles) { roles(roles); TenantRef t=tenant(); if(!List.of("TRIAL","ACTIVE").contains(t.status())) throw new ApiException(403,"SUSPENDED","El cliente conserva sus datos; las operaciones están suspendidas."); module(feature); }
     public void module(String feature) { if(feature!=null && !tenant().modules().contains(feature)) throw new ApiException(403,"MODULE_NOT_INCLUDED","El contrato no incluye este módulo."); }
     public void branch(String id) {
+        if(accessStore!=null) {
+            validatedSqlRequest();
+            Checks.id(id);
+            if(!accessStore.branch(request,id)) throw ApiException.missing();
+            return;
+        }
         Checks.id(id); sql.one("SELECT id FROM branches WHERE tenant_id=? AND id=? AND active=TRUE",tenantId(),id);
         if(!actor().roles().contains("ADM") && sql.optional("SELECT branch_id FROM membership_branches WHERE tenant_id=? AND user_id=? AND branch_id=?",tenantId(),userId(),id).isEmpty()) throw ApiException.forbidden();
     }
-    public void link(String patient,String scope) { if(sql.optional("SELECT patient_id FROM patient_links WHERE tenant_id=? AND user_id=? AND patient_id=? AND active AND JSON_CONTAINS(scopes,JSON_QUOTE(?))",tenantId(),userId(),patient,scope).isEmpty()) throw ApiException.missing(); }
+    public void link(String patient,String scope) {
+        if(accessStore!=null) {
+            validatedSqlRequest();
+            Checks.id(patient);
+            if(scope==null || scope.isBlank() || scope.length()>80) throw ApiException.invalid("Alcance de acceso no valido.");
+            if(!accessStore.link(request,patient,scope)) throw ApiException.missing();
+            return;
+        }
+        if(sql.optional("SELECT patient_id FROM patient_links WHERE tenant_id=? AND user_id=? AND patient_id=? AND active AND JSON_CONTAINS(scopes,JSON_QUOTE(?))",tenantId(),userId(),patient,scope).isEmpty()) throw ApiException.missing();
+    }
+    private void validatedSqlRequest() {
+        Actor actor=actor(); // Preserve the existing 401 before inspecting internal request authority.
+        Object host=request.getAttribute("health.tenant");
+        if(!actor.equals(request.getAttribute("health.actor")) || !(host instanceof TenantRef tenant)
+                || actor.tenantId()==null || !actor.tenantId().equals(tenant.id())) throw ApiException.forbidden();
+    }
 }

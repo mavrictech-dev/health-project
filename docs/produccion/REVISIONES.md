@@ -615,3 +615,19 @@ No integrar por cierre formal pendiente: quota corto antes de worker_done y
 segunda escalacion confirma compactacion bloqueada. Evidencia conservada en
 tmp/sqlserver-a13-review/backend y manifest/result.json; no nueva aprobacion
 por simple exito de suite. HTTP/DB/JDBC/Flyway/navegador reales no probados.
+
+
+## SQL-01.A13 - ACEPTADA tras cierre formal
+
+Worker_done msg_d0f5e7def244 completa mismo Task/Dispatch sin nueva implementacion.
+Supervisor verifica4SHA contra snapshot independiente301/301 previamente probado,
+reports13suites/0fallos/0errores/0omitidas y jar. No repetir verify sin cambio.
+python -B tmp/accept-sqlserver-a13.py comprueba104bases y copia4archivos por bytes;
+103bases ajenas intactas,1modificado+3nuevos. Acceptance.json registra informe
+msg_bf193d7c4cb6 y cierre. Rechazo de aprobacion provisional por cuota queda
+sustituido por esta aceptacion acotada, sin borrar historial.
+
+Access/store y dos suites aceptados para camino SQL explicito; igual autoridad
+request/principal,2SP tipados,404uniforme D-21,REQUIRED y error seguro. No nuevo
+wiring/DB/HTTP/navegador real. /status confirma Sol medium y cuota disponible;
+se conserva seleccion actual de la misma cuenta/sesion, no cambio supervisor.

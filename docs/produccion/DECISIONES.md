@@ -487,3 +487,25 @@ conserva sus403/404. Este cambio del camino SQL queda documentado antes de su
 activacion; formato HTTP de errores permanece. RS/tipos/ids incompatibles500
 seguro con rollback, erroresSP mapeados sin fallback/reintento.
 Encargo tmp/sql-01-a13-spec.md; pruebas de permisos modeladas no validan DB real.
+
+
+### D-22: catalogo de registro y limite temporal del ciclo SQL
+
+Siguiente A14 convierte solo AccountLifecycleService.options y agrega store
+aislado con dos suites;4archivos. Constructor legado @Autowired conserva
+comportamiento; SQL explicito sin beans/datasource activo. Host del request
+interno debe coincidir con TenantRef argumento; plataforma ofrece plans y
+specialties,tenant ofrece solo portal:true sin consultas. Catalogo sigue publico.
+
+REGISTRATION_PLANS y REGISTRATION_SPECIALTIES,REQUEST,una unidad REQUIRED,
+ambos resultsets0..Nfilas dentroTX. Proyeccion explicita de ocho campos plan y
+cuatro especialidad,INTInteger/BIGINTLong/BITBoolean,arraysString inmutables,
+orden/Unicode preservados,sin techo241 ni campos demo/privados. Datos SP
+malformados500 seguro,fallos sin lista vacia fingida/retry/fallback.
+
+No se activa un servicio SQL incompleto: register/request/redeem del nuevo
+constructor fallan500seguro antes de efecto/interaccion hasta sus paquetes
+siguientes. El legado y rate/issue conservan comportamiento. No tocar rutas
+ni flujo de correo ahora. Bootstrap separado se aborda despues de acordar
+transaccion/principal propio; no reutilizar la TX runtime como setup.
+Encargo tmp/sql-01-a14-spec.md. Pruebas offline no acreditan catalogo/API real.

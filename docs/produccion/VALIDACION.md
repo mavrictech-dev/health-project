@@ -381,3 +381,13 @@ Son executor/manager dobles, request y SecurityContext locales; no SQLServer
 conectado, pertenencia/revocacion en motor ni navegacion/HTTP real. Sin QAvisual
 nueva por cambio backend aislado. No integrar hasta cierre del encargo; cuotas
 del trabajador impiden worker_done. No repetir suite si hashes no cambian.
+
+
+### A13 - cierre recibido, misma evidencia301/301
+
+Worker_done msg_d0f5e7def244 permite cerrar entrega. Cuatro SHA actuales iguales
+al snapshot301/301,0fail/0error/0skip,jarPASS20.295s. Se reutiliza build del
+supervisor del15:45, no se presenta como ejecucion nueva. Acceptance
+tmp/sqlserver-a13-acceptance.json verifica104bases/103fueraownership y4SHA.
+No conexionSQL/JDBC/Flyway/HTTP/navegador real. Cuatro archivos integrados sin
+activar SQL; la prueba de permisos/modelos no acredita pertenencia en motor.

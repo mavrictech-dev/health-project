@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | BLOQUEADA (cierre A13 por cuota; A1-A12 aceptadas) | A13 task_129beb79686e / ctx_3b77fd5f3dd4,301/301 supervisor; informe msg_bf193d7c4cb6 | Falta worker_done; reanudar misma sesion tras cuota y verificar modelo. A13 no integrada. Diseno documental independiente posible; otros consumidores/JDBC/Flyway/HTTP reales pendientes |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A13 aceptadas; A14 preparado) | A13 task_129beb79686e / ctx_3b77fd5f3dd4,301/301 supervisor; done msg_d0f5e7def244 | Access integrado sin wiring. Siguiente catalogo publico de registro; consumidores restantes/segregacion/JDBC/Flyway/HTTP reales pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -338,3 +338,13 @@ Antes de reanudar verificar/restaurar modelo por proceso sin cambiar config
 global; no inferir causa exacta del cambio por la pantalla sola.
 Responsable de cierre: programador misma sesion al recuperar cuota; supervisor
 puede seguir diseno documental independiente. No marcar Task completada.
+
+
+A13 ACEPTADA tras worker_done msg_d0f5e7def244, recibido17:48 local. Cuatro SHA
+siguen iguales al snapshot301/301+jar; se reutiliza esa evidencia sin repetir
+verify. Integrados1archivo existente+3nuevos,104bases previas verificadas y103
+ajenas al ownership intactas. Quota ya disponible; /status confirma misma
+cuenta mendozadeafabisa@gmail.com,sesion01a19e4c-15af-74e0-a1b9-75fc7093b98f
+y modelo GPT-6.1-Sol medium. No se restauro high ni se altero seleccion vigente.
+A14 preparada tmp/sql-01-a14-spec.md,D-22: catalogo publico registro por2SP,
+ownership servicio/store y dos suites. Sin Bootstrap ni escrituras del ciclo.

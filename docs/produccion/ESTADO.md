@@ -273,3 +273,13 @@ no se integran ni publican archivos A13; A12/da3373a sigue ultimo corte de codig
 aceptado. Resta verificar modelo antes de reanudar: tras wake de Orca la pantalla
 muestra Luna medium, distinto del Sol high observado antes. No comprar cuota,
 cambiar cuentas ni iniciar agentes sustitutos; mismo Task/Dispatch pendiente.
+
+
+## A13 aceptada tras cierre - 2026-11-04
+
+Recibido worker_done msg_d0f5e7def244 y4SHA iguales al snapshot301/301+jar.
+Access/store/suites integrados sin cambiar configuracion activa; SQL-01 vuelve
+aEN_CURSO. Misma cuenta/sesion,Sol medium y cuota disponible verificados.
+A14 prepara solo catalogo publico de registro; mutadores de ciclo y Bootstrap
+con principal segregado siguen pendientes. SQLServer/JDBC/HTTP real aun no
+validado; no nueva evidencia visual ni afirmacion de migracion completa.
