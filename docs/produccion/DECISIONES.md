@@ -463,3 +463,27 @@ RS/cardinalidad/tipos/columnas seguras dentroTX, sin filtrar hashes/CSRF en list
 Preservar404 desconocido, cookie/logout y errores existentes. Pruebas HTTP
 simuladas/manager doble, sin atribuirlas a browser o SQL Server real.
 Encargo completo tmp/sql-01-a12-spec.md; no activar backend parcial.
+
+
+### D-21: Access de sede/vinculo por SP en constructor explicito
+
+A12 aceptada con279pruebas independientes. A13 convierte solamente Access.branch
+y Access.link, mas store aislado y dos suites nuevas; cuatro archivos.
+Constructor legado con @Autowired preservado y constructor SQL explicito, sin
+activar beans/datasource ni cambiar otros metodos publicos de Access.
+
+Autoridad de branch/link SQL: SecurityContext.actor coincide con health.actor
+y TenantRef del request inyectado; sin actor401, incoherencia o plataforma403,
+antes del SP. No usar otro request de TraceContext para sustituir autoridad.
+REQUEST deriva actor/tenant/token de atributos internos. ADM tambien consultaSP.
+ACCESS_BRANCH(id) y ACCESS_PATIENT_LINK(patient,scope), solo esos dos descriptores;
+REQUIRED y mapeo dentroTX,0..1fila,ids exactos. Ids canonicos Checks.id y scope
+no blanco<=80UTF16, sin cambio de caso ni lista cerrada adicional.
+
+Decision consciente para futuro camino SQL: V3 devuelve opcion vacia tanto por
+sede ausente/inactiva/ajena como por falta de asignacion; unificar404 para estos
+casos evita lectura extra y revelar existencia. Link vacio tambien404. Legado
+conserva sus403/404. Este cambio del camino SQL queda documentado antes de su
+activacion; formato HTTP de errores permanece. RS/tipos/ids incompatibles500
+seguro con rollback, erroresSP mapeados sin fallback/reintento.
+Encargo tmp/sql-01-a13-spec.md; pruebas de permisos modeladas no validan DB real.

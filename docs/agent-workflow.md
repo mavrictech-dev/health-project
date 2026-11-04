@@ -345,3 +345,9 @@ entrega ni inicio de implementacion confirmado. No duplicar el arranque.
 El corte revisado hasta A11 fue confirmado y subido como
 c3df2692fe80da9009d321726d2f8b95a2e4d608 a origin/health/production-wave0;
 remote ref comprobado, main permanece en0b24487c77055a081f6e76f0b18bc544ce4b1958.
+
+
+A12 aceptada: msg_7298902f71ec/msg_f73a5d08f955,ctx_296d15f80886. Snapshot
+independiente279/279+jar y6SHA;6archivos integrados sin activar SQL. A13 se
+prepara en tmp/sql-01-a13-spec.md con D-21 y ownership4archivos. Seguir por
+follow-up sobre misma conversacion retenida; no reenviar Task/Dispatch de A12.

@@ -311,4 +311,72 @@ class IdentityServiceSqlServerTest {
         }
         verifyNoInteractions(recorder);
     }
+
+    @Test void browserLoginSharesOneAuthenticationSaveAndCarriesSameStoredCsrfExpiryWithRedactedDiagnostics() {
+        Fixture f=new Fixture();
+        var result=f.service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1");
+        assertEquals(STORED_EXPIRY,result.expiresAt());assertEquals("b".repeat(64),result.csrfToken());
+        assertTrue(result.token().matches("[A-Za-z0-9_-]{43}"));assertEquals(Checks.hash(result.token()),f.savedHash);
+        assertEquals(List.of("credentials","membership","save"),f.order);
+        verify(f.store,times(1)).saveSession(any(),any(),any(),any());
+        assertEquals(new IdentityService.BrowserUser(ID,"Synthetic",EMAIL,List.of("ADM")),result.user());
+        assertEquals("BrowserLogin[redacted]",result.toString());assertEquals("BrowserUser[redacted]",result.user().toString());
+        List<String> roles=new ArrayList<>(List.of("ADM"));
+        var immutable=new IdentityService.BrowserUser(ID,"Synthetic",EMAIL,roles);roles.add("PRO");
+        assertEquals(List.of("ADM"),immutable.roles());
+        assertThrows(UnsupportedOperationException.class,()->immutable.roles().add("PRO"));
+        assertNotNull(f.request.getAttribute("health.actor"));assertNull(SecurityContextHolder.getContext().getAuthentication());
+    }
+
+    @Test void browserLoginDoesNotBypassCredentialEmailRoleHostOrRateRejections() {
+        for(int mode=0;mode<5;mode++) {
+            Fixture f=new Fixture();
+            if(mode==0)f.credentials=Optional.empty();
+            if(mode==1)f.credentials=Optional.of(credentials(null,true,true));
+            if(mode==2)f.credentials=Optional.of(credentials(null,false,false));
+            if(mode==3)f.membership=Optional.empty();
+            String password=mode==4?"wrong":PASSWORD;
+            ApiException error=assertThrows(ApiException.class,()->f.service.loginBrowser(EMAIL,password,REF,"127.0.0.1"));
+            assertEquals(mode==2?403:401,error.status);f.noSessionWriteOrActor();
+        }
+        Fixture host=new Fixture();
+        assertEquals(401,assertThrows(ApiException.class,()->host.service.loginBrowser(EMAIL,PASSWORD,null,"127.0.0.1")).status);
+        verifyNoInteractions(host.store);
+        Fixture rate=new Fixture();rate.credentials=Optional.empty();
+        for(int i=0;i<10;i++)assertThrows(ApiException.class,()->rate.service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1"));
+        assertEquals(429,assertThrows(ApiException.class,()->rate.service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1")).status);
+        verify(rate.store,times(10)).credentials(any(),any());rate.noSessionWriteOrActor();
+    }
+
+    @Test void browserLoginWaitsForOuterCommitAndPublishesNothingOnRollbackOrCommitFailure() {
+        Fixture committed=new Fixture();
+        committed.manager.outer(()-> {
+            committed.service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1");
+            assertNull(committed.request.getAttribute("health.actor"));return true;
+        });
+        assertNotNull(committed.request.getAttribute("health.actor"));
+        Fixture rollback=new Fixture();
+        assertThrows(ApiException.class,()->rollback.manager.outer(()-> {
+            rollback.service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1");throw new ApiException(409,"CONFLICT","Later failure");
+        }));
+        assertNull(rollback.request.getAttribute("health.actor"));
+        Fixture failed=new Fixture();failed.manager.failCommit=true;
+        assertEquals(500,assertThrows(ApiException.class,()->failed.service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1")).status);
+        assertNull(failed.request.getAttribute("health.actor"));assertNull(SecurityContextHolder.getContext().getAuthentication());
+    }
+
+    @Test void browserLoginFailsSafelyOnLegacyConstructorWithoutAnySqlOrRecorderUse() {
+        Sql sql=mock(Sql.class);AttemptRecorder recorder=mock(AttemptRecorder.class);
+        IdentityService service=new IdentityService(sql,mock(Access.class),mock(PasswordEncoder.class),SETTINGS,recorder);
+        assertEquals(500,assertThrows(ApiException.class,()->service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1")).status);
+        verifyNoInteractions(sql,recorder);
+    }
+
+    @Test void malformedSavedBrowserResultRollsBackWithoutActorOrSecondSessionWrite() {
+        Fixture f=new Fixture();
+        doReturn(new SavedSession("private-invalid",STORED_EXPIRY)).when(f.store).saveSession(any(),any(),any(),any());
+        assertEquals(500,assertThrows(ApiException.class,()->f.service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1")).status);
+        assertNull(f.request.getAttribute("health.actor"));assertEquals(List.of("begin:0","rollback"),f.manager.events);
+        verify(f.store,times(1)).saveSession(any(),any(),any(),any());
+    }
 }

@@ -560,3 +560,41 @@ en tmp/sqlserver-a11-acceptance.json y snapshot original. Constructor legado
 AccountLifecycle/Bootstrap modificados. A11 aceptada para camino implementado
 y pruebas simuladas, no para migracion completa. A12 convierte browser sessions
 con CSRF obtenido del mismo SESSION_SAVE y respuesta sin bearer en body.
+
+
+## SQL-01.A12 - revision provisional de avance
+
+Msg_d81b4583d988 confirma turno del programador en ctx_296d15f80886, aunque
+Orca mantiene start_unknown por observacion de arranque incompleta. No es fallo
+de implementacion ni autoriza otro arranque. Supervisor leyo tres clases en
+worktree sin modificarlas y confronto SESSION_SAVE/CURRENT/LIST/REVOKE conV3.
+Proyecciones HTTP explicitas, loginBrowser inmutable/redactado y store11SP
+presentes; cookie SQL diferida hasta afterCommit bajo TX exterior.
+
+No hay suite final ni nuevo test de controller disponible en esta observacion.
+No se aprueba un avance. Guidance msg_c4b2bae99c1f requiere verificar ausencia
+de cookie antes de commit y tras rollback/fallo, salida sin TX exterior,
+CSRF/expiry del mismoRS, bearerA11, constructor Spring legado y hashes6.
+SQLServer/JDBC/HTTP conectado y navegador real siguen fuera de esta evidencia.
+
+
+## SQL-01.A12 - ACEPTADA con279 pruebas independientes
+
+Entrega msg_7298902f71ec y done msg_f73a5d08f955 revisados. Seis SHA coinciden
+con los archivos recibidos y snapshot tmp/sqlserver-a12-review/backend.
+Supervisor leyo tres clases y las tres suites, contrasto firmas V3, diffs
+de servicio/store y preservacion de tests A11 retirando solo secciones anexadas.
+verify independiente:279/279,0fail/0error/0skip,BUILD SUCCESS20.765s,jar PASS.
+
+Login browser comparte autenticacion/SAVE con bearer, resultado interno
+inmutable/redactado y body explicito; CSRF/expiry del mismoRS. Cookie/actor
+tras commit, ausentes en rollback o fallo de commit modelado, incluyendo TX
+exterior y logout. Lista con nueve campos seguros, current con tenantIdNULL
+y revocacion por id64hex sin rehash. Legado @Autowired sigue seleccionado;
+CSRF legado se obtiene antes de cookie para no dejar header ante lectura fallida.
+
+Aceptacion limitada: HTTP MockMvc standalone y TX modeladas, no conexiones
+SQLServer/JDBC/Flyway/pool ni navegador reales. Se integran6archivos por bytes,
+103 bases verificadas y98 ajenas al ownership intactas. Acceptance y manifests
+en tmp/sqlserver-a12-acceptance.json y tmp/sqlserver-a12-review-manifest.json.
+Sin defectos abiertos dentro del alcance revisado; backend activo sigue legado.

@@ -37,6 +37,10 @@ public final class SqlServerIdentityStore {
     public record SavedSession(String csrfToken,Instant expiresAt) {
         @Override public String toString() { return "SavedSession[redacted]"; }
     }
+    public record SessionSummary(String id,String tenantId,Instant createdAt,Instant lastSeenAt,Instant expiresAt,
+            boolean revoked,String userAgent,String sourceIp,boolean current) {
+        @Override public String toString() { return "SessionSummary[redacted]"; }
+    }
 
     public <T> T required(Supplier<T> work) { return within(required,work); }
 
@@ -91,9 +95,26 @@ public final class SqlServerIdentityStore {
             Map<String,Object> row=optional(executor.execute(SqlServerProcedure.SESSION_SAVE,
                     SqlServerRequestContexts.from(request,SqlServerContext.Scope.IDENTITY),hash,userId,expires))
                     .orElseThrow(SqlServerIdentityStore::inconsistent);
-            String csrf=text(row,"csrfToken",false);
-            if(!csrf.matches("[0-9a-fA-F]{64}")) throw inconsistent();
-            return new SavedSession(csrf,instant(row,"expiresAt",false));
+            return savedSession(row);
+        });
+    }
+
+    public SavedSession currentSession(HttpServletRequest request) {
+        return required(()->savedSession(optional(executor.execute(SqlServerProcedure.SESSION_CURRENT,
+                actorContext(request))).orElseThrow(ApiException::missing)));
+    }
+
+    public List<SessionSummary> listSessions(HttpServletRequest request) {
+        return required(()-> {
+            var result=executor.execute(SqlServerProcedure.SESSIONS_LIST,actorContext(request));
+            if(result==null || result.resultSets().size()!=1 || result.resultSets().getFirst().size()>100) throw inconsistent();
+            return result.resultSets().getFirst().stream().map(row-> {
+                String id=text(row,"id",false);
+                if(!opaqueId(id)) throw inconsistent();
+                return new SessionSummary(id,text(row,"tenantId",true),instant(row,"createdAt",false),
+                        instant(row,"lastSeenAt",false),instant(row,"expiresAt",false),bit(row,"revoked"),
+                        text(row,"userAgent",false),text(row,"sourceIp",false),bit(row,"current"));
+            }).toList(); // Explicit projection: extra driver/SP columns cannot escape to HTTP.
         });
     }
 
@@ -110,6 +131,13 @@ public final class SqlServerIdentityStore {
         required(()-> { executeVoid(SqlServerProcedure.SESSION_REVOKE,actorContext(request),(Object)null);return Boolean.TRUE; });
     }
 
+    public void revokeSession(HttpServletRequest request,String id) {
+        required(()-> {
+            if(!opaqueId(id)) throw ApiException.missing(); // Preserve unknown/foreign-id 404, never binder 400.
+            executeVoid(SqlServerProcedure.SESSION_REVOKE,actorContext(request),id);
+            return Boolean.TRUE;
+        });
+    }
     public void acceptInvitation(HttpServletRequest request,String userId) {
         required(()-> {
             var context=SqlServerRequestContexts.from(request,SqlServerContext.Scope.IDENTITY);
@@ -131,6 +159,12 @@ public final class SqlServerIdentityStore {
         var context=SqlServerRequestContexts.from(request,SqlServerContext.Scope.REQUEST);
         if(context.actorId()==null) throw ApiException.forbidden();
         return context;
+    }
+    private static boolean opaqueId(String id) { return id!=null && id.matches("[0-9a-fA-F]{64}"); }
+    private static SavedSession savedSession(Map<String,Object> row) {
+        String csrf=text(row,"csrfToken",false);
+        if(!opaqueId(csrf)) throw inconsistent();
+        return new SavedSession(csrf,instant(row,"expiresAt",false));
     }
     private <T> T within(TransactionTemplate template,Supplier<T> work) {
         try { return template.execute(status->work.get()); }

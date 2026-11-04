@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A11 aceptadas; A12 sesiones de navegador siguiente) | A11 task_f7a0d8b4a221 / ctx_9fce40cb9b8a,249/249 supervisor | IdentityService/store integrados sin wiring activo. Faltan otros consumidores, segregacion final y JDBC/Flyway/HTTP reales |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A12 aceptadas; A13 Access preparado) | A12 task_20f587aa9bd6 / ctx_296d15f80886,279/279 supervisor | Browser sessions integradas sin wiring; siguiente Access.branch/link. Faltan otros consumidores, segregacion final y JDBC/Flyway/HTTP reales |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -293,3 +293,21 @@ entrega ni inicio de implementacion confirmado. No duplicar el arranque.
 El corte revisado hasta A11 fue confirmado y subido como
 c3df2692fe80da9009d321726d2f8b95a2e4d608 a origin/health/production-wave0;
 remote ref comprobado, main permanece en0b24487c77055a081f6e76f0b18bc544ce4b1958.
+
+
+A12 avance confirmado msg_d81b4583d988: programador informa implementacion de
+contratos y prepara tests. Esto acredita turno activo pese a start_unknown /
+turn_start_unobserved del recibo Orca; no reenviar ni recuperar por ese estado.
+Supervisor leyo controller/service/store contra V3: proyeccion explicita de
+body,11SP y cookie diferida a afterCommit si existe TX exterior. Guidance
+msg_c4b2bae99c1f exige regresiones de commit/rollback, contratos bearerA11,
+seleccion Spring del constructor legado y evidencia final de seis archivos.
+A12 no entregada, integrada ni aprobada; A11 sigue ultimo corte aceptado.
+
+
+A12 ACEPTADA: informe msg_7298902f71ec/done msg_f73a5d08f955 recibidos.
+Supervisor verifica6SHA,snapshot independiente verify279/279 sin fallos ni
+omisiones y jar PASS; cinco archivos existentes+uno nuevo integrados por bytes.
+103 bases comprobadas,98 fueraownership intactas; pruebas A11 conservadas.
+No app/config nueva ni DB real. A13 preparada tmp/sql-01-a13-spec.md,D-21,
+ownership Access y nuevo store con dos suites; sin archivos compartidos A12.

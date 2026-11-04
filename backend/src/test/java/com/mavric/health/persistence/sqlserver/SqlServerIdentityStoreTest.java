@@ -241,6 +241,84 @@ public class SqlServerIdentityStoreTest {
         when(driver.executor.execute(any(),any(),any(Object[].class))).thenThrow(new IllegalStateException("private driver"));
         safe500(()->driver.store.credentials(driver.request,"qa@example.test"));verify(driver.executor,times(1)).execute(any(),any(),any(Object[].class));
     }
+    private static Map<String,Object> sessionRow() {
+        Map<String,Object> row=new LinkedHashMap<>();
+        row.put("id","d".repeat(64));row.put("tenantId",null);row.put("createdAt","2026-11-04T01:02:03.123456Z");
+        row.put("lastSeenAt","2026-11-04T01:03:03Z");row.put("expiresAt",EXPIRY.toString());
+        row.put("revoked",false);row.put("userAgent","Synthetic browser");row.put("sourceIp","192.0.2.1");row.put("current",true);
+        return row;
+    }
+
+    @Test void currentListAndRevokeUseRequestScopeNoLookupAndUnchangedOpaqueId() {
+        Fixture f=new Fixture();f.actor();f.add(saved());f.add(sessionRow());f.noRows();f.noRows();
+        assertEquals(EXPIRY,f.store.currentSession(f.request).expiresAt());
+        var summaries=f.store.listSessions(f.request);
+        assertEquals(1,summaries.size());assertNull(summaries.getFirst().tenantId());
+        assertEquals(Instant.parse("2026-11-04T01:02:03.123456Z"),summaries.getFirst().createdAt());
+        assertTrue(summaries.getFirst().current());assertFalse(summaries.getFirst().revoked());
+        assertThrows(UnsupportedOperationException.class,()->summaries.clear());
+        String opaque="A".repeat(64);
+        f.store.revokeSession(f.request,opaque);f.store.revokeSession(f.request);
+        assertEquals(List.of(SqlServerProcedure.SESSION_CURRENT,SqlServerProcedure.SESSIONS_LIST,
+                SqlServerProcedure.SESSION_REVOKE,SqlServerProcedure.SESSION_REVOKE),f.calls.stream().map(Call::procedure).toList());
+        assertEquals(List.of(),f.calls.get(0).parameters());assertEquals(List.of(),f.calls.get(1).parameters());
+        assertEquals(List.of(opaque),f.calls.get(2).parameters());assertEquals(Collections.singletonList(null),f.calls.get(3).parameters());
+        assertTrue(f.calls.stream().allMatch(c->c.context().scope()==SqlServerContext.Scope.REQUEST
+                && HASH.equals(c.context().tokenHash()) && ID.equals(c.context().actorId())));
+    }
+
+    @Test void sessionListIsSafeProjectionEvenIfSourceContainsExtraSecretColumns() {
+        Fixture f=new Fixture();f.actor();var row=sessionRow();
+        row.put("tokenHash","private-token-hash");row.put("csrfToken","private-csrf");row.put("passwordHash","private-password");
+        f.add(row);var result=f.store.listSessions(f.request);
+        String json=new tools.jackson.databind.ObjectMapper().writeValueAsString(result);
+        assertFalse(json.contains("private"));assertFalse(json.contains("tokenHash"));assertFalse(json.contains("csrfToken"));assertFalse(json.contains("passwordHash"));
+        assertEquals("SessionSummary[redacted]",result.getFirst().toString());
+    }
+
+    @Test void emptyListAndExactlyHundredSessionsAreValidButOversizedOrMultipleResultsetsRollBack() {
+        Fixture empty=new Fixture();empty.actor();empty.empty();assertEquals(List.of(),empty.store.listSessions(empty.request));
+        Fixture hundred=new Fixture();hundred.actor();
+        hundred.results.add(new SqlServerExecutor.Result(List.of(Collections.nCopies(100,sessionRow())),List.of(0)));
+        assertEquals(100,hundred.store.listSessions(hundred.request).size());
+        for (var sets:List.<List<List<Map<String,Object>>>>of(List.of(),List.of(List.of(),List.of()),
+                List.of(Collections.nCopies(101,sessionRow())))) {
+            Fixture f=new Fixture();f.actor();f.results.add(new SqlServerExecutor.Result(sets,List.of()));
+            safe500(()->f.store.listSessions(f.request));assertEquals("rollback",f.manager.events.getLast());
+        }
+    }
+
+    @Test void malformedSessionDatesBitsNullableTenantAndTextsAreSecureMappingRollbacks() {
+        for (Map.Entry<String,Object> field:List.<Map.Entry<String,Object>>of(Map.entry("id","x".repeat(43)),Map.entry("tenantId",5),
+                Map.entry("createdAt","private-date"),Map.entry("lastSeenAt","2026-11-04T00:00:00.000000001Z"),
+                Map.entry("expiresAt","2026-11-04T00:00:00+01:00"),Map.entry("revoked",0),
+                Map.entry("current","true"),Map.entry("userAgent",false),Map.entry("sourceIp",5))) {
+            Fixture f=new Fixture();f.actor();var row=sessionRow();row.put(field.getKey(),field.getValue());f.add(row);
+            safe500(()->f.store.listSessions(f.request));assertEquals("rollback",f.manager.events.getLast());
+        }
+    }
+
+    @Test void currentSessionEmptyIs404AndMalformedOrMultipleRowsNeverSucceed() {
+        Fixture empty=new Fixture();empty.actor();empty.empty();
+        assertEquals(404,assertThrows(ApiException.class,()->empty.store.currentSession(empty.request)).status);
+        Fixture duplicate=new Fixture();duplicate.actor();
+        duplicate.results.add(new SqlServerExecutor.Result(List.of(List.of(saved(),saved())),List.of()));
+        safe500(()->duplicate.store.currentSession(duplicate.request));
+        Fixture malformed=new Fixture();malformed.actor();malformed.add(Map.of("csrfToken","private","expiresAt",EXPIRY.toString()));
+        safe500(()->malformed.store.currentSession(malformed.request));
+    }
+
+    @Test void invalidOpaqueRevokeIdsAre404BeforeExecutorNotBinder400AndValidForeign404IsPreserved() {
+        for(String id:Arrays.asList(null,"",ID,"x".repeat(43),"g".repeat(64),"a".repeat(65))) {
+            Fixture f=new Fixture();f.actor();
+            assertEquals(404,assertThrows(ApiException.class,()->f.store.revokeSession(f.request,id)).status);
+            verifyNoInteractions(f.executor);assertEquals("rollback",f.manager.events.getLast());
+        }
+        Fixture foreign=new Fixture();foreign.actor();ApiException missing=ApiException.missing();
+        doThrow(missing).when(foreign.executor).execute(any(),any(),any(Object[].class));
+        assertSame(missing,assertThrows(ApiException.class,()->foreign.store.revokeSession(foreign.request,"b".repeat(64))));
+        verify(foreign.executor,times(1)).execute(eq(SqlServerProcedure.SESSION_REVOKE),any(),eq("b".repeat(64)));
+    }
     private static void safe500(Runnable action) {
         ApiException error=assertThrows(ApiException.class,action::run);
         assertEquals(500,error.status);assertEquals("DATABASE_ERROR",error.code);assertFalse(error.toString().contains("private"));assertNull(error.getCause());

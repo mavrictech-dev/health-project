@@ -49,11 +49,32 @@ public class IdentityService {
         return createSql(request,input,true); // store enforces MANDATORY, never manufactures an independent TX
     }
     public record UserInput(@jakarta.validation.constraints.NotBlank @jakarta.validation.constraints.Size(max=160) String name,@jakarta.validation.constraints.NotBlank @jakarta.validation.constraints.Email @jakarta.validation.constraints.Size(max=254) String email,@jakarta.validation.constraints.NotBlank String password,@jakarta.validation.constraints.Pattern(regexp="HUMAN|ANIMAL") String domain,@jakarta.validation.constraints.Size(max=100) String credential) { }
+    /** Internal only: the controller builds an explicit HTTP projection, never serializes this result. */
+    public record BrowserUser(String id,String name,String email,List<String> roles) {
+        public BrowserUser { roles=List.copyOf(roles); }
+        @Override public String toString() { return "BrowserUser[redacted]"; }
+    }
+    public record BrowserLogin(String token,BrowserUser user,Instant expiresAt,String csrfToken) {
+        public BrowserLogin {
+            if(token==null || !token.matches("[A-Za-z0-9_-]{43}") || user==null
+                    || user.id()==null || user.name()==null || user.email()==null
+                    || expiresAt==null || expiresAt.getNano()%1000!=0
+                    || csrfToken==null || !csrfToken.matches("[0-9a-fA-F]{64}")) throw databaseError();
+        }
+        @Override public String toString() { return "BrowserLogin[redacted]"; }
+    }
+    @Transactional public BrowserLogin loginBrowser(String email,String password,TenantRef tenant,String address) {
+        if(identityStore==null) throw databaseError();
+        HttpServletRequest request=hostRequest(tenant);
+        request.removeAttribute("health.actor");
+        try { return identityStore.required(()->loginSql(email,password,tenant,address,request)); }
+        catch(RuntimeException error) { request.removeAttribute("health.actor");throw SqlServerErrors.map(error); }
+    }
     @Transactional public Map<String,Object> login(String email,String password,TenantRef tenant,String address) {
         if(identityStore!=null) {
             HttpServletRequest request=hostRequest(tenant);
             request.removeAttribute("health.actor");
-            try { return identityStore.required(()->loginSql(email,password,tenant,address,request)); }
+            try { return identityStore.required(()->bearer(loginSql(email,password,tenant,address,request))); }
             catch(RuntimeException error) { request.removeAttribute("health.actor");throw SqlServerErrors.map(error); }
         }
         limit(Checks.hash(address+":"+(tenant==null?"platform":tenant.id())+":"+email.toLowerCase(Locale.ROOT)));
@@ -83,7 +104,7 @@ public class IdentityService {
                     var user=identityStore.credentials(request,normalized(email)).orElseThrow(IdentityService::rejected);
                     if(!passwords.matches(password,user.passwordHash())) throw rejected();
                     identityStore.acceptInvitation(request,user.id());
-                    return loginSql(email,password,tenant,address,request);
+                    return bearer(loginSql(email,password,tenant,address,request));
                 });
             } catch(RuntimeException error) { request.removeAttribute("health.actor");throw SqlServerErrors.map(error); }
         }
@@ -115,7 +136,7 @@ public class IdentityService {
         else identityStore.create(request,id,input.name().trim(),normalized(input.email()),hash,input.domain(),input.credential());
         return id;
     }
-    private Map<String,Object> loginSql(String email,String password,TenantRef tenant,String address,HttpServletRequest request) {
+    private BrowserLogin loginSql(String email,String password,TenantRef tenant,String address,HttpServletRequest request) {
         limit(Checks.hash(address+":"+(tenant==null?"platform":tenant.id())+":"+email.toLowerCase(Locale.ROOT)));
         var found=identityStore.credentials(request,normalized(email));
         if(found.isEmpty() || found.get().locked() || !passwords.matches(password,found.get().passwordHash())) {
@@ -137,10 +158,15 @@ public class IdentityService {
         String token=Base64.getUrlEncoder().withoutPadding().encodeToString(bytes),hash=Checks.hash(token);
         Instant expiry=Instant.now().plus(settings.sessionHours(),java.time.temporal.ChronoUnit.HOURS);
         var saved=identityStore.saveSession(request,hash,user.id(),expiry);
+        BrowserLogin result=new BrowserLogin(token,new BrowserUser(user.id(),user.name(),user.email(),roles),saved.expiresAt(),saved.csrfToken());
         Actor actor=new Actor(user.id(),user.name(),user.email(),tenant==null?null:tenant.id(),roles,hash);
         publishAfterCommit(request,actor);
-        return Map.of("accessToken",token,"tokenType","Bearer","expiresAt",saved.expiresAt().toString(),
-                "user",Map.of("id",user.id(),"name",user.name(),"email",user.email(),"roles",roles));
+        return result;
+    }
+    private static Map<String,Object> bearer(BrowserLogin result) {
+        BrowserUser user=result.user();
+        return Map.of("accessToken",result.token(),"tokenType","Bearer","expiresAt",result.expiresAt().toString(),
+                "user",Map.of("id",user.id(),"name",user.name(),"email",user.email(),"roles",user.roles()));
     }
     private static void publishAfterCommit(HttpServletRequest request,Actor actor) {
         if(!TransactionSynchronizationManager.isActualTransactionActive()

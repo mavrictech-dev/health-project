@@ -350,3 +350,19 @@ Escaneo local de49 archivos candidatos:0 coincidencias de patrones de claves
 privadas, tokens GitHub/OpenAI o JWT. No incluir tmp, auth, env ni artefactos.
 No nueva prueba visual; las evidencias visuales anteriores son interceptadas.
 Migracion activa, JDBC/Flyway/HTTP y navegacion con backend real pendientes.
+
+
+### A12 - snapshot supervisor,279 pruebas
+
+python -B tmp/prepare-sqlserver-a12-review.py confirma6SHA de entrega y103bases,
+prepara snapshot desde backend supervisor con solo6reemplazos autorizados.
+Desde tmp/sqlserver-a12-review/backend: .\mvnw.cmd -B -ntp verify con JDK21,
+exit0,BUILD SUCCESS20.765s,279tests/0failures/0errors/0skipped y jar/repackagePASS.
+Log tmp/sqlserver-a12-review/verify-supervisor.log; XML en target/surefire-reports.
+Controller19 nuevos,servicio25,store17,otras218;30nuevas+249previas.
+
+python -B tmp/accept-sqlserver-a12.py vuelve a verificar SHA/bases y preservacion
+de pruebas anteriores; integra5existentes+1nueva,98bases ajenas intactas.
+Pruebas HTTP simuladas y manager de TX modelado; no Boot/puerto, DB, JDBC,
+Flyway o navegador conectado. No nueva QAvisual; frontend no cambio. No repetir
+suites frontend/motor sin cambios pertinentes. Integracion real sigue pendiente.

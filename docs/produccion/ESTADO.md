@@ -254,3 +254,12 @@ A12 no tiene entrega: Orca recupero ctx_fc719f716d1e como abandoned por terminal
 ausente. Conversacion original del programador restaurada y ambas cuentas
 efectivas verificadas; misma Task se retomara con Dispatch nuevo.
 No implica SQL Server conectado, validacion HTTP real ni salida a produccion.
+
+
+## Corte SQL-01.A12 aceptado - 2026-11-04
+
+Camino explicito browser sessions integrado tras279/279 pruebas independientes,
+seis hashes verificados y jar PASS. Cookies/CSRF/lista/revocacion por SP se
+prueban con HTTP simulado y TX modeladas, no con backend real. Sigue constructor
+legado predeterminado: no hay nueva activacion ni migracion100% completada.
+Siguiente paquete A13: controles Access.branch/link por dos SP existentes.
