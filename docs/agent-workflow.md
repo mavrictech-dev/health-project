@@ -351,3 +351,26 @@ A12 aceptada: msg_7298902f71ec/msg_f73a5d08f955,ctx_296d15f80886. Snapshot
 independiente279/279+jar y6SHA;6archivos integrados sin activar SQL. A13 se
 prepara en tmp/sql-01-a13-spec.md con D-21 y ownership4archivos. Seguir por
 follow-up sobre misma conversacion retenida; no reenviar Task/Dispatch de A12.
+
+
+A13 delegada por follow-up de ctx_296d15f80886: nueva Task
+task_129beb79686e / Dispatch ctx_3b77fd5f3dd4, mismo Run, terminal,
+cuenta y sesion verificadas antes del envio. Inventario registra starting con
+liveness live; no duplicar envio por ausencia de recibo de consola.
+A12 ya confirmada/subida en da3373a31cc49f8ae1ffa41843d35e1467239fdd,
+remote ref comprobado; main intacta. Esperar aviso de Orca y revisar entrega
+A13, sin edicion simultanea de sus cuatro archivos ni aprobacion anticipada.
+
+
+A13 bloqueo de cierre: informe msg_bf193d7c4cb6 recibido, cuota impide worker_done
+(escalaciones msg_stop_e31ad32df0bb6303e1f643ef y msg_stop_234fcde9e030030267381ddd).
+Supervisor verifica4SHA y snapshot301/301+jar, sin integrar. Guidance de cierre
+msg_20af34a4e8e2 ya esta en cola; no mas wakes ni retry mientras quota bloquea.
+La pantalla tras segundo aviso muestra GPT-6-Luna medium; antes mostraba
+GPT-6.1-Sol high. Causa no confirmada; verificar/restaurar antes de delegar otra
+tarea, mediante configuracion por proceso sin modificar globales. No seleccionar
+la alternativa de modelo de un aviso de cuota para eludir el bloqueo.
+Se consulto documentacion oficial OpenAI sobre /model, sin ejecutar ese comando
+ni cambiar configuraciones:
+https://learn.chatgpt.com/docs/cli/slash-commands .
+A13 sigue task_129beb79686e/ctx_3b77fd5f3dd4, misma cuenta/sesion; no reset/fork.

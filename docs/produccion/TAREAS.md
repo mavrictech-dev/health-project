@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A12 aceptadas; A13 Access preparado) | A12 task_20f587aa9bd6 / ctx_296d15f80886,279/279 supervisor | Browser sessions integradas sin wiring; siguiente Access.branch/link. Faltan otros consumidores, segregacion final y JDBC/Flyway/HTTP reales |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | BLOQUEADA (cierre A13 por cuota; A1-A12 aceptadas) | A13 task_129beb79686e / ctx_3b77fd5f3dd4,301/301 supervisor; informe msg_bf193d7c4cb6 | Falta worker_done; reanudar misma sesion tras cuota y verificar modelo. A13 no integrada. Diseno documental independiente posible; otros consumidores/JDBC/Flyway/HTTP reales pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -311,3 +311,30 @@ omisiones y jar PASS; cinco archivos existentes+uno nuevo integrados por bytes.
 103 bases comprobadas,98 fueraownership intactas; pruebas A11 conservadas.
 No app/config nueva ni DB real. A13 preparada tmp/sql-01-a13-spec.md,D-21,
 ownership Access y nuevo store con dos suites; sin archivos compartidos A12.
+
+
+A13 delegada por follow-up de ctx_296d15f80886: nueva Task
+task_129beb79686e / Dispatch ctx_3b77fd5f3dd4, mismo Run, terminal,
+cuenta y sesion verificadas antes del envio. Inventario registra starting con
+liveness live; no duplicar envio por ausencia de recibo de consola.
+A12 ya confirmada/subida en da3373a31cc49f8ae1ffa41843d35e1467239fdd,
+remote ref comprobado; main intacta. Esperar aviso de Orca y revisar entrega
+A13, sin edicion simultanea de sus cuatro archivos ni aprobacion anticipada.
+
+
+A13 INFORME FINAL recibido msg_bf193d7c4cb6: cuatro SHA,301tests y preservacion.
+Escalacion msg_stop_e31ad32df0bb6303e1f643ef: cuota agotada antes de worker_done,
+reintento anunciado16:35 local. Supervisor reviso4archivos y ejecuto snapshot
+independiente301/301,0fallos/errores/omisiones,jarPASS20.295s;104bases raiz
+intactas. Evidencia tmp/sqlserver-a13-review-{manifest,result}.json.
+A13 NO integrada/aceptada formalmente; A12 sigue ultimo corte publicado.
+
+Guidance msg_20af34a4e8e2 pide conservar hashes, no repetir verify sin cambios y
+cerrar mismos Task/Dispatch tras recuperar cuota. Su wake genero otra escalacion
+msg_stop_234fcde9e030030267381ddd: compactacion tambien bloqueada; pantalla ahora
+muestra GPT-6-Luna medium frente a GPT-6.1-Sol high anterior. No nueva tarea,
+retry, fork, cambio de cuenta, compra ni mas wakes mientras persiste bloqueo.
+Antes de reanudar verificar/restaurar modelo por proceso sin cambiar config
+global; no inferir causa exacta del cambio por la pantalla sola.
+Responsable de cierre: programador misma sesion al recuperar cuota; supervisor
+puede seguir diseno documental independiente. No marcar Task completada.

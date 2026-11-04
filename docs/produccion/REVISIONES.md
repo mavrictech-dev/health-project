@@ -598,3 +598,20 @@ SQLServer/JDBC/Flyway/pool ni navegador reales. Se integran6archivos por bytes,
 103 bases verificadas y98 ajenas al ownership intactas. Acceptance y manifests
 en tmp/sqlserver-a12-acceptance.json y tmp/sqlserver-a12-review-manifest.json.
 Sin defectos abiertos dentro del alcance revisado; backend activo sigue legado.
+
+
+## SQL-01.A13 - revision independiente PASS; cierre por cuota pendiente
+
+Informe msg_bf193d7c4cb6 declara4SHA/301pruebas. Supervisor leyo Access,
+SqlServerAccessStore y ambas suites completas; contrato V3/D-21 consistente.
+Solo branch/link nuevos caminos, request inyectado/actor exacto, ADM sin bypass,
+REQUEST dosSP, parametros opacos, opcion vacia404 y mapeo estricto dentroTX.
+Ocho helpers anteriores Access exactos;103bases fueraownership equivalentes
+entre worktrees (solo EOL cuando corresponde),104bases raiz sin cambios.
+Snapshot independiente verify301/301 y jarPASS20.295s; cuatro SHA confirmados
+antes/despues del build. Sin defectos encontrados en alcance inspeccionado.
+
+No integrar por cierre formal pendiente: quota corto antes de worker_done y
+segunda escalacion confirma compactacion bloqueada. Evidencia conservada en
+tmp/sqlserver-a13-review/backend y manifest/result.json; no nueva aprobacion
+por simple exito de suite. HTTP/DB/JDBC/Flyway/navegador reales no probados.

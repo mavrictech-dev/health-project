@@ -263,3 +263,13 @@ seis hashes verificados y jar PASS. Cookies/CSRF/lista/revocacion por SP se
 prueban con HTTP simulado y TX modeladas, no con backend real. Sigue constructor
 legado predeterminado: no hay nueva activacion ni migracion100% completada.
 Siguiente paquete A13: controles Access.branch/link por dos SP existentes.
+
+
+## A13 verificada en snapshot, bloqueada por cuota - 2026-11-04
+
+301/301 pruebas independientes y jarPASS para4archivos Access/store/suites.
+Informe final recibido, sin worker_done por cuota. Se conservan hashes/pruebas,
+no se integran ni publican archivos A13; A12/da3373a sigue ultimo corte de codigo
+aceptado. Resta verificar modelo antes de reanudar: tras wake de Orca la pantalla
+muestra Luna medium, distinto del Sol high observado antes. No comprar cuota,
+cambiar cuentas ni iniciar agentes sustitutos; mismo Task/Dispatch pendiente.

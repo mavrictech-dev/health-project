@@ -366,3 +366,18 @@ de pruebas anteriores; integra5existentes+1nueva,98bases ajenas intactas.
 Pruebas HTTP simuladas y manager de TX modelado; no Boot/puerto, DB, JDBC,
 Flyway o navegador conectado. No nueva QAvisual; frontend no cambio. No repetir
 suites frontend/motor sin cambios pertinentes. Integracion real sigue pendiente.
+
+
+### A13 -301 pruebas independientes, entrega sin cierre formal
+
+python -B tmp/prepare-sqlserver-a13-review.py confirma4SHA/104bases y prepara
+snapshot tmp/sqlserver-a13-review/backend desde backend supervisor. Dentro de
+snapshot, .\mvnw.cmd -B -ntp verify con JDK21:exit0,BUILD SUCCESS20.295s,
+301tests/0failures/0errors/0skipped,jar/repackagePASS,2026-11-04T15:45:31-05:00.
+Access12 nuevos+Store10,279previas completas. Log verify-supervisor.log y XML
+Surefire preservados. Result.json verifica de nuevo hashes y104bases intactas.
+
+Son executor/manager dobles, request y SecurityContext locales; no SQLServer
+conectado, pertenencia/revocacion en motor ni navegacion/HTTP real. Sin QAvisual
+nueva por cambio backend aislado. No integrar hasta cierre del encargo; cuotas
+del trabajador impiden worker_done. No repetir suite si hashes no cambian.
