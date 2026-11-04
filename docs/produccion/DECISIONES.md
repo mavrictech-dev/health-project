@@ -9,7 +9,10 @@ publicar. Se revisan diffs y se ejecutan comprobaciones sobre worktree de entreg
 
 ## D-02: arquitectura y datos
 
-Mantener monolito Java21/SpringBoot4.1.1, JDBC, MySQL8.4 y SP transaccionales.
+DECISION DE MOTOR SUSTITUIDA por D-09 (aclaracion directa del usuario, 2026-11-03).
+Objetivo vigente: monolito Java/Spring, SQL Server y 100 % de persistencia mediante
+SP parametrizados, incluidas lecturas, sesiones, auditoria y comprobaciones de salud.
+MySQL8.4 describe el backend heredado y no el objetivo arquitectonico.
 Next16.4.3 estatico; mock se selecciona en build y exporta out-demo; live exporta
 out y usa /api same-origin. No sustituir contratos live por modelos del store.
 Tenant desde Host validado; SAD plataforma no obtiene historia clinica. Navegador
@@ -115,3 +118,348 @@ Inspeccion adicional: generador calculaba64 rutas frente a78 en routes.json,
 omitiendo14 rutas runtime ya existentes. Seguimiento msg_3dc27a5ab1ea autoriza
 conservar esas14 y sumar las3 SOP mediante lista runtime explicita, sin reescribir
 spec.json o modificar las78 rutas previas. Se revisara diff y build final.
+
+Revision SAAS-01.A aceptada para UI/contrato: ocho archivos frontend, propietario nuevo, alta de primera sede/perfiles/cuotas, lista y detalle/configuracion. La seleccion de perfiles no habilita uso clinico. No agregar edicion de suscripciones/planes sin revision esperada, cobros, correo real ni confirmacion de pago. Siguiente corte desbloqueado: lectura de equipo en ORG-01.B; correo, pacientes y uso clinico conservan sus dependencias.
+
+## D-07: primer corte ORG-01
+
+Implementar una ruta tenant ADM para lectura de configuracion y alta de sede propia, mostrando cuotas del servidor como referencia y dejando al SP la autorizacion atomica. No editar membresias/suscripciones ni enviar invitaciones en ORG-01.A: esas escrituras carecen de expectedRevision/idempotencia y no deben fingir control concurrente; IAM/correo sigue separado. Solo lectura del equipo existente.
+
+## D-08: ORG-01.A y lectura de equipo
+
+ORG-01.A aceptada para alta de sede propia y visualizacion de cuotas/sedes con autoridad final del SP. Continuar el equipo como vista de solo lectura: los miembros vienen de /tenant/configuration, sin exponer datos mas alla de nombre/roles/estado/asignaciones necesarias. No modificar membresias mientras PUT /tenant/members carezca de expectedRevision, ni iniciar invitaciones/correo.
+
+
+Actualizacion D-08 tras ORG-01.B: se acepta la consulta de miembros en solo lectura con proyeccion de nombre/roles/estado/propietario y asignaciones por nombres. Correo/credenciales/IDs no se exponen en la vista; no se hacen cambios a membresias, invitaciones ni correo. ORG-01 queda integrada solo en frontend interceptado; validar API, persistencia y transacciones reales cuando el entorno QA tenga daemon disponible, antes de completar el parent o abrir operaciones clinicas.
+
+
+## D-09: SQL Server y persistencia exclusivamente mediante SP
+
+El 2026-11-03 el usuario aclara que toda la persistencia debe cumplir docs/Arquitectura_Health_Project.md, especialmente secciones 2 y 9: SQL Server y SP para lecturas, escrituras, sesiones, auditoria y health checks. Esta instruccion directa prevalece sobre la frase contradictoria de PLAN_EJECUCION_PRODUCCION.md:22 y las decisiones anteriores que mantuvieron MySQL. El supervisor reconoce que debio exponer la contradiccion antes de aceptar el motor heredado como objetivo.
+
+El backend actual no cumple: driver/Flyway/URL/Compose son MySQL; Sql.rows/one/optional ejecutan lecturas SQL directas; Sql.call establece variables de sesion MySQL antes de llamar SP. Inventario textual: 11 migraciones, 60 declaraciones CREATE PROCEDURE (53 nombres distintos por redefiniciones), 116 llamadas a helpers de lectura en 22 archivos Java. No es una medicion de cobertura ni prueba runtime.
+
+Corregir implica portar esquema, SP, errores, tipos/JSON, concurrencia y contratos de resultados; sustituir consultas Java por llamadas parametrizadas a SP; separar cuenta de migracion de cuenta runtime con EXECUTE solo sobre SP aprobados; adaptar entorno/suites. Una sustitucion del conector no basta. Diseno y criterios en MIGRACION_SQLSERVER.md. No se modifica el plan/README protegidos en esta correccion; se registra aqui su discrepancia.
+
+Las aceptaciones frontend anteriores conservan su evidencia de UI/HTTP interceptada. Ninguna valida SQL Server ni conformidad de persistencia. Se reabre ARQ-02 para el contrato fisico y queda bloqueada la aceptacion integral de QA/INT/SAAS/ORG hasta demostrar el nuevo backend. No extender funcionalidades dependientes de DB antes de cerrar el primer recorrido SQL Server. No borrar volumen MySQL, migraciones historicas o datos existentes.
+
+
+## D-10: ejecucion de la migracion y QA2022 local
+
+El usuario ordeno aplicar la migracion con el programador. Se conserva Run run_624b9269b491, rebind generation3 al coordinador restaurado term_0a40d921-c692-4112-ace7-e6023edef4e8. Programador restaurado term_820779be-5e60-4a84-99f9-eaa999841df4, mismo session01a19e4c-15af-74e0-a1b9-75fc7093b98f; /status confirma mendozadeafabisa@gmail.com. No se lanzo otra sesion ni se cambio cuenta global.
+
+Servicio MSSQLSERVER ya estaba activo: SQLServer2022 Developer16.0.1000.6, WindowsOnly=1; cuenta Windows actual tiene sysadmin. No se cambio el modo de autenticacion ni se inicio/reinicio servicio alguno. Supervisor comprobo ausencia del destino y creo solamente health_project_sqlserver_qa_20261103, compat160 y marca health_project_scope. Esta base sintetica exclusiva es el destino de las pruebas; ninguna base existente de usuarios esta autorizada como destino. No confundir pruebas ejecutadas como administrador con prueba de permisos runtime minimos; estas ultimas requieren usuario efectivo restringido y pruebas negativas.
+
+Secuencia: esquema/semillas nuevos, SP por familias, adaptador JDBC y conversion de Java, despues configuracion/entorno/suites. El cambio de datasource activo se integra solo cuando las familias esten migradas. El paquete inicial amplio fallo sin cambios; SQL-01.A1 acotado produjo semilla parcial y se reintento el mismo Task con instrucciones de completar esquema. No aceptar el estado parcial como migracion. Cada entrega tendra revision de SQL y ejecucion en motor real; conservar migraciones MySQL historicas inactivas y datos existentes.
+
+
+## D-11: contexto de SP y outbox en migracion
+
+Acuerdo de A2: question msg_2263398396e2 / reply msg_7404c9852589. usp_request_context sustituye completamente contexto hp_* por conexion/operacion (incluido anonimo); scopes REQUEST/IDENTITY/BOOTSTRAP/WORKER elegidos por Spring, nunca body. El bootstrap de administrador requiere principal de setup/migracion distinto, sin grant runtime para elevar identidades aunque pueda declarar ese scope.
+
+Outbox sin ampliar esquema: UPDATE OUTPUT atomico reclama PENDING/FAILED vencidos e incrementa attempts como claim_version; ack/fail exige id+version+SENDING. Nunca se reclama SENDING automaticamente; resultado SMTP ambiguo queda para conciliacion y no como FAILED reintentable. No prometer exactly-once ni entrega de invitacion. No correo real en esta migracion. Java se adaptara en su paquete, despues de validar SP.
+
+
+## D-12: contratos de SaaS/organizacion durante migracion
+
+A3 question msg_492154009b96 / reply msg_2711730228f2: helper privado de target valida SAD plataforma o ADM del mismo tenant sin sustituir contexto original. Escritura normal exige OPEN/tenant habilitado/modulo; ajuste administrativo de suscripcion/status por SAD puede operar tenant suspendido para recuperacion explicita sin reactivarlo automaticamente. Timezone IANA se valida en Java con ZoneId.of y se conserva en SQL, sin traducirla a catalogo Windows.
+
+Question msg_247c7169eb2b / reply msg_afa6b0dd469a: registro publico conserva misma TX Spring create -> pending -> tenant_create -> issue. ScopeIDENTITY/hostplataforma/actorNULL, propietario pending activo sin plataforma ni memberships/tenantowner anteriores, cuotas/ciclo servidor. No wrapper nuevo ni marca de conexion que sobreviva rollback; no reanudar identidad existente en esta migracion. DOCTOR exige dominio clinico coherente; otros propietarios pueden tener dominio clinico opcional valido sin recibir PRO automaticamente.
+
+
+## D-13: alcance observado durante portado clinico/operativo
+
+A4 pregunta msg_b557781e8c28/reply msg_33bfcdbcbbbe: conservar historia longitudinal de mismo tenant y politicas de rama actuales; escrituras revalidan branch/autor, documentos conservan original SIGNED y paciente/encounter propios. Auditoria segura de lecturas portal se integra al SP con TX, sin cuerpos ni tokens. No filtrar por rama lecturas que hoy son tenant-wide por intuicion. Pregunta msg_61ae2b4ad522/reply msg_08ba56409f7d: perfiles DEMO/pending conservan etiquetas y validacion estructural, no se certifican ni bloquean globalmente por una regla nueva durante migracion; solo QA sintetica, ESP-02/PIL profesionales pendientes.
+
+A5 preguntas msg_4a4453edd984 y msg_f21f3f038351, replies msg_444fda704eb2 y msg_cf7c5bcea2ed: no crear mutador de recurso hospitalario ausente ni conditions/requiredData de workflows que el motor actual no contiene. Conservar listados tenant-wide para roles actuales, sin inventar ADM universal; writes mantienen roles/branch/modulo. Finance CAJ/AUD sin exigir PRO. Brechas de producto se conservan explicitas; la migracion no las declara resueltas.
+
+## D-14: cierre de operaciones y proximo corte de auditoria
+
+A5 aceptada por el supervisor tras 29/29 comprobaciones en SQL Server real;
+no hay cambio HTTP ni activacion del datasource. Se conserva la distincion entre
+SP compilados/ejecutados y runtime completo pendiente. A6 tiene ownership solo
+de V7__audit_triggers.sql nuevo. Debe conservar la proyeccion segura de V10 MySQL
+y la inmutabilidad de V9, adaptando inserted/deleted a conjuntos de multiples
+filas de SQL Server. No se otorga EXECUTE al runtime sobre helpers privados ni
+acceso a tablas para facilitar pruebas. Permisos definitivos y Java se tratan
+en paquetes posteriores; no configurar otra base, servicio o autenticacion de
+instancia para sortear el bloqueo de transporte.
+
+### D-14.A: proyecciones planas y claves completas en A6
+
+Pregunta msg_f4caccd2ae16, Dispatch ctx_4d330d95d46d. Se contrastaron V1,
+usp_audit_change/usp_trace_events V3 y V10 historico. Se aprueba mantener
+tenant NULL historico para users/plans/plan_versions/tenants/application_state;
+support_comments deriva tenant del ticket correspondiente a cada fila/estado,
+NULL solo para ticket de plataforma. Un cambio de ticket/tenant debe conservar
+procedencia anterior y nueva, sin imputar ambas al tenant actual de la conexion.
+La FK no tiene cascade; ticket ausente es error de integridad, no excusa para
+degradar un comentario tenant a evento global silenciosamente.
+
+modules/specialties/roles/scopes se representan como *_sha256 sobre UTF8
+completo del valor almacenado, NULL preservado. El helper exige proyecciones
+planas y el contrato no promete mostrar arrays originales desde la auditoria.
+Conservar los restantes campos escalares seguros; no arrays anidados ni JSON
+escapado fingiendo valores estructurados. Diferencias de serializacion cuentan
+como cambio del valor persistido, sin inventar normalizacion semantica.
+
+Emparejar inserted/deleted por PK completa y tenant, incluidos componentes de
+PK compuestas. Cambios de clave/tenant se registran como DELETE anterior e
+INSERT nuevo; ningun emparejamiento arbitrario por numero de fila o ID parcial.
+Estas adaptaciones se aprueban como contrato de implementacion, no como V7
+implementada o validada. Ownership sigue limitado al archivo V7.
+
+### D-14.B: materializacion local UTF8 para corregir R-A6-UTF8
+
+Pregunta msg_43c08eed1310, seguimiento ctx_840acbdaeb78. Se autoriza usar tabla
+variable local por trigger con columnas varchar(max) COLLATE
+Latin1_General_100_BIN2_UTF8 como destino de asignacion DIRECTA de los valores
+NVARCHAR originales. HASHBYTES lee los bytes ya almacenados en esa columna,
+sin conversion inline a la pagina de codigo de la DB ni cambios de esquema
+persistente. Preservar lado inserted/deleted, PK completa, tenant y NULL; el
+resto de proyecciones/joins/contexto/guards no cambia. No helper persistente,
+grant ni cambio de collation de base/tabla existente.
+
+Antes de autorizar se probo el enfoque en SQL2022 real: 6/6 casos con bytes,
+longitud y SHA256 comparados contra Python independiente (ASCII, vacio, NULL,
+texto null, acentos+CJK+emoji y JSON largo16014bytes). Ejemplo corto
+C381E4B8ADF09FA6B7 y largo9cd5937d...b2fb6a1 coinciden exactamente. Evidencia
+tmp/sqlserver-a6-utf8-materialization-probe.sql/.json. Solo tablas variables,
+sin escrituras persistentes. Esto acredita el mecanismo, no la implementacion
+final V7: repetir matriz de triggers y before/after tras la correccion.
+
+Referencia primaria consultada: [collation por columna y copia a destino UTF8](https://learn.microsoft.com/en-us/sql/relational-databases/collations/set-or-change-the-column-collation/).
+
+### D-15: separar ejecucion runtime, bootstrap y migracion
+
+Siguiente paquete SQL-01.A7 limitado a V8__execution_permissions.sql y
+backend/scripts/verify-sqlserver-permissions.sql nuevos. Roles DB propiedad dbo
+hp_runtime_executor y hp_bootstrap_executor; EXECUTE por objeto literal aprobado,
+nunca a todo esquema/base/public. Bootstrap recibe solo contexto, exists y create;
+no runtime. Helpers internos sin acceso directo, invocacion legitima por cadena
+de propiedad. Ambos sin CRUD directo sobre las 37 tablas ni DDL/roles amplios.
+No crear logins/usuarios persistentes, credenciales o membresias reales.
+El principal de migracion permanece administrativo y separado.
+
+Inventariar explicitamente las 133 SP con justificacion de categoria antes de
+aprobar. Prueba en base QA exclusiva mediante usuarios WITHOUT LOGIN y TX
+revertida, con controles efectivos positivos/negativos; no confundir con login
+JDBC ni autenticacion HTTP. El Bootstrap Java heredado aun corre en arranque:
+debera separarse del datasource runtime en la conversion Java posterior.
+Ownership de programador solo dos archivos; supervisor conserva documentos.
+
+### D-15.A: compatibilidad bootstrap de privilegio minimo
+
+Pregunta msg_37e1794422f7 (A7 ctx_caf2cefe03bb) confirmada contra V3:
+usp_bootstrap_exists/create exigen db_owner o sysadmin. EXECUTE por objeto
+solo no basta; el contrato D-15 inicial necesitaba esta evolucion. Se autoriza
+EXCLUSIVAMENTE en V8 dos ALTER PROCEDURE literales para admitir tambien
+IS_ROLEMEMBER(N'hp_bootstrap_executor')=1 en esa guarda. V3 fuente aplicada
+permanece intacta; firmas, scope BOOTSTRAP, transaccion, bloqueos, idempotencia,
+validaciones y demas cuerpo conservados exactamente. No EXECUTE AS OWNER,
+permisos amplios ni cambios a otro SP. Entrega exige diff de cuerpos y prueba
+real del rol sin privilegios fijos; rollback restaura definiciones originales.
+
+usp_access_branch y usp_access_patient_link se clasifican como entradas runtime
+aprobadas: sustituyen lecturas directas de identity/Access.java branch/link,
+con validacion de actor/sesion/tenant del lado servidor. No confundir con helpers
+require/guard internos. Probar bootstrap sin scope rechazado y runtime con
+scope BOOTSTRAP aun denegado a ambos SP. No se modifica Java en este paquete.
+
+### D-15.B: QA de denegaciones con transacciones inutilizables
+
+Pregunta msg_e3264b727cb2: worker comunica CREATE TABLE262 e impersonacion15517
+con XACT_STATE=-1 pese a XACT_ABORT OFF; REVERT3930 o rollback que elimina al
+usuario efimero dificultan continuar el harness oneTX. Se inspecciono su script
+y se corrige la restriccion de QA, sin ampliar permisos de producto.
+
+Autorizar fases rollback-only SECUENCIALES y conexiones independientes para
+esos negativos y scope51001. Cada fase instala V8/roles/fixtures dentro de su
+transaccion, afirma error y estado, cierra conexion sin COMMIT; nueva conexion
+administrativa comprueba rollback, contexto liberado, hashes de definiciones
+bootstrap originales y baseline133SP/31triggers/37tablas/0users/0roles-principales
+de A7. Falla de limpieza detiene siguientes fases y retorna exit no cero.
+No se autoriza CREATE USER/LOGIN persistente ni cambios a instancia.
+
+Se prefieren fases independientes a fixtures SP WITH EXECUTE AS: no hacen
+falta nuevos modulos de prueba ni cadenas de propiedad que compliquen el
+resultado. Mantener intentos REALES CREATE TABLE y EXECUTE AS dbo; DROP3701 o
+HAS_PERMS solos no prueban esos rechazos. No retirar guardas ni elevar usuario
+para que pase la suite. El informe debe distinguir pruebas motor del worker
+de la futura revision independiente del supervisor.
+
+### D-15.C: historial de migraciones opcional y restringido
+
+Revision supervisora de A7 detecta/reproduce R-A7-HISTORY: conteo exacto37tablas
+rechaza dbo.flyway_schema_history previsto por usp_monitor_migrations en V3.
+Corregir ANTES de integrar/aplicar V8:37tablas negocio + opcional exclusivamente
+esa tabla de infraestructura, propiedad/cadena dbo compatible, sin ignorar
+otras tablas. Con historial, agregar8DENY DML por objeto (4x2roles):570ACL; sin
+el,562 originales. Ningun nuevo GRANT ni crear/poblar historial desde V8.
+Lectura solo SP con autorizacion SAD/SOP, nunca directo ni bootstrap.
+
+Ownership de correccion solo V8 y verificador no integrados. V1-V7 inmutables.
+Ampliar QA con historial representativo sintetico y tabla desconocida, ambos
+rollback-only y cleanup independiente. No confundir fixture de historial con
+ejecucion de Flyway/JDBC real, aun pendiente. Supervisor no escribe DB durante
+correccion delegada; no nueva sesion/worktree/cuenta ni config global.
+
+### D-15.D: visibilidad de metadatos limitada al historial
+
+Pregunta msg_52027c25a65d: worker informa catalogo570/effective570 PASS, pero
+usp_monitor_migrations devuelve0filas porque OBJECT_ID del historial esNULL
+bajo runtime sin permisos de metadatos. Supervisor contrasta V3: ese IF existe
+y usa contexto caller; aun pendiente repetir personalmente el caso corregido.
+
+Se autoriza opcion A: GRANT VIEW DEFINITION ON OBJECT::dbo.flyway_schema_history
+TO hp_runtime_executor, SOLO si la tabla existe. Un permiso de metadatos sobre
+esa tabla, sin nuevo SELECT/DML/EXEC ni grant de esquema/base. Conservar8DENY
+CRUD a ambos roles y solo2ALTERbootstrap D-15.A; no evolucionar monitor ni
+EXECUTE AS OWNER. Conteo con historial pasa a571ACL; sin historial562.
+Bootstrap sin VIEW DEFINITION y sin EXEC del monitor. Lectura de filas solo
+por SP con guardas SAD/SOP/plataforma/sesion existentes.
+
+Probar visibilidad OBJECT_ID runtime, permiso efectivo exacto, ausencia de
+grantsmetadata amplios, CRUDdirecto8rechazos229, fila sintetica recuperada por
+SP autorizado y llamada sin actor/sesion de plataforma rechazada51001. Mantener
+rollback independiente y cleanup; SQLrepresentativo no acredita Flyway/JDBC real.
+Ownership sin cambio, dos archivos de A7.R1, V1-V7 inmutables.
+
+Documentacion primaria consultada: [Microsoft: visibilidad de metadatos](https://learn.microsoft.com/en-us/sql/relational-databases/security/metadata-visibility-configuration).
+Explica funciones de metadatos que retornanNULL y VIEW DEFINITION por objeto;
+la aceptacion requiere ademas evidencia real en esta instancia, no solo documentacion.
+
+### D-16: adaptador JDBC separado antes de convertir servicios
+
+A7.R1 aceptada para fuente y10fases motor rollback-only; roles no desplegados.
+Siguiente paquete A8 limitado a pom(dependenciasSQLServer compatibles),4clases
+nuevas persistence/sqlserver y2suites nuevas. Contrato completo del encargo en
+tmp/sql-01-a8-spec.md. Adaptador sin registro de bean ni datasource activo,
+12procedimientos de entrada tipados y contexto interno porSP en misma conexion,
+limpieza finally e invalidacion si falla. Consume todosRS/updatecounts sin SQL
+arbitrario; tipos/UTC/JSON/NULL preservados y errores SQLServer seguros sin retry.
+Proposito runtime separado de bootstrap, que requerira principal propio al cablear.
+
+No retocar Sql.java/Errors.java/Bootstrap ni servicios/config/MySQL heredados en
+este corte. Su presencia sigue siendo brecha100%SP, no arquitectura destino.
+Primero preparar/verificar adaptador y dependencias sin activar app; despues
+convertir identidad/infraestructura y familias secuenciales, revisar migrador y
+transporte real. Dobles JDBC son pruebas de contrato unitarias, no integracion.
+
+Referencias primarias consultadas para contrato: [Microsoft RS multiples](https://learn.microsoft.com/en-us/sql/connect/jdbc/using-multiple-result-sets),
+[Microsoft procedimientos](https://learn.microsoft.com/en-us/sql/connect/jdbc/using-statements-with-stored-procedures),
+[Flyway SQL Server](https://documentation.red-gate.com/flyway/reference/database-driver-reference/sql-server-database).
+Versiones se contrastan con BOM/codigo local, no se actualizan frameworks.
+
+### D-17: completar catalogo antes de convertir consumidores
+
+A8 aceptada aislada con49/49pruebas independientes. SiguienteA9 ownership4
+archivos: Procedure/Executor/suiteExecutor y nueva suiteContrato. Catalogo
+exacto108operaciones:106runtime+2bootstrap, pues los107grantsruntimeV8 incluyen
+usp_request_context, que sigue SOLO interno. Agregar96descriptores a los12
+iniciales, con parametros ordenados/tipos/longitudes desde V3-V6. No exponer
+24helpersprivados ni contexto como llamada de libre seleccion.
+
+Agregar solo tipos publicos requeridos (INT/BIGINT/NVARCHARMAX),sin narrowing
+ni truncado y con validacion antesconexion. QAcontrato compara fuentesSQL y
+matrizV8 contra catalogoJava, sin clonar enum en otroarray; mocks verifican
+binds y MAX/errores/bordes. No wiring,consumidores,config,migraciones,DB oHTTP.
+Esto desbloquea conversion modular posterior, no acredita100%SP todavia.
+Encargo completo tmp/sql-01-a9-spec.md; supervisor conserva documentos.
+
+### D-18: convertir host y sesion sin activar un backend parcial
+
+A9 aceptada: catalogo completo y 169 pruebas independientes. Siguiente A10
+limita ownership a HostFilter, SessionFilter, nuevo SqlServerSecurityStore y
+dos suites nuevas. Store usa cinco descriptores aprobados y TransactionOperations
+del datasource runtime; contexto explicito desde atributos internos de request.
+Transacciones cortas terminan antes del FilterChain, nunca abarcan downstream.
+
+Agregar constructores explicitos para el camino SQL Server y conservar los
+constructores actuales que SecurityConfiguration aun utiliza. No seleccionar
+motor desde HTTP, ni fallback a consultas legadas cuando falle un SP. El camino
+legado es transicion temporal que debe retirarse en el cierre 100% SP; no se
+adopta una arquitectura multibase permanente. Sin beans, wiring, configuracion
+o activacion en este corte. SecurityConfiguration y servicios restantes intactos.
+
+Preservar host validado, aislamiento, sesion, roles, CSRF y errores HTTP vigentes
+(incluido 503 de mantenimiento en filtro). Pruebas con filtros reales y request/
+response simulados; gateway y transacciones con dobles, sin atribuir integracion
+SQL Server o navegador. Encargo completo en tmp/sql-01-a10-spec.md.
+
+### D-18.A: revocacion entre lookup y touch
+
+Avance msg_e3dc74c811cb contrastado con V3: session_resolve filtra sesion y
+contexto host; session_touch ejecuta require_actor nuevamente. Mantener 401
+cuando lookup devuelve vacio, membresia falta o host/rol no corresponde. Si
+la sesion pierde validez entre lecturas y touch, conservar 403 FORBIDDEN seguro
+del SP, sin autenticar ni continuar FilterChain. No traducir infraestructura
+500 a 401 y no reintentar. Son transacciones cortas separadas; no se promete
+atomicidad de toda la request ni ausencia de carreras con revocacion.
+
+Exigir prueba de esta carrera simulada y de error 500, con cadena detenida y
+sin fallback legado. El mismo datasource para executor y TransactionOperations
+sera verificado al cablear, aun pendiente; A10 no crea ni activa ese wiring.
+
+### D-19: IdentityService con SP y registro fallido independiente
+
+A10 aceptada con218 pruebas independientes. A11 tiene ownership seis archivos:
+IdentityService, SecurityStore (solo extraer contexto), nueva utilidad de contexto,
+IdentityStore y dos suites. Constructor SQL explicito; constructor legado marcado
+@Autowired para preservar seleccion actual de Spring. Sin beans/config nuevos.
+Legado temporal se retira al cierre100%SP, sin fallback por error ni eleccion HTTP.
+
+Contexto compartido conserva exactamente controles A10. IdentityStore usa nueve
+descriptores V3 y TransactionTemplates REQUIRED/REQUIRES_NEW con mismo manager
+runtime: independiente SOLO el login fallido, equivalente al AttemptRecorder
+existente, que no se llama en camino SQL. Futuro wiring debe acreditar datasource
+comun y durabilidad reales; mocks no lo demuestran. Login/accept se agrupan sin
+self-invocation parcial, verifican password en servidor y no exponen hashes/CSRF
+en respuesta bearer. Actor solo tras exito de unidad transaccional, considerando
+commit/rollback envolvente; conservar API, rate limit y politicas existentes.
+
+BrowserSessionController/Bootstrap/AttemptRecorder/Access/config y migraciones
+no se modifican en A11. Falta convertir esos consumidores antes de activar SQL.
+Encargo completo tmp/sql-01-a11-spec.md; pruebas de contrato y servicios con
+dobles, sin DB/HTTP real ni habilitacion del backend.
+
+### D-19.A: entradas explicitas para crear usuario administrativo o de registro
+
+Pregunta msg_26836b1b9f84 contrastada con AccountLifecycle.register: ese caller
+usa identity.create seguido de pending/portal o tenant/outbox en su TX. Se
+autoriza separar caminos SQL por metodo de servidor: create(UserInput) requiere
+Actor administrativo y scope REQUEST; nueva createForRegistration(UserInput)
+requiere Actor ausente y scope IDENTITY. No inferir elevacion por anonimato de
+create, URI, body o headers. No endpoint nuevo ni modificacion de AccountLifecycle.
+
+La nueva entrada de registro debe participar en TX externa MANDATORY, con
+template o guarda efectiva aun al invocarse sin proxy; no crear/confirmar TX
+propia que deje usuario antes de pending/tenant/outbox. Se permite ese tercer
+modo transaccional exclusivamente para registro. Fallar seguro sin USER_CREATE
+si falta TX/request, existe Actor o se usa constructor legado para nueva entrada.
+create legado permanece como hoy y AccountLifecycle actual sigue usandolo; su
+conversion posterior invocara la nueva entrada dentro de TX completa.
+
+Ownership A11 sigue seis archivos, nueve descriptores, sin registro/correo nuevo
+ni activacion. Exigir pruebas de rechazo y participacion MANDATORY con dobles;
+la atomicidad de registro completo y persistencia real aun no estan validadas.
+
+### D-20: sesiones de navegador y CSRF del resultado de login
+
+A11 aceptada con249 pruebas independientes y cierre formal. Siguiente A12
+limita ownership a BrowserSessionController,IdentityService,IdentityStore,
+sus dos suites y una suite nueva de controller. Mantener constructor legado
+@Autowired y camino SQL explicito, sin wiring o endpoints nuevos.
+
+Entrada interna loginBrowser reutiliza autenticacion/unidad transaccional A11 y
+SavedSession del mismo SESSION_SAVE; no segunda lectura para obtener CSRF.
+Resultado interno tipado/redactado, controller proyecta solo user/expiry/CSRF y
+coloca bearer exclusivamente en cookie HttpOnly con flags existentes, despues
+de exito. Login/accept bearer conservan shape sin CSRF y hooks afterCommit.
+
+Store agrega SESSION_CURRENT y SESSIONS_LIST, reutiliza SESSION_REVOKE por id
+opaco sin SELECT ni rehash. 11 descriptores totales, contexto REQUEST propio,
+RS/cardinalidad/tipos/columnas seguras dentroTX, sin filtrar hashes/CSRF en lista.
+Preservar404 desconocido, cookie/logout y errores existentes. Pruebas HTTP
+simuladas/manager doble, sin atribuirlas a browser o SQL Server real.
+Encargo completo tmp/sql-01-a12-spec.md; no activar backend parcial.

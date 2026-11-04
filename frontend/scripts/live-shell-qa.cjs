@@ -41,8 +41,10 @@ async function live(){
       if(url.pathname==='/api/auth/sessions')return answer([{id:'session-synthetic',current:true,expiresAt:'2099-01-01T00:00:00Z'}]);
       if(url.pathname==='/api/platform/tenants'){
         assert.equal(request.method(),'GET');assert.equal(url.searchParams.get('limit'),'200');
-        return answer([{id:'tenant-synthetic',name:'Clínica sintética QA',hostname:'tenant.health.localhost',url:'http://tenant.health.localhost:18080',kind:'CLINIC',domain:'HUMAN',status:'ACTIVE',ownerName:'Propietario sintético',ownerEmail:'owner@example.test',planName:'Plan sintético',planVersion:1,cycle:'MONTHLY',branchesUsed:1,branchQuota:2,professionalsUsed:3,professionalQuota:5,specialtiesUsed:2,specialtyQuota:4}]);
+        return answer([{id:'tenant-synthetic',name:'Clínica sintética QA',slug:'tenant',hostname:'tenant.health.localhost',url:'http://tenant.health.localhost:18080',kind:'CLINIC',domain:'HUMAN',status:'ACTIVE',ownerName:'Propietario sintético',ownerEmail:'owner@example.test',timezone:'America/Lima',planName:'Plan sintético',planVersion:1,cycle:'MONTHLY',branchesUsed:1,branchQuota:2,professionalsUsed:3,professionalQuota:5,specialtiesUsed:2,specialtyQuota:4}]);
       }
+      if(url.pathname==='/api/platform/tenants/tenant-synthetic')return answer({id:'tenant-synthetic',name:'Clínica sintética QA',slug:'tenant',hostname:'tenant.health.localhost',kind:'CLINIC',domain:'HUMAN',status:'ACTIVE',ownerName:'Propietario sintético',ownerEmail:'owner@example.test',timezone:'America/Lima'});
+      if(url.pathname==='/api/platform/tenants/tenant-synthetic/configuration')return answer({planName:'Plan sintético',planVersion:1,cycle:'MONTHLY',branchQuota:2,professionalQuota:5,specialtyQuota:4,baseMinor:10000,branchMinor:2000,professionalMinor:1000,annualDiscount:10,modules:['CORE'],branches:[],specialties:[],members:[],invoices:[]});
       if(url.pathname==='/api/trace/events')return state.traceStatus!==200?problem(state.traceStatus):answer({items:[],hasMore:false,nextCursor:0});
       if(url.pathname==='/api/support')return answer([]);
       if(url.pathname==='/api/monitor')return answer({application:{mode:'OPEN',message:'Estado interceptado',revision:1},database:{status:'UP',latencyMs:1},uptimeMs:100,version:'intercepted',requests:[],samples:[]});

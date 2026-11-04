@@ -6,16 +6,18 @@ supervisor. Estados: POR_VERIFICAR → LISTA → EN_CURSO → EN_REVISION → IN
 VALIDADA; BLOQUEADA registra causa, responsable y trabajo independiente.
 
 Supervisor unico escritor. Run run_624b9269b491; programador retenido en su
-worktree. No commits, push, integracion en main o publicacion.
+worktree. El usuario autorizo commit/push de entregas revisadas en
+health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 
 | ID | Responsable | Dependencias | Estado | Archivos/evidencia | Hallazgo / siguiente accion |
 | --- | --- | --- | --- | --- | --- |
 | ARQ-01 | Arquitecto | Ninguna | VALIDADA | ESTADO.md; fuentes y HP-ORCH-01 | Matriz revisada; brechas runtime conservadas |
-| ARQ-02 | Arquitecto + programador | ARQ-01 | VALIDADA | DECISIONES.md D-02/04/05; msg_393227f665f1 acuerdo | Primer corte acordado; revisiones SaaS pendientes explicitas |
-| QA-01 | Programador como calidad; revision arquitecto | ARQ-01 | BLOQUEADA (ejecucion real) | QA-01.A + R1 VALIDADA e integrada localmente;23/23 supervisor/config OK | Daemon local ausente, responsable entorno; INT/SAAS independientes continuan |
+| ARQ-02 | Arquitecto + programador | ARQ-01 | REABIERTA (persistencia SQL Server) | DECISIONES.md D-02/04/05; msg_393227f665f1 acuerdo | Contratos HTTP conservados; contrato de persistencia debe cumplir D-09/SQL Server y 100 % SP |
+| QA-01 | Programador como calidad; revision arquitecto | ARQ-01 | BLOQUEADA (JDBC/HTTP reales) | QA-01.A + R1 validada offline; SQL-01.A7.R1 10 fases motor reales | SQL Server QA disponible; faltan adaptador/conversion Java y transporte JDBC, distinto de bloqueo Docker historico |
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
-| SAAS-01 | Programador frontend/backend | INT-01 | EN_CURSO | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94 | Alta/listado/detalle API; parent aun sin validar |
-| ORG-01 | Programador | SAAS-01 | POR_VERIFICAR | — | Sedes/equipo y cuotas servidor |
+| SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
+| ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A11 aceptadas; A12 sesiones de navegador siguiente) | A11 task_f7a0d8b4a221 / ctx_9fce40cb9b8a,249/249 supervisor | IdentityService/store integrados sin wiring activo. Faltan otros consumidores, segregacion final y JDBC/Flyway/HTTP reales |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -41,3 +43,244 @@ urgencias, diagnostico/laboratorio/imagenes, farmacia/inventario, terapias,
 especialidades avanzadas, transfusion, trasplante, reproduccion y poblacion
 veterinaria. Cada paquete requiere especificacion, permisos, pruebas y aprobacion
 clinica; aun POR_VERIFICAR, sin IDs originales adicionales en el plan.
+
+
+Actualizacion 2026-11-03: SQL Server/100 % SP es el objetivo vigente por instruccion directa del usuario (D-09). Los estados frontend integrados son parciales; no validan DB ni conformidad arquitectonica. La falta de daemon sigue siendo un bloqueo de runtime, distinto del cambio de motor pendiente.
+
+
+SQL-01 actualizacion de ejecucion: paquete completo task_b2fb1d01c45f / ctx_a8390d8f6bfc failed sin cambios por amplitud; se acepta dividir ownership por etapa. SQL-01.A1 task_d86c4f01f587 implementa solo esquema final y semillas (dos archivos nuevos). El resto sigue pendiente hasta entregas comprobadas. Motor local descubierto: MSSQLSERVER ya estaba RUNNING, SQL Server2022 Developer16.0.1000.6, WindowsOnly1. Supervisor creo exclusivamente health_project_sqlserver_qa_20261103, compat160, marca health_project_scope; no se inicio Docker ni cambio autenticacion/configuracion global de instancia.
+
+
+A1 supervisor:37 tablas reales;241 perfilesJSON completos comparados con fuente;2 escenarios positivos/9 negativos/rollback PASS. Dos archivos integrados por hash sin commit. A2 escribe solo V3__identity_infrastructure_procedures.sql; no tocar archivos compartidos y no activar datasource antes del cierre del backend.
+
+
+A2 task_8d67b6111fbd / ctx_382d876e53f5 aceptada:54 SP en motor y16/16 pruebas independientes; V3 integrado por SHA. A3 task_a1762a54ecca / ctx_1184a57710c9 escribe unicamente V4__saas_organization_procedures.sql. Preambulo observado pegado en composer y enviado solo Enter; sin duplicar Dispatch.
+
+
+A3 aceptada:27 SP SaaS/ORG,81 totales;14 pruebas motor/8RS/rollback PASS. A4 task_f11829784540 / ctx_8e043211cc7d implementa solo V5__clinical_procedures.sql (pacientes/agenda/clinica/documentos/portal), inicio observado tras Enter del preambulo pegado. Sin pacientes reales ni habilitacion de perfiles.
+
+
+A4 task_f11829784540 / ctx_8e043211cc7d entregada26SP, aplicados107SPtotales, aun EN_REVISION por whitelist SQL de key con guion (msg_93edafd175d2). Motor confirma rechazo de key valido; autorizado al programador corregir solo ese patron V5 y prevenirlo en V6. A5 task_2ebe7d0da31b / ctx_9881ceca91d1 implementa V6 independiente con helpersV3/V4 aceptados, sin DB/archivos compartidos con supervisor. Pruebas y cleanup del supervisor solo en QA; errorQUOTED_IDENTIFIER del harness fue corregido y cleanup confirmado0.
+
+Continuacion 2026-11-03: los parrafos previos son historicos. A4 ya aceptada con
+correccion (REVISIONES.md). A5 aceptada e integrada localmente tras 29/29 pruebas
+independientes en SQL Server, incluidas tres carreras de dos conexiones.
+V6 SHA256 5b007234afce7a435fe9220111249e537a22b467ed922cfdb45c3bec69949458;
+V1-V5 identicos entre worktrees; fixtures retirados. A6 portara exclusivamente
+triggers de auditoria en V7; el supervisor conserva ownership de estos documentos.
+No se ha activado el datasource ni validado HTTP/JDBC. TCP ordinario local sigue
+sin disponibilidad acreditada; la conexion administrativa sqlcmd no lo sustituye.
+
+A6 preparada: task_f3b982860225, SQL-01.A6 auditoria multirregistro e
+inmutabilidad. Ownership unico del programador: V7__audit_triggers.sql nuevo;
+sin DB/Java/config ni edicion simultanea de archivos compartidos. Encargo
+completo y aceptacion de motor en tmp/sql-01-a6-spec.md. Se reutiliza la sesion
+retenida verificada; Dispatch se registra desde el recibo de arranque de Orca.
+
+A6 activa con Dispatch ctx_4d330d95d46d, programador retenido. Pregunta
+msg_f4caccd2ae16 resuelta tras contraste de esquema/lectores: D-14.A acuerda
+tenant por ticket para comentarios, arrays hasheados y emparejamiento por PK
+completa. Continua implementacion de V7; aun sin entrega ni aceptacion de motor.
+
+A6 avance msg_1f768cd3731e: borrador V7 de 31 triggers, SHA56a0a6ad...d41a0,
+compila en SQL2022 dentro de transaccion revertida (exit0); comprobacion posterior
+0 triggers/133 SP. Informe final y revision funcional pendientes; sin integracion
+del borrador. Detalle en VALIDACION.md, preflight no equivale a aceptacion.
+
+A6 entrega recibida y DEVUELTA en revision supervisora: 20/21 pruebas motor
+PASS; hash UTF8 sobre columna larga falla (R-A6-UTF8). Task original completed
+por informe del worker no implica VALIDADA. V7 no integrada; siguiente accion
+correccion acotada del programador en V7 y repetir regresion independiente.
+No quedan triggers, fixtures o principal de prueba persistidos tras rollback.
+
+A6.R1 seguimiento task_3c91c4fb9c77 / ctx_840acbdaeb78: pregunta
+msg_43c08eed1310 resuelta por D-14.B. Probe supervisor materializacion UTF8 local
+6/6 PASS; se autoriza implementarla solo en V7. No es aceptacion final ni
+levantamiento del defecto hasta repetir la matriz sobre triggers corregidos.
+
+A6.R1 aceptada por supervisor: informe msg_e7929313fcb5 y done
+msg_29df9770e5be; SHA c5657fa2...f1f coincide con snapshot probado. Matriz21/21
+y adicional4/4 PASS; V7 integrada y aplicada solo QA (31 triggers/133 SP/0 usuarios).
+El rechazo original permanece como historial, sustituido por esta aceptacion.
+A7 preparada en tmp/sql-01-a7-spec.md, ownership V8 y prueba permisos nuevos;
+sin modificar V1-V7/Java/config/frontend. D-15 fija separacion bootstrap/runtime.
+
+A7 delegada al programador retenido mediante send follow-up: task_0f3593beb12b /
+ctx_caf2cefe03bb, Run run_624b9269b491. Recibo ready, mismo terminal/worktree;
+programacion y QA tienen ownership de dos archivos nuevos, DB solo TX revertidas.
+El supervisor no modifica esa DB mientras corre el encargo. Orca notificara entrega.
+
+A7 pregunta msg_37e1794422f7 resuelta por D-15.A: incompatibilidad real de
+guarda bootstrap original con rol limitado. Excepcion de ownership permite
+solo dos ALTER PROCEDURE literales dentro de V8, sin editar V3 aplicada.
+Access.branch/link confirmados como entradas runtime publicas para adaptador.
+Task/Dispatch sin cambio; aun sin entrega ni aprobacion, pruebas reales pendientes.
+
+A7 sigue EN_CURSO. Pregunta msg_e3264b727cb2 resuelta por D-15.B: pruebas
+negativas que dejan TX doomed pueden usar fases/conexiones independientes,
+siempre rollback-only y con cleanup verificado entre fases. Se exige intento
+real de CREATE TABLE/impersonacion; no se sustituye por metadata o DROP3701.
+Los PASS preliminares informados por el worker aun no estan aceptados.
+
+A7 matrices recibidas completas: msg_2727b6c656aa (V3 54), msg_5b03e1a90ed6
+(V4 27), msg_f1d34c6ac7da (V5 26), msg_b4cfba3f76e3 (V6 26). Revision
+estatica provisional del supervisor:133SP unicas/exactas,107 runtime/2bootstrap/
+24privadas;562permisos objeto (110GRANT/452DENY). V1-V7 byte a byte intactas;
+solo dos ALTER bootstrap con delta D-15.A exacto. SHA provisional V8
+e9bdd250eff88a9d7075cc63fdfd642882cba1060bd05b6c856d8fd9c8d1eb4e.
+Sin entrega final/done ni aceptacion motor; worker conserva DB para QA secuencial.
+
+A7 informe final msg_4590913ed19e/done msg_6a6e6b19278c recibido; supervisor
+confirma7fases PASS pero DEVUELVE R-A7-HISTORY: V8 rechaza historial Flyway
+previsto por V3 (repro real51000 con tabla sintetica, rollbackidentico).
+V8 no integrada/aplicada; spec correccion tmp/sql-01-a7-r1-spec.md, D-15.C.
+Siguiente accion programador: mismos2archivos, historia opcional restringida
+y regresiones; sin Java/config ni cambios a V1-V7.
+
+A7.R1 delegada: task_0f87a58c3cd5 / ctx_5c1d76ff89fd, follow-up de
+ctx_caf2cefe03bb, mismo terminal/sesion/worktree. Ambas cuentas verificadas
+antes de delegar sin exponer tokens. Recibo ready; siguiente revision al aviso
+Orca, sin polling ni escritura DB simultanea del supervisor.
+
+A7.R1 sigue EN_CURSO. Pregunta msg_52027c25a65d resuelta por D-15.D: autorizar
+solo VIEW DEFINITION sobre historial a runtime cuando existe,571ACL totales;
+sin historial562. No tercerALTER ni EXECUTEASOWNER. Worker debe comprobar
+fila via monitor autorizado, metadata limitada, guardas y denegaciones CRUD.
+No hay entrega final/aprobacion ni V8 integrada/aplicada permanentemente.
+
+A7.R1 ACEPTADA: informe msg_240473aedb25/done msg_3a6e0b2a0d1f,10fases
+independientes PASS, SHA V8 63ca532a...067f4e/verificador76c9d3ca...d2217a.
+Solo2archivos integrados por bytes, V1-V7 intactas; V8 no instalada permanente,
+roles no desplegados. Rechazo anterior conserva historial y queda sustituido
+por esta aceptacion acotada. A8 preparado en tmp/sql-01-a8-spec.md, D-16;
+ownership7archivos, dependencias/adaptador aislado/2suites, no datasource activo.
+
+A8 delegada: task_8e112036e806 / ctx_8c9925bf4026, mismo Run/terminal/sesion/
+worktree. Cuentas de ambos roles verificadas antes de delegar; recibo ready.
+Esperar aviso Orca sin polling, supervisor no edita ownership de implementacion.
+
+A8 avance msg_ef70d90309d4: worker informa verify49PASS(39nuevos mocks+10previos),
+dependencias gestionadas mssql-jdbc13.4.0.jre11/Flyway12.4.0. Supervisor leyo
+4clases y pom: adaptador sinbeans/servicios activos, enum12SP, segregacion
+bootstrap y contexto explicito. Informe/hashespreservacion finales aun en curso;
+no hay worker_done ni aceptacion/integracion. No atribuir mocks a JDBC real.
+
+A8 ACEPTADA: informe msg_6986dedd6c0e,hashes msg_cd5b9f34dfdc,done
+msg_3892ecfd5247. Snapshot independiente verify49/49+dependencytreePASS;
+7archivos integrados porSHA sinactivarapp. Detallelimites enREVISIONES/VALIDACION.
+A9 preparado: tmp/sql-01-a9-spec.md,D-17,ownership4archivos. Catalogo objetivo
+108(106runtime+2bootstrap) mas contexto10parametros interno; no109operaciones
+publicas. Primera entrega futura porfamilias necesita ese catalogo completo.
+
+A9 delegada: task_6d03f2d8139e / ctx_06d20aba0fba, follow-up dectx_8c9925bf4026,
+mismoRun/terminal/sesion/worktree. Cuentas verificadas antesde delegar, reciboready.
+Sinmodificaciones simultaneas deownership; siguiente revision al avisoOrca.
+
+A9 matrices completas recibidas: msg_9ec1b49b5117(V3:46),msg_0fd93764c77d
+(V4:21),msg_97d0d4e1097f(V5:21),msg_ea14976d039e(V6:20),total108.
+Supervisor revisionprovisional: catalogo coincide exactamente conV8 publico
+excluyendo contexto,106runtime+2bootstrap,12nombresA8 preservados,helpersfuera.
+Executor delta solo setInt/setLong;Context/Errors/pom/V1-V8 byteidenticos.
+Informe/hashes/done/pruebasfinales pendientes; A9 aun EN_CURSO,nointegrada.
+
+A9 ACEPTADA: informe msg_9c03ea854782/done msg_070f9bc35f5e; revision de
+cuatro hashes, snapshot independiente verify 169/169 y jar PASS. Cuatro archivos
+integrados por bytes; Context/Errors/pom/V1-V8 intactos. Alcance unitario y de
+contrato estatico, sin activar consumidores. A10 preparado en
+tmp/sql-01-a10-spec.md, D-18: primer corte HostFilter/SessionFilter, store
+transaccional y dos suites; ownership cinco archivos, sin SecurityConfiguration.
+
+A10 delegada: task_fa8a678ab445 / ctx_8817c1f1c540, follow-up de
+ctx_06d20aba0fba. Mismo Run, terminal, sesion y worktree; cuentas verificadas
+antes de delegar, recibo ready. Sin edicion simultanea del ownership; el
+supervisor atendera el siguiente aviso de Orca sin polling.
+
+A10 avance msg_e3dc74c811cb: contratos de cinco SP contrastados, sin entrega
+final. D-18.A confirma 401 en lookup invalido y 403 si touch detecta revocacion
+posterior, sin autenticar/continuar ni convertir infraestructura 500 en 401.
+Pruebas requeridas de ambas rutas; datasource comun y transaccion real siguen
+pendientes del wiring, sin nueva activacion. Task/Dispatch sin cambio.
+
+A10 avance msg_d98f86eb990a: worker comunica verify preliminar 216/216 PASS,
+con regresion adicional de atribucion de actor downstream aun en verificacion.
+Supervisor leyo filtros y store: cinco SP tipados, validacion de RS dentro del
+callback transaccional, caminos por constructor y ausencia de fallback.
+Sin entrega final/hashes/done; A10 sigue EN_CURSO, no integrada ni aprobada.
+
+A10 ACEPTADA: informe msg_def53e7f44cb, precision msg_573947eb3b58 y done
+msg_40b15b6a1727. Snapshot independiente verify218/218+jar PASS; cinco archivos
+integrados por SHA (dos filtros,store,dos suites),92 bases fuera de ownership
+intactas. SecurityConfiguration/defaults no cambiaron; sin camino SQL activo.
+A11 preparada: tmp/sql-01-a11-spec.md,D-19,IdentityService/store y contexto
+compartido mas dos suites; ownership seis archivos, sin DB ni config activa.
+
+A11 delegada: task_f7a0d8b4a221 / ctx_a58ce1994fb4, follow-up de
+ctx_8817c1f1c540. Mismo Run/terminal/sesion/worktree; cuentas verificadas antes
+de delegar, recibo ready. No edicion simultanea del ownership; atender siguiente
+aviso Orca sin polling. Revision y aceptacion siguen a cargo del supervisor.
+
+A11 pregunta msg_26836b1b9f84 resuelta por D-19.A: create SQL administrativo
+REQUEST y nueva entrada createForRegistration IDENTITY anonima controlada,
+con TX externa MANDATORY. Sin cambios a AccountLifecycle ni wiring; create
+legado conserva comportamiento actual. Pruebas de ausencia de Actor/TX y
+rechazos sin escritura requeridas. Task/Dispatch y ownership sin cambio.
+
+A11 BLOQUEADA por cuota, aviso msg_stop_17ebeb1751d822e44021b9c2. Codex indica
+reintento a las03:35; no se programo retry ni se cambiaron cuentas/sesiones.
+worker-show mantiene Dispatch abierto ready/input_accepted, liveness live y
+terminal retenida. No es worker_done ni Task completada o fallida por informe.
+No se cerro/abandono/reasigno el trabajador ni se toco otro proyecto.
+
+La prueba que quedo en segundo plano termino (sin proceso Maven activo):
+reports worker249 sin fallos; supervisor congelo seis archivos observados y
+ejecuto snapshot independiente verify249/249, jar PASS. Resultado SOLO borrador
+en tmp/sqlserver-a11-draft-review-result.json, no aprobacion ni integracion.
+Backend supervisor97bases intactas, A10 sigue ultimo corte integrado. Responsable
+del cierre: programador al recuperar cuota, mismo Task/Dispatch; pendientes
+informe final, hashes declarados/preservacion y worker_done. No iniciar A12.
+
+Reanudacion autorizada por usuario (siga), 2026-11-04: cuota5h disponible
+segun /status; seis hashes del borrador coinciden con snapshot249 probado.
+Orca habia recuperado el intento viejo como abandoned/terminal_missing, no
+por worker_done. Inventario exacto del worktree sin terminal/agent activo y
+ningun proceso aislado de ese sessionID; se restauro conversacion guardada
+original con cuenta por proceso y --no-daemon, sin nuevo checkout ni fork.
+
+Task ORIGINAL reabierta task_f7a0d8b4a221; nuevo Dispatch ctx_9fce40cb9b8a,
+terminal term_e585516c-8970-42be-aa67-6179af46234f. /status verifica programador
+mendozadeafabisa@gmail.com, session01a19e4c-15af-74e0-a1b9-75fc7093b98f.
+Msg_3667453d1da9 confirma turno activo; recibo inicial turn_start_unobserved
+queda aclarado por esa respuesta, no se reenvio el arranque. Guidance
+msg_5b5cf4f5745b pide reutilizar evidencia sin cambios y completar informe/
+hashes/preservacion/worker_done. Sin aprobacion/integracion aun, A12 pendiente.
+
+A11 avance de cierre msg_15a5d76e3a1e: worker confirma seis SHA iguales al
+snapshot249 y95 archivos backend protegidos (43 SHA crudos,52 solo EOL).
+Supervisor verifica de nuevo hashes y extraccion exacta de cuerpos context/
+truncate a utilidad compartida. Informe final y worker_done aun pendientes;
+no repeticion de verify ni integracion por mero cierre estatico.
+
+A11 ACEPTADA: informe msg_84819ef6a833/done msg_97855813c3f8, seis SHA iguales
+a snapshot249 probado, sin repetir suite. Se integran seis archivos por bytes,
+95 bases fuera de ownership intactas. Intento abandonado queda historico,
+Task original cerrada por el nuevo Dispatch, no por el error de cuota.
+A12 preparada: tmp/sql-01-a12-spec.md,D-20,ownership seis archivos para browser
+sessions y reutilizacion de CSRF de SESSION_SAVE. Sin configuracion activa.
+
+A12 enviada por follow-up: task_20f587aa9bd6 / ctx_fc719f716d1e, mismo
+terminal/sesion/worktree y cuentas verificadas. Recibo outcome_unknown: prompt
+escrito, turno aun no observado. No se reenvia ni abandona; esperar aviso Orca
+y comprobar ese Dispatch si hace falta. No declarar trabajo iniciado hasta
+evidencia de turno/respuesta. A11 sigue aceptada, A12 no integrada/aprobada.
+
+
+Continuidad autorizada 2026-11-04: A12 ctx_fc719f716d1e aparece abandoned /
+terminal_missing tras recuperacion de Orca, sin entrega. Inventario Health del
+worktree:0terminales/0agentes; proceso de esa sesion ausente antes del resume.
+Se restaura la conversacion original01a19e4c-15af-74e0-a1b9-75fc7093b98f en
+term_cb1b5652-ef88-4fce-8c34-0634faf27a89, mismo worktree/cuenta y --no-daemon.
+/status efectivo confirma programador mendozadeafabisa@gmail.com y arquitecto
+recuperapiura@gmail.com. A12 conserva task_20f587aa9bd6; reabrir esa misma Task
+con nuevo Dispatch, sin duplicar el intento abandonado ni afirmar aprobacion.
+El usuario autoriza commit/push del corte revisado hasta A11 en rama de trabajo;
+A12 y validacion real no forman parte del corte aceptado. No merge ni despliegue.

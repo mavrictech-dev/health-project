@@ -39,7 +39,7 @@ fila acredita integracion real actual.
 ## Discrepancias y riesgos verificados
 
 - Guias historicas de especialidades/SaaS mencionan SQL Server; pom, Compose y
-  migraciones usan MySQL 8.4. Se mantiene MySQL.
+  migraciones usan MySQL 8.4. Esta decision de mantenerlo fue sustituida por D-09: el usuario confirma SQL Server y 100 % SP como objetivo; la implementacion heredada debe migrarse.
 - Documentacion de 14/18 de octubre describe servicios activos y pruebas de
   entonces. Ahora docker version falla por pipe dockerDesktopLinuxEngine ausente.
 - runtime-workspace ya lista clientes reales; la brecha SaaS no es ausencia total
@@ -71,7 +71,7 @@ filas; M no significa que todas las acciones del flujo se ejecutaron.
 | F02 Cambiar organización o sucursal | S03 panel global: contexto | PRO,REC,ADM | /public/context, /tenant/branches; sesiones por host | Selector demo; API directorio | S; H aislamiento; Navegacion entre hosts con sesiones propias; no selector arbitrario tenant |
 | F03 Recuperar acceso | S01 /acceso; S02 /portal/acceso; S04 /recuperar,/invitacion; S53 /app/cuenta,/portal/cuenta,/operacion/cuenta | PRO,REC,ADM,ASI,DIA,FAR,CAJ,ALM,AUD,PAC,RES | /auth/browser/login/session, /auth/recovery/*; sp_session_save/end | UI identidad real; borradores y cambio de contexto parcial | H identidad; S; M demo; Probar expiracion/red/CSRF actual; no seleccion RUC como autenticacion |
 | F04 Reanudar trabajo tras expiración o fallo de guardado | S01 /acceso | PRO,REC,ADM,ASI,DIA,FAR,CAJ,ALM,AUD | /auth/browser/login/session, /auth/recovery/*; sp_session_save/end | UI identidad real; borradores y cambio de contexto parcial | H identidad; S; M demo; Probar expiracion/red/CSRF actual; no seleccion RUC como autenticacion |
-| F05 Dar de alta y configurar una organización | S05 /app/configuracion/organizacion; S06 /app/configuracion/equipo; S55 /app/configuracion/agenda | ADM,SOP | /platform/tenants; sp_tenant_create | Alta rica mock; listado real | S; H API; M SaaS; SAAS-01 alta administrativa real pendiente |
+| F05 Dar de alta y configurar una organización | S05 /app/configuracion/organizacion; S06 /app/configuracion/equipo; S55 /app/configuracion/agenda | ADM,SOP | /platform/tenants; sp_tenant_create | Alta rica mock; listado real | S; H API; M SaaS; SAAS-01.A alta/listado/detalle frontend interceptados; MySQL y persistencia pendientes |
 | F06 Invitar y asignar a un profesional | S04 /recuperar,/invitacion; S06 /app/configuracion/equipo | ADM,PRO | /tenant/members, /auth/invitations/accept; sp_member_save/invitation_accept | Mock UI; API parcial | S; H API; Correo invitacion por enlace no implementado; ORG/IAM |
 | F07 Cambiar permisos o revocar membresía | S06 /app/configuracion/equipo; S50 /app/auditoria | ADM | /tenant/members, /auth/invitations/accept; sp_member_save/invitation_accept | Mock UI; API parcial | S; H API; Correo invitacion por enlace no implementado; ORG/IAM |
 | F08 Diseñar, publicar y habilitar una plantilla de especialidad | S08 /app/configuracion/especialidades | ADM,PRO | /tenant/specialties; sp_specialties_save | Mock UI; catalogo API | S; M catalogo; Publicacion clinica/validador por perfil y aprobacion profesional pendientes |
@@ -152,3 +152,105 @@ de familias y docs/frontend-demo/07: clientes, planes, suscripciones, catalogo,
 auditoria, sedes y acceso ficticio. El adaptador rico de esos comandos sigue
 mock salvo el listado real existente. Los241 perfiles tienen estado de dise?o,
 no de habilitacion clinica.
+
+
+## Hito revisado ORG-01.B
+
+Frontend tenant de equipo en lectura integrado localmente tras revision independiente: 68 tests, check, builds live/demo85 rutas, QA de organizacion12, shell16 y demo13. El detalle de aceptacion y evidencia esta en REVISIONES.md/VALIDACION.md. No habilita invitaciones ni uso asistencial; MySQL y persistencia siguen sin verificar.
+
+
+## Correccion de conformidad de persistencia - 2026-11-03
+
+El estado observado es MySQL y lecturas directas desde JDBC, mientras la arquitectura requerida por el usuario es SQL Server y 100 % SP. Consultar D-09 y MIGRACION_SQLSERVER.md. Este inventario distingue implementacion existente de arquitectura objetivo; las comprobaciones frontend y reportes historicos no prueban conformidad SQL Server.
+
+### Continuacion SQL-01.A5, 2026-11-03
+
+Familias V1-V6 presentes en el checkout de coordinacion; 133 SP aplicados en
+SQL Server 2022 QA exclusivo. Operaciones de caja, stock, hospital y procesos
+aceptadas en motor con 29 comprobaciones del supervisor y tres carreras reales.
+Esto no cambia todavia el backend activo MySQL: faltan auditoria completa,
+permisos finales, adaptador JDBC y conversion de servicios/configuracion.
+No se habilita producto ni uso asistencial. Siguiente entrega: triggers SQL Server
+de cambios multirregistro y proteccion de auditoria (SQL-01.A6).
+
+### Hito SQL-01.A6.R1 aceptado
+
+V7 corregida integrada por SHA c5657fa2...f1f y aplicada solo a QA sintetica:
+31 triggers/133 SP/0 usuarios. Supervisor 21+4 pruebas reales PASS, incluida
+regresion UTF8 largo/CJK/emoji; defecto original documentado y corregido.
+Backend activo sigue MySQL/direct SQL; siguiente paquete son permisos por SP,
+despues adaptador JDBC y conversion Java. No validacion HTTP ni habilitacion
+clinica. No nueva evidencia visual para este cambio exclusivo de persistencia.
+
+### Hito A7.R1 - permisos aceptados en motor, despliegue runtime pendiente
+
+V8 y verificador integrados localmente con10fases independientes PASS;
+562ACL sinhistorial/571conhistorial representativo. Ambos roles sin acceso
+directoCRUD; metadata solo objeto historia/runtime; monitor SAD/SOP y rechazo
+anonimo/tabla desconocida comprobados. Baseline persistente sigue133SP/31triggers/
+37tablas/0users, sin roles ni historial: V8 se probo exclusivamente rollback-only.
+A7 no acredita login/JDBC/Flyway/HTTP real. Backend activo sigueMySQL/directSQL;
+A8 prepara adaptador aislado con pruebas unitarias y sin activacion parcial.
+
+### Hito A8 - adaptador JDBC aislado aceptado
+
+4clases nuevas de persistenciaSQLServer,2suites y2dependenciaspom integradas
+localmente tras revision y49/49tests independientes. Catalogo inicial12SP y
+contexto interno; sinregistrobeans ni consumidores activos. VersionesBOM:
+mssql-jdbc13.4.0.jre11/Flyway12.4.0. Backendactivo sigueMySQL ylecturasdirectas;
+A9 completa catalogo necesario antes de conversion porfamilias. No Flyway,
+login/conexionJDBC,poolreal oHTTP acreditados por esosmocks. Demo intacta.
+
+### Hito A9 - catalogo completo aceptado, consumidores pendientes
+
+108 operaciones tipadas (106 runtime y 2 bootstrap) y contexto interno, con
+169 pruebas independientes y compilacion/empaquetado PASS. Cuatro archivos
+integrados por hash; no beans ni consumidores SQL Server activados. Backend
+actual conserva MySQL/lecturas directas: A10 inicia conversion de host y sesion
+con camino explicito, sin modificar la configuracion actual. No se acredita
+JDBC conectado, pool, Flyway, HTTP real ni habilitacion del producto.
+
+### Hito A10 - host y sesion con camino SQL explicito aceptados
+
+Cinco archivos integrados tras218/218 pruebas independientes y empaquetado.
+Filtros disponen de constructor SQL y store de cinco SP; configuracion vigente
+sigue usando camino legado. No estan desplegados datasource/roles runtime SQL.
+A11 convierte IdentityService con store transaccional; restantes consumidores,
+bootstrap separado y validacion JDBC/Flyway/HTTP reales siguen pendientes.
+No nueva evidencia visual ni activacion de producto.
+
+### Bloqueo A11 por cuota del programador
+
+A10 sigue ultimo corte integrado. A11 tiene borrador de seis archivos en
+worktree separado y snapshot independiente249/249PASS, sin aprobacion/integracion
+por falta de entrega final: programador alcanzo cuota, CLI indica03:35.
+Sesion y cuenta retenidas, Dispatch original abierto, sin reintento automatico
+ni cambio de roles/cuentas. Pendiente cierre del mismo trabajador tras recuperar
+cuota; no se avanzan consumidores dependientes ni se activa backend parcial.
+
+### A11 reanudada tras recuperacion de Orca
+
+Misma Task, cuenta, conversacion y worktree del programador; nuevo handle/
+Dispatch tras perdida de terminal en recovery. Turno confirmado por mensaje
+Orca. Borrador sin cambios respecto a249pruebas independientes; cierre de
+programador pendiente, A10 sigue ultimo corte integrado. Sin activar backend.
+
+### Hito A11 - identidad SQL explicita aceptada
+
+Seis archivos integrados tras cierre del mismo trabajador restaurado y
+confirmacion de249 pruebas independientes. Creacion/login/password/logout/
+accept tienen camino tipado; registro anonimo requiere entrada explicita y TX
+externa, sin cambiar AccountLifecycle. Wiring actual permanece legado.
+A12 cubre sesiones de navegador; falta conversion restante, bootstrap separado
+y validacion JDBC/Flyway/HTTP real. No nueva evidencia visual ni activacion.
+
+
+## Continuidad y push autorizado - 2026-11-04
+
+El usuario autoriza continuar pendientes y hacer push a la rama de trabajo.
+El corte aceptado sigue en SQL-01.A11 (249 pruebas unitarias/modeladas, sin
+wiring SQL activo); frontend68/68 y TypeScript verificados nuevamente.
+A12 no tiene entrega: Orca recupero ctx_fc719f716d1e como abandoned por terminal
+ausente. Conversacion original del programador restaurada y ambas cuentas
+efectivas verificadas; misma Task se retomara con Dispatch nuevo.
+No implica SQL Server conectado, validacion HTTP real ni salida a produccion.

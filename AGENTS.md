@@ -39,3 +39,20 @@ secuenciales cuando comparten archivos o estado. Preparar un entorno local
 sintetico separado sin afectar datos existentes ni otros proyectos.
 No publicar, hacer push, commit o integrar en main. No cambiar cuentas globales,
 credenciales o sesiones ajenas. No gastos ni datos o destinatarios reales.
+
+Excepcion vigente (usuario, 2026-11-04): el supervisor puede crear commits y
+hacer push de entregas revisadas a health/production-wave0 en el origin de
+Health Project. No autoriza merge en main, push forzado ni despliegue. Los
+trabajadores mantienen la prohibicion de commit/push salvo encargo explicito.
+
+## Persistencia vigente (aclaracion del usuario, 2026-11-03)
+
+La arquitectura objetivo es SQL Server y 100 % de acceso de datos mediante
+procedimientos almacenados parametrizados, incluidas lecturas, sesiones,
+auditoria, salud y tareas internas. La indicacion MySQL del plan de produccion
+fue sustituida por la instruccion directa del usuario (DECISIONES.md D-09/D-10).
+MySQL en codigo/documentacion historica describe el estado heredado a migrar,
+no una autorizacion para mantenerlo como motor objetivo. Consultar
+docs/produccion/MIGRACION_SQLSERVER.md y TAREAS.md. Cuenta runtime EXECUTE solo
+sobre SP aprobados, sin acceso directo a tablas ni DDL; migracion/setup con
+principal separado. No activar backend parcial como migracion completa.

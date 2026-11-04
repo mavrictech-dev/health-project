@@ -1,0 +1,25 @@
+.live-saas>input {max-width:480px;margin:15px 0;}
+.saas-confirmed {display:flex;gap:9px;align-items:center;padding:14px;border-radius:12px;background:var(--soft-green);}
+.live-saas-sheet[data-slot=sheet-content] {width:min(680px,100vw);max-width:680px;}
+.live-saas-sheet .sheet-body {min-width:0;overflow-wrap:anywhere;}
+.live-saas-sheet h3 {font-size:14px;margin:24px 0 12px;}
+.live-saas-sheet ul {padding-left:18px;line-height:1.9;}
+.saas-business-details {display:grid;grid-template-columns:1fr 1fr;gap:0 20px;margin:0 0 20px;}
+.saas-business-details>div {padding:14px 0;border-bottom:1px solid var(--border);min-width:0;}
+.saas-business-details dt {font-size:11px;color:var(--muted-foreground);margin-bottom:7px;}
+.saas-business-details dd {font-size:13px;margin:0;overflow-wrap:anywhere;}
+.saas-create-form {display:flex;flex-direction:column;gap:6px;}
+.saas-two-fields,.saas-three-fields {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;}
+.saas-three-fields {grid-template-columns:repeat(3,minmax(0,1fr));}
+.saas-create-form select {width:100%;max-width:100%;}
+.saas-specialties {border:1px solid var(--border);border-radius:12px;padding:15px;margin-bottom:20px;min-width:0;}
+.saas-specialties legend {font-size:13px;padding:0 5px;}
+.saas-specialties p {font-size:11px;color:var(--muted-foreground);margin:0 0 12px;line-height:1.8;}
+.saas-specialties>div {max-height:220px;overflow-y:auto;margin-top:12px;}
+.saas-specialties label {display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:12px;padding:9px 0;}
+.saas-specialties small {color:var(--muted-foreground);font-size:10px;}
+.saas-ambiguous,.saas-read-card {border:1px solid var(--border);border-radius:12px;padding:15px;margin:15px 0;}
+.saas-ambiguous p,.saas-read-card p {font-size:12px;line-height:1.8;margin:10px 0;}
+.saas-ambiguous label {display:flex;align-items:flex-start;gap:8px;font-size:12px;margin-top:15px;}
+.saas-read-card small {color:var(--muted-foreground);}
+@media(max-width:640px){.saas-business-details,.saas-two-fields,.saas-three-fields {grid-template-columns:1fr;}.live-saas .detail-actions,.live-saas-sheet .detail-actions {flex-wrap:wrap;}.live-saas-sheet[data-slot=sheet-content] {width:100vw;}.live-saas .runtime-table-wrap {max-width:100%;}.live-saas-sheet .sheet-body {padding:22px;}}
