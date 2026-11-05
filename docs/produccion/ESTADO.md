@@ -636,3 +636,15 @@ Guardas fallan antes de construir el pool. Driver y manager de prueba simulados:
 no conexion JDBC, servidor HTTP, grants, concurrencia o capturas nuevas.
 Launcher actual sigue heredado; SQL-01 EN_CURSO. Siguen pendientes seleccion
 del root/perfil QA, setup separado y validacion real JDBC/HTTP/visual.
+
+
+A58 integrada y subida 392b55f (982/982 independientes y JAR PASS).
+A59 delegada task_9023895f0ad8 / ctx_5b618a21611b, dependencia A58 settled.
+IdentityOnly de ambos roles y /status efectivo del programador confirmados:
+mendozadeafabisa@gmail.com, sesion 01a19e4c-15af-74e0-a1b9-75fc7093b98f;
+mismo terminal/worktree y --no-daemon, sin cambio global de cuentas.
+Ownership exclusivo HealthApplication, nuevo SourceSelector, perfil sqlserver-qa
+y HealthApplicationModeTest segun D-67/tmp/sql-01-a59-spec.md. Seleccion tras
+ConfigData y retirada del switch Flyway heredado, sin nuevo migrador. Orca
+confirma dispatched; pendiente entrega y revision. No se ejecuto el backend,
+JDBC, HTTP ni validacion visual nueva. Setup/runner y QA real siguen pendientes.
