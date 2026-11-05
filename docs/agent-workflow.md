@@ -1189,3 +1189,30 @@ y rechazar RESPONSE_INVALID; no basta solo comprobar textoMAX. Nuevo test
 justifica suite adicional antes de ejecutar plan. Preservar ambos errores,
 no aplicar permisos persistentes. Task task_f1a61e6514e6 / ctx_03dc4aa58e11
 sigue abierta; entrega, revision independiente y cleanup final pendientes.
+
+
+A62 diagnostico supervisor y correccion concreta, 2026-11-05. Pregunta
+msg_64f82ee7792d: tercer plan seguiaRESPONSE_INVALID/sqlcmd0, sinBEGIN/V8.
+Respuesta msg_0b532d6c12d5 indico no repetir ni editar gates hasta diagnostico;
+worker confirmo msg_3e3df395a87a y termino turno esperando. Escalacion
+msg_stop_e2eb74d493abd5206d91ffda refleja esa espera, no abandono ni cambio
+cuenta/sesion. Task/Dispatch siguen abiertos.
+Supervisor creo tmp/sqlserver-a62-diagnostic con scriptSHA
+2fd41ab885a7ae704adee0c4174889d2e89f772961f346d57be38e3efe151d08.
+Tres consultas reales de metadata SOLOLECTURA, sin V8/DDL/BEGIN/ensayo:
+1 original:sqlcmd0,14lineas, framing/chunk/checksum correctos; etapa hashes falla
+porque roles/acl/fingerprint sonNULL en JSON. FORJSON escalar sinfilas requiere
+normalizacion SQL explicita a[] para colecciones esperadas, sin relajar parser.
+2 consulta temporal con COALESCE de esos arrays pasa parser original; baseline
+rechaza TRANSACTION_INVALID: captura dentroSELECT daba count0/state1.
+3 captura de count/state al inicio antes de lecturasmetadata + arrays explicitos:
+parser y validate_baseline originales PASS, count0/state0,roles[]/acl[],hash64
+4E678570F62D8ABDC7EE76385D0681A80372BC7F77E0C434CC8789C9B90BC557.
+Evidencia raw/queries y captured-state-summary.json conservada en tmp. Primera
+invocacion del wrapper diagnostico bloqueo su propia asercion antes de SQL;
+se corrigio ese guard para distinguir texto literal de DDL ejecutable. No hubo
+SQL en ese intento. Las tres consultas posteriores fueron readonly verificadas.
+R-A62-EMPTY-ARRAYS-STATE enviada msg_7fcef7d8a2cf: implementar solo correcciones
+SQL de arrays/capturaestado y regresiones, mantener parser/gates estrictos,
+suite tras cambio, un plan y siPASS unico rehearseoriginal. No apply/COMMIT real.
+A62 no aceptada ni integrada; tests52PASS del worker no validan aun motor/ensayo.

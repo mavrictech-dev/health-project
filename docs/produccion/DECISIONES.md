@@ -1020,3 +1020,11 @@ nvarchar(max) para no truncar hex por promocion de tipos. Autorizar plan
 adicional tras regresion que reproduzca chunk truncado con checksum original;
 ensayo sigue limitado a uno tras planPASS. HistoricosERROR no se reinterpretan
 comoPASS, sin permiso de apply/COMMIT persistente o ampliacion de SQL.
+
+
+D-70 correccion supervisora de snapshots: colecciones SQL vacias deben emitirse
+como[] explicitamente para roles/ACL y arrays aplicables; nunca sustituir NULL
+en parser para ocultar falta de fingerprint. Capturar estado transaccional al
+inicio del snapshot antes de SELECTmetadata; comparaciones0/0 fuera y1/1 dentro
+permanecen estrictas. Diagnostico real readonly comprobo parser+baselinePASS
+sin editar gates. Implementacion delegada msg_7fcef7d8a2cf; ensayo aun pendiente.
