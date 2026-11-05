@@ -572,3 +572,5 @@ A46 aceptada e integrada como adaptador aislado de lot/move: 832/832 independien
 A46 integrada/push 850d4fb. A47 preparada para completar adapter de inventario (transfer/receive); luego otros consumidores y cableado. Motor/JDBC/HTTP reales pendientes.
 
 A47 delegada task_3cb62b0420cf / ctx_51adf881d39e, dependencia A46 settled. IdentityOnly de ambos roles y /status efectivo del programador confirmados (mendozadeafabisa@gmail.com, sesion 01a19e4c-15af-74e0-a1b9-75fc7093b98f). Mismo terminal/worktree, --no-daemon; ownership exclusivo cuatro rutas segun D-55. Orca dispatched, pendiente entrega y revision. Sin SQL/JDBC/HTTP real ni activacion.
+
+A47 aceptada e integrada: 847/847 independientes y jar PASS; InventoryService completo preparado aisladamente. A48 preparada para lecturas HospitalService, sin ampliar funcionalidad hospitalaria. Restantes consumidores, wiring SQL Server y QA motor/JDBC/HTTP real y visual siguen pendientes.

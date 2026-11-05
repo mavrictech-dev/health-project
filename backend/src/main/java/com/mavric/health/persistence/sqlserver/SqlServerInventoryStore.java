@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 import tools.jackson.databind.ObjectMapper;
 import com.mavric.health.inventory.domain.Requests.Lot;
 import com.mavric.health.inventory.domain.Requests.Move;
+import com.mavric.health.inventory.domain.Requests.Transfer;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
@@ -16,7 +17,7 @@ import com.mavric.health.shared.*;
  * V6 owns membership/module visibility; no Java branch filtering or stock/prescription rules. */
 public final class SqlServerInventoryStore {
  private final SqlServerExecutor executor;private final TransactionTemplate transactions;private final ObjectMapper mapper;
- /** Read compatibility only; writes require the configured Spring mapper overload, never a hidden default. */
+ /** Read/receive compatibility; DTO writes require the configured Spring mapper overload, never a hidden default. */
  public SqlServerInventoryStore(SqlServerExecutor executor,PlatformTransactionManager manager){this(executor,manager,null);}
  public SqlServerInventoryStore(SqlServerExecutor executor,PlatformTransactionManager manager,ObjectMapper mapper){this.executor=Objects.requireNonNull(executor);this.transactions=new TransactionTemplate(Objects.requireNonNull(manager));this.mapper=mapper;}
  private <T>T within(Supplier<T> work){try{return transactions.execute(tx->work.get());}catch(RuntimeException failure){throw SqlServerErrors.map(failure);}}
@@ -34,6 +35,13 @@ public final class SqlServerInventoryStore {
   boolean dispense=p!=null && "DISPENSE".equals(p.kind());var c=writeContext(request,dispense?"FAR":"ALM");if(p==null || p.kind()==null || !Set.of("RECEIVE","DISPENSE").contains(p.kind()))throw SqlServerErrors.invalid();
   if(dispense && p.prescriptionId()==null)throw ApiException.invalid("Selecciona la prescripci\u00f3n a dispensar.");Checks.id(p.lotId());if(p.patientId()!=null)Checks.id(p.patientId());if(p.prescriptionId()!=null)Checks.id(p.prescriptionId());inputQuantity(p.quantity());String requestKey=Idempotency.key(key);if(dispense)module(request,"PHARMACY");configuredMapper();String json=mapper.writeValueAsString(p),hash=Checks.hash(json),generated=Checks.id();var values=rows(executor.execute(SqlServerProcedure.INVENTORY_MOVE,c,generated,json,requestKey,hash));if(values.size()!=1)throw SqlServerErrors.database();var row=movement(values.getFirst(),c.tenantId());if(!p.lotId().equals(row.get("lotId")) || !p.kind().equals(row.get("kind")) || p.quantity().compareTo((BigDecimal)row.get("quantity"))!=0 || !Objects.equals(p.patientId(),row.get("patientId")) || !Objects.equals(p.prescriptionId(),row.get("prescriptionId")) || !requestKey.equals(row.get("requestKey")) || !hash.equals(row.get("requestHash")) || generated.equals(row.get("id"))&&!c.actorId().equals(row.get("actorId")))throw SqlServerErrors.database();return row;
  });}
+ public Map<String,Object> transfer(HttpServletRequest request,Transfer p,String key){return within(()->{
+  var c=writeContext(request,"ALM");if(p==null)throw SqlServerErrors.invalid();Checks.id(p.lotId());Checks.id(p.destinationBranchId());inputQuantity(p.quantity());String requestKey=Idempotency.key(key);configuredMapper();String json=mapper.writeValueAsString(p),hash=Checks.hash(json),generated=Checks.id();var row=transferOne(executor.execute(SqlServerProcedure.INVENTORY_TRANSFER_START,c,generated,json,requestKey,hash),c.tenantId());
+  if(!p.lotId().equals(row.get("lotId")) || !p.destinationBranchId().equals(row.get("destinationBranchId")) || p.quantity().compareTo((BigDecimal)row.get("quantity"))!=0 || !requestKey.equals(row.get("requestKey")) || !hash.equals(row.get("requestHash")))throw SqlServerErrors.database();
+  boolean received="RECEIVED".equals(row.get("status"));if(received?row.get("receivedAt")==null:row.get("receivedAt")!=null)throw SqlServerErrors.database();if(generated.equals(row.get("id")) && received)throw SqlServerErrors.database();return row;
+ });}
+ public Map<String,Object> receive(HttpServletRequest request,String id){return within(()->{var c=writeContext(request,"ALM");Checks.id(id);var row=transferOne(executor.execute(SqlServerProcedure.INVENTORY_TRANSFER_RECEIVE,c,id),c.tenantId());if(!id.equals(row.get("id")) || !"RECEIVED".equals(row.get("status")) || row.get("receivedAt")==null)throw SqlServerErrors.database();return row;});}
+ private static Map<String,Object> transferOne(SqlServerExecutor.Result result,String tenant){var values=rows(result);if(values.size()!=1)throw SqlServerErrors.database();return transfer(values.getFirst(),tenant);}
  private void configuredMapper(){if(mapper==null)throw SqlServerErrors.database();}
  private static boolean nonblank(String value,int max){return value!=null && !value.isBlank() && value.length()<=max;}
  private static void inputQuantity(BigDecimal value){if(value==null || value.signum()<=0)throw SqlServerErrors.invalid();var exact=value.stripTrailingZeros();if(exact.scale()>3 || (long)exact.precision()-exact.scale()>11)throw SqlServerErrors.invalid();}

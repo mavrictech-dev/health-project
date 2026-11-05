@@ -846,3 +846,7 @@ D-54 (2026-11-05): A46 migra solo lot/move de inventario, SP V6 existentes. JSON
 D-54 resuelta para implementacion aislada: A46 aceptada e integrada tras SHA/revision y verify independiente 832/832. V6 conserva autoridad de stock/branch/dispensacion. A47 completa transfer/receive antes de avanzar con otros consumidores y wiring.
 
 D-55 (2026-11-05): A47 completa transfer/receive de inventario con V6 existente. Start UUID/JSON/key/hash exacto; replay puede ya estar RECEIVED y debe conservarse. Receive un ID y retorno RECEIVED con timestamp; SP autoridad de branch/stock/unidad/locks/audit. Sin queries ni calculo de negocio Java. Mismas cuatro rutas, preservando A45/A46 y legacy; sin wiring, QA SQL/JDBC/HTTP pendiente.
+
+D-55 resuelta para implementacion: A47 revisada e integrada tras SHA/review/verify independiente 847/847. Todo InventoryService tiene caminos de store aislados; wiring/QA real pendientes.
+
+D-56 (2026-11-05): A48 prepara resources/admissions HospitalService via HOSPITAL_RESOURCES/ADMISSIONS sin args. Preservar roles HOSPITAL, orden/limite200 y proyecciones7/11 incluyendo computed/nullable; sin branch filtros, recalcular ocupacion o inventar protocolos. Constructor mixto conserva tres escrituras legacy. Solo cuatro rutas en tmp/sql-01-a48-spec.md; sin wiring ni habilitar hospitalizacion.
