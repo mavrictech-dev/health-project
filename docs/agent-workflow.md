@@ -483,3 +483,18 @@ A18 aceptada tras msg_2ffa48cf0b92/msg_413a740a5390,4SHA,snapshot368/368+jar.
 4archivos integrados sin wiring; A19 preparada tmp/sql-01-a19-spec.md,D-27,
 ownership4archivos de lecturas auditoria/trazas. Cuenta/sesion/Sol medium y
 cuota verificados; seguir worker-start --spec-file con dependencia A18settled.
+
+
+A19 delegada con worker-start --spec-file y dependencia A18settled:
+task_f2b11c63b1f1 / ctx_37f7e33bd3b9,mismo Run/terminal/cuenta/sesion/Sol medium.
+Recibo outcome_unknown/turn_start_unobserved: texto entregado,turno aun no
+observado. No reenviar ni abandonar; esperar avisoOrca. Ownership4archivos
+reservados al programador. A18 subida como
+fa177aa8d8ea3f46cfb4a89ee493b12bb662b963 a ramahealth/production-wave0,refremota
+comprobada y main intacta. Sin aprobacion anticipada ni backend activado.
+
+
+A19 aceptada tras msg_80ea187c0939/msg_a34fb5c8acf0,4SHA,snapshot385/385+jar.
+4archivos integrados sin wiring; A20 preparada tmp/sql-01-a20-spec.md,D-28,
+ownership4archivosMonitor/status/sample. Misma cuenta/sesion/Sol medium/cuota
+verificados; seguir worker-start --spec-file con dependencia A19settled.

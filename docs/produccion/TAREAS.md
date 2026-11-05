@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A18 aceptadas; A19 preparado) | A18 task_da2ffda82d8a / ctx_fcbb8244defb,368/368 supervisor | Finalizacion de trazas integrada sin wiring. Siguiente consultas auditoria/trazabilidad; otros consumidores/wiring/QA real pendientes |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A19 aceptadas; A20 preparado) | A19 task_f2b11c63b1f1 / ctx_37f7e33bd3b9,385/385 supervisor | Lecturas auditoria/trazas integradas sin wiring. Siguiente estado publico/muestreo salud; Monitor details/mode,otros consumidores/wiring/QA real pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -465,3 +465,22 @@ legacy comparados exactos. Sin conexion real ni cambio de SecurityConfiguration.
 A19 preparada tmp/sql-01-a19-spec.md,D-27,ownership4archivos AuditService/store/
 dos suites,4SP,paginacion y proyecciones. Cuenta/sesion/Sol medium/cuota
 verificados antes de delegar; sin nuevas reglas clinicas ni backend activo.
+
+
+A19 delegada con worker-start --spec-file y dependencia A18settled:
+task_f2b11c63b1f1 / ctx_37f7e33bd3b9,mismo Run/terminal/cuenta/sesion/Sol medium.
+Recibo outcome_unknown/turn_start_unobserved: texto entregado,turno aun no
+observado. No reenviar ni abandonar; esperar avisoOrca. Ownership4archivos
+reservados al programador. A18 subida como
+fa177aa8d8ea3f46cfb4a89ee493b12bb662b963 a ramahealth/production-wave0,refremota
+comprobada y main intacta. Sin aprobacion anticipada ni backend activado.
+
+
+A19 ACEPTADA: informe msg_80ea187c0939/done msg_a34fb5c8acf0,4SHA exactos,
+verify independiente385/385 yjarPASS23.370s.114bases verificadas,113ajenas
+intactas;1existente+3nuevos integrados. Legacy/scope comparados exactos al
+retirar solo seleccionSQL. Paginacion/proyecciones/JSONnull/contexto validados
+con modelos,no permisos/puenteNULL reales. Sin nueva configuracion ni UI.
+A20 preparada tmp/sql-01-a20-spec.md,D-28,ownership4archivosMonitor/store/
+dos suites para status/sample;details/mode SQLguardados hastaA21. Cuentas/
+sesion/Sol medium/cuota verificados antes de delegar.

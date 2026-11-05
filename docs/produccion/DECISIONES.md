@@ -626,3 +626,21 @@ Queryevents se trunca100UTF16sinpartirsurrogates como legacy; blank->NULL,
 UUIDfiltros canonicos,statuspositiveumbral intacto,before<=0sin filtro. No
 imponer from<to nuevo. Legacy no cambia. ErroresSPpreservados/datosmal500,
 sin fallback/retry ni snapshotreal prometido. Encargo tmp/sql-01-a19-spec.md.
+
+
+### D-28: estado publico y muestreo WORKER antes de completar monitor
+
+A19 aceptada385/385. A20 limita MonitorService a status/sample con store y
+2suites,nueva ownership4archivos. Constructorlegacy @Autowired y SQLexplicito,
+instanceUUID estable/Scheduled15000/12000 conservados. Details/mode SQL fallan
+500seguro antes de efectos hastaA21; no configuracion activa ni nuevoendpoint.
+
+APPLICATION_STATUS enREQUESTpublico devuelve4campos(mode/message/revision/
+statusderivado),sin login/informacion de infraestructura extra. Sampleusa
+HEALTH_READY conWORKER sinningun datoHTTP/actor/tenant/token,readyInteger1
+obligatorio antes de HEALTH_SAMPLE(UP/latenciams/metricasJVM). UnidadREQUIRED
+para ambos,mapeos dentrocallback;no sampleUP anteprobeinvalido,ni DOWNficticio.
+FallosStoreseguros,samplerbest-effortconWARNestatico sin datos/Throwable.
+TresSPtotales,sin SELECT1Java,cache/retry oTXsobre tareas. Actuator/pool se
+convierten despues; no probarlos ni declararlos migrados en este corte.
+Encargo tmp/sql-01-a20-spec.md. Modelos no acreditan disponibilidaddurable real.

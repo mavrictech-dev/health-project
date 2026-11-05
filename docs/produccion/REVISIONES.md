@@ -756,3 +756,19 @@ conexion/pool/locks/commitdurable por ese modelo.
 accept-sqlserver-a18.py verifica4SHA/111bases y core/legacy,integra1existente
 +3nuevos;110bases ajenas intactas. Evidencia tmp/sqlserver-a18-acceptance.json.
 Sin defectos abiertos en alcance revisado,no nuevaQAvisual ni wiring SQL.
+
+
+## SQL-01.A19 - ACEPTADA con385 pruebas independientes
+
+Informe msg_80ea187c0939/done msg_a34fb5c8acf0 revisados. Supervisor leyo
+AuditService/store/dos suites ycontrastoV1/V3/4SP. Autoridad contextual y
+Access.actor coherentes,roles porhost,sin autoridad HTTP;proyecciones6/19/11
+campos connullable yJSONVALUEprofundo,inmutables. Paginacionlimit+1 sin
+sumarlo enbind,cursorvisibleLong,journey2RS/200steps sin queryadicional.
+
+Snapshot385/385,0fail/0error/0skip,jarPASS23.370s.Baseline114archivos
+comprobados en manifest;113ajenos intactos. accept-sqlserver-a19.py compara
+legado completo/scope al retirar solo ramasSQL y copia4SHA(1existente+3nuevos).
+Permisos/crossTenant/puenteNULL estan modelados,no validados en motor.
+No nueva pruebaHTTP/MockMvc en A19(opcional),ni captura/navegador ni cambioUI.
+Aceptacion acotada,no auditoria integral enSQLServer/JDBC/HTTP conectado.

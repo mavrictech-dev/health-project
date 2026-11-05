@@ -474,3 +474,15 @@ Log verify-supervisor.log yXMLSurefire conservados. accept-sqlserver-a18.py
 revalida4SHA/bases y preservacion core/legacy,copia4archivos;110ajenos intactos.
 Servletdobles y managerMODELADO,logcapturado sin secretos: no JDBC/SQLServer/
 HTTP/pool/locks/durabilidad/proxy/navegador reales. Sin nueva captura visual.
+
+
+### A19 -385 pruebas independientes de lecturas tipadas
+
+python -B tmp/prepare-sqlserver-a19-review.py confirma4SHA/114bases,snapshot
+tmp/sqlserver-a19-review/backend. ConHEALTH_TRUST_GATEWAY=false solo proceso:
+.\mvnw.cmd -B -ntp verify,JDK21,exit0,BUILD SUCCESS23.370s,385tests/0failures/
+0errors/0skipped,jarPASS,2026-11-04T19:15:39-05:00.17nuevas+368previas.
+Log verify-supervisor.log yXMLSurefire. Acceptance revalida4SHA/bases y
+cuerposlegacy;113fueraownership intactos,1existente+3nuevos integrados.
+Dobles/managerMODELADO,testsservicio sinHTTP nuevo; no motor/aislamiento/
+permisos/puenteNULL/pool/durabilidad ni nueva evidencia visual reales.

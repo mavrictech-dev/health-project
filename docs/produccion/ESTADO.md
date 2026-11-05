@@ -340,3 +340,12 @@ respuesta preservada ante fallo y contexto limpiado; no validacion durable o
 conectada. Constructor legacy actual y SecurityConfiguration intactos.
 A19 prepara lecturas de auditoria/trazabilidad; Monitor/Mail/Bootstrap y negocio/
 actuator/wiringsegregado y QAreal aun pendientes. No100%SP ni backend activo.
+
+
+## A19 aceptada - 2026-11-04
+
+Lecturas de auditoria/trazas en caminoSQL explicito integradas tras385/385
+pruebas independientes y4SHA. Legacy/default vigentes,roles/paginacion/JSON
+probados con dobles; no auditoria/permisos reales acreditados. A20 prepara
+estado publico y muestreo de salud; detalles/mode posterioresA21,Mail/Bootstrap/
+actuator/negocio/wiring y QAconectada aun pendientes. No backendSQL activado.
