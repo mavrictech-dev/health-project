@@ -1,0 +1,24 @@
+package com.mavric.health.monitor;
+import java.util.*;
+import org.junit.jupiter.api.*;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.scheduling.annotation.Scheduled;
+import com.mavric.health.shared.*;
+import com.mavric.health.identity.Access;
+import com.mavric.health.audit.TraceContext;
+import com.mavric.health.persistence.sqlserver.SqlServerMonitorStore;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.*;
+/** Manual sampler only. No scheduling postprocessor, server, SQL or actual health certification. */
+class MonitorServiceSqlServerTest {
+ final Sql sql=mock(Sql.class);final Access access=mock(Access.class);final SqlServerMonitorStore store=mock(SqlServerMonitorStore.class);final MonitorService service=new MonitorService(store,access);
+ @AfterEach void cleanup(){TraceContext.REQUEST.remove();SecurityContextHolder.clearContext();}
+ @Test void publicStatusForwardsInternalRequestAndErrorsWithoutAccessOrFallback(){assertEquals(500,assertThrows(ApiException.class,service::status).status);verifyNoInteractions(store);var request=new MockHttpServletRequest("GET","/api/public/status");TraceContext.REQUEST.set(request);var out=Map.<String,Object>of("mode","OPEN","message","","revision",1,"status","OPERATIONAL");when(store.status(request)).thenReturn(out);assertSame(out,service.status());var error=new ApiException(500,"DATABASE_ERROR","Safe");when(store.status(request)).thenThrow(error);assertSame(error,assertThrows(ApiException.class,service::status));verifyNoInteractions(sql,access);}
+ @Test void sampleInstanceStableMetricsNonnegativeAndNoAccessOrContextMutation() throws Exception {var request=new MockHttpServletRequest("POST","/forged");TraceContext.REQUEST.set(request);var auth=new org.springframework.security.authentication.UsernamePasswordAuthenticationToken("forged",null);SecurityContextHolder.getContext().setAuthentication(auth);service.sample();service.sample();var ids=org.mockito.ArgumentCaptor.forClass(String.class);verify(store,times(2)).sample(ids.capture(),longThat(v->v>=0),longThat(v->v>=0),longThat(v->v>=0));assertEquals(ids.getAllValues().getFirst(),ids.getAllValues().getLast());assertEquals(ids.getValue(),UUID.fromString(ids.getValue()).toString());assertSame(request,TraceContext.REQUEST.get());assertSame(auth,SecurityContextHolder.getContext().getAuthentication());var scheduled=MonitorService.class.getMethod("sample").getAnnotation(Scheduled.class);assertEquals(15000,scheduled.fixedDelay());assertEquals(12000,scheduled.initialDelay());verifyNoInteractions(sql,access);}
+ @Test void sampleFailureWarnsOnlyStaticMessageAndFatalErrorPropagates(){var logger=(ch.qos.logback.classic.Logger)org.slf4j.LoggerFactory.getLogger(MonitorService.class);var appender=new ch.qos.logback.core.read.ListAppender<ch.qos.logback.classic.spi.ILoggingEvent>();appender.start();logger.addAppender(appender);try{doThrow(new RuntimeException("canary token password driver")).when(store).sample(anyString(),anyLong(),anyLong(),anyLong());service.sample();assertEquals(1,appender.list.size());var event=appender.list.getFirst();assertEquals("Database health sample unavailable",event.getFormattedMessage());assertEquals(ch.qos.logback.classic.Level.WARN,event.getLevel());assertNull(event.getThrowableProxy());var fatal=new AssertionError("synthetic fatal");doThrow(fatal).when(store).sample(anyString(),anyLong(),anyLong(),anyLong());assertSame(fatal,assertThrows(AssertionError.class,service::sample));assertEquals(1,appender.list.size());verifyNoInteractions(sql,access);}finally{logger.detachAppender(appender);appender.stop();}}
+ @Test void detailsAndModeAreGuardedBeforeInputsAccessOrAnyStore(){assertEquals(500,assertThrows(ApiException.class,service::details).status);assertEquals("DATABASE_ERROR",assertThrows(ApiException.class,()->service.mode(-1,null,null)).code);verifyNoInteractions(access,store,sql);}
+ @Test void minimalSpringKeepsLegacyAndNoSchedulerStarts(){when(sql.one(anyString(),any(Object[].class))).thenReturn(new LinkedHashMap<>(Map.of("mode","OPEN","message","","revision",1)));try(var context=new AnnotationConfigApplicationContext()){context.registerBean(Sql.class,()->sql);context.registerBean(Access.class,()->access);context.registerBean(MonitorService.class);context.refresh();verifyNoInteractions(sql);var legacy=context.getBean(MonitorService.class);assertEquals("OPERATIONAL",((Map<?,?>)legacy.status()).get("status"));legacy.sample();verify(sql).call(eq("sp_health_sample"),any(Object[].class));assertEquals(0,context.getBeanNamesForType(SqlServerMonitorStore.class).length);assertEquals(0,context.getBeanNamesForType(javax.sql.DataSource.class).length);}verifyNoInteractions(store,access);}
+}

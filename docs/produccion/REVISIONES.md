@@ -772,3 +772,13 @@ legado completo/scope al retirar solo ramasSQL y copia4SHA(1existente+3nuevos).
 Permisos/crossTenant/puenteNULL estan modelados,no validados en motor.
 No nueva pruebaHTTP/MockMvc en A19(opcional),ni captura/navegador ni cambioUI.
 Aceptacion acotada,no auditoria integral enSQLServer/JDBC/HTTP conectado.
+
+
+A20 ACEPTADA: informe msg_11b7052f1796/done msg_5a2a9bf20f4c,4SHA exactos.
+Snapshot independiente verify398/398,0fallos/errores/omisiones,jarPASS22.306s,
+2026-11-04T21:54:34-05:00.117bases verificadas,116fueraownership intactas;
+1existente+3nuevos integrados. Cuerpos legacy exactos al retirar guardasSQL.
+Tres SP tipados,status REQUEST/sample WORKER sin autoridadHTTP,REQUIRED y
+WARN estatico revisados personalmente. Evidencia tmp/sqlserver-a20-acceptance.json.
+Sin motor/JDBC/HTTP real ni nueva evidencia visual; no backend activo.
+A21 siguiente: details/mode por SP en mismos4archivos,secuencia sin solapamiento.

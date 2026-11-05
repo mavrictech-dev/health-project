@@ -349,3 +349,13 @@ pruebas independientes y4SHA. Legacy/default vigentes,roles/paginacion/JSON
 probados con dobles; no auditoria/permisos reales acreditados. A20 prepara
 estado publico y muestreo de salud; detalles/mode posterioresA21,Mail/Bootstrap/
 actuator/negocio/wiring y QAconectada aun pendientes. No backendSQL activado.
+
+
+A20 ACEPTADA: informe msg_11b7052f1796/done msg_5a2a9bf20f4c,4SHA exactos.
+Snapshot independiente verify398/398,0fallos/errores/omisiones,jarPASS22.306s,
+2026-11-04T21:54:34-05:00.117bases verificadas,116fueraownership intactas;
+1existente+3nuevos integrados. Cuerpos legacy exactos al retirar guardasSQL.
+Tres SP tipados,status REQUEST/sample WORKER sin autoridadHTTP,REQUIRED y
+WARN estatico revisados personalmente. Evidencia tmp/sqlserver-a20-acceptance.json.
+Sin motor/JDBC/HTTP real ni nueva evidencia visual; no backend activo.
+A21 siguiente: details/mode por SP en mismos4archivos,secuencia sin solapamiento.

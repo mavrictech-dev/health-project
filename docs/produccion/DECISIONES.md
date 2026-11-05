@@ -644,3 +644,10 @@ FallosStoreseguros,samplerbest-effortconWARNestatico sin datos/Throwable.
 TresSPtotales,sin SELECT1Java,cache/retry oTXsobre tareas. Actuator/pool se
 convierten despues; no probarlos ni declararlos migrados en este corte.
 Encargo tmp/sql-01-a20-spec.md. Modelos no acreditan disponibilidaddurable real.
+
+
+D-29 (2026-11-04): A21 completa Monitor details/mode mediante SP y constructor
+explicito sin wiring. Details plataforma SAD/SOP,tenant ADM/AUD;mode SADsolo.
+Lecturas REQUIRED sin promesa snapshot;mode+status misma unidad. Proyeccion
+explicita,inmutabilidad,nullableversionFlyway,contextoREQUEST coherente y
+ningunSPplataforma desde tenant. Contrato detallado tmp/sql-01-a21-spec.md.

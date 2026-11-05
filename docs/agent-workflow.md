@@ -498,3 +498,24 @@ A19 aceptada tras msg_80ea187c0939/msg_a34fb5c8acf0,4SHA,snapshot385/385+jar.
 4archivos integrados sin wiring; A20 preparada tmp/sql-01-a20-spec.md,D-28,
 ownership4archivosMonitor/status/sample. Misma cuenta/sesion/Sol medium/cuota
 verificados; seguir worker-start --spec-file con dependencia A19settled.
+
+
+A20 delegada por worker-start --spec-file con dependencia A19settled:
+task_bb80dc4ffc56 / ctx_0e0495efbb48,mismo Run/terminal/cuenta/sesion/Sol medium.
+Recibo outcome_unknown/turn_start_unobserved: texto entregado,turno aun no
+observado. No reenviar ni abandonar; esperar avisoOrca. Ownership4archivos
+MonitorService/store/dos suites reservado al programador. A19 subida como
+d38305c080e31bf06b602ad339e39e2ed275573e a health/production-wave0,refremota
+comprobada y main intacta. Identidad guardada de ambos roles y /status efectivo
+del programador verificados; sin cuentas globales ni nuevo proceso/servidor.
+No aprobacion anticipada ni backend activado; JDBC/HTTPreal siguen pendientes.
+
+
+A20 ACEPTADA: informe msg_11b7052f1796/done msg_5a2a9bf20f4c,4SHA exactos.
+Snapshot independiente verify398/398,0fallos/errores/omisiones,jarPASS22.306s,
+2026-11-04T21:54:34-05:00.117bases verificadas,116fueraownership intactas;
+1existente+3nuevos integrados. Cuerpos legacy exactos al retirar guardasSQL.
+Tres SP tipados,status REQUEST/sample WORKER sin autoridadHTTP,REQUIRED y
+WARN estatico revisados personalmente. Evidencia tmp/sqlserver-a20-acceptance.json.
+Sin motor/JDBC/HTTP real ni nueva evidencia visual; no backend activo.
+A21 siguiente: details/mode por SP en mismos4archivos,secuencia sin solapamiento.
