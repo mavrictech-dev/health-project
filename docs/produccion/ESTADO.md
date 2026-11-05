@@ -379,3 +379,12 @@ personal confirma claimcommit antes senderfueraTX,AMBIGUOUS paraexcepciones,
 completefallido sinreclasificacion/reenvio,logsestaticos y WORKER9NULL.
 No SQLServer/JDBC/SMTP/HTTP reales ni nueva evidencia visual. A23 siguiente:
 Bootstrap con executor/principal separado,sin configurar ni crearusuarios.
+
+
+A23 ACEPTADA: informe msg_dc8bc56cebd5/done msg_1d077c1c01ff,4SHAexactos,
+verify independiente437/437,0fallos/errores/omisiones,jarPASS23.672s,
+2026-11-04T22:20:24-05:00.123bases verificadas,122ajenas intactas;1existente+
+3nuevos integrados. Cuerpo legacy exacto retirando selectorSQL; EXISTS antes
+hash diferido y CREATE en mismaREQUIRED,BOOTSTRAP9NULL,sinbean/wiring.
+Sin usuarios/principales/SQLServer/JDBC/HTTP reales ni evidencia visual nueva.
+Siguiente A24 soporte lecturas,escrituras guardadas hasta A25.

@@ -557,3 +557,25 @@ personal confirma claimcommit antes senderfueraTX,AMBIGUOUS paraexcepciones,
 completefallido sinreclasificacion/reenvio,logsestaticos y WORKER9NULL.
 No SQLServer/JDBC/SMTP/HTTP reales ni nueva evidencia visual. A23 siguiente:
 Bootstrap con executor/principal separado,sin configurar ni crearusuarios.
+
+
+A23 delegada: task_561630dec753 / ctx_d098afb8307c,dependencia A22settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio noobservado;no reenviar ni
+abandonar,esperar avisoOrca. Ownership Bootstrap/store/dossuites,D-31.
+A22 subidaa75366fb9ab6a4bd32ee1f9163f6318a1e7b9784 a rama de trabajo,
+refremota comprobada,main intacta. Restoconsumidores/wiring/QAreal pendientes;
+sin configurar principal ni usuarios reales ni aprobacionA23anticipada.
+
+
+A23 ACEPTADA: informe msg_dc8bc56cebd5/done msg_1d077c1c01ff,4SHAexactos,
+verify independiente437/437,0fallos/errores/omisiones,jarPASS23.672s,
+2026-11-04T22:20:24-05:00.123bases verificadas,122ajenas intactas;1existente+
+3nuevos integrados. Cuerpo legacy exacto retirando selectorSQL; EXISTS antes
+hash diferido y CREATE en mismaREQUIRED,BOOTSTRAP9NULL,sinbean/wiring.
+Sin usuarios/principales/SQLServer/JDBC/HTTP reales ni evidencia visual nueva.
+Siguiente A24 soporte lecturas,escrituras guardadas hasta A25.
+
+Instruccion usuario vigente: apagar la PC AL TERMINAR todos los pendientes
+autorizados y guardar resultados. No apagar por worker_done ni cierre parcial;
+consumidores/wiring/QAreal todavia pendientes. No apagar durante tareas activas.

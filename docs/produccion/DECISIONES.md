@@ -663,3 +663,9 @@ D-31: Bootstrap por constructorSQL explicito,store REQUIRED con datasource/
 executorBOOTSTRAP separados runtime. EXISTS antes de validacion password/hash;
 supplier de hash dentro unidad que CREATE. ContextoBOOTSTRAP9NULL,sin wiring
 ni usuarios reales. Carrera se resuelve por SP idempotente,no garantia deinsert.
+
+
+D-32: soporte SQL por etapas,A24list/detail unicamente,create/stepguardados
+hastaA25. PlataformaSAD/SOP,tenant autor autenticado sinrestriccionADM/AUD,
+contextoREQUEST coherente y proyeccionexacta,nullableplataforma/MAX preservado.
+Una REQUIRED por lectura,sinwiring ni promesa snapshot.

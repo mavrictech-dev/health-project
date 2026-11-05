@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A22 aceptadas; A23 preparado) | A19 task_f2b11c63b1f1 / ctx_37f7e33bd3b9,385/385 supervisor | Correo integrado sin wiring. Siguiente Bootstrap A23; otros consumidores/wiring/QA real pendientes |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A23 aceptadas; A24 preparado) | A19 task_f2b11c63b1f1 / ctx_37f7e33bd3b9,385/385 supervisor | Bootstrap integrado sin wiring. Siguiente soporte lecturas A24; otros consumidores/wiring/QA real pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -543,3 +543,21 @@ personal confirma claimcommit antes senderfueraTX,AMBIGUOUS paraexcepciones,
 completefallido sinreclasificacion/reenvio,logsestaticos y WORKER9NULL.
 No SQLServer/JDBC/SMTP/HTTP reales ni nueva evidencia visual. A23 siguiente:
 Bootstrap con executor/principal separado,sin configurar ni crearusuarios.
+
+
+A23 delegada: task_561630dec753 / ctx_d098afb8307c,dependencia A22settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio noobservado;no reenviar ni
+abandonar,esperar avisoOrca. Ownership Bootstrap/store/dossuites,D-31.
+A22 subidaa75366fb9ab6a4bd32ee1f9163f6318a1e7b9784 a rama de trabajo,
+refremota comprobada,main intacta. Restoconsumidores/wiring/QAreal pendientes;
+sin configurar principal ni usuarios reales ni aprobacionA23anticipada.
+
+
+A23 ACEPTADA: informe msg_dc8bc56cebd5/done msg_1d077c1c01ff,4SHAexactos,
+verify independiente437/437,0fallos/errores/omisiones,jarPASS23.672s,
+2026-11-04T22:20:24-05:00.123bases verificadas,122ajenas intactas;1existente+
+3nuevos integrados. Cuerpo legacy exacto retirando selectorSQL; EXISTS antes
+hash diferido y CREATE en mismaREQUIRED,BOOTSTRAP9NULL,sinbean/wiring.
+Sin usuarios/principales/SQLServer/JDBC/HTTP reales ni evidencia visual nueva.
+Siguiente A24 soporte lecturas,escrituras guardadas hasta A25.
