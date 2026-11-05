@@ -783,3 +783,16 @@ Plan y ensayo real de V8 en TXrevertida unicamente; worker no ejecuta apply.
 ACLexacta/fingerprintfreshconnection obligatorios antes de aceptar/aplicar.
 Orca dispatched, pendiente entrega/revision. No cambio TCP/auth/servicios/logins,
 ni JDBCpositivo/grants efectivos de login/negocioHTTP/visual en este corte.
+
+
+A62 EN_CURSO, 2026-11-05. Pregunta msg_0af526813a57: primer plan readonly
+CLI1/SQLcmd1 antes deBEGIN/V8,0.469s; first-plan-error preservado. Consulta
+seleccionaba t.principal_id en sys.triggers; worker corrigio owner a
+sys.objects o.principal_id via join y reporta51/51testsPASS tras correccion.
+Supervisor inspecciono query corregida y diagnostico seguro solo numeros/lineas
+SQL. Se autoriza un plan adicional y, SOLOsi pasa, el unico rehearse previsto;
+ningun apply ni COMMIT persistente. No repetir tests exitosos sin cambios nuevos.
+Rehearse exige ACL562 exacta, definiciones/metadata protegidas y fingerprint
+identico tras rollback verificado por conexion nueva. Ante nuevo fallo conservar
+evidencia/verificarcleanup y consultar antes de repetir. Task task_f1a61e6514e6 /
+ctx_03dc4aa58e11 sigue abierta; no entregaaceptada ni archivosintegrados.

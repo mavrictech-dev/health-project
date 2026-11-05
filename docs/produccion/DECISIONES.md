@@ -1007,3 +1007,9 @@ ningun usuario/login/dato nuevo. Supervisor revisara ensayo independiente antes
 de aplicar permisos persistentes solo en QA autorizada. Esto puede resolver
 los dos roles sin tocar SQL compartido a nivel servicio; TCP/auth continuan
 bloqueando JDBCpositivo y requieren entorno compatible separado o decisionexplicita.
+
+
+D-70 aclaracion: correccion comprobada de columna de metadata inexistente
+justifica un plan adicional; solo si pasa permite el unico ensayo revertido
+original. Preservar error inicial. Esta autorizacion no permite apply/COMMIT
+persistente, ampliar scope ni repetir QA exitosa sin cambio.
