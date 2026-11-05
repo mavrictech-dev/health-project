@@ -8,14 +8,12 @@ README y plan del usuario preservados.
 
 ## Actualizacion supervisora, 2026-11-05
 
-SQL-01.A1-A38 implementacion aceptada en health/production-wave0. A36.R1 tuvo
-8/8 fases independientes de SQL Server sintetico con fingerprint QA restaurado;
-V9 no esta instalada permanentemente. A37 reserve/change paso 634 pruebas
-independientes con dobles, sin SQL real para writes. A38 paso 664 pruebas
-independientes con dobles y conserva la validacion clinica heredada. SQL-01 sigue
-EN_CURSO: siguiente A39 DocumentService y luego consumidores restantes; wiring SQL Server,
-JDBC/HTTP reales, grants runtime y validacion visual siguen pendientes. main
-permanece intacta.
+SQL-01.A1-A44 implementacion aceptada en health/production-wave0. A44 FinanceService
+paso verificacion independiente con 797 pruebas, cero fallos/errores/skips y jar
+PASS. Los adaptadores SQL Server siguen aislados. A36.R1 tuvo 8/8 fases de motor
+sintetico; esto no acredita JDBC/HTTP de la aplicacion completa. Pendientes:
+consumidores restantes, cableado runtime, grants y QA SQL Server/JDBC/HTTP real,
+mas validacion visual de recorridos reales. main permanece intacta.
 
 HP-ORCH-01 VALIDADA como auditoria estatica, con informe Orca en cuatro partes
 (ctx_06e3adc9a15a). No equivale a validacion del sistema. Nueva autorizacion:
@@ -547,3 +545,9 @@ Solo este método/store/tests; vínculos/guards y wiring real quedan pendientes.
 
 SQL-01.A43 PortalService.balance delegada task_52d6d531ea9e / ctx_331ec5fb3ea3,
 dependencia A42 settled. Ownership cuatro archivos, cuenta y sesión verificadas.
+
+SQL-01.A44 preparada: FinanceService balance/movements/post; V6 ya contiene SP
+parametrizados y grants runtime. Implementación aislada no activa ni valida JDBC.
+
+SQL-01.A44 FinanceService balance/movements/post delegada task_f78192a4223f /
+ctx_1ea57539fc82; V6 contract existente; revisión pendiente, sin wiring/SQL real.

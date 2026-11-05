@@ -751,3 +751,11 @@ Snapshot independiente HEAD A42 + cuatro ownership por SHA256. JDK21 verify:
 773 tests, 0 fallos/errores/skips, BUILD SUCCESS, jar PASS. Tests con doubles
 cubren Long negativos/extremos, PEN, forma, scopes y errores, pero no ejecutan el
 ledger, SP permissions/BILLING/HOLDLOCK, SQL Server, JDBC, HTTP ni grants.
+
+## SQL-01.A44 - FinanceService aislado, 2026-11-05
+
+Snapshot independiente HEAD A43 más cuatro paths por SHA256. `mvnw -B -ntp
+verify` con JDK21: 797 tests, 0 fallos/errores/skips, BUILD SUCCESS, jar PASS.
+Tests mock cubren número decimal y negativos, projection, serializer/hash, replay
+semántico, validaciones y errors. Ninguno valida V6 en SQL Server, aggregate real,
+locks/idempotencia bajo concurrencia, ledger, permisos runtime, JDBC/HTTP o wiring.

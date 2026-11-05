@@ -1103,3 +1103,21 @@ verify final. 129 rutas protegidas del worker siguen intactas; con HEAD, la úni
 diferencia conocida es LF final de SqlServerClinicalStore A38. Pruebas de suma,
 ledger, permisos de SP, vínculo, grants, JDBC/HTTP y wiring son dobles o no se
 ejecutaron. A43 aceptada como adapter aislado, sin activar backend.
+
+A44 revision supervisora, 2026-11-05
+
+Informe msg_8678830f1972 / worker_done msg_afee73d8c109. Cuatro SHA de ownership
+coinciden en worktree y snapshot desde HEAD A43. Revisión de FinanceService,
+Requests.Post, V1 finance_movements, V6 SP y catálogo. Legacy constructor @Autowired
+y cuerpos originales preservados; D-52: read scopes, balance Number DECIMAL(38,0)
+no estrechado; movements un SP sin balance-preflight; post un JSON serializado
+una vez con mapper Spring y hash UTF-8 exacto; no SELECT posterior. Replays con
+UUID/actor original aceptados tras validar patient/tenant/key/hash y propiedades.
+Ledger, reglas payment/refund/locks y auditoría permanecen en V6. Probé además
+que los 133 archivos protegidos no cambian respecto al worktree; comparación con
+HEAD mantiene únicamente la diferencia LF final conocida de A38.
+
+Verify independiente JDK21 sobre snapshot: 797 tests, cero fallos/errores/skips,
+BUILD SUCCESS, jar/repackage PASS. Doubles/model transaction no prueban ledger,
+replays concurrentes, locks, durabilidad, grants, JDBC/HTTP ni wiring. A44 aceptada
+solo como adapter aislado; D-52 resuelta sin activar servicio.

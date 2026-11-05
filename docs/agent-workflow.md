@@ -923,3 +923,15 @@ cuenta efectiva y `--no-daemon`; solo PortalService.balance/store/tests.
 A43 entrega msg_1cc060ac6ce7/msg_9ef6037075b4 revisada: verify independiente
 773/773, jar PASS, con primer error de compilación de mocks corregido antes del
 verify final. Integrada sin activar backend; SQL/JDBC/HTTP/grants pendientes.
+
+A44 preparada D-52/tmp/sql-01-a44-spec.md, dependencia A43. FinanceService, store
+y suites son ownership secuencial; conservar SQL V6/grants y probar serializer/hash
+con el mapper Spring (sin DB).
+
+A44 delegada task_f78192a4223f / ctx_1ea57539fc82 con A43 settled. Cuenta/session
+confirmadas, mismo terminal/worktree; D-52 mantiene responsabilidad de serializer,
+hash exacto e idempotencia del SP.
+
+A44 msg_8678830f1972/msg_afee73d8c109 revisada e integrada por snapshot
+independiente (797/797, jar PASS). D-52 implementada solo aislada; sin QA SQL
+Server/JDBC/HTTP ni habilitación. Sin defectos en fuentes revisadas.

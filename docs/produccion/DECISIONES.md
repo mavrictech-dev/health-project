@@ -830,3 +830,9 @@ D-51 resuelta para implementación: A43 accepted como store aislado tras verify
 independiente 773/773. No validar con doubles el balance/ledger o enlace BILLING
 real. Todo PortalService tiene ahora consumers preparados aisladamente; pasar a
 inventario de consumidores no portal y diseñar cableado solo con revisión completa.
+
+D-52 (2026-11-05): Migrar FinanceService.balance/movements/post con SqlServerFinanceStore explícito. Balance retorna agregación decimal38 Number intacta; movements usa solo FINANCE_MOVEMENTS, sin balance/query de preflight, y conserva límite/orden. Post preserva serializer configurado, SHA-256 exacto UTF8 e idempotency key; V6 es autoridad para pagos/refunds/locks/replay/conflicto/auditoría y retorna row para nueva o replay. No read-after-write Java, cálculo/validación ledger duplicados ni activación/wiring. SQL Server/JDBC/HTTP siguen gate separado.
+
+D-52 resuelta para implementación: FinanceService balance/movements/post aceptado
+en snapshot independiente 797/797; mapper/hash confirmado. Sin validar balance
+real, movimiento, replay concurrente, locks, grants JDBC/HTTP o wiring.
