@@ -836,3 +836,5 @@ D-52 (2026-11-05): Migrar FinanceService.balance/movements/post con SqlServerFin
 D-52 resuelta para implementación: FinanceService balance/movements/post aceptado
 en snapshot independiente 797/797; mapper/hash confirmado. Sin validar balance
 real, movimiento, replay concurrente, locks, grants JDBC/HTTP o wiring.
+
+D-53 (2026-11-05): A45 prepara solo InventoryService.lots/transfers/prescriptions con los tres SP de V6 existentes y store explicito sin wiring. Preservar permisos por lectura, proyecciones 8/10/6, orden y limite 200, decimales exactos, fechas y JSON profundo. Constructor mixto SqlServerInventoryStore/Sql/Access mantiene escrituras legacy sin migrarlas parcialmente; no nuevos permisos ni queries. Ownership secuencial de cuatro archivos en tmp/sql-01-a45-spec.md. SQL/JDBC/HTTP y permisos reales siguen pendientes.

@@ -990,3 +990,12 @@ ninguno en worker; verify final confirmado por supervisor. Siguiente consumidor
 se elige tras inventario de superficies restantes.
 A44 delegada task_f78192a4223f / ctx_1ea57539fc82, dependencia A43 settled.
 Cuenta/session confirmadas; serializers/hash y tests offline bajo revisión supervisor.
+
+A44 integrada y subida en 9ae3df1 (health/production-wave0), cuatro archivos identicos por SHA al snapshot 797/797. A45 preparada: lecturas InventoryService, D-53/tmp/sql-01-a45-spec.md, dependencia A44 settled. Cuatro rutas exclusivas; escrituras inventario se delegaran despues. Sin wiring ni QA real SQL/JDBC/HTTP.
+
+A45 delegada task_ee48477242f6 / ctx_6d830951f6fc, dependencia A44 settled.
+Programador efectivo confirmado por /status: mendozadeafabisa@gmail.com, sesion
+01a19e4c-15af-74e0-a1b9-75fc7093b98f; IdentityOnly de ambos roles coincide.
+Mismo terminal/worktree y --no-daemon, cuatro rutas de inventario exclusivas.
+Estado Orca dispatched; pendiente entrega y revision independiente. No se
+activaron SQL Server/JDBC/HTTP ni se modifico main.

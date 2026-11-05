@@ -551,3 +551,12 @@ parametrizados y grants runtime. Implementación aislada no activa ni valida JDB
 
 SQL-01.A44 FinanceService balance/movements/post delegada task_f78192a4223f /
 ctx_1ea57539fc82; V6 contract existente; revisión pendiente, sin wiring/SQL real.
+
+A44 cierre efectivo: cuatro archivos integrados y push 9ae3df1 en health/production-wave0. A45 preparada para lecturas de inventario; D-53. SQL-01 sigue EN_CURSO, sin activacion del backend SQL Server.
+
+A45 delegada task_ee48477242f6 / ctx_6d830951f6fc, dependencia A44 settled.
+Programador efectivo confirmado por /status: mendozadeafabisa@gmail.com, sesion
+01a19e4c-15af-74e0-a1b9-75fc7093b98f; IdentityOnly de ambos roles coincide.
+Mismo terminal/worktree y --no-daemon, cuatro rutas de inventario exclusivas.
+Estado Orca dispatched; pendiente entrega y revision independiente. No se
+activaron SQL Server/JDBC/HTTP ni se modifico main.
