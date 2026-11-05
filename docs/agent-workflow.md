@@ -1151,3 +1151,15 @@ Sin nuevas pruebas Java/frontend/HTTP/capturas por este cambio de herramienta.
 Siguiente trabajo independiente: preparar instalacion de permisos V8 existente
 SOLO en QA marcada con ensayo transaccional/rollback antes de aplicar. No
 habilitar transporte/autenticacion compartidos; entornoJDBC positivo sigue abierto.
+
+
+A61 integrada/pushc78fb02,36/36 independientes y preflightCLI2BLOCKED validado.
+A62 delegada task_f1a61e6514e6 / ctx_03dc4aa58e11, dependencia A61 settled.
+IdentityOnly ambos roles y /status efectivo confirman programador
+mendozadeafabisa@gmail.com,sesion01a19e4c-15af-74e0-a1b9-75fc7093b98f,
+mismo terminal/worktree --no-daemon. Ownership scripts/sqlserver-qa-permissions.py
+y scripts/tests/test_sqlserver_qa_permissions.py, D-70/tmp/sql-01-a62-spec.md.
+Plan y ensayo real de V8 en TXrevertida unicamente; worker no ejecuta apply.
+ACLexacta/fingerprintfreshconnection obligatorios antes de aceptar/aplicar.
+Orca dispatched, pendiente entrega/revision. No cambio TCP/auth/servicios/logins,
+ni JDBCpositivo/grants efectivos de login/negocioHTTP/visual en este corte.
