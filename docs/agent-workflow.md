@@ -1046,3 +1046,16 @@ arranque, JDBC o HTTP real. Sin nuevas capturas. SQL-01 EN_CURSO: setup separado
 runner sintetico, transporte JDBC y QA real/visual siguen pendientes. El motor
 local compartido tiene transporte TCP/NP deshabilitado segun evidencia historica;
 no se habilita ni reinicia automaticamente para superar ese limite.
+
+
+A59 integrada/push e3452df, verify independiente 990/990 y JAR PASS.
+A60 delegada task_6dd5202e936b / ctx_320f23de8c02, dependencia A59 settled.
+IdentityOnly ambos roles y /status efectivo confirman programador
+mendozadeafabisa@gmail.com, sesion01a19e4c-15af-74e0-a1b9-75fc7093b98f;
+mismo worktree/terminal, --no-daemon y sin cambios de cuentas globales.
+Ownership solo tmp/sqlserver-a60-qa, sin archivos versionados: proceso Java/JAR
+real, ConfigData perfilQA y HTTP loopback con destinoDB reservado inaccesible,
+negativos de guardas y cleanup de procesos propios. D-68/tmp/sql-01-a60-spec.md.
+Orca dispatched, pendiente evidencia y revision. Esta QA negativa no acredita
+JDBC exitoso, grants, SQL real ni recorridos UI. Setup/runner permanente y
+transporte SQL local seguro siguen pendientes; no reiniciar instancia compartida.
