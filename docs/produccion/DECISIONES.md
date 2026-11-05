@@ -1088,7 +1088,7 @@ cleanup comprobado, max2; fallo de producto/cleanup/scope exige escalacion.
 D-72 (2026-11-05): A64 corrige herramientas SQLcmd ante timeout probado con
 exit0. Budget query10s/process20s/login5s, stderr inesperado falla cerrado y
 Timeout expired se clasifica SQLCMD_TIMEOUT aunque raw0. A62apply diferencia
-not_attempted/outcome_unverified/commit_acknowledged/commit_verified; fallo
+not_attempted/mutation_outcome_unverified/commit_acknowledged/commit_verified; fallo
 postcommit requiere reconciliacion y prohibe retry_mutation. No auto retries ni
 compensacion, no nuevas mutaciones en QA. Cuatro rutas y pruebas segun
  tmp/sql-01-a64-spec.md. A63 original20PASS queda EN_REVISION hasta repeticion

@@ -1355,3 +1355,14 @@ stderr Timeout expired; -t4 devuelve completo sinstderr. -t10 snapshotposterior
 0.656s validoFP416017...D285B. No fixtures ni mutaciones/reapply en diagnostico.
 No aceptar A63hasta repetir QAindependiente con herramienta fiable. A64 prepara
 clasificacion stderr/timeouts y estadoapply seguro, cuatro rutas D-72/spec.
+
+
+A64 delegada task_a5ca78a7da9d / ctx_8467520a8feb, dependencia A63settled.
+A63 EN_REVISION, aun no aprobada por fallo de lectura inicial supervisora; worker
+20/20PASS queda evidencia original. IdentityOnly ambosroles y /status efectivo
+verifican mendozadeafabisa@gmail.com,sesion01a19e4c-15af-74e0-a1b9-75fc7093b98f,
+mismo worktree/terminal --no-daemon. Ownership cuatro archivos A61/A62 y sus dos
+suites, D-72/tmp/sql-01-a64-spec.md. Solo robustez SQLcmd/timeouts/reporting,
+validacion real readonly; ninguna reinstalacion/apply/fixture/servicios/auth.
+Orca dispatched; entrega/review pendientes. RepeticionindependienteA63 despues
+de aceptar fix; DBinstalada416017...D285B conservada, JDBC/negocio/visual pendientes.
