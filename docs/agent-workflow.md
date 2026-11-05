@@ -690,3 +690,21 @@ Ownerlookup oUSER_CREATE->TENANT_CREATE mismaREQUIRED/Settingsantescommit y
 pago1SP/proyeccion8/nullable revisados personalmente. PlatformServicecompleto
 solo constructorSQLaislado,sin wiring. Sinmotor/JDBC/HTTP/cobrosreales ni nueva
 visual. Siguiente A30 OrganizationService lecturas simples (5SP).
+
+
+A30 delegada: task_343723feb930 / ctx_9d719f950a40,dependencia A29settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio noobservado,no reenviar ni
+abandonar;esperar avisoOrca. OwnershipOrganizationService/store/dossuites,D-38.
+A29 subida090f1791660fe97206e4145bbf27057f5f390e74 a rama de trabajo,
+refremota comprobada,main intacta. Organizationconfig/write/negocio/wiring/
+QAreal pendientes;apagarPC solo al terminar TODO,no durante este cierreparcial.
+
+
+A30 ACEPTADA: informe msg_7e0a095350d3/done msg_f9c5704373f7,4SHAexactos,
+verify independiente526/526,0fallos/errores/omisiones,jarPASS27.017s,
+2026-11-04T23:29:31-05:00.132bases verificadas,131ajenas intactas;1existente+
+3nuevos integrados. Legacytarget/metodos comparados exactos retirandoramasSQL.
+CincoSP/proyecciones/tenantADMocualquierActor/Access.branchprevio/perfilJSON
+profundo revisados personalmente. SinSQLServer/JDBC/HTTP reales ni nueva
+visual. Siguiente A31 configuracionorganizacion8RS,sinwiring.

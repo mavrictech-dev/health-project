@@ -707,3 +707,8 @@ commitREQUESTSAD. Pay1SP2args/8campos,sin cobroexterno. Sinwiring/DBreal.
 D-38: A30Organizationlookup/directory/professionals/catalog/plans tenant-only,
 lookup/plansADM,restocualquieractorcoherente. BranchAccessA13preservado mas
 SPprofessionalsautoridad. 5SPREQUEST tipados,config/writeguardados,sinwiring.
+
+
+D-39: A31configuracion1SP8RS,ADMhostactual oSADtargetexplicito. Root31campos
+idtenantpreservado,agruparpares poruser sinN+1,proyecciones ycoherenciatenant/
+IDs antescommitREQUIRED. CincoescriturasSQLguardadas,sinwiring.
