@@ -850,3 +850,7 @@ D-55 (2026-11-05): A47 completa transfer/receive de inventario con V6 existente.
 D-55 resuelta para implementacion: A47 revisada e integrada tras SHA/review/verify independiente 847/847. Todo InventoryService tiene caminos de store aislados; wiring/QA real pendientes.
 
 D-56 (2026-11-05): A48 prepara resources/admissions HospitalService via HOSPITAL_RESOURCES/ADMISSIONS sin args. Preservar roles HOSPITAL, orden/limite200 y proyecciones7/11 incluyendo computed/nullable; sin branch filtros, recalcular ocupacion o inventar protocolos. Constructor mixto conserva tres escrituras legacy. Solo cuatro rutas en tmp/sql-01-a48-spec.md; sin wiring ni habilitar hospitalizacion.
+
+D-56 resuelta para implementacion: A48 aceptada e integrada con SHA/review y verify independiente 869/869. Lecturas hospitalarias solo aisladas; pendientes escrituras y QA real.
+
+D-57 (2026-11-05): A49 completa resource/admit/discharge con tres SP V6 existentes, un resultado por operacion, sin preflight/read-after-write. Mapper Spring para DTO original, nuevo UUID solo create; alta por ID/revision con conflicto MAX en SP, sin overflow Java. V6 autoridad de dominio/paciente/recurso/branch/ocupacion/locks/audit. Conservar A48 y legacy en cuatro paths; sin wiring ni habilitacion clinica.
