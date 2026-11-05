@@ -923,3 +923,20 @@ D-66 resuelta: A58 aceptada e integrada tras cuatro SHA y verify independiente
 insegura; no excluye metadatos de observacion inofensivos. La prueba distingue
 TaskScheduler y ScheduledAnnotationBeanPostProcessor activos. No activa launcher
 ni acredita JDBC o HTTP real.
+
+
+D-67 (2026-11-05): A59 conecta el main existente a una seleccion de fuente por
+ApplicationEnvironmentPreparedEvent posterior a ConfigData. Instancia Spring
+sin fuentes iniciales; modo ausente selecciona solo legacy, runtime solo la raiz
+SQL completa A58; modo invalido falla sin fallback. Rechazar fuentes adicionales
+spring.main.sources incluidas listas, y prevalidar SQL con el guard existente.
+Retirar ejecucion Flyway del antiguo --migrate: el launcher rechaza migracion,
+setup y bootstrap con error seguro antes de construir Spring; el proceso separado
+sigue pendiente. Esto cambia deliberadamente el switch heredado para impedir
+migracion MySQL accidental al elegir un perfil SQL. No habilita un migrador nuevo.
+Perfil sqlserver-qa local, sin credenciales/DB por defecto, jobs apagados, Flyway
+SQL init y bootstrap inertes, readiness SP separada de liveness, bind127.0.0.1.
+Puerto/origen sinteticos coherentes (18080 predeterminado), TLS sin trust bypass
+predeterminado. Cuatro rutas de tmp/sql-01-a59-spec.md, pruebas offline; no arranque
+ni JDBC/HTTP hasta runner sintetico y setup con principal separado. Conservar
+legacy sin modo SQL y demo independiente; no declarar migracion terminada.

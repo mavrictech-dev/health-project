@@ -1075,3 +1075,8 @@ Guardas fallan antes de construir el pool. Driver y manager de prueba simulados:
 no conexion JDBC, servidor HTTP, grants, concurrencia o capturas nuevas.
 Launcher actual sigue heredado; SQL-01 EN_CURSO. Siguen pendientes seleccion
 del root/perfil QA, setup separado y validacion real JDBC/HTTP/visual.
+
+
+A59 preparada segun D-67: launcher/selector posterior a ConfigData/perfil QA y
+una suite, ownership cuatro rutas de tmp/sql-01-a59-spec.md. Sin arranque real,
+setup, JDBC o HTTP. Dependencia A58 aceptada; pendiente Dispatch.
