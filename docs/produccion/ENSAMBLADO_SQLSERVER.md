@@ -70,9 +70,10 @@ cuatro informes Orca; la parte 4 corrige las erratas de numeros de linea.
 | JDBC real | Grants negativos, transacciones, conexion compartida, reset, eviction, rollback y concurrencia. |
 | HTTP y visual | Flujos reales de identidad, tenant, portal y SaaS; escritorio, movil y capturas despues de JDBC. |
 
-A53-A56 estan aceptadas, con verify independiente hasta 965/965.
-A57 tiene ownership para negocio y portal fuera del scan, sin root, AOP,
-scheduling ni conexiones. Los siguientes cortes
+A53-A57 estan aceptadas, con verify independiente hasta 973/973.
+A58 tiene ownership para la raiz SQL y guardas de modo, con pruebas de contexto
+sin servidor ni conexion. El launcher actual conserva su ruta heredada;
+los siguientes cortes
 requieren un encargo concreto antes de editar. La activacion exige el grafo
 completo y su evidencia; estos cortes no habilitan protocolos clinicos.
 
