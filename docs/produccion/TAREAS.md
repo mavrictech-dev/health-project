@@ -1188,3 +1188,18 @@ D-69/tmp/sql-01-a61-spec.md. Solo metadata de QA marcada y registro de instancia
 local en lectura; CLI debe distinguir BLOCKED de ERROR y candidato a prueba,
 sin acreditar JDBC ni configurar servicios/auth/logins/grants. Orca dispatched;
 entrega y revision pendientes. Setup/JDBC positivo/negocio HTTP/visual pendientes.
+
+
+A61 EN_CURSO, 2026-11-05. Pregunta msg_e61cb80f6633: primer CLI real dio
+exit1 SQLCMD_FAILED antes de ejecutar query por flags -h/-1 incompatibles con
+-y0. Evidencia first-error conservada en tmp/sqlserver-a61-preflight. Worker
+retiro solo -h/-1, comprobo ayuda instalada sin conexion y reporta36/36 tests
+PASS,173protegidos intactos. Supervisor reviso script actual: query fija de
+metadata, validacion estricta de marker antes de winreg, subprocess con entorno
+minimo y registro KEY_READ; sin cambio de alcance ni mutaciones SQL/config.
+Respuesta msg_4327632c0100 autoriza UNA ejecucion adicional corregida sobre el
+mismo destino D-69, justificada por esa correccion; no repetir testsPASS sin
+cambios nuevos. Conservar error original y capturar rawexit/JSON/SHA actuales.
+Task task_260b01935c63 / ctx_2b5e8fd35eee siguen abiertas; A61 no aprobada ni
+integrada, pendiente entrega y verificacion independiente. JDBC positivo,
+setup/runner y negocio/visual siguen pendientes. Sin cambios en producto.

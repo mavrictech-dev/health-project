@@ -983,3 +983,9 @@ solo precondiciones, nunca validacion JDBC. jdbc_positive_validated false siempr
 No usar adminWindows como runtime ni puerto administrativo, no habilitar/reiniciar
 servicio ni autenticacion global. Herramienta prepara una decision revisable sobre
 entorno independiente o cambio explicito; setup/migrador siguen pendientes.
+
+
+D-69 aclaracion: UNA VEZ limita repeticiones sin causa; una correccion comprobada
+de flags SQLcmd incompatibles justifica una ejecucion adicional sobre el mismo
+destino y lecturas, autorizada por msg_4327632c0100. Conservar first-error y
+no repetir suites exitosas sin cambios. No amplia permisos ni scope de datos.
