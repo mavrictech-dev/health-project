@@ -1225,3 +1225,8 @@ Sin nuevas pruebas Java/frontend/HTTP/capturas por este cambio de herramienta.
 Siguiente trabajo independiente: preparar instalacion de permisos V8 existente
 SOLO en QA marcada con ensayo transaccional/rollback antes de aplicar. No
 habilitar transporte/autenticacion compartidos; entornoJDBC positivo sigue abierto.
+
+
+A62 preparada D-70/tmp/sql-01-a62-spec.md: setup permisosQA V8 inmutable,
+script/suite nuevos; worker plan y ensayo conrollbackunicamente. Aplicacion
+persistente solo tras review/ensayoindependiente del supervisor. No TCP/auth/JDBC.

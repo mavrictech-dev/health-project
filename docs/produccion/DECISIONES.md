@@ -995,3 +995,15 @@ D-69 resuelta: preflight aceptado con36/36 independientes y CLI real exit2
 BLOCKED correctamente interpretado. Roles ausentes no son error de herramienta;
 setup QA separado puede resolverlos sin modificar transporte/auth de instancia.
 No usar esta aceptacion como prueba JDBC ni grants efectivos de un login real.
+
+
+D-70 (2026-11-05): A62 prepara setup local de permisos V8 inmutable, sin transporte
+ni autenticacion global. CLI plan/rehearse/apply, defaultplan sin escrituras;
+programador solo ensaya con rollback y fingerprint en conexion nueva, nunca
+apply. Dos rutas script/suite, ownership tmp/sql-01-a62-spec.md. FixedQA marcada,
+37tablas/133SP/sinhistoria/rolesausentes,principaladminseparado. Postcondiciones
+ACL562 EXACTA,owner/tipos/defs y ausencia de cambios ajenos; fuenteV8 SHAaprobado,
+ningun usuario/login/dato nuevo. Supervisor revisara ensayo independiente antes
+de aplicar permisos persistentes solo en QA autorizada. Esto puede resolver
+los dos roles sin tocar SQL compartido a nivel servicio; TCP/auth continuan
+bloqueando JDBCpositivo y requieren entorno compatible separado o decisionexplicita.
