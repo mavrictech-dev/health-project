@@ -957,3 +957,11 @@ La evidencia historica de TCP/NP deshabilitados no autoriza cambiar o reiniciar
 la instancia SQL compartida. Setup/runner permanente y QA JDBC positiva siguen
 pendientes; este corte permite encontrar defectos de arranque antes de resolver
 el transporte. Ownership solo tmp/sqlserver-a60-qa; supervisor conserva docs.
+
+
+D-68 precision de aceptacion: health raiz puede incluir nombres de grupos
+liveness/readiness sin datos de componentes. Comprobador debe exigir status DOWN
+y admitir solo groups opcional con esos dos nombres exactos sin duplicados;
+rechazar todos los demas campos. Probes mantienen cuerpos exactos. El44/45
+original sigue FAIL historico, no se reescribe como PASS. Correccion QA en
+follow-up task_7744886e8fdf, producto sin cambios; aceptacion final pendiente.

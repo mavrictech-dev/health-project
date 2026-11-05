@@ -1183,3 +1183,24 @@ arranque, JDBC o HTTP real. Sin nuevas capturas. SQL-01 EN_CURSO: setup separado
 runner sintetico, transporte JDBC y QA real/visual siguen pendientes. El motor
 local compartido tiene transporte TCP/NP deshabilitado segun evidencia historica;
 no se habilita ni reinicia automaticamente para superar ese limite.
+
+
+SQL-01.A60 DEVUELTA para corregir comprobador, 2026-11-05. Informe
+msg_78f1bbfe76df y worker_done failed msg_2563df0730b7; task_6dd5202e936b /
+ctx_320f23de8c02. Harness real exit1, 44/45 checks en54.765s. Supervisor verifico
+SHA de harness/evidence/main.log y reviso codigo y respuestas JSON. Unico fallo:
+igualdad exacta esperaba {status:DOWN} en /actuator/health, obtuvo tambien
+groups:[liveness,readiness]. D-68 exige ausencia de componentes/causas/secretos,
+no prohibe esos nombres de grupos; no hay defecto de producto demostrado.
+HTTP real observado: liveness200UP antes/despues, readiness503DOWN, root503DOWN;
+/api/public/status500 DATABASE_ERROR saneado, requestId y no-store correctos.
+Cuatro negativos rechazados antes de servidor/pool. Cinco procesos propios
+cerrados, sin listeners segun evidencia. JAR DF356D634CC0C63DBD54CDCBAD8E4401D8449AF29704131C51993BEA52483B08;
+173 rutas protegidas reportadas intactas. Ningun archivo de producto editado.
+No presentar44/45 como aprobacion. R-A60-HEALTH-GROUPS enviada al mismo trabajador
+retenido; Orca creo follow-up task_7744886e8fdf / ctx_7042ff8c30a7, dispatched.
+Ownership solo tmp: preservar evidencia FAIL original, permitir unicamente
+status y metadata opcional groups exacta sin duplicados, conservar todos los
+demas criterios y repetir QA una vez. Revision/ejecucion independiente final
+pendientes. Esto es conectividad deliberadamente negativa; no JDBC exitoso,
+grants, setup, negocio ni nueva evidencia visual. Main y SQL compartido intactos.
