@@ -1040,3 +1040,27 @@ stderr Timeout expired; -t4 devuelve completo sinstderr. -t10 snapshotposterior
 0.656s validoFP416017...D285B. No fixtures ni mutaciones/reapply en diagnostico.
 No aceptar A63hasta repetir QAindependiente con herramienta fiable. A64 prepara
 clasificacion stderr/timeouts y estadoapply seguro, cuatro rutas D-72/spec.
+
+
+A64 ARTEFACTO ACEPTADO y A63 QA VALIDADA independientemente, 2026-11-05.
+Orca escalation msg_stop_51e5e9f7f1ce249a4692c1a0: programador alcanzo cuota,
+pantalla disponible20:45, task_a5ca78a7da9d/ctx_8467520a8feb abierta sinworker_done.
+No reiniciar/cambiar cuentas/sesiones/gastar creditos. Codigo/evidencia dejados
+antes de cuota revisados por supervisor; cuatroSHA congelados y comprobados
+contra worker actual,173rutas protegidas intactas salvoEOF A38conocido.
+Snapshot tmp/sqlserver-a64-review: suite65/65PASS8.669s; validator readonly
+17/17PASS,timeout-t1 raw0 clasificadoSQLCMD_TIMEOUT y t4completo, FPQAintacto.
+A64 cambia SOLObudget10query/20process, clasificador stderr compartido y estado
+postcommit/no retrymutacion; guards SQL/canonica/matrizfuente inmutables.
+Repeticion A63 en snapshot con A64 revisado:20/20fases PASS,24s,
+fixtureidentidades limitadas comprobadas,2SPpermitidos,18negativosconcodigos
+229/262/15151/15517 exactos;4batch3998 esperados.20snapshots completos antes==
+despues,usuarios/tablafixtures ausentes, fingerprintinstalado416017...D285B.
+Harness originalSHA39B4AE33...40928DA, unicoajuste supervisor timeout de proceso
+15 a constantecompartida20; niSQL ni expectativas cambiados. Evidencia bajo
+snapshot/tmp/a63-independent-review y log, no se repitio apply/rehearse/V8.
+A63 originalworker msg_414eef2201d7/cierre msg_c79673847f6d; estadoaprobado solo
+para autorizacion DB mediante usuarios WITHOUTLOGIN, no login/JDBC/TLS/HTTP/UI.
+A64 tiene evidencia suficiente para integrar estos cuatroartefactos revisados;
+el cierre formal/reportefinal Orca permanece PENDIENTE porcuota. No despachar
+trabajo nuevo al retenido hasta cerrar Task. No marcar run ni migracion completa.

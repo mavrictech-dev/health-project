@@ -25,6 +25,7 @@ SPEC = importlib.util.spec_from_file_location("a61_preflight", ROOT / "scripts/s
 A61 = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(A61)
 LIMITS = list(A61.LIMITS) + ["Installed permissions are not successful JDBC, runtime authentication or effective grants testing.", "No transport, instance authentication, logins, users, data fixtures or bootstrap SAD are provisioned."]
+APPLY_RECONCILIATION_MESSAGE = "Do not repeat apply; verify the database state using a new connection before any further action."
 ERRORS = {"ARTIFACT_HASH", "REFERENCE_HASH", "ARTIFACT_CONTRACT", "COMMAND_INVALID", "RESPONSE_INVALID", "METADATA_INVALID", "SCOPE_MISMATCH", "BASELINE_CONFLICT", "CONTROL_REQUIRED", "ROLES_EXIST", "TRANSACTION_INVALID", "ROLES_INVALID", "ACL_INVALID", "PROTECTED_METADATA_CHANGED", "BOOTSTRAP_HEADER_INVALID", "BOOTSTRAP_DEFINITION_INVALID", "SQLCMD_NOT_FOUND", "SQLCMD_FAILED", "SQLCMD_TIMEOUT", "CLEANUP_MISMATCH", "PERSISTENCE_MISMATCH", "INSPECTION_ERROR"}
 
 
@@ -295,13 +296,16 @@ class Transport:
         argv = A61.sqlcmd_arguments(self.executable)[:-2]
         argv += ["-i", str(path)] if path else ["-Q", query]
         try:
-            response = self.run(argv, shell=False, env=self.environment, capture_output=True, text=True, encoding="utf-8-sig", errors="strict", timeout=15, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
-            record["raw_exit_code"] = response.returncode if type(response.returncode) is int else None
-            if type(response.returncode) is not int or response.returncode != 0:
-                diagnostic = response.stderr if isinstance(response.stderr, str) else ""
+            response = self.run(argv, shell=False, env=self.environment, capture_output=True, text=True, encoding="utf-8-sig", errors="strict", timeout=A61.SQLCMD_PROCESS_TIMEOUT_SECONDS, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+            raw_exit_code = getattr(response, "returncode", None)
+            record["raw_exit_code"] = raw_exit_code if type(raw_exit_code) is int else None
+            failure_code = A61.sqlcmd_error_code(response)
+            if failure_code:
+                stderr = getattr(response, "stderr", None)
+                diagnostic = stderr if isinstance(stderr, str) else ""
                 record["sql_error_numbers"] = sorted({int(value) for value in re.findall(r"\bMsg\s+([0-9]{1,6})\b", diagnostic)})
                 record["sql_error_lines"] = sorted({int(value) for value in re.findall(r"\bLine\s+([0-9]{1,6})\b", diagnostic)})
-                raise SetupError("SQLCMD_FAILED")
+                raise SetupError(failure_code)
             try:
                 return parse_snapshot(response.stdout)
             except SetupError as failure:
@@ -321,6 +325,8 @@ class Transport:
 
 def execute(mode, *, transport=None, artifact_loader=Artifact.load, directory=TEMP, registry_reader=None):
     result = {"status": "error", "command": mode if mode in ("plan", "rehearse", "apply") else None, "database": A61.DATABASE, "scope": A61.SCOPE, "scope_validated": False, "jdbc_positive_validated": False, "limits": list(LIMITS)}
+    if mode == "apply":
+        result.update(sql_action="not_attempted", reconciliation_required=False, retry_mutation=False)
     if mode not in ("plan", "rehearse", "apply"):
         result["error"] = "COMMAND_INVALID"
         return 1, result
@@ -352,8 +358,12 @@ def execute(mode, *, transport=None, artifact_loader=Artifact.load, directory=TE
             result["wrapper_sha256"] = sha(frozen)
             result["v8_sha256"] = sha(artifact.raw)
             mutation_attempted = True
+            if mode == "apply":
+                result["sql_action"] = "mutation_outcome_unverified"
             inside = transport.execute(path=wrapper)
             validate_installed(inside, before, artifact, True)
+            if mode == "apply":
+                result["sql_action"] = "commit_acknowledged"
             result["inside_fingerprint"] = inside["fingerprint"]
             (folder / "inside.json").write_text(json.dumps(inside, indent=2), encoding="utf-8")
             after = transport.snapshot()  # Always a new administrative sqlcmd connection.
@@ -366,6 +376,7 @@ def execute(mode, *, transport=None, artifact_loader=Artifact.load, directory=TE
                 validate_installed(after, before, artifact, False)
                 if after["fingerprint"] != inside["fingerprint"]:
                     raise SetupError("PERSISTENCE_MISMATCH")
+                result["sql_action"] = "commit_verified"
             result.update(status="rehearsed" if mode == "rehearse" else "applied", fingerprint_after=after["fingerprint"], cleanup_verified=mode == "rehearse")
         result["sqlcmd_calls"] = transport.calls
         return 0, result
@@ -373,12 +384,20 @@ def execute(mode, *, transport=None, artifact_loader=Artifact.load, directory=TE
         code = failure.args[0] if isinstance(failure, (SetupError, A61.PreflightError)) and failure.args else "INSPECTION_ERROR"
         result["error"] = code if isinstance(code, str) and code in ERRORS else "INSPECTION_ERROR"
         if mutation_attempted:
+            if mode == "apply":
+                result.update(reconciliation_required=True, retry_mutation=False, diagnostic=APPLY_RECONCILIATION_MESSAGE)
             try:
                 after = transport.snapshot()
                 result["fingerprint_after_error"] = after["fingerprint"]
-                result["cleanup_after_error_verified"] = after == before
+                if mode == "apply":
+                    result.update(readonly_recovery_completed=True, recovery_matches_preapply=after == before)
+                else:
+                    result["cleanup_after_error_verified"] = after == before
             except Exception:
-                result["cleanup_after_error_verified"] = False
+                if mode == "apply":
+                    result["readonly_recovery_completed"] = False
+                else:
+                    result["cleanup_after_error_verified"] = False
         result["sqlcmd_calls"] = getattr(transport, "calls", [])
         return 1, result
 

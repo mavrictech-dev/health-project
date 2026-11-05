@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; integracion SQL Server, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; integracion SQL Server/rollback/concurrencia pendiente; Docker no es el bloqueo del motor local descubierto |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A62 aceptados con alcance; permisos QA instalados) | Java990; HTTP negativo47; herramientas59; ensayo SQL y ACL562 independientes | Grafo SQL opt-in completo; faltan JDBC positivo, principales runtime/setup, bootstrap y negocio HTTP/visual; TCP0/WindowsOnly1 |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A63 permisos efectivos validada; A64 artefactos aceptados, cierre Orca pendiente) | Java990; HTTP negativo47; herramientas65; ACL562; QAefectiva20 independientes | TCP0/WindowsOnly1, principales/login/JDBC/TLS/bootstrap y negocioHTTP/visual pendientes; cuota worker hasta20:45 |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -1450,3 +1450,27 @@ suites, D-72/tmp/sql-01-a64-spec.md. Solo robustez SQLcmd/timeouts/reporting,
 validacion real readonly; ninguna reinstalacion/apply/fixture/servicios/auth.
 Orca dispatched; entrega/review pendientes. RepeticionindependienteA63 despues
 de aceptar fix; DBinstalada416017...D285B conservada, JDBC/negocio/visual pendientes.
+
+
+A64 ARTEFACTO ACEPTADO y A63 QA VALIDADA independientemente, 2026-11-05.
+Orca escalation msg_stop_51e5e9f7f1ce249a4692c1a0: programador alcanzo cuota,
+pantalla disponible20:45, task_a5ca78a7da9d/ctx_8467520a8feb abierta sinworker_done.
+No reiniciar/cambiar cuentas/sesiones/gastar creditos. Codigo/evidencia dejados
+antes de cuota revisados por supervisor; cuatroSHA congelados y comprobados
+contra worker actual,173rutas protegidas intactas salvoEOF A38conocido.
+Snapshot tmp/sqlserver-a64-review: suite65/65PASS8.669s; validator readonly
+17/17PASS,timeout-t1 raw0 clasificadoSQLCMD_TIMEOUT y t4completo, FPQAintacto.
+A64 cambia SOLObudget10query/20process, clasificador stderr compartido y estado
+postcommit/no retrymutacion; guards SQL/canonica/matrizfuente inmutables.
+Repeticion A63 en snapshot con A64 revisado:20/20fases PASS,24s,
+fixtureidentidades limitadas comprobadas,2SPpermitidos,18negativosconcodigos
+229/262/15151/15517 exactos;4batch3998 esperados.20snapshots completos antes==
+despues,usuarios/tablafixtures ausentes, fingerprintinstalado416017...D285B.
+Harness originalSHA39B4AE33...40928DA, unicoajuste supervisor timeout de proceso
+15 a constantecompartida20; niSQL ni expectativas cambiados. Evidencia bajo
+snapshot/tmp/a63-independent-review y log, no se repitio apply/rehearse/V8.
+A63 originalworker msg_414eef2201d7/cierre msg_c79673847f6d; estadoaprobado solo
+para autorizacion DB mediante usuarios WITHOUTLOGIN, no login/JDBC/TLS/HTTP/UI.
+A64 tiene evidencia suficiente para integrar estos cuatroartefactos revisados;
+el cierre formal/reportefinal Orca permanece PENDIENTE porcuota. No despachar
+trabajo nuevo al retenido hasta cerrar Task. No marcar run ni migracion completa.

@@ -8,6 +8,8 @@ import sys
 
 DATABASE = "health_project_sqlserver_qa_20261103"
 SCOPE = "Health Project synthetic SQL Server migration QA; provisioned 2026-11-03; no real data"
+SQLCMD_QUERY_TIMEOUT_SECONDS = 10
+SQLCMD_PROCESS_TIMEOUT_SECONDS = 20
 INSTANCE_KEY = r"SOFTWARE\Microsoft\Microsoft SQL Server\Instance Names\SQL"
 INSTANCE_ROOT = r"SOFTWARE\Microsoft\Microsoft SQL Server"
 QUERY = """SELECT DB_NAME() AS databaseName,
@@ -51,7 +53,21 @@ def child_environment(environ):
 def sqlcmd_arguments(executable):
     # -y 0 uses unformatted output without JSON truncation; -h/-W are incompatible.
     # -X1/-x disable startup scripts, sqlcmd environment variables and substitution.
-    return [executable, "-S", "localhost", "-d", DATABASE, "-E", "-C", "-b", "-l", "5", "-t", "5", "-f", "65001", "-y", "0", "-w", "65535", "-r", "1", "-X1", "-x", "-Q", QUERY]
+    return [executable, "-S", "localhost", "-d", DATABASE, "-E", "-C", "-b", "-l", "5", "-t", str(SQLCMD_QUERY_TIMEOUT_SECONDS), "-f", "65001", "-y", "0", "-w", "65535", "-r", "1", "-X1", "-x", "-Q", QUERY]
+
+
+def sqlcmd_error_code(response):
+    """ODBC sqlcmd can return zero on timeout; never trust the exit alone."""
+    stderr = getattr(response, "stderr", None)
+    if not isinstance(stderr, str):
+        return "SQLCMD_FAILED"
+    lines = [line.strip() for line in stderr.splitlines() if line.strip()]
+    if any(re.fullmatch(r"timeout[ \t]+expired", line, re.IGNORECASE) for line in lines):
+        return "SQLCMD_TIMEOUT"
+    returncode = getattr(response, "returncode", None)
+    if type(returncode) is not int or returncode != 0 or lines:
+        return "SQLCMD_FAILED"
+    return None
 
 
 def unique_object(pairs):
@@ -135,13 +151,14 @@ def inspect_environment(*, run=subprocess.run, resolve=shutil.which, registry=No
         if not executable:
             raise PreflightError("SQLCMD_NOT_FOUND")
         try:
-            response = run(sqlcmd_arguments(executable), env=child_environment(os.environ if environ is None else environ), shell=False, capture_output=True, text=True, encoding="utf-8-sig", errors="strict", timeout=15, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
+            response = run(sqlcmd_arguments(executable), env=child_environment(os.environ if environ is None else environ), shell=False, capture_output=True, text=True, encoding="utf-8-sig", errors="strict", timeout=SQLCMD_PROCESS_TIMEOUT_SECONDS, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
         except FileNotFoundError:
             raise PreflightError("SQLCMD_NOT_FOUND") from None
         except subprocess.TimeoutExpired:
             raise PreflightError("SQLCMD_TIMEOUT") from None
-        if type(response.returncode) is not int or response.returncode != 0:
-            raise PreflightError("SQLCMD_FAILED")
+        failure = sqlcmd_error_code(response)
+        if failure:
+            raise PreflightError(failure)
         metadata = parse_metadata(response.stdout)
         result["metadata"] = metadata
         result["scope_validated"] = True

@@ -165,6 +165,9 @@ class PermissionTests(unittest.TestCase):
         code, result = self.execute("apply", transport)
         self.assertEqual(code, 0)
         self.assertEqual(result["status"], "applied")
+        self.assertEqual(result["sql_action"], "commit_verified")
+        self.assertFalse(result["reconciliation_required"])
+        self.assertFalse(result["retry_mutation"])
         self.assertIs(result["jdbc_positive_validated"], False)
         wrapper = transport.wrappers[0].decode('utf-8')
         self.assertEqual(wrapper.count('COMMIT TRANSACTION;'), 1)
@@ -297,6 +300,65 @@ class PermissionTests(unittest.TestCase):
             code, result = self.execute(mode, transport)
             self.safe_error(code, result)
 
+    def test_apply_before_guard_failure_records_not_attempted_and_never_needs_reconciliation(self):
+        before = deepcopy(self.before)
+        before['controlDatabase'] = 0
+        transport = ModelTransport([before])
+        code, result = self.execute('apply', transport)
+        self.safe_error(code, result, 'CONTROL_REQUIRED')
+        self.assertEqual(result['sql_action'], 'not_attempted')
+        self.assertFalse(result['reconciliation_required'])
+        self.assertFalse(result['retry_mutation'])
+        self.assertEqual(transport.wrappers, [])
+
+    def test_apply_postcommit_read_error_preserves_acknowledgement_and_never_retries_mutation(self):
+        after = installed(self.before, self.artifact, False)
+        transport = ModelTransport([self.before, setup.SetupError('SQLCMD_TIMEOUT'), after], self.inside)
+        code, result = self.execute('apply', transport)
+        self.safe_error(code, result, 'SQLCMD_TIMEOUT')
+        self.assertEqual(result['sql_action'], 'commit_acknowledged')
+        self.assertTrue(result['reconciliation_required'])
+        self.assertFalse(result['retry_mutation'])
+        self.assertEqual(result['diagnostic'], setup.APPLY_RECONCILIATION_MESSAGE)
+        self.assertIn('Do not repeat apply', result['diagnostic'])
+        self.assertIn('new connection', result['diagnostic'])
+        self.assertTrue(result['readonly_recovery_completed'])
+        self.assertFalse(result['recovery_matches_preapply'])
+        self.assertNotIn('cleanup_after_error_verified', result)
+        self.assertEqual([call['kind'] for call in transport.calls], ['snapshot', 'wrapper', 'snapshot', 'snapshot'])
+        self.assertEqual(len(transport.wrappers), 1)
+
+    def test_apply_zero_exit_with_timeout_or_invalid_frame_never_acknowledges_commit(self):
+        after = installed(self.before, self.artifact, False)
+        for raw_exit, stdout, stderr, error in ((0, framed(self.inside), 'Timeout expired\n', 'SQLCMD_TIMEOUT'), (1, '', 'Timeout expired\r\n', 'SQLCMD_TIMEOUT'), (0, '', '', 'RESPONSE_INVALID'), (0, CANARY, '', 'RESPONSE_INVALID')):
+            replies = iter([subprocess.CompletedProcess([], 0, framed(self.before), ''), subprocess.CompletedProcess([], raw_exit, stdout, stderr), subprocess.CompletedProcess([], 0, framed(after), '')])
+            transport = setup.Transport(run=lambda *args, **kwargs: next(replies), resolve=lambda name: 'SQLCMD.EXE', environ={})
+            code, result = self.execute('apply', transport)
+            self.safe_error(code, result, error)
+            self.assertEqual(result['sql_action'], 'mutation_outcome_unverified')
+            self.assertTrue(result['reconciliation_required'])
+            self.assertFalse(result['retry_mutation'])
+            self.assertTrue(result['readonly_recovery_completed'])
+            self.assertFalse(result['recovery_matches_preapply'])
+            self.assertNotIn('cleanup_after_error_verified', result)
+            self.assertEqual(sum(call['kind'] == 'wrapper' for call in transport.calls), 1)
+            self.assertEqual(len(transport.calls), 3)
+
+    def test_transport_checks_shared_stderr_classifier_before_parser_and_accepts_only_blank_diagnostics(self):
+        for raw_exit, stderr, expected in ((0, 'Timeout expired\n', 'SQLCMD_TIMEOUT'), (1, ' tImEoUt\tExPiReD\r\n', 'SQLCMD_TIMEOUT'), (0, CANARY, 'SQLCMD_FAILED'), (0, None, 'SQLCMD_FAILED'), (0, b'', 'SQLCMD_FAILED')):
+            response = subprocess.CompletedProcess([], raw_exit, framed(self.before), stderr)
+            transport = setup.Transport(run=lambda *args, **kwargs: response, resolve=lambda name: 'SQLCMD.EXE', environ={})
+            with patch.object(setup, 'parse_snapshot', side_effect=AssertionError('must not parse')) as parse:
+                code, result = self.execute('plan', transport)
+                self.safe_error(code, result, expected)
+                self.assertEqual(result['sqlcmd_calls'][0]['raw_exit_code'], raw_exit)
+                parse.assert_not_called()
+        for stderr in ('', ' \t\r\n'):
+            transport = setup.Transport(run=lambda *args, **kwargs: subprocess.CompletedProcess([], 0, framed(self.before), stderr), resolve=lambda name: 'SQLCMD.EXE', environ={})
+            code, result = self.execute('plan', transport)
+            self.assertEqual(code, 0)
+            self.assertEqual(result['status'], 'planned')
+
     def test_framed_metadata_checksum_duplicates_shape_and_truncation_are_strict(self):
         # SQL concatenation must remain MAX: prefix + 4000 hex chars exceeds nvarchar(4000).
         self.assertIn("CONVERT(nvarchar(max),N'A62JSON:')+", setup.EMIT)
@@ -375,13 +437,17 @@ class PermissionTests(unittest.TestCase):
         calls = []
         def run(argv, **kwargs):
             calls.append((argv, kwargs))
-            return subprocess.CompletedProcess(argv, 0, framed(self.before), CANARY)
+            return subprocess.CompletedProcess(argv, 0, framed(self.before), '')
         transport = setup.Transport(run=run, resolve=lambda name: 'SQLCMD.EXE', environ={'SystemRoot': 'C:/Windows', 'SQLCMDINI': CANARY, 'SQLCMDPASSWORD': CANARY, 'DATABASE_PASSWORD': CANARY})
         self.assertEqual(transport.snapshot(), self.before)
         argv, options = calls[0]
         self.assertEqual(argv[argv.index('-S') + 1], 'localhost')
         self.assertEqual(argv[argv.index('-d') + 1], setup.A61.DATABASE)
-        self.assertEqual(options['timeout'], 15)
+        self.assertEqual(options['timeout'], setup.A61.SQLCMD_PROCESS_TIMEOUT_SECONDS)
+        self.assertEqual(setup.A61.SQLCMD_PROCESS_TIMEOUT_SECONDS, 20)
+        self.assertEqual(setup.A61.SQLCMD_QUERY_TIMEOUT_SECONDS, 10)
+        self.assertEqual(argv[argv.index('-t') + 1], '10')
+        self.assertEqual(argv[argv.index('-l') + 1], '5')
         self.assertFalse(options['shell'])
         self.assertEqual(options['env'], {'SystemRoot': 'C:/Windows'})
         self.assertNotIn(CANARY, str(argv) + str(options) + str(transport.calls))

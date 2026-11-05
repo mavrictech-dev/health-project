@@ -63,7 +63,7 @@ class PreflightTests(unittest.TestCase):
 
         def sqlcmd(argv, **options):
             self.calls.append((argv, options))
-            return subprocess.CompletedProcess(argv, 0, json.dumps(valid_metadata() if data is None else data) if stdout is None else stdout, CANARY)
+            return subprocess.CompletedProcess(argv, 0, json.dumps(valid_metadata() if data is None else data) if stdout is None else stdout, "")
 
         return preflight.inspect_environment(run=run or sqlcmd, resolve=resolve or (lambda name: "C:/synthetic/SQLCMD.EXE"), registry=self.registry, environ={} if environ is None else environ)
 
@@ -131,6 +131,25 @@ class PreflightTests(unittest.TestCase):
             code, result = self.inspect(run=lambda *args, **kwargs: subprocess.CompletedProcess([], status, CANARY, CANARY))
             self.assert_error(code, result, "SQLCMD_FAILED")
 
+    def test_stderr_timeouts_and_unexpected_or_malformed_diagnostics_fail_before_metadata(self):
+        for status, stderr, expected in ((0, 'Timeout expired\n', 'SQLCMD_TIMEOUT'), (1, ' \tTiMeOuT\tExPiReD\r\n', 'SQLCMD_TIMEOUT'), (0, CANARY, 'SQLCMD_FAILED'), (0, None, 'SQLCMD_FAILED'), (0, b'Timeout expired', 'SQLCMD_FAILED'), (0, 123, 'SQLCMD_FAILED')):
+            response = subprocess.CompletedProcess([], status, json.dumps(valid_metadata()), stderr)
+            with self.subTest(status=status, expected=expected), patch.object(preflight, 'parse_metadata', side_effect=AssertionError('must not parse')) as parse:
+                code, result = self.inspect(run=lambda *args, **kwargs: response)
+                self.assert_error(code, result, expected)
+                parse.assert_not_called()
+                self.assertEqual(self.registry.opened, [])
+        code, result = self.inspect(run=lambda *args, **kwargs: subprocess.CompletedProcess([], 0, '', 'Timeout expired\r\n'))
+        self.assert_error(code, result, 'SQLCMD_TIMEOUT')
+
+    def test_empty_or_whitespace_stderr_is_accepted_but_empty_stdout_still_fails(self):
+        for stderr in ('', ' \t\r\n'):
+            code, result = self.inspect(run=lambda *args, **kwargs: subprocess.CompletedProcess([], 0, json.dumps(valid_metadata()), stderr))
+            self.assertEqual(code, 0)
+            self.assertEqual(result['status'], 'READY_FOR_JDBC_TEST')
+        code, result = self.inspect(run=lambda *args, **kwargs: subprocess.CompletedProcess([], 0, '', ''))
+        self.assert_error(code, result, 'METADATA_INVALID')
+
     def test_fixed_arguments_read_only_query_and_sanitized_environment(self):
         environment = {"SystemRoot": "C:/Windows", "TEMP": "C:/synthetic-temp", "COMSPEC": "C:/Windows/cmd.exe", "PATH": CANARY, "SQLCMDINI": CANARY, "SQLCMDPASSWORD": CANARY, "DATABASE_PASSWORD": CANARY, "MIGRATION_PASSWORD": CANARY, "SMTP_HOST": CANARY}
         before = dict(environment)
@@ -144,7 +163,11 @@ class PreflightTests(unittest.TestCase):
             self.assertIn(flag, argv)
         for flag in ("-A", "-U", "-P", "-i", "-W", "-h"):
             self.assertNotIn(flag, argv)
-        self.assertEqual(options["timeout"], 15)
+        self.assertEqual(options["timeout"], preflight.SQLCMD_PROCESS_TIMEOUT_SECONDS)
+        self.assertEqual(preflight.SQLCMD_QUERY_TIMEOUT_SECONDS, 10)
+        self.assertEqual(preflight.SQLCMD_PROCESS_TIMEOUT_SECONDS, 20)
+        self.assertEqual(argv[argv.index("-t") + 1], "10")
+        self.assertEqual(argv[argv.index("-l") + 1], "5")
         self.assertFalse(options["shell"])
         self.assertEqual(options["encoding"], "utf-8-sig")
         self.assertEqual(options["env"], {k: environment[k] for k in ("SystemRoot", "TEMP", "COMSPEC")})
@@ -224,7 +247,7 @@ class PreflightTests(unittest.TestCase):
             self.assertEqual(json.loads(output.getvalue())["error"]["code"], "ARGUMENTS_NOT_SUPPORTED")
         output = io.StringIO()
         with redirect_stdout(output):
-            code = preflight.main([], registry=Registry(tcp=0), run=lambda *args, **kwargs: subprocess.CompletedProcess([], 0, json.dumps(valid_metadata(integratedSecurityOnly=1)), CANARY), resolve=lambda name: "SQLCMD.EXE", environ={"SQLCMDPASSWORD": CANARY})
+            code = preflight.main([], registry=Registry(tcp=0), run=lambda *args, **kwargs: subprocess.CompletedProcess([], 0, json.dumps(valid_metadata(integratedSecurityOnly=1)), ""), resolve=lambda name: "SQLCMD.EXE", environ={"SQLCMDPASSWORD": CANARY})
         self.assertEqual(code, 2)
         self.assertEqual(json.loads(output.getvalue())["status"], "BLOCKED")
         self.assertNotIn(CANARY, output.getvalue())

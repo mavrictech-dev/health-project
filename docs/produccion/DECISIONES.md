@@ -1094,3 +1094,10 @@ compensacion, no nuevas mutaciones en QA. Cuatro rutas y pruebas segun
  tmp/sql-01-a64-spec.md. A63 original20PASS queda EN_REVISION hasta repeticion
 independiente posterior; no es fallo demostrado de permisos ni autorizacion
 para alterar SQL Server. TCP/auth y JDBCpositivo siguen pendientes.
+
+
+D-71 resuelta para QAefectiva:20/20 independientes con A64revisado,fixturesTX
+restaurados porfase,scopeWITHOUTLOGIN. No autentica loginSQL niJDBC real.
+D-72 artefactos aprobados por revision y65tests/17checks/20fasesindependientes;
+cierreTaskA64 pendiente porcuota, no inferirworker_done ni abrir siguienteTask.
+Conservar4SHA revisados; sin cuentaalternativa ni compra de creditos.
