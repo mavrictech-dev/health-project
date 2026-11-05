@@ -1013,3 +1013,10 @@ D-70 aclaracion: correccion comprobada de columna de metadata inexistente
 justifica un plan adicional; solo si pasa permite el unico ensayo revertido
 original. Preservar error inicial. Esta autorizacion no permite apply/COMMIT
 persistente, ampliar scope ni repetir QA exitosa sin cambio.
+
+
+D-70 correccion de transporte de metadata: prefijo de fragmento debe ser
+nvarchar(max) para no truncar hex por promocion de tipos. Autorizar plan
+adicional tras regresion que reproduzca chunk truncado con checksum original;
+ensayo sigue limitado a uno tras planPASS. HistoricosERROR no se reinterpretan
+comoPASS, sin permiso de apply/COMMIT persistente o ampliacion de SQL.

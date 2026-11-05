@@ -1176,3 +1176,16 @@ Rehearse exige ACL562 exacta, definiciones/metadata protegidas y fingerprint
 identico tras rollback verificado por conexion nueva. Ante nuevo fallo conservar
 evidencia/verificarcleanup y consultar antes de repetir. Task task_f1a61e6514e6 /
 ctx_03dc4aa58e11 sigue abierta; no entregaaceptada ni archivosintegrados.
+
+
+A62 EN_CORRECCION de serializacion, 2026-11-05. Pregunta msg_02bb6214ea6a:
+segundo plan sqlcmd0 pero CLI1 RESPONSE_INVALID por truncamiento al concatenar
+prefijo Unicode con4000hex,1.172s. SinBEGIN/V8/ensayo/escrituras; second-plan-error
+preservado. Worker cambio SOLO prefijo EMIT a CONVERT(nvarchar(max),...),suite
+51/51PASS con asercionMAX. Supervisor inspecciono framing/parser y autoriza un
+plan adicional y solo siPASS unico ensayo revertido. Exige ademas regresion con
+snapshot multichunk y ultimo parcial, truncar8hex manteniendo checksum original
+y rechazar RESPONSE_INVALID; no basta solo comprobar textoMAX. Nuevo test
+justifica suite adicional antes de ejecutar plan. Preservar ambos errores,
+no aplicar permisos persistentes. Task task_f1a61e6514e6 / ctx_03dc4aa58e11
+sigue abierta; entrega, revision independiente y cleanup final pendientes.
