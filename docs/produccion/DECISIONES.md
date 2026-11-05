@@ -1072,3 +1072,14 @@ D-70 aplicacion persistente confirmada por supervisor SOLOQA: dosroles/ACL562 y
 inferir rollback. Reconciliacion nuevaConexion verifico estado exacto instalado,
 conservando errorautomatico original. Auth/transporte globales no modificados;
 JDBC y principalruntime real siguen pendientes.
+
+
+D-71 (2026-11-05): A63 QA SQL real de roles ya instalados. Usuarios WITHOUTLOGIN
+transitorios en TX, impersonacion y probes de permisos/SP con codigos exactos;
+ningun login/usuario/fixture persistente. Baseline instalado416017...D285B se
+restaura en snapshot COMPLETO desde conexion nueva por fase. No ejecutar de nuevo
+A62apply/rehearse ni A7instalador que exigen rolesausentes. Ownership solo tmp,
+sin editar producto. Calidad valida autorizacion DB efectiva, no autenticacion
+JDBC ni backendHTTP. Transporte/auth de instancia quedan bloqueados sin cambio.
+Correcciones rutinarias del harness dentro scope pueden repetirse solo tras
+cleanup comprobado, max2; fallo de producto/cleanup/scope exige escalacion.

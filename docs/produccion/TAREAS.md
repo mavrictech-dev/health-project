@@ -1410,3 +1410,8 @@ quedan SOLOordinary_tcp_enabled y runtime_sql_auth_compatible (TCP0/WindowsOnly1
 SQL compartido sin cambios de servicios/transporte/auth; no backendactivo ni
 JDBCpositivo/grants efectivos de login/HTTPnegocio/UIvalidados. ProximoQA: permisos
 efectivos bajo usuarios DB WITHOUTLOGIN temporales, fixturesTXrevertidos.
+
+
+A63 preparada D-71/tmp/sql-01-a63-spec.md: QA permisos efectivos de roles
+instalados con usuarios DBsinLOGIN transitorios, rollback y snapshotfresh por
+fase. Ninguna ruta versionada asignada ni nueva instalacionV8/JDBClogin.
