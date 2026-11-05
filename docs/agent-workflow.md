@@ -708,3 +708,21 @@ verify independiente526/526,0fallos/errores/omisiones,jarPASS27.017s,
 CincoSP/proyecciones/tenantADMocualquierActor/Access.branchprevio/perfilJSON
 profundo revisados personalmente. SinSQLServer/JDBC/HTTP reales ni nueva
 visual. Siguiente A31 configuracionorganizacion8RS,sinwiring.
+
+
+A31 delegada: task_9cd9b91416bd / ctx_497dcaaf2f2b,dependencia A30settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio noobservado,no reenviar ni
+abandonar;esperar avisoOrca. Ownership mismos4archivosOrganization,D-39.
+A30 subidabfaa582da12f8cfbf9eb7d62481a4efe8ed73878 a rama de trabajo,
+refremota comprobada,main intacta. Organizationwrite/negocio/wiring/QAreal
+pendientes;apagarPC solo al terminar TODO,no durante este cierreparcial.
+
+
+A31 ACEPTADA: informe msg_424f833e4d0f/done msg_a58307547146,4SHAexactos,
+verify independiente539/539,0fallos/errores/omisiones,jarPASS27.129s,
+2026-11-04T23:40:26-05:00.135bases verificadas,131ajenas intactas;4existentes
+integrados. OrganizationService entero comparado exacto retirando rama/helperSQL.
+8RS->36root/10member,pairs/FKcoherencia,nullable/profiles/tenantid y31campos
+revisados personalmente. SinSQLServer/JDBC/HTTP reales ni nueva visual.
+Siguiente A32 suscripcion/sedes/areas/especialidades,mismos4archivos,sinwiring.

@@ -712,3 +712,8 @@ SPprofessionalsautoridad. 5SPREQUEST tipados,config/writeguardados,sinwiring.
 D-39: A31configuracion1SP8RS,ADMhostactual oSADtargetexplicito. Root31campos
 idtenantpreservado,agruparpares poruser sinN+1,proyecciones ycoherenciatenant/
 IDs antescommitREQUIRED. CincoescriturasSQLguardadas,sinwiring.
+
+
+D-40: A32subscription/branch/area/specialties1SPcadaoperacion,contexto
+SADexplicit/ADMcurrentA31,mapper8RSreutilizado sinlecturaextra para cambios
+contrato/especialidades. POSTPUTBoolean yUUIDservidor,memberguardado,sinwiring.
