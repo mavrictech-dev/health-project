@@ -853,3 +853,18 @@ Exige regresion y suite tras cambio, luego UN rehearse adicional sin otro plan
 innecesario. Preservar first-rehearse-error y wrapper original. No apply/COMMIT.
 Task task_f1a61e6514e6 / ctx_03dc4aa58e11 sigue abierta y no aprobada; ensayo
 real exitoso, revision y repeticion independiente pendientes.
+
+
+A62 ensayo DEVUELTO por conflicto de collation, 2026-11-05. Pregunta
+msg_8d19b738b416: segunda ejecucionrehearse CLI1/SQLcmd1 error468 en comparacion
+EXCEPT de ACL,3.140s. Worker reporta nueva conexionraw0 y fingerprint original
+4E678570F62D8ABDC7EE76385D0681A80372BC7F77E0C434CC8789C9B90BC557
+identico,cleanuptrue; second-rehearse-error preservado. Supervisor verifico SHA
+wrapper4DDB7F0A5A9B6D9BEE3971328E17437062420E88E8D00C530D147DC1C99A347C
+y contrasto verificador A7 aprobado1090-1096: usa COLLATE DATABASE_DEFAULT en
+cuatrocampos de permisosdelcatalogo. Autorizado mismo ajuste de comparacion en
+ambos EXCEPT y expected, sin cambiar collation de base/objetos ni V8/A7.
+Conservar562exactos, matrizbidireccional y demas guards. Regresion/suite tras
+cambio y UN rehearseadicional, no otro plan innecesario. Nuncaapply/COMMIT real.
+A62 sigue task_f1a61e6514e6 / ctx_03dc4aa58e11 en correccion, no integrada;
+revision/ensayoindependiente y QA JDBCpositiva/negocio/visual aun pendientes.

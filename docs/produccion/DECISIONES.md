@@ -1035,3 +1035,10 @@ metadata, exigiendo0/0. No se debilitan checks de permisos, colisiones o destino
 ni estado explicito1/1 dentroTX. Ensayo anterior fallo antesBEGIN y nueva
 conexion confirmo baseline identico; autorizada correccion y un rehearse adicional
 conregresion, no apply/COMMIT persistente.
+
+
+D-70 normalizacionACL: reutilizar COLLATE DATABASE_DEFAULT del verificadorA7
+aprobado para comparar matriz esperada con metadatos sin error468. Ajuste solo
+enexpresiones/tablaesperada temporal, no collationglobal ni V8. Mantener matriz
+exacta562 y Pythoncaseexact postvalidation; no rebajar igualdad a conteo.
+Ensayo adicional tras regresion autorizado; apply sigue reservado al supervisor.
