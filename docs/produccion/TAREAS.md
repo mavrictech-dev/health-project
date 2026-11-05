@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A42 implementacion aceptada) | A42 task_8a37b7d20a78 / ctx_1404f7998e4c; verify independiente 754/754 | PortalService patients/documents/appointments aislados; falta QA motor, balance y consumidores restantes, wiring JDBC/HTTP |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A43 implementacion aceptada) | A43 task_52d6d531ea9e / ctx_331ec5fb3ea3; verify independiente 773/773 | PortalService completo aislado; falta QA motor, consumidores no portal y wiring JDBC/HTTP |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -943,3 +943,27 @@ hay la diferencia EOF ya conocida de A38. Siguiente A43 PortalService.balance.
 A42 delegada task_8a37b7d20a78 / ctx_1404f7998e4c; A41 settled. Cuenta efectiva
 y sesión Codex retenida verificadas, ownership exclusivo del método patients y
 store/two suites. Despacho `--no-daemon`; sin cambios fuera de alcance.
+
+A43 preparada tmp/sql-01-a43-spec.md / D-51, dependencia A42 settled. Ownership
+secuencial PortalService.balance, nuevo store y dos suites. Preservar overloads
+A40-A42 y rutas restantes; sin SQL/JDBC/HTTP real ni wiring.
+
+A43 delegada task_52d6d531ea9e / ctx_331ec5fb3ea3, dependencia A42 settled.
+Cuenta y sesión efectiva verificadas con IdentityOnly y /status; programador
+mendozadeafabisa@gmail.com, sesión 01a19e4c-15af-74e0-a1b9-75fc7093b98f,
+GPT-6.1-Sol medium, `--no-daemon`; mismo terminal/worktree. Cuatro rutas según
+D-51/spec; en curso, sin DB/JDBC/HTTP/wiring.
+
+A43 ACEPTADA e integrada: informe msg_1cc060ac6ce7 / worker_done msg_9ef6037075b4.
+Cuatro SHA confirmados en snapshot independiente desde HEAD A42. Verify JDK21
+773/773, cero fallos/errores/skips, BUILD SUCCESS, jar PASS. Primera compilación
+falló por inferencia del mock en tests; se corrigió tipando Map<String,Object> y
+la ejecución final única completa pasó. Balance Long admite negativos; cálculo y
+BILLING quedan en SP. 129 rutas protegidas coinciden contra worktree; frente a
+HEAD solo diferencia EOF conocida A38. Sin SQL/JDBC/HTTP/ledger real/grants/wiring.
+PortalService entero queda implementado en adapters aislados; sigue revisión de
+otros consumidores y el cableado de runtime.
+A43 delegada task_52d6d531ea9e / ctx_331ec5fb3ea3, dependencia A42 settled.
+Account/session se confirmaron con IdentityOnly y /status; el informe registró
+una corrección de compilación de mocks antes del verify final exitoso. Ownership
+balance/store/tests únicamente.

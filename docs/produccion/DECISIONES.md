@@ -823,3 +823,10 @@ D-50 resuelta para implementación: PortalService.patients aceptado como lectura
 SQL aislada en snapshot independiente (754/754). Se conserva la cardinalidad sin
 cap por ausencia de límite en V5. No acredita guards, vínculo o auditoría reales;
 siguiente paquete A43 migra balance secuencialmente.
+
+D-51 (2026-11-05): A43 migra exclusivamente PortalService.balance mediante PORTAL_BALANCE. Mantener guards portal() PAC/RES+PORTAL, module FINANCE y Checks.id en ese orden. SQL branch usa SP sin Access.link ni consultas Java; usp_portal_scope es autoridad para FINANCE y vínculo BILLING activo, y el SP audita/computa balance dentro de REQUIRED. Devolver balanceMinor BIGINT y currency PEN; pagos negativos y demás movimientos positivos como indica V5, sin excluir saldo negativo. Constructor explícito nuevo añade balance store a selectores A40-A42; legacy y métodos restantes preservados. No equivale a validación JDBC/SQL/HTTP/wiring real.
+
+D-51 resuelta para implementación: A43 accepted como store aislado tras verify
+independiente 773/773. No validar con doubles el balance/ledger o enlace BILLING
+real. Todo PortalService tiene ahora consumers preparados aisladamente; pasar a
+inventario de consumidores no portal y diseñar cableado solo con revisión completa.

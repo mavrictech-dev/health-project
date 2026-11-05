@@ -744,3 +744,10 @@ JDK21 `mvnw -B -ntp verify`: 754 tests, 0 fallos/errores/skips, BUILD SUCCESS,
 jar PASS. Tests con executor/TX simulados cubren resultset no paginado, cero args,
 orden, proyección, datos nullable, scopes, errores y constructor/rutas. No ejecutan
 SQL Server, vínculos/HOLDLOCK/tenant real, audit durable, JDBC/HTTP o grants.
+
+## SQL-01.A43 - PortalService.balance aislado, 2026-11-05
+
+Snapshot independiente HEAD A42 + cuatro ownership por SHA256. JDK21 verify:
+773 tests, 0 fallos/errores/skips, BUILD SUCCESS, jar PASS. Tests con doubles
+cubren Long negativos/extremos, PEN, forma, scopes y errores, pero no ejecutan el
+ledger, SP permissions/BILLING/HOLDLOCK, SQL Server, JDBC, HTTP ni grants.

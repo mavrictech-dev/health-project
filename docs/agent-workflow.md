@@ -913,3 +913,13 @@ propiedad secuencial de A42; stores y ramas A39-A41 quedan protegidos.
 A42 entrega msg_9bf9164256ed/msg_e09dab22cf97 revisada e integrada con 754/754
 independiente, únicamente como adapter aislado. Sin SQL real/JDBC/HTTP/wiring.
 A43 PortalService.balance es el siguiente paquete secuencial.
+
+A43 preparada D-51 / tmp/sql-01-a43-spec.md, dependencia A42. PortalService sigue
+ownership secuencial; conservar los tres stores anteriores y guards.
+
+A43 delegada task_52d6d531ea9e / ctx_331ec5fb3ea3, A42 settled. Verificación de
+cuenta efectiva y `--no-daemon`; solo PortalService.balance/store/tests.
+
+A43 entrega msg_1cc060ac6ce7/msg_9ef6037075b4 revisada: verify independiente
+773/773, jar PASS, con primer error de compilación de mocks corregido antes del
+verify final. Integrada sin activar backend; SQL/JDBC/HTTP/grants pendientes.

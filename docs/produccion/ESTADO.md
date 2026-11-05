@@ -541,3 +541,9 @@ Solo esta lectura y su store/tests; sin SQL/JDBC/HTTP real ni wiring.
 
 SQL-01.A42 preparada para PortalService.patients tras A41 integrada 57fddb7;
 solo este listado y su adaptador/tests. Sin vínculo real SQL/JDBC/HTTP ni wiring.
+
+SQL-01.A43 preparada para PortalService.balance tras A42 integrada d6b32c2.
+Solo este método/store/tests; vínculos/guards y wiring real quedan pendientes.
+
+SQL-01.A43 PortalService.balance delegada task_52d6d531ea9e / ctx_331ec5fb3ea3,
+dependencia A42 settled. Ownership cuatro archivos, cuenta y sesión verificadas.

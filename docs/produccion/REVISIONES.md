@@ -1085,3 +1085,21 @@ conocida en SqlServerClinicalStore A38. Vínculos activos, seguridad de scopes,
 HOLDLOCK, auditoría y aislamiento SQL no son probados por doubles. Sin SQL Server,
 JDBC, HTTP, grants o wiring. A42 aceptada como recorrido aislado. Siguiente A43
 PortalService.balance.
+
+A43 revision supervisora, 2026-11-05
+
+Informe msg_1cc060ac6ce7 / worker_done msg_9ef6037075b4. Cuatro hashes exactos
+verificados y snapshot desde HEAD A42. Revisión de PortalService, constructor
+7-args y overloads previos, D-51, V5 usp_portal_balance/usp_portal_scope y
+PORTAL_BALANCE. Guard order portal() -> FINANCE -> Checks.id conservado. La rama
+SQL manda un argumento y requiere una fila/una columna Long balanceMinor y PEN;
+admite negativos y no recalcula ledger. Sin Access.link/select/auditoría Java ni
+fallback; el SP mantiene BILLING/HOLDLOCK, operación y audit.
+
+Independiente JDK21 `mvnw -B -ntp verify`: 773 tests, 0 fallos/errores/skips,
+BUILD SUCCESS, jar/repackage PASS. Informe incluye primer testCompile fallido por
+inferencia de mock, reparado tipando mapa; revisión supervisora solo acredita el
+verify final. 129 rutas protegidas del worker siguen intactas; con HEAD, la única
+diferencia conocida es LF final de SqlServerClinicalStore A38. Pruebas de suma,
+ledger, permisos de SP, vínculo, grants, JDBC/HTTP y wiring son dobles o no se
+ejecutaron. A43 aceptada como adapter aislado, sin activar backend.
