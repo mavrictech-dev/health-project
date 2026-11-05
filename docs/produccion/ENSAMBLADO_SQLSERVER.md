@@ -70,8 +70,8 @@ cuatro informes Orca; la parte 4 corrige las erratas de numeros de linea.
 | JDBC real | Grants negativos, transacciones, conexion compartida, reset, eviction, rollback y concurrencia. |
 | HTTP y visual | Flujos reales de identidad, tenant, portal y SaaS; escritorio, movil y capturas despues de JDBC. |
 
-A53-A57 estan aceptadas, con verify independiente hasta 973/973.
-A58 tiene ownership para la raiz SQL y guardas de modo, con pruebas de contexto
+A53-A58 estan aceptadas, con verify independiente hasta 982/982.
+A58 incorpora la raiz SQL y guardas de modo, con pruebas de contexto
 sin servidor ni conexion. El launcher actual conserva su ruta heredada;
 los siguientes cortes
 requieren un encargo concreto antes de editar. La activacion exige el grafo
@@ -91,7 +91,7 @@ A51 verify independiente 922/922 y JAR aprobado siguen como baseline anterior.
 SQL-01 permanece EN_CURSO: wiring, JDBC, grants, HTTP y validacion visual real
 siguen pendientes.
 
-## Bloqueo de A58, 2026-11-05
+## Bloqueo historico de A58, resuelto el 2026-11-05
 
 A58 sigue en correccion y no esta integrada. El programador alcanzo su limite de
 uso; la pantalla indica recuperacion a las 15:31. Su segundo verify dejo 982
@@ -106,3 +106,19 @@ la prueba; no reemplaza la verificacion final pendiente.
 La instruccion R-A58-SCHED-ASSERT quedo en la misma Task/Dispatch mediante
 msg_d21e5a0d8674. A57 conserva el ultimo codigo aceptado. No se integro codigo
 incompleto ni se cambio de cuenta, sesion o trabajador.
+
+
+SQL-01.A58 aceptada, 2026-11-05. Informes msg_cdf0324432e5 y cierre
+msg_960065124930, task_29bfb2dd6f0e / ctx_beb186f7d50e. Correccion de la
+asercion de scheduling y bloqueo de cuota resueltos con la cuenta y sesion
+originales. Cuatro SHA coinciden con la entrega; 165 rutas protegidas comparadas,
+solo EOF A38 conocido sin diferencia semantica. Revision personal del root,
+guardas y suites; snapshot independiente tmp/sqlserver-a58-review desde HEAD.
+JDK21 mvnw -B -ntp verify: 982 pruebas, cero fallos/errores/omisiones,
+BUILD SUCCESS, JAR/repackage PASS, 50.987 s. Log verify-supervisor-a58.log.
+Root explicito fuera del scan, 18 controladores, AOP y un solo grafo SQL;
+excluye inicializacion/Flyway/datasource automatico/correo y no habilita jobs.
+Guardas fallan antes de construir el pool. Driver y manager de prueba simulados:
+no conexion JDBC, servidor HTTP, grants, concurrencia o capturas nuevas.
+Launcher actual sigue heredado; SQL-01 EN_CURSO. Siguen pendientes seleccion
+del root/perfil QA, setup separado y validacion real JDBC/HTTP/visual.

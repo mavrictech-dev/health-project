@@ -1149,3 +1149,19 @@ A56 review supervisora,2026-11-05. Informe msg_c4d2d121a8f5/done msg_4d20a5938f6
 A57 review supervisora,2026-11-05. Informe msg_00140e3d56bb/done msg_5fb7cf31721c. CuatroSHA exactos y lectura personal configs/2suites. 12overloadsnegocioSQL correctos,mismoAccess/Identity/Settings/mapper ySqlNULLenmixtos. Portalfull4stores+SqlNULL+Access+Schedulingcompartido. ComposicionA54-A57 unoportipo/poolinerte,aristaPortalreserve aSchedulingREAL ystoresreales conexecutorDOBLE, sinpromesaPermisos/linksSQLniTXdurable.161protegidoscomparados solo newlineA38 conocido sincontenido. Verify independiente973/973,0fallos/errores/skips,jarPASS41.799s;sin defectos para devolver. Raiz/AOP/controladores/setup/jobs/perfilQA yQArealpendientes.
 
 A58 revision parcial,no aceptada,2026-11-05. Programador con usage limit hasta15:31 antesinforme/worker_done. Reportes disponibles982/1failure/0errors/0skips; primerverify fallo testCompile por accessorWebContext inexistente, corregido antessegundo. Fallo final en asercion anyMatch nombrescheduled, no aprobacion. Supervisor inspecciono Root/Guard/tests y ejecuto diagnosticooffline separado usando clasescompiladasWIP yMockSQLServerDataSource:ScheduledTasksObservationAutoConfiguration unico bean por nombre;0procesadoresScheduled/0TaskScheduler,poolapagado,18controllers yningungetConnection. Causa test demasiadoamplio;R-A58-SCHED-ASSERT pide reemplazo porausencia tiposactivos sin eliminarchecks ni excluir metadatosinofensivos producto. Instruccion msg_d21e5a0d8674 pendiente deconsumo. No cambiosproducto hechos porsupervisor, no integracion ni resultadoMavenverde.
+
+
+SQL-01.A58 aceptada, 2026-11-05. Informes msg_cdf0324432e5 y cierre
+msg_960065124930, task_29bfb2dd6f0e / ctx_beb186f7d50e. Correccion de la
+asercion de scheduling y bloqueo de cuota resueltos con la cuenta y sesion
+originales. Cuatro SHA coinciden con la entrega; 165 rutas protegidas comparadas,
+solo EOF A38 conocido sin diferencia semantica. Revision personal del root,
+guardas y suites; snapshot independiente tmp/sqlserver-a58-review desde HEAD.
+JDK21 mvnw -B -ntp verify: 982 pruebas, cero fallos/errores/omisiones,
+BUILD SUCCESS, JAR/repackage PASS, 50.987 s. Log verify-supervisor-a58.log.
+Root explicito fuera del scan, 18 controladores, AOP y un solo grafo SQL;
+excluye inicializacion/Flyway/datasource automatico/correo y no habilita jobs.
+Guardas fallan antes de construir el pool. Driver y manager de prueba simulados:
+no conexion JDBC, servidor HTTP, grants, concurrencia o capturas nuevas.
+Launcher actual sigue heredado; SQL-01 EN_CURSO. Siguen pendientes seleccion
+del root/perfil QA, setup separado y validacion real JDBC/HTTP/visual.

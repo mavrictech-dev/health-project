@@ -916,3 +916,10 @@ System properties: perfil QA posterior debe suministrar los valores y vaciar
 spring.flyway.url/user/password heredados. Este corte no cambia el launcher.
 
 D-66 revisionA58 pendiente: R-A58-SCHED-ASSERT distingue ScheduledTasksObservationAutoConfiguration (metadatosBoot) de ScheduledAnnotationBeanPostProcessor/TaskScheduler activos. No excluir observacion inofensiva solo para hacer pasar test. Sustituir aserciongenerica por checks de tiposactivos y conservar el resto. Programador original tieneinstruccionmsg_d21e5a0d8674;cuota hasta15:31 impidecorreccion/cierreahora. No interpretar escalacion como salida de proceso ni reiniciar/cambiarcuentas, no activar/integrarWIP.
+
+
+D-66 resuelta: A58 aceptada e integrada tras cuatro SHA y verify independiente
+982/982 con JAR PASS. El guard conserva el rechazo temprano de configuracion
+insegura; no excluye metadatos de observacion inofensivos. La prueba distingue
+TaskScheduler y ScheduledAnnotationBeanPostProcessor activos. No activa launcher
+ni acredita JDBC o HTTP real.

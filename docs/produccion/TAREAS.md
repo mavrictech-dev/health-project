@@ -1059,3 +1059,19 @@ A57 ACEPTADA e integrada: informe msg_00140e3d56bb/done msg_5fb7cf31721c sin del
 A57 integrada/push379359d. A58 delegada task_29bfb2dd6f0e / ctx_beb186f7d50e, dependencia A57 settled. IdentityOnly ambos roles y /status efectivo programador confirmados:mendozadeafabisa@gmail.com,sesion01a19e4c-15af-74e0-a1b9-75fc7093b98f;mismo terminal/worktree--no-daemon. Cuatro rutas nuevas RuntimeRoot/ModeGuard/2Tests D-66/tmp/sql-01-a58-spec.md. AutoConfigcontextooffline,18controllers,AOP/readinessgroups/guardas tempranas;noSpringApplication/puerto/conexion. Launcheractualsinmodificar. Orca dispatched;entrega/review pendientes,baseline973anterior.
 
 A58 EN_CORRECCION y bloqueada por cuota del programador hasta15:31 (pantalla2026-11-05). Escalaciones msg_stop_72bf2027e9fb22a48bbab6a8 y msg_stop_0682c5652ecf23db0462ae21; Task/Dispatch siguen abiertos, sin worker_done ni aprobacion. Reportes worker disponibles:982tests,1failure,0errors,0skips. R-A58-SCHED-ASSERT: testRoot rechaza cualquier bean cuyo nombre contiene scheduled; unico match real es ScheduledTasksObservationAutoConfiguration de Boot (metadatos). Diagnostico independiente tmp/a58-diagnostic/result.log:0ScheduledAnnotationBeanPostProcessor,0TaskScheduler,poolRunningfalse,18controllers,drivernevergetConnection. Correccion especifica msg_d21e5a0d8674 en cola: comprobar tipos activos, conservar cobertura, ejecutar verify final y reportar con misma cuenta/sesion al recuperar cuota. NO integrar4archivosWIP ni despachar dependiente. A57 sigue ultimo productoaceptado379359d.
+
+
+SQL-01.A58 aceptada, 2026-11-05. Informes msg_cdf0324432e5 y cierre
+msg_960065124930, task_29bfb2dd6f0e / ctx_beb186f7d50e. Correccion de la
+asercion de scheduling y bloqueo de cuota resueltos con la cuenta y sesion
+originales. Cuatro SHA coinciden con la entrega; 165 rutas protegidas comparadas,
+solo EOF A38 conocido sin diferencia semantica. Revision personal del root,
+guardas y suites; snapshot independiente tmp/sqlserver-a58-review desde HEAD.
+JDK21 mvnw -B -ntp verify: 982 pruebas, cero fallos/errores/omisiones,
+BUILD SUCCESS, JAR/repackage PASS, 50.987 s. Log verify-supervisor-a58.log.
+Root explicito fuera del scan, 18 controladores, AOP y un solo grafo SQL;
+excluye inicializacion/Flyway/datasource automatico/correo y no habilita jobs.
+Guardas fallan antes de construir el pool. Driver y manager de prueba simulados:
+no conexion JDBC, servidor HTTP, grants, concurrencia o capturas nuevas.
+Launcher actual sigue heredado; SQL-01 EN_CURSO. Siguen pendientes seleccion
+del root/perfil QA, setup separado y validacion real JDBC/HTTP/visual.
