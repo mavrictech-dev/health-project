@@ -876,3 +876,15 @@ D-61 (2026-11-05): A53 void SqlServerMonitorStore.ready() REQUIRED,WORKER9NULL,u
 D-61 resuelta para implementacion: A53 aceptada/integrada tras SHA/review/verify independiente934/934. ReadinessSP e indicador aislados, sin registrar/activar.
 
 D-62 (2026-11-05): A54 prepara propiedades e infraestructura explicita fuera scan en com.mavric.healthsqlserver, cuatro rutas nuevas sin root/main/import desdelegacy. Propiedades tipadas de endpoint/database/credencialruntime externa, driverSQLServer fijo sin JDBCURL con credenciales; toString/errores sin secretos. Hikari lazy sin apertura, probe fijo EXEC dbo.usp_health_ready, sin initSQL/isValid; unDSmanager/JdbcTemplate/executorRUNTIME/TransactionTemplate. Sin stores (factories siguiente paquete), setup/jobs/HTTP ni activacion. Credenciales y principales reales siguen sin validar.
+
+
+D-62 contrato de A54: health.sqlserver.runtime usa propiedades tipadas serverName,
+port opcional, instanceName opcional, databaseName, username, password externo y
+trustServerCertificate (false). Port e instance son excluyentes; sin ambos usa
+1433. SQLServerDataSource por API tipada y encrypt=true, sin URL con credenciales.
+Hikari sin arrancar al crear: max12/minIdle0, connectionTimeout10s,
+validationTimeout5s, loginTimeout10s, initFailTimeout=-1, READ_COMMITTED,
+autoCommit=true y probe fijo EXEC dbo.usp_health_ready, initSQL null.
+Cinco beans: un DS, manager default, JdbcTemplate, TransactionTemplate REQUIRED,
+executor RUNTIME; mismo DS/mapper. No stores, root, jobs, health bean ni conexion
+en este corte. Alias identifican el mismo objeto, sin segundo datasource.
