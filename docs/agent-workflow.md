@@ -579,3 +579,21 @@ Siguiente A24 soporte lecturas,escrituras guardadas hasta A25.
 Instruccion usuario vigente: apagar la PC AL TERMINAR todos los pendientes
 autorizados y guardar resultados. No apagar por worker_done ni cierre parcial;
 consumidores/wiring/QAreal todavia pendientes. No apagar durante tareas activas.
+
+
+A24 delegada: task_cf53b14abd19 / ctx_6bbd40a868fe,dependencia A23settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio noobservado,no reenviar ni
+abandonar;esperar avisoOrca. OwnershipSupportController/store/dossuites,D-32.
+A23 subidab04fb355a60e000e0d61338bd1dbaf612e0b2873 a rama de trabajo,
+refremota comprobada,main intacta. EscriturasA25/restoconsumidores/wiring/
+QAreal pendientes. Apagado autorizado solo al terminar,no en este cierreparcial.
+
+
+A24 ACEPTADA: informe msg_812fbd62269b/done msg_40493c72a239,4SHAexactos,
+verify independiente452/452,0fallos/errores/omisiones,jarPASS24.483s,
+2026-11-04T22:29:00-05:00.126bases verificadas,125ajenas intactas;1existente+
+3nuevos integrados. Records/rutas/cuerposlegacyexactos retirando ramasSQL.
+Ownershiptenant/autor porfila,proyecciones12/4,nullable y MAX,mapeodentroTX
+revisados personalmente. SinSQLServer/JDBC/HTTP reales ni evidencia visual.
+Siguiente A25 escrituras soporte,mismos4archivos sin solapamiento.

@@ -669,3 +669,9 @@ D-32: soporte SQL por etapas,A24list/detail unicamente,create/stepguardados
 hastaA25. PlataformaSAD/SOP,tenant autor autenticado sinrestriccionADM/AUD,
 contextoREQUEST coherente y proyeccionexacta,nullableplataforma/MAX preservado.
 Una REQUIRED por lectura,sinwiring ni promesa snapshot.
+
+
+D-33: A25publicsupportREQUESTanonimo/tenantanonimo permitido,requestinterno
+igual argumentoHTTP,rate existente anteswrite. CREATE0RS recibo5camposlegacy;
+STEP6args2RS sinlecturaextra,SPautoridad de transiciones/revision/tenantcomment.
+GuardatestA24 sustituido explicitamente por regresionesnuevas,sinwiring.

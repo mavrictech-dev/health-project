@@ -388,3 +388,12 @@ verify independiente437/437,0fallos/errores/omisiones,jarPASS23.672s,
 hash diferido y CREATE en mismaREQUIRED,BOOTSTRAP9NULL,sinbean/wiring.
 Sin usuarios/principales/SQLServer/JDBC/HTTP reales ni evidencia visual nueva.
 Siguiente A24 soporte lecturas,escrituras guardadas hasta A25.
+
+
+A24 ACEPTADA: informe msg_812fbd62269b/done msg_40493c72a239,4SHAexactos,
+verify independiente452/452,0fallos/errores/omisiones,jarPASS24.483s,
+2026-11-04T22:29:00-05:00.126bases verificadas,125ajenas intactas;1existente+
+3nuevos integrados. Records/rutas/cuerposlegacyexactos retirando ramasSQL.
+Ownershiptenant/autor porfila,proyecciones12/4,nullable y MAX,mapeodentroTX
+revisados personalmente. SinSQLServer/JDBC/HTTP reales ni evidencia visual.
+Siguiente A25 escrituras soporte,mismos4archivos sin solapamiento.

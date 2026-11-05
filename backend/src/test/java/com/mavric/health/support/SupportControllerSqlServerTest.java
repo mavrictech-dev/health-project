@@ -1,0 +1,29 @@
+package com.mavric.health.support;
+import java.util.*;
+import org.junit.jupiter.api.*;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
+import com.mavric.health.audit.TraceContext;
+import com.mavric.health.identity.*;
+import com.mavric.health.tenancy.TenantRef;
+import com.mavric.health.shared.*;
+import com.mavric.health.persistence.sqlserver.*;
+import com.mavric.health.persistence.sqlserver.SqlServerIdentityStoreTest.ModelTransactionManager;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.*;
+/** Real controller and store, modeled executor/manager. No HTTP server, SQL or actual permissions. */
+class SupportControllerSqlServerTest {
+ static final String ID="aa000000-0000-4000-8000-000000000001";
+ final SqlServerExecutor executor=mock(SqlServerExecutor.class);final ModelTransactionManager manager=new ModelTransactionManager();final SqlServerSupportStore store=new SqlServerSupportStore(executor,manager);final Access access=mock(Access.class);final AccountLifecycleService lifecycle=mock(AccountLifecycleService.class);final Sql sql=mock(Sql.class);final SupportController controller=new SupportController(store,access,lifecycle);final MockHttpServletRequest request=new MockHttpServletRequest("GET","/api/support");
+ void actor(String role,boolean tenant){var actor=new Actor(ID,"Synthetic","qa@example.test",tenant?ID:null,List.of(role),"a".repeat(64));doReturn(actor).when(access).actor();request.setAttribute("health.actor",actor);if(tenant)request.setAttribute("health.tenant",new TenantRef(ID,"Synthetic","clinic","CLINIC","HUMAN","ACTIVE",List.of()));else request.removeAttribute("health.tenant");TraceContext.REQUEST.set(request);}
+ SupportControllerSqlServerTest(){when(executor.execute(any(),any(),any(Object[].class))).thenAnswer(inv->{assertTrue(TransactionSynchronizationManager.isActualTransactionActive());var sp=inv.<SqlServerProcedure>getArgument(0);if(sp==SqlServerProcedure.SUPPORT_LIST)return new SqlServerExecutor.Result(List.of(List.of()),List.of());var row=new LinkedHashMap<String,Object>();row.put("id",ID);row.put("tenantId",request.getAttribute("health.tenant")==null?null:ID);row.put("actorId",ID);row.put("reference","Synthetic");row.put("email","qa@example.test");row.put("subject","Synthetic");row.put("message","Synthetic");row.put("status","OPEN");row.put("priority","NORMAL");row.put("revision",1);row.put("createdAt","2026-11-04T00:00:00Z");row.put("updatedAt","2026-11-04T00:00:00Z");return new SqlServerExecutor.Result(List.of(List.of(row),List.of()),List.of());});}
+ @AfterEach void cleanup(){TraceContext.REQUEST.remove();SecurityContextHolder.clearContext();TransactionSynchronizationManager.clear();}
+ @Test void platformSadSopAndEveryTenantRoleCanReadOwnSupport(){for(String role:List.of("SAD","SOP")){actor(role,false);assertEquals(List.of(),controller.list());assertEquals(List.of(),((Map<?,?>)controller.get(ID)).get("comments"));}for(String role:List.of("ADM","AUD","PRO","REC","PAC","RES")){actor(role,true);assertEquals(List.of(),controller.list());assertEquals(ID,((Map<?,?>)controller.get(ID)).get("id"));}verifyNoInteractions(sql,lifecycle);}
+ @Test void missingRequestActorMismatchHostTypeAndPlatformRoleNeverQuery(){assertEquals(500,assertThrows(ApiException.class,controller::list).status);actor("PRO",true);doThrow(new ApiException(401,"UNAUTHENTICATED","Safe")).when(access).actor();assertEquals(401,assertThrows(ApiException.class,controller::list).status);actor("PRO",false);assertEquals(403,assertThrows(ApiException.class,controller::list).status);actor("PRO",true);request.setAttribute("health.actor","forged");assertEquals(403,assertThrows(ApiException.class,controller::list).status);actor("PRO",true);request.setAttribute("health.tenant","forged");assertEquals(500,assertThrows(ApiException.class,controller::list).status);verifyNoInteractions(executor);}
+ @Test void sqlWritesGuardBeforeAllInputsAndCollaborators(){assertEquals(500,assertThrows(ApiException.class,()->controller.create(null,null)).status);assertEquals("DATABASE_ERROR",assertThrows(ApiException.class,()->controller.step("bad",null)).code);verifyNoInteractions(executor,lifecycle,access,sql);}
+ @Test void errorsNoFallbackAndForgedClientDataDoesNotSelectAuthority(){actor("PAC",true);request.addHeader("X-Tenant-Id","forged");request.addHeader("X-Roles","SAD");request.setContent("forged body".getBytes());assertEquals(List.of(),controller.list());doThrow(new RuntimeException(new java.sql.SQLException("private",null,51002))).when(executor).execute(any(),any(),any(Object[].class));var e=assertThrows(ApiException.class,()->controller.get(ID));assertEquals(404,e.status);assertFalse(e.toString().contains("private"));verifyNoInteractions(sql,lifecycle);}
+ @Test void minimalSpringSelectsLegacyWithoutDatasource(){doReturn(new Actor(ID,"Synthetic","qa@example.test",null,List.of("SAD"),"a".repeat(64))).when(access).actor();when(sql.rows(anyString(),any(Object[].class))).thenReturn(List.of());try(var context=new AnnotationConfigApplicationContext()){context.registerBean(Sql.class,()->sql);context.registerBean(Access.class,()->access);context.registerBean(AccountLifecycleService.class,()->lifecycle);context.registerBean(SupportController.class);context.refresh();assertEquals(List.of(),context.getBean(SupportController.class).list());verify(sql).rows(anyString(),any(Object[].class));assertEquals(0,context.getBeanNamesForType(SqlServerSupportStore.class).length);assertEquals(0,context.getBeanNamesForType(javax.sql.DataSource.class).length);}verifyNoInteractions(executor);}
+}
