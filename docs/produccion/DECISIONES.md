@@ -904,3 +904,13 @@ D-65 (2026-11-05): A57 agrega factories12serviciosnegocio yPortalfull7args encon
 D-65 resuelta para implementacion: A57 aceptada/integrada trasSHA/review/verify independiente973/973. Negocio/Portal declarativosfuera scan,sinrootactivo.
 
 D-66 (2026-11-05): A58 prepara SqlServerRuntimeRoot y ModeGuard mas2Tests,sin modificarHealthApplication/launcher. Root fuera scan sinmain/SpringBootConfiguration,imports explicitosA54-A57+16controladoresdelegadores (Browser/Support yAdvice yaA56),Settings binding,AOPclassproxy ydbHealthIndicatorA53. AutoConfigBoot4 con exclusiones datasource/Jdbc/Txmanager/Flyway/SQLinitializer/defaultDBhealth/Mail;usar clasesinstaladas reales. Guard temprano exige mode=runtime,Flywayfalse,SQLinitnever,probesenabledtrue ygrupos livenessState/readinessState+db;rechaza setup/Bootstrap/migrationcreds/jobs/override. Testsconfigautoconfigoffline sinSpringApplication/puerto/conexion. Launcher/setup/jobs/perfilQA seencargan despues;noactivarrootparcial.
+
+D-66 requisitos externos del root: health.sqlserver.mode=runtime,
+spring.flyway.enabled=false, spring.sql.init.mode=never,
+management.endpoint.health.probes.enabled=true, liveness.include=livenessState
+y readiness.include=readinessState,db bajo management.endpoint.health.group.
+Sin valores de migracion/bootstrap en Environment; flags migrate/setup/bootstrap
+rechazados incluso vacios, jobs/override solo ausente o false. Show-details y
+show-components solo ausente o never. El guard no introduce defaults ni altera
+System properties: perfil QA posterior debe suministrar los valores y vaciar
+spring.flyway.url/user/password heredados. Este corte no cambia el launcher.
