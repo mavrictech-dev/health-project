@@ -989,3 +989,9 @@ D-69 aclaracion: UNA VEZ limita repeticiones sin causa; una correccion comprobad
 de flags SQLcmd incompatibles justifica una ejecucion adicional sobre el mismo
 destino y lecturas, autorizada por msg_4327632c0100. Conservar first-error y
 no repetir suites exitosas sin cambios. No amplia permisos ni scope de datos.
+
+
+D-69 resuelta: preflight aceptado con36/36 independientes y CLI real exit2
+BLOCKED correctamente interpretado. Roles ausentes no son error de herramienta;
+setup QA separado puede resolverlos sin modificar transporte/auth de instancia.
+No usar esta aceptacion como prueba JDBC ni grants efectivos de un login real.

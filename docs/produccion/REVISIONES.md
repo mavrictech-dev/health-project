@@ -1226,3 +1226,25 @@ TCPEnabled0, NpEnabled0, IsIntegratedSecurityOnly1. Base QA marcada conserva
 133 SP. No se cambio servicio/autenticacion/configuracion/credenciales ni datos.
 Proximo corte prepara preflight reproducible que falle cerrado ante estos
 bloqueos; setup separado y entorno JDBC positivo aun pendientes.
+
+
+SQL-01.A61 ACEPTADA e integrada, 2026-11-05. Informe msg_af22b707777b y cierre
+msg_f6e0ad8e207b task_260b01935c63 / ctx_2b5e8fd35eee. Dos SHA confirmados;
+revision personal script/suite y173 rutas protegidas (solo EOF A38 conocido).
+Snapshot independiente tmp/sqlserver-a61-review desde HEAD mas dos archivos:
+python -B -m unittest discover -s scripts/tests -v,36/36 PASS en3.392s.
+Primera invocacion del supervisor apunto al arbol base y ejecuto solo23tests
+existentes (PASS15.398s); se corrigio el directorio y se ejecuto la suite completa
+36 en snapshot. Ambos logs conservados, sin afirmar cobertura nueva con23.
+CLI independiente de solo lectura: rawexit2 BLOCKED esperado,0.390s,stderr vacio;
+scope exacto validado,37 tablas/133SP,compat160 ySQL2022 16.0.1000.6. Cuatro
+bloqueos: TCPEnabled0, WindowsOnly1 incompatible con authruntime actual, roles
+hp_runtime_executor y hp_bootstrap_executor ausentes. jdbc_positive_validated
+false. Evidencia preflight-supervisor.json/run.json ylogs en snapshot.
+Script no modifica SQL/registro/servicios/autenticacion/credenciales. Primer
+ERRORworker porflagsSQLcmd incompatible preservado, correccion autorizada por
+msg_4327632c0100; ejecucion final BLOCKED no se presenta como JDBC positivo.
+Sin nuevas pruebas Java/frontend/HTTP/capturas por este cambio de herramienta.
+Siguiente trabajo independiente: preparar instalacion de permisos V8 existente
+SOLO en QA marcada con ensayo transaccional/rollback antes de aplicar. No
+habilitar transporte/autenticacion compartidos; entornoJDBC positivo sigue abierto.
