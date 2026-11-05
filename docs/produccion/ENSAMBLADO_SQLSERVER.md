@@ -90,3 +90,19 @@ grafo futuro, pool, permisos ni protocolo de red.
 A51 verify independiente 922/922 y JAR aprobado siguen como baseline anterior.
 SQL-01 permanece EN_CURSO: wiring, JDBC, grants, HTTP y validacion visual real
 siguen pendientes.
+
+## Bloqueo de A58, 2026-11-05
+
+A58 sigue en correccion y no esta integrada. El programador alcanzo su limite de
+uso; la pantalla indica recuperacion a las 15:31. Su segundo verify dejo 982
+pruebas, un fallo y cero errores u omisiones.
+
+El fallo es una asercion que rechaza cualquier nombre de bean con "scheduled".
+Un diagnostico independiente encontro la configuracion de observacion de Boot,
+con cero ScheduledAnnotationBeanPostProcessor, cero TaskScheduler y pool apagado.
+El driver estuvo simulado y no recibio getConnection. Esto localiza el fallo de
+la prueba; no reemplaza la verificacion final pendiente.
+
+La instruccion R-A58-SCHED-ASSERT quedo en la misma Task/Dispatch mediante
+msg_d21e5a0d8674. A57 conserva el ultimo codigo aceptado. No se integro codigo
+incompleto ni se cambio de cuenta, sesion o trabajador.

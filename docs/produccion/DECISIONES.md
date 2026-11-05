@@ -914,3 +914,5 @@ rechazados incluso vacios, jobs/override solo ausente o false. Show-details y
 show-components solo ausente o never. El guard no introduce defaults ni altera
 System properties: perfil QA posterior debe suministrar los valores y vaciar
 spring.flyway.url/user/password heredados. Este corte no cambia el launcher.
+
+D-66 revisionA58 pendiente: R-A58-SCHED-ASSERT distingue ScheduledTasksObservationAutoConfiguration (metadatosBoot) de ScheduledAnnotationBeanPostProcessor/TaskScheduler activos. No excluir observacion inofensiva solo para hacer pasar test. Sustituir aserciongenerica por checks de tiposactivos y conservar el resto. Programador original tieneinstruccionmsg_d21e5a0d8674;cuota hasta15:31 impidecorreccion/cierreahora. No interpretar escalacion como salida de proceso ni reiniciar/cambiarcuentas, no activar/integrarWIP.
