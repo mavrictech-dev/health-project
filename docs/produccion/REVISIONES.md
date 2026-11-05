@@ -1064,3 +1064,24 @@ worker; en comparación directa con HEAD, solo difiere el LF final ya corregido 
 SqlServerClinicalStore A38. Ninguna prueba HTTP/MockMvc/SQL Server/JDBC, vínculo
 HOLDLOCK real, revocación, grants o wiring. A41 aceptada solo como implementación
 aislada; siguiente A42 PortalService.patients.
+
+A42 revision supervisora, 2026-11-05
+
+Informe msg_9bf9164256ed / worker_done msg_e09dab22cf97. Los cuatro SHA
+coinciden con fuentes y snapshot desde HEAD A41. Revisión de D-50, V5
+usp_portal_scope/usp_portal_patients, schema paciente/link y enum de procedimiento.
+Constructor @Autowired legacy y overloads A40/A41 intactos; el overload nuevo
+solo agrega patientsStore. Los métodos/ramas docs, appointments, reserve y balance
+no cambian. En rama SQL portal() queda antes, no hay parámetros ni Access.link/
+select auxiliar. Context/request y argumentos vacíos correctos. El SP retorna
+sin TOP, límite o paginación; el adaptador conserva todo el resultset y orden,
+whitelistea siete campos, valida/copia scopes y mantiene nullables sin inventar
+campos de tenant/actor.
+
+Verify JDK21 independiente sobre snapshot: 754 tests, cero fallos/errores/skips,
+BUILD SUCCESS, jar/repackage PASS. 126 rutas protegidas del baseline del worker
+no cambiaron; comparando con HEAD, la única diferencia es una línea vacía final
+conocida en SqlServerClinicalStore A38. Vínculos activos, seguridad de scopes,
+HOLDLOCK, auditoría y aislamiento SQL no son probados por doubles. Sin SQL Server,
+JDBC, HTTP, grants o wiring. A42 aceptada como recorrido aislado. Siguiente A43
+PortalService.balance.

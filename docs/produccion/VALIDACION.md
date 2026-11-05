@@ -736,3 +736,11 @@ por SHA256. JDK21 `mvnw -B -ntp verify`: 733 tests, 0 fallos/errores/skips,
 BUILD SUCCESS y jar PASS. Los tests con dobles cubren scopes/roles, respuesta,
 orden, cardinalidad, campos/UTC/estado y errores. No prueban SQL Server real,
 vínculo APPOINTMENTS/HOLDLOCK, auditoría durable, JDBC, HTTP ni grants.
+
+## SQL-01.A42 - PortalService.patients aislado, 2026-11-05
+
+Snapshot independiente de HEAD A41 y cuatro archivos verificados por SHA256.
+JDK21 `mvnw -B -ntp verify`: 754 tests, 0 fallos/errores/skips, BUILD SUCCESS,
+jar PASS. Tests con executor/TX simulados cubren resultset no paginado, cero args,
+orden, proyección, datos nullable, scopes, errores y constructor/rutas. No ejecutan
+SQL Server, vínculos/HOLDLOCK/tenant real, audit durable, JDBC/HTTP o grants.

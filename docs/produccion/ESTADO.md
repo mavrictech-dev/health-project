@@ -538,3 +538,6 @@ sin solapamiento, cuatro rutas. En curso, sin wiring ni QA motor.
 
 SQL-01.A41 preparada para PortalService.appointments tras A40 integrada 3b49ab1.
 Solo esta lectura y su store/tests; sin SQL/JDBC/HTTP real ni wiring.
+
+SQL-01.A42 preparada para PortalService.patients tras A41 integrada 57fddb7;
+solo este listado y su adaptador/tests. Sin vínculo real SQL/JDBC/HTTP ni wiring.

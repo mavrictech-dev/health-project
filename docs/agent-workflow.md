@@ -906,3 +906,10 @@ citas; stores A39/A40 preservados byte a byte.
 A41 entrega msg_ddbb92337846/msg_d342021ca8d4 revisada e integrada tras snapshot
 independiente, SHA y verify733/733. Aceptada solo como adapter aislado, sin SQL
 real/JDBC/HTTP/wiring. Siguiente A42 PortalService.patients, propiedad secuencial.
+
+A42 preparada D-50 / tmp/sql-01-a42-spec.md, dependencia A41. PortalService es
+propiedad secuencial de A42; stores y ramas A39-A41 quedan protegidos.
+
+A42 entrega msg_9bf9164256ed/msg_e09dab22cf97 revisada e integrada con 754/754
+independiente, únicamente como adapter aislado. Sin SQL real/JDBC/HTTP/wiring.
+A43 PortalService.balance es el siguiente paquete secuencial.

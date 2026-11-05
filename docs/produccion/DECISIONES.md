@@ -816,3 +816,10 @@ D-49 resuelta para implementación: A41 migrada/aceptada como lectura aislada,
 con snapshot 733/733; bodies previos de PortalService y stores A39/A40 preservados.
 No evidencia SQL Server/JDBC/HTTP, guards del SP o wiring. Próximo A42 migra
 PortalService.patients en secuencia sobre el archivo compartido.
+
+D-50 (2026-11-05): A42 migra exclusivamente PortalService.patients con store SQL Server explícito. Mantener portal() PAC/RES + PORTAL y omitir Access.link/SELECT de apoyo: usp_portal_scope valida host/tenant/actor/subscription; usp_portal_patients devuelve vínculos activos del actor con scopes y audit PORTAL_PATIENTS_READ bajo REQUIRED, orden name,id. Proyección whitelist de siete campos; scopes preservados y validados contra APPOINTMENTS/DOCUMENTS/BILLING. Los constructores y métodos A39-A41 se mantienen. SQL/JDBC/HTTP/wiring siguen pendientes.
+
+D-50 resuelta para implementación: PortalService.patients aceptado como lectura
+SQL aislada en snapshot independiente (754/754). Se conserva la cardinalidad sin
+cap por ausencia de límite en V5. No acredita guards, vínculo o auditoría reales;
+siguiente paquete A43 migra balance secuencialmente.
