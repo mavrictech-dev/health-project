@@ -685,3 +685,8 @@ query220UTF16sintruncar y limits1..200. Constructoraislado,sinwiring.
 D-35: A27tenants/tenant/statusSAD,29columnas+hostname/urldesdeSettings.
 Status unSPdevuelvefila;augmentSettings dentrocallbackTX antescommit,fallo
 revierte. Nolecturaextra ni autoreanudacion ni revisioninventada,sinwiring.
+
+
+D-36: A28planmutador usaSAAS_PLAN_SAVE1SPconBooleancreate/proyeccion21,
+version/locks resueltosSP. CreateUser ejecutaIdentityService.create firmado
+dentroREQUIRED y PLATFORM_USERS(id,1) mismaunidad,body5camposlegacy;sinwiring.

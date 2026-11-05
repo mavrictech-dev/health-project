@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A26 aceptadas; A27 preparado) | A19 task_f2b11c63b1f1 / ctx_37f7e33bd3b9,385/385 supervisor | Catalogos plataforma integrados sin wiring. Siguiente tenants/status A27; otros consumidores/wiring/QA real pendientes |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A27 aceptadas; A28 preparado) | A19 task_f2b11c63b1f1 / ctx_37f7e33bd3b9,385/385 supervisor | Consulta/estado organizaciones integrado sin wiring. Siguiente plan/createUser A28; otros consumidores/wiring/QA real pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -616,3 +616,21 @@ verify independiente476/476,0fallos/errores/omisiones,jarPASS24.161s,
 SAD/4SP/proyecciones21/6/5/7/JSONprofundo/nullable revisados personalmente.
 SinSQLServer/JDBC/HTTP reales ni nueva evidencia visual. Siguiente A27:
 tenants/tenant/status plataforma,mismos4archivos,secuencia sin solapamiento.
+
+
+A27 delegada: task_84f9c8b3ffc2 / ctx_c229ce54bbb1,dependencia A26settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio noobservado,no reenviar ni
+abandonar;esperar avisoOrca. Ownership mismos4archivos plataforma,D-35.
+A26 subida68c315143873e24abd65b3f2e21f81ab50269574 a rama de trabajo,
+refremota comprobada,main intacta. Restoconsumidores/wiring/QAreal pendientes;
+apagarPC solo al terminar todos los pendientes,no durante este cierreparcial.
+
+
+A27 ACEPTADA: informe msg_c5143cfe6847/done msg_0828a8d66f1f,4SHAexactos,
+verify independiente486/486,0fallos/errores/omisiones,jarPASS24.474s,
+2026-11-04T23:00:00-05:00.132bases verificadas,128ajenas intactas;4existentes
+integrados. Legacy/A26 comparados exactos retirando3ramasSQL y sqlDomainnuevo.
+Proyeccion29+2Settings,DATEcanonico,usageLongsinclamp,status1SP y callbackURL
+antescommit revisados personalmente. SinSQLServer/JDBC/HTTP reales ni nueva
+visual. Siguiente A28 planesmutadores y createUser plataforma,mismos4archivos.

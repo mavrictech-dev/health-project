@@ -416,3 +416,12 @@ verify independiente476/476,0fallos/errores/omisiones,jarPASS24.161s,
 SAD/4SP/proyecciones21/6/5/7/JSONprofundo/nullable revisados personalmente.
 SinSQLServer/JDBC/HTTP reales ni nueva evidencia visual. Siguiente A27:
 tenants/tenant/status plataforma,mismos4archivos,secuencia sin solapamiento.
+
+
+A27 ACEPTADA: informe msg_c5143cfe6847/done msg_0828a8d66f1f,4SHAexactos,
+verify independiente486/486,0fallos/errores/omisiones,jarPASS24.474s,
+2026-11-04T23:00:00-05:00.132bases verificadas,128ajenas intactas;4existentes
+integrados. Legacy/A26 comparados exactos retirando3ramasSQL y sqlDomainnuevo.
+Proyeccion29+2Settings,DATEcanonico,usageLongsinclamp,status1SP y callbackURL
+antescommit revisados personalmente. SinSQLServer/JDBC/HTTP reales ni nueva
+visual. Siguiente A28 planesmutadores y createUser plataforma,mismos4archivos.

@@ -9,7 +9,7 @@ import com.mavric.health.identity.Actor;
 import com.mavric.health.shared.*;
 import com.mavric.health.saas.application.PlatformService;
 
-/** Unwired SAD catalog reads. Executor and REQUIRED manager must share the runtime datasource. */
+/** Unwired SAD catalog and tenant operations. Executor and REQUIRED manager must share the runtime datasource. */
 public final class SqlServerPlatformStore {
  private final SqlServerExecutor executor;private final TransactionTemplate transactions;
  public SqlServerPlatformStore(SqlServerExecutor executor,PlatformTransactionManager manager){this.executor=Objects.requireNonNull(executor);transactions=new TransactionTemplate(Objects.requireNonNull(manager));}
@@ -25,6 +25,35 @@ public final class SqlServerPlatformStore {
  public List<Map<String,Object>> users(HttpServletRequest request,int limit){return within(()->{var c=context(request);int size=Checks.limit(limit);return read(executor.execute(SqlServerProcedure.PLATFORM_USERS,c,null,size),size,SqlServerPlatformStore::user);});}
  public List<Map<String,Object>> specialties(HttpServletRequest request,String query){return within(()->{var c=context(request);String value=query==null?"":query;if(value.length()>220)throw SqlServerErrors.invalid();return read(executor.execute(SqlServerProcedure.PLATFORM_SPECIALTIES,c,value),Integer.MAX_VALUE,SqlServerPlatformStore::specialty);});}
  public List<Map<String,Object>> audit(HttpServletRequest request,int limit){return within(()->{var c=context(request);int size=Checks.limit(limit);return read(executor.execute(SqlServerProcedure.PLATFORM_AUDIT,c,size),size,SqlServerPlatformStore::auditRow);});}
+ public List<Map<String,Object>> tenants(HttpServletRequest request,int limit){return within(()->{var c=context(request);int size=Checks.limit(limit);return read(executor.execute(SqlServerProcedure.PLATFORM_TENANTS,c,null,size),size,SqlServerPlatformStore::tenantRow);});}
+ public Map<String,Object> tenant(HttpServletRequest request,String id){return within(()->{
+  var c=context(request);Checks.id(id);var rows=read(executor.execute(SqlServerProcedure.PLATFORM_TENANTS,c,id,1),1,SqlServerPlatformStore::tenantRow);
+  if(rows.isEmpty())throw ApiException.missing();return matching(rows.getFirst(),id);
+ });}
+ /** Trusted server callback only, for Settings URL augmentation before the status transaction commits. */
+ public Map<String,Object> status(HttpServletRequest request,String id,String status,String reason,java.util.function.Function<Map<String,Object>,Map<String,Object>> augment){return within(()->{
+  var c=context(request);Checks.id(id);
+  if(status==null || !Set.of("TRIAL","ACTIVE","SUSPENDED","CANCELLED").contains(status) || reason==null || reason.isBlank() || reason.length()>500)throw SqlServerErrors.invalid();
+  if(augment==null)throw SqlServerErrors.database();
+  var rows=read(executor.execute(SqlServerProcedure.SAAS_TENANT_STATUS,c,id,status,reason),1,SqlServerPlatformStore::tenantRow);
+  if(rows.size()!=1)throw SqlServerErrors.database();var row=matching(rows.getFirst(),id);var result=augment.apply(row);
+  if(result==null)throw SqlServerErrors.database();return Collections.unmodifiableMap(new LinkedHashMap<>(result));
+ });}
+ private static Map<String,Object> matching(Map<String,Object> row,String id){if(!id.equals(row.get("id")))throw SqlServerErrors.database();return row;}
+ private static Map<String,Object> tenantRow(Map<String,Object> row){
+  var out=new LinkedHashMap<String,Object>();for(String key:List.of("id","ownerUserId","planId"))out.put(key,id(row,key,false));
+  for(String key:List.of("name","ownerName","ownerEmail","planName"))out.put(key,text(row,key,false));
+  String slug=text(row,"slug",false),kind=text(row,"kind",false),domain=text(row,"domain",false),status=text(row,"status",false),timezone=text(row,"timezone",false),renewal=text(row,"renewalDate",false);
+  try{com.mavric.health.tenancy.DomainRules.slug(slug);java.time.ZoneId.of(timezone);if(!renewal.matches("[0-9]{4}-[0-9]{2}-[0-9]{2}") || !java.time.LocalDate.parse(renewal).toString().equals(renewal) || java.time.LocalDate.parse(renewal).getYear()<1)throw SqlServerErrors.database();}catch(RuntimeException invalid){throw SqlServerErrors.database();}
+  if(!PlatformService.KINDS.contains(kind) || !Set.of("HUMAN","ANIMAL").contains(domain) || !Set.of("TRIAL","ACTIVE","SUSPENDED","CANCELLED").contains(status))throw SqlServerErrors.database();
+  if(kind.equals("VETERINARY")?!domain.equals("ANIMAL"):!kind.equals("DOCTOR")&&!domain.equals("HUMAN"))throw SqlServerErrors.database();
+  out.put("slug",slug);out.put("kind",kind);out.put("domain",domain);out.put("status",status);out.put("timezone",timezone);out.put("renewalDate",renewal);out.put("createdAt",timestamp(row));
+  String cycle=text(row,"cycle",false);if(!Set.of("MONTHLY","YEARLY").contains(cycle))throw SqlServerErrors.database();out.put("cycle",cycle);
+  for(String key:List.of("planVersion","branchQuota","professionalQuota","specialtyQuota","includedBranches","includedProfessionals"))out.put(key,integer(row,key,1));
+  int discount=integer(row,"annualDiscount",0);if(discount>60)throw SqlServerErrors.database();out.put("annualDiscount",discount);
+  for(String key:List.of("baseMinor","branchMinor","professionalMinor","branchesUsed","professionalsUsed","specialtiesUsed"))out.put(key,amount(row,key));
+  var modules=strings(row,"modules",PlatformService.MODULES);if(!modules.contains("CORE"))throw SqlServerErrors.database();out.put("modules",modules);return Collections.unmodifiableMap(out);
+ }
  private static List<Map<String,Object>> read(SqlServerExecutor.Result result,int max,java.util.function.Function<Map<String,Object>,Map<String,Object>> mapper){if(result==null || result.resultSets().size()!=1 || result.resultSets().getFirst().size()>max)throw SqlServerErrors.database();return result.resultSets().getFirst().stream().map(mapper).toList();}
  private static Object field(Map<String,Object> row,String key){if(!row.containsKey(key))throw SqlServerErrors.database();return row.get(key);}
  private static String text(Map<String,Object> row,String key,boolean nullable){Object v=field(row,key);if(v==null && nullable)return null;if(!(v instanceof String value))throw SqlServerErrors.database();return value;}
