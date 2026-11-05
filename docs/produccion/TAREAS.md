@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; integracion SQL Server, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; integracion SQL Server/rollback/concurrencia pendiente; Docker no es el bloqueo del motor local descubierto |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A59 implementacion aceptada; A52 auditoria; A60 QA HTTP negativa) | A59 verify independiente990/990; A60 independiente47/47 | Grafo SQL completo opt-in, jobs apagados; faltan setup/runner, JDBC positivo con permisos y negocio HTTP/visual |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A62 aceptados con alcance; permisos QA instalados) | Java990; HTTP negativo47; herramientas59; ensayo SQL y ACL562 independientes | Grafo SQL opt-in completo; faltan JDBC positivo, principales runtime/setup, bootstrap y negocio HTTP/visual; TCP0/WindowsOnly1 |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -1388,3 +1388,25 @@ No nuevaspruebasMaven/frontend/HTTP/capturas; codigoJava baseline990 anterior.
 Herramienta permite applyexplicito solo tras guards/postconditions; supervisor
 procede segunD-70 a setup persistente SOLOQA marcada, con nueva comprobacion.
 Esta aceptacion del ensayo aun NOafirma applyreal ni JDBCpositivo/login/negocio/UI.
+
+
+SQL-01.A62 permisos APLICADOS en QA y reconciliados, 2026-11-05. Herramienta
+revisada integrada/pushdb33b08. Supervisor ejecuto apply UNAvez, V8aprobada completa,
+wrapperSQLcmd0 yCOMMITtrasgates. Primera lectura postcommit SQLcmd0 sinlineas
+causo CLI1 RESPONSE_INVALID; herramienta reportoERRORestricto, no applied falso.
+Lectura de recuperacion mostrofingerprint nuevo, cleanup_after_error_verifiedfalse
+es coherente con COMMIT, no evidencia de rollback. NOse repitio apply ni se hizo
+compensacion/destruccion. Error original intacto en tmp/sqlserver-a62-apply.json.
+Reconciliacion supervisor NUEVAconexion: validate_installedPASS contra baseline
+preapply y artefactoV8,562ACL exactas tambiencontraA7,rolesR ownedbydbo,sin
+membresias/usuarios/logins nuevos. Protected9partes igualantes/dentro/despues,
+bootstrapcanonico2SHAaprobados. Fingerprint instalado
+416017762854266FF427F8015899E95FB5AB68A17E7A0D9A1B16073F7D8D285B
+coincide snapshotinside y readposterror; queda confirmado persistente mediante
+verificacionmanual, no se reinterpreta CLI1 comoPASSautomatico.
+Evidencia tmp/sqlserver-a62-apply-manual-verification.json y after-manual-verification.json
+en carpetaapply. Preflightposterior raw2BLOCKED: rolesruntime/bootstrapR presentes;
+quedan SOLOordinary_tcp_enabled y runtime_sql_auth_compatible (TCP0/WindowsOnly1).
+SQL compartido sin cambios de servicios/transporte/auth; no backendactivo ni
+JDBCpositivo/grants efectivos de login/HTTPnegocio/UIvalidados. ProximoQA: permisos
+efectivos bajo usuarios DB WITHOUTLOGIN temporales, fixturesTXrevertidos.

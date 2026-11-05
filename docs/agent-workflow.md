@@ -1309,3 +1309,25 @@ No nuevaspruebasMaven/frontend/HTTP/capturas; codigoJava baseline990 anterior.
 Herramienta permite applyexplicito solo tras guards/postconditions; supervisor
 procede segunD-70 a setup persistente SOLOQA marcada, con nueva comprobacion.
 Esta aceptacion del ensayo aun NOafirma applyreal ni JDBCpositivo/login/negocio/UI.
+
+
+SQL-01.A62 permisos APLICADOS en QA y reconciliados, 2026-11-05. Herramienta
+revisada integrada/pushdb33b08. Supervisor ejecuto apply UNAvez, V8aprobada completa,
+wrapperSQLcmd0 yCOMMITtrasgates. Primera lectura postcommit SQLcmd0 sinlineas
+causo CLI1 RESPONSE_INVALID; herramienta reportoERRORestricto, no applied falso.
+Lectura de recuperacion mostrofingerprint nuevo, cleanup_after_error_verifiedfalse
+es coherente con COMMIT, no evidencia de rollback. NOse repitio apply ni se hizo
+compensacion/destruccion. Error original intacto en tmp/sqlserver-a62-apply.json.
+Reconciliacion supervisor NUEVAconexion: validate_installedPASS contra baseline
+preapply y artefactoV8,562ACL exactas tambiencontraA7,rolesR ownedbydbo,sin
+membresias/usuarios/logins nuevos. Protected9partes igualantes/dentro/despues,
+bootstrapcanonico2SHAaprobados. Fingerprint instalado
+416017762854266FF427F8015899E95FB5AB68A17E7A0D9A1B16073F7D8D285B
+coincide snapshotinside y readposterror; queda confirmado persistente mediante
+verificacionmanual, no se reinterpreta CLI1 comoPASSautomatico.
+Evidencia tmp/sqlserver-a62-apply-manual-verification.json y after-manual-verification.json
+en carpetaapply. Preflightposterior raw2BLOCKED: rolesruntime/bootstrapR presentes;
+quedan SOLOordinary_tcp_enabled y runtime_sql_auth_compatible (TCP0/WindowsOnly1).
+SQL compartido sin cambios de servicios/transporte/auth; no backendactivo ni
+JDBCpositivo/grants efectivos de login/HTTPnegocio/UIvalidados. ProximoQA: permisos
+efectivos bajo usuarios DB WITHOUTLOGIN temporales, fixturesTXrevertidos.

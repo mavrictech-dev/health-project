@@ -1065,3 +1065,10 @@ exacta contraA7 yrollback fullsnapshotverificado. Supervisor procede a apply
 explicito SOLOQA marcada con principalsetupWindows separado; creacion2roles/ACL
 y2ALTERV8aprobados, sin users/logins/datos/servicios/auth. Applyresultado se
 registrara aparte; nunca equivale a JDBCpositivo o backendmigradocompleto.
+
+
+D-70 aplicacion persistente confirmada por supervisor SOLOQA: dosroles/ACL562 y
+2ALTERV8. CLIapply1 por lecturavacia posterior a COMMIT; no repetir mutacion ni
+inferir rollback. Reconciliacion nuevaConexion verifico estado exacto instalado,
+conservando errorautomatico original. Auth/transporte globales no modificados;
+JDBC y principalruntime real siguen pendientes.
