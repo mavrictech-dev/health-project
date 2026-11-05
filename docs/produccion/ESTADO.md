@@ -566,3 +566,5 @@ A45 aceptada e integrada en implementacion aislada: lecturas de inventario y ver
 A45 integrada/push 5d85b54. A46 preparada para lot/move en el mismo ownership secuencial; transfer/receive se reservaron a A47. Sin activacion del backend.
 
 A46 delegada task_7b66f63670ce / ctx_2522112ed8a8, dependencia A45 settled. Cuenta efectiva /status mendozadeafabisa@gmail.com y sesion 01a19e4c-15af-74e0-a1b9-75fc7093b98f confirmadas; IdentityOnly de ambos roles coincide. Terminal/worktree retenidos y --no-daemon. Cuatro rutas segun D-54, solo lot/move y tests, sin archivos compartidos en paralelo. Orca dispatched; pendiente entrega y revision. No SQL/JDBC/HTTP ni activacion.
+
+A46 aceptada e integrada como adaptador aislado de lot/move: 832/832 independientes y jar PASS. Inventario aun tiene transfer/receive legacy pendientes (A47). SQL-01 sigue EN_CURSO; runtime SQL Server/JDBC/HTTP y QA visual real pendientes.

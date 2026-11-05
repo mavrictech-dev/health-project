@@ -842,3 +842,5 @@ D-53 (2026-11-05): A45 prepara solo InventoryService.lots/transfers/prescription
 D-53 resuelta para implementacion aislada: A45 revisada e integrada con verify independiente 818/818. Contratos de lecturas preservados; escrituras, runtime SQL Server y QA real siguen pendientes.
 
 D-54 (2026-11-05): A46 migra solo lot/move de inventario, SP V6 existentes. JSON original con mapper configurado y hash exacto, UUID nuevo o replay previo, mapping dentro REQUIRED; V6 autoridad para branch/stock/prescripcion/PHARMACY/idempotencia/audit. Sin preflight SQL ni read-after-write. Se permite agregar mapper al constructor de store y ajustar tests A45 en sus cuatro rutas; transfer/receive permanecen legacy hasta A47. Sin wiring ni validacion real de motor.
+
+D-54 resuelta para implementacion aislada: A46 aceptada e integrada tras SHA/revision y verify independiente 832/832. V6 conserva autoridad de stock/branch/dispensacion. A47 completa transfer/receive antes de avanzar con otros consumidores y wiring.
