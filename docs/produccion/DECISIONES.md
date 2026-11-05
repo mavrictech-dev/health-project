@@ -728,3 +728,8 @@ D-42 (2026-11-05): A34pacienteslist/get/save3SP,tenantwide contextofirmado,
 rolesreadADMREC PRO ASI AUD/writeADMREC PRO+CORE. HTTPcreateexpected0/
 update>=1,UUIDservidor,JSON7campos yproyeccion11;link/historyguardados,
 sinwiring/datosreales ni reglasclinicasnuevas.
+
+
+D-43 (2026-11-05): A35linkADMREC+PORTAL/historyPROASIAUD2SP,history4RS
+conauditoriainterna callerTX ysinGET/auditextra. Longitudinaltenantwide,
+entries/docencounterpuedenfueraTOP200,proyecciones13/8/16+limits,sinwiring.

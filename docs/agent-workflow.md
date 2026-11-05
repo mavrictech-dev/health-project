@@ -763,3 +763,21 @@ Existing1SP/newUSER_CREATE->MEMBER_SAVE mismaREQUIRED/proyeccion7 yJSON4
 revisados personalmente. OrganizationServicecompleto aislado,sinwiring.
 SinSQLServer/JDBC/HTTP reales ni nueva visual. Siguiente A34pacienteslist/get/
 save;vinculos/historialporpaquete siguiente,sinfuncionalidadclinicanueva.
+
+
+A34 delegada: task_db63510e0221 / ctx_a8b1ecddf5ae,dependencia A33settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio noobservado,no reenviar ni
+abandonar;esperar avisoOrca. OwnershipPatientService/store/dossuites,D-42.
+A33 subidae7a70c01235cc28b4cc1e62dec2f161cb7925b8d a rama de trabajo,
+refremota comprobada,main intacta. Negocio/wiring/QAreal pendientes;
+apagarPC solo al terminar TODO,no durante este cierreparcial.
+
+
+A34 ACEPTADA: informe msg_5d34d753067c/done msg_882450fc3223,4SHAexactos,
+verify independiente580/580,0fallos/errores/omisiones,jarPASS27.747s,
+2026-11-05T00:18:22-05:00.135bases verificadas,134ajenas intactas;1existente+
+3nuevos integrados. Legacycuerposlist/get/save/link/history comparados exactos.
+Proyeccion11/JSON7/contactodeepinmutable/limits3998y200000/revisionSPI
+revisados personalmente. SinSQLServer/JDBC/HTTP reales ni nueva visual.
+Siguiente A35 vinculos/historial para completarPatientServiceaislado,sinwiring.
