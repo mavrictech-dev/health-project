@@ -750,3 +750,22 @@ fases SQL Server reales repetidas por el supervisor. CONVERT(bigint,86400000000)
 mantiene el limite por dias completos: 93d23h y 94d-1us permitidos; 94d exactos,
 reversed/equal rechazados. V9 incremental, no instalada permanentemente en QA.
 No acredita wiring, JDBC, HTTP ni permisos efectivos de cuenta runtime.
+
+
+D-45 (2026-11-05): A37 portara SchedulingService.reserve/change al store SQL
+Server existente, conservando rutas/DTO y constructor legacy. Staff: CORE con
+REC/PRO, sede asignada y escritura atomica por usp_appointment_reserve/change.
+Portal: PAC/RES, PORTAL, vinculo APPOINTMENTS y solo REQUESTED; no cambiar el
+controller actual. Reserve conserva Idempotency.key, UUID servidor, JSON de 9
+campos en orden legacy, fechas UTC a microsegundos y SHA-256 UTF-8 del JSON exacto
+de Requests.Reserve serializado por el ObjectMapper configurado. Replay misma
+clave/hash retorna fila; hash distinto y horario/conflictos siguen siendo del
+SP. Change conserva revision, estados/transition, sede y reglas de reprogramacion
+futura RESERVED. Ambos dentro REQUIRED y sin retry. Contrato probado con dobles;
+eso no valida SQL real/JDBC/HTTP, que siguen como gate posterior. Sin wiring,
+configuracion, controladores, SP, migraciones, endpoint ni funcionalidad nueva.
+
+A37 aceptada en implementacion aislada: serializacion de hash verificada contra
+Sql.json con el mapper configurado; test suite y revision fuente pasan. La clase
+store requiere el constructor con ese mismo ObjectMapper para escribir. SQL
+Server real, concurrencia, cuenta/runtime JDBC, wiring y HTTP permanecen gates.

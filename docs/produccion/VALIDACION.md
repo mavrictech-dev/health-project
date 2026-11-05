@@ -674,3 +674,18 @@ Esta es validacion de procedimientos en el motor bajo principal administrativo
 con datos/sesiones sinteticos. No es autenticacion JDBC, permisos de runtime,
 pool de conexiones ni integracion HTTP. Quedan wiring SQL completo y recorridos
 reales de backend/frontend por verificar.
+
+
+## SQL-01.A37 - escritura de agenda aislada, 2026-11-05
+
+Snapshot supervisor con A36 mas los cuatro archivos de A37. Verify independiente
+JDK21 exit0: 634 tests, 0 fallos/errores/skips, BUILD SUCCESS y jar PASS.
+Simulacion de executor/TransactionTemplate; cobertura de serializacion/hash
+contra el mapper configurado de Sql.json, replay de mismo key/hash y hash
+conflictivo, binds exactos de reserve/change, REQUESTED portal, roles CORE/
+PORTAL/link/sede, duracion/UTC, limites de revision y transiciones, cardinalidad
+de RS, mapeo seguro de 51000..51005, REQUIRED/rollback, sin retry y sin GET
+posterior a escritura. Los tests usan dobles: no se ejecutaron estos writes contra
+SQL Server ni por JDBC/HTTP. V5 y V9 no se alteraron para A37; backend sigue sin
+wiring. Revisar VALIDACION de A36.R1 para el alcance distinto de la matriz real
+solo lecturas de citas en el motor.

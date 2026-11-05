@@ -841,3 +841,18 @@ msg_0c18ad1b2d68 se inspeccionaron; el supervisor repitio las 8 fases motor y
 acepto solo despues de confirmar V9 exacta, rollback/fingerprint y hashes.
 No se cambio cuenta global, credenciales, Java congelada ni QA fuera de la matriz.
 La aceptacion no declara JDBC, HTTP, runtime role, wiring o UI validados.
+
+
+A37 dispatch task_7b7ba60b058c / ctx_d05e0e2d7594, dependency A36.R1 settled.
+Identidad almacenada confirmada: arquitecto recuperapiura@gmail.com y programador
+mendozadeafabisa@gmail.com; sesion/worktree retenidos, `--no-daemon`. Ownership
+solo SchedulingService, SqlServerSchedulingStore y las dos suites. D-45 y
+tmp/sql-01-a37-spec.md fijan contratos de reserva/cambio; no wiring ni QA DB.
+Recibo outcome_unknown/turn_start_unobserved: no reenviar ni abandonar y esperar
+Orca. A36 subida como e433ff9 en health/production-wave0; main sigue igual.
+
+A37 entrega msg_18d08325e02f / msg_aeba32045413 revisada e integrada. Snapshot
+basado en A36, hashes de ownership y 154 archivos protegidos verificados; verify
+independiente 634/634 y jar PASS. Codigo aceptado solo para constructor/adaptador
+explicito. Sin QA SQL de las escrituras, runtime JDBC/HTTP ni wiring; worker_done
+no se tomo como aprobacion.

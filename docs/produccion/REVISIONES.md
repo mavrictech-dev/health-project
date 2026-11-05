@@ -962,3 +962,22 @@ previos inalterados y 112 rutas dirty actuales (solo las 110 previas mas los
 2 entregables). A36 aceptada e integrada en health/production-wave0. Sin
 activacion, runtime-role, JDBC, HTTP o validacion visual; A37 reserve/change
 todavia pendiente.
+
+
+A37 revision supervisora, 2026-11-05
+
+Informe msg_18d08325e02f y worker_done msg_aeba32045413. Snapshot independiente
+desde A36 commit e433ff9dbece3584c9a69f8a22acc447820f6f68: hashes exactos de los
+4 archivos asignados y 154/154 archivos backend protegidos cotejados. Revision
+manual de service/store/tests: constructor legado sin cambios, ramas de SQL
+Server explicitas, Access role/module/link/branch guard, procedures tipados,
+mapper configurado para serializar el Reserve original, hash SHA-256 UTF8,
+body de 9 campos en UTC micros, proyeccion whitelist 14, replay y revision.
+Los SP conservan autoridad atomica para conflictos de horario, estado y revision;
+sin retry ni GET posterior a las mutaciones.
+
+Ejecutado `mvnw -B -ntp verify` independientemente en snapshot JDK21:
+634 tests, 0 failures/errors/skips, BUILD SUCCESS; jar reempaquetado. Esto verifica
+adaptador contra executor/transaction manager modelados. No acredita SQL real,
+locks/durabilidad, datasource comun, JDBC, grants runtime ni HTTP. A37 integrada
+en health/production-wave0, sin wiring; siguiente A38 ClinicalService.
