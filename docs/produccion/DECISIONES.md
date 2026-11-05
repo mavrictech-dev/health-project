@@ -809,3 +809,10 @@ PortalService.documents; constructor legacy intacto y constructor explícito
 colaboradores de los métodos no migrados. Suite independiente 712/712. No hay
 validación real del vínculo/SQL/JDBC/HTTP, ni backend activo. Siguiente A41
 PortalService.appointments por propiedad secuencial del mismo archivo.
+
+D-49 (2026-11-05): A41 migra únicamente PortalService.appointments con store SQL Server explícito. Mantener portal() PAC/RES + PORTAL, Checks.id, controladores y respuesta. La rama SQL no usa Access.link ni SELECT auxiliar: usp_portal_scope verifica vínculo APPOINTMENTS activo/bajo HOLDLOCK y módulos; usp_portal_appointments audita en transacción, filtra por paciente y conserva orden starts_at DESC,id y límite 200. El adaptador valida proyección, estados y UTC; no duplica reglas de enlace/visibilidad. SQL/JDBC/HTTP real y wiring siguen pendientes.
+
+D-49 resuelta para implementación: A41 migrada/aceptada como lectura aislada,
+con snapshot 733/733; bodies previos de PortalService y stores A39/A40 preservados.
+No evidencia SQL Server/JDBC/HTTP, guards del SP o wiring. Próximo A42 migra
+PortalService.patients en secuencia sobre el archivo compartido.

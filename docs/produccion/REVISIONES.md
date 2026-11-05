@@ -1044,3 +1044,23 @@ no evidencia del motor. No se ejecutó HTTP/MockMvc/JDBC/SQL Server ni wiring.
 119 iguales byte a byte y una difiere solo por línea vacía final ya eliminada en
 A38. Cuatro archivos A40 coincidentes. A40 aceptada solo como lectura aislada;
 siguiente A41 PortalService appointments.
+
+A41 revision supervisora, 2026-11-05
+
+Informe msg_ddbb92337846 / worker_done msg_d342021ca8d4. Los cuatro hashes del
+worker coinciden byte a byte con worktree/snapshot. Snapshot de HEAD A40 más solo
+los cuatro paths A41. Revisión de PortalService, D-49, V5 usp_portal_scope y
+usp_portal_appointments, V1 appointments y catálogo PORTAL_APPOINTMENTS. El
+constructor @Autowired legacy y overloads A40 conservan firmas/función; el
+método appointments legado es exacto al extraer rama SQL. documents/A40 intacto.
+Rama SQL conserva portal()/Checks.id, request actor/tenant; llama un SP sin
+Access.link/SQL auxiliar/fallback; mapping whitelist nueve columnas, estados,
+fechas UTC micro, orden/max y límites validados. Guards de vínculo y auditoría
+permanecen dentro del SP.
+
+Verify JDK21 independiente: 733 tests, cero fallos/errores/skips, BUILD SUCCESS,
+jar/repackage PASS. 123 archivos protegidos coinciden entre el baseline del
+worker; en comparación directa con HEAD, solo difiere el LF final ya corregido en
+SqlServerClinicalStore A38. Ninguna prueba HTTP/MockMvc/SQL Server/JDBC, vínculo
+HOLDLOCK real, revocación, grants o wiring. A41 aceptada solo como implementación
+aislada; siguiente A42 PortalService.patients.

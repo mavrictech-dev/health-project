@@ -728,3 +728,11 @@ errores SP. No ejecutan SQL Server, autorización del vínculo, HOLDLOCK, audito
 durable, revocación/publicación, JDBC, HTTP ni grants.
 
 El backend no está cableado/activo; la prueba no afirma funcionamiento real.
+
+## SQL-01.A41 - PortalService.appointments aislado, 2026-11-05
+
+Snapshot independiente de HEAD A40 + cuatro archivos de ownership verificados
+por SHA256. JDK21 `mvnw -B -ntp verify`: 733 tests, 0 fallos/errores/skips,
+BUILD SUCCESS y jar PASS. Los tests con dobles cubren scopes/roles, respuesta,
+orden, cardinalidad, campos/UTC/estado y errores. No prueban SQL Server real,
+vínculo APPOINTMENTS/HOLDLOCK, auditoría durable, JDBC, HTTP ni grants.

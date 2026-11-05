@@ -535,3 +535,6 @@ SQL-01.A40 preparada para PortalService.documents, con D-48 y ownership secuenci
 SQL-01.A40 PortalService.documents delegada task_06825ad3435d / ctx_f5dea8dd3f6a,
 dependencia A39 settled. Cuenta efectiva verificada; un solo worker y ownership
 sin solapamiento, cuatro rutas. En curso, sin wiring ni QA motor.
+
+SQL-01.A41 preparada para PortalService.appointments tras A40 integrada 3b49ab1.
+Solo esta lectura y su store/tests; sin SQL/JDBC/HTTP real ni wiring.

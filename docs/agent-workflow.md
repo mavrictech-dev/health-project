@@ -898,3 +898,11 @@ Consulta msg_5bd454c50aa8 respondida msg_1200f775c2d5. Sin cambios de ownership.
 A40 revisada e integrada: informe msg_147b380a526e/msg_54d34f4bd005, 712/712
 verify independiente. Constructor autorizado y legado preservados; la prueba
 solo usa dobles, sin JDBC/SQL/HTTP/wiring. commit/push supervisor posterior.
+
+A41 preparada con D-49 / tmp/sql-01-a41-spec.md, dependiente de A40. Secuencia
+necesaria por compartir PortalService; ownership ahora solo del programador de
+citas; stores A39/A40 preservados byte a byte.
+
+A41 entrega msg_ddbb92337846/msg_d342021ca8d4 revisada e integrada tras snapshot
+independiente, SHA y verify733/733. Aceptada solo como adapter aislado, sin SQL
+real/JDBC/HTTP/wiring. Siguiente A42 PortalService.patients, propiedad secuencial.
