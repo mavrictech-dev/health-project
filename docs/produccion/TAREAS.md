@@ -1176,3 +1176,15 @@ bloqueos; setup separado y entorno JDBC positivo aun pendientes.
 A61 preparada segun D-69/tmp/sql-01-a61-spec.md: preflight reproducible local
 solo lectura, dos rutas script/suite. ExitBLOCKED esperado por transporte/auth;
 no valida JDBC, no realiza setup ni altera instancia compartida.
+
+
+A60 QA HTTP negativa aceptada y registrada/push3dbe6bf (47/47 independientes),
+con fallo inicial preservado. A61 delegada task_260b01935c63 / ctx_2b5e8fd35eee,
+dependencia A60 corregida settled. IdentityOnly ambos roles y /status efectivo
+verifican mendozadeafabisa@gmail.com y sesion01a19e4c-15af-74e0-a1b9-75fc7093b98f,
+mismo worktree/terminal --no-daemon. Ownership exclusivo dos rutas nuevas:
+scripts/sqlserver-qa-preflight.py y scripts/tests/test_sqlserver_qa_preflight.py.
+D-69/tmp/sql-01-a61-spec.md. Solo metadata de QA marcada y registro de instancia
+local en lectura; CLI debe distinguir BLOCKED de ERROR y candidato a prueba,
+sin acreditar JDBC ni configurar servicios/auth/logins/grants. Orca dispatched;
+entrega y revision pendientes. Setup/JDBC positivo/negocio HTTP/visual pendientes.
