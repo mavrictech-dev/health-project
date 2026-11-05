@@ -888,3 +888,7 @@ autoCommit=true y probe fijo EXEC dbo.usp_health_ready, initSQL null.
 Cinco beans: un DS, manager default, JdbcTemplate, TransactionTemplate REQUIRED,
 executor RUNTIME; mismo DS/mapper. No stores, root, jobs, health bean ni conexion
 en este corte. Alias identifican el mismo objeto, sin segundo datasource.
+
+D-62 resuelta para implementacion: A54 aceptada/integrada tras SHA/review/verify independiente948/948. Infraestructura declarativa fuera scan, sinroot ni aperturaPool.
+
+D-63 (2026-11-05): A55 agrega solo SqlServerRuntimeStoresConfiguration y su suite fuera scan, factories explicitamente nombradas para23storesruntime existentes. ExcluirBootstrapStore. Compartir executorRUNTIME/manager/mapper deA54; SecurityStore usa TransactionTemplateREQUIRED; conservar propagaciones internas REQUIRES_NEW/MANDATORY. Usar overload mapper de Clinical/Document/Finance/Hospital/Inventory/Patient/Scheduling/Workflow. Sinimportauto/root/services/health/jobs ni conexion.
