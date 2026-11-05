@@ -560,3 +560,5 @@ Programador efectivo confirmado por /status: mendozadeafabisa@gmail.com, sesion
 Mismo terminal/worktree y --no-daemon, cuatro rutas de inventario exclusivas.
 Estado Orca dispatched; pendiente entrega y revision independiente. No se
 activaron SQL Server/JDBC/HTTP ni se modifico main.
+
+A45 aceptada e integrada en implementacion aislada: lecturas de inventario y verify independiente 818/818, jar PASS. Siguiente A46 crea lotes y movimientos; transferencias/recepcion, consumidores restantes y cableado/QA real pendientes.

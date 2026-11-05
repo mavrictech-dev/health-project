@@ -759,3 +759,5 @@ verify` con JDK21: 797 tests, 0 fallos/errores/skips, BUILD SUCCESS, jar PASS.
 Tests mock cubren número decimal y negativos, projection, serializer/hash, replay
 semántico, validaciones y errors. Ninguno valida V6 en SQL Server, aggregate real,
 locks/idempotencia bajo concurrencia, ledger, permisos runtime, JDBC/HTTP o wiring.
+
+SQL-01.A45, 2026-11-05. Snapshot independiente tmp/sqlserver-a45-review desde HEAD A44 mas cuatro archivos SHA exactos. JDK21 HEALTH_TRUST_GATEWAY=false solo proceso, mvnw -B -ntp verify: 818 pruebas, 0 fallos/errores/skips, BUILD SUCCESS y jar/repackage PASS, 33.776s. Log tmp/sqlserver-a45-review/verify-supervisor-a45.log. Doubles de executor/Access/manager; no validan SP V6 en SQL Server, grants, JDBC, HTTP, concurrencia ni inventario real. Sin cambios de frontend ni nueva evidencia visual.

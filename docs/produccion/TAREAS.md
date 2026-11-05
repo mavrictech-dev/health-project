@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A44 implementacion aceptada) | A44 task_f78192a4223f / ctx_1ea57539fc82; verify independiente 797/797 | PortalService y FinanceService aislados; falta QA motor, demás consumidores y wiring JDBC/HTTP |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A45 implementacion aceptada) | A45 task_ee48477242f6 / ctx_6d830951f6fc; verify independiente 818/818 | PortalService y FinanceService aislados; falta QA motor, demás consumidores y wiring JDBC/HTTP |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -999,3 +999,5 @@ Programador efectivo confirmado por /status: mendozadeafabisa@gmail.com, sesion
 Mismo terminal/worktree y --no-daemon, cuatro rutas de inventario exclusivas.
 Estado Orca dispatched; pendiente entrega y revision independiente. No se
 activaron SQL Server/JDBC/HTTP ni se modifico main.
+
+A45 ACEPTADA e integrada: informe msg_1b318f56d4e9 / worker_done msg_3da464382452. Cuatro SHA confirmados, snapshot independiente HEAD A44, verify JDK21 818/818, cero fallos/errores/skips y jar PASS (33.776s). Lecturas INVENTORY_LOTS/TRANSFERS/PRESCRIPTIONS con cero argumentos y proyecciones 8/10/6; escrituras legacy preservadas. 137 rutas protegidas comparadas contra supervisor: solo LF final conocido A38, confirmado sin diferencia de contenido. Sin SQL/JDBC/HTTP/grants/stock real ni wiring. Siguiente A46 lot/move, mismo ownership secuencial.
