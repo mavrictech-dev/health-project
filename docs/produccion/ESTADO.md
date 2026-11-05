@@ -610,3 +610,5 @@ A54 integrada/push2f91af0. A55 delegada task_32b10e1f02bf / ctx_2723ab79cbb2, de
 A55 aceptada e integrada:952/952 independientes yjarPASS. 23storesruntime conectados ainfra encontextosoffline; backendactual aunlegacy. A56 siguiente identidad/security fuera scan. Negocio/portal/root/setup/jobs/perfilQA yJDBC/grants/HTTP/visualreal siguen pendientes.
 
 A55 integrada/push92f618b. A56 delegada task_fc2eb4d94a34 / ctx_c770071eca97, dependencia A55 settled. IdentityOnly ambos roles y /status efectivo programador confirmados:mendozadeafabisa@gmail.com,sesion01a19e4c-15af-74e0-a1b9-75fc7093b98f;mismo terminal/worktree--no-daemon. Cuatro rutas nuevas identidad/security ydosTests D-64/tmp/sql-01-a56-spec.md. Mocksservlet/FilterChain autorizados offline,noBoot/puerto/JDBC/HTTPreal/pool. Sinrootactual/legacy/stores modificados. Orca dispatched;entrega/review pendientes,baseline952anterior.
+
+A56 aceptada e integrada:965/965 independientes,jarPASS. Identidad/security compuestas fuera scan ycadenaServlet simulada comprobada. A57 siguiente negocio/portal;root/setup/jobs/perfilQA,AOPygrafoTOTAL yJDBC/grants/HTTP/visualreal pendientes.

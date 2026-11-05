@@ -896,3 +896,7 @@ D-63 (2026-11-05): A55 agrega solo SqlServerRuntimeStoresConfiguration y su suit
 D-63 resuelta para implementacion: A55 aceptada/integrada trasSHA/review/verify independiente952/952. Factories23runtime sinRoot/poolactivo.
 
 D-64 (2026-11-05): A56 prepara dos configuraciones fuera scan: identidad (Access con proxyHttpServletRequest,IdentitySQL,lifecycleSQL,BrowserSessionSQL,SupportSQL,Errors/Advice) y seguridad (BCrypt12,bearerOnlyUsers,cadenaSQL). Settings/mapper/stores suministrados explicitamente;sin defaults/root/scan. Orden Trace->Host->Session ypoliticaslegacy exactas,cookieCSRF/origin/afterCommit intactos. Filtros locales dentrocadena,no@BeanFilter adicional. Tests servlet/chain mocksinpuerto/motor, no lospresentarcomoHTTP/backendreal. Sin editar legacy/stores/infra ni activar grafo parcial.
+
+D-64 resuelta para implementacion: A56 aceptada/integrada trasSHA/review/verify independiente965/965. Factoriesidentidad/cadenaSQL fuera scan,politicaslegacy exactas,sin rootAOP/servidor.
+
+D-65 (2026-11-05): A57 agrega factories12serviciosnegocio yPortalfull7args enconfigBusiness/Portal y2Tests,fuera scan sinimports/root/AOP/scheduling. CuatrostoresPortal obligatorios+SchedulingSQL compartido,SqlNULL enconstructoresmixtos yaaceptados. MismoAccess/Identity/Settings/mapper deA56/A54 ystoresA55 porqualifiers. Probarcompletitud/referencias,crossservicePortal.reserve->SchedulingSQL yjobsinertes,sin invocar conexiones. No cambios deproducto ni controladoresdelegadoresaun.
