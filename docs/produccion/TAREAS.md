@@ -1171,3 +1171,8 @@ TCPEnabled0, NpEnabled0, IsIntegratedSecurityOnly1. Base QA marcada conserva
 133 SP. No se cambio servicio/autenticacion/configuracion/credenciales ni datos.
 Proximo corte prepara preflight reproducible que falle cerrado ante estos
 bloqueos; setup separado y entorno JDBC positivo aun pendientes.
+
+
+A61 preparada segun D-69/tmp/sql-01-a61-spec.md: preflight reproducible local
+solo lectura, dos rutas script/suite. ExitBLOCKED esperado por transporte/auth;
+no valida JDBC, no realiza setup ni altera instancia compartida.

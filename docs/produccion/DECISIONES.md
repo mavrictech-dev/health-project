@@ -971,3 +971,15 @@ D-68 resuelta para QA negativa: revision y repeticion independiente47/47 PASS.
 Conservar44/45 original, sin modificar producto. No extender aprobacion a JDBC
 exitoso, permisos, negocio o visual. Lectura actual confirma WindowsOnly1 y
 TCP/NP deshabilitados; no hay autorizacion para cambiar la instancia compartida.
+
+
+D-69 (2026-11-05): A61 implementa CLI Python de preflight QA de solo lectura,
+con dos rutas exclusivas script/suite. Destino fijo local y base sintetica marcada;
+SQLcmd administrativo Windows independiente del runtime para metadata unicamente.
+Registro solo lectura de la instancia default; sin conectar TCP ni alterar nada.
+Estados: exit2 BLOCKED para TCPoff/WindowsOnly incompatible/roles ausentes;
+exit1 ERROR scope incorrecto o inspeccion fallida; exit0 READY_FOR_JDBC_TEST
+solo precondiciones, nunca validacion JDBC. jdbc_positive_validated false siempre.
+No usar adminWindows como runtime ni puerto administrativo, no habilitar/reiniciar
+servicio ni autenticacion global. Herramienta prepara una decision revisable sobre
+entorno independiente o cambio explicito; setup/migrador siguen pendientes.
