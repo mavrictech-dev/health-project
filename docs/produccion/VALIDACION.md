@@ -913,3 +913,20 @@ R-A62-EMPTY-ARRAYS-STATE enviada msg_7fcef7d8a2cf: implementar solo correcciones
 SQL de arrays/capturaestado y regresiones, mantener parser/gates estrictos,
 suite tras cambio, un plan y siPASS unico rehearseoriginal. No apply/COMMIT real.
 A62 no aceptada ni integrada; tests52PASS del worker no validan aun motor/ensayo.
+
+
+A62 plan corregido PASS y ensayo DEVUELTO, 2026-11-05. Pregunta
+msg_7109bb02ca61: planR1/R2 CLI0 con fingerprint
+4E678570F62D8ABDC7EE76385D0681A80372BC7F77E0C434CC8789C9B90BC557.
+Primer rehearse CLI1/SQLcmd1 con59999 antesBEGIN en guardprecondiciones;
+cleanupautomatico confirmado por conexion NUEVA raw0/fingerprintIDENTICO y
+cleanup_after_error_verifiedtrue. Ningun cambio persistente. Wrapper SHA
+8E1FD8D689BA8DF9B195DF2EA1EC879BDA53B0C1A44EA475A651A68460974E9C
+inspeccionado: expresionpreBEGIN conserva XACT_STATE inline combinada con
+HAS_PERMS/OBJECT_ID y demas metadata, pese a captura previa correcta0/0.
+Supervisor autoriza sustituir SOLO lectura de estado por variables capturadas
+al inicio, conservando CONTROL/history/roles/marker/fingerprint y suffix1/1.
+Exige regresion y suite tras cambio, luego UN rehearse adicional sin otro plan
+innecesario. Preservar first-rehearse-error y wrapper original. No apply/COMMIT.
+Task task_f1a61e6514e6 / ctx_03dc4aa58e11 sigue abierta y no aprobada; ensayo
+real exitoso, revision y repeticion independiente pendientes.

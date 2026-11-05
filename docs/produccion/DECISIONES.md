@@ -1028,3 +1028,10 @@ en parser para ocultar falta de fingerprint. Capturar estado transaccional al
 inicio del snapshot antes de SELECTmetadata; comparaciones0/0 fuera y1/1 dentro
 permanecen estrictas. Diagnostico real readonly comprobo parser+baselinePASS
 sin editar gates. Implementacion delegada msg_7fcef7d8a2cf; ensayo aun pendiente.
+
+
+D-70 guardpreBEGIN debe usar count/state capturados fuera de la expresion
+metadata, exigiendo0/0. No se debilitan checks de permisos, colisiones o destino,
+ni estado explicito1/1 dentroTX. Ensayo anterior fallo antesBEGIN y nueva
+conexion confirmo baseline identico; autorizada correccion y un rehearse adicional
+conregresion, no apply/COMMIT persistente.
