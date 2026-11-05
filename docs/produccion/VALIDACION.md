@@ -506,3 +506,13 @@ SQL details/mode. Autorizacioncontextual,tenant3SP/plataforma6SP y mode2SP,
 nullableversionFlyway,inmutabilidad y TX modeladas revisados. SinJDBC/HTTPreal
 ni evidencia visual nueva ni backend activo. Siguiente A22 correo por claim/
 complete con SMTPdoble y sinreintento automatico ante resultado ambiguo.
+
+
+A22 ACEPTADA: informe msg_f0856447bb7a/done msg_98705a30ccac,4SHAexactos,
+verify independiente424/424,0fallos/errores/omisiones,jarPASS22.813s,
+2026-11-04T22:12:08-05:00.120bases verificadas,119ajenas intactas;1existente+
+3nuevos integrados. Cuerpo sendlegacy exacto retirando selectorSQL. Revision
+personal confirma claimcommit antes senderfueraTX,AMBIGUOUS paraexcepciones,
+completefallido sinreclasificacion/reenvio,logsestaticos y WORKER9NULL.
+No SQLServer/JDBC/SMTP/HTTP reales ni nueva evidencia visual. A23 siguiente:
+Bootstrap con executor/principal separado,sin configurar ni crearusuarios.

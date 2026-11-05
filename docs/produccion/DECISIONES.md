@@ -657,3 +657,9 @@ D-30: MailDelivery SQL usa claim/complete REQUIRED separados,claim confirmado
 antes del emisor fueraTX;rechazar ciclo con outerTX. Excepcion del emisor
 es AMBIGUOUS,exito SENT;fallo complete no reclasifica ni reenvia. WORKER9NULL,
 sin red real ni wiring,claim_version y exclusionSENDING conservados.
+
+
+D-31: Bootstrap por constructorSQL explicito,store REQUIRED con datasource/
+executorBOOTSTRAP separados runtime. EXISTS antes de validacion password/hash;
+supplier de hash dentro unidad que CREATE. ContextoBOOTSTRAP9NULL,sin wiring
+ni usuarios reales. Carrera se resuelve por SP idempotente,no garantia deinsert.

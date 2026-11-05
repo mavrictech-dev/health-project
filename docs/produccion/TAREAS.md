@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A21 aceptadas; A22 preparado) | A19 task_f2b11c63b1f1 / ctx_37f7e33bd3b9,385/385 supervisor | Monitor completo integrado sin wiring. Siguiente correo A22; otros consumidores/wiring/QA real pendientes |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A22 aceptadas; A23 preparado) | A19 task_f2b11c63b1f1 / ctx_37f7e33bd3b9,385/385 supervisor | Correo integrado sin wiring. Siguiente Bootstrap A23; otros consumidores/wiring/QA real pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -524,3 +524,22 @@ SQL details/mode. Autorizacioncontextual,tenant3SP/plataforma6SP y mode2SP,
 nullableversionFlyway,inmutabilidad y TX modeladas revisados. SinJDBC/HTTPreal
 ni evidencia visual nueva ni backend activo. Siguiente A22 correo por claim/
 complete con SMTPdoble y sinreintento automatico ante resultado ambiguo.
+
+
+A22 delegada: task_84b8780065e8 / ctx_f8a78b671a3b,dependencia A21settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio no observado;no reenviar ni
+abandonar,esperar avisoOrca. Ownership MailDelivery/store/dossuites,D-30.
+A21 subida9f42ed30870fac9999eadbd1a35ac8bf7b2c1c9a a rama de trabajo,
+refremota comprobada,main intacta. Bootstrap/restoconsumidores/wiring/QAreal
+pendientes;ningun SMTP ni backend parcial activado ni aprobacionA22anticipada.
+
+
+A22 ACEPTADA: informe msg_f0856447bb7a/done msg_98705a30ccac,4SHAexactos,
+verify independiente424/424,0fallos/errores/omisiones,jarPASS22.813s,
+2026-11-04T22:12:08-05:00.120bases verificadas,119ajenas intactas;1existente+
+3nuevos integrados. Cuerpo sendlegacy exacto retirando selectorSQL. Revision
+personal confirma claimcommit antes senderfueraTX,AMBIGUOUS paraexcepciones,
+completefallido sinreclasificacion/reenvio,logsestaticos y WORKER9NULL.
+No SQLServer/JDBC/SMTP/HTTP reales ni nueva evidencia visual. A23 siguiente:
+Bootstrap con executor/principal separado,sin configurar ni crearusuarios.

@@ -1,0 +1,28 @@
+package com.mavric.health.persistence.sqlserver;
+import java.util.*;
+import org.junit.jupiter.api.*;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
+import com.mavric.health.audit.TraceContext;
+import com.mavric.health.shared.ApiException;
+import com.mavric.health.persistence.sqlserver.SqlServerIdentityStoreTest.ModelTransactionManager;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.*;
+/** Modeled transactions and executor; no SQL Server, claiming locks or real mail delivery. */
+class SqlServerMailDeliveryStoreTest {
+ static final String ID="aa000000-0000-4000-8000-000000000001";
+ final SqlServerExecutor executor=mock(SqlServerExecutor.class);final ModelTransactionManager manager=new ModelTransactionManager();final SqlServerMailDeliveryStore store=new SqlServerMailDeliveryStore(executor,manager);final Deque<SqlServerExecutor.Result> results=new ArrayDeque<>();final List<SqlServerProcedure> calls=new ArrayList<>();final List<List<Object>> args=new ArrayList<>();
+ SqlServerMailDeliveryStoreTest(){when(executor.execute(any(),any(),any(Object[].class))).thenAnswer(inv->{assertTrue(TransactionSynchronizationManager.isActualTransactionActive());calls.add(inv.getArgument(0));assertEquals(new SqlServerContext(null,null,null,null,null,null,null,null,null,SqlServerContext.Scope.WORKER),inv.getArgument(1));args.add(Arrays.asList(((Object[])inv.getRawArguments()[2]).clone()));return results.removeFirst();});}
+ static Map<String,Object> mail(){return new LinkedHashMap<>(Map.of("id",ID,"recipient","qa@example.test","subject","Synthetic","body","\u4e2d\ud83e\uddb7".repeat(5000),"claimVersion",1,"passwordHash","private"));}
+ void rows(List<Map<String,Object>> rows){results.add(new SqlServerExecutor.Result(List.of(rows),List.of(0)));}
+ void write(){results.add(new SqlServerExecutor.Result(List.of(),List.of(0)));}
+ @AfterEach void cleanup(){TraceContext.REQUEST.remove();SecurityContextHolder.clearContext();TransactionSynchronizationManager.clear();}
+ static void safe(Runnable work){var e=assertThrows(ApiException.class,work::run);assertEquals(500,e.status);assertEquals("DATABASE_ERROR",e.code);assertNull(e.getCause());}
+ @Test void exactClaimCompleteBindsImmutableFullBodyAndRedactedDiagnostic(){var prior=new MockHttpServletRequest("POST","/forged");TraceContext.REQUEST.set(prior);rows(List.of(mail()));var claimed=store.claim();assertEquals(mail().get("body"),claimed.getFirst().body());assertEquals("ClaimedMail[redacted]",claimed.getFirst().toString());assertThrows(UnsupportedOperationException.class,claimed::clear);for(String outcome:List.of("SENT","REJECTED","AMBIGUOUS")){write();store.complete(ID,5,outcome);assertEquals(List.of(ID,5,outcome),args.getLast());}assertEquals(List.of(10),args.getFirst());assertEquals(SqlServerProcedure.MAIL_CLAIM,calls.getFirst());assertEquals(Collections.nCopies(3,SqlServerProcedure.MAIL_COMPLETE),calls.subList(1,4));assertSame(prior,TraceContext.REQUEST.get());}
+ @Test void invalidClaimRowsAllMappedBeforeCommitAndDuplicatesRollback(){for(String key:List.of("id","recipient","subject","body","claimVersion")){var invalid=mail();invalid.remove(key);rows(List.of(invalid));safe(store::claim);assertEquals("rollback",manager.events.getLast());}for(Object version:Arrays.asList(null,0,6,1L,"1")){var invalid=mail();invalid.put("claimVersion",version);rows(List.of(invalid));safe(store::claim);}var invalid=mail();invalid.put("id","bad");rows(List.of(invalid));safe(store::claim);rows(List.of(mail(),mail()));safe(store::claim);assertFalse(manager.events.contains("commit"));}
+ @Test void emptyAndTenClaimsValidButElevenOrBadResultsetsFail(){rows(List.of());assertEquals(List.of(),store.claim());var rows=new ArrayList<Map<String,Object>>();for(int i=0;i<10;i++){var row=mail();row.put("id",String.format("aa000000-0000-4000-8000-%012d",i));rows.add(row);}rows(rows);assertEquals(10,store.claim().size());rows.add(mail());rows(rows);safe(store::claim);for(var sets:List.<List<List<Map<String,Object>>>>of(List.of(),List.of(List.of(),List.of()))){results.add(new SqlServerExecutor.Result(sets,List.of()));safe(store::claim);}}
+ @Test void completeInvalidBeforeExecutorAndUnexpectedResultRollback(){for(String id:Arrays.asList(null,"bad",ID.toUpperCase(Locale.ROOT)))assertEquals(400,assertThrows(ApiException.class,()->store.complete(id,1,"SENT")).status);for(int version:List.of(0,6))assertEquals(400,assertThrows(ApiException.class,()->store.complete(ID,version,"SENT")).status);for(String outcome:Arrays.asList(null,"FAILED","sent"))assertEquals(400,assertThrows(ApiException.class,()->store.complete(ID,1,outcome)).status);verifyNoInteractions(executor);rows(List.of());safe(()->store.complete(ID,1,"SENT"));}
+ @Test void requiredJoinCommitFailureAndStale51003NoRetry(){rows(List.of(mail()));assertThrows(RuntimeException.class,()->manager.outer(()->{store.claim();assertEquals(List.of("begin:0"),manager.events);throw new RuntimeException("synthetic rollback");}));assertEquals("rollback",manager.events.getLast());rows(List.of(mail()));manager.failCommit=true;safe(store::claim);doThrow(new RuntimeException(new java.sql.SQLException("private driver",null,51003))).when(executor).execute(any(),any(),any(Object[].class));var error=assertThrows(ApiException.class,()->store.complete(ID,1,"SENT"));assertEquals(409,error.status);assertFalse(error.toString().contains("private"));verify(executor,times(3)).execute(any(),any(),any(Object[].class));}
+}
