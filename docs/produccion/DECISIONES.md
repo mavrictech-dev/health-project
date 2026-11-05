@@ -722,3 +722,9 @@ contrato/especialidades. POSTPUTBoolean yUUIDservidor,memberguardado,sinwiring.
 D-41: A33member usaIdentityService.create administrativo REQUIRED si nuevo,
 seguido MEMBER_SAVE enmismaunidad;existinguser sinSPplataformaSAD-only ni
 lookup porqueMEMBER_SAVE validaactive/role y404. JSON4/retorno7legacy,sinwiring.
+
+
+D-42 (2026-11-05): A34pacienteslist/get/save3SP,tenantwide contextofirmado,
+rolesreadADMREC PRO ASI AUD/writeADMREC PRO+CORE. HTTPcreateexpected0/
+update>=1,UUIDservidor,JSON7campos yproyeccion11;link/historyguardados,
+sinwiring/datosreales ni reglasclinicasnuevas.
