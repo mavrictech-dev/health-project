@@ -425,3 +425,13 @@ integrados. Legacy/A26 comparados exactos retirando3ramasSQL y sqlDomainnuevo.
 Proyeccion29+2Settings,DATEcanonico,usageLongsinclamp,status1SP y callbackURL
 antescommit revisados personalmente. SinSQLServer/JDBC/HTTP reales ni nueva
 visual. Siguiente A28 planesmutadores y createUser plataforma,mismos4archivos.
+
+
+A28 ACEPTADA: informe msg_f9d280a13f7b/done msg_a044799c9eef,4SHAexactos,
+verify independiente496/496,0fallos/errores/omisiones,jarPASS26.359s,
+2026-11-04T23:09:10-05:00.132bases verificadas,128ajenas intactas;4existentes
+integrados. PlatformService entero comparado exacto retirando2ramasSQL.
+Plan1SP/json16/Boolean y USER_CREATE->PLATFORM_USERS mismaREQUIREDmodelada,
+proyeccion5campos/nullable,sinpassword revisados personalmente. D-36.Avigente.
+SinSQLServer/JDBC/HTTP reales ni nueva visual. A29 siguiente:createTenant/pay,
+mismos4archivos para completarPlatformService aislado,sinwiring.

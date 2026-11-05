@@ -25,7 +25,7 @@ public class PlatformService {
         if(actor.roles()==null)throw unavailable();if(!actor.roles().contains("SAD"))throw ApiException.forbidden();access.platform();return request;
     }
     public List<Map<String,Object>> plans() {if(store!=null)return store.plans(request()); access.platform(); return sql.rows("SELECT p.*,v.* FROM plans p JOIN plan_versions v ON v.plan_id=p.id AND v.version=p.current_version ORDER BY p.name"); }
-    @Transactional public Map<String,Object> plan(String id,Plan input) {if(store!=null)throw unavailable();
+    @Transactional public Map<String,Object> plan(String id,Plan input) {if(store!=null)return store.savePlan(request(),id,input);
         access.platform(); if(id==null) id=Checks.id(); else sql.one("SELECT id FROM plans WHERE id=?",Checks.id(id));
         if(!KINDS.containsAll(input.kinds()) || !Set.of("HUMAN","ANIMAL").containsAll(input.domains()) || !MODULES.containsAll(input.modules()) || !input.modules().contains("CORE")) throw ApiException.invalid("Tipos de cliente, ámbitos o módulos inválidos.");
         if(input.kinds().contains("DOCTOR") && input.includedProfessionals()!=1) throw ApiException.invalid("La oferta para independientes incluye una identidad clínica.");
@@ -34,7 +34,7 @@ public class PlatformService {
     public List<Map<String,Object>> tenants(int limit) {if(store!=null)return store.tenants(request(),limit).stream().map(this::sqlDomain).toList(); access.platform(); return sql.rows(TENANT_QUERY+" ORDER BY t.created_at DESC LIMIT ?",Checks.limit(limit)).stream().map(this::domain).toList(); }
     public Map<String,Object> tenant(String id) {if(store!=null)return sqlDomain(store.tenant(request(),id)); access.platform(); return domain(sql.one(TENANT_QUERY+" WHERE t.id=?",Checks.id(id))); }
     public List<Map<String,Object>> users(int limit) {if(store!=null)return store.users(request(),limit); access.platform(); return sql.rows("SELECT id,name,email,clinical_domain,credential,active FROM users ORDER BY name LIMIT ?",Checks.limit(limit)); }
-    @Transactional public Map<String,Object> createUser(IdentityService.UserInput input) {if(store!=null)throw unavailable(); access.platform(); String id=identities.create(input); return sql.one("SELECT id,name,email,clinical_domain,credential FROM users WHERE id=?",id); }
+    @Transactional public Map<String,Object> createUser(IdentityService.UserInput input) {if(store!=null){var req=request();if(input==null)throw ApiException.invalid("Identidad requerida.");return store.createUser(req,()->identities.create(input));} access.platform(); String id=identities.create(input); return sql.one("SELECT id,name,email,clinical_domain,credential FROM users WHERE id=?",id); }
     @Transactional public Map<String,Object> create(Tenant input) {if(store!=null)throw unavailable();
         access.platform(); DomainRules.slug(input.slug());
         try { ZoneId.of(input.timezone()); } catch(Exception e) { throw ApiException.invalid("Zona horaria inválida."); }

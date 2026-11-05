@@ -690,3 +690,15 @@ revierte. Nolecturaextra ni autoreanudacion ni revisioninventada,sinwiring.
 D-36: A28planmutador usaSAAS_PLAN_SAVE1SPconBooleancreate/proyeccion21,
 version/locks resueltosSP. CreateUser ejecutaIdentityService.create firmado
 dentroREQUIRED y PLATFORM_USERS(id,1) mismaunidad,body5camposlegacy;sinwiring.
+
+
+D-36.A: preguntaA28 msg_dff134da15ed contrastada con fuente IdentityStore47-54:
+create administrativo usa REQUIRED,NO MANDATORY;solo createForRegistration
+MANDATORY. Conservar ambas clases y probar joinREQUIRED mismo manager/datasource
+con PlatformStore;sin commitinterno. La frase anterior del encargo fue imprecisa
+y queda sustituida. DescriptionNULL rechazado por Requests/JSONstringV4.
+
+
+D-37: A29completaPlatformService aislado:createTenant une ownerexistente
+lookup o IdentityService.create nuevo conSAAS_TENANT_CREATE ySettingsantes
+commitREQUESTSAD. Pay1SP2args/8campos,sin cobroexterno. Sinwiring/DBreal.
