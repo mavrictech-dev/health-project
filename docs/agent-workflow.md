@@ -960,3 +960,5 @@ A47 integrada/push c6c9edf. A48 delegada task_327128ed3c64 / ctx_c66ad6f7b6ae co
 A48 msg_cbed2de99744/msg_7f2d607b03e5 procesados sin deliveryId. Cuatro SHA/review y snapshot independiente 869/869, jar PASS; entrega integrada sin SQL/JDBC/HTTP real. A49 ownership secuencial de los mismos cuatro paths para escrituras.
 
 A48 integrada/push 7c854e2. A49 delegada task_568f195e2a55 / ctx_7f64223cac59, dependencia A48 settled. IdentityOnly de ambos roles y /status efectivo programador confirmados: mendozadeafabisa@gmail.com, sesion 01a19e4c-15af-74e0-a1b9-75fc7093b98f; mismo terminal/worktree --no-daemon. Cuatro rutas exclusivas segun D-57/tmp/sql-01-a49-spec.md; resource/admit/discharge, sin cambios simultaneos en mismos archivos. Orca dispatched, entrega/revision pendientes. Sin wiring/SQL/JDBC/HTTP real.
+
+A49 msg_4e7e2e39c0f9/msg_c25e601e4996 procesados sin deliveryId; aceptada e integrada tras cuatro SHA/review/verify independiente 885/885, jar PASS. A50 siguiente con ownership exclusivo WorkflowService/store/dos suites y decisiones D-58; sin escritores simultaneos.

@@ -854,3 +854,7 @@ D-56 (2026-11-05): A48 prepara resources/admissions HospitalService via HOSPITAL
 D-56 resuelta para implementacion: A48 aceptada e integrada con SHA/review y verify independiente 869/869. Lecturas hospitalarias solo aisladas; pendientes escrituras y QA real.
 
 D-57 (2026-11-05): A49 completa resource/admit/discharge con tres SP V6 existentes, un resultado por operacion, sin preflight/read-after-write. Mapper Spring para DTO original, nuevo UUID solo create; alta por ID/revision con conflicto MAX en SP, sin overflow Java. V6 autoridad de dominio/paciente/recurso/branch/ocupacion/locks/audit. Conservar A48 y legacy en cuatro paths; sin wiring ni habilitacion clinica.
+
+D-57 resuelta para implementacion: A49 aceptada e integrada con SHA/review/verify independiente 885/885. HospitalService completo aislado, sin habilitacion clinica ni QA real.
+
+D-58 (2026-11-05): A50 prepara solo WorkflowService.definitions/list mediante dos SP V6. SP autoridad para permisos/modulos dinamicos de definiciones actuales; Java valida autoridad tenant/request y proyeccion, no filtra por copia local de roles o catalogo fijo. definitions8 sin limite artificial (V6 sin TOP), list12 max200. get/create/step y helper definition permanecen legacy para evitar mezcla de dependencias en este corte. Ownership cuatro rutas, sin wiring/protocolos nuevos.
