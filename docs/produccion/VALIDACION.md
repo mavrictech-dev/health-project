@@ -600,3 +600,12 @@ integrados. OrganizationService entero comparado exacto retirando rama/helperSQL
 8RS->36root/10member,pairs/FKcoherencia,nullable/profiles/tenantid y31campos
 revisados personalmente. SinSQLServer/JDBC/HTTP reales ni nueva visual.
 Siguiente A32 suscripcion/sedes/areas/especialidades,mismos4archivos,sinwiring.
+
+
+A32 ACEPTADA: informe msg_71f05e1a1c40/done msg_fd75823486a6,4SHAexactos,
+verify independiente550/550,0fallos/errores/omisiones,jarPASS27.145s,
+2026-11-04T23:52:45-05:00.135bases verificadas,131ajenas intactas;4existentes
+integrados. OrganizationService entero comparado exacto retirando4ramasSQL.
+CuatroSP/flagsPOSTPUT/JSONwhitelist/retorno8RSoretorno1fila/mappers dentroTX
+revisados personalmente. SinSQLServer/JDBC/HTTP reales ni nueva visual.
+Siguiente A33 miembros para completarOrganizationServiceaislado,sinwiring.

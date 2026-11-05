@@ -717,3 +717,8 @@ IDs antescommitREQUIRED. CincoescriturasSQLguardadas,sinwiring.
 D-40: A32subscription/branch/area/specialties1SPcadaoperacion,contexto
 SADexplicit/ADMcurrentA31,mapper8RSreutilizado sinlecturaextra para cambios
 contrato/especialidades. POSTPUTBoolean yUUIDservidor,memberguardado,sinwiring.
+
+
+D-41: A33member usaIdentityService.create administrativo REQUIRED si nuevo,
+seguido MEMBER_SAVE enmismaunidad;existinguser sinSPplataformaSAD-only ni
+lookup porqueMEMBER_SAVE validaactive/role y404. JSON4/retorno7legacy,sinwiring.
