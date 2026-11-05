@@ -769,3 +769,20 @@ A37 aceptada en implementacion aislada: serializacion de hash verificada contra
 Sql.json con el mapper configurado; test suite y revision fuente pasan. La clase
 store requiere el constructor con ese mismo ObjectMapper para escribir. SQL
 Server real, concurrencia, cuenta/runtime JDBC, wiring y HTTP permanecen gates.
+
+
+D-46 (2026-11-05): A38 completa el consumidor ClinicalService con el store SQL
+Server explicitamente seleccionado. get usa ENCOUNTER_GET (2 resultsets, read
+audit incluido); start usa ENCOUNTER_START (su resultset compuesto, sin GET
+extra); note conserva GET previo/branch/finalize validation y usa ENCOUNTER_NOTE
+para mutar y retornar estado; entry conserva GET previo, branch/autor, Checks.json
+y la validacion existente del profileSnapshot antes de CLINICAL_ENTRY_ADD. SQL
+Server mappings deben consumir resultsets de los SP sin SELECT directo. No mover,
+debilitar o sustituir reglas clinicas ni aprobar perfiles. Constructor legado,
+routes/DTO y respuestas intactos; sin wiring, schema, nuevas reglas, datos reales,
+JDBC/HTTP ni activar perfiles. Tests mock no son QA motor.
+
+A38 aceptada solo como store/servicio explicitamente seleccionado y suite offline
+independiente. D-46 se implemento: profileSnapshot validado por logica existente,
+resultsets/auditoria sin lecturas duplicadas y sin backend activo. SQL Server real,
+JDBC, wiring/grants y aprobacion de perfiles clinicos siguen fuera de esta decision.

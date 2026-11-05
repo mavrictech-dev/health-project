@@ -856,3 +856,16 @@ basado en A36, hashes de ownership y 154 archivos protegidos verificados; verify
 independiente 634/634 y jar PASS. Codigo aceptado solo para constructor/adaptador
 explicito. Sin QA SQL de las escrituras, runtime JDBC/HTTP ni wiring; worker_done
 no se tomo como aprobacion.
+
+
+A38 dispatch task_92d3865317c8 / ctx_c5458189b296, dependency A37 settled.
+Cuenta efectiva del terminal confirmada con `/status`: programador
+mendozadeafabisa@gmail.com, sesion original preservada y GPT-6.1-Sol medium.
+Ownership exclusivo ClinicalService/store/dos suites; D-46 y
+tmp/sql-01-a38-spec.md conservan auditoria y validacion clinica. Sin QA DB ni
+wiring. Recibo outcome_unknown/turn_start_unobserved: no reenviar; esperar Orca.
+
+A38 entrega msg_26e6abc7f780 / msg_139daa11df87 inspeccionada y aceptada solo
+para adapter aislado. Snapshot A37, 157 rutas backend protegidas y cuatro SHA
+comprobados; verify independiente 664/664 y jar PASS. Sin SQL QA, wiring, JDBC,
+HTTP ni perfiles clinicos habilitados; worker_done no equivale a aprobacion.

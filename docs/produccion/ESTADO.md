@@ -8,11 +8,12 @@ README y plan del usuario preservados.
 
 ## Actualizacion supervisora, 2026-11-05
 
-SQL-01.A1-A37 implementacion aceptada en health/production-wave0. A36.R1 tuvo
+SQL-01.A1-A38 implementacion aceptada en health/production-wave0. A36.R1 tuvo
 8/8 fases independientes de SQL Server sintetico con fingerprint QA restaurado;
 V9 no esta instalada permanentemente. A37 reserve/change paso 634 pruebas
-independientes con dobles, sin SQL real para writes. SQL-01 sigue EN_CURSO:
-siguiente A38 ClinicalService y luego consumidores restantes; wiring SQL Server,
+independientes con dobles, sin SQL real para writes. A38 paso 664 pruebas
+independientes con dobles y conserva la validacion clinica heredada. SQL-01 sigue
+EN_CURSO: siguiente A39 DocumentService y luego consumidores restantes; wiring SQL Server,
 JDBC/HTTP reales, grants runtime y validacion visual siguen pendientes. main
 permanece intacta.
 

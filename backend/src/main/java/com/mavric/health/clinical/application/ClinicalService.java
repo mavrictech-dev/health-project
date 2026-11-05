@@ -8,12 +8,31 @@ import com.mavric.health.clinical.domain.Requests.*;
 import tools.jackson.databind.ObjectMapper;
 @Service
 public class ClinicalService {
+    private final com.mavric.health.persistence.sqlserver.SqlServerClinicalStore store;
     private final Sql sql;private final Access access;private final ObjectMapper mapper;
-    public ClinicalService(Sql sql,Access access,ObjectMapper mapper) { this.sql=sql;this.access=access;this.mapper=mapper; }
-    @Transactional public Map<String,Object> get(String id) { access.roles("PRO","ASI","AUD"); var row=sql.one("SELECT * FROM encounters WHERE tenant_id=? AND id=?",access.tenantId(),Checks.id(id)); row.put("entries",sql.rows("SELECT * FROM clinical_entries WHERE tenant_id=? AND encounter_id=? ORDER BY created_at",access.tenantId(),id)); sql.call("sp_audit",access.tenantId(),access.userId(),"ENCOUNTER_READ",id,sql.json(Map.of())); return row; }
-    @Transactional public Map<String,Object> start(Start p) { access.write("CORE","PRO"); access.branch(p.branchId()); String id=Checks.id(); sql.call("sp_encounter_start",access.tenantId(),id,access.userId(),sql.json(p)); return get(id); }
-    @Transactional public Map<String,Object> note(String id,Note p,boolean finalize) { access.write("CORE","PRO"); var row=get(id); access.branch(row.get("branchId").toString()); if(finalize && p.note().isBlank()) throw ApiException.invalid("Registra el resumen de la visita antes de finalizar."); sql.call("sp_encounter_save",access.tenantId(),id,access.userId(),p.expectedRevision(),p.note(),finalize); return get(id); }
+    @org.springframework.beans.factory.annotation.Autowired
+    public ClinicalService(Sql sql,Access access,ObjectMapper mapper) { this.sql=sql;this.access=access;this.mapper=mapper;this.store=null; }
+    public ClinicalService(com.mavric.health.persistence.sqlserver.SqlServerClinicalStore store,Access access,ObjectMapper mapper){this.sql=null;this.store=Objects.requireNonNull(store);this.access=access;this.mapper=mapper;}
+    private jakarta.servlet.http.HttpServletRequest request(boolean write,String... roles){
+        var req=com.mavric.health.audit.TraceContext.REQUEST.get();if(req==null)throw new ApiException(500,"DATABASE_ERROR","No se pudo completar la operacion de datos.");
+        var actor=access.actor();Object host=req.getAttribute("health.tenant");
+        if(host!=null && !(host instanceof com.mavric.health.tenancy.TenantRef))throw new ApiException(500,"DATABASE_ERROR","No se pudo completar la operacion de datos.");
+        if(!actor.equals(req.getAttribute("health.actor")) || !(host instanceof com.mavric.health.tenancy.TenantRef tenant) || actor.tenantId()==null || !actor.tenantId().equals(tenant.id()))throw ApiException.forbidden();
+        if(actor.roles()==null)throw new ApiException(500,"DATABASE_ERROR","No se pudo completar la operacion de datos.");
+        if(actor.roles().contains("SAD") || actor.roles().contains("SOP") || Collections.disjoint(actor.roles(),Arrays.asList(roles)))throw ApiException.forbidden();
+        if(write)access.write("CORE",roles);else access.roles(roles);return req;
+    }
+    @Transactional public Map<String,Object> get(String id) { if(store!=null)return store.get(request(false,"PRO","ASI","AUD"),id); access.roles("PRO","ASI","AUD"); var row=sql.one("SELECT * FROM encounters WHERE tenant_id=? AND id=?",access.tenantId(),Checks.id(id)); row.put("entries",sql.rows("SELECT * FROM clinical_entries WHERE tenant_id=? AND encounter_id=? ORDER BY created_at",access.tenantId(),id)); sql.call("sp_audit",access.tenantId(),access.userId(),"ENCOUNTER_READ",id,sql.json(Map.of())); return row; }
+    @Transactional public Map<String,Object> start(Start p) { if(store!=null){var req=request(true,"PRO");return store.required(()->{if(p==null)throw ApiException.invalid("Datos de atencion requeridos.");Checks.id(p.branchId());access.branch(p.branchId());return store.start(req,p);});} access.write("CORE","PRO"); access.branch(p.branchId()); String id=Checks.id(); sql.call("sp_encounter_start",access.tenantId(),id,access.userId(),sql.json(p)); return get(id); }
+    @Transactional public Map<String,Object> note(String id,Note p,boolean finalize) { if(store!=null){var req=request(true,"PRO");return store.required(()->{access.roles("PRO","ASI","AUD");var row=store.get(req,id);access.branch((String)row.get("branchId"));if(p==null || p.note()==null)throw ApiException.invalid("Nota requerida.");if(finalize && p.note().isBlank())throw ApiException.invalid("Registra el resumen de la visita antes de finalizar.");return store.note(req,id,p,finalize);});} access.write("CORE","PRO"); var row=get(id); access.branch(row.get("branchId").toString()); if(finalize && p.note().isBlank()) throw ApiException.invalid("Registra el resumen de la visita antes de finalizar."); sql.call("sp_encounter_save",access.tenantId(),id,access.userId(),p.expectedRevision(),p.note(),finalize); return get(id); }
     @Transactional public Map<String,Object> entry(String encounter,Entry p) {
+        if(store!=null){String[] roles=p!=null && "OBSERVATION".equals(p.kind())?new String[]{"PRO","ASI"}:new String[]{"PRO"};var req=request(true,roles);return store.required(()->{
+            access.roles("PRO","ASI","AUD");var visit=store.get(req,encounter);access.branch((String)visit.get("branchId"));
+            if(p==null || p.kind()==null)throw ApiException.invalid("Tipo de entrada no v\u00e1lido.");
+            if(!p.kind().equals("OBSERVATION") && !visit.get("professionalId").equals(access.userId()))throw ApiException.forbidden();
+            var input=new Entry(p.kind(),store.payload(p.payload()));Checks.json(input.payload(),mapper);validate(input,visit);
+            var result=store.entry(req,encounter,input);if(!Objects.equals(visit.get("profileSnapshot"),result.get("profileSnapshot")))throw new ApiException(500,"DATABASE_ERROR","No se pudo completar la operacion de datos.");return result;
+        });}
         access.write("CORE",p.kind().equals("OBSERVATION")?new String[]{"PRO","ASI"}:new String[]{"PRO"}); var visit=get(encounter); access.branch(visit.get("branchId").toString());
         if(!p.kind().equals("OBSERVATION") && !visit.get("professionalId").equals(access.userId())) throw ApiException.forbidden();
         Checks.json(p.payload(),mapper); validate(p,visit);

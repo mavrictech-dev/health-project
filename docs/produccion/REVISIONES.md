@@ -981,3 +981,21 @@ Ejecutado `mvnw -B -ntp verify` independientemente en snapshot JDK21:
 adaptador contra executor/transaction manager modelados. No acredita SQL real,
 locks/durabilidad, datasource comun, JDBC, grants runtime ni HTTP. A37 integrada
 en health/production-wave0, sin wiring; siguiente A38 ClinicalService.
+
+
+A38 revision supervisora, 2026-11-05
+
+Informe msg_26e6abc7f780 y worker_done msg_139daa11df87. Snapshot desde A37
+commit 505166153bbd5db742c70e9fb8d0bff668b495b0: cuatro hashes ownership
+verificados; 157 archivos backend protegidos cotejados; tres paths nuevos.
+Revision manual: constructor legacy y validate/required intactos; cuerpos
+legacy preservados; ENCOUNTER_GET/START/NOTE y CLINICAL_ENTRY_ADD unicos, REQUEST
+interno, guards de rol/modulo/sede, resultsets y whitelist revisados. Start y
+note consumen su respuesta compuesta, sin GET auditado duplicado; entry mantiene
+validacion del profileSnapshot guardado y no consulta catalogo actual.
+
+`mvnw -B -ntp verify` independiente sobre snapshot JDK21: 664 tests, 0
+failures/errors/skips, BUILD SUCCESS y jar reempaquetado. Adecuado para aceptar
+el adapter aislado; no acredita motor, JDBC, HTTP, transacciones/durabilidad,
+grants, datasource compartido ni habilitacion profesional. A38 integrada sin
+wiring; siguiente A39 DocumentService.

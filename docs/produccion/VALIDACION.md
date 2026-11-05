@@ -689,3 +689,18 @@ posterior a escritura. Los tests usan dobles: no se ejecutaron estos writes cont
 SQL Server ni por JDBC/HTTP. V5 y V9 no se alteraron para A37; backend sigue sin
 wiring. Revisar VALIDACION de A36.R1 para el alcance distinto de la matriz real
 solo lecturas de citas en el motor.
+
+
+## SQL-01.A38 - ClinicalService aislado, 2026-11-05
+
+Snapshot supervisor basado en A37 y los cuatro archivos asignados. Verificacion
+JDK21 independiente: 664 tests, 0 fallos/errores/skips, exit0, BUILD SUCCESS,
+jar PASS. Pruebas con executor/Access/TransactionTemplate modelados cubren
+lecturas y writes, auditoria/resultsets, orden de SP, roles/sede/autor, REQUIRED,
+errores seguros y la validacion estructural existente (evaluation, observation,
+annotation, order, prescription, Dental y payload JSON). `validate` preservado;
+fixtures sinteticos de perfiles solo ejercitan ramas de codigo.
+
+No se ejecuto ninguna escritura en la QA SQL Server ni JDBC/HTTP; estos dobles
+no demuestran locks/interbloqueos/durabilidad, grants de runtime o perfiles
+clinicos aprobados. El backend sigue sin wiring y sin perfiles habilitados.
