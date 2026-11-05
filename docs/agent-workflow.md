@@ -1292,3 +1292,20 @@ CR/trimexterno yBIN2; headerausente/malformado debe fallar, nuncaSUBSTRING0 oNUL
 que omitaIF. raw/bodiesV8 siguen inmutables. Regresiones header/body/casosCRLF,
 suite tras cambio, plan y siPASS rehearse unico; noapply/COMMITpersistente.
 A62 aun no aceptada ni integrada, pendiente entrega y verificacion independiente.
+
+
+SQL-01.A62 ACEPTADA para herramienta y ensayo, 2026-11-05. Informe
+msg_042c08b34cb0 y cierre msg_899e1fa940d3,task_f1a61e6514e6/ctx_03dc4aa58e11.
+Revision personal completa dosarchivos; SHA8419F0EC...35FDB1B9 yBF1F2E1D...DDB8B63F
+confirmados.175protegidos comparados,soloEOF A38 conocido. Snapshotindependiente
+tmp/sqlserver-a62-review: suite59/59PASS4.375s,planreal0en0.891s yrehearse0en3.594s.
+TresSQLcmd0,estados0/0->1/1->0/0, before==after COMPLETO,protected9partes iguales,
+rolesafter[] yACLafter0; fingerprint4E678570F62D8ABDC7EE76385D0681A80372BC7F77E0C434CC8789C9B90BC557
+intacto. Snapshotinside562ACL comparado independientemente contra matriz literal
+A7aprobada:562/562EXACT,checksum26750101C4E5390E38FF8B0A748601A886EF9D8E9897E6A3EFA5C45E8F36B870.
+Bootstrap CREATEcanonico ambosSHA coinciden diagnostico;rawV8/bodiesALTER inmutables.
+Historicos3erroresplan/4erroresensayo se conservan, no convertidos retroactivamente.
+No nuevaspruebasMaven/frontend/HTTP/capturas; codigoJava baseline990 anterior.
+Herramienta permite applyexplicito solo tras guards/postconditions; supervisor
+procede segunD-70 a setup persistente SOLOQA marcada, con nueva comprobacion.
+Esta aceptacion del ensayo aun NOafirma applyreal ni JDBCpositivo/login/negocio/UI.

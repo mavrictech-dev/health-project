@@ -1058,3 +1058,10 @@ con CR/trimexterno yaaprobados; no sustituir globalmente CREATE/ALTER en el cuer
 Headerinvalido oausente falla cerrado. FuenteV8/bodyALTER de ejecucion inmutables;
 no debilitar matrizACL ni gateantesCOMMIT. Diagnostico con3rollbacksfreshPASS no
 aprueba aun herramienta ni permisos persistentes/JDBCpositivo.
+
+
+D-70 herramienta/ensayo resueltos:59/59,plan yrehearseindependientesPASS,ACL562
+exacta contraA7 yrollback fullsnapshotverificado. Supervisor procede a apply
+explicito SOLOQA marcada con principalsetupWindows separado; creacion2roles/ACL
+y2ALTERV8aprobados, sin users/logins/datos/servicios/auth. Applyresultado se
+registrara aparte; nunca equivale a JDBCpositivo o backendmigradocompleto.
