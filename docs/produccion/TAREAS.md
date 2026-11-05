@@ -1342,3 +1342,32 @@ suite tras cambio y UN ensayo adicional sin plan/Maven innecesario. Noapply.
 Mantener562ACL exacta y resto de gates; cleanupfreshconnection obligatorio.
 Task task_f1a61e6514e6 / ctx_03dc4aa58e11 sigue en correccion, no aceptada;
 no afirmar exitoso ensayo completo ni permisos persistentes/JDBC positivo.
+
+
+A62 diagnostico bootstrap real, 2026-11-05. Pregunta msg_c6ff2fbb224d:
+cuarto ensayo seguia59999/bootstrap mismatch;57/57workerPASS no prueba motor.
+Supervisor indico detener repeticiones (msg_ae99d6e0c616); worker confirmo
+msg_daa1b4e122c8. Escalacion msg_stop_5c090ebdc81dc1458460cb8d refleja turno
+terminado esperando, sinworker_done; mismaTask/Dispatch/cuenta/sesion retenidas.
+Copia congelada tmp/sqlserver-a62-bootstrap-diagnostic y wrapper SHA
+98F048F0A0022ED85758568D207655C6CAC9F2CFA5969236751B03A8FAF7608D.
+Supervisor ejecuto TRES diagnosticos transaccionales: prefijoV8literal/guards
+ACL/protegidos intactos, proyeccion solo hashes/longitudes/declaracion yROLLBACK;
+conexion NUEVA despues de CADAuno comprobo after==before, fingerprint original
+4E678570F62D8ABDC7EE76385D0681A80372BC7F77E0C434CC8789C9B90BC557.
+No COMMIT, usuarios/logins nuevos ni datos de negocio modificados.
+Causa reproducida: catalogo devuelve comentario+CREATE PROCEDURE trasALTER,
+CREATEstart80 yALTERstart0. LHS SUBSTRING0 incluia comentario. Al reconocer
+CREATE y canonicalizar SOLO tokenDECLARACION esperado ALTER->CREATE, ambos cuerpos
+BIN2/SHA/longitud EXACTOS: exists846bytes hash
+F5C6789CD211DA3A3B7ACBE6A7C4277270E16F8E319D0E1627C161296960E69E;
+create1608bytes hashDAFF0F77F8CB93763FC551BCCB491E7A0BAB114E08A05F5140F2AD792A9BEC55.
+Evidencia diagnostic-summary.json/declaration-summary.json/canonical-create-summary.json
+con stdout/SQL y before/after en tmp. Esta prueba diagnostica NO sustituye ensayo
+final de herramienta ni acredita grants/login/JDBCreal.
+R-A62-CREATE-CANON enviada msg_e7bc7c859bcc: regla compartida snapshotSQL/guard/
+installed_hashes reconoce CREATE/ALTER exactos, canonicaliza solo token aCREATE,
+CR/trimexterno yBIN2; headerausente/malformado debe fallar, nuncaSUBSTRING0 oNULL
+que omitaIF. raw/bodiesV8 siguen inmutables. Regresiones header/body/casosCRLF,
+suite tras cambio, plan y siPASS rehearse unico; noapply/COMMITpersistente.
+A62 aun no aceptada ni integrada, pendiente entrega y verificacion independiente.

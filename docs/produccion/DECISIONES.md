@@ -1049,3 +1049,12 @@ derivado del V8 inmutable, siguiendo sus prechecks aprobados. Conservar comparac
 binaria exacta del resto de caracteres; no sustituir por comparacion permisiva.
 SQLcmd puede normalizar nuevaslineas del literal; regresion LF/CRLF y contenido
 diferente requerida. Rehearse adicional autorizado, no apply/COMMIT persistente.
+
+
+D-70 canonica de declaracion: prueba real comprobo CREATE en catalogo trasALTER.
+Reconocer CREATE/ALTER exactos del SP aprobado y normalizar SOLO ese token aCREATE
+para snapshot, guard y hashes esperados compartidos. Resto del cuerpo BIN2 exacto
+con CR/trimexterno yaaprobados; no sustituir globalmente CREATE/ALTER en el cuerpo.
+Headerinvalido oausente falla cerrado. FuenteV8/bodyALTER de ejecucion inmutables;
+no debilitar matrizACL ni gateantesCOMMIT. Diagnostico con3rollbacksfreshPASS no
+aprueba aun herramienta ni permisos persistentes/JDBCpositivo.
