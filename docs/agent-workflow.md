@@ -519,3 +519,22 @@ Tres SP tipados,status REQUEST/sample WORKER sin autoridadHTTP,REQUIRED y
 WARN estatico revisados personalmente. Evidencia tmp/sqlserver-a20-acceptance.json.
 Sin motor/JDBC/HTTP real ni nueva evidencia visual; no backend activo.
 A21 siguiente: details/mode por SP en mismos4archivos,secuencia sin solapamiento.
+
+
+A21 delegada: task_f09e6e635f54 / ctx_4e21f0abcb65,dependencia A20settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio no observado aun. No reenviar ni
+abandonar; esperar avisoOrca. Ownership mismos4archivosMonitor/store/dossuites.
+A20 aprobada y subida38c46b4686513f26f971b425947db51714150240 a rama de trabajo,
+refremota comprobada y main intacta. Otros consumidores,wiring y QAreal
+permanecen pendientes; no backend parcial activado ni aprobacionA21anticipada.
+
+
+A21 ACEPTADA: informe msg_5d06be4f117a/done msg_afd7844ea41a,4SHAexactos,
+verify independiente410/410 sinfallos/errores/omisiones,jarPASS23.115s,
+2026-11-04T22:03:41-05:00.120bases verificadas,116ajenas intactas;4existentes
+integrados. Legacy y sampler/statusA20 comparados exactos retirando solo ramas
+SQL details/mode. Autorizacioncontextual,tenant3SP/plataforma6SP y mode2SP,
+nullableversionFlyway,inmutabilidad y TX modeladas revisados. SinJDBC/HTTPreal
+ni evidencia visual nueva ni backend activo. Siguiente A22 correo por claim/
+complete con SMTPdoble y sinreintento automatico ante resultado ambiguo.

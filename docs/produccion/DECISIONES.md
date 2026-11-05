@@ -651,3 +651,9 @@ explicito sin wiring. Details plataforma SAD/SOP,tenant ADM/AUD;mode SADsolo.
 Lecturas REQUIRED sin promesa snapshot;mode+status misma unidad. Proyeccion
 explicita,inmutabilidad,nullableversionFlyway,contextoREQUEST coherente y
 ningunSPplataforma desde tenant. Contrato detallado tmp/sql-01-a21-spec.md.
+
+
+D-30: MailDelivery SQL usa claim/complete REQUIRED separados,claim confirmado
+antes del emisor fueraTX;rechazar ciclo con outerTX. Excepcion del emisor
+es AMBIGUOUS,exito SENT;fallo complete no reclasifica ni reenvia. WORKER9NULL,
+sin red real ni wiring,claim_version y exclusionSENDING conservados.

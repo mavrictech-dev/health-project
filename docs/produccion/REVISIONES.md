@@ -782,3 +782,13 @@ Tres SP tipados,status REQUEST/sample WORKER sin autoridadHTTP,REQUIRED y
 WARN estatico revisados personalmente. Evidencia tmp/sqlserver-a20-acceptance.json.
 Sin motor/JDBC/HTTP real ni nueva evidencia visual; no backend activo.
 A21 siguiente: details/mode por SP en mismos4archivos,secuencia sin solapamiento.
+
+
+A21 ACEPTADA: informe msg_5d06be4f117a/done msg_afd7844ea41a,4SHAexactos,
+verify independiente410/410 sinfallos/errores/omisiones,jarPASS23.115s,
+2026-11-04T22:03:41-05:00.120bases verificadas,116ajenas intactas;4existentes
+integrados. Legacy y sampler/statusA20 comparados exactos retirando solo ramas
+SQL details/mode. Autorizacioncontextual,tenant3SP/plataforma6SP y mode2SP,
+nullableversionFlyway,inmutabilidad y TX modeladas revisados. SinJDBC/HTTPreal
+ni evidencia visual nueva ni backend activo. Siguiente A22 correo por claim/
+complete con SMTPdoble y sinreintento automatico ante resultado ambiguo.
