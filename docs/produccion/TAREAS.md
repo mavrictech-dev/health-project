@@ -1001,3 +1001,7 @@ Estado Orca dispatched; pendiente entrega y revision independiente. No se
 activaron SQL Server/JDBC/HTTP ni se modifico main.
 
 A45 ACEPTADA e integrada: informe msg_1b318f56d4e9 / worker_done msg_3da464382452. Cuatro SHA confirmados, snapshot independiente HEAD A44, verify JDK21 818/818, cero fallos/errores/skips y jar PASS (33.776s). Lecturas INVENTORY_LOTS/TRANSFERS/PRESCRIPTIONS con cero argumentos y proyecciones 8/10/6; escrituras legacy preservadas. 137 rutas protegidas comparadas contra supervisor: solo LF final conocido A38, confirmado sin diferencia de contenido. Sin SQL/JDBC/HTTP/grants/stock real ni wiring. Siguiente A46 lot/move, mismo ownership secuencial.
+
+A45 integrada/push 5d85b54. A46 preparada segun D-54/tmp/sql-01-a46-spec.md: lot/move, cuatro rutas existentes exclusivas, dependencia A45. Transfer/receive siguientes. Sigue pendiente SQL Server/JDBC/HTTP real y wiring.
+
+A46 delegada task_7b66f63670ce / ctx_2522112ed8a8, dependencia A45 settled. Cuenta efectiva /status mendozadeafabisa@gmail.com y sesion 01a19e4c-15af-74e0-a1b9-75fc7093b98f confirmadas; IdentityOnly de ambos roles coincide. Terminal/worktree retenidos y --no-daemon. Cuatro rutas segun D-54, solo lot/move y tests, sin archivos compartidos en paralelo. Orca dispatched; pendiente entrega y revision. No SQL/JDBC/HTTP ni activacion.
