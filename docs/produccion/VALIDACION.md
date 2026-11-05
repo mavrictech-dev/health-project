@@ -649,3 +649,28 @@ rechaza1. JavaDuration.toDays=93loacepta,contratoD-44. DefectopersistenciaV5:137
 nofalloenadaptador. Evidencia tmp/sqlserver-a36-window-defect.txt.
 A35 sigueultimocodigoaceptado. Corregir viaV9incremental(noeditarV1-V8),
 soloALTERusp_appointments_list yregresionmotorrollback-only;4SHAJavaA36congelados.
+
+
+## SQL-01.A36.R1 - correccion y regresion independiente, 2026-11-05
+
+QA real local sobre health_project_sqlserver_qa_20261103, marcada como sintetica,
+SQL Server 2022/compat160, dbo y transporte administrativo shared memory.
+El supervisor ejecuta el runner stdlib incrustado en
+backend/scripts/verify-sqlserver-appointment-window.sql con python -B; el
+runner abre conexiones sqlcmd nuevas por fase y compara fingerprint global antes
+y despues de cada rollback. Resultado independiente exit0: 8/8 fases PASS.
+
+exact93, day93hour23 y below94 permitieron la consulta real; cada prueba comprobó
+fila propia y forma de 14 columnas, from inclusivo, to exclusivo, aislamiento de
+tenant y filtro de sede asignada. reject94/reversed/equal devolvieron 51000;
+deny_unassigned/deny_foreign devolvieron 51001. Los errores ocurrieron con
+XACT_STATE=-1 y se revirtieron sin efectos. Fingerprint estable
+4021589FDC7DADAA15A885E0D55D88966B15830DA4888B0741D70444B2906E45 tras cada
+fase; definicion de appointments_list restaurada al SHA
+654C7C366DD8EFF426C8EBD5E442234F8DD7F6712CEB56694AD1DBD65469BE74; 37 tablas,
+133 procedimientos, 31 triggers, users=0, @@TRANCOUNT=0. V9 no permanece aplicada.
+
+Esta es validacion de procedimientos en el motor bajo principal administrativo
+con datos/sesiones sinteticos. No es autenticacion JDBC, permisos de runtime,
+pool de conexiones ni integracion HTTP. Quedan wiring SQL completo y recorridos
+reales de backend/frontend por verificar.

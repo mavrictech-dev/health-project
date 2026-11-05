@@ -6,6 +6,15 @@ implementaciones en Maczz09/health-programmer. La coordinacion paso despues a
 health/production-wave0 para integrar solo archivos revisados, sin commits/main.
 README y plan del usuario preservados.
 
+## Actualizacion supervisora, 2026-11-05
+
+SQL-01.A1-A36 aceptadas en health/production-wave0; ultimo cambio de producto
+integrado: A36 agenda lectura/list/get con V9 incremental. A36.R1 revisada y
+repetida de forma independiente en SQL Server sintetico: 8/8 fases PASS y
+fingerprint QA restaurado. V9 no esta instalada permanentemente. SQL-01 sigue
+EN_CURSO: A37 reserve/change, demas consumidores, wiring del backend SQL Server,
+JDBC/HTTP reales y validacion visual siguen pendientes. main no se modifico.
+
 HP-ORCH-01 VALIDADA como auditoria estatica, con informe Orca en cuatro partes
 (ctx_06e3adc9a15a). No equivale a validacion del sistema. Nueva autorizacion:
 ejecutar la guia por dependencias, con demo independiente y datos sinteticos.

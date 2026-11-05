@@ -820,3 +820,24 @@ rechaza1. JavaDuration.toDays=93loacepta,contratoD-44. DefectopersistenciaV5:137
 nofalloenadaptador. Evidencia tmp/sqlserver-a36-window-defect.txt.
 A35 sigueultimocodigoaceptado. Corregir viaV9incremental(noeditarV1-V8),
 soloALTERusp_appointments_list yregresionmotorrollback-only;4SHAJavaA36congelados.
+
+
+A36.R1 delegada: task_e799ba698e1d / ctx_5e8a2815de68,dependencia A36settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio noobservado,no reenviar ni
+abandonar;esperar avisoOrca. Ownership SOLOV9nuevo/scriptmotorQA,D-44.A.
+Worker tiene ownership exclusivo temporal QArollback-only pararegresion;
+supervisor no modificaQA mientrascorre. CuatroSHAJavaA36congelados,sin integrar.
+Hallazgo subido13a6f598decc0bcc61918212863460e2c9f16356 enramatrabajo,
+main intacta. A35ultimo codigoaceptado;610PASSunitarios no cierranfallomotor.
+Negocio/wiring/QAHTTPJDBC pendientes;apagarPC solo al terminar TODO.
+
+
+A36.R1 cierre de revision: task_e799ba698e1d, Dispatch final ctx_a63291f9f11a.
+El primer turno termino por limite remoto sin informe. Por peticion expresa del
+usuario se cerco ese Dispatch sin cerrar la sesion, se reabrio la misma tarea y
+se reuso el terminal/worktree retenido. El informe msg_131099f43d0f y worker_done
+msg_0c18ad1b2d68 se inspeccionaron; el supervisor repitio las 8 fases motor y
+acepto solo despues de confirmar V9 exacta, rollback/fingerprint y hashes.
+No se cambio cuenta global, credenciales, Java congelada ni QA fuera de la matriz.
+La aceptacion no declara JDBC, HTTP, runtime role, wiring o UI validados.

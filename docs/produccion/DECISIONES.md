@@ -744,3 +744,9 @@ D-44.A: motordemostrodivisionnumericcontradice diascompletosJava. R-A36-SQL-
 WINDOW requiereV9incrementalALTERsolo predicado con divisionBIGINT explicita
 (o equivalenteexacto93diascompletos),sin tocarV1-V8aplicadas ni cuatroSHAJava.
 Regresionmotorreal antesaceptarA36,sinJDBC/HTTP claim.
+
+Resolucion 2026-11-05: A36.R1 aceptada despues de inspeccion exacta de V9 y 8/8
+fases SQL Server reales repetidas por el supervisor. CONVERT(bigint,86400000000)
+mantiene el limite por dias completos: 93d23h y 94d-1us permitidos; 94d exactos,
+reversed/equal rechazados. V9 incremental, no instalada permanentemente en QA.
+No acredita wiring, JDBC, HTTP ni permisos efectivos de cuenta runtime.

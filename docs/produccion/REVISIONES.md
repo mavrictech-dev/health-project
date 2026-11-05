@@ -935,3 +935,30 @@ rechaza1. JavaDuration.toDays=93loacepta,contratoD-44. DefectopersistenciaV5:137
 nofalloenadaptador. Evidencia tmp/sqlserver-a36-window-defect.txt.
 A35 sigueultimocodigoaceptado. Corregir viaV9incremental(noeditarV1-V8),
 soloALTERusp_appointments_list yregresionmotorrollback-only;4SHAJavaA36congelados.
+
+
+A36.R1 revision y aceptacion supervisora, 2026-11-05
+
+Informe worker msg_131099f43d0f y worker_done msg_0c18ad1b2d68. V9 comparada
+contra usp_appointments_list de V5: texto exacto salvo CREATE->ALTER y el
+divisor /86400000000>93 -> /CONVERT(bigint,86400000000)>93; flags ANSI_NULLS
+y QUOTED_IDENTIFIER ON. No cambian V1-V8, contrato Java, firma, permisos,
+proyeccion ni filtros. SHA V9 9A0C1F96B66ADB7DE833310A5BDA1797CAE9C0F39E7A2D435CDE7EEBB62EDC04;
+SHA harness B00FFFE1FB8D9E004F7B64C382BDE10FE2BF4CDA213E6B4AED9B7C6E539803EA.
+
+Revision independiente: mismo embedded runner, ejecutado desde el supervisor
+con python -B y sqlcmd en SQL Server 2022 QA marcada, dbo/shared memory. 8/8
+fases: exact93, day93hour23, below94, reject94, reversed, equal,
+deny_unassigned, deny_foreign; todos exit0. Casos positivos consultaron el SP
+real y verificaron fila propia, from inclusivo, to exclusivo y tenant ajeno
+ausente; sede propia devolvio exactamente 14 columnas. Errores publicos
+esperados 51000/51001 observados bajo XACT_STATE=-1. Fingerprint
+4021589FDC7DADAA15A885E0D55D88966B15830DA4888B0741D70444B2906E45 antes y
+despues de cada fase; 37 tablas, 133 SP, 31 triggers y 0 users conservados.
+V9/fixtures revertidos en cada conexion; ACL y 132 SP restantes intactos.
+
+Se verificaron tambien los cuatro SHA congelados de A36, 110/110 archivos
+previos inalterados y 112 rutas dirty actuales (solo las 110 previas mas los
+2 entregables). A36 aceptada e integrada en health/production-wave0. Sin
+activacion, runtime-role, JDBC, HTTP o validacion visual; A37 reserve/change
+todavia pendiente.

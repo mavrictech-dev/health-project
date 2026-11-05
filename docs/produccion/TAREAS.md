@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A35 aceptadas; A36 preparado) | A19 task_f2b11c63b1f1 / ctx_37f7e33bd3b9,385/385 supervisor | PatientService completo aislado sin wiring. Siguiente agenda lecturas A36; otros consumidores/wiring/QA real pendientes |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A36 aceptadas) | A36 task_76b732f76c7c + R1 task_e799ba698e1d / ctx_a63291f9f11a; QA motor 8/8 independiente | Agenda list/get aceptados y corregida frontera de 93 dias por V9. Siguiente A37 reserve/change; consumidores restantes, wiring JDBC/HTTP real pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -806,3 +806,22 @@ rechaza1. JavaDuration.toDays=93loacepta,contratoD-44. DefectopersistenciaV5:137
 nofalloenadaptador. Evidencia tmp/sqlserver-a36-window-defect.txt.
 A35 sigueultimocodigoaceptado. Corregir viaV9incremental(noeditarV1-V8),
 soloALTERusp_appointments_list yregresionmotorrollback-only;4SHAJavaA36congelados.
+
+
+A36.R1 delegada: task_e799ba698e1d / ctx_5e8a2815de68,dependencia A36settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio noobservado,no reenviar ni
+abandonar;esperar avisoOrca. Ownership SOLOV9nuevo/scriptmotorQA,D-44.A.
+Worker tiene ownership exclusivo temporal QArollback-only pararegresion;
+supervisor no modificaQA mientrascorre. CuatroSHAJavaA36congelados,sin integrar.
+Hallazgo subido13a6f598decc0bcc61918212863460e2c9f16356 enramatrabajo,
+main intacta. A35ultimo codigoaceptado;610PASSunitarios no cierranfallomotor.
+Negocio/wiring/QAHTTPJDBC pendientes;apagarPC solo al terminar TODO.
+
+
+A36.R1 ACEPTADA: informe msg_131099f43d0f/done msg_0c18ad1b2d68; supervisor
+repitio las 8 fases reales PASS, todas con sqlcmd exit0 y fingerprint estable.
+V9 y harness integrados tras comparacion exacta al cuerpo V5 con solo ALTER y
+divisor BIGINT. V9 no se instalo permanentemente; SQL-01 sigue EN_CURSO.
+Siguiente A37 reserve/change. No habilitar backend ni declarar JDBC/HTTP/runtime
+validados. Reintento mantuvo la cuenta y worktree; entrega hecha en ctx_a63291f9f11a.
