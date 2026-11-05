@@ -940,3 +940,8 @@ Puerto/origen sinteticos coherentes (18080 predeterminado), TLS sin trust bypass
 predeterminado. Cuatro rutas de tmp/sql-01-a59-spec.md, pruebas offline; no arranque
 ni JDBC/HTTP hasta runner sintetico y setup con principal separado. Conservar
 legacy sin modo SQL y demo independiente; no declarar migracion terminada.
+
+
+D-67 resuelta: A59 aceptada con verify independiente990/990 y JAR PASS.
+Launcher/perfil implementados; arranque y ConfigData end-to-end aun no probados.
+Mantener separados QA HTTP de indisponibilidad y conexion JDBC exitosa real.

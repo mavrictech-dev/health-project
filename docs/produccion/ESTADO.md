@@ -648,3 +648,21 @@ y HealthApplicationModeTest segun D-67/tmp/sql-01-a59-spec.md. Seleccion tras
 ConfigData y retirada del switch Flyway heredado, sin nuevo migrador. Orca
 confirma dispatched; pendiente entrega y revision. No se ejecuto el backend,
 JDBC, HTTP ni validacion visual nueva. Setup/runner y QA real siguen pendientes.
+
+
+SQL-01.A59 aceptada, 2026-11-05. Informe msg_d58995381183 y cierre
+msg_962eefb0267b, task_9023895f0ad8 / ctx_5b618a21611b. Cuatro SHA confirmados;
+169 rutas protegidas conservadas, solo EOF A38 ya conocido. Revision personal
+main/selector/perfil/suite: una sola raiz seleccionada por Environment tras
+ConfigData, fuentes externas rechazadas, guard A58 reutilizado; Flyway fuera del
+launcher y switches de setup rechazados antes de construir Spring. QA exige
+credenciales externas, loopback y jobs apagados. Snapshot independiente
+ tmp/sqlserver-a59-review: JDK21 mvnw -B -ntp verify, 990 pruebas, cero
+fallos/errores/omisiones, BUILD SUCCESS, JAR/repackage PASS, 52.847 s.
+Log verify-supervisor-a59.log. Primer fallo worker era nombre de PropertySource
+sintetico incorrecto; se corrigio fixture sin relajar producto.
+Estas pruebas cargan YAML y eventos preparados; NO validan ConfigData end-to-end,
+arranque, JDBC o HTTP real. Sin nuevas capturas. SQL-01 EN_CURSO: setup separado,
+runner sintetico, transporte JDBC y QA real/visual siguen pendientes. El motor
+local compartido tiene transporte TCP/NP deshabilitado segun evidencia historica;
+no se habilita ni reinicia automaticamente para superar ese limite.

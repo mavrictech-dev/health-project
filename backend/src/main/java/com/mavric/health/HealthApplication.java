@@ -9,10 +9,13 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 @org.springframework.scheduling.annotation.EnableScheduling
 public class HealthApplication {
     public static void main(String[] args) {
-        if(java.util.Arrays.asList(args).contains("--migrate")) {
-            org.flywaydb.core.Flyway.configure().dataSource(System.getenv("DATABASE_URL"),System.getenv("MIGRATION_USER"),System.getenv("MIGRATION_PASSWORD")).locations("classpath:db/migration").load().migrate();
-            return;
+        for(String argument:args) {
+            String flag=argument.split("=",2)[0];
+            if(flag.equalsIgnoreCase("--migrate") || flag.equalsIgnoreCase("--setup") || flag.equalsIgnoreCase("--bootstrap"))
+                throw new IllegalArgumentException("Use the separate migration/setup process.");
         }
-        SpringApplication.run(HealthApplication.class, args);
+        SpringApplication application=new SpringApplication();
+        application.addListeners(new com.mavric.healthsqlserver.SqlServerApplicationSourceSelector(application));
+        application.run(args);
     }
 }

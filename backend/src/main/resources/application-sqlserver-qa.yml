@@ -1,0 +1,48 @@
+health:
+  sqlserver:
+    mode: runtime
+    jobs:
+      enabled: false
+    runtime:
+      server-name: ${HEALTH_SQLSERVER_SERVER:127.0.0.1}
+      database-name: ${HEALTH_SQLSERVER_DATABASE:}
+      username: ${HEALTH_SQLSERVER_RUNTIME_USER:}
+      password: ${HEALTH_SQLSERVER_RUNTIME_PASSWORD:}
+      trust-server-certificate: ${HEALTH_SQLSERVER_TRUST_CERTIFICATE:false}
+  bootstrap:
+    email: ''
+    password: ''
+  base-domain: health.localhost
+  public-origin: http://health.localhost:${HEALTH_SQLSERVER_HTTP_PORT:18080}
+  session-hours: 8
+spring:
+  flyway:
+    enabled: false
+    url: ''
+    user: ''
+    password: ''
+  sql:
+    init:
+      mode: never
+  main:
+    allow-bean-definition-overriding: false
+  datasource:
+    url: ''
+    username: ''
+    password: ''
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      group:
+        liveness:
+          include: [livenessState]
+        readiness:
+          include: [readinessState, db]
+      show-details: never
+      show-components: never
+server:
+  address: 127.0.0.1
+  port: ${HEALTH_SQLSERVER_HTTP_PORT:18080}
+  forward-headers-strategy: none
