@@ -945,3 +945,15 @@ legacy sin modo SQL y demo independiente; no declarar migracion terminada.
 D-67 resuelta: A59 aceptada con verify independiente990/990 y JAR PASS.
 Launcher/perfil implementados; arranque y ConfigData end-to-end aun no probados.
 Mantener separados QA HTTP de indisponibilidad y conexion JDBC exitosa real.
+
+
+D-68 (2026-11-05): A60 es QA secuencial sin edicion versionada. Ejecutar JAR A59
+real con ConfigData y perfil SQL QA en loopback, entorno hijo minimo sin secretos
+existentes y destino JDBC deliberadamente inaccesible (puerto local reservado sin
+listen). Verificar liveness UP, readiness/root DOWN, error publico saneado y
+rechazos de modo/fuentes/setup sin fallback. Cerrar solo procesos propios.
+Esto acredita HTTP real negativo, no JDBC exitoso ni permisos/integracion SQL.
+La evidencia historica de TCP/NP deshabilitados no autoriza cambiar o reiniciar
+la instancia SQL compartida. Setup/runner permanente y QA JDBC positiva siguen
+pendientes; este corte permite encontrar defectos de arranque antes de resolver
+el transporte. Ownership solo tmp/sqlserver-a60-qa; supervisor conserva docs.

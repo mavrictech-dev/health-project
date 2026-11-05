@@ -145,3 +145,8 @@ arranque, JDBC o HTTP real. Sin nuevas capturas. SQL-01 EN_CURSO: setup separado
 runner sintetico, transporte JDBC y QA real/visual siguen pendientes. El motor
 local compartido tiene transporte TCP/NP deshabilitado segun evidencia historica;
 no se habilita ni reinicia automaticamente para superar ese limite.
+
+
+A60 preparada D-68/tmp/sql-01-a60-spec.md: QA de JAR/ConfigData/HTTP reales
+con DB deliberadamente inaccesible; sin rutas versionadas asignadas. Separar
+esta evidencia negativa de integracion JDBC positiva. Dependencia A59 aceptada.
