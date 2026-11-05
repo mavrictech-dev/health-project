@@ -462,3 +462,15 @@ inyectado sin clamping. CasoCommitDOCTOR usa1; cancelacionCLINIC4. Es evidencia
 modelada,NOejecucion de la reglaSP ni prueba de motor. accept-sqlserver-a17-r1.py
 revalida5SHA/111bases y compara legado,integra5existentes;106ajenas intactas.
 No repetir frontend/motor sin cambio,no nuevas capturas ni backend conectado.
+
+
+### A18 -368 pruebas independientes de filtro/store
+
+python -B tmp/prepare-sqlserver-a18-review.py confirma4SHA/111bases,snapshot
+tmp/sqlserver-a18-review/backend. Con HEALTH_TRUST_GATEWAY=false solo proceso:
+.\mvnw.cmd -B -ntp verify,JDK21,exit0,BUILD SUCCESS23.303s,368tests/0failures/
+0errors/0skipped,jar/repackagePASS,2026-11-04T19:01:04-05:00.15nuevas+353previas.
+Log verify-supervisor.log yXMLSurefire conservados. accept-sqlserver-a18.py
+revalida4SHA/bases y preservacion core/legacy,copia4archivos;110ajenos intactos.
+Servletdobles y managerMODELADO,logcapturado sin secretos: no JDBC/SQLServer/
+HTTP/pool/locks/durabilidad/proxy/navegador reales. Sin nueva captura visual.

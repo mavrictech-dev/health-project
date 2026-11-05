@@ -8,8 +8,9 @@ import com.mavric.health.shared.*;
 import com.mavric.health.identity.Actor;
 import com.mavric.health.tenancy.TenantRef;
 public class TraceFilter extends OncePerRequestFilter {
-    private final Sql sql;private final Errors errors;
-    public TraceFilter(Sql sql,Errors errors) { this.sql=sql;this.errors=errors; }
+    private final Sql sql;private final Errors errors;private final com.mavric.health.persistence.sqlserver.SqlServerTraceStore store;
+    public TraceFilter(Sql sql,Errors errors) { this.sql=sql;this.errors=errors;this.store=null; }
+    public TraceFilter(com.mavric.health.persistence.sqlserver.SqlServerTraceStore store,Errors errors) {this.sql=null;this.errors=errors;this.store=Objects.requireNonNull(store);}
     @Override protected void doFilterInternal(HttpServletRequest req,HttpServletResponse res,FilterChain chain) throws ServletException,IOException {
         long start=System.nanoTime(); String id=UUID.randomUUID().toString(); req.setAttribute("health.requestId",id);res.setHeader("X-Request-Id",id);res.setHeader("Cache-Control","no-store");TraceContext.REQUEST.set(req);boolean failure=false;
         if(Boolean.parseBoolean(System.getenv().getOrDefault("HEALTH_TRUST_GATEWAY","false"))) try {
@@ -27,11 +28,14 @@ public class TraceFilter extends OncePerRequestFilter {
         finally {
             try {
                 if(req.getRequestURI().startsWith("/api/") && !req.getRequestURI().equals("/api/public/status")) {
+                    if(store!=null) store.finish(req,id,failure?500:res.getStatus(),(System.nanoTime()-start)/1_000_000);
+                    else {
                     var t=(TenantRef)req.getAttribute("health.tenant");var a=(Actor)req.getAttribute("health.actor");String agent=Objects.toString(req.getHeader("User-Agent"),"");
                     sql.call("sp_request_finish",id,t==null?null:t.id(),a==null?null:a.id(),req.getMethod(),req.getRequestURI().substring(0,Math.min(250,req.getRequestURI().length())),failure?500:res.getStatus(),(System.nanoTime()-start)/1_000_000,TraceContext.address(req),agent.substring(0,Math.min(300,agent.length())));
+                    }
                 }
             } catch(Exception e) {org.slf4j.LoggerFactory.getLogger(TraceFilter.class).error("Trace persistence unavailable for request {}",id);}
-            TraceContext.REQUEST.remove();
+            finally {TraceContext.REQUEST.remove();}
         }
     }
 }

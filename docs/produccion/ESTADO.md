@@ -330,3 +330,13 @@ plataforma y portal del ciclo de cuenta en caminoSQL explicito integrados,
 sin activar configuracion ni SMTP. No equivale a recorrido conectado o IAM
 integral validado. Otros consumidores y wiringsegregado siguen pendientes.
 A18 prepara trazasHTTP finales porSP; sin nueva evidencia visual.
+
+
+## A18 aceptada - 2026-11-04
+
+Finalizacion de trazasHTTP por REQUEST_FINISH integrada tras368/368 pruebas
+independientes y4SHA. Transaccion independiente modelada alfinal del filtro,
+respuesta preservada ante fallo y contexto limpiado; no validacion durable o
+conectada. Constructor legacy actual y SecurityConfiguration intactos.
+A19 prepara lecturas de auditoria/trazabilidad; Monitor/Mail/Bootstrap y negocio/
+actuator/wiringsegregado y QAreal aun pendientes. No100%SP ni backend activo.

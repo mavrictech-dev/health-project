@@ -468,3 +468,18 @@ snapshot353/353+jar. Rechazo352/fixture se conserva como historial,ahora resuelt
 5archivos integrados sin wiring; A18 preparada tmp/sql-01-a18-spec.md,D-26,
 ownership4archivos de traza final. Seguir worker-start --spec-file con
 dependenciaTaskR1settled,mismo terminal/sesion/cuenta/Sol medium.
+
+
+A18 delegada por worker-start --spec-file con dependencia A17.R1settled:
+task_da2ffda82d8a / ctx_fcbb8244defb,mismo Run/terminal/cuenta/sesion/Sol medium.
+Recibo outcome_unknown/turn_start_unobserved: texto entregado,turno no observado
+aun. No reenviar ni abandonar; esperar avisoOrca. Ownership4archivos de trazas
+reservados al programador. A17 corregida subida como
+6c387f555ff93038adbc517d21ca0f16a6998abb a ramahealth/production-wave0,refremota
+comprobada y main intacta. No aprobacion anticipada ni backend activado.
+
+
+A18 aceptada tras msg_2ffa48cf0b92/msg_413a740a5390,4SHA,snapshot368/368+jar.
+4archivos integrados sin wiring; A19 preparada tmp/sql-01-a19-spec.md,D-27,
+ownership4archivos de lecturas auditoria/trazas. Cuenta/sesion/Sol medium y
+cuota verificados; seguir worker-start --spec-file con dependencia A18settled.

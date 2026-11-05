@@ -604,3 +604,25 @@ Fallo de persistencia conserva respuesta/excepcion original segun comportamiento
 best-effort actual,con logestatico+ID sin secretos. ThreadLocal siempre limpio,
 incluso fallo del store; no query/body/cookies/tokens claros nuevos en datos.
 Encargo tmp/sql-01-a18-spec.md; gateways/async/pool y SQL/JDBC reales no validados.
+
+
+### D-27: lectura tipada de auditoria/trazas y contrato de filtros SQL
+
+A18 aceptada368/368. A19 convierte AuditService4metodos con store y2suites,
+ownership4archivos,sin controllers/config. Legacy @Autowired y nuevo SQL
+explicito; contexto interno coincide con Access.actor/host. list soloADM/AUD
+tenant; events/requests/journey SAD/SOPplataforma oADM/AUDtenant.
+
+AUDIT_LIST/TRACE_EVENTS/TRACE_REQUESTS/TRACE_JOURNEY,REQUEST,REQUIRED. Limit
+clamp1..200,eventos SP ya retorna limit+1,cursor del ultimo visible; journey
+consume2RS y hasta200steps de201 sin segunda query. Proyectar campos exactos
+V3 con tipos/nulls,inmutabilidad profunda y JSONVALUE (incluyeNULL),sin columnas
+privadas extras ni estrecharLong. Tenant exige filaspropias oeventosNULLdel
+puenteSP; plataforma permite rootNULL+eventoTenantCreado. Sin autoridad cliente.
+
+Decision consciente solo nuevo caminoSQL: fechasinvalidas o precision>6->400
+en vez de truncar; resource>60/queryrequests>250->400 por limites del contrato.
+Queryevents se trunca100UTF16sinpartirsurrogates como legacy; blank->NULL,
+UUIDfiltros canonicos,statuspositiveumbral intacto,before<=0sin filtro. No
+imponer from<to nuevo. Legacy no cambia. ErroresSPpreservados/datosmal500,
+sin fallback/retry ni snapshotreal prometido. Encargo tmp/sql-01-a19-spec.md.

@@ -737,3 +737,22 @@ cuotas deplan,resultado creado validado,ISSUEregistro explicitoMANDATORY.
 No autenticacion automatica/cookie/hostfalso ni nueva configuracion. Se acepta
 implementacion y mocks/TXmodeladas,NO permisos/cupos/rollback/concurrencia
 reales ni SQLServer/JDBC/Flyway/HTTP/SMTP conectado. Sin nuevaQAvisual.
+
+
+## SQL-01.A18 - ACEPTADA con368 pruebas independientes
+
+Informe msg_2ffa48cf0b92/done msg_413a740a5390 revisados. Supervisor leyo
+TraceFilter/store/dos suites ycontrastoconV3/REQUEST_FINISH. Core filtro,
+Origin/gateway/headers y llamada legacy con argumentos identicos; solo nueva
+rama store alfinally y cleanup garantizado. Correlacionlocal/contextofinal
+validado,SPunico/REQUEST/0RS,REQUIRES_NEWacotado. Respuesta/excepcion original
+conservada ante fallopersistenciaRuntime; log seguro soloID,mensajeestatico.
+
+Snapshot368/368,0fail/0error/0skip,jarPASS23.303s. Independentenv gatewayfalse
+solo proceso,sinDNS. Se verifican error/cleanup,actoratributos traslimpieza
+SecurityContext,mapeos/binds y suspension/reanudacion modelada. No se acredita
+conexion/pool/locks/commitdurable por ese modelo.
+
+accept-sqlserver-a18.py verifica4SHA/111bases y core/legacy,integra1existente
++3nuevos;110bases ajenas intactas. Evidencia tmp/sqlserver-a18-acceptance.json.
+Sin defectos abiertos en alcance revisado,no nuevaQAvisual ni wiring SQL.
