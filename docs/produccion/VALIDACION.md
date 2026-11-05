@@ -544,3 +544,12 @@ Requestpublico/rate/receipt5campos y STEP6args2RS sinDETAILextra revisados.
 GuardaA24obsoleta reemplazada segunencargo (451previos+9netos=460).
 SinSQLServer/JDBC/HTTP reales ni nueva evidencia visual. A26 siguiente:
 lecturas plataforma planes/usuarios/especialidades/auditoria sinwiring.
+
+
+A26 ACEPTADA: informe msg_83b0af00a8fc/done msg_7132631cf5b7,4SHAexactos,
+verify independiente476/476,0fallos/errores/omisiones,jarPASS24.161s,
+2026-11-04T22:50:23-05:00.129bases verificadas,128ajenas intactas;1existente+
+3nuevos integrados. Legacy methods/domain/TENANT_QUERY comparados exactos.
+SAD/4SP/proyecciones21/6/5/7/JSONprofundo/nullable revisados personalmente.
+SinSQLServer/JDBC/HTTP reales ni nueva evidencia visual. Siguiente A27:
+tenants/tenant/status plataforma,mismos4archivos,secuencia sin solapamiento.

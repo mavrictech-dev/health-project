@@ -680,3 +680,8 @@ GuardatestA24 sustituido explicitamente por regresionesnuevas,sinwiring.
 D-34: A26 cuatrolecturas plataforma porSP soloSAD,REQUESTcoherente,otras
 operacionesSQLguardadas. Proyecciones tipadas y JSONprofundo inmutable,
 query220UTF16sintruncar y limits1..200. Constructoraislado,sinwiring.
+
+
+D-35: A27tenants/tenant/statusSAD,29columnas+hostname/urldesdeSettings.
+Status unSPdevuelvefila;augmentSettings dentrocallbackTX antescommit,fallo
+revierte. Nolecturaextra ni autoreanudacion ni revisioninventada,sinwiring.

@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A25 aceptadas; A26 preparado) | A19 task_f2b11c63b1f1 / ctx_37f7e33bd3b9,385/385 supervisor | Soporte completo integrado sin wiring. Siguiente plataforma lecturas A26; otros consumidores/wiring/QA real pendientes |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A26 aceptadas; A27 preparado) | A19 task_f2b11c63b1f1 / ctx_37f7e33bd3b9,385/385 supervisor | Catalogos plataforma integrados sin wiring. Siguiente tenants/status A27; otros consumidores/wiring/QA real pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -598,3 +598,21 @@ Requestpublico/rate/receipt5campos y STEP6args2RS sinDETAILextra revisados.
 GuardaA24obsoleta reemplazada segunencargo (451previos+9netos=460).
 SinSQLServer/JDBC/HTTP reales ni nueva evidencia visual. A26 siguiente:
 lecturas plataforma planes/usuarios/especialidades/auditoria sinwiring.
+
+
+A26 delegada: task_e3ea956a22a7 / ctx_367702337778,dependencia A25settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio noobservado,no reenviar ni
+abandonar;esperar avisoOrca. OwnershipPlatformService/store/dossuites,D-34.
+A25 subidab0c4221505eec39508513dd75d41c77d39d3b70f a rama de trabajo,
+refremota comprobada,main intacta. Restoconsumidores/wiring/QAreal pendientes;
+apagarPC solo al terminar todos los pendientes,no durante este cierreparcial.
+
+
+A26 ACEPTADA: informe msg_83b0af00a8fc/done msg_7132631cf5b7,4SHAexactos,
+verify independiente476/476,0fallos/errores/omisiones,jarPASS24.161s,
+2026-11-04T22:50:23-05:00.129bases verificadas,128ajenas intactas;1existente+
+3nuevos integrados. Legacy methods/domain/TENANT_QUERY comparados exactos.
+SAD/4SP/proyecciones21/6/5/7/JSONprofundo/nullable revisados personalmente.
+SinSQLServer/JDBC/HTTP reales ni nueva evidencia visual. Siguiente A27:
+tenants/tenant/status plataforma,mismos4archivos,secuencia sin solapamiento.
