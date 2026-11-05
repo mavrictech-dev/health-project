@@ -30,10 +30,37 @@ public final class SqlServerSupportStore {
  });}
  public Map<String,Object> detail(HttpServletRequest request,String id){return within(()->{
   var c=context(request);Checks.id(id);var rs=sets(executor.execute(SqlServerProcedure.SUPPORT_DETAIL,c,id),2);
+  return detail(rs,c,id);
+ });}
+ private static Map<String,Object> detail(List<List<Map<String,Object>>> rs,SqlServerContext c,String id){
   if(rs.getFirst().size()>1)throw SqlServerErrors.database();if(rs.getFirst().isEmpty())throw ApiException.missing();
   var ticket=ticket(rs.getFirst().getFirst(),c);if(!id.equals(ticket.get("id")))throw SqlServerErrors.database();
   var result=new LinkedHashMap<>(ticket);result.put("comments",rs.get(1).stream().map(SqlServerSupportStore::comment).toList());return Collections.unmodifiableMap(result);
+ }
+ /** Validates trusted request attributes before the controller rate limiter; create repeats this inside REQUIRED. */
+ public static void validatePublicRequest(HttpServletRequest request){publicContext(request);}
+ private static SqlServerContext publicContext(HttpServletRequest request){
+  if(request==null)throw SqlServerErrors.database();Object host=request.getAttribute("health.tenant"),value=request.getAttribute("health.actor");
+  if(host!=null && !(host instanceof TenantRef) || value!=null && !(value instanceof Actor))throw SqlServerErrors.database();
+  if(value instanceof Actor actor && !Objects.equals(actor.tenantId(),host==null?null:((TenantRef)host).id()))throw ApiException.forbidden();
+  var c=SqlServerRequestContexts.from(request,SqlServerContext.Scope.REQUEST);
+  if(c.tenantId()!=null && !canonical(c.tenantId()) || c.actorId()!=null && (!canonical(c.actorId()) || c.tokenHash()==null || !c.tokenHash().matches("[0-9a-fA-F]{64}")))throw SqlServerErrors.database();return c;
+ }
+ public Map<String,Object> create(HttpServletRequest request,String email,String subject,String message,String priority){return within(()->{
+  var c=publicContext(request);
+  if(!validText(email,254) || !validText(subject,180) || !validText(message,4000) || priority==null || !Set.of("LOW","NORMAL","HIGH","URGENT").contains(priority))throw SqlServerErrors.invalid();
+  String id=Checks.id(),reference="MVT-"+UUID.randomUUID().toString().substring(0,12).toUpperCase(Locale.ROOT);
+  String json=new tools.jackson.databind.ObjectMapper().writeValueAsString(Map.of("email",email,"subject",subject,"message",message,"priority",priority));
+  var result=executor.execute(SqlServerProcedure.SUPPORT_CREATE,c,id,reference,json);
+  if(result==null || !result.resultSets().isEmpty())throw SqlServerErrors.database();
+  return Map.of("reference",reference,"status","OPEN","message","Solicitud registrada. Conserva tu referencia.","provider","Mavric Technologies","website","https://mavrictec.com");
  });}
+ public Map<String,Object> step(HttpServletRequest request,String id,int revision,String status,String priority,String message){return within(()->{
+  var c=context(request);Checks.id(id);
+  if(revision<1 || status==null || !Set.of("OPEN","IN_PROGRESS","WAITING_USER","RESOLVED","CLOSED").contains(status) || priority==null || !Set.of("LOW","NORMAL","HIGH","URGENT").contains(priority) || message!=null && message.length()>4000)throw SqlServerErrors.invalid();
+  return detail(sets(executor.execute(SqlServerProcedure.SUPPORT_STEP,c,id,revision,status,priority,Checks.id(),message),2),c,id);
+ });}
+ private static boolean validText(String value,int max){return value!=null && !value.isBlank() && value.length()<=max;}
  private static List<List<Map<String,Object>>> sets(SqlServerExecutor.Result result,int count){if(result==null || result.resultSets().size()!=count)throw SqlServerErrors.database();return result.resultSets();}
  private static Object field(Map<String,Object> row,String key){if(!row.containsKey(key))throw SqlServerErrors.database();return row.get(key);}
  private static String text(Map<String,Object> row,String key){if(!(field(row,key) instanceof String value))throw SqlServerErrors.database();return value;}

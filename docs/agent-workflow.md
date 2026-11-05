@@ -597,3 +597,22 @@ verify independiente452/452,0fallos/errores/omisiones,jarPASS24.483s,
 Ownershiptenant/autor porfila,proyecciones12/4,nullable y MAX,mapeodentroTX
 revisados personalmente. SinSQLServer/JDBC/HTTP reales ni evidencia visual.
 Siguiente A25 escrituras soporte,mismos4archivos sin solapamiento.
+
+
+A25 delegada: task_574949c343c3 / ctx_0d56a466b977,dependencia A24settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio noobservado,no reenviar ni
+abandonar;esperar avisoOrca. Ownership mismos4archivossoporte,D-33.
+A24 subidac6a734265bd204872d19ac00b4c4f4ca08031f56 a rama de trabajo,
+refremota comprobada,main intacta. Restoconsumidores/wiring/QAreal pendientes;
+apagarPC solo al terminar todos los pendientes,no durante este cierreparcial.
+
+
+A25 ACEPTADA: informe msg_a7c3353a8c4f/done msg_529d3a89d58a,4SHAexactos,
+verify independiente460/460,0fallos/errores/omisiones,jarPASS24.375s,
+2026-11-04T22:39:23-05:00.129bases verificadas,125ajenas intactas;4existentes
+integrados. Legacy/list/getA24 comparados exactos retirando ramasSQLwrites.
+Requestpublico/rate/receipt5campos y STEP6args2RS sinDETAILextra revisados.
+GuardaA24obsoleta reemplazada segunencargo (451previos+9netos=460).
+SinSQLServer/JDBC/HTTP reales ni nueva evidencia visual. A26 siguiente:
+lecturas plataforma planes/usuarios/especialidades/auditoria sinwiring.

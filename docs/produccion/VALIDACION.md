@@ -534,3 +534,13 @@ verify independiente452/452,0fallos/errores/omisiones,jarPASS24.483s,
 Ownershiptenant/autor porfila,proyecciones12/4,nullable y MAX,mapeodentroTX
 revisados personalmente. SinSQLServer/JDBC/HTTP reales ni evidencia visual.
 Siguiente A25 escrituras soporte,mismos4archivos sin solapamiento.
+
+
+A25 ACEPTADA: informe msg_a7c3353a8c4f/done msg_529d3a89d58a,4SHAexactos,
+verify independiente460/460,0fallos/errores/omisiones,jarPASS24.375s,
+2026-11-04T22:39:23-05:00.129bases verificadas,125ajenas intactas;4existentes
+integrados. Legacy/list/getA24 comparados exactos retirando ramasSQLwrites.
+Requestpublico/rate/receipt5campos y STEP6args2RS sinDETAILextra revisados.
+GuardaA24obsoleta reemplazada segunencargo (451previos+9netos=460).
+SinSQLServer/JDBC/HTTP reales ni nueva evidencia visual. A26 siguiente:
+lecturas plataforma planes/usuarios/especialidades/auditoria sinwiring.

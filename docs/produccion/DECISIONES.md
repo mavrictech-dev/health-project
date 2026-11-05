@@ -675,3 +675,8 @@ D-33: A25publicsupportREQUESTanonimo/tenantanonimo permitido,requestinterno
 igual argumentoHTTP,rate existente anteswrite. CREATE0RS recibo5camposlegacy;
 STEP6args2RS sinlecturaextra,SPautoridad de transiciones/revision/tenantcomment.
 GuardatestA24 sustituido explicitamente por regresionesnuevas,sinwiring.
+
+
+D-34: A26 cuatrolecturas plataforma porSP soloSAD,REQUESTcoherente,otras
+operacionesSQLguardadas. Proyecciones tipadas y JSONprofundo inmutable,
+query220UTF16sintruncar y limits1..200. Constructoraislado,sinwiring.
