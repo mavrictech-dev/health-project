@@ -869,3 +869,15 @@ A38 entrega msg_26e6abc7f780 / msg_139daa11df87 inspeccionada y aceptada solo
 para adapter aislado. Snapshot A37, 157 rutas backend protegidas y cuatro SHA
 comprobados; verify independiente 664/664 y jar PASS. Sin SQL QA, wiring, JDBC,
 HTTP ni perfiles clinicos habilitados; worker_done no equivale a aprobacion.
+
+A39 delegada: task_fdc6d0edfca3 / ctx_5da265b27a38, dependencia A38 settled.
+Mismo Run, terminal y worktree retenidos; cuenta del programador identity-only
+confirmada con cuenta asignada, sesion existente y `--no-daemon`. Cuatro paths
+exclusivos según tmp/sql-01-a39-spec.md / D-47. Worker reporta que inspecciona
+D-47 y SP, sin ampliar alcance. Worktree ya contiene cambios acumulados previos
+sin commit; se preservan y ownership actual se limita a los cuatro paths.
+
+A39 entrega msg_aca8115fd222 / msg_2fcef8fe4ac3 revisada e integrada tras
+snapshot independiente de HEAD A38, hashes de los cuatro archivos y verify
+692/692 con jar PASS. Aceptada únicamente como adapter aislado. No hubo JDBC,
+SQL QA, HTTP ni wiring; siguiente paquete A40 PortalService documental.

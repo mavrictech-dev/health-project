@@ -999,3 +999,26 @@ failures/errors/skips, BUILD SUCCESS y jar reempaquetado. Adecuado para aceptar
 el adapter aislado; no acredita motor, JDBC, HTTP, transacciones/durabilidad,
 grants, datasource compartido ni habilitacion profesional. A38 integrada sin
 wiring; siguiente A39 DocumentService.
+
+A39 revision supervisora, 2026-11-05
+
+Informe msg_aca8115fd222 y worker_done msg_2fcef8fe4ac3. Los cuatro SHA del
+reporte coinciden con el worktree y el snapshot aislado. Snapshot desde HEAD A38
+más exactamente los cuatro archivos asignados. Contraste manual con DocumentService,
+Requests, Sql.rows camelización, V1.documents, V5 resultsets/guards y V8 bindings/
+grants. Revisados constructores Spring, ramas legacy sin cambios en cuerpos,
+request/actor/tenant, roles, módulos, REQUIRED anidado y propagación segura de
+errores. La lista y el detalle validan 16 columnas; CREATE/CHANGE consumen su
+resultset compuesto sin lecturas Java redundantes; CHANGE mantiene GET previo y
+validación SAVE. SP retiene hash UTF-8, expectedRevision/locks, firma inmutable,
+publicación/vínculo y retiro.
+
+`mvnw -B -ntp verify` independiente con JDK21 y snapshot: 692 tests, 0
+failures/errors/skips, BUILD SUCCESS, jar/repackage PASS. La ruta HTTP se mantiene
+en DocumentController/DTO; no se ejecutaron MockMvc, SQL Server, JDBC, grants,
+firmas reales, publicación, wiring ni perfiles. Los doubles no acreditan esas
+integraciones. Worktree tenía 120 archivos dirty/untracked: 115 de 116 previos
+coinciden byte por byte con HEAD; el único restante es una línea vacía final en
+SqlServerClinicalStore, el arreglo de formato local ya integrado en A38. Los
+cuatro ownership A39 están exactos. A39 aceptada solo como implementación
+aislada; siguiente A40 PortalService documental.

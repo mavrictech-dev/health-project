@@ -523,3 +523,9 @@ rechaza1. JavaDuration.toDays=93loacepta,contratoD-44. DefectopersistenciaV5:137
 nofalloenadaptador. Evidencia tmp/sqlserver-a36-window-defect.txt.
 A35 sigueultimocodigoaceptado. Corregir viaV9incremental(noeditarV1-V8),
 soloALTERusp_appointments_list yregresionmotorrollback-only;4SHAJavaA36congelados.
+
+A39 aceptada en implementación aislada: verify independiente 692/692 y jar PASS. D-47 y revisión técnica confirman los cuatro SP y preservación de auditoría; no hay QA real de firmas/publicación, SQL Server/JDBC/HTTP o wiring. Siguiente A40 PortalService documental.
+SQL-01.A39 DocumentService delegada task_fdc6d0edfca3 / ctx_5da265b27a38,
+dependencia A38 settled. A39 aceptada tras revisión independiente, cuatro archivos integrados; sin DB,
+wiring, JDBC/HTTP o edición de shared docs/producto. Worktree preservado con
+cambios acumulados de tareas anteriores.

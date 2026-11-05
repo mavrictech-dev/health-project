@@ -786,3 +786,10 @@ A38 aceptada solo como store/servicio explicitamente seleccionado y suite offlin
 independiente. D-46 se implemento: profileSnapshot validado por logica existente,
 resultsets/auditoria sin lecturas duplicadas y sin backend activo. SQL Server real,
 JDBC, wiring/grants y aprobacion de perfiles clinicos siguen fuera de esta decision.
+
+D-47 (2026-11-05): Migrar únicamente DocumentService con adaptador SQL Server explícito. Preservar rutas/DTO y métodos list/get/create/change. Lectura PRO/ASI/AUD; escritura PRO + CORE y tenant activo según contratos ya aprobados. Usar DOCUMENTS_LIST/DOCUMENT_GET/DOCUMENT_CREATE/DOCUMENT_CHANGE y proyecciones compatibles; validar forma/tenant/IDs/resultsets. Mantener auditorías DOCUMENT_LIST_READ y DOCUMENT_READ en SP. create retorna el resultset compuesto de CREATE, no ejecutar GET duplicado. change mantiene lectura previa y validación SAVE del servicio legado, usa SP con revisión optimista y acepta el resultset del CHANGE sin GET posterior redundante. Firma UTF-8, inmutabilidad, publicación/vínculo, retiro, revisión y auditoría permanecen en SP V5 existente. No cambiar SP, wiring/config, controllers/DTO, perfiles ni habilitar funcionalidad parcial. Pruebas unitarias offline no equivalen a JDBC/SQL Server/HTTP.
+
+D-47 resuelta para implementación: A39 aceptada como adapter aislado tras revisión
+fuente y 692/692 en snapshot independiente. El cambio no activa DocumentService.
+Validación real con SQL Server/JDBC/HTTP, grants, firma/publicación e integración
+sigue pendiente; PortalService documental queda en tarea secuencial A40.

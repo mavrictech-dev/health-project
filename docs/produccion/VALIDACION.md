@@ -704,3 +704,16 @@ fixtures sinteticos de perfiles solo ejercitan ramas de codigo.
 No se ejecuto ninguna escritura en la QA SQL Server ni JDBC/HTTP; estos dobles
 no demuestran locks/interbloqueos/durabilidad, grants de runtime o perfiles
 clinicos aprobados. El backend sigue sin wiring y sin perfiles habilitados.
+
+## SQL-01.A39 - DocumentService aislado, 2026-11-05
+
+Verificación en snapshot independiente derivado de HEAD A38 y cuatro archivos
+A39 confirmados por SHA256: JDK21 `mvnw -B -ntp verify`, 692 pruebas, 0
+fallos/errores/skips, BUILD SUCCESS, jar PASS. Tests modelan executor y REQUIRED
+y cubren roles, scopes, proyecciones/listas, UUID/tenant, nullable fields,
+Unicode/MAX content, operaciones/expectedRevision, shape y errores; no conectan
+al servidor SQL ni prueban firma/hash/publicación reales.
+
+No se activó el backend ni se ejecutó JDBC/HTTP/MockMvc, SQL Server, grants o
+wiring. Resultados mock no prueban seguridad de SP ni durabilidad/concurrencia.
+Validación de integración y revisión visual del cliente siguen pendientes.

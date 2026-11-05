@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A38 implementacion aceptada) | A38 task_92d3865317c8 / ctx_c5458189b296; verify independiente 664/664 | ClinicalService completo aislado; falta QA motor de escrituras, consumidores restantes y wiring JDBC/HTTP |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A39 implementacion aceptada) | A39 task_fdc6d0edfca3 / ctx_5da265b27a38; verify independiente 692/692 | DocumentService completo aislado; falta QA motor de escrituras, PortalService y consumidores restantes, wiring JDBC/HTTP |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -860,3 +860,21 @@ Verify JDK21 independiente: 664/664, cero fallos/errores/skips, jar PASS.
 Validacion clinica/profileSnapshot y auditoria se conservan; dobles no validan
 SQL real. Siguiente A39 DocumentService; wiring, JDBC/HTTP, grants runtime y
 QA del motor para get/start/note/entry siguen pendientes.
+
+A39 preparada para SQL-01: tmp/sql-01-a39-spec.md / D-47. Ownership exclusivo de DocumentService, nuevo SqlServerDocumentStore y dos suites dedicadas. Dependencia A38 settled. Sin portal documental, otros servicios, wiring, SQL/DDL o cambios compartidos. Contratos de firma/hash, expectedRevision, publicación y retiro existentes en SP se preservan. Esperar informe y revisar en snapshot independiente antes de aceptar. La siguiente etapa es PortalService documental y otros consumidores por paquetes sin archivos solapados.
+
+A39 delegada: task_fdc6d0edfca3 / ctx_5da265b27a38; dependencia A38 settled.
+Run run_624b9269b491, terminal retenido term_cb1b5652-ef88-4fce-8c34-0634faf27a89,
+worktree C:/Users/maxmo/orca/workspaces/Health Project/health-programmer.
+IdentityOnly confirma email asignado sin exponer credenciales; --no-daemon.
+Ownership DocumentService/store nuevo/dos suites, exactamente según spec. Worktree
+contiene cambios históricos acumulados previos; no se limpia/reset ni modifica
+fuera de ownership. En curso; esperar informe Orca.
+
+A39 ACEPTADA e integrada: informe msg_aca8115fd222 / worker_done msg_2fcef8fe4ac3.
+Cuatro hashes ownership verificados; snapshot independiente desde HEAD A38 con
+las cuatro fuentes asignadas. `mvnw -B -ntp verify` JDK21: 692/692, 0
+fallos/errores/skips, BUILD SUCCESS y jar PASS. List/get/create/change usan los
+cuatro SP previstos; la firma UTF-8, locking, publicación y retiro quedan bajo
+SP. Dobles no acreditan SQL Server/JDBC/HTTP ni grants/wiring. Siguiente A40:
+PortalService documental aislado; otros consumidores y validación real pendientes.
