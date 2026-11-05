@@ -590,3 +590,5 @@ A50 artefacto revisado, aceptado e integrado: verify independiente905/905 y jar 
 A50 ya cerrada en Orca por msg_36c5ed3e4930; bloqueo cuota resuelto, misma cuenta/sesion, sin nueva edicion/verify. A51 preparada para completar get/create/step de workflows con dos resultsets y permisos dinamicos de V6. Sin wiring ni QA SQL/JDBC/HTTP real.
 
 A51 delegada task_eb4c19e51b5f / ctx_cb2e6de75a0f, dependencia A50 settled. IdentityOnly de ambos roles y /status efectivo programador confirmados: mendozadeafabisa@gmail.com, sesion 01a19e4c-15af-74e0-a1b9-75fc7093b98f. Mismo terminal/worktree --no-daemon, cuatro rutas exclusivas D-59/tmp/sql-01-a51-spec.md; get/create/step en un paquete. Orca dispatched, pendiente entrega/revision. Sin wiring ni SQL/JDBC/HTTP real.
+
+A51 aceptada e integrada: verify independiente922/922 jarPASS. Workflows ya tiene todos sus recorridos aislados. El runtime aun selecciona componentes/filters legacy y configMySQL; siguiente A52 auditoria completa de ensamblado y posibles consumidores no cubiertos. Sigue pendiente wiring/SQLServer/JDBC/HTTP/grants/QAvisualreal.
