@@ -717,3 +717,14 @@ al servidor SQL ni prueban firma/hash/publicación reales.
 No se activó el backend ni se ejecutó JDBC/HTTP/MockMvc, SQL Server, grants o
 wiring. Resultados mock no prueban seguridad de SP ni durabilidad/concurrencia.
 Validación de integración y revisión visual del cliente siguen pendientes.
+
+## SQL-01.A40 - PortalService.documents aislado, 2026-11-05
+
+Snapshot independiente de HEAD A39 más cuatro archivos A40 confirmados por
+SHA256. JDK21 `mvnw -B -ntp verify`: 712 pruebas, 0 fallos/errores/skips,
+BUILD SUCCESS, jar PASS. Tests modelan executor/REQUIRED y cubren selección del
+constructor, scopes, proyección, límite/orden/Unicode, validación, mapeo seguro y
+errores SP. No ejecutan SQL Server, autorización del vínculo, HOLDLOCK, auditoría
+durable, revocación/publicación, JDBC, HTTP ni grants.
+
+El backend no está cableado/activo; la prueba no afirma funcionamiento real.

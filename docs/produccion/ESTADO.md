@@ -529,3 +529,9 @@ SQL-01.A39 DocumentService delegada task_fdc6d0edfca3 / ctx_5da265b27a38,
 dependencia A38 settled. A39 aceptada tras revisión independiente, cuatro archivos integrados; sin DB,
 wiring, JDBC/HTTP o edición de shared docs/producto. Worktree preservado con
 cambios acumulados de tareas anteriores.
+
+SQL-01.A40 preparada para PortalService.documents, con D-48 y ownership secuencial sin solapamiento con A39. A39 integrada en health/production-wave0: 814f3bc. main intacta.
+
+SQL-01.A40 PortalService.documents delegada task_06825ad3435d / ctx_f5dea8dd3f6a,
+dependencia A39 settled. Cuenta efectiva verificada; un solo worker y ownership
+sin solapamiento, cuatro rutas. En curso, sin wiring ni QA motor.

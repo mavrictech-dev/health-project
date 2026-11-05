@@ -881,3 +881,20 @@ A39 entrega msg_aca8115fd222 / msg_2fcef8fe4ac3 revisada e integrada tras
 snapshot independiente de HEAD A38, hashes de los cuatro archivos y verify
 692/692 con jar PASS. Aceptada únicamente como adapter aislado. No hubo JDBC,
 SQL QA, HTTP ni wiring; siguiente paquete A40 PortalService documental.
+
+A39 ACEPTADA e integrada por commit 814f3bc en health/production-wave0; main intacta. Informe msg_aca8115fd222/msg_2fcef8fe4ac3, snapshot supervisor independiente 692/692, jar PASS; ninguna prueba de SQL/JDBC/HTTP real.
+A40 preparada en tmp/sql-01-a40-spec.md / D-48 para PortalService.documents exclusivamente; verificar account/session y despachar con dependencia A39 settled.
+
+A40 dispatch task_06825ad3435d / ctx_f5dea8dd3f6a, A39 settled. `/status`
+confirma cuenta/session existente mendozadeafabisa@gmail.com /
+01a19e4c-15af-74e0-a1b9-75fc7093b98f, GPT-6.1-Sol medium. IdentityOnly y
+--no-daemon. Cuatro rutas exclusivas; revisar PORTAL_DOCUMENTS/SP V5; esperar.
+
+A40 interfaz aclarada: preservar Sql y SchedulingService para las operaciones no
+migradas mediante constructor explícito con store + Sql + Access + SchedulingService;
+constructor legacy @Autowired intacto. documents usa únicamente el store sin fallback.
+Consulta msg_5bd454c50aa8 respondida msg_1200f775c2d5. Sin cambios de ownership.
+
+A40 revisada e integrada: informe msg_147b380a526e/msg_54d34f4bd005, 712/712
+verify independiente. Constructor autorizado y legado preservados; la prueba
+solo usa dobles, sin JDBC/SQL/HTTP/wiring. commit/push supervisor posterior.

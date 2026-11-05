@@ -1022,3 +1022,25 @@ coinciden byte por byte con HEAD; el único restante es una línea vacía final 
 SqlServerClinicalStore, el arreglo de formato local ya integrado en A38. Los
 cuatro ownership A39 están exactos. A39 aceptada solo como implementación
 aislada; siguiente A40 PortalService documental.
+
+A40 revision supervisora, 2026-11-05
+
+Informe msg_147b380a526e, cierre msg_54d34f4bd005; decisión de constructor
+msg_5bd454c50aa8/msg_1200f775c2d5. Los cuatro hashes reportados coinciden con
+el worktree y snapshot derivado de HEAD A39. Revisión de PortalService, D-48,
+V5 usp_portal_scope/usp_portal_documents y enum PORTAL_DOCUMENTS: constructor
+legacy @Autowired y colaboradores intactos; nuevos métodos ajenos a documents no
+cambiaron; selección server-side, `portal()` y Checks.id preservados. SQL path
+usa request interno y SP único, sin Access.link/SELECT/auditoría duplicada ni
+fallback; el SP sigue siendo autoridad de vínculo activo, visibilidad y audit.
+Store valida proyección exacta de nueve campos, tipos/UUID/fecha/hash/cardinalidad,
+conserva orden/lista/contenido y no inventa columnas omitidas.
+
+`mvnw -B -ntp verify` independiente sobre snapshot: JDK21, 712 tests, 0
+failures/errors/skips, BUILD SUCCESS, jar/repackage PASS. Pruebas de los guards,
+HOLDLOCK, revocación, publicación, aislamiento SQL, grants y auditoría son dobles,
+no evidencia del motor. No se ejecutó HTTP/MockMvc/JDBC/SQL Server ni wiring.
+120 rutas previas del worktree protegidas; comparadas con checkout supervisor,
+119 iguales byte a byte y una difiere solo por línea vacía final ya eliminada en
+A38. Cuatro archivos A40 coincidentes. A40 aceptada solo como lectura aislada;
+siguiente A41 PortalService appointments.

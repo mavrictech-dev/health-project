@@ -793,3 +793,19 @@ D-47 resuelta para implementación: A39 aceptada como adapter aislado tras revis
 fuente y 692/692 en snapshot independiente. El cambio no activa DocumentService.
 Validación real con SQL Server/JDBC/HTTP, grants, firma/publicación e integración
 sigue pendiente; PortalService documental queda en tarea secuencial A40.
+
+D-48 (2026-11-05): A40 porta exclusivamente PortalService.documents mediante SqlServerPortalDocumentStore explícito. Mantener portal() (PAC/RES + PORTAL), Checks.id, controller y proyección. No llamar Access.link/SELECT Java en la rama SQL: usp_portal_scope resuelve tenant/actor, módulo y vínculo DOCUMENTS activo bajo HOLDLOCK; usp_portal_documents filtra SIGNED/published/not withdrawn, limita/ordena 200 y registra PORTAL_DOCUMENTS_READ bajo la misma transacción. El store consume/valida nueve campos camelizados y no infiere campos ausentes. El wiring de PortalService completo y el QA real SQL/JDBC/HTTP quedan en gates posteriores.
+
+Aclaración arquitectónica A40: se autoriza el constructor explícito
+(SqlServerPortalDocumentStore, Sql, Access, SchedulingService) para conservar los
+recorridos no migrados; `Sql` permanece solo para patients/appointments/balance y
+SchedulingService para reserve. `documents` debe usar exclusivamente el store en
+la rama seleccionada, sin fallback. Constructor legacy `@Autowired` sin cambios.
+Respuesta supervisora msg_1200f775c2d5 a la consulta msg_5bd454c50aa8.
+
+D-48 resuelta para implementación: A40 fue revisada e integrada únicamente para
+PortalService.documents; constructor legacy intacto y constructor explícito
+(SqlServerPortalDocumentStore, Sql, Access, SchedulingService) conserva los
+colaboradores de los métodos no migrados. Suite independiente 712/712. No hay
+validación real del vínculo/SQL/JDBC/HTTP, ni backend activo. Siguiente A41
+PortalService.appointments por propiedad secuencial del mismo archivo.
