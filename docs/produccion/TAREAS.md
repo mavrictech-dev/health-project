@@ -1474,3 +1474,15 @@ para autorizacion DB mediante usuarios WITHOUTLOGIN, no login/JDBC/TLS/HTTP/UI.
 A64 tiene evidencia suficiente para integrar estos cuatroartefactos revisados;
 el cierre formal/reportefinal Orca permanece PENDIENTE porcuota. No despachar
 trabajo nuevo al retenido hasta cerrar Task. No marcar run ni migracion completa.
+
+
+Continuidad de entorno JDBC: propuesta revisable ENTORNO_JDBC_QA.md preparada
+por supervisor. SoloMSSQLSERVER instalada; sesion sin elevacion; setup2022cacheado
+firmadoMicrosoft y puerto14335 disponible al comprobar. Se propone elegir
+instanciaHEALTHPROJECTQA exclusiva o endpointQA existente autorizado antes de
+provisionar; no se instalo/configuro nada. Herramientas actuales fijan destino
+antiguo y no deben validaruno para arrancarotro. GateJDBC sigue abierto.
+CierreA64 instruido enmsg_6eb8c5168fdd, envioaceptado; cuota produjo escalacion
+msg_stop_7a5b426a43df0e05f53aa65f. No mas nudges/restarts/cuentas alternativas
+hasta disponibilidad20:45 o cambioexterno. TaskA64 abierta, artefactos integrados
+8d70803; A63permisoefectivo20/20 independiente aprobado con scopeDBsinLOGIN.

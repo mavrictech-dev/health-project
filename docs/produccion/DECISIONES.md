@@ -1101,3 +1101,12 @@ restaurados porfase,scopeWITHOUTLOGIN. No autentica loginSQL niJDBC real.
 D-72 artefactos aprobados por revision y65tests/17checks/20fasesindependientes;
 cierreTaskA64 pendiente porcuota, no inferirworker_done ni abrir siguienteTask.
 Conservar4SHA revisados; sin cuentaalternativa ni compra de creditos.
+
+
+D-73 (2026-11-05): propuesta ENTORNO_JDBC_QA.md para elegir destino SQL QA
+con TCP/login compatible. Recomendar instancia nombrada exclusiva HEALTHPROJECTQA
+loopback14335 y base nueva marcada, sin modificar instancia compartida. Inspeccion
+actual confirma instaladorcacheado firmado y falta de elevacion, no medio completo
+ni instalacion viable aun. Antes de provisionar se necesita eleccion de destino
+y elevacion Windows; no modificar recursos existentes ni iniciar otroTask hasta
+cierreA64. Esta decision es contrato propuesto, no instalacion ni JDBCvalidado.
