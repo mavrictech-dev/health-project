@@ -435,3 +435,13 @@ Plan1SP/json16/Boolean y USER_CREATE->PLATFORM_USERS mismaREQUIREDmodelada,
 proyeccion5campos/nullable,sinpassword revisados personalmente. D-36.Avigente.
 SinSQLServer/JDBC/HTTP reales ni nueva visual. A29 siguiente:createTenant/pay,
 mismos4archivos para completarPlatformService aislado,sinwiring.
+
+
+A29 ACEPTADA: informe msg_d32e530bbbf9/done msg_cbed31986756,4SHAexactos,
+verify independiente509/509,0fallos/errores/omisiones,jarPASS25.680s,
+2026-11-04T23:19:29-05:00.132bases verificadas,128ajenas intactas;4existentes
+integrados. PlatformService entero comparado exacto retirando2ramasSQL.
+Ownerlookup oUSER_CREATE->TENANT_CREATE mismaREQUIRED/Settingsantescommit y
+pago1SP/proyeccion8/nullable revisados personalmente. PlatformServicecompleto
+solo constructorSQLaislado,sin wiring. Sinmotor/JDBC/HTTP/cobrosreales ni nueva
+visual. Siguiente A30 OrganizationService lecturas simples (5SP).

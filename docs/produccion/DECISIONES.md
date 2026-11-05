@@ -702,3 +702,8 @@ y queda sustituida. DescriptionNULL rechazado por Requests/JSONstringV4.
 D-37: A29completaPlatformService aislado:createTenant une ownerexistente
 lookup o IdentityService.create nuevo conSAAS_TENANT_CREATE ySettingsantes
 commitREQUESTSAD. Pay1SP2args/8campos,sin cobroexterno. Sinwiring/DBreal.
+
+
+D-38: A30Organizationlookup/directory/professionals/catalog/plans tenant-only,
+lookup/plansADM,restocualquieractorcoherente. BranchAccessA13preservado mas
+SPprofessionalsautoridad. 5SPREQUEST tipados,config/writeguardados,sinwiring.
