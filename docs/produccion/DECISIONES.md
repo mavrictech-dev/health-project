@@ -858,3 +858,7 @@ D-57 (2026-11-05): A49 completa resource/admit/discharge con tres SP V6 existent
 D-57 resuelta para implementacion: A49 aceptada e integrada con SHA/review/verify independiente 885/885. HospitalService completo aislado, sin habilitacion clinica ni QA real.
 
 D-58 (2026-11-05): A50 prepara solo WorkflowService.definitions/list mediante dos SP V6. SP autoridad para permisos/modulos dinamicos de definiciones actuales; Java valida autoridad tenant/request y proyeccion, no filtra por copia local de roles o catalogo fijo. definitions8 sin limite artificial (V6 sin TOP), list12 max200. get/create/step y helper definition permanecen legacy para evitar mezcla de dependencias en este corte. Ownership cuatro rutas, sin wiring/protocolos nuevos.
+
+D-58 resuelta para artefacto: A50 aceptada e integrada tras SHA/review/verify independiente 905/905. Su Task/Dispatch NO cerrados: el programador alcanzo usage limit antes de worker_done; instruccion msg_2c08b3a801cf para completar reporte sin tocar archivos al recuperar cuota. No relanzar cuenta/sesion ni comprar creditos; no despachar dependientes con A50 aun abierta.
+
+D-59 preparada (2026-11-05): siguiente A51 debe migrar get/create/step juntos porque las escrituras llaman get internamente. Reutilizar WORKFLOW_GET/CREATE/STEP con dos resultsets (case12 + history5) sin get preflight/read-after-write adicionales. V6 autoridad de permisos dinamicos/branch/transiciones/revision/locks; preservar Checks.json200000/depth30 solo en escrituras y mapper configurado. Pendiente encargo final y Dispatch hasta cierre A50.
