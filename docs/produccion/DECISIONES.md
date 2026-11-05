@@ -872,3 +872,7 @@ D-60 (2026-11-05): A52 auditoria de solo lectura previa al ensamblado runtime co
 D-60 resuelta como auditoria estatica aceptada,no runtimevalidado. ENSAMBLADO_SQLSERVER.md:root explicito fuera scan,mismoDSmanager/executor/mapper,setup separado,poolprobeSP/healthSP,sin grafo parcial.24Stores=23runtime+bootstrap confirmados.
 
 D-61 (2026-11-05): A53 void SqlServerMonitorStore.ready() REQUIRED,WORKER9NULL,un HEALTH_READY ceroargs,1RS1fila readyInteger1. Sin SAMPLE/APPLICATION_STATUS/requestHTTP. Nuevo SqlServerDatabaseHealthIndicator implementa Boot4 HealthIndicator directamente,constructorstore,sinbean/config. UP tras retorno store;RuntimeException=>DOWN sin detalles/exception/cause/logs. No Health.down(error)/AbstractHealthIndicator ni metadata/isValid/Sql. Sin liveness/pool/arranque en este corte.
+
+D-61 resuelta para implementacion: A53 aceptada/integrada tras SHA/review/verify independiente934/934. ReadinessSP e indicador aislados, sin registrar/activar.
+
+D-62 (2026-11-05): A54 prepara propiedades e infraestructura explicita fuera scan en com.mavric.healthsqlserver, cuatro rutas nuevas sin root/main/import desdelegacy. Propiedades tipadas de endpoint/database/credencialruntime externa, driverSQLServer fijo sin JDBCURL con credenciales; toString/errores sin secretos. Hikari lazy sin apertura, probe fijo EXEC dbo.usp_health_ready, sin initSQL/isValid; unDSmanager/JdbcTemplate/executorRUNTIME/TransactionTemplate. Sin stores (factories siguiente paquete), setup/jobs/HTTP ni activacion. Credenciales y principales reales siguen sin validar.

@@ -70,7 +70,8 @@ cuatro informes Orca; la parte 4 corrige las erratas de numeros de linea.
 | JDBC real | Grants negativos, transacciones, conexion compartida, reset, eviction, rollback y concurrencia. |
 | HTTP y visual | Flujos reales de identidad, tenant, portal y SaaS; escritorio, movil y capturas despues de JDBC. |
 
-Solo A53 tiene ownership autorizado en este momento. Los siguientes cortes
+A53 esta aceptada con verify independiente 934/934. A54 tiene ownership para
+propiedades e infraestructura fuera del scan, sin stores ni activacion. Los siguientes cortes
 requieren un encargo concreto antes de editar. La activacion exige el grafo
 completo y su evidencia; estos cortes no habilitan protocolos clinicos.
 

@@ -10,6 +10,13 @@ public final class SqlServerMonitorStore {
  private final SqlServerExecutor executor;private final TransactionTemplate transactions;
  public SqlServerMonitorStore(SqlServerExecutor executor,PlatformTransactionManager manager){this.executor=Objects.requireNonNull(executor);transactions=new TransactionTemplate(Objects.requireNonNull(manager));}
  private <T> T within(Supplier<T> work){try{return transactions.execute(tx->work.get());}catch(RuntimeException error){throw SqlServerErrors.map(error);}}
+ /** Readiness-only operation, with server WORKER authority and no sampling side effects. */
+ public void ready(){within(()->{
+  var context=new SqlServerContext(null,null,null,null,null,null,null,null,null,SqlServerContext.Scope.WORKER);
+  var row=one(executor.execute(SqlServerProcedure.HEALTH_READY,context));
+  if(!(row.get("ready") instanceof Integer value) || value!=1)throw SqlServerErrors.database();
+  return null;
+ });}
  public Map<String,Object> status(HttpServletRequest request){return within(()->{
   if(request==null)throw SqlServerErrors.database();var context=SqlServerRequestContexts.from(request,SqlServerContext.Scope.REQUEST);
   return application(context);
