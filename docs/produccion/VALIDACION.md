@@ -1028,3 +1028,15 @@ quedan SOLOordinary_tcp_enabled y runtime_sql_auth_compatible (TCP0/WindowsOnly1
 SQL compartido sin cambios de servicios/transporte/auth; no backendactivo ni
 JDBCpositivo/grants efectivos de login/HTTPnegocio/UIvalidados. ProximoQA: permisos
 efectivos bajo usuarios DB WITHOUTLOGIN temporales, fixturesTXrevertidos.
+
+
+A63 EN_REVISION: worker msg_414eef2201d7/cierre msg_c79673847f6d reporta20/20
+fases SQLefectivas yrollback. Supervisor reviso harness SHA39B4AE33...40928DA y
+177protegidos (soloEOF A38). Repeticionindependiente fallo ANTES de fixtures:
+0fases,rawSQLcmd0/stdoutvacio en lectura inicial, mismo patron postCOMMIT A62.
+Evidencia tmp/sqlserver-a63-review/run-7fc92fc45b5c494ea86b33cbaa9b1e40.
+Diagnostico causal readonly: WAITFOR2s enQA marcada, -t1 devuelveexit0/stdout0/
+stderr Timeout expired; -t4 devuelve completo sinstderr. -t10 snapshotposterior
+0.656s validoFP416017...D285B. No fixtures ni mutaciones/reapply en diagnostico.
+No aceptar A63hasta repetir QAindependiente con herramienta fiable. A64 prepara
+clasificacion stderr/timeouts y estadoapply seguro, cuatro rutas D-72/spec.
