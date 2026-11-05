@@ -1248,3 +1248,18 @@ Conservar562exactos, matrizbidireccional y demas guards. Regresion/suite tras
 cambio y UN rehearseadicional, no otro plan innecesario. Nuncaapply/COMMIT real.
 A62 sigue task_f1a61e6514e6 / ctx_03dc4aa58e11 en correccion, no integrada;
 revision/ensayoindependiente y QA JDBCpositiva/negocio/visual aun pendientes.
+
+
+A62 ensayo DEVUELTO por comparacionCRLF, 2026-11-05. Pregunta msg_b3ef60f536f5:
+tercer ensayo CLI1/SQLcmd1 error59999 en bootstrap definition mismatch tras
+checks ACL/protegidos,3.813s. Freshcleanup reportado raw0/fingerprint original
+4E678570F62D8ABDC7EE76385D0681A80372BC7F77E0C434CC8789C9B90BC557
+identico,cleanuptrue; third-rehearse-error preservado. Supervisor verifico SHA
+wrapper95A365571991EC09CCDD25BD3EE572E0F47DC0E1B3F583BCECA81E67DC873EF9
+y comparo V8aprobada252-268: normaliza CR en ambos operandos; A62soloizquierda.
+Autorizado envolver RHSderivadoV8 en mismoREPLACE(CR),sin cambiarbody/hash/fuente
+ni comparacionbinaria. Regresion LF/CRLFequivalentes, contenido distinto rechazado,
+suite tras cambio y UN ensayo adicional sin plan/Maven innecesario. Noapply.
+Mantener562ACL exacta y resto de gates; cleanupfreshconnection obligatorio.
+Task task_f1a61e6514e6 / ctx_03dc4aa58e11 sigue en correccion, no aceptada;
+no afirmar exitoso ensayo completo ni permisos persistentes/JDBC positivo.

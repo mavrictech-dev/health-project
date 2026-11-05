@@ -1042,3 +1042,10 @@ aprobado para comparar matriz esperada con metadatos sin error468. Ajuste solo
 enexpresiones/tablaesperada temporal, no collationglobal ni V8. Mantener matriz
 exacta562 y Pythoncaseexact postvalidation; no rebajar igualdad a conteo.
 Ensayo adicional tras regresion autorizado; apply sigue reservado al supervisor.
+
+
+D-70 comparacion de bootstrap: normalizar CR tambien en literal esperado
+derivado del V8 inmutable, siguiendo sus prechecks aprobados. Conservar comparacion
+binaria exacta del resto de caracteres; no sustituir por comparacion permisiva.
+SQLcmd puede normalizar nuevaslineas del literal; regresion LF/CRLF y contenido
+diferente requerida. Rehearse adicional autorizado, no apply/COMMIT persistente.
