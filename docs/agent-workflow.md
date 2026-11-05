@@ -800,3 +800,23 @@ LinkPORTAL6campos/History4RS13-8-16+limits/contextroles separados yreferencias
 fueraTOP200 revisados personalmente. PatientServicecompleto aislado,sinwiring.
 SinSQLServer/JDBC/HTTP reales ni nueva visual. Siguiente A36agendalecturas;
 reservas/transiciones por paquete posterior,sin ampliar alcance funcional.
+
+
+A36 delegada: task_76b732f76c7c / ctx_08e9ef1f165b,dependencia A35settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio noobservado,no reenviar ni
+abandonar;esperar avisoOrca. OwnershipSchedulingService/store/dossuites,D-44.
+A35 subida8bcf773a427156e1f1a1f76c9ba572bde0ab8d57 a rama de trabajo,
+refremota comprobada,main intacta. Negocio/wiring/QAreal pendientes;
+apagarPC solo al terminar TODO,no durante este cierreparcial.
+
+
+A36 DEVUELTA R-A36-SQL-WINDOW: informe msg_423edc262487/done msg_b6a343ead366,
+4SHA ysnapshotindependiente610/610,0fallos/errores/omisiones,jarPASS28.776s
+2026-11-05T00:39:56-05:00.138bases intactas,sin integrar cuatroentregables.
+MotorQAconfirmado markerlocal:SQL_VARIANT_PROPERTY(86400000000)='numeric',
+DATEDIFF_BIG(microsecond,93dias23h)/86400000000=93.958333333333 ypredicado>93
+rechaza1. JavaDuration.toDays=93loacepta,contratoD-44. DefectopersistenciaV5:137,
+nofalloenadaptador. Evidencia tmp/sqlserver-a36-window-defect.txt.
+A35 sigueultimocodigoaceptado. Corregir viaV9incremental(noeditarV1-V8),
+soloALTERusp_appointments_list yregresionmotorrollback-only;4SHAJavaA36congelados.

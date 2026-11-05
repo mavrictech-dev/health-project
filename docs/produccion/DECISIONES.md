@@ -738,3 +738,9 @@ entries/docencounterpuedenfueraTOP200,proyecciones13/8/16+limits,sinwiring.
 D-44 (2026-11-05): A36agenda list/get2SP,REC PRO ASI AUD sinADMsolo,
 contextREQUESTtenantwide. BranchAccessA13listopcional,getsinbranchfiltro,
 precisionUTCmicro yDuration.toDays<=93legacy,proyeccion14;writesguardados.
+
+
+D-44.A: motordemostrodivisionnumericcontradice diascompletosJava. R-A36-SQL-
+WINDOW requiereV9incrementalALTERsolo predicado con divisionBIGINT explicita
+(o equivalenteexacto93diascompletos),sin tocarV1-V8aplicadas ni cuatroSHAJava.
+Regresionmotorreal antesaceptarA36,sinJDBC/HTTP claim.
