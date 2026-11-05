@@ -892,3 +892,7 @@ en este corte. Alias identifican el mismo objeto, sin segundo datasource.
 D-62 resuelta para implementacion: A54 aceptada/integrada tras SHA/review/verify independiente948/948. Infraestructura declarativa fuera scan, sinroot ni aperturaPool.
 
 D-63 (2026-11-05): A55 agrega solo SqlServerRuntimeStoresConfiguration y su suite fuera scan, factories explicitamente nombradas para23storesruntime existentes. ExcluirBootstrapStore. Compartir executorRUNTIME/manager/mapper deA54; SecurityStore usa TransactionTemplateREQUIRED; conservar propagaciones internas REQUIRES_NEW/MANDATORY. Usar overload mapper de Clinical/Document/Finance/Hospital/Inventory/Patient/Scheduling/Workflow. Sinimportauto/root/services/health/jobs ni conexion.
+
+D-63 resuelta para implementacion: A55 aceptada/integrada trasSHA/review/verify independiente952/952. Factories23runtime sinRoot/poolactivo.
+
+D-64 (2026-11-05): A56 prepara dos configuraciones fuera scan: identidad (Access con proxyHttpServletRequest,IdentitySQL,lifecycleSQL,BrowserSessionSQL,SupportSQL,Errors/Advice) y seguridad (BCrypt12,bearerOnlyUsers,cadenaSQL). Settings/mapper/stores suministrados explicitamente;sin defaults/root/scan. Orden Trace->Host->Session ypoliticaslegacy exactas,cookieCSRF/origin/afterCommit intactos. Filtros locales dentrocadena,no@BeanFilter adicional. Tests servlet/chain mocksinpuerto/motor, no lospresentarcomoHTTP/backendreal. Sin editar legacy/stores/infra ni activar grafo parcial.
