@@ -700,3 +700,25 @@ status y metadata opcional groups exacta sin duplicados, conservar todos los
 demas criterios y repetir QA una vez. Revision/ejecucion independiente final
 pendientes. Esto es conectividad deliberadamente negativa; no JDBC exitoso,
 grants, setup, negocio ni nueva evidencia visual. Main y SQL compartido intactos.
+
+
+SQL-01.A60 ACEPTADA para QA HTTP negativa, 2026-11-05. Correccion entregada
+msg_ced2b9913463 y cierre succeeded msg_ccb16861a3c1, task_7744886e8fdf /
+ctx_7042ff8c30a7. Supervisor comprobo SHA y diff unico de asercion autorizada,
+original FAIL archivado intacto y173 rutas protegidas (solo EOF A38 conocido).
+Ejecucion independiente python tmp/sqlserver-a60-review/harness.py con JAR del
+snapshot independiente A59: rawexit0,47/47 checks,53.890s. Solo se adapto ruta
+JAR del harness; producto sin cambios. JAR supervisor SHA
+b13d12a8308b6fc31d2644c9c0e00c7af70edebb3c0e9c4a0a8e97cc7cf39b10.
+HTTP real: liveness200UP antes/despues de DB fallida, readiness503DOWN,
+health503DOWN con nombres de grupos sin componentes/detalles, public/status500
+DATABASE_ERROR saneado con requestId y no-store. Cuatro arranques inseguros
+rechazados. Cinco procesos propios cerrados y sin listeners, puertoDB reservado
+sin escucha y cerrado. Canary ausente. Evidencia/logs en tmp/sqlserver-a60-review.
+Esto valida ConfigData, proceso y HTTP con destino SQL INACCESIBLE, no JDBC
+exitoso, login/tenant, grants, negocio, migraciones ni UI; sin capturas nuevas.
+Preflight supervisor de solo lectura confirmado hoy: MSSQLSERVER running,
+TCPEnabled0, NpEnabled0, IsIntegratedSecurityOnly1. Base QA marcada conserva
+133 SP. No se cambio servicio/autenticacion/configuracion/credenciales ni datos.
+Proximo corte prepara preflight reproducible que falle cerrado ante estos
+bloqueos; setup separado y entorno JDBC positivo aun pendientes.

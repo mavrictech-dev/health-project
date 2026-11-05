@@ -13,11 +13,11 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | --- | --- | --- | --- | --- | --- |
 | ARQ-01 | Arquitecto | Ninguna | VALIDADA | ESTADO.md; fuentes y HP-ORCH-01 | Matriz revisada; brechas runtime conservadas |
 | ARQ-02 | Arquitecto + programador | ARQ-01 | REABIERTA (persistencia SQL Server) | DECISIONES.md D-02/04/05; msg_393227f665f1 acuerdo | Contratos HTTP conservados; contrato de persistencia debe cumplir D-09/SQL Server y 100 % SP |
-| QA-01 | Programador como calidad; revision arquitecto | ARQ-01 | BLOQUEADA (JDBC/HTTP reales) | QA-01.A + R1 validada offline; SQL-01.A7.R1 10 fases motor reales | SQL Server QA disponible; faltan adaptador/conversion Java y transporte JDBC, distinto de bloqueo Docker historico |
+| QA-01 | Programador como calidad; revision arquitecto | ARQ-01 | BLOQUEADA (JDBC positivo, negocio HTTP y visual reales) | A60 corregida:47/47 independientes HTTP negativo; A7.R1 motor | Salud/ConfigData reales aprobados; TCP/NP deshabilitados y WindowsOnly1 impiden validar login JDBC runtime actual |
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
-| SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
-| ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A51 codigo y A53-A57 aceptados; A52 auditoria aceptada) | A57 task_9c477f2e9222 / ctx_c729848731d1; verify independiente 973/973 | PortalService, FinanceService e InventoryService aislados; falta QA motor, demás consumidores y wiring JDBC/HTTP |
+| SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; integracion SQL Server, duplicados y rollback reales pendientes antes de validar parent |
+| ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; integracion SQL Server/rollback/concurrencia pendiente; Docker no es el bloqueo del motor local descubierto |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A59 implementacion aceptada; A52 auditoria; A60 QA HTTP negativa) | A59 verify independiente990/990; A60 independiente47/47 | Grafo SQL completo opt-in, jobs apagados; faltan setup/runner, JDBC positivo con permisos y negocio HTTP/visual |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -1149,3 +1149,25 @@ status y metadata opcional groups exacta sin duplicados, conservar todos los
 demas criterios y repetir QA una vez. Revision/ejecucion independiente final
 pendientes. Esto es conectividad deliberadamente negativa; no JDBC exitoso,
 grants, setup, negocio ni nueva evidencia visual. Main y SQL compartido intactos.
+
+
+SQL-01.A60 ACEPTADA para QA HTTP negativa, 2026-11-05. Correccion entregada
+msg_ced2b9913463 y cierre succeeded msg_ccb16861a3c1, task_7744886e8fdf /
+ctx_7042ff8c30a7. Supervisor comprobo SHA y diff unico de asercion autorizada,
+original FAIL archivado intacto y173 rutas protegidas (solo EOF A38 conocido).
+Ejecucion independiente python tmp/sqlserver-a60-review/harness.py con JAR del
+snapshot independiente A59: rawexit0,47/47 checks,53.890s. Solo se adapto ruta
+JAR del harness; producto sin cambios. JAR supervisor SHA
+b13d12a8308b6fc31d2644c9c0e00c7af70edebb3c0e9c4a0a8e97cc7cf39b10.
+HTTP real: liveness200UP antes/despues de DB fallida, readiness503DOWN,
+health503DOWN con nombres de grupos sin componentes/detalles, public/status500
+DATABASE_ERROR saneado con requestId y no-store. Cuatro arranques inseguros
+rechazados. Cinco procesos propios cerrados y sin listeners, puertoDB reservado
+sin escucha y cerrado. Canary ausente. Evidencia/logs en tmp/sqlserver-a60-review.
+Esto valida ConfigData, proceso y HTTP con destino SQL INACCESIBLE, no JDBC
+exitoso, login/tenant, grants, negocio, migraciones ni UI; sin capturas nuevas.
+Preflight supervisor de solo lectura confirmado hoy: MSSQLSERVER running,
+TCPEnabled0, NpEnabled0, IsIntegratedSecurityOnly1. Base QA marcada conserva
+133 SP. No se cambio servicio/autenticacion/configuracion/credenciales ni datos.
+Proximo corte prepara preflight reproducible que falle cerrado ante estos
+bloqueos; setup separado y entorno JDBC positivo aun pendientes.

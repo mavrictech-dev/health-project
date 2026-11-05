@@ -965,3 +965,9 @@ y admitir solo groups opcional con esos dos nombres exactos sin duplicados;
 rechazar todos los demas campos. Probes mantienen cuerpos exactos. El44/45
 original sigue FAIL historico, no se reescribe como PASS. Correccion QA en
 follow-up task_7744886e8fdf, producto sin cambios; aceptacion final pendiente.
+
+
+D-68 resuelta para QA negativa: revision y repeticion independiente47/47 PASS.
+Conservar44/45 original, sin modificar producto. No extender aprobacion a JDBC
+exitoso, permisos, negocio o visual. Lectura actual confirma WindowsOnly1 y
+TCP/NP deshabilitados; no hay autorizacion para cambiar la instancia compartida.
