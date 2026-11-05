@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; MySQL, persistencia, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; runtime MySQL/persistencia/rollback/concurrencia sigue bloqueado por daemon ausente |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A34 aceptadas; A35 preparado) | A19 task_f2b11c63b1f1 / ctx_37f7e33bd3b9,385/385 supervisor | Pacienteslist/get/save aislados sin wiring. Siguiente vinculos/historia A35; otros consumidores/wiring/QA real pendientes |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A1-A35 aceptadas; A36 preparado) | A19 task_f2b11c63b1f1 / ctx_37f7e33bd3b9,385/385 supervisor | PatientService completo aislado sin wiring. Siguiente agenda lecturas A36; otros consumidores/wiring/QA real pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -767,3 +767,22 @@ verify independiente580/580,0fallos/errores/omisiones,jarPASS27.747s,
 Proyeccion11/JSON7/contactodeepinmutable/limits3998y200000/revisionSPI
 revisados personalmente. SinSQLServer/JDBC/HTTP reales ni nueva visual.
 Siguiente A35 vinculos/historial para completarPatientServiceaislado,sinwiring.
+
+
+A35 delegada: task_7db332837037 / ctx_49daf4245ff3,dependencia A34settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio noobservado,no reenviar ni
+abandonar;esperar avisoOrca. Ownership mismos4archivosPatient,D-43.
+A34 subida76ab3f41689e09ba406298b3896903e670c7164a a rama de trabajo,
+refremota comprobada,main intacta. Negocio/wiring/QAreal pendientes;
+apagarPC solo al terminar TODO,no durante este cierreparcial.
+
+
+A35 ACEPTADA: informe msg_3c7ca8ecdd84/done msg_204102e38321,4SHAexactos,
+verify independiente593/593,0fallos/errores/omisiones,jarPASS28.715s,
+2026-11-05T00:29:55-05:00.138bases verificadas,134ajenas intactas;4existentes
+integrados. Legacy/A34 publicpaths comparados exactos retirando2ramasSQL.
+LinkPORTAL6campos/History4RS13-8-16+limits/contextroles separados yreferencias
+fueraTOP200 revisados personalmente. PatientServicecompleto aislado,sinwiring.
+SinSQLServer/JDBC/HTTP reales ni nueva visual. Siguiente A36agendalecturas;
+reservas/transiciones por paquete posterior,sin ampliar alcance funcional.

@@ -628,3 +628,13 @@ verify independiente580/580,0fallos/errores/omisiones,jarPASS27.747s,
 Proyeccion11/JSON7/contactodeepinmutable/limits3998y200000/revisionSPI
 revisados personalmente. SinSQLServer/JDBC/HTTP reales ni nueva visual.
 Siguiente A35 vinculos/historial para completarPatientServiceaislado,sinwiring.
+
+
+A35 ACEPTADA: informe msg_3c7ca8ecdd84/done msg_204102e38321,4SHAexactos,
+verify independiente593/593,0fallos/errores/omisiones,jarPASS28.715s,
+2026-11-05T00:29:55-05:00.138bases verificadas,134ajenas intactas;4existentes
+integrados. Legacy/A34 publicpaths comparados exactos retirando2ramasSQL.
+LinkPORTAL6campos/History4RS13-8-16+limits/contextroles separados yreferencias
+fueraTOP200 revisados personalmente. PatientServicecompleto aislado,sinwiring.
+SinSQLServer/JDBC/HTTP reales ni nueva visual. Siguiente A36agendalecturas;
+reservas/transiciones por paquete posterior,sin ampliar alcance funcional.

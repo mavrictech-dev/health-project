@@ -781,3 +781,22 @@ verify independiente580/580,0fallos/errores/omisiones,jarPASS27.747s,
 Proyeccion11/JSON7/contactodeepinmutable/limits3998y200000/revisionSPI
 revisados personalmente. SinSQLServer/JDBC/HTTP reales ni nueva visual.
 Siguiente A35 vinculos/historial para completarPatientServiceaislado,sinwiring.
+
+
+A35 delegada: task_7db332837037 / ctx_49daf4245ff3,dependencia A34settled,
+mismo Run/terminal/worktree/sesion/cuenta/Sol medium. Recibo outcome_unknown/
+turn_start_unobserved:texto entregado,inicio noobservado,no reenviar ni
+abandonar;esperar avisoOrca. Ownership mismos4archivosPatient,D-43.
+A34 subida76ab3f41689e09ba406298b3896903e670c7164a a rama de trabajo,
+refremota comprobada,main intacta. Negocio/wiring/QAreal pendientes;
+apagarPC solo al terminar TODO,no durante este cierreparcial.
+
+
+A35 ACEPTADA: informe msg_3c7ca8ecdd84/done msg_204102e38321,4SHAexactos,
+verify independiente593/593,0fallos/errores/omisiones,jarPASS28.715s,
+2026-11-05T00:29:55-05:00.138bases verificadas,134ajenas intactas;4existentes
+integrados. Legacy/A34 publicpaths comparados exactos retirando2ramasSQL.
+LinkPORTAL6campos/History4RS13-8-16+limits/contextroles separados yreferencias
+fueraTOP200 revisados personalmente. PatientServicecompleto aislado,sinwiring.
+SinSQLServer/JDBC/HTTP reales ni nueva visual. Siguiente A36agendalecturas;
+reservas/transiciones por paquete posterior,sin ampliar alcance funcional.

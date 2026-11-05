@@ -733,3 +733,8 @@ sinwiring/datosreales ni reglasclinicasnuevas.
 D-43 (2026-11-05): A35linkADMREC+PORTAL/historyPROASIAUD2SP,history4RS
 conauditoriainterna callerTX ysinGET/auditextra. Longitudinaltenantwide,
 entries/docencounterpuedenfueraTOP200,proyecciones13/8/16+limits,sinwiring.
+
+
+D-44 (2026-11-05): A36agenda list/get2SP,REC PRO ASI AUD sinADMsolo,
+contextREQUESTtenantwide. BranchAccessA13listopcional,getsinbranchfiltro,
+precisionUTCmicro yDuration.toDays<=93legacy,proyeccion14;writesguardados.
