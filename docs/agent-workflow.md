@@ -1331,3 +1331,15 @@ quedan SOLOordinary_tcp_enabled y runtime_sql_auth_compatible (TCP0/WindowsOnly1
 SQL compartido sin cambios de servicios/transporte/auth; no backendactivo ni
 JDBCpositivo/grants efectivos de login/HTTPnegocio/UIvalidados. ProximoQA: permisos
 efectivos bajo usuarios DB WITHOUTLOGIN temporales, fixturesTXrevertidos.
+
+
+A62 herramienta/ensayo aceptados db33b08 y setupQA persistente reconciliado8a9be54.
+A63 delegada task_9e0e7d38425b / ctx_fdd905d31a01, dependencia A62settled.
+IdentityOnly ambos roles y /status efectivo verifican mendozadeafabisa@gmail.com,
+sesion01a19e4c-15af-74e0-a1b9-75fc7093b98f,mismo terminal/worktree --no-daemon.
+Ownership solo tmp/sqlserver-a63-installed-qa, ninguna ruta versionada; QAefectiva
+bajo usuariosDB WITHOUTLOGIN transitorios y snapshotfresh tras rollbackporfase.
+D-71/tmp/sql-01-a63-spec.md, baselineinstalado416017...D285B con562ACL.
+No reaplicarV8/A62apply ni ejecutarA7legacy; supervisor no escribiraQA mientras
+worker tenga fixtures. Orca dispatched, evidencia/revision pendientes. TCP/auth
+siguen bloqueando loginJDBCpositivo; negocioHTTP/visual/bootstrapSAD pendientes.
