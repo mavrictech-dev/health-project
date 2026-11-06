@@ -1110,3 +1110,15 @@ actual confirma instaladorcacheado firmado y falta de elevacion, no medio comple
 ni instalacion viable aun. Antes de provisionar se necesita eleccion de destino
 y elevacion Windows; no modificar recursos existentes ni iniciar otroTask hasta
 cierreA64. Esta decision es contrato propuesto, no instalacion ni JDBCvalidado.
+
+
+D-74 (2026-11-05): usuario autorizo crear instancia HEALTHPROJECTQA y continuar.
+A64cerrada enOrca (Taskcompleted), cuatroSHAfinales coinciden8d70803. Medio completo
+SQL2022Developer firmado disponibleC:/SQL2022/Developer_ENU. Supervisor preparoINI
+sinpassword, instancia nueva/datadirectorioD:/HealthProject-QA/SqlServer, engine
+manual/TCP0/NP0/WindowsAuth inicial, operadorWindowsoriginal admin SOLOSQLnueva.
+Lanzamiento SETUP viaRunAs puede esperar credencialesOSadmin; no se automatiza
+ese dialogo. Configuracionposterior SOLOnuevo namespace cambiaLoginMode2 conSA
+inhabilitada, WMIloopback14335 y servicio nuevo. A65 implementa helperPlan/Apply/
+Verify ytests, sin workerprivilegiado. Supervisor revisa y aplica; sin modificar
+MSSQLSERVER/SQLBrowser ni datos de otros proyectos, no nuevoJDBCvalidado aun.
