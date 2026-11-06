@@ -1,0 +1,19 @@
+import java.io.DataInputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+public class SupervisorBackendLauncher {
+ public static void main(String[] args)throws Exception{
+  var in=new DataInputStream(System.in);int size=in.readInt();
+  if(args.length!=0||size<48||size>128)throw new IllegalArgumentException("Invalid QA input");
+  byte[] bytes=in.readNBytes(size);if(bytes.length!=size||in.read()!=-1)throw new IllegalArgumentException("Invalid QA input");
+  String password=new String(bytes,StandardCharsets.UTF_8);Arrays.fill(bytes,(byte)0);
+  System.setProperty("spring.profiles.active","sqlserver-qa");
+  System.setProperty("health.sqlserver.runtime.server-name","127.0.0.1");
+  System.setProperty("health.sqlserver.runtime.port","14335");
+  System.setProperty("health.sqlserver.runtime.database-name","health_project_sqlserver_qa_isolated_20261105");
+  System.setProperty("health.sqlserver.runtime.username","hp_qa_runtime_20261105");
+  System.setProperty("health.sqlserver.runtime.password",password);
+  System.setProperty("health.sqlserver.runtime.trust-server-certificate","true");
+  com.mavric.health.HealthApplication.main(new String[0]);
+ }
+}

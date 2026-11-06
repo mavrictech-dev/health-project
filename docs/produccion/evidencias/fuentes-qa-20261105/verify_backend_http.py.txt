@@ -1,0 +1,73 @@
+from pathlib import Path
+import importlib.util,json,os,shutil,socket,struct,subprocess,time,urllib.request,urllib.error,zipfile
+
+root=Path(__file__).resolve().parent
+project=root.parents[1]
+spec=importlib.util.spec_from_file_location('a67',root/'scripts/provision-isolated-sqlserver-logins.py')
+m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+app=root/'backend-app'
+app.mkdir(exist_ok=True)
+with zipfile.ZipFile(project/'backend/target/health-project-0.1.0.jar') as archive:
+    for name in archive.namelist():
+        if name.startswith(('BOOT-INF/classes/','BOOT-INF/lib/')):
+            target=(app/name).resolve();assert target.is_relative_to(app.resolve())
+            if target.is_file():assert target.read_bytes()==archive.read(name),'Extracted artifact changed'
+            else:archive.extract(name,app)
+classpath=os.pathsep.join(str(p) for p in [root/'jdbc-classes',app/'BOOT-INF/classes',*sorted((app/'BOOT-INF/lib').glob('*.jar'))])
+compiled=subprocess.run([shutil.which('javac'),'-encoding','UTF-8','-cp',classpath,'-d',str(root/'jdbc-classes'),str(root/'SupervisorBackendLauncher.java')],capture_output=True,text=True,timeout=30)
+(root/'backend-launcher-compile.log').write_text(compiled.stdout+compiled.stderr,encoding='utf-8')
+assert compiled.returncode==0,'Launcher compile failed'
+with socket.socket() as check:
+    assert check.connect_ex(('127.0.0.1',18080))!=0,'QA HTTP port already occupied'
+bundle=m.load_credentials()
+password=bundle.password_for('hp_qa_runtime_20261105').encode('utf-8')
+payload=bytearray(struct.pack('>i',len(password))+password)
+report={'backend':'real SQL runtime root','database':m.A66.DATABASE,'endpoint':'127.0.0.1:18080','mockApi':False,'qaTrustServerCertificate':True,'tlsChainValidated':False,'checks':[],'businessFlowsValidated':False,'visualValidated':False}
+process=None
+try:
+    with (root/'backend-runtime.log').open('wb') as logfile:
+        process=subprocess.Popen([shutil.which('java'),'-cp',classpath,'SupervisorBackendLauncher'],stdin=subprocess.PIPE,stdout=logfile,stderr=subprocess.STDOUT,env=m.A66.environment(os.environ),creationflags=subprocess.CREATE_NO_WINDOW)
+        report['processId']=process.pid
+        process.stdin.write(payload);process.stdin.close()
+        for i in range(len(payload)):payload[i]=0
+        print('Started owned QA backend process',process.pid,flush=True)
+        deadline=time.monotonic()+45
+        while True:
+            if process.poll() is not None:raise AssertionError('Backend exited before readiness')
+            try:
+                probe=urllib.request.Request('http://127.0.0.1:18080/actuator/health/readiness',headers={'Host':'health.localhost:18080'})
+                with urllib.request.urlopen(probe,timeout=2) as response:
+                    if response.status==200:break
+            except (OSError,urllib.error.HTTPError):pass
+            if time.monotonic()>deadline:raise AssertionError('Backend readiness timeout')
+            time.sleep(.25)
+        cases=[('/actuator/health/liveness',200,'health'),('/actuator/health/readiness',200,'health'),('/actuator/health',200,'health'),('/api/public/status',200,'status'),('/api/public/context',200,'context'),('/api/auth/me',401,'unauthorized'),('/api/platform/plans',401,'unauthorized')]
+        for path,expected,kind in cases:
+            request=urllib.request.Request('http://127.0.0.1:18080'+path,headers={'Host':'health.localhost:18080'})
+            try:response=urllib.request.urlopen(request,timeout=10)
+            except urllib.error.HTTPError as error:response=error
+            with response:
+                body=response.read();data=json.loads(body)
+                assert response.status==expected,'Unexpected HTTP status for '+path
+                assert password not in body,'Secret disclosure in HTTP response'
+                if kind=='health':
+                    assert data.get('status')=='UP' and set(data)<= {'status','groups'},'Unexpected health body'
+                    if 'groups' in data:assert path=='/actuator/health' and set(data['groups'])=={'liveness','readiness'},'Unexpected probe groups'
+                if kind=='status':assert data.get('mode')=='OPEN','Application state is not OPEN'
+                if kind=='context':assert data.get('platform') is True and data.get('baseDomain')=='health.localhost','Unexpected host context'
+                report['checks'].append({'path':path,'status':response.status,'passed':True})
+        report['status']='passed'
+except Exception as error:
+    report['status']='failed';report['failureType']=type(error).__name__;report['failure']=str(error) if isinstance(error,AssertionError) else 'Safe runtime diagnostic failure'
+finally:
+    if process is not None and process.poll() is None:
+        process.terminate()
+        try:process.wait(timeout=10)
+        except subprocess.TimeoutExpired:process.kill();process.wait(timeout=5)
+    report['ownedBackendStopped']=process is not None and process.poll() is not None
+    logfile=root/'backend-runtime.log'
+    report['passwordAbsentFromLog']=logfile.exists() and password not in logfile.read_bytes()
+    (root/'backend-http-result.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
+    print(json.dumps(report,indent=2),flush=True)
+    assert report['passwordAbsentFromLog'],'Secret disclosure in backend log'
+    assert report['status']=='passed','Backend HTTP verification incomplete'

@@ -1260,3 +1260,22 @@ Resumen versionado: evidencias/SQLSERVER_QA_20261105.json; detalle local en snap
 Pendientes: correccion A67/cierre Orca, lifecycle/reset de pool y rollback negocio,
 bootstrap SAD, recorridos autenticados HTTP, frontend/visual y cadena TLS.
 No nuevas evidencias visuales inspeccionadas ni publicacion/main/otros proyectos.
+
+Entrega GitHub solicitada por el usuario, 2026-11-06. Informe consolidado en
+INFORME_AVANCE_2026-11-06.md y evidencia ENTREGA_GITHUB_20261106.json.
+Inventario de183 rutas del worktree programador:180 coinciden tras normalizar
+CRLF/LF, una difiere solo en whitespace final y dos son A67. Ninguna diferencia
+sustantiva adicional omitida. Dos archivos A67 copiados por SHA revisado, sin
+modificar, como EN_REVISION; la publicacion no aprueba el defecto conocido ni
+reescribe la ejecucion historica. No se toca el worktree del programador.
+Suite de herramientas sobre esta copia:123/123 PASS, raw0,30.307s unittest.
+No se repiten SQL/JDBC/HTTP ni se crean recursos para publicar. Fuentes exactas
+de tres harnesses anteriores archivadas sin secretos en evidencias/fuentes-qa-20261105.
+Consulta Orca readonly: ctx_b1a926031df9 abandoned, stage terminal_missing,
+liveness unverifiable; terminal no activo tras recuperacion. No se ejecuto
+recovery, cambio de cuenta o reinicio. Cierre e informe final de A67 pendientes.
+Cuota hasta11nov11:35 es el ultimo aviso recibido, no nueva medicion de consumo.
+Servicio HEALTHPROJECTQA comprobado Stopped/Manual, sin listener14335; backend
+QA sin listener18080. La evidencia positiva17JDBC/7HTTP sigue fechada5nov.
+No subir credenciales, DPAPI, .env, datos SQL, sesiones, tmp, logs ni binarios.
+Rama destino health/production-wave0; main0b24487 preservada, sin despliegue.

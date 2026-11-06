@@ -1,5 +1,14 @@
 # Estado de produccion
 
+## Corte vigente: 6 de noviembre de 2026
+
+Consultar [el informe de avances y pendientes](INFORME_AVANCE_2026-11-06.md).
+La evidencia posterior incluye JDBC real17/17 y HTTP real7/7 del 5 de noviembre,
+principales SQL instalados y A67 publicada como trabajo en revision. El servicio
+QA esta detenido/manual en este corte; el dispatch del programador figura
+abandoned/terminal_missing. Las secciones siguientes conservan el historial
+y deben interpretarse con su fecha y alcance.
+
 Baseline inspeccionada el 2 de noviembre de 2026 sobre HEAD
 0b24487c77055a081f6e76f0b18bc544ce4b1958. Supervisor en main sin integrar producto;
 implementaciones en Maczz09/health-programmer. La coordinacion paso despues a

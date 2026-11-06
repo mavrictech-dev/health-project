@@ -1,0 +1,55 @@
+{
+  "command": "python -B -m unittest discover -s scripts/tests -v",
+  "rawExit": 0,
+  "seconds": 30.969,
+  "log": "tmp\\github-upload-validation-20261106.log",
+  "lastLines": [
+    "",
+    "----------------------------------------------------------------------",
+    "Ran 123 tests in 30.307s",
+    "",
+    "OK"
+  ],
+  "date": "2026-11-06",
+  "scope": "Publication validation; no SQL mutations or app startup",
+  "testsPassed": 123,
+  "a67Status": "Versioned unchanged as work in review; SQLcmd informational-message defect remains",
+  "a67Hashes": {
+    "scripts/provision-isolated-sqlserver-logins.py": "3FE1F82F80C398290F16C2D46E187CE421463E477B007327C726079DF9A0279F",
+    "scripts/tests/test_isolated_sqlserver_logins.py": "6CE37E60D0026FB430E3661FA10C96DE628DE0C6C6BFD06AA481F196FEEC1CFC"
+  },
+  "workerComparison": {
+    "workerChangedPaths": 183,
+    "identicalToSupervisorAfterLineEndingNormalization": 180,
+    "onlyTerminalWhitespaceDifference": [
+      "backend/src/main/java/com/mavric/health/persistence/sqlserver/SqlServerClinicalStore.java"
+    ],
+    "missingFromSupervisor": [
+      "scripts/provision-isolated-sqlserver-logins.py",
+      "scripts/tests/test_isolated_sqlserver_logins.py"
+    ],
+    "differentContent": []
+  },
+  "localQaService": {
+    "name": "MSSQL$HEALTHPROJECTQA",
+    "state": "Stopped",
+    "startMode": "Manual",
+    "processId": 0
+  },
+  "orcaDispatch": {
+    "id": "ctx_b1a926031df9",
+    "state": "abandoned",
+    "stage": "terminal_missing",
+    "liveness": "unverifiable",
+    "observedBy": "read-only worker-show; no recovery action performed"
+  },
+  "deliveryAudit": {
+    "filesChecked": 16,
+    "operationalPasswordMatch": false,
+    "privateKeyMatch": false,
+    "ignoredGeneratedPathsSelected": false,
+    "a67BytesUnchanged": true,
+    "pythonSyntax": "passed"
+  },
+  "reportLinksValidated": true
+}

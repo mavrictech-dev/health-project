@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; integracion SQL Server, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; integracion SQL Server/rollback/concurrencia pendiente; Docker no es el bloqueo del motor local descubierto |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (principales instalados; A67 herramienta y cierre pendientes) | A67:16 pruebas nuevas independientes; JDBC17/17; HTTP7/7 real; esquema/562ACL intactos | Corregir avisos SQLcmd; cuota programador hasta11nov11:35, autorizacion especifica solicitada; negocio/visual/TLS pendientes |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A67 versionada EN_REVISION; SQL/JDBC/HTTP basicos probados) | Herramientas123/123 al6nov; JDBC17/17 y HTTP7/7 del5nov; informe consolidado | Corregir reporte SQLcmd y recuperar coordinacion: dispatchabandoned/terminal_missing; negocio/visual/TLS pendientes; SQL QA hoy detenido/manual |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -1694,3 +1694,22 @@ Resumen versionado: evidencias/SQLSERVER_QA_20261105.json; detalle local en snap
 Pendientes: correccion A67/cierre Orca, lifecycle/reset de pool y rollback negocio,
 bootstrap SAD, recorridos autenticados HTTP, frontend/visual y cadena TLS.
 No nuevas evidencias visuales inspeccionadas ni publicacion/main/otros proyectos.
+
+Entrega GitHub solicitada por el usuario, 2026-11-06. Informe consolidado en
+INFORME_AVANCE_2026-11-06.md y evidencia ENTREGA_GITHUB_20261106.json.
+Inventario de183 rutas del worktree programador:180 coinciden tras normalizar
+CRLF/LF, una difiere solo en whitespace final y dos son A67. Ninguna diferencia
+sustantiva adicional omitida. Dos archivos A67 copiados por SHA revisado, sin
+modificar, como EN_REVISION; la publicacion no aprueba el defecto conocido ni
+reescribe la ejecucion historica. No se toca el worktree del programador.
+Suite de herramientas sobre esta copia:123/123 PASS, raw0,30.307s unittest.
+No se repiten SQL/JDBC/HTTP ni se crean recursos para publicar. Fuentes exactas
+de tres harnesses anteriores archivadas sin secretos en evidencias/fuentes-qa-20261105.
+Consulta Orca readonly: ctx_b1a926031df9 abandoned, stage terminal_missing,
+liveness unverifiable; terminal no activo tras recuperacion. No se ejecuto
+recovery, cambio de cuenta o reinicio. Cierre e informe final de A67 pendientes.
+Cuota hasta11nov11:35 es el ultimo aviso recibido, no nueva medicion de consumo.
+Servicio HEALTHPROJECTQA comprobado Stopped/Manual, sin listener14335; backend
+QA sin listener18080. La evidencia positiva17JDBC/7HTTP sigue fechada5nov.
+No subir credenciales, DPAPI, .env, datos SQL, sesiones, tmp, logs ni binarios.
+Rama destino health/production-wave0; main0b24487 preservada, sin despliegue.

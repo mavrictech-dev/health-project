@@ -1180,3 +1180,12 @@ No extrapolar a cambios de producto, cuentas globales, gasto ni nuevas mutacione
 JDBC real17/17 y HTTP real7/7 validados con alcance de evidencia versionada;
 trustServerCertificatetrue local QA no valida cadena TLS. El primer trafico anade
 3 trazas sinteticas: conservarlas y no debilitar/reaplicar setup por conteos nuevos.
+
+D-78 (2026-11-06): usuario solicita subir todo el trabajo y un informe de avances
+pendientes. Se autoriza esta entrega de codigo/documentacion a la rama vigente;
+A67 se conserva sin modificaciones como EN_REVISION con defecto SQLcmd conocido.
+No se interpreta como aprobacion funcional ni como autorizacion para reejecutar
+setup, cambiar cuentas o integrar en main. Se preservan los secretos locales.
+El estado Orca observado hoy es dispatchabandoned/terminal_missing; no fabricamos
+worker_done ni recuperamos sesiones en el alcance de una subida a GitHub.
+Informe consolidado y evidencia de inventario/pruebas quedan versionados.

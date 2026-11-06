@@ -1471,3 +1471,11 @@ cuentas. Despues de HTTP hay3 request_traces sinteticas, un delta esperado que
 impide usar verificadores setup de filas vacias como sondas posttrafico.
 Ver D-77 y evidencias/SQLSERVER_QA_20261105.json. Correccion supervisora pendiente
 de la autorizacion especifica solicitada al usuario por la regla de roles.
+
+Corte GitHub 2026-11-06: ver docs/produccion/INFORME_AVANCE_2026-11-06.md.
+A67 se publica sin modificar como EN_REVISION por instruccion de subir el trabajo;
+no es una aprobacion ni requiere repetir create.123 pruebas de herramientas PASS.
+Orca reporta dispatchabandoned/terminal_missing y livenessunverifiable; no se ha
+relanzado al programador. Servicio SQL QA actualmente Stopped/Manual y backend
+QA apagado. Las17 pruebas JDBC/7HTTP reales corresponden al5nov. Fuentes QA y
+resumen de evidencia publicados sin credenciales; cierre y correccion pendientes.

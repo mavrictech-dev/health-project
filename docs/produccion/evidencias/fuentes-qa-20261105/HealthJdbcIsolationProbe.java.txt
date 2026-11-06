@@ -1,0 +1,98 @@
+import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.sql.*;
+import java.util.*;
+
+/** Independent local QA only. No product changes or persistent fixtures. */
+public class HealthJdbcIsolationProbe {
+ static final String DB="health_project_sqlserver_qa_isolated_20261105";
+ static final List<String> passed=new ArrayList<>();
+ static String phase="input";
+ static void check(boolean value){if(!value)throw new IllegalStateException("QA_ASSERTION");}
+ static String secret(DataInputStream in)throws Exception{
+  int size=in.readInt();check(size>=48&&size<=128);
+  byte[] bytes=in.readNBytes(size);check(bytes.length==size);
+  String result=new String(bytes,StandardCharsets.UTF_8);Arrays.fill(bytes,(byte)0);return result;
+ }
+ static SQLServerDataSource source(String user,String password,boolean trust){
+  var ds=new SQLServerDataSource();ds.setServerName("127.0.0.1");ds.setPortNumber(14335);
+  ds.setDatabaseName(DB);ds.setUser(user);ds.setPassword(password);
+  ds.setEncrypt("true");ds.setTrustServerCertificate(trust);ds.setLoginTimeout(5);
+  ds.setSocketTimeout(10000);ds.setApplicationName("HealthProjectIndependentJdbcQA");return ds;
+ }
+ static void context(Connection c,String scope,String request)throws SQLException{
+  try(var s=c.prepareCall("{call dbo.usp_request_context(?,?,?,?,?,?,?,?,?,?)}")){
+   for(int i=1;i<=9;i++)s.setNull(i,Types.NVARCHAR);
+   if(request!=null)s.setString(1,request);s.setString(10,scope);s.execute();
+  }
+ }
+ static String contextRequest(Connection c)throws SQLException{
+  // QA diagnostic of this session only; product data access remains by SP.
+  try(var s=c.createStatement();var r=s.executeQuery("SELECT CONVERT(varchar(36),SESSION_CONTEXT(N'hp_request_id'))")){check(r.next());return r.getString(1);}
+ }
+ static void identity(Connection c,String name,String role)throws SQLException{
+  // Built-in metadata used solely to verify effective QA login/user/target.
+  try(var s=c.prepareStatement("SELECT CONVERT(nvarchar(128),SERVERPROPERTY('InstanceName')),DB_NAME(),SUSER_SNAME(),USER_NAME(),IS_SRVROLEMEMBER('sysadmin'),IS_ROLEMEMBER(?)")){
+   s.setString(1,role);try(var r=s.executeQuery()){
+    check(r.next()&&"HEALTHPROJECTQA".equals(r.getString(1))&&DB.equals(r.getString(2))&&name.equals(r.getString(3))&&name.equals(r.getString(4))&&r.getInt(5)==0&&r.getInt(6)==1&&!r.next());
+   }
+  }
+ }
+ static void denied(Connection c,String label,String sql,int expected)throws SQLException{
+  phase=label;c.setAutoCommit(false);boolean rejected=false;
+  try(var s=c.createStatement()){s.setQueryTimeout(5);s.execute(sql);}
+  catch(SQLException e){if(e.getErrorCode()!=expected)throw e;rejected=true;}
+  finally{c.rollback();c.setAutoCommit(true);}
+  check(rejected);passed.add(label);
+ }
+ static void runtime(String password)throws Exception{
+  phase="runtime_tcp_login";
+  try(var c=source("hp_qa_runtime_20261105",password,true).getConnection()){
+   identity(c,"hp_qa_runtime_20261105","hp_runtime_executor");passed.add(phase);
+   phase="runtime_health_sp";
+   try(var s=c.prepareCall("{call dbo.usp_health_ready}")){check(s.execute());try(var r=s.getResultSet()){check(r.next()&&r.getInt("ready")==1&&!r.next());}}
+   passed.add(phase);phase="runtime_application_status_sp";
+   try(var s=c.prepareCall("{call dbo.usp_application_status}")){check(s.execute());try(var r=s.getResultSet()){check(r.next()&&"OPEN".equals(r.getString("mode"))&&!r.next());}}
+   passed.add(phase);
+   phase="runtime_context_replace";String request=UUID.randomUUID().toString();context(c,"REQUEST",request);check(request.equals(contextRequest(c)));context(c,"REQUEST",null);check(contextRequest(c)==null);passed.add(phase);
+   phase="runtime_invalid_context_clears";context(c,"REQUEST",request);boolean invalid=false;
+   try{context(c,"INVALID",null);}catch(SQLException e){check(e.getErrorCode()==51000);invalid=true;}
+   check(invalid&&contextRequest(c)==null);context(c,"REQUEST",null);passed.add(phase);
+   denied(c,"runtime_direct_read_denied","SELECT TOP(0) id FROM dbo.users",229);
+   denied(c,"runtime_direct_write_denied","UPDATE dbo.application_state SET mode=mode WHERE 1=0",229);
+   denied(c,"runtime_ddl_denied","CREATE TABLE dbo.__hp_qa_jdbc_forbidden(id int)",262);
+   denied(c,"runtime_private_sp_denied","EXEC dbo.usp_require_transaction",229);
+   context(c,"BOOTSTRAP",null);denied(c,"runtime_bootstrap_sp_denied","EXEC dbo.usp_bootstrap_exists",229);context(c,"REQUEST",null);
+  }
+ }
+ static void bootstrap(String password)throws Exception{
+  phase="bootstrap_tcp_login";
+  try(var c=source("hp_qa_bootstrap_20261105",password,true).getConnection()){
+   identity(c,"hp_qa_bootstrap_20261105","hp_bootstrap_executor");passed.add(phase);
+   phase="bootstrap_exists_sp";context(c,"BOOTSTRAP",null);
+   try(var s=c.prepareCall("{call dbo.usp_bootstrap_exists}")){check(s.execute());try(var r=s.getResultSet()){check(!r.next());}}
+   context(c,"REQUEST",null);passed.add(phase);
+   denied(c,"bootstrap_direct_read_denied","SELECT TOP(0) id FROM dbo.users",229);
+   denied(c,"bootstrap_direct_write_denied","UPDATE dbo.application_state SET mode=mode WHERE 1=0",229);
+   denied(c,"bootstrap_ddl_denied","CREATE TABLE dbo.__hp_qa_jdbc_forbidden(id int)",262);
+   denied(c,"bootstrap_runtime_sp_denied","EXEC dbo.usp_health_ready",229);
+  }
+ }
+ public static void main(String[] args){
+  try{
+   check(args.length==0);var input=new DataInputStream(System.in);
+   String runtimePassword=secret(input),bootstrapPassword=secret(input);check(input.read()==-1);
+   runtime(runtimePassword);bootstrap(bootstrapPassword);
+   phase="strict_certificate_trust_rejected";boolean rejected=false;
+   try(var c=source("hp_qa_runtime_20261105",runtimePassword,false).getConnection()){}
+   catch(SQLException e){check(e.getErrorCode()==0&&"08S01".equals(e.getSQLState()));rejected=true;}
+   check(rejected);passed.add(phase);
+   System.out.println("{\"status\":\"passed\",\"checks\":"+passed.size()+",\"passed\":[\""+String.join("\",\"",passed)+"\"],\"transport\":\"TCP 127.0.0.1:14335\",\"encryptConfigured\":true,\"qaTrustServerCertificate\":true,\"tlsChainValidated\":false,\"persistentFixturesCreated\":false,\"productRuntimeOrPoolValidated\":false}");
+  }catch(Throwable e){
+   int code=e instanceof SQLException s?s.getErrorCode():-1;
+   String state=e instanceof SQLException s?s.getSQLState():"QA_ASSERTION";
+   System.out.println("{\"status\":\"failed\",\"phase\":\""+phase+"\",\"completedChecks\":"+passed.size()+",\"sqlError\":"+code+",\"sqlState\":\""+state+"\"}");System.exit(1);
+  }
+ }
+}

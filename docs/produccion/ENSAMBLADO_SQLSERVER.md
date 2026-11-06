@@ -1,5 +1,14 @@
 # Ensamblado SQL Server: contrato y estado
 
+## Corte vigente: 6 de noviembre de 2026
+
+Consultar [el informe de avances y pendientes](INFORME_AVANCE_2026-11-06.md).
+La evidencia posterior incluye JDBC real17/17 y HTTP real7/7 del 5 de noviembre,
+principales SQL instalados y A67 publicada como trabajo en revision. El servicio
+QA esta detenido/manual en este corte; el dispatch del programador figura
+abandoned/terminal_missing. Las secciones siguientes conservan el historial
+y deben interpretarse con su fecha y alcance.
+
 Auditoria A52 del 5 de noviembre de 2026, aceptada como inspeccion estatica.
 Informes Orca: msg_e1d08a75d0cb, msg_3e7691fec50d, msg_19c574d0fc9c y
 msg_dd188b41730d. Cierre: msg_7146d53bd230, task_9884fa7bdeea / ctx_0413ad736efc.
