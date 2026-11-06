@@ -1573,3 +1573,5 @@ Estado A65: artefactos INTEGRADOS; OS y metadata LPC verificados; TCP Windows-E
 BLOQUEADO. No nueva validacion backend HTTP negocio ni visual. Siguiente A66:
 base nueva marcada/esquema migrado bajo principal separado, spec tmp/sql-01-a66-spec.md;
 no logins/password/bootstrap/runtime en ese paquete, mutaciones solo supervisor.
+
+A66 delegada task_e7748a7c48a5 / ctx_feff787c969e (follow-up A65.R2 settled). Identidades IdentityOnly y cuenta efectiva /status verificadas: arquitecto recuperapiura@gmail.com, programador mendozadeafabisa@gmail.com; misma sesion y worktree con --no-daemon. Ownership solo scripts/provision-isolated-sqlserver-qa.py y scripts/tests/test_isolated_sqlserver_provision.py. Contrato D-75/tmp/sql-01-a66-spec.md, sin mutaciones SQL del trabajador. Receipt outcome_unknown/turn_start_unobserved: no reenviar ni inferir salida; esperar wake conforme next de Orca. A65 revisada y push790c143; main0b24487 intacta. Crear base y JDBC real aun pendientes.
