@@ -1168,3 +1168,15 @@ A66 catalogo historico espera extraPrincipals0; postA67 se valida deltaexacto2
 sin reescribir ni debilitar guards A66 y sin reejecutar sus migraciones.
 Referencias: https://learn.microsoft.com/en-us/windows/win32/api/dpapi/nf-dpapi-cryptprotectdata
  y https://learn.microsoft.com/en-us/sql/t-sql/statements/create-login-transact-sql?view=sql-server-ver16.
+
+D-77 (2026-11-05): cuota del programador hasta11nov11:35 deja TaskA67 abierta.
+Preservar cuenta/sesion/worktree y errores historicos. La revision independiente
+puede ejecutar los artefactos comprobados y QA propia; no sustituye worker_done.
+Principales ya instalados/reconciliados; nunca repetir create ni borrar store.
+SQLcmd con USE genera avisos por stderr pese a COMMIT correcto: correccion de
+transporte pendiente dentro de dos rutas A67. Supervisor solicito autorizacion
+expresa para aplicarla por el reparto de roles de AGENTS.md; aun sin respuesta.
+No extrapolar a cambios de producto, cuentas globales, gasto ni nuevas mutaciones.
+JDBC real17/17 y HTTP real7/7 validados con alcance de evidencia versionada;
+trustServerCertificatetrue local QA no valida cadena TLS. El primer trafico anade
+3 trazas sinteticas: conservarlas y no debilitar/reaplicar setup por conteos nuevos.

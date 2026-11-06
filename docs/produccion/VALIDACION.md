@@ -1203,3 +1203,60 @@ credenciales y principales separados con permisos existentes; mutaciones solo
 supervisor tras revision. Tabla A66 esperada sin usuarios runtime es evidencia
 de esta fase: al instalar principales nuevos se debera verificar delta exacto,
 no reejecutar migraciones ni relajar guards historicos del verificador A66.
+
+A67: principales instalados y primera QA JDBC/HTTP real, 2026-11-05.
+Orca recibio msg_e504249e4810 (arrays vacios corregidos y Plan real PASS).
+Escalacion msg_stop_0ea244743f5c41c4d114ed7a: cuota del programador hasta
+11 de noviembre 11:35, sin worker_done; task_e9b58257c00d/ctx_b1a926031df9 sigue
+abierta. No reiniciar, reasignar cuentas, comprar creditos ni fabricar su cierre.
+Log dejado:123 tests OK en23.239s; no equivale a informe final formal.
+Supervisor reviso codigo completo y16 pruebas nuevas, congelo SHA3FE1F82F...A0279F
+y6CE37E60...EC1CFC en tmp/sqlserver-a67-review.16/16 independientes PASS2.145s,
+181 archivos previos del trabajador conservan hash exacto. Probe DPAPI real con
+payload ficticio: roundtrip/corrupcion rechazados, sin plaintext ni store operativo.
+Plan supervisor raw0, absent y FP CBD9C3CE...74E2AB, sin abrir credenciales.
+
+Supervisor ejecuto create UNA vez. Dos logins/usuarios QA y membresias exactas
+quedaron instalados; credentials.dpapi614bytes en directorio operativo ignorado
+por Git, CurrentUser. No contraseña en argv/env de SQLcmd, SQLfile o registros.
+La ejecucion historica reporta SQLCMD_FAILED/mutation_outcome_unverified con raw0;
+se conserva, sin retry. Fresh verify readonly raw0 confirma installed y metadata/
+DPAPI verificados, FP61194671C6053063799B0E10FFB41DC6B2E6F8103B47E7F8DF7F79C041FE1AAF.
+Diagnostico sin mutacion reproduce dos avisos Changed database context por USE
+que -r1 dirige a stderr; el frame es valido. Propuesta acotada -m1 elimina esos
+avisos y conserva THROW59998 como raw1/stderr con error. Fuente oficial SQLcmd
+https://learn.microsoft.com/en-us/sql/tools/sqlcmd/sqlcmd-utility?view=sql-server-ver16.
+Defecto de reporte pendiente: no se integro A67 ni se aplico correccion del
+supervisor. Se solicito al usuario autorizacion especifica para esa correccion,
+pues AGENTS.md asigna implementacion al programador y su cuota esta agotada.
+No interpretar tiempo sin respuesta como autorizacion.
+
+Verificacion independiente con driver Microsoft JDBC13.4.0 real, TCP127.0.0.1:14335:
+17/17 controles PASS. Ambos logins/user/DB/roles efectivos confirmados, sin sysadmin;
+runtime ejecuta health/status y bootstrap ejecuta exists sin SAD. Ambos rechazan
+lectura/escritura directa y DDL; privado y bootstrap denegados al runtime y health
+denegado a bootstrap. Contexto reemplazado/limpiado tras valor invalido. Sin fixtures
+persistentes. Passwords enviados al proceso Java solo por stdin en memoria.
+Encrypttrue con trustServerCertificatetrue EXCLUSIVO QA. Trustfalse rechazado;
+NO acredita cadena TLS valida ni pruebas completas de transaccion/pool.
+
+Maven offline -DskipTests package PASS19.739s sobre backend actual, sin cambios
+Java. Launcher QA separado recibe password por stdin, configura solo su JVM y
+usa HealthApplication real, profile sqlserver-qa, puerto18080 y jobsfalse.
+Primera espera HTTP uso Host127 y expiro por contrato de host; evidencia preservada.
+Harness corregido con Hosthealth.localhost y grupos Actuator permitidos:7/7 PASS
+sin mocks. liveness/readiness/root UP200, public/status OPEN200, public/context
+platform200, auth/me y platform/plans401 sin sesion. Proceso propio detenido;
+password ausente del registro. No SAD/login de aplicacion ni negocio autenticado.
+
+Snapshot readonly posterior: metadata de principales exacta; todos los objetos,
+562ACL, definiciones y hashes de semillas intactos. Unico delta de filas:
+request_traces0->3 sinteticas de estas peticiones. users/auth_sessions/tenants0.
+FP actual C058A6F920FF15DBA32E771C8224132CF0B544B5A3FE55907C2A4A7F17C837AC.
+Verificadores setup vacios A66/A67 son evidencia historica, no sondas de salud
+posttrafico. No borrar trazas ni reejecutar setup por ese delta esperado.
+MSSQLSERVER/SQLBrowser conservan fingerprint c689d113...c116e sin cambios.
+Resumen versionado: evidencias/SQLSERVER_QA_20261105.json; detalle local en snapshot.
+Pendientes: correccion A67/cierre Orca, lifecycle/reset de pool y rollback negocio,
+bootstrap SAD, recorridos autenticados HTTP, frontend/visual y cadena TLS.
+No nuevas evidencias visuales inspeccionadas ni publicacion/main/otros proyectos.

@@ -1,0 +1,214 @@
+{
+  "date": "2026-11-05",
+  "scope": "Health Project synthetic isolated local QA",
+  "instance": "HEALTHPROJECTQA",
+  "database": "health_project_sqlserver_qa_isolated_20261105",
+  "workerTask": "task_e9b58257c00d",
+  "workerDispatch": "ctx_b1a926031df9",
+  "workerFormalClosure": "pending; usage quota until Nov 11 11:35 as reported by Orca",
+  "reviewedArtifactHashes": {
+    "scripts/provision-isolated-sqlserver-logins.py": "3FE1F82F80C398290F16C2D46E187CE421463E477B007327C726079DF9A0279F",
+    "scripts/tests/test_isolated_sqlserver_logins.py": "6CE37E60D0026FB430E3661FA10C96DE628DE0C6C6BFD06AA481F196FEEC1CFC"
+  },
+  "independentNewUnitTests": {
+    "passed": 16,
+    "rawExit": 0,
+    "seconds": 2.145
+  },
+  "workerSuiteLog": {
+    "passed": 123,
+    "seconds": 23.239,
+    "formalFinalReportReceived": false
+  },
+  "preservation": {
+    "baselinePaths": 181,
+    "changed": [],
+    "missing": [],
+    "unknownEntries": []
+  },
+  "syntheticDpapi": {
+    "status": "passed",
+    "syntheticOnly": true,
+    "roundtrip": true,
+    "corruptionRejected": true,
+    "operationalStoreAccessed": false,
+    "plaintextWritten": false
+  },
+  "setupAttempt": {
+    "status": "error",
+    "code": "SQLCMD_FAILED",
+    "sql_action": "mutation_outcome_unverified",
+    "reconciliation_required": true,
+    "credential_store_verified": true,
+    "raw_exits": [
+      {
+        "phase": "inspect",
+        "raw_exit_code": 0
+      },
+      {
+        "phase": "commit_acknowledged",
+        "raw_exit_code": 0
+      }
+    ]
+  },
+  "freshSetupReconciliation": {
+    "status": "verified",
+    "code": "METADATA_AND_DPAPI_VERIFIED",
+    "resources": "installed",
+    "catalog_fingerprint": "61194671C6053063799B0E10FFB41DC6B2E6F8103B47E7F8DF7F79C041FE1AAF",
+    "credential_store_verified": true
+  },
+  "sqlcmdInfoDiagnosis": [
+    {
+      "probe": "original",
+      "rawExit": 0,
+      "stderrLines": 2,
+      "onlyExpectedDatabaseContextInfo": true,
+      "frameValid": true,
+      "mutation": false
+    },
+    {
+      "probe": "message-threshold-one",
+      "rawExit": 0,
+      "stderrLines": 0,
+      "onlyExpectedDatabaseContextInfo": true,
+      "frameValid": true,
+      "mutation": false
+    }
+  ],
+  "sqlcmdFatalErrorPreserved": {
+    "rawExit": 1,
+    "stderrNonempty": true,
+    "error59998Detected": true,
+    "mutation": false,
+    "messageThreshold": 1
+  },
+  "jdbc": {
+    "status": "passed",
+    "checks": 17,
+    "passed": [
+      "runtime_tcp_login",
+      "runtime_health_sp",
+      "runtime_application_status_sp",
+      "runtime_context_replace",
+      "runtime_invalid_context_clears",
+      "runtime_direct_read_denied",
+      "runtime_direct_write_denied",
+      "runtime_ddl_denied",
+      "runtime_private_sp_denied",
+      "runtime_bootstrap_sp_denied",
+      "bootstrap_tcp_login",
+      "bootstrap_exists_sp",
+      "bootstrap_direct_read_denied",
+      "bootstrap_direct_write_denied",
+      "bootstrap_ddl_denied",
+      "bootstrap_runtime_sp_denied",
+      "strict_certificate_trust_rejected"
+    ],
+    "transport": "TCP 127.0.0.1:14335",
+    "encryptConfigured": true,
+    "qaTrustServerCertificate": true,
+    "tlsChainValidated": false,
+    "persistentFixturesCreated": false,
+    "productRuntimeOrPoolValidated": false
+  },
+  "jdbcProcess": {
+    "rawExit": 0,
+    "stderrEmpty": true,
+    "passwordsInArgv": false,
+    "passwordsInEnv": false,
+    "secretTransport": "stdin memory only"
+  },
+  "backendHttp": {
+    "backend": "real SQL runtime root",
+    "database": "health_project_sqlserver_qa_isolated_20261105",
+    "endpoint": "127.0.0.1:18080",
+    "mockApi": false,
+    "qaTrustServerCertificate": true,
+    "tlsChainValidated": false,
+    "checks": [
+      {
+        "path": "/actuator/health/liveness",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "path": "/actuator/health/readiness",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "path": "/actuator/health",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "path": "/api/public/status",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "path": "/api/public/context",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "path": "/api/auth/me",
+        "status": 401,
+        "passed": true
+      },
+      {
+        "path": "/api/platform/plans",
+        "status": 401,
+        "passed": true
+      }
+    ],
+    "businessFlowsValidated": false,
+    "visualValidated": false,
+    "processId": 33804,
+    "status": "passed",
+    "ownedBackendStopped": true,
+    "passwordAbsentFromLog": true
+  },
+  "postHttpIntegrity": {
+    "structuralCatalogAndSeedHashesUnchanged": true,
+    "principalsExact": true,
+    "countDeltas": {
+      "request_traces": {
+        "before": 0,
+        "after": 3
+      }
+    },
+    "rawExits": [
+      {
+        "phase": "inspect",
+        "raw_exit_code": 0
+      }
+    ],
+    "usersSessionsTenants": {
+      "users": 0,
+      "auth_sessions": 0,
+      "tenants": 0
+    },
+    "newFingerprint": "C058A6F920FF15DBA32E771C8224132CF0B544B5A3FE55907C2A4A7F17C837AC"
+  },
+  "protectedInstance": {
+    "protectedFingerprint": "c689d11318d6d6639229c6b4ac016d7f2b009b7fe893df8ab559e032fd3c116e",
+    "unchanged": true
+  },
+  "limitations": [
+    "A67 tool still needs informational-message transport fix; no replay of creation is authorized.",
+    "TLS chain validation is pending. Local QA explicitly used trustServerCertificate=true.",
+    "No SAD, tenants, sessions, patients, authenticated business flow or visual validation.",
+    "Connection pool lifecycle, eviction/reset after failures, concurrency and durable business rollback remain pending.",
+    "A67 setup empty-data fingerprint is historical: HTTP added exactly three synthetic request_traces. Do not delete traces or replay setup."
+  ],
+  "visualEvidenceInspected": [],
+  "productionOrMainChanged": false,
+  "realRecipientsOrDataUsed": false,
+  "harnessHashes": {
+    "HealthJdbcIsolationProbe.java": "373C7BE7E38B333D3F2CD167DCE7389C5F0F5E953035DE27661812B607E321C4",
+    "SupervisorBackendLauncher.java": "974EBC955FE8CE0EBAB30A1F8EEDE4AF4F95CDE36CD63354057E9AB4832317D3",
+    "verify_backend_http.py": "38B9382847335A5D183C2FD6661E6F6F68CE847A25C0AD91C9821954D1EAA692"
+  }
+}

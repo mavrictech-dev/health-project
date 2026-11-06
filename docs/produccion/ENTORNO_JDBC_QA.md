@@ -139,3 +139,14 @@ CBD9C3CE...74E2AB. Esquema aislado instalado y comprobado. No repetir setup ni
 reescribir ERROR historico. Paso siguiente: logins runtime/bootstrap SQL separados,
 credenciales DPAPI CurrentUser locales sin plaintext/argv/Git, membresias solo a
 los roles aprobados; despues JDBC real. Aun sin login runtime ni SAD/HTTP/visual.
+
+Estado 2026-11-05: logins runtime/bootstrap instalados con solo su rol aprobado;
+DPAPI CurrentUser en tmp/sqlserver-isolated-credentials/credentials.dpapi, sin
+plaintext.17 pruebas JDBC reales y7 HTTP reales PASS, sin mocks; backend QA de
+prueba detenido. Cadena TLS, negocio autenticado, lifecycle de pool y visual
+pendientes. A67 sigue sin integrar por defecto de avisos SQLcmd y sin cierre
+formal por cuota del programador hasta11nov11:35. No repetir create ni resetear
+cuentas. Despues de HTTP hay3 request_traces sinteticas, un delta esperado que
+impide usar verificadores setup de filas vacias como sondas posttrafico.
+Ver D-77 y evidencias/SQLSERVER_QA_20261105.json. Correccion supervisora pendiente
+de la autorizacion especifica solicitada al usuario por la regla de roles.

@@ -13,11 +13,11 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | --- | --- | --- | --- | --- | --- |
 | ARQ-01 | Arquitecto | Ninguna | VALIDADA | ESTADO.md; fuentes y HP-ORCH-01 | Matriz revisada; brechas runtime conservadas |
 | ARQ-02 | Arquitecto + programador | ARQ-01 | REABIERTA (persistencia SQL Server) | DECISIONES.md D-02/04/05; msg_393227f665f1 acuerdo | Contratos HTTP conservados; contrato de persistencia debe cumplir D-09/SQL Server y 100 % SP |
-| QA-01 | Programador como calidad; revision arquitecto | ARQ-01 | BLOQUEADA (JDBC positivo, negocio HTTP y visual reales) | A60:47/47 HTTP negativo; A63:20/20 permisos DB; A65:88 tests worker,3 nuevos independientes | Instancia dedicada activa en loopback; metadata LPC validada, Windows-E TCP falla SSPI; base aislada/login/JDBC pendiente |
+| QA-01 | Programador como calidad; revision arquitecto | ARQ-01 | EN_CURSO (infra JDBC/HTTP positiva; falta negocio y visual) | JDBC real17/17 y HTTP real7/7 independientes; evidencias/SQLSERVER_QA_20261105.json | Trust certificado QA explicitado; cadena TLS, lifecycle de pool, bootstrap y negocio autenticado/visual pendientes |
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; integracion SQL Server, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; integracion SQL Server/rollback/concurrencia pendiente; Docker no es el bloqueo del motor local descubierto |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A66 integrada y catalogo SQL real validado) | Java990; HTTP negativo47; herramientas107 worker; A66 Verify independiente FP CBD9C3CE...74E2AB | Preparar A67 logins y credenciales separados; login JDBC/TLS, bootstrap y negocioHTTP/visual pendientes |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (principales instalados; A67 herramienta y cierre pendientes) | A67:16 pruebas nuevas independientes; JDBC17/17; HTTP7/7 real; esquema/562ACL intactos | Corregir avisos SQLcmd; cuota programador hasta11nov11:35, autorizacion especifica solicitada; negocio/visual/TLS pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -1633,3 +1633,64 @@ de esta fase: al instalar principales nuevos se debera verificar delta exacto,
 no reejecutar migraciones ni relajar guards historicos del verificador A66.
 
 A67 delegada task_e9b58257c00d / ctx_b1a926031df9, dependencia A66.R1 settled. IdentityOnly ambos y /status verifican cuenta programador mendozadeafabisa@gmail.com, sesion01a19e4c-15af-74e0-a1b9-75fc7093b98f y mismo worktree --no-daemon. Ownership SOLO scripts/provision-isolated-sqlserver-logins.py y scripts/tests/test_isolated_sqlserver_logins.py; D-76/tmp/sql-01-a67-spec.md. Worker no crea logins ni secretos operativos; solo codigo/test/Plan readonly y DPAPI ficticio. Receipt follow_up/outcome_unknown por turn_start_unobserved: no reenviar ni inferir salida, esperar wake conforme next. A66 aceptada y push222f08c; principals/JDBC/HTTP/UI aun pendientes.
+
+A67 avance recibido msg_bfd04f67586d: trabajador activo, implementacion de gates/DPAPI en dos rutas, suite aun en curso. Plan no accede al almacen operativo; no credenciales operativas ni SQL mutante ejecutados. Proximos pasos worker autorizados: DPAPI ficticio y un Plan readonly. Task task_e9b58257c00d/ctx_b1a926031df9 sigue EN_CURSO, sin entrega final ni aprobacion. Supervisor no modifica archivos asignados ni inicia provisionamiento antes del informe/revision.
+
+A67 escalacion msg_fcce61cb46fc y pregunta msg_db319696d2e0: suite121/121 raw0, DPAPI ficticio PASS; unico Plan SQLcmd0 fallo SNAPSHOT_INVALID sin mutaciones/store. Supervisor reviso snapshot_sql/resource_state, autorizo UNA lectura readonly de keys/types/longitudes y correccion representacional en dos rutas, sin relajar guards; una nueva Plan posterior al fix. Envio msg_06de372de762 y reply de pregunta expresan MISMA autorizacion, no dos lecturas. Ante otra discrepancia/escalamiento de permisos debe consultar. Task sigue EN_CURSO, no aprobada ni principals creados.
+
+A67: principales instalados y primera QA JDBC/HTTP real, 2026-11-05.
+Orca recibio msg_e504249e4810 (arrays vacios corregidos y Plan real PASS).
+Escalacion msg_stop_0ea244743f5c41c4d114ed7a: cuota del programador hasta
+11 de noviembre 11:35, sin worker_done; task_e9b58257c00d/ctx_b1a926031df9 sigue
+abierta. No reiniciar, reasignar cuentas, comprar creditos ni fabricar su cierre.
+Log dejado:123 tests OK en23.239s; no equivale a informe final formal.
+Supervisor reviso codigo completo y16 pruebas nuevas, congelo SHA3FE1F82F...A0279F
+y6CE37E60...EC1CFC en tmp/sqlserver-a67-review.16/16 independientes PASS2.145s,
+181 archivos previos del trabajador conservan hash exacto. Probe DPAPI real con
+payload ficticio: roundtrip/corrupcion rechazados, sin plaintext ni store operativo.
+Plan supervisor raw0, absent y FP CBD9C3CE...74E2AB, sin abrir credenciales.
+
+Supervisor ejecuto create UNA vez. Dos logins/usuarios QA y membresias exactas
+quedaron instalados; credentials.dpapi614bytes en directorio operativo ignorado
+por Git, CurrentUser. No contraseña en argv/env de SQLcmd, SQLfile o registros.
+La ejecucion historica reporta SQLCMD_FAILED/mutation_outcome_unverified con raw0;
+se conserva, sin retry. Fresh verify readonly raw0 confirma installed y metadata/
+DPAPI verificados, FP61194671C6053063799B0E10FFB41DC6B2E6F8103B47E7F8DF7F79C041FE1AAF.
+Diagnostico sin mutacion reproduce dos avisos Changed database context por USE
+que -r1 dirige a stderr; el frame es valido. Propuesta acotada -m1 elimina esos
+avisos y conserva THROW59998 como raw1/stderr con error. Fuente oficial SQLcmd
+https://learn.microsoft.com/en-us/sql/tools/sqlcmd/sqlcmd-utility?view=sql-server-ver16.
+Defecto de reporte pendiente: no se integro A67 ni se aplico correccion del
+supervisor. Se solicito al usuario autorizacion especifica para esa correccion,
+pues AGENTS.md asigna implementacion al programador y su cuota esta agotada.
+No interpretar tiempo sin respuesta como autorizacion.
+
+Verificacion independiente con driver Microsoft JDBC13.4.0 real, TCP127.0.0.1:14335:
+17/17 controles PASS. Ambos logins/user/DB/roles efectivos confirmados, sin sysadmin;
+runtime ejecuta health/status y bootstrap ejecuta exists sin SAD. Ambos rechazan
+lectura/escritura directa y DDL; privado y bootstrap denegados al runtime y health
+denegado a bootstrap. Contexto reemplazado/limpiado tras valor invalido. Sin fixtures
+persistentes. Passwords enviados al proceso Java solo por stdin en memoria.
+Encrypttrue con trustServerCertificatetrue EXCLUSIVO QA. Trustfalse rechazado;
+NO acredita cadena TLS valida ni pruebas completas de transaccion/pool.
+
+Maven offline -DskipTests package PASS19.739s sobre backend actual, sin cambios
+Java. Launcher QA separado recibe password por stdin, configura solo su JVM y
+usa HealthApplication real, profile sqlserver-qa, puerto18080 y jobsfalse.
+Primera espera HTTP uso Host127 y expiro por contrato de host; evidencia preservada.
+Harness corregido con Hosthealth.localhost y grupos Actuator permitidos:7/7 PASS
+sin mocks. liveness/readiness/root UP200, public/status OPEN200, public/context
+platform200, auth/me y platform/plans401 sin sesion. Proceso propio detenido;
+password ausente del registro. No SAD/login de aplicacion ni negocio autenticado.
+
+Snapshot readonly posterior: metadata de principales exacta; todos los objetos,
+562ACL, definiciones y hashes de semillas intactos. Unico delta de filas:
+request_traces0->3 sinteticas de estas peticiones. users/auth_sessions/tenants0.
+FP actual C058A6F920FF15DBA32E771C8224132CF0B544B5A3FE55907C2A4A7F17C837AC.
+Verificadores setup vacios A66/A67 son evidencia historica, no sondas de salud
+posttrafico. No borrar trazas ni reejecutar setup por ese delta esperado.
+MSSQLSERVER/SQLBrowser conservan fingerprint c689d113...c116e sin cambios.
+Resumen versionado: evidencias/SQLSERVER_QA_20261105.json; detalle local en snapshot.
+Pendientes: correccion A67/cierre Orca, lifecycle/reset de pool y rollback negocio,
+bootstrap SAD, recorridos autenticados HTTP, frontend/visual y cadena TLS.
+No nuevas evidencias visuales inspeccionadas ni publicacion/main/otros proyectos.
