@@ -1149,3 +1149,37 @@ Estado A65: artefactos INTEGRADOS; OS y metadata LPC verificados; TCP Windows-E
 BLOQUEADO. No nueva validacion backend HTTP negocio ni visual. Siguiente A66:
 base nueva marcada/esquema migrado bajo principal separado, spec tmp/sql-01-a66-spec.md;
 no logins/password/bootstrap/runtime en ese paquete, mutaciones solo supervisor.
+
+A66 EN_REVISION, 2026-11-05 22:22 Lima. Informes msg_2005817e5ff4 y
+msg_906fdc482b0e recibidos; task_e7748a7c48a5/ctx_feff787c969e completed, no
+aprobacion automatica. Dos archivos SHA F65B9B36...DF6BC / 4279D9BE...19F00
+congelados en tmp/sqlserver-a66-review. Revision completa de herramienta y pruebas;
+18/18 nuevas independientes PASS2.083s raw0, worker106/106PASS21.505s.
+Plan LPC supervisor raw0, destino ausente/canCreate1. SQL generado revisado:
+V1..V9 bytes pinados, una BEGIN/COMMIT y EXECUTE AS migrador/REVERT. PARSEONLY
+real sobre wrappers completos raw0/stdout0/stderr0; solo sintaxis, no permisos
+ni ejecucion. Referencia https://learn.microsoft.com/en-us/sql/t-sql/statements/set-parseonly-transact-sql.
+Supervisor ejecuto create UNA vez, sin elevacion ni cambio de servicios. DB nueva
+health_project_sqlserver_qa_isolated_20261105 creada y marcada; principal
+hp_qa_isolated_migrator WITHOUT LOGIN con CONTROL solo esta base. CREATE y marker
+acknowledged. Migracion termino SQLcmdraw0/stderr0, pero herramienta devolvio
+RESPONSE_INVALID/migration_outcome_unverified; no repetir create ni migracion.
+Diario original c7c7bb307e7e48bbab6eea03af65de04 bajo snapshot/tmp/sqlserver-a66-provision.
+Fresh verify del snapshot reproduce RESPONSE_INVALID con SQLcmd0. Una invocacion
+previa desde raiz sin integrar script fallo archivo ausente, sin ejecutar SQL.
+Diagnostico readonly conserva stdout/bin: frames largos de4000 caracteres en
+vez de4008, checksum distinto; concatenacion NVARCHAR limitada recorta8 caracteres
+por chunk. Supervisor ajusto SOLO prefijo del wrapper de LECTURA a
+CAST(N'A66JSON:' AS nvarchar(max)); ninguna mutacion/replay ni cambio al producto.
+Fresh lectura completa con checksum ahora valida y compara exacta contra todos
+los postcondiciones pinados:37tablas/133SP/31triggers habilitados,562ACL exactas,
+roles dbo, migrador tipoS/auth0/CONTROL1/extra0/memberships0,265seedrows completas
+(specialties241/plans4/plan_versions4/workflow_definitions15/application_state1),
+resto tablasvacias; definiciones finales V8/V9 exactas. Fingerprint reconciliado
+CBD9C3CE913BFB57D3E257C8CA225E4F959F31669A90414C570F74B0DD74E2AB.
+Evidencia reconciliation-proof.json/reconciled-catalog.json y readonly-max-prefix
+bajo snapshot. Esto confirma persistencia del esquema; diario ERROR original
+se conserva y no se reinterpreta como una ejecucion exitosa de la herramienta.
+Proteccion MSSQLSERVER/SQLBrowser antes/despues c689d113...c116e igual.
+A66 devuelve defecto de framing al programador antes de integrar dos archivos.
+Sin logins runtime/bootstrap, SAD, JDBC/TLS ni backend HTTP negocio/visual nuevos.

@@ -1447,3 +1447,10 @@ LPC confirma version16.0.1000.6, authmixta y saDisabled1. Windows-E por TCP fall
 SSPI; no afirmar Verify monolitico aprobado ni conexion JDBC. Mantener politicas
 globales sin cambios. A66 prepara base marcada y migracion con principal separado;
 logins runtime/bootstrap y sus pruebas TCP/JDBC se ejecutaran despues. Ver D-75.
+
+Estado 2026-11-05 22:22 Lima: base aislada ya creada y marcada; V1..V9
+persistidos bajo migrador separado, catalogo completo reconciliado con checksum
+por lectura nueva. No repetir create/migracion. Tool A66 pendiente de corregir
+framing largo; diario historico ERROR preservado. Roles y ACL instalados no son
+logins/runtime/JDBC validado. No se creo SAD ni usuarios/pacientes/tenants/sesiones.
+Ver TAREAS/REVISIONES y fingerprint CBD9C3CE...74E2AB. Instancia compartida intacta.

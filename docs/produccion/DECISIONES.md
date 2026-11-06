@@ -1142,3 +1142,11 @@ y migraciones V1..V9 inmutables en transaccion bajo principal de migracion DB
 WITHOUT LOGIN separado del runtime. Ninguna copia de datos ni Flyway baseline.
 Supervisor revisa/aplica; worker solo Plan readonly y pruebas. Logins/bootstrap/
 JDBC/HTTP/UI pendientes en paquetes posteriores. Contrato tmp/sql-01-a66-spec.md.
+
+D-75 ejecucion: DB aislada y migraciones persistidas verificadas por fresh lectura
+completa, fingerprint CBD9C3CE...74E2AB. Toolcreate historica sigue ERROR por
+framing NVARCHAR recortado; conservar diario y prohibir reapply/delete/recreate.
+Correccion debe limitarse al transporte y regresion SQL readonly de respuestas
+largas. Supervisor no integro aun A66. Nunca degradar checksum ni aceptar raw0
+como confirmacion. Siguiente gate despues de corregir A66: principals SQL y
+JDBC restringido; no acceso runtime mediante migrador/control/sesion Windows admin.

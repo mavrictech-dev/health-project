@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; integracion SQL Server, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; integracion SQL Server/rollback/concurrencia pendiente; Docker no es el bloqueo del motor local descubierto |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A65 integrada; OS y metadata LPC verificados) | Java990; HTTP negativo47; herramientas88; ACL562; QAefectiva20; servicioQA real Running | Preparar A66 base nueva marcada/esquema; Windows-E TCP bloqueado por SSPI; login SQL/JDBC/TLS/bootstrap y negocioHTTP/visual pendientes |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A66 esquema real reconciliado; herramienta EN_REVISION) | Java990; HTTP negativo47; herramienta106 worker/18 nuevas independientes; esquema aislado37/133/31/562 verificado | Corregir framing largo sin repetir migracion; logins runtime/bootstrap, JDBC/TLS y negocioHTTP/visual pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -1575,3 +1575,39 @@ base nueva marcada/esquema migrado bajo principal separado, spec tmp/sql-01-a66-
 no logins/password/bootstrap/runtime en ese paquete, mutaciones solo supervisor.
 
 A66 delegada task_e7748a7c48a5 / ctx_feff787c969e (follow-up A65.R2 settled). Identidades IdentityOnly y cuenta efectiva /status verificadas: arquitecto recuperapiura@gmail.com, programador mendozadeafabisa@gmail.com; misma sesion y worktree con --no-daemon. Ownership solo scripts/provision-isolated-sqlserver-qa.py y scripts/tests/test_isolated_sqlserver_provision.py. Contrato D-75/tmp/sql-01-a66-spec.md, sin mutaciones SQL del trabajador. Receipt outcome_unknown/turn_start_unobserved: no reenviar ni inferir salida; esperar wake conforme next de Orca. A65 revisada y push790c143; main0b24487 intacta. Crear base y JDBC real aun pendientes.
+
+A66 EN_REVISION, 2026-11-05 22:22 Lima. Informes msg_2005817e5ff4 y
+msg_906fdc482b0e recibidos; task_e7748a7c48a5/ctx_feff787c969e completed, no
+aprobacion automatica. Dos archivos SHA F65B9B36...DF6BC / 4279D9BE...19F00
+congelados en tmp/sqlserver-a66-review. Revision completa de herramienta y pruebas;
+18/18 nuevas independientes PASS2.083s raw0, worker106/106PASS21.505s.
+Plan LPC supervisor raw0, destino ausente/canCreate1. SQL generado revisado:
+V1..V9 bytes pinados, una BEGIN/COMMIT y EXECUTE AS migrador/REVERT. PARSEONLY
+real sobre wrappers completos raw0/stdout0/stderr0; solo sintaxis, no permisos
+ni ejecucion. Referencia https://learn.microsoft.com/en-us/sql/t-sql/statements/set-parseonly-transact-sql.
+Supervisor ejecuto create UNA vez, sin elevacion ni cambio de servicios. DB nueva
+health_project_sqlserver_qa_isolated_20261105 creada y marcada; principal
+hp_qa_isolated_migrator WITHOUT LOGIN con CONTROL solo esta base. CREATE y marker
+acknowledged. Migracion termino SQLcmdraw0/stderr0, pero herramienta devolvio
+RESPONSE_INVALID/migration_outcome_unverified; no repetir create ni migracion.
+Diario original c7c7bb307e7e48bbab6eea03af65de04 bajo snapshot/tmp/sqlserver-a66-provision.
+Fresh verify del snapshot reproduce RESPONSE_INVALID con SQLcmd0. Una invocacion
+previa desde raiz sin integrar script fallo archivo ausente, sin ejecutar SQL.
+Diagnostico readonly conserva stdout/bin: frames largos de4000 caracteres en
+vez de4008, checksum distinto; concatenacion NVARCHAR limitada recorta8 caracteres
+por chunk. Supervisor ajusto SOLO prefijo del wrapper de LECTURA a
+CAST(N'A66JSON:' AS nvarchar(max)); ninguna mutacion/replay ni cambio al producto.
+Fresh lectura completa con checksum ahora valida y compara exacta contra todos
+los postcondiciones pinados:37tablas/133SP/31triggers habilitados,562ACL exactas,
+roles dbo, migrador tipoS/auth0/CONTROL1/extra0/memberships0,265seedrows completas
+(specialties241/plans4/plan_versions4/workflow_definitions15/application_state1),
+resto tablasvacias; definiciones finales V8/V9 exactas. Fingerprint reconciliado
+CBD9C3CE913BFB57D3E257C8CA225E4F959F31669A90414C570F74B0DD74E2AB.
+Evidencia reconciliation-proof.json/reconciled-catalog.json y readonly-max-prefix
+bajo snapshot. Esto confirma persistencia del esquema; diario ERROR original
+se conserva y no se reinterpreta como una ejecucion exitosa de la herramienta.
+Proteccion MSSQLSERVER/SQLBrowser antes/despues c689d113...c116e igual.
+A66 devuelve defecto de framing al programador antes de integrar dos archivos.
+Sin logins runtime/bootstrap, SAD, JDBC/TLS ni backend HTTP negocio/visual nuevos.
+
+A66.R1 delegada task_df2133a607d7 / ctx_872dbdc51204 al mismo retenido (ambas identidades y cuenta/sesion efectiva verificadas). Ownership conserva SOLO dos archivos A66. Fix de framing y regresiones; probe SQL literal y Verify autorizados exclusivamente readonly. DB ya persistida CBD9C3CE...74E2AB: PROHIBIDO create/migrate/reapply/cleanup. Receipt follow_up/outcome_unknown por turn_start_unobserved; no reenviar, seguir next y esperar wake. No artefactos A66 integrados aun.
