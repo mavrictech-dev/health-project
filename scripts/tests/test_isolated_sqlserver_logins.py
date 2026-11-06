@@ -345,6 +345,26 @@ class IsolatedLoginTests(unittest.TestCase):
                 self.assert_no_canary(error.exception)
         self.assertEqual(list(self.path.iterdir()),[])
 
+    def test_context_notices_do_not_turn_valid_commit_into_unverified_outcome(self):
+        transport=M.Transport({'PATH':'synthetic'})
+        responses=[]
+        def sqlcmd(argv,**kwargs):
+            sql=kwargs['input']
+            phase='commit_acknowledged' if "N'commit_acknowledged' phase" in sql else 'inspect_fresh'
+            # ODBC behavior established by the readonly USE probe: severity0
+            # context notices are emitted unless the message threshold is1.
+            threshold=argv[argv.index('-m')+1] if '-m' in argv else '0'
+            notices="Changed database context to 'master'.\n" if threshold=='0' else ''
+            responses.append(phase)
+            return subprocess.CompletedProcess(argv,0,frame(snapshot(self.artifact,True),phase),notices)
+        with patch.object(M.shutil,'which',return_value='sqlcmd.exe'),patch.object(M.subprocess,'run',side_effect=sqlcmd):
+            acknowledged=transport.run(M.create_sql(self.artifact,credentials()),'commit_acknowledged')
+            fresh=transport.run(M.inspect_sql(self.artifact,'inspect_fresh'),'inspect_fresh')
+        self.assertEqual(M.resource_state(acknowledged,self.artifact),'installed')
+        self.assertEqual(M.resource_state(fresh,self.artifact),'installed')
+        self.assertEqual(responses,['commit_acknowledged','inspect_fresh'])
+        self.assertEqual(list(self.path.iterdir()),[])
+
     def test_prompt_normalization_never_accepts_unframed_or_corrupt_output(self):
         transport=M.Transport({})
         for stdout in [CANARY,'1> '+CANARY,frame({'x':1},'inspect')[:-5]]:

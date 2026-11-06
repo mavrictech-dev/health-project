@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-06",
+  "scope": "A67 correction and local continuation; database startup not authorized by Windows elevation",
+  "a67Correction": "SQLcmd severity threshold1 suppresses USE notices; strict errors/checksum/no-retry preserved",
+  "tests": {
+    "rawExit": 0,
+    "seconds": 26.0,
+    "tail": [
+      "",
+      "----------------------------------------------------------------------",
+      "Ran 124 tests in 25.483s",
+      "",
+      "OK"
+    ]
+  },
+  "files": {
+    "scripts/provision-isolated-sqlserver-logins.py": "4415F6DB8260B000F64023DA6D94E088FB49DE53FC55A9EF4140AA0329740EAD",
+    "scripts/tests/test_isolated_sqlserver_logins.py": "BC90574A1D0901A3F0FE07B405387536C9A783BF5FE37F7632C256758B969453"
+  },
+  "programmer": {
+    "email": "mendozadeafabisa@gmail.com",
+    "terminal": "term_22e64ef3-7ea8-41fc-a042-98e914f4fbf4",
+    "session": "01a1b189-b4a1-7143-8ac3-c2b08101b604",
+    "effectiveIdentityVerified": true,
+    "noDaemon": true,
+    "weeklyQuotaPercentLeft": 0,
+    "resetReported": "11 Nov 11:35",
+    "workDispatched": false
+  },
+  "sqlStart": {
+    "status": "elevation_cancelled",
+    "service": "MSSQL$HEALTHPROJECTQA",
+    "serviceState": "Stopped",
+    "serviceStartMode": "Manual",
+    "mutationExecuted": false,
+    "repeatAwaitingUserAnswer": true
+  },
+  "bootstrap": {
+    "source": "tmp/health-continuation-20261106/HealthQaBootstrap.java",
+    "sha256": "430E6F099ACA033AC97E60F7C691C88F4A5E48E2C5101382947E14F761A15049",
+    "compileRawExit": 0,
+    "executed": false,
+    "sadCreated": false
+  },
+  "pending": [
+    "Windows elevation to start dedicated SQL QA",
+    "fresh real A67 regression",
+    "bootstrap and application login",
+    "authenticated business journeys",
+    "Playwright desktop/mobile visual inspection",
+    "trusted TLS chain"
+  ],
+  "newDatabaseTestsExecuted": false,
+  "productMainOrOtherProjectsChanged": false,
+  "workerDoneFabricated": false
+}

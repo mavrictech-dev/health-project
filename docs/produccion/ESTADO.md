@@ -1060,3 +1060,9 @@ y scripts/tests/test_isolated_sqlserver_config.py. SoloPlan/CPUworker, superviso
 revisa yejecutaApplyelevado. Dispatchactualizado con instalacioncompletada por
 msg de coordinacion. Helper/arranque/loopback14335/mixedauthsaDisabled yVerify
 SQL de la instancia NUEVA aun pendientes. Sin backendJDBC/negocio/visual nuevos.
+
+Continuidad 2026-11-06: A67.R2 corregida con124/124 pruebas de herramientas;
+verificacion SQL real nueva pendiente porque Windows cancelo elevacion de arranque.
+Programador recuperado con cuenta correcta y --no-daemon, pero cuota semanal0%.
+Se sigue procedimiento secuencial D-79. Bootstrap preparado/compilado, no ejecutado.
+Esperar aceptacion de UAC antes de nuevo Start; no recrear base ni logins/store.

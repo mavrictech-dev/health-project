@@ -272,7 +272,9 @@ class Transport:
     def run(self, sql, phase):
         executable = shutil.which('sqlcmd.exe', path=self.env.get('PATH', ''))
         require(executable is not None, 'SQLCMD_NOT_FOUND')
-        argv = [executable, '-S', A66.SERVER, '-d', A66.DATABASE, '-E', '-C', '-b', '-X1', '-x', '-l', '5', '-t', '20', '-f', '65001', '-y', '0', '-w', '65535', '-r1']
+        # USE emits severity-zero context notices. Suppress those at SQLcmd,
+        # preserving -b and strict stderr/checksum validation for real failures.
+        argv = [executable, '-S', A66.SERVER, '-d', A66.DATABASE, '-E', '-C', '-b', '-X1', '-x', '-l', '5', '-t', '20', '-f', '65001', '-y', '0', '-w', '65535', '-r1', '-m', '1']
         try:
             response = subprocess.run(argv, input=sql + '\nGO\n:EXIT\n', env=self.env, capture_output=True, text=True, encoding='utf-8', errors='strict', timeout=30, creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
         except subprocess.TimeoutExpired:

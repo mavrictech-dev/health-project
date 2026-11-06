@@ -1189,3 +1189,21 @@ setup, cambiar cuentas o integrar en main. Se preservan los secretos locales.
 El estado Orca observado hoy es dispatchabandoned/terminal_missing; no fabricamos
 worker_done ni recuperamos sesiones en el alcance de una subida a GitHub.
 Informe consolidado y evidencia de inventario/pruebas quedan versionados.
+
+D-79 (2026-11-06): usuario autoriza ejecutar los pendientes A67, recuperar
+programador, bootstrap/login, negocio, visual y cadena TLS con prioridad y calidad.
+Se verificaron raiz/rama/worktrees y ausencia de cambios locales del supervisor.
+Orca restauro un terminal idle con cuenta arquitecto; no se delego en el ni se
+cerro su sesion. Nuevo terminal term_22e64ef3-7ea8-41fc-a042-98e914f4fbf4 usa launcher
+programador con home asignado y --no-daemon; /status efectivo verifica
+mendozadeafabisa@gmail.com, sesion01a1b189-b4a1-7143-8ac3-c2b08101b604, cuota semanal0
+hasta11nov11:35. No enviar trabajo que no puede ejecutar ni comprar/cambiar cuenta.
+El usuario solicita completar y la guia PLAN_EJECUCION_PRODUCCION seccion5 permite
+los mismos paquetes secuenciales si no hay subagentes disponibles. Se aplica ese
+procedimiento alternativo local: supervisor asume temporalmente A67 en checkout
+principal, mantiene decisiones/revision/evidencia y no simula worker_done. Ownership
+primero SOLO scripts/provision-isolated-sqlserver-logins.py y su suite; trabajador
+recuperado idle sin asignacion activa. No cambios simultaneos en su worktree.
+Arranque SQL SOLO QA mediante wrapper Start-only revisado, baseline de proteccion
+actual6217e698...175e3d tras reboot externo; no reapply ni crear DB/logins/credenciales.
+Trabajos siguientes siguen acotados y secuenciales; sin main/produccion/datos reales.

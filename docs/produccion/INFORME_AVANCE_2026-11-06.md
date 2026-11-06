@@ -1,5 +1,16 @@
 # Health Project: avances y pendientes
 
+## Continuaci?n del mismo d?a
+
+A67 tiene corregido el filtro de avisos SQLcmd y su nueva regresi?n: 124/124
+pruebas de herramientas. La sesi?n del programador se recuper? con la cuenta
+correcta y `--no-daemon`, pero confirma cuota semanal 0 % hasta el 11 de noviembre.
+Windows cancel? la elevaci?n para arrancar SQL QA; no se ejecut? el wrapper
+privilegiado ni se repiti? setup. Se espera respuesta del usuario para volver a
+mostrar UAC. Bootstrap separado preparado y compilado, todav?a sin ejecutar.
+La validaci?n real nueva, los recorridos y TLS siguen pendientes de SQL activo.
+Ver [evidencia de continuidad](evidencias/CONTINUIDAD_QA_20261106.json).
+
 Corte: 6 de noviembre de 2026. Rama de entrega: `health/production-wave0` en
 [GitHub](https://github.com/mavrictech-dev/health-project/tree/health/production-wave0).
 El proyecto sigue en desarrollo y QA local; no está aprobado para producción.

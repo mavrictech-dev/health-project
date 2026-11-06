@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; integracion SQL Server, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; integracion SQL Server/rollback/concurrencia pendiente; Docker no es el bloqueo del motor local descubierto |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A67 versionada EN_REVISION; SQL/JDBC/HTTP basicos probados) | Herramientas123/123 al6nov; JDBC17/17 y HTTP7/7 del5nov; informe consolidado | Corregir reporte SQLcmd y recuperar coordinacion: dispatchabandoned/terminal_missing; negocio/visual/TLS pendientes; SQL QA hoy detenido/manual |
+| SQL-01 | Arquitecto; implementacion y QA secuenciales D-79 por cuota | D-09, ARQ-02 fisico | EN_CURSO (A67 fuente corregida, verificacion nueva espera arranque SQL) | Herramientas124/124; JDBC17/17 y HTTP7/7 historicos; CONTINUIDAD_QA_20261106.json | Sesion programador recuperada, cuota semanal0%; Windows cancelo UAC y QA sigueStopped; bootstrap compilado sin ejecutar, negocio/visual/TLS pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -1713,3 +1713,53 @@ Servicio HEALTHPROJECTQA comprobado Stopped/Manual, sin listener14335; backend
 QA sin listener18080. La evidencia positiva17JDBC/7HTTP sigue fechada5nov.
 No subir credenciales, DPAPI, .env, datos SQL, sesiones, tmp, logs ni binarios.
 Rama destino health/production-wave0; main0b24487 preservada, sin despliegue.
+
+D-79 (2026-11-06): usuario autoriza ejecutar los pendientes A67, recuperar
+programador, bootstrap/login, negocio, visual y cadena TLS con prioridad y calidad.
+Se verificaron raiz/rama/worktrees y ausencia de cambios locales del supervisor.
+Orca restauro un terminal idle con cuenta arquitecto; no se delego en el ni se
+cerro su sesion. Nuevo terminal term_22e64ef3-7ea8-41fc-a042-98e914f4fbf4 usa launcher
+programador con home asignado y --no-daemon; /status efectivo verifica
+mendozadeafabisa@gmail.com, sesion01a1b189-b4a1-7143-8ac3-c2b08101b604, cuota semanal0
+hasta11nov11:35. No enviar trabajo que no puede ejecutar ni comprar/cambiar cuenta.
+El usuario solicita completar y la guia PLAN_EJECUCION_PRODUCCION seccion5 permite
+los mismos paquetes secuenciales si no hay subagentes disponibles. Se aplica ese
+procedimiento alternativo local: supervisor asume temporalmente A67 en checkout
+principal, mantiene decisiones/revision/evidencia y no simula worker_done. Ownership
+primero SOLO scripts/provision-isolated-sqlserver-logins.py y su suite; trabajador
+recuperado idle sin asignacion activa. No cambios simultaneos en su worktree.
+Arranque SQL SOLO QA mediante wrapper Start-only revisado, baseline de proteccion
+actual6217e698...175e3d tras reboot externo; no reapply ni crear DB/logins/credenciales.
+Trabajos siguientes siguen acotados y secuenciales; sin main/produccion/datos reales.
+
+A67.R2 implementada por procedimiento secuencial D-79, 2026-11-06.
+Ownership supervisor limitado a herramienta A67 y su suite. Cambio de transporte:
+SQLcmd -m1 suprime avisos de severidad0 de USE; -b, clasificacion de stderr,
+checksum, fases, stdin secreto, roles y guardas permanecen intactos. Regresion
+nueva comprueba recepcion de commit/fresh mediante transporte real con modelo
+ODBC y ninguna escritura de archivos sensibles. Suite completa124/124 PASS,
+25.483s unittest/raw0, evidencia tmp/health-continuation-20261106/a67-tests.*.
+No se repitio create ni se generaron nuevas credenciales.
+
+Programador recuperado: terminal term_22e64ef3-7ea8-41fc-a042-98e914f4fbf4,
+sesion01a1b189-b4a1-7143-8ac3-c2b08101b604, /status confirma cuenta
+mendozadeafabisa@gmail.com y cuota semanal0% hasta11nov11:35; launcher home por
+proceso/--no-daemon. Terminal restaurado term_634b81ad-ad57-471b-8b32-9ac7a5705fff
+resulto arquitecto recuperapiura@gmail.com; no se delego trabajo en el ni se cerro.
+TaskA67 se conserva sin worker_done; no se fabrican entregas del agente.
+
+Arranque QA: wrapper revisado permite SOLO accionStart de HEALTHPROJECTQA si
+plan exacto y proteccion de instancia compartida6217e698...175e3d sin cambios.
+Start-Process RunAs devolvio operacion cancelada por usuario; no entro al script
+privilegiado ni arranco SQL. No reintentar sin nueva aceptacion de la elevacion.
+Pregunta asincrona presentada al usuario para volver a mostrar UAC; aun pendiente.
+Sigue pendiente verificacion real nueva de A67/arranque. La evidencia JDBC17/HTTP7
+anterior no se presenta como repetida hoy.
+
+Bootstrap local separado preparado y compilado offline con JDK21: HealthQaBootstrap
+usa exclusivamente login bootstrap, Purpose.BOOTSTRAP, SqlServerBootstrapStore y
+BCrypt, con password por stdin, guardas de destino y comprobacion de idempotencia.
+Fuente/classes en tmp/health-continuation-20261106; javac raw0. NO ejecutado:
+no se creo SAD, login de aplicacion, tenant ni fixtures. Negocio/Playwright/TLS
+siguen por verificar cuando SQL este disponible. Sin cambios de frontend,
+credenciales/globales, FactuEz ni main.

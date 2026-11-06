@@ -158,3 +158,9 @@ Orca reporta dispatchabandoned/terminal_missing y livenessunverifiable; no se ha
 relanzado al programador. Servicio SQL QA actualmente Stopped/Manual y backend
 QA apagado. Las17 pruebas JDBC/7HTTP reales corresponden al5nov. Fuentes QA y
 resumen de evidencia publicados sin credenciales; cierre y correccion pendientes.
+
+Continuidad 2026-11-06: A67.R2 corregida con124/124 pruebas de herramientas;
+verificacion SQL real nueva pendiente porque Windows cancelo elevacion de arranque.
+Programador recuperado con cuenta correcta y --no-daemon, pero cuota semanal0%.
+Se sigue procedimiento secuencial D-79. Bootstrap preparado/compilado, no ejecutado.
+Esperar aceptacion de UAC antes de nuevo Start; no recrear base ni logins/store.
