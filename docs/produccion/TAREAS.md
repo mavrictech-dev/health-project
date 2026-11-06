@@ -13,11 +13,11 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | --- | --- | --- | --- | --- | --- |
 | ARQ-01 | Arquitecto | Ninguna | VALIDADA | ESTADO.md; fuentes y HP-ORCH-01 | Matriz revisada; brechas runtime conservadas |
 | ARQ-02 | Arquitecto + programador | ARQ-01 | REABIERTA (persistencia SQL Server) | DECISIONES.md D-02/04/05; msg_393227f665f1 acuerdo | Contratos HTTP conservados; contrato de persistencia debe cumplir D-09/SQL Server y 100 % SP |
-| QA-01 | Programador como calidad; revision arquitecto | ARQ-01 | BLOQUEADA (JDBC positivo, negocio HTTP y visual reales) | A60 corregida:47/47 independientes HTTP negativo; A7.R1 motor | Salud/ConfigData reales aprobados; TCP/NP deshabilitados y WindowsOnly1 impiden validar login JDBC runtime actual |
+| QA-01 | Programador como calidad; revision arquitecto | ARQ-01 | BLOQUEADA (JDBC positivo, negocio HTTP y visual reales) | A60:47/47 HTTP negativo; A63:20/20 permisos DB; A65:88 tests worker,3 nuevos independientes | Instancia dedicada activa en loopback; metadata LPC validada, Windows-E TCP falla SSPI; base aislada/login/JDBC pendiente |
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; integracion SQL Server, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; integracion SQL Server/rollback/concurrencia pendiente; Docker no es el bloqueo del motor local descubierto |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A63 permisos efectivos validada; A64 artefactos aceptados, cierre Orca pendiente) | Java990; HTTP negativo47; herramientas65; ACL562; QAefectiva20 independientes | TCP0/WindowsOnly1, principales/login/JDBC/TLS/bootstrap y negocioHTTP/visual pendientes; cuota worker hasta20:45 |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A65 integrada; OS y metadata LPC verificados) | Java990; HTTP negativo47; herramientas88; ACL562; QAefectiva20; servicioQA real Running | Preparar A66 base nueva marcada/esquema; Windows-E TCP bloqueado por SSPI; login SQL/JDBC/TLS/bootstrap y negocioHTTP/visual pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -1515,3 +1515,61 @@ y scripts/tests/test_isolated_sqlserver_config.py. SoloPlan/CPUworker, superviso
 revisa yejecutaApplyelevado. Dispatchactualizado con instalacioncompletada por
 msg de coordinacion. Helper/arranque/loopback14335/mixedauthsaDisabled yVerify
 SQL de la instancia NUEVA aun pendientes. Sin backendJDBC/negocio/visual nuevos.
+
+A65 EN_REVISION, 2026-11-05 21:48 Lima. Task inicial task_4a20b9ea8a16 /
+ctx_f78898d0aa6b y correccion SQLcmd task_a5563c8423ba / ctx_10b2540084fa
+completed; informes msg_48815701636f, msg_e876f3d54d03, msg_6f8853ee55f6 y
+msg_eab51bfa1866 recibidos. Supervisor rechazo combinacion -h/-y de SQLcmd;
+correccion revisada SHA PS38FCCD98...11248 / testDC67121A...D3FD.
+Snapshot tmp/sqlserver-a65-final-review: 86/86 independientes PASS22.069s;
+original84/84PASS18.680s conservado. Plan ordinario BLOCKED por acceso protegido
+a Parameters: no ampliar ACL. Verificacion prevista separa OS elevado de SQL-E
+con operador Windows original; no afirmar Verify monolitico ni JDBC/TLS runtime.
+Primer RunAs sin prueba de ejecucion: PIDnull y sin marker/salida. Se comprobo
+estado inicial1/TCP0/NP0/Stopped antes de un lanzamiento revisado v2 con Wait.
+V2 si entro, PID14464, exit1: Planplanned nueveacciones; Applyerror
+INSPECTION_OR_ACTION_FAILED/mutation_attemptedtrue. Estado reconciliado:
+LoginMode2/TCP1/ListenOnAllIPs0/127.0.0.1-IP17habilitada puerto14335,
+puertosdinamicosvacios/IPAll14335; servicio sigueStoppedManual. No repetirApply.
+Fingerprint protegidoantes/despues c689d11318d6d6639229c6b4ac016d7f2b009b7fe893df8ab559e032fd3c116e igual.
+Diagnostico readonly en PowerShell limpia reproduce tipo ServiceProcess.ServiceController
+no encontrado; Add-Type -AssemblyName System.ServiceProcess permite construir y
+leer StatusStopped, sin Start. Defecto real de dependencia no cubierto por mocks.
+Se devuelve al mismo programador para carga explicita y regresion fresh-process;
+ningun archivo A65 integrado/aprobado aun. Evidencia job
+ tmp/healthprojectqa-install-20261105 (elevated-plan/apply, configure-launch-v2,
+configure-entered-v2, configure-outcome, configure-recovery).
+Instancia creada, configuracion parcial reconciliada; arranque/listeners/SQL-E,
+base aislada/principales/JDBC/HTTP negocio/visual siguen pendientes. Sin evidencia
+visual nueva ni afirmacion de integracion real. No cambios enMSSQLSERVER/SQLBrowser.
+
+A65.R2 reasignada task_9913f30a8a2a / ctx_6c69662952ab al mismo retenido. Receipt follow_up/outcome_unknown por turn_start_unobserved: no reenviar ni abandonar; esperar wake segun next de Orca. Ownership limitado a los dos archivos A65; ninguna operacion privilegiada en trabajador.
+
+A65.R2 revisada, 2026-11-05 21:55 Lima. Informes msg_b149fc02b1e2 y
+msg_c5bfd89aa4a5 recibidos; task_9913f30a8a2a/ctx_6c69662952ab completed.
+Dos artefactos aceptados e integrados por SHA exacto: script3FBC605A36A6BE720B4D87E3F50D64163E167D5BA96C2C621C3B672B3A2BD831,
+test6647ED093F0945933C452CD86CC0BC33192685AA52AC4435893C4B79E77D8E56.
+Diff R2 limitado a cargar System.ServiceProcess, tipos completos y factory fija;
+fuera de esa seccion conserva el SHA anterior. Worker88/88PASS19.474s,177 rutas
+protegidas identicas. Supervisor reviso ambos diffs y ejecuto las dos regresiones
+nuevas y syntax:3/3OK2.098s. Primer comando desde cwd incorrecto tuvo tres
+ImportError sin ejecutar tests; corregido. Wrapper PS reporto raw1 al redirigir
+stderr de unittest como NativeCommandError aunque la suite termino OK; no se
+oculto ni se repitio una suite exitosa. Evidencia tmp/sqlserver-a65-r2-review.
+Recuperacion revisada sin repetir Apply: plan fresco elevado SOLO Start, ejecutado
+una vez con helper congelado; PIDwrapper34024 exit0. ServicioQA RunningManual,
+PID5964, LoginMode2, master bajo directorio dedicado y binario Microsoft validado.
+Listeners PID:127.0.0.1:14335 y DAC127.0.0.1/::1:61409; ninguno externo. PuertoTCP
+alcanzable por socket. Fingerprint compartida/browser c689d113...c116e sin cambios.
+Consulta fija TCP Windows-E falla SSPI/Cannot generate SSPI context; Verify
+monolitico NO aprobado. Probe localhost expira por direccion distinta. Probe LPC
+Windows-E original PASS, salida exacta instanceHEALTHPROJECTQA/version16.0.1000.6/
+windowsOnly0/saDisabled1. Supervisor valido parser/contrato y listeners/PID de
+nuevo, sin reiniciar. SQL metadata administrativa por LPC no valida login TCP.
+Evidencia tmp/healthprojectqa-install-20261105/start-r2-{plan,launch,os-verification,
+composite-verification}.json y sql-{lpc,tcp-localhost}-*.bin. No cambiar SSPI/SPN,
+politicas, firewall ni cuentas globales. Runtime SQL login/JDBC/TLS pendientes.
+Estado A65: artefactos INTEGRADOS; OS y metadata LPC verificados; TCP Windows-E
+BLOQUEADO. No nueva validacion backend HTTP negocio ni visual. Siguiente A66:
+base nueva marcada/esquema migrado bajo principal separado, spec tmp/sql-01-a66-spec.md;
+no logins/password/bootstrap/runtime en ese paquete, mutaciones solo supervisor.

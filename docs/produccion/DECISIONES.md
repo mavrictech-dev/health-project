@@ -1122,3 +1122,23 @@ ese dialogo. Configuracionposterior SOLOnuevo namespace cambiaLoginMode2 conSA
 inhabilitada, WMIloopback14335 y servicio nuevo. A65 implementa helperPlan/Apply/
 Verify ytests, sin workerprivilegiado. Supervisor revisa y aplica; sin modificar
 MSSQLSERVER/SQLBrowser ni datos de otros proyectos, no nuevoJDBCvalidado aun.
+
+D-74 revision A65: 86tests CPU no sustituyen arranque real. Apply elevado v2
+configuro solo HEALTHPROJECTQA pero fallo antesStart porque PowerShell limpia
+no carga System.ServiceProcess. Estado parcial conservado y reconciliado;
+no retryApply ni restauracion automatica. Devolver cargaexplicita/testfresh al
+programador antes de revisar un nuevo plan y arrancar SOLO servicioQA nuevo.
+Fingerprint de instancia compartida/browser igual antes/despues. CompositeVerify
+OS elevado + SQL operadororiginal se documenta con alcance exacto; no monolithic
+Verify PASS si Parameters queda inaccesible al operadorSQL. JDBCpositivo sigue abierto.
+
+D-75 (2026-11-05): A65 entrega aceptada para configuracion/servicio, OS real y
+metadata LPC comprobados; Verify TCP Windows-E bloqueado por SSPI. No cambiar
+seguridad global para remediarlo. Setup usara Windows original por LPC hacia
+HEALTHPROJECTQA con guardas cerradas; runtime seguira TCP127.0.0.1:14335 con
+login SQL separado aun por provisionar. A66 prepara base nueva exacta
+health_project_sqlserver_qa_isolated_20261105/marcador aislado, CREATE sin colision
+y migraciones V1..V9 inmutables en transaccion bajo principal de migracion DB
+WITHOUT LOGIN separado del runtime. Ninguna copia de datos ni Flyway baseline.
+Supervisor revisa/aplica; worker solo Plan readonly y pruebas. Logins/bootstrap/
+JDBC/HTTP/UI pendientes en paquetes posteriores. Contrato tmp/sql-01-a66-spec.md.

@@ -110,3 +110,19 @@ detenido y TCP/NP apagados; A65 prepara configuracion del nuevo namespace y
 Verify. Instancia compartida sin cambios verificados. Usuario autorizo creacion,
 no volver a pedir eleccion de destino. A64 ya completed enOrca; no bloqueo de
 cuota en este paso.
+
+Estado comprobado 2026-11-05 21:48 Lima: instalacion completa; configuracion TCP
+loopback14335/authmixta aplicada parcialmente, servicio aunStoppedManual. Apply
+fallo antesStart por ensamblado System.ServiceProcess no cargado en PowerShell
+limpia. Correccion delegada y aprobacion pendiente; no reejecutar Apply a ciegas.
+Plan/read de Parameters requiere elevacionWindows; SQLmetadata se verificara bajo
+operadororiginal en fase separada. No hay todavia baseaislada/loginruntime/JDBC
+positivo ni evidencia HTTP negocio/visual nueva. Ver TAREAS/REVISIONES para evidencia.
+
+Actualizacion comprobada 2026-11-05 21:55 Lima: correccion de ensamblado revisada,
+servicioHEALTHPROJECTQA RunningManual, listener ordinario127.0.0.1:14335 y DACsolo
+loopback; master/directorio/binario verificados. Metadata original Windows-E por
+LPC confirma version16.0.1000.6, authmixta y saDisabled1. Windows-E por TCP falla
+SSPI; no afirmar Verify monolitico aprobado ni conexion JDBC. Mantener politicas
+globales sin cambios. A66 prepara base marcada y migracion con principal separado;
+logins runtime/bootstrap y sus pruebas TCP/JDBC se ejecutaran despues. Ver D-75.

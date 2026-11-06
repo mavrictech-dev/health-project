@@ -1093,3 +1093,59 @@ y scripts/tests/test_isolated_sqlserver_config.py. SoloPlan/CPUworker, superviso
 revisa yejecutaApplyelevado. Dispatchactualizado con instalacioncompletada por
 msg de coordinacion. Helper/arranque/loopback14335/mixedauthsaDisabled yVerify
 SQL de la instancia NUEVA aun pendientes. Sin backendJDBC/negocio/visual nuevos.
+
+A65 EN_REVISION, 2026-11-05 21:48 Lima. Task inicial task_4a20b9ea8a16 /
+ctx_f78898d0aa6b y correccion SQLcmd task_a5563c8423ba / ctx_10b2540084fa
+completed; informes msg_48815701636f, msg_e876f3d54d03, msg_6f8853ee55f6 y
+msg_eab51bfa1866 recibidos. Supervisor rechazo combinacion -h/-y de SQLcmd;
+correccion revisada SHA PS38FCCD98...11248 / testDC67121A...D3FD.
+Snapshot tmp/sqlserver-a65-final-review: 86/86 independientes PASS22.069s;
+original84/84PASS18.680s conservado. Plan ordinario BLOCKED por acceso protegido
+a Parameters: no ampliar ACL. Verificacion prevista separa OS elevado de SQL-E
+con operador Windows original; no afirmar Verify monolitico ni JDBC/TLS runtime.
+Primer RunAs sin prueba de ejecucion: PIDnull y sin marker/salida. Se comprobo
+estado inicial1/TCP0/NP0/Stopped antes de un lanzamiento revisado v2 con Wait.
+V2 si entro, PID14464, exit1: Planplanned nueveacciones; Applyerror
+INSPECTION_OR_ACTION_FAILED/mutation_attemptedtrue. Estado reconciliado:
+LoginMode2/TCP1/ListenOnAllIPs0/127.0.0.1-IP17habilitada puerto14335,
+puertosdinamicosvacios/IPAll14335; servicio sigueStoppedManual. No repetirApply.
+Fingerprint protegidoantes/despues c689d11318d6d6639229c6b4ac016d7f2b009b7fe893df8ab559e032fd3c116e igual.
+Diagnostico readonly en PowerShell limpia reproduce tipo ServiceProcess.ServiceController
+no encontrado; Add-Type -AssemblyName System.ServiceProcess permite construir y
+leer StatusStopped, sin Start. Defecto real de dependencia no cubierto por mocks.
+Se devuelve al mismo programador para carga explicita y regresion fresh-process;
+ningun archivo A65 integrado/aprobado aun. Evidencia job
+ tmp/healthprojectqa-install-20261105 (elevated-plan/apply, configure-launch-v2,
+configure-entered-v2, configure-outcome, configure-recovery).
+Instancia creada, configuracion parcial reconciliada; arranque/listeners/SQL-E,
+base aislada/principales/JDBC/HTTP negocio/visual siguen pendientes. Sin evidencia
+visual nueva ni afirmacion de integracion real. No cambios enMSSQLSERVER/SQLBrowser.
+
+A65.R2 revisada, 2026-11-05 21:55 Lima. Informes msg_b149fc02b1e2 y
+msg_c5bfd89aa4a5 recibidos; task_9913f30a8a2a/ctx_6c69662952ab completed.
+Dos artefactos aceptados e integrados por SHA exacto: script3FBC605A36A6BE720B4D87E3F50D64163E167D5BA96C2C621C3B672B3A2BD831,
+test6647ED093F0945933C452CD86CC0BC33192685AA52AC4435893C4B79E77D8E56.
+Diff R2 limitado a cargar System.ServiceProcess, tipos completos y factory fija;
+fuera de esa seccion conserva el SHA anterior. Worker88/88PASS19.474s,177 rutas
+protegidas identicas. Supervisor reviso ambos diffs y ejecuto las dos regresiones
+nuevas y syntax:3/3OK2.098s. Primer comando desde cwd incorrecto tuvo tres
+ImportError sin ejecutar tests; corregido. Wrapper PS reporto raw1 al redirigir
+stderr de unittest como NativeCommandError aunque la suite termino OK; no se
+oculto ni se repitio una suite exitosa. Evidencia tmp/sqlserver-a65-r2-review.
+Recuperacion revisada sin repetir Apply: plan fresco elevado SOLO Start, ejecutado
+una vez con helper congelado; PIDwrapper34024 exit0. ServicioQA RunningManual,
+PID5964, LoginMode2, master bajo directorio dedicado y binario Microsoft validado.
+Listeners PID:127.0.0.1:14335 y DAC127.0.0.1/::1:61409; ninguno externo. PuertoTCP
+alcanzable por socket. Fingerprint compartida/browser c689d113...c116e sin cambios.
+Consulta fija TCP Windows-E falla SSPI/Cannot generate SSPI context; Verify
+monolitico NO aprobado. Probe localhost expira por direccion distinta. Probe LPC
+Windows-E original PASS, salida exacta instanceHEALTHPROJECTQA/version16.0.1000.6/
+windowsOnly0/saDisabled1. Supervisor valido parser/contrato y listeners/PID de
+nuevo, sin reiniciar. SQL metadata administrativa por LPC no valida login TCP.
+Evidencia tmp/healthprojectqa-install-20261105/start-r2-{plan,launch,os-verification,
+composite-verification}.json y sql-{lpc,tcp-localhost}-*.bin. No cambiar SSPI/SPN,
+politicas, firewall ni cuentas globales. Runtime SQL login/JDBC/TLS pendientes.
+Estado A65: artefactos INTEGRADOS; OS y metadata LPC verificados; TCP Windows-E
+BLOQUEADO. No nueva validacion backend HTTP negocio ni visual. Siguiente A66:
+base nueva marcada/esquema migrado bajo principal separado, spec tmp/sql-01-a66-spec.md;
+no logins/password/bootstrap/runtime en ese paquete, mutaciones solo supervisor.
