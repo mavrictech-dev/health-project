@@ -1,0 +1,32 @@
+const fs=require('node:fs'),path=require('node:path');
+const {chromium}=require('../../frontend/node_modules/playwright');
+const root=__dirname;const report={status:'running',mockApi:false,backend:'real SQL Server/HTTP',checks:[],screenshots:[],consoleErrors:[],pageErrors:[],failedRequests:[],httpFailures:[]};
+const config=JSON.parse(fs.readFileSync(0,'utf8'));const origin='http://health.localhost:18300';
+const assert=(v,label)=>{if(!v)throw Error(label);report.checks.push(label);};
+(async()=>{
+ const browser=await chromium.launch({channel:'msedge',headless:true,args:['--host-resolver-rules=MAP *.health.localhost 127.0.0.1,MAP health.localhost 127.0.0.1']});
+ const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});const page=await context.newPage();page.setDefaultTimeout(20000);
+ page.on('pageerror',e=>report.pageErrors.push(e.message));page.on('console',m=>{if(m.type()==='error')report.consoleErrors.push(m.text());});
+ page.on('requestfailed',r=>report.failedRequests.push({url:new URL(r.url()).pathname,error:r.failure()?.errorText}));page.on('response',r=>{if(r.status()>=400)report.httpFailures.push({path:new URL(r.url()).pathname,status:r.status()});});
+ const shot=async name=>{await page.screenshot({path:path.join(root,name+'.png'),fullPage:true});report.screenshots.push(name+'.png');};
+ const overflow=async label=>assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),label+' no page overflow');
+ const login=async(email,password,base=origin)=>{await page.goto(base+'/acceso/');await page.getByLabel('Correo electrónico',{exact:true}).fill(email);await page.getByLabel('Contraseña',{exact:true}).fill(password);await page.getByRole('button',{name:'Iniciar sesión',exact:true}).click();await page.locator('.runtime-nav').waitFor();};
+ try{
+  await page.goto(origin+'/acceso/');await page.getByLabel('Correo electrónico',{exact:true}).waitFor();await shot('live-login-desktop');await overflow('login desktop');
+  await page.getByLabel('Correo electrónico',{exact:true}).fill(config.email);await page.getByLabel('Contraseña',{exact:true}).fill('Invalid-synthetic-password');await Promise.all([page.waitForResponse(r=>r.url().endsWith('/api/auth/browser/login')&&r.status()===401),page.getByRole('button',{name:'Iniciar sesión',exact:true}).click()]);await page.waitForFunction(()=>[...document.querySelectorAll('[role="alert"]')].some(el=>el.textContent.trim()));assert(await page.locator('.auth-feedback.error').innerText()!=='','invalid credentials visible');await shot('live-login-invalid');
+  await login(config.email,config.password);assert(!await page.evaluate(()=>document.cookie.includes('health_session')),'HttpOnly cookie hidden from JavaScript');assert((await context.cookies()).some(c=>c.name==='health_session'&&c.httpOnly&&c.sameSite==='Strict'),'browser cookie HttpOnly and SameSite Strict');
+  await shot('live-saas-home-desktop');await overflow('SAD home desktop');
+  await page.locator('.runtime-nav').getByRole('link',{name:'Clientes',exact:true}).click();await page.getByRole('heading',{name:'Clientes y espacios',exact:true}).waitFor();await page.locator('.runtime-table tbody tr').first().waitFor();await shot('live-saas-clients-desktop');await overflow('clients desktop');assert(await page.locator('.runtime-table tbody tr').count()>=5,'real synthetic tenants listed');
+  await page.getByRole('button',{name:'Crear cliente',exact:true}).click();await page.locator('#client-name').waitFor();await shot('live-saas-create-form');assert(await page.locator('#client-password').getAttribute('type')==='password','initial owner password masked');await page.getByRole('button',{name:'Cerrar',exact:true}).last().click();
+  await page.locator('.runtime-nav').getByRole('link',{name:'Trazabilidad',exact:true}).click();await page.getByRole('heading',{name:'Trazabilidad',exact:true}).waitFor();await page.locator('.runtime-table tbody tr').first().waitFor();await shot('live-trace-desktop');
+  await page.locator('.runtime-nav').getByRole('link',{name:'Estado de la aplicación',exact:true}).click();await page.getByRole('heading',{name:'Servicios operativos',exact:true}).waitFor();await shot('live-monitor-desktop');
+  await page.setViewportSize({width:390,height:844});await shot('live-monitor-mobile');await overflow('monitor mobile');
+  await page.goto(origin+'/saas/clientes/');await page.getByRole('heading',{name:'Clientes y espacios'}).waitFor();await page.locator('.runtime-table tbody tr').first().waitFor();await shot('live-clients-mobile');await overflow('clients mobile');
+  await page.goto(origin+'/saas/cuenta/');await page.getByRole('heading',{name:'Sesiones de tu identidad'}).waitFor();await page.getByText('Esta sesión',{exact:true}).waitFor();await shot('live-account-mobile');await page.getByRole('button',{name:'Abrir menú',exact:true}).click();await page.getByRole('button',{name:'Cerrar sesión',exact:true}).click();await page.getByRole('heading',{name:'Bienvenido de nuevo',exact:true}).waitFor();assert(!(await context.cookies()).some(c=>c.name==='health_session'),'logout removes browser cookie');
+  await page.setViewportSize({width:1440,height:1000});await login(config.ownerEmail,config.ownerPassword,'http://'+config.ownerHost+':18300');await page.goto('http://'+config.ownerHost+':18300/app/configuracion/organizacion/');await page.getByRole('heading',{name:'Organización y sedes',exact:true}).waitFor();await page.locator('.live-organization').waitFor();await shot('live-organization-desktop');await overflow('organization desktop');
+  await page.setViewportSize({width:390,height:844});await shot('live-organization-mobile');await overflow('organization mobile');
+  assert(report.pageErrors.length===0,'zero page JavaScript errors');assert(report.failedRequests.filter(r=>r.error!=='net::ERR_ABORTED').length===0,'zero failed network requests excluding navigation cancellation');assert(!report.httpFailures.some(r=>r.status>=500),'zero HTTP server errors');
+  report.status='passed';
+ }catch(e){report.status='failed';report.failure=e.message;await shot('live-failure').catch(()=>{});}
+ finally{await browser.close();fs.writeFileSync(path.join(root,'visual-result.json'),JSON.stringify(report,null,2));console.log(JSON.stringify({status:report.status,checks:report.checks.length,failure:report.failure,images:report.screenshots.length}));if(report.status!=='passed')process.exitCode=1;}
+})();

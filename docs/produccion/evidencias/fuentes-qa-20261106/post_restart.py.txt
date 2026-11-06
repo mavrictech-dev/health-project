@@ -1,0 +1,23 @@
+from pathlib import Path
+import importlib.util,json,zlib,urllib.request,urllib.error
+r=Path(__file__).resolve().parent;p=r.parents[1]
+s=importlib.util.spec_from_file_location('a67',p/'scripts/provision-isolated-sqlserver-logins.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+v=json.loads(zlib.decompress(m.Dpapi().unprotect((r/'business-state.dpapi').read_bytes())))['values'];checks=[]
+def api(path,host='health.localhost',token=None,expected=200):
+ headers={'Host':host}
+ if token:headers['Authorization']='Bearer '+token
+ q=urllib.request.Request('http://127.0.0.1:18080'+path,headers=headers)
+ try:response=urllib.request.urlopen(q)
+ except urllib.error.HTTPError as e:response=e
+ with response:
+  assert response.status==expected,path
+  return json.loads(response.read())
+assert api('/actuator/health/readiness')['status']=='UP';checks.append('new backend process ready with runtime principal')
+tenants=api('/api/platform/tenants?limit=200',token=v['sad']);ui=next(t for t in tenants if t['slug']=='qa-ui-'+v['RUN']);checks.append('SAD bearer session and browser-created tenant survive backend restart')
+cfg=api('/api/tenant/configuration',host=v['host'],token=v['admin']);assert len(cfg['branches'])==3;checks.append('three committed tenant branches survive restart')
+history=api('/api/patients/'+v['patient_a']['id']+'/history',host=v['host'],token=v['pro_token']);assert len(history['encounters'])==2 and len(history['entries'])==2;checks.append('clinical encounters and entries survive restart')
+balance=api('/api/finance/patients/'+v['patient_a']['id'],host=v['host'],token=v['cash']);assert balance['balanceMinor']==8000;checks.append('committed finance balance survives restart')
+api('/api/tenant/configuration',host=v['host_b'],token=v['admin'],expected=401);checks.append('host isolation still enforced after restart')
+app=json.loads(m.Dpapi().unprotect((r/'application-credentials.dpapi').read_bytes()));log=(r/'runtime.log').read_bytes()
+assert all(secret.encode() not in log for secret in [app['password'],v['PASSWORD'],m.load_credentials().password_for('hp_qa_runtime_20261105')]);checks.append('application and database passwords absent from runtime log')
+out={'status':'passed','mockApi':False,'checks':checks,'tlsChainValidated':False};(r/'post-restart-result.json').write_text(json.dumps(out,indent=2),encoding='utf-8');print(json.dumps({'status':'passed','checks':len(checks)}))

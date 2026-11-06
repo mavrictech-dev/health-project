@@ -164,3 +164,18 @@ verificacion SQL real nueva pendiente porque Windows cancelo elevacion de arranq
 Programador recuperado con cuenta correcta y --no-daemon, pero cuota semanal0%.
 Se sigue procedimiento secuencial D-79. Bootstrap preparado/compilado, no ejecutado.
 Esperar aceptacion de UAC antes de nuevo Start; no recrear base ni logins/store.
+
+
+## Corte posterior — 6 nov. 2026
+
+SQL HEALTHPROJECTQA arrancada por wrapper Start-only y aceptación UAC; listener
+solo127.0.0.1:14335. Bootstrap SAD sintético ejecutado separado e idempotente.
+Runtime profile sqlserver-qa en127.0.0.1:18080, origin QA health.localhost:18300;
+proxy estático/API local en18300. Backend reiniciado y persistencia verificada.
+V10–V12 adicionales aplicadas con migrador separado;133SP/562ACL reconciliados.
+No usar catálogo setup vacío como prueba de salud después del tráfico.
+
+TLS sigue con excepción de confianza solo QA. El script TLS está preparado,
+pero Windows canceló UAC antes de aplicar: cert vacío/ForceEncryption0, cero
+certificados QA nuevos. Nueva aceptación pendiente; no repetir elevación ni
+alterar confianza global para evadirla. Ver informe y CIERRE_LOCAL_20261106.json.

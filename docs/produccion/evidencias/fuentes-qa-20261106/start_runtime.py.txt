@@ -1,0 +1,28 @@
+from pathlib import Path
+import importlib.util,json,os,socket,struct,subprocess,time,urllib.request,urllib.error
+root=Path(__file__).resolve().parent
+project=root.parents[1]
+spec=importlib.util.spec_from_file_location('a67',project/'scripts/provision-isolated-sqlserver-logins.py')
+m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+cp=(root/'classpath.txt').read_text(encoding='utf-8-sig').strip()
+jdk=Path('C:/Program Files/Eclipse Adoptium/jdk-21.0.5.11-hotspot/bin')
+compiled=subprocess.run([str(jdk/'javac.exe'),'-encoding','UTF-8','-cp',cp,'-d',str(root/'classes'),str(root/'HealthQaRuntime.java')],capture_output=True,timeout=30)
+assert compiled.returncode==0,'Launcher compilation failed'
+with socket.socket() as s: assert s.connect_ex(('127.0.0.1',18080))!=0,'Port occupied'
+password=m.load_credentials().password_for('hp_qa_runtime_20261105').encode()
+with (root/'runtime.log').open('wb') as log:
+ p=subprocess.Popen([str(jdk/'java.exe'),'-cp',cp,'HealthQaRuntime'],stdin=subprocess.PIPE,stdout=log,stderr=subprocess.STDOUT,creationflags=subprocess.CREATE_NO_WINDOW,env=m.A66.environment(os.environ))
+ p.stdin.write(struct.pack('>i',len(password))+password);p.stdin.close()
+ (root/'runtime-process.json').write_text(json.dumps({'pid':p.pid,'launcher':'HealthQaRuntime','port':18080}),encoding='utf-8')
+ deadline=time.monotonic()+60
+ while True:
+  assert p.poll() is None,'Runtime exited'
+  try:
+   req=urllib.request.Request('http://127.0.0.1:18080/actuator/health/readiness',headers={'Host':'health.localhost:18300'})
+   with urllib.request.urlopen(req,timeout=2) as r:
+    if r.status==200:break
+  except (OSError,urllib.error.HTTPError):pass
+  assert time.monotonic()<deadline,'Runtime readiness timeout'
+  time.sleep(.3)
+assert password not in (root/'runtime.log').read_bytes(),'Secret in log'
+print(json.dumps({'status':'ready','pid':p.pid,'mockApi':False,'runtimeOnly':True,'port':18080}))

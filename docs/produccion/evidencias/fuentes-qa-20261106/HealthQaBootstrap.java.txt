@@ -1,0 +1,55 @@
+import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+import com.mavric.health.persistence.sqlserver.*;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import tools.jackson.databind.ObjectMapper;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.sql.*;
+import java.util.*;
+
+/** Separate synthetic setup process. Never imported by the runtime root. */
+public final class HealthQaBootstrap {
+ static final String DATABASE="health_project_sqlserver_qa_isolated_20261105";
+ static final String EMAIL="qa-sad@example.test";
+ static String input(DataInputStream in)throws Exception{
+  int size=in.readInt();if(size<12||size>128)throw new IllegalArgumentException("Invalid private input");
+  byte[] b=in.readNBytes(size);if(b.length!=size)throw new IllegalArgumentException("Invalid private input");
+  String text=new String(b,StandardCharsets.UTF_8);Arrays.fill(b,(byte)0);return text;
+ }
+ public static void main(String[] args){
+  String phase="input";
+  try{
+   if(args.length!=0)throw new IllegalArgumentException("Arguments not supported");
+   var in=new DataInputStream(System.in);String databasePassword=input(in),sadPassword=input(in);
+   boolean allowExisting=in.readBoolean();if(in.read()!=-1)throw new IllegalArgumentException("Invalid private input");
+   var ds=new SQLServerDataSource();ds.setServerName("127.0.0.1");ds.setPortNumber(14335);
+   ds.setDatabaseName(DATABASE);ds.setUser("hp_qa_bootstrap_20261105");ds.setPassword(databasePassword);
+   ds.setEncrypt("true");ds.setTrustServerCertificate(true);ds.setLoginTimeout(5);ds.setSocketTimeout(10000);
+   phase="effective_target";
+   try(var c=ds.getConnection();var s=c.createStatement();var r=s.executeQuery("SELECT CONVERT(nvarchar(128),SERVERPROPERTY('InstanceName')),DB_NAME(),SUSER_SNAME(),USER_NAME(),IS_SRVROLEMEMBER('sysadmin'),IS_ROLEMEMBER('hp_bootstrap_executor')")){
+    if(!r.next()||!"HEALTHPROJECTQA".equals(r.getString(1))||!DATABASE.equals(r.getString(2))||!"hp_qa_bootstrap_20261105".equals(r.getString(3))||!"hp_qa_bootstrap_20261105".equals(r.getString(4))||r.getInt(5)!=0||r.getInt(6)!=1||r.next())throw new IllegalStateException("Target mismatch");
+   }
+   var jdbc=new JdbcTemplate(ds);var manager=new DataSourceTransactionManager(ds);
+   var executor=new SqlServerExecutor(jdbc,new ObjectMapper(),SqlServerExecutor.Purpose.BOOTSTRAP);
+   var context=new SqlServerContext(null,null,null,null,null,null,null,null,null,SqlServerContext.Scope.BOOTSTRAP);
+   var before=executor.execute(SqlServerProcedure.BOOTSTRAP_EXISTS,context);
+   if(before.resultSets().size()!=1||before.resultSets().getFirst().size()>1)throw new IllegalStateException("Unexpected bootstrap state");
+   boolean existed=!before.resultSets().getFirst().isEmpty();
+   if(existed&&!allowExisting)throw new IllegalStateException("Existing SAD without matching local setup record");
+   var store=new SqlServerBootstrapStore(executor,manager);
+   phase="initialize_synthetic_sad";
+   var encoder=new BCryptPasswordEncoder(12);
+   store.initialize(EMAIL,()->encoder.encode(sadPassword));
+   phase="idempotence";
+   store.initialize(EMAIL,()->{throw new IllegalStateException("Existing SAD password must not be reset");});
+   var after=executor.execute(SqlServerProcedure.BOOTSTRAP_EXISTS,context);
+   if(after.resultSets().size()!=1||after.resultSets().getFirst().size()!=1)throw new IllegalStateException("Bootstrap verification failed");
+   System.out.println("{\"status\":\"passed\",\"existingSad\":"+existed+",\"idempotent\":true,\"email\":\"qa-sad@example.test\",\"purpose\":\"BOOTSTRAP\",\"runtimePrincipalUsed\":false,\"trustServerCertificateQaOnly\":true}");
+  }catch(Throwable e){
+   int vendor=-1;for(Throwable cause=e;cause!=null;cause=cause.getCause())if(cause instanceof SQLException sql){vendor=sql.getErrorCode();break;}
+   System.out.println("{\"status\":\"failed\",\"phase\":\""+phase+"\",\"exceptionType\":\""+e.getClass().getSimpleName()+"\",\"sqlVendorCode\":"+vendor+"}");System.exit(1);
+  }
+ }
+}

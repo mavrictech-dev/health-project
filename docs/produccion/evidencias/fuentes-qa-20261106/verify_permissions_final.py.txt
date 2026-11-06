@@ -1,0 +1,9 @@
+from pathlib import Path
+import importlib.util,subprocess,json
+r=Path(__file__).resolve().parent;p=r.parents[1]
+s=importlib.util.spec_from_file_location('a66',p/'scripts/provision-isolated-sqlserver-qa.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m);art=m.Artifacts.load()
+q="""SET NOCOUNT ON; SELECT r.name role,p.class classId,s.name schemaName,o.name objectName,p.minor_id minorId,p.permission_name permissionName,p.state state FROM sys.database_permissions p JOIN sys.database_principals r ON r.principal_id=p.grantee_principal_id JOIN sys.objects o ON o.object_id=p.major_id JOIN sys.schemas s ON s.schema_id=o.schema_id WHERE r.name IN ('hp_runtime_executor','hp_bootstrap_executor') AND p.class=1 AND o.name<>'flyway_schema_history' ORDER BY r.name,p.class,s.name,o.name,p.minor_id,p.permission_name,p.state FOR JSON PATH;"""
+a=subprocess.run(['sqlcmd','-S',r'lpc:.\HEALTHPROJECTQA','-E','-d','health_project_sqlserver_qa_isolated_20261105','-b','-r1','-m1','-y0','-w65535','-f65001'],input=q.encode(),capture_output=True);assert a.returncode==0
+acl=json.loads(a.stdout.decode().replace('\r','').replace('\n',''));assert acl==art.acl
+report={'status':'passed','permissions':len(acl),'equalsApprovedV8':True,'newRuntimeGrants':False,'migrationPrincipalSeparate':True}
+(r/'permissions-final.json').write_text(json.dumps(report,indent=2));print(json.dumps(report))

@@ -1207,3 +1207,26 @@ recuperado idle sin asignacion activa. No cambios simultaneos en su worktree.
 Arranque SQL SOLO QA mediante wrapper Start-only revisado, baseline de proteccion
 actual6217e698...175e3d tras reboot externo; no reapply ni crear DB/logins/credenciales.
 Trabajos siguientes siguen acotados y secuenciales; sin main/produccion/datos reales.
+
+
+D-80 (2026-11-06): A68 prolonga el fallback secuencial D-79 por cuota0. Ownership
+supervisor: migraciones SQL adicionales V10–V12, harnesses QA y script TLS local;
+trabajador retenido idle, sin escrituras compartidas. Contratos HTTP, UUID canónico,
+autorización SQL y separación runtime/bootstrap/migrador se mantienen. No editar
+migraciones V1–V9 ya aplicadas ni usar sus herramientas de setup como sondas después
+del tráfico. V10 conserva la unidad transaccional del llamador y prohíbe autocommit;
+V11 corrige solo generación canónica y áreas sin dependencias, no remapea lotes
+históricos arbitrarios; V12 distingue conflicto409 de dominio inválido400.
+
+Fundamento transacciones: https://learn.microsoft.com/en-us/sql/t-sql/statements/set-implicit-transactions-transact-sql
+y https://learn.microsoft.com/en-us/sql/connect/jdbc/understanding-transactions .
+La aceptación se basa además en JDBC/HTTP reales y rollback/pool independientes.
+
+D-81 (2026-11-06): TLS local requiere CA/leaf dedicados, sin instalar confianza
+global OS, sin exportar claves privadas, ACL de lectura solo para servicio QA
+sobre su nueva clave, binding/reinicio exclusivamente HEALTHPROJECTQA y truststore
+exclusivo JVM con trustServerCertificate=false. Script preparado, aplicación no
+ejecutada por cancelación UAC. Requiere nueva aceptación Windows; no equivale a
+TLS productivo/publicCA/HTTPS publicado. Bases oficiales:
+https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/configure-sql-server-encryption
+y https://learn.microsoft.com/en-us/sql/connect/jdbc/setting-the-connection-properties .

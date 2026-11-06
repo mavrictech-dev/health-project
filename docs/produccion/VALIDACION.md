@@ -1311,3 +1311,74 @@ Fuente/classes en tmp/health-continuation-20261106; javac raw0. NO ejecutado:
 no se creo SAD, login de aplicacion, tenant ni fixtures. Negocio/Playwright/TLS
 siguen por verificar cuando SQL este disponible. Sin cambios de frontend,
 credenciales/globales, FactuEz ni main.
+
+
+## A68 — cierre local revisado, 6 de noviembre de 2026
+
+Este corte sustituye los pendientes de arranque/bootstrap/negocio/visual de los
+registros anteriores. A67.R2 aceptada: 124 pruebas de herramientas y prueba SQL
+real de avisos/error; no se repitió create/setup. Task A67 completada por revisión
+del supervisor D-79, sin simular worker_done del dispatch abandonado.
+
+SQL QA arrancó con aceptación posterior de Windows: solo HEALTHPROJECTQA,
+127.0.0.1:14335. Fingerprint de MSSQLSERVER/SQLBrowser antes/después idéntico:
+6217e698f4cd5b3523b96ecf8e56f699406ef26e4ebcc09f1f047a8437175e3d.
+Bootstrap SAD sintético ejecutado con login bootstrap separado e idempotencia
+comprobada; runtime no recibió credenciales bootstrap. Credenciales de aplicación
+también en DPAPI CurrentUser, excluidas de Git, stdin a Java/Node.
+
+Tres defectos reales encontrados y corregidos mediante migraciones adicionales:
+
+- V10: JDBC setAutoCommit(false) selecciona transacciones implícitas, pero EXEC
+  no las materializa. La guarda privada hace una lectura de tabla únicamente si
+  el llamador ya seleccionó ese modo; no hace BEGIN/COMMIT y mantiene el rechazo
+  de autocommit. Primera escritura, rollback y pool físico reutilizado probados.
+- V11: NEWID convertido a char genera mayúsculas; los contratos exigen UUID
+  canónico minúsculo. Se corrigen alta de área y lote destino de transferencia,
+  y los IDs de áreas ya existentes, sin borrar datos ni cambiar permisos.
+  La corrección de áreas rechaza dependencias/collisiones inesperadas. No remapea
+  lotes históricos de otras instalaciones; esta QA no tenía lotes previos al fix.
+- V12: segunda identidad clínica en DOCTOR devuelve conflicto de capacidad 409;
+  el dominio clínico inválido conserva 400. El alta fallida se revierte.
+
+Aplicadas solo a esta base con hp_qa_isolated_migrator, en transacción separada
+y guardas de definición previa. Rechazos iniciales de guardas por normalización
+de newline/comentario preservados; ocurrieron antes de BEGIN/ALTER. V1–V9 y
+credenciales no se reejecutaron. Las 133 definiciones finales coinciden con
+V1–V12; 37 tablas y 31 triggers habilitados. Los 562 permisos siguen exactamente
+iguales a V8: ningún nuevo acceso runtime a tablas, DDL o SP privados.
+
+Evidencia independiente sin API simulada: 177 comprobaciones HTTP/negocio,
+8 de JDBC/transacción/pool, 7 de persistencia tras reiniciar backend y 6 de
+CSRF/revocación de sesión. Playwright Edge: 16 controles de navegación/login/
+cuenta/organización en escritorio1440 y móvil390; alta real de cliente y sede
+por cookie+CSRF, refresco de cupos y rechazo409 inspeccionados. 18 capturas
+versionadas e inspeccionadas: carga, error401, revisión/confirmación y error409,
+legibilidad y tablas con scroll interno móvil; sin overflow de página ni errores
+JavaScript. Los401/409 de negativos son esperados. El500 inicial de configuración
+queda en las trazas históricas; no se eliminó para aparentar una ejecución limpia.
+
+El harness recuperó selectores/esperas y reanudó fixtures cifrados tras corregir
+defectos. No se presenta como una pasada ininterrumpida desde una base vacía.
+Se preservó la respuesta positiva de altas antes del fallo de selector del harness;
+las reanudaciones consultaron esas altas y no las duplicaron. El probe final
+MySQL/Docker se excluyó, con prueba JDBC negativa y ACL SQL separadas.
+
+Offline: Maven990/990, package PASS; frontend check/68tests/build85 rutas PASS;
+herramientas124/124 PASS; demo build y13 recorridos PASS/0API/0errores.
+Los990 y68 incluyen pruebas unitarias/modelos/mocks y no sustituyen el QA real.
+
+Run run_624b9269b491; A68 task_43d86e5dd1d1 revisión local aceptada. A69
+task_7e312870e8d4 depende de A68 y conserva TLS BLOQUEADA: Windows canceló la
+elevación antes de entrar al script. No hay certificados nuevos ni binding,
+ForceEncryption sigue0 y la conexión usa trustServerCertificate=true solo QA.
+Script TLS preparado, parser/plan PASS; apply/cadena/hostname/negativos NO
+ejecutados. Pregunta para nueva aceptación UAC pendiente; no reintentar a ciegas.
+
+Fuentes/hashes, resultados y capturas: evidencias/CIERRE_LOCAL_20261106.json,
+fuentes-qa-20261106 y visuales-qa-20261106. Solo datos sintéticos .example.test.
+Sin main, despliegue, gasto, destinatarios reales ni cambios a FactuEz.
+El programador está recuperado con su cuenta propia, pero cuota semanal0%;
+esta entrega la implementó/verificó el supervisor secuencialmente según D-79.
+Los módulos clínicos del frontend, correo/adjuntos, restauración, carga y gates
+profesionales/productivos del plan siguen pendientes; la API probada no los cierra.

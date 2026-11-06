@@ -1,0 +1,19 @@
+from pathlib import Path
+r=Path(__file__).resolve().parent;p=r.parents[1]
+s=(p/'frontend/scripts/preview-static.cjs').read_text(encoding='utf-8-sig')
+s=s.replace("const root = path.resolve(__dirname, '..', demo ? 'out-demo' : 'out');","const root = path.resolve("+repr(str(p/'frontend/out').replace('\\','/'))+");")
+s=s.replace("const port = Number(process.env.PORT || (demo ? 3002 : 3001));","const port = 18300;")
+marker="http.createServer((request, response) => {"
+proxy="""
+  const host=(request.headers.host||'').split(':')[0];
+  if (!(host==='health.localhost'||/^[a-z0-9-]+\\.health\\.localhost$/.test(host))) {response.writeHead(400);response.end();return;}
+  if(request.url.startsWith('/api/')||request.url.startsWith('/actuator/')) {
+    const upstream=http.request({hostname:'127.0.0.1',port:18080,path:request.url,method:request.method,headers:{...request.headers,host:request.headers.host}},reply=>{response.writeHead(reply.statusCode,reply.headers);reply.pipe(response);});
+    upstream.setTimeout(30000,()=>upstream.destroy());
+    upstream.on('error',()=>{if(!response.headersSent){response.writeHead(502,{'Content-Type':'application/json'});response.end(JSON.stringify({detail:'Servicio QA no disponible'}));}else response.destroy();});
+    request.pipe(upstream);return;
+  }
+"""
+assert marker in s
+(r/'preview-live.cjs').write_text(s.replace(marker,marker+proxy),encoding='utf-8')
+print('Prepared local live proxy using existing static/RSC serving logic; no API mocks')

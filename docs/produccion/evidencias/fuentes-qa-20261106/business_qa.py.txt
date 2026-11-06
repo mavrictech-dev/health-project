@@ -1,0 +1,81 @@
+"""Run existing API scenarios sequentially with encrypted checkpoints; no Docker."""
+from pathlib import Path
+import ast,importlib.util,json,os,sys,types,datetime,zlib
+root=Path(__file__).resolve().parent;project=root.parents[1]
+spec=importlib.util.spec_from_file_location('a67',project/'scripts/provision-isolated-sqlserver-logins.py')
+m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+dp=m.Dpapi()
+app=json.loads(dp.unprotect((root/'application-credentials.dpapi').read_bytes()))
+assert app['database']==m.A66.DATABASE and app['email']=='qa-sad@example.test'
+cfg=types.ModuleType('qa_config')
+cfg.load_config=lambda _: {'HEALTH_BASE_DOMAIN':'health.localhost','BOOTSTRAP_ADMIN_EMAIL':app['email'],'BOOTSTRAP_ADMIN_PASSWORD':app['password']}
+def forbidden():raise AssertionError('Docker forbidden in SQL QA')
+cfg.compose_command=forbidden;sys.modules['qa_config']=cfg
+os.environ['HEALTH_TEST_URL']='http://127.0.0.1:18080'
+source=project/'backend/scripts/verify-api.py';tree=ast.parse(source.read_text(encoding='utf-8-sig'))
+main=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='main')
+header=[n for n in tree.body if n is not main and not isinstance(n,ast.If)]
+ns={'__file__':str(source),'__name__':'sql_qa'}
+exec(compile(ast.Module(body=header,type_ignores=[]),str(source),'exec'),ns)
+# Resume only this encrypted run's synthetic tenant after a later read failed.
+# Existing matching fixtures are checked against the original owner and scope.
+def ensure_tenant(body,token):
+ existing=[t for t in ns['api']('GET','/api/platform/tenants?limit=200',token=token) if t['slug']==body['slug']]
+ if not existing:return ns['api']('POST','/api/platform/tenants',body,token=token)
+ assert len(existing)==1 and existing[0]['name']==body['name'] and existing[0]['ownerEmail']==body['owner']['email'] and body['slug'].startswith('qa-'+ns['RUN']+'-'),'Unexpected fixture collision'
+ return existing[0]
+ns['ensure_tenant']=ensure_tenant
+class ResumeFixtures(ast.NodeTransformer):
+ def visit_Assign(self,node):
+  if node.lineno==96:
+   replacement=ast.parse('tenant = ensure_tenant(body, sad)').body[0]
+   return ast.copy_location(replacement,node)
+  return self.generic_visit(node)
+main=ResumeFixtures().visit(main);ast.fix_missing_locations(main)
+# Existing final MySQL direct-table probe is excluded. Actual SQL permission
+# denial is covered separately by the real JDBC evidence; never label it rerun.
+steps=[]
+for n in main.body:
+ if isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='cmd' for t in n.targets):break
+ steps.append(n)
+statefile=root/'business-state.dpapi';reportfile=root/'business-result.json'
+start=0
+if statefile.exists():
+ raw=dp.unprotect(statefile.read_bytes());saved=json.loads(zlib.decompress(raw) if raw[:1]!=b'{' else raw)
+ ns.update(saved['values']);start=saved['nextStep']
+ # Recreate local function definitions in the current namespace, no writes.
+ for n in steps[:start]:
+  if isinstance(n,ast.FunctionDef):exec(compile(ast.Module(body=[n],type_ignores=[]),str(source),'exec'),ns)
+def encode(v):
+ if isinstance(v,datetime.datetime):return {'__datetime':v.isoformat()}
+ raise TypeError()
+def snapshot(next_step):
+ values={}
+ for k,v in ns.items():
+  if k.startswith('__') or k in ('CONFIG','HTTP','ROOT'):continue
+  try:json.dumps(v,default=encode);values[k]=v
+  except TypeError:pass
+ data=json.dumps({'nextStep':next_step,'values':values},default=encode).encode()
+ statefile.write_bytes(dp.protect(zlib.compress(data)))
+# Datetime checkpoints restore only safe typed datetime values.
+for k,v in list(ns.items()):
+ if isinstance(v,dict) and set(v)=={'__datetime'}:ns[k]=datetime.datetime.fromisoformat(v['__datetime'])
+snapshot(start)
+for i,n in enumerate(steps[start:],start):
+ try:
+  exec(compile(ast.Module(body=[n],type_ignores=[]),str(source),'exec'),ns)
+  snapshot(i+1)
+  report={'status':'running','mockApi':False,'sqlServerReal':True,'completedSteps':i+1,'totalSteps':len(steps),'assertions':len(ns['REPORT']),'checks':ns['REPORT'],'sourceLine':n.lineno}
+  reportfile.write_text(json.dumps(report,indent=2),encoding='utf-8')
+  print(f'Step {i+1}/{len(steps)} line {n.lineno}: PASS ({len(ns["REPORT"])} assertions)',flush=True)
+ except Exception as e:
+  snapshot(i)
+  # Preserve known safe failure detail without values or credentials.
+  detail=str(e) if isinstance(e,AssertionError) else type(e).__name__
+  for secret in [app['password'],ns.get('PASSWORD','')]:
+   if secret:detail=detail.replace(secret,'[redacted]')
+  report={'status':'failed','mockApi':False,'sqlServerReal':True,'failedStep':i,'sourceLine':n.lineno,'assertions':len(ns['REPORT']),'checks':ns['REPORT'],'detail':detail,'checkpointEncrypted':True}
+  reportfile.write_text(json.dumps(report,indent=2),encoding='utf-8');print(json.dumps({k:v for k,v in report.items() if k!='checks'}),flush=True);sys.exit(1)
+report.update(status='passed',mysqlPermissionProbeExcluded=True)
+reportfile.write_text(json.dumps(report,indent=2),encoding='utf-8')
+print(f'PASS: {len(ns["REPORT"])} assertions against real SQL Server/HTTP',flush=True)

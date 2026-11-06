@@ -1,0 +1,15 @@
+const fs=require('node:fs'),path=require('node:path');const {chromium}=require('../../frontend/node_modules/playwright');const c=JSON.parse(fs.readFileSync(0,'utf8'));
+const report={status:'running',mockApi:false,checks:[]};const check=(v,n)=>{if(!v)throw Error(n);report.checks.push(n);};
+(async()=>{const b=await chromium.launch({channel:'msedge',headless:true,args:['--host-resolver-rules=MAP *.health.localhost 127.0.0.1,MAP health.localhost 127.0.0.1']});const ctx=await b.newContext();const p=await ctx.newPage();try{
+await p.goto('http://'+c.ownerHost+':18300/acceso/');await p.getByLabel('Correo electrónico',{exact:true}).fill(c.ownerEmail);await p.getByLabel('Contraseña',{exact:true}).fill(c.ownerPassword);await p.getByRole('button',{name:'Iniciar sesión',exact:true}).click();await p.locator('.runtime-nav').waitFor();
+const result=await p.evaluate(async()=>{
+ const session=await(await fetch('/api/auth/browser/session')).json();
+ const send=async headers=>(await fetch('/api/tenant/branches',{method:'POST',headers:{'Content-Type':'application/json',...headers},body:JSON.stringify({name:'',address:'',external:false,active:true})})).status;
+ const missing=await send({}),wrong=await send({'X-CSRF-Token':'invalid-synthetic-csrf'}),valid=await send({'X-CSRF-Token':session.csrfToken});
+ const sessions=await(await fetch('/api/auth/sessions')).json();const own=sessions.find(s=>s.current);
+ const revoked=(await fetch('/api/auth/sessions/'+own.id,{method:'DELETE',headers:{'X-CSRF-Token':session.csrfToken}})).status;
+ const stale=(await fetch('/api/auth/browser/session')).status;
+ return {missing,wrong,valid,currentFound:!!own,revoked,stale};
+});
+check(result.missing===403,'cookie mutation without CSRF rejected');check(result.wrong===403,'cookie mutation with invalid CSRF rejected');check(result.valid===400,'valid CSRF reaches business validation without write');check(result.currentFound,'current browser session identified');check(result.revoked===200,'current session revocation confirmed');check(result.stale===401,'revoked cookie cannot restore session');
+report.status='passed';}catch(e){report.status='failed';report.failure=e.message;}finally{await b.close();fs.writeFileSync(path.join(__dirname,'browser-security-result.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report));if(report.status!=='passed')process.exitCode=1;}})();

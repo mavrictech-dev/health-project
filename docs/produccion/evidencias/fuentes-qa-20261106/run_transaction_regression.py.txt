@@ -1,0 +1,15 @@
+from pathlib import Path
+import importlib.util,json,zlib,hashlib,struct,subprocess,urllib.request
+r=Path(__file__).resolve().parent;p=r.parents[1]
+s=importlib.util.spec_from_file_location('a67',p/'scripts/provision-isolated-sqlserver-logins.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+v=json.loads(zlib.decompress(m.Dpapi().unprotect((r/'business-state.dpapi').read_bytes())))['values']
+q=urllib.request.Request('http://127.0.0.1:18080/api/auth/me',headers={'Host':'health.localhost','Authorization':'Bearer '+v['sad']});actor=json.load(urllib.request.urlopen(q))['id']
+jdk=Path('C:/Program Files/Eclipse Adoptium/jdk-21.0.5.11-hotspot/bin');cp=(r/'classpath.txt').read_text(encoding='utf-8-sig').strip()
+out=subprocess.run([str(jdk/'javac.exe'),'-cp',cp,'-d',str(r/'classes'),str(r/'JdbcWriteFirstRegression.java')],capture_output=True);assert out.returncode==0,out.stderr.decode()
+values=[m.load_credentials().password_for('hp_qa_runtime_20261105'),actor,hashlib.sha256(v['sad'].encode()).hexdigest()]
+wire=b''.join(struct.pack('>i',len(b))+b for b in [x.encode() for x in values]);out=subprocess.run([str(jdk/'java.exe'),'-cp',cp,'JdbcWriteFirstRegression'],input=wire,capture_output=True,timeout=30)
+text=out.stdout.decode()+out.stderr.decode();assert values[0] not in text
+(r/'transaction-regression.log').write_text(text,encoding='utf-8')
+data=next((json.loads(line) for line in out.stdout.decode().splitlines() if line.startswith('{')),None)
+if data:(r/'transaction-regression-result.json').write_text(json.dumps(data,indent=2),encoding='utf-8')
+print(json.dumps({'rawExit':out.returncode,'status':data.get('status') if data else 'failed','checks':len(data['checks']) if data else 0}));assert out.returncode==0 and data and data['status']=='passed'

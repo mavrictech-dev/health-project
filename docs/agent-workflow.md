@@ -1485,3 +1485,31 @@ verificacion SQL real nueva pendiente porque Windows cancelo elevacion de arranq
 Programador recuperado con cuenta correcta y --no-daemon, pero cuota semanal0%.
 Se sigue procedimiento secuencial D-79. Bootstrap preparado/compilado, no ejecutado.
 Esperar aceptacion de UAC antes de nuevo Start; no recrear base ni logins/store.
+
+
+## Continuidad real SQL/HTTP/UI — 6 nov. 2026
+
+A67 aceptada tras fix124 pruebas y lectura SQL real. A68
+`task_43d86e5dd1d1` incorpora V10–V12 y QA local real; A69
+`task_7e312870e8d4` conserva bloqueo de elevación para TLS. El supervisor ejecutó
+estos paquetes secuencialmente por D-79: cuenta programador recuperada y verificada,
+cuota0, sin atribuirle entregas ni simular worker_done. Run único de Health Project.
+
+Pruebas: backend `mvn -o test package` (990); frontend `npm run check`, `npm test`
+(68), `npm run build` (85 rutas), `npm run build:demo` y `node scripts/demo-qa.cjs`
+con HEALTH_PREVIEW_URL local18302 (13/0API). Herramientas:
+`python -B -m unittest discover -s scripts/tests -q` (124).
+Recorridos reales, fuentes exactas y comandos locales en
+`produccion/evidencias/fuentes-qa-20261106/README.md`; no confundir con demo/mocks.
+
+Bootstrap se ejecuta separado con su login; jamás configurar secretos bootstrap
+en la raíz runtime. Mantener passwords/checkpoints DPAPI e inputs secretos solo
+por memoria/stdin; no escribir .env de QA ni argv con contraseñas. No volver a
+ejecutar create de base/logins ni las migraciones aplicadas. A66/A67 verificaban
+un catálogo vacío de negocio histórico; después de tráfico/V10–V12 no son sondas.
+
+TLS: script `scripts/configure-isolated-sqlserver-tls.ps1` sin flags solo muestra
+plan. `-Apply` requiere elevación Windows, guardas fijas y revisión del resultado;
+no ejecutado en este corte por cancelación UAC. No retry mientras esa aceptación
+esté pendiente. Sin certificado instalado/ForceEncryption0, las pruebas siguen
+`trustServerCertificate=true` exclusivamente QA y no acreditan cadena válida.

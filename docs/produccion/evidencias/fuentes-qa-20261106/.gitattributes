@@ -1,0 +1,2 @@
+# Evidence archives retain the exact bytes hashed during QA.
+*.txt -text whitespace=cr-at-eol

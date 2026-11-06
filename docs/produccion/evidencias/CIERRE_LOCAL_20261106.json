@@ -1,0 +1,803 @@
+{
+  "cutUtc": "2026-11-06T20:48:28.228083+00:00",
+  "repository": "D:\\Mavric\\Health Project",
+  "branch": "health/production-wave0",
+  "productionApproved": false,
+  "mainMerged": false,
+  "run": "run_624b9269b491",
+  "accounts": {
+    "architect": "recuperapiura@gmail.com",
+    "programmer": "mendozadeafabisa@gmail.com",
+    "programmerRecovered": true,
+    "programmerWeeklyQuotaPercent": 0,
+    "execution": "supervisor sequential fallback D-79; no worker_done fabricated"
+  },
+  "a67": {
+    "status": "passed",
+    "contextNoticesAcceptedViaThreshold": true,
+    "realSqlErrorsRejected": true,
+    "principalsExact": true,
+    "catalogExactWithThreePreservedTraces": true,
+    "mutationReplayed": false,
+    "sqlcmdExits": [
+      {
+        "phase": "inspect",
+        "raw_exit_code": 0
+      },
+      {
+        "phase": "notice_probe",
+        "raw_exit_code": 0
+      },
+      {
+        "phase": "error_probe",
+        "raw_exit_code": 1
+      }
+    ]
+  },
+  "bootstrap": {
+    "status": "passed",
+    "existingSad": false,
+    "idempotent": true,
+    "email": "qa-sad@example.test",
+    "purpose": "BOOTSTRAP",
+    "runtimePrincipalUsed": false,
+    "trustServerCertificateQaOnly": true,
+    "rawExit": 0,
+    "stderrEmpty": true,
+    "credentialsPersistedAsDpapi": true
+  },
+  "business": {
+    "status": "passed",
+    "mockApi": false,
+    "sqlServerReal": true,
+    "completedSteps": 182,
+    "totalSteps": 182,
+    "assertions": 177,
+    "checks": [
+      "GET /api/public/context -> 200",
+      "POST /api/auth/login -> 200",
+      "GET /api/platform/plans -> 200",
+      "four configurable seeded plans",
+      "GET /api/platform/specialties -> 200",
+      "241 specialty profiles available",
+      "GET /api/platform/tenants?limit=200 -> 200",
+      "tenant subdomain created at onboarding",
+      "POST /api/auth/login -> 200",
+      "GET /api/tenant/configuration -> 200",
+      "GET /api/platform/tenants?limit=200 -> 200",
+      "POST /api/platform/tenants -> 200",
+      "tenant subdomain created at onboarding",
+      "POST /api/auth/login -> 200",
+      "GET /api/tenant/configuration -> 200",
+      "GET /api/platform/tenants?limit=200 -> 200",
+      "POST /api/platform/tenants -> 200",
+      "tenant subdomain created at onboarding",
+      "POST /api/auth/login -> 200",
+      "GET /api/tenant/configuration -> 200",
+      "POST /api/platform/tenants -> 409",
+      "POST /api/platform/tenants -> 400",
+      "GET /api/platform/users?limit=200 -> 200",
+      "failed onboarding rolls back newly created owner",
+      "GET /api/tenant/configuration -> 401",
+      "GET /api/tenant/configuration -> 401",
+      "GET /api/platform/tenants -> 403",
+      "GET /api/public/context -> 404",
+      "GET /api/public/context -> 200",
+      "forged tenant and forwarded host ignored",
+      "PUT /api/tenant/members -> 200",
+      "POST /api/auth/login -> 200",
+      "PUT /api/tenant/members -> 200",
+      "POST /api/auth/login -> 200",
+      "PUT /api/tenant/members -> 200",
+      "POST /api/auth/login -> 200",
+      "PUT /api/tenant/members -> 200",
+      "POST /api/auth/login -> 200",
+      "PUT /api/tenant/members -> 200",
+      "POST /api/auth/login -> 200",
+      "PUT /api/tenant/members -> 200",
+      "POST /api/auth/login -> 401",
+      "POST /api/auth/invitations/accept -> 200",
+      "GET /api/auth/me -> 200",
+      "POST /api/tenant/branches -> 200",
+      "POST /api/tenant/branches -> 200",
+      "POST /api/tenant/branches -> 409",
+      "PUT /api/tenant/subscription -> 409",
+      "PUT /api/tenant/members -> 200",
+      "PUT /api/tenant/members -> 200",
+      "POST /api/patients -> 200",
+      "POST /api/patients -> 200",
+      "POST /api/patients -> 200",
+      "POST /api/patients -> 200",
+      "POST /api/patients -> 400",
+      "GET /api/patients/d297adb8-06dd-42d4-beca-065939d3e55a -> 404",
+      "POST /api/patients -> 400",
+      "PUT /api/patients/c692af54-6391-4e8a-9b95-7bcbdd930bcc -> 200",
+      "PUT /api/patients/c692af54-6391-4e8a-9b95-7bcbdd930bcc -> 409",
+      "GET /api/patients/c692af54-6391-4e8a-9b95-7bcbdd930bcc/history -> 403",
+      "concurrent professional bookings: one winner",
+      "POST /api/appointments -> 409",
+      "PUT /api/appointments/34c0e946-97b9-4cb0-a3b3-ad5e8d4cd58d -> 200",
+      "POST /api/appointments -> 200",
+      "POST /api/appointments -> 200",
+      "appointment idempotence returns same record",
+      "POST /api/appointments -> 409",
+      "POST /api/encounters -> 200",
+      "encounter stores specialty profile snapshot",
+      "POST /api/encounters -> 409",
+      "POST /api/encounters/455962fe-f31b-4f51-a687-d3a6f93da708/entries -> 400",
+      "POST /api/encounters/455962fe-f31b-4f51-a687-d3a6f93da708/entries -> 200",
+      "POST /api/encounters/455962fe-f31b-4f51-a687-d3a6f93da708/entries -> 200",
+      "PUT /api/encounters/455962fe-f31b-4f51-a687-d3a6f93da708/note -> 200",
+      "POST /api/encounters/455962fe-f31b-4f51-a687-d3a6f93da708/finalize -> 200",
+      "PUT /api/encounters/455962fe-f31b-4f51-a687-d3a6f93da708/note -> 409",
+      "POST /api/encounters/455962fe-f31b-4f51-a687-d3a6f93da708/entries -> 409",
+      "GET /api/patients/c692af54-6391-4e8a-9b95-7bcbdd930bcc/history -> 200",
+      "shared history includes captured measurements and prescription",
+      "POST /api/encounters -> 200",
+      "GET /api/patients/c692af54-6391-4e8a-9b95-7bcbdd930bcc/history -> 200",
+      "same tenant history spans branches",
+      "POST /api/encounters/150c3bd4-6167-49fc-ad23-88f9d7b62d93/finalize -> 200",
+      "POST /api/encounters -> 200",
+      "POST /api/encounters/8d689a14-b21c-4769-8836-eead5c9f7cf3/entries -> 200",
+      "POST /api/encounters/8d689a14-b21c-4769-8836-eead5c9f7cf3/finalize -> 200",
+      "PUT /api/tenant/members -> 200",
+      "POST /api/auth/login -> 200",
+      "POST /api/encounters -> 200",
+      "veterinary encounter uses animal profile",
+      "POST /api/encounters/53c9baf2-4cc5-4f11-b94b-72f9a23038ca/finalize -> 200",
+      "PUT /api/tenant/members -> 200",
+      "POST /api/auth/login -> 200",
+      "PUT /api/patients/c692af54-6391-4e8a-9b95-7bcbdd930bcc/links -> 200",
+      "GET /api/patients -> 403",
+      "GET /api/portal/patients/90866606-2ac8-4978-8f9f-c8f493aa5b05/documents -> 404",
+      "POST /api/documents -> 200",
+      "PUT /api/documents/25dcc687-74aa-4395-8e54-b61b2ce3c353 -> 200",
+      "signed document hash matches stored content",
+      "PUT /api/documents/25dcc687-74aa-4395-8e54-b61b2ce3c353 -> 409",
+      "PUT /api/documents/25dcc687-74aa-4395-8e54-b61b2ce3c353 -> 200",
+      "GET /api/portal/patients/c692af54-6391-4e8a-9b95-7bcbdd930bcc/documents -> 200",
+      "portal receives signed published documents",
+      "POST /api/documents -> 200",
+      "PUT /api/patients/c692af54-6391-4e8a-9b95-7bcbdd930bcc/links -> 200",
+      "GET /api/portal/patients/c692af54-6391-4e8a-9b95-7bcbdd930bcc/documents -> 404",
+      "PUT /api/auth/password -> 400",
+      "PUT /api/auth/password -> 200",
+      "GET /api/auth/me -> 401",
+      "POST /api/finance/movements -> 200",
+      "POST /api/finance/movements -> 200",
+      "charge idempotence",
+      "POST /api/finance/movements -> 200",
+      "POST /api/finance/movements -> 409",
+      "concurrent refunds cannot exceed original payment",
+      "GET /api/finance/patients/c692af54-6391-4e8a-9b95-7bcbdd930bcc -> 200",
+      "clinical cash balance is accurate",
+      "POST /api/inventory/lots -> 200",
+      "POST /api/inventory/movements -> 200",
+      "POST /api/inventory/movements -> 200",
+      "concurrent dispensing cannot exceed prescription",
+      "POST /api/inventory/transfers -> 200",
+      "POST /api/inventory/transfers/165a3438-d7bd-4a93-854e-0e65f3932552/receive -> 200",
+      "POST /api/inventory/transfers/165a3438-d7bd-4a93-854e-0e65f3932552/receive -> 200",
+      "GET /api/inventory/lots -> 200",
+      "stock and transfer conserve quantities; retries do not duplicate stock",
+      "POST /api/hospital/resources -> 200",
+      "concurrent admissions: one occupant per bed",
+      "POST /api/hospital/admissions/bb801a52-0c9c-48e7-ad7c-95bfe28f147a/discharge -> 200",
+      "POST /api/hospital/admissions/bb801a52-0c9c-48e7-ad7c-95bfe28f147a/discharge -> 409",
+      "POST /api/hospital/resources -> 200",
+      "POST /api/hospital/resources -> 400",
+      "POST /api/workflows -> 200",
+      "PUT /api/tenant/members -> 200",
+      "POST /api/auth/login -> 200",
+      "POST /api/workflows/57b4c8d1-2b14-4fdf-9e50-c0c9a0aea73d/steps -> 409",
+      "POST /api/workflows/57b4c8d1-2b14-4fdf-9e50-c0c9a0aea73d/steps -> 200",
+      "POST /api/workflows/57b4c8d1-2b14-4fdf-9e50-c0c9a0aea73d/steps -> 409",
+      "GET /api/workflows/57b4c8d1-2b14-4fdf-9e50-c0c9a0aea73d -> 200",
+      "workflow revisions preserve history",
+      "POST /api/workflows -> 403",
+      "PUT /api/platform/tenants/60a72f97-7ec7-49e6-b5ce-f513dd69dc24/status -> 200",
+      "POST /api/patients -> 403",
+      "GET /api/patients/c692af54-6391-4e8a-9b95-7bcbdd930bcc/history -> 200",
+      "PUT /api/platform/tenants/60a72f97-7ec7-49e6-b5ce-f513dd69dc24/status -> 200",
+      "PUT /api/tenant/members -> 200",
+      "GET /api/patients -> 401",
+      "DELETE /api/auth/session -> 200",
+      "GET /api/auth/me -> 401",
+      "GET /api/audit -> 200",
+      "tenant audit records metadata for mutations",
+      "POST /api/platform/plans -> 200",
+      "PUT /api/tenant/subscription -> 200",
+      "subscription binds published plan version",
+      "PUT /api/platform/plans/e78531ce-b755-4b80-aec5-a3eb98a27751 -> 200",
+      "GET /api/tenant/configuration -> 200",
+      "editing catalog preserves contracted version and price",
+      "PUT /api/platform/plans/e78531ce-b755-4b80-aec5-a3eb98a27751 -> 409",
+      "PUT /api/tenant/subscription -> 200",
+      "explicit contract update selects latest published version",
+      "POST /api/platform/tenants/60a72f97-7ec7-49e6-b5ce-f513dd69dc24/invoices/877a217b-6681-4cd8-a782-dbae2f881e0f/payment -> 200",
+      "POST /api/platform/tenants/60a72f97-7ec7-49e6-b5ce-f513dd69dc24/invoices/877a217b-6681-4cd8-a782-dbae2f881e0f/payment -> 200",
+      "GET /api/finance/patients/c692af54-6391-4e8a-9b95-7bcbdd930bcc -> 200",
+      "SaaS invoice payments do not enter clinical cash ledger",
+      "POST /api/platform/tenants -> 200",
+      "POST /api/auth/login -> 200",
+      "GET /api/tenant/configuration -> 200",
+      "independent owner has one clinical identity",
+      "POST /api/tenant/branches -> 200",
+      "independent may register external places without consuming owned branch quota",
+      "PUT /api/tenant/members -> 409",
+      "POST /api/hospital/resources -> 403",
+      "POST /api/platform/plans -> 200",
+      "POST /api/platform/tenants -> 200",
+      "POST /api/auth/login -> 200",
+      "GET /api/tenant/configuration -> 200",
+      "concurrent invitations cannot exceed professional quota"
+    ],
+    "sourceLine": 285,
+    "mysqlPermissionProbeExcluded": true
+  },
+  "transactionPoolRegression": {
+    "mock": false,
+    "status": "passed",
+    "checks": [
+      "autocommit_write_first_rejected",
+      "spring_write_first_read_own_write",
+      "exactly_one_physical_transaction",
+      "rollback_removes_write_and_trigger_effects",
+      "same_physical_pool_connection_clean_after_rollback",
+      "next_transaction_healthy",
+      "commit_leaves_no_nested_transaction",
+      "private_transaction_helper_still_denied"
+    ],
+    "trustServerCertificateQaOnly": true,
+    "persistentFixture": false,
+    "physicalPoolSize": 1
+  },
+  "visual": {
+    "status": "passed",
+    "mockApi": false,
+    "backend": "real SQL Server/HTTP",
+    "checks": [
+      "login desktop no page overflow",
+      "invalid credentials visible",
+      "HttpOnly cookie hidden from JavaScript",
+      "browser cookie HttpOnly and SameSite Strict",
+      "SAD home desktop no page overflow",
+      "clients desktop no page overflow",
+      "real synthetic tenants listed",
+      "initial owner password masked",
+      "monitor mobile no page overflow",
+      "clients mobile no page overflow",
+      "logout removes browser cookie",
+      "organization desktop no page overflow",
+      "organization mobile no page overflow",
+      "zero page JavaScript errors",
+      "zero failed network requests excluding navigation cancellation",
+      "zero HTTP server errors"
+    ],
+    "screenshots": [
+      "live-login-desktop.png",
+      "live-login-invalid.png",
+      "live-saas-home-desktop.png",
+      "live-saas-clients-desktop.png",
+      "live-saas-create-form.png",
+      "live-trace-desktop.png",
+      "live-monitor-desktop.png",
+      "live-monitor-mobile.png",
+      "live-clients-mobile.png",
+      "live-account-mobile.png",
+      "live-organization-desktop.png",
+      "live-organization-mobile.png"
+    ],
+    "consoleErrors": [
+      "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    ],
+    "pageErrors": [],
+    "failedRequests": [
+      {
+        "url": "/recuperar/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/registro/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/recuperar/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/registro/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/saas/inicio/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/saas/clientes/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/saas/trazabilidad/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/saas/monitor/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/saas/soporte/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/saas/cuenta/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/demo/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/saas/inicio/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/saas/clientes/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/saas/trazabilidad/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/saas/monitor/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/saas/soporte/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/saas/cuenta/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/saas/inicio/__next.$c$path.__PAGE__.txt",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/recuperar/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/registro/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/recuperar/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/registro/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/app/inicio/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/app/configuracion/organizacion/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/app/trazabilidad/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/app/monitor/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/app/soporte/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/app/cuenta/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/demo/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/app/inicio/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/app/configuracion/organizacion/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/app/trazabilidad/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/app/monitor/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/app/soporte/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/app/cuenta/",
+        "error": "net::ERR_ABORTED"
+      },
+      {
+        "url": "/app/configuracion/organizacion/__next.$c$path.__PAGE__.txt",
+        "error": "net::ERR_ABORTED"
+      }
+    ],
+    "httpFailures": [
+      {
+        "path": "/api/auth/browser/session",
+        "status": 401
+      },
+      {
+        "path": "/api/auth/browser/login",
+        "status": 401
+      },
+      {
+        "path": "/api/auth/browser/session",
+        "status": 401
+      },
+      {
+        "path": "/api/auth/browser/session",
+        "status": 401
+      },
+      {
+        "path": "/api/auth/browser/session",
+        "status": 401
+      }
+    ]
+  },
+  "browserWrites": {
+    "status": "passed",
+    "mockApi": false,
+    "checks": [
+      "resume exact synthetic UI fixture",
+      "capacity refreshed after real write",
+      "real quota conflict returns HTTP409",
+      "quota error preserves draft/review",
+      "zero JavaScript page errors",
+      "zero HTTP5xx"
+    ],
+    "screenshots": [
+      "live-organization-loaded-desktop.png",
+      "live-ui-branch-quota-mobile.png"
+    ],
+    "pageErrors": [],
+    "httpFailures": [
+      {
+        "path": "/api/auth/browser/session",
+        "status": 401
+      },
+      {
+        "path": "/api/auth/browser/session",
+        "status": 401
+      },
+      {
+        "path": "/api/tenant/branches",
+        "status": 409
+      }
+    ],
+    "priorVerifiedChecks": [
+      "resume exact synthetic UI fixture",
+      "capacity refreshed after real write",
+      "real quota conflict returns HTTP409",
+      "quota error preserves draft/review",
+      "zero JavaScript page errors",
+      "zero HTTP5xx"
+    ],
+    "priorScreenshots": [
+      "live-ui-branch-quota-mobile.png"
+    ]
+  },
+  "browserSecurity": {
+    "status": "passed",
+    "mockApi": false,
+    "checks": [
+      "cookie mutation without CSRF rejected",
+      "cookie mutation with invalid CSRF rejected",
+      "valid CSRF reaches business validation without write",
+      "current browser session identified",
+      "current session revocation confirmed",
+      "revoked cookie cannot restore session"
+    ]
+  },
+  "restartDurability": {
+    "status": "passed",
+    "mockApi": false,
+    "checks": [
+      "new backend process ready with runtime principal",
+      "SAD bearer session and browser-created tenant survive backend restart",
+      "three committed tenant branches survive restart",
+      "clinical encounters and entries survive restart",
+      "committed finance balance survives restart",
+      "host isolation still enforced after restart",
+      "application and database passwords absent from runtime log"
+    ],
+    "tlsChainValidated": false
+  },
+  "database": {
+    "databaseName": "health_project_sqlserver_qa_isolated_20261105",
+    "instanceName": "HEALTHPROJECTQA",
+    "tables": 37,
+    "procedures": 133,
+    "enabledTriggers": 31,
+    "users": 16,
+    "tenants": 6,
+    "branches": 10,
+    "patients": 4,
+    "encounters": 4,
+    "sessions": 26,
+    "requestTraces": 278,
+    "nonCanonicalAreaIds": 0,
+    "nonCanonicalStockIds": 0,
+    "applicationMode": "OPEN",
+    "all133DefinitionsMatchV1ThroughV12": true,
+    "mockApi": false
+  },
+  "permissions": {
+    "status": "passed",
+    "permissions": 562,
+    "equalsApprovedV8": true,
+    "newRuntimeGrants": false,
+    "migrationPrincipalSeparate": true
+  },
+  "offline": {
+    "backendTests": 990,
+    "backendFailures": 0,
+    "mavenPackage": "PASS offline",
+    "frontendTypeScript": "PASS",
+    "frontendTests": 68,
+    "frontendBuildRoutes": 85,
+    "toolTests": 124,
+    "toolTestsSeconds": 26.424,
+    "demoBuild": "PASS",
+    "demoQA": {
+      "passed": 13,
+      "results": [
+        "Direct entry without server or credentials",
+        "SaaS plans: edit flow and reload persistence",
+        "Trace: command bridge, steps, export and rejected requests",
+        "Monitor state changes persist locally; three themes",
+        "Support: right drawer with blur, create, reply and resolve",
+        "Human dashboard and agenda",
+        "Dental patient and workspace",
+        "Veterinary patient and workspace",
+        "Patient portal and appointments",
+        "Simulated session revocation",
+        "Access and recovery with simulated inbox",
+        "Registration creates local tenant and verification link",
+        "390px presentation landing in three themes"
+      ],
+      "apiRequests": [],
+      "errors": []
+    }
+  },
+  "tls": {
+    "status": "blocked_on_windows_elevation",
+    "encrypt": true,
+    "trustServerCertificateQaOnly": true,
+    "chainValidated": false,
+    "script": "scripts/configure-isolated-sqlserver-tls.ps1",
+    "scriptSyntaxAndPlan": "PASS; apply NOT executed",
+    "adminLaunch": "Windows cancelled before script execution",
+    "renewedAcceptanceQuestion": "pending",
+    "currentObservation": {
+      "protectedFingerprint": "6217e698f4cd5b3523b96ecf8e56f699406ef26e4ebcc09f1f047a8437175e3d",
+      "certificate": "",
+      "forceEncryption": 0,
+      "newQaCertificates": 0
+    }
+  },
+  "migrations": {
+    "V10__jdbc_implicit_transaction_boundary.sql": {
+      "sha256OriginalBytes": "486862353a929d799ef54007b4db8a005f438d60502c0e8970297f7238690ca0",
+      "sha256Lf": "486862353a929d799ef54007b4db8a005f438d60502c0e8970297f7238690ca0"
+    },
+    "V11__canonical_generated_uuids.sql": {
+      "sha256OriginalBytes": "f512c6d44917612b53850e29c320c85925a3c92936951bc1a5cd39807ad72ef1",
+      "sha256Lf": "f03282dfa74f207c49ea52eb6b35e7b691df0f6a73bfe8f58df6b156beb3f368"
+    },
+    "V12__independent_professional_conflict.sql": {
+      "sha256OriginalBytes": "516f1bd3583b51792a75045c90342fab8236c2d7830b154ef811939980876438",
+      "sha256Lf": "5fec650fdd577d79f1ec0f6e07ae635555a0fc23f6fb173c42d924fe41d11e4c"
+    }
+  },
+  "sourceArchives": {
+    "HealthQaBootstrap.java": {
+      "archive": "evidencias/fuentes-qa-20261106/HealthQaBootstrap.java.txt",
+      "sha256": "430e6f099aca033ac97e60f7c691c88f4a5e48e2c5101382947e14f761a15049"
+    },
+    "HealthQaRuntime.java": {
+      "archive": "evidencias/fuentes-qa-20261106/HealthQaRuntime.java.txt",
+      "sha256": "354e751427a757eb27ce39066c6be73e9427fb6f8c01bb46f258e6d7d81474d5"
+    },
+    "JdbcWriteFirstRegression.java": {
+      "archive": "evidencias/fuentes-qa-20261106/JdbcWriteFirstRegression.java.txt",
+      "sha256": "124e02f115bbf4ded95435c84889a323f2dcf79b62457d2aeadcf0f8b98b5391"
+    },
+    "business_qa.py": {
+      "archive": "evidencias/fuentes-qa-20261106/business_qa.py.txt",
+      "sha256": "03c10a1c9b614a3e565391261d4a0b6b641d5588b111a1290fb0894075d6cca9"
+    },
+    "visual_qa.cjs": {
+      "archive": "evidencias/fuentes-qa-20261106/visual_qa.cjs.txt",
+      "sha256": "34b3717ae4f2c636d9eecfaa710f74d7d37ad28a4aea00d797406b353c1b5d91"
+    },
+    "visual_writes.cjs": {
+      "archive": "evidencias/fuentes-qa-20261106/visual_writes.cjs.txt",
+      "sha256": "cdd77025ac599586a05f5ea93736d81137b7ac76244ca4f36e75f8d96f15c384"
+    },
+    "browser_security.cjs": {
+      "archive": "evidencias/fuentes-qa-20261106/browser_security.cjs.txt",
+      "sha256": "5b8c437e2dea876f1b4b939b54721501aa2727d1fe23d104e54966eee7cd3294"
+    },
+    "run_visual.py": {
+      "archive": "evidencias/fuentes-qa-20261106/run_visual.py.txt",
+      "sha256": "f984f94829b64d71f869e43d446ea1a53847aa3fc27de27a42a4a2a2d871121b"
+    },
+    "run_transaction_regression.py": {
+      "archive": "evidencias/fuentes-qa-20261106/run_transaction_regression.py.txt",
+      "sha256": "5110b2a0af381b300f407d5ba40cc2af5f7454bc44f814e27c22f7e9dc195c95"
+    },
+    "post_restart.py": {
+      "archive": "evidencias/fuentes-qa-20261106/post_restart.py.txt",
+      "sha256": "05f253437d1d105113b5f11d2dbe2be55d943514e87cf539f54b7213b0afb420"
+    },
+    "prepare_preview.py": {
+      "archive": "evidencias/fuentes-qa-20261106/prepare_preview.py.txt",
+      "sha256": "27284db691295949a8ee6b4d3e2435878f148bed725952244c7384b79ee11584"
+    },
+    "start_runtime.py": {
+      "archive": "evidencias/fuentes-qa-20261106/start_runtime.py.txt",
+      "sha256": "ee448646955ec73946e65266a5969da2f02a4896fa4fff7fb8c3270711ddf1d5"
+    },
+    "verify_permissions_final.py": {
+      "archive": "evidencias/fuentes-qa-20261106/verify_permissions_final.py.txt",
+      "sha256": "689eb1723226799982184810c8d8b3c1a5633910424126ae3574724aa8980714"
+    }
+  },
+  "screenshots": {
+    "live-login-desktop.png": {
+      "path": "evidencias/visuales-qa-20261106/live-login-desktop.png",
+      "sha256": "d4d241bae2d28bd2576c3b12e5a5bf39c2dea7be60391f0f43f24680ab9f60a3"
+    },
+    "live-login-invalid.png": {
+      "path": "evidencias/visuales-qa-20261106/live-login-invalid.png",
+      "sha256": "5b0f80f63fc6096b8237eb49c0a47d3cca4eba65e1dcd182b855d097c4cdfcc2"
+    },
+    "live-saas-home-desktop.png": {
+      "path": "evidencias/visuales-qa-20261106/live-saas-home-desktop.png",
+      "sha256": "211bfc4a76307d5a82bf608b647cddc2564982893a340c1b5cdccf4bcc1948f1"
+    },
+    "live-saas-clients-desktop.png": {
+      "path": "evidencias/visuales-qa-20261106/live-saas-clients-desktop.png",
+      "sha256": "238018b26e50e338075da4e87f577f898853b473890caf9a0ec44b76c0710c31"
+    },
+    "live-saas-create-form.png": {
+      "path": "evidencias/visuales-qa-20261106/live-saas-create-form.png",
+      "sha256": "5d378d99c9d8dd2264b7dc6b2d4055a420297c7d8304346cd05f3c0d848d5ea3"
+    },
+    "live-trace-desktop.png": {
+      "path": "evidencias/visuales-qa-20261106/live-trace-desktop.png",
+      "sha256": "560c9bccb6dcddec3710bd8aba76cc418ae5d03e12a06edfd4955bf0e37640b5"
+    },
+    "live-monitor-desktop.png": {
+      "path": "evidencias/visuales-qa-20261106/live-monitor-desktop.png",
+      "sha256": "752044bfd09622c54fb4074379730310d0d57385e390c2e5a6ec05a877d4998b"
+    },
+    "live-monitor-mobile.png": {
+      "path": "evidencias/visuales-qa-20261106/live-monitor-mobile.png",
+      "sha256": "4181484ce321b8788e91dcd1ec826385cb67148250535cfeabc1ebbb87056a53"
+    },
+    "live-clients-mobile.png": {
+      "path": "evidencias/visuales-qa-20261106/live-clients-mobile.png",
+      "sha256": "bb4bafcf1422e2659947578e65614732fc8e04738664cd828130e7f224fe460e"
+    },
+    "live-account-mobile.png": {
+      "path": "evidencias/visuales-qa-20261106/live-account-mobile.png",
+      "sha256": "4ad163f9d5a01303656cfc7a0e4c164f700dfe4f2dde4c73f4f9ba6979c7dd2e"
+    },
+    "live-organization-desktop.png": {
+      "path": "evidencias/visuales-qa-20261106/live-organization-desktop.png",
+      "sha256": "feb6eab31b67874fc87e5ea48e5333ae69208dba2eda18a9dcb5df0e4a049904"
+    },
+    "live-organization-loaded-desktop.png": {
+      "path": "evidencias/visuales-qa-20261106/live-organization-loaded-desktop.png",
+      "sha256": "7cee35e5c5f86559c718433c63aba6afc8500dc8f93cddac76dcf4b2cfba12d2"
+    },
+    "live-organization-mobile.png": {
+      "path": "evidencias/visuales-qa-20261106/live-organization-mobile.png",
+      "sha256": "da55229510654f1f8696685b72ba354981475052b3ea583396453fe4a8ffd7b5"
+    },
+    "live-ui-tenant-review.png": {
+      "path": "evidencias/visuales-qa-20261106/live-ui-tenant-review.png",
+      "sha256": "87a785a4598f98ca87dc288bf13ea639aa030416676a6fef4080fde516e11c80"
+    },
+    "live-ui-tenant-created.png": {
+      "path": "evidencias/visuales-qa-20261106/live-ui-tenant-created.png",
+      "sha256": "488f7af787129ecabade754c3a9781dbccb117f9e8897244a627b13433c2e6fb"
+    },
+    "live-ui-branch-review.png": {
+      "path": "evidencias/visuales-qa-20261106/live-ui-branch-review.png",
+      "sha256": "f5015558791a8f91c318ff7ace759c6f321594dca695b4ce063fd344e1593355"
+    },
+    "live-ui-branch-created.png": {
+      "path": "evidencias/visuales-qa-20261106/live-ui-branch-created.png",
+      "sha256": "e3719bee14168964f94645b782671696c5ff67e5763f71e153d9da3dc8ed6969"
+    },
+    "live-ui-branch-quota-mobile.png": {
+      "path": "evidencias/visuales-qa-20261106/live-ui-branch-quota-mobile.png",
+      "sha256": "e820873f07296520534fa13dea274b94f840021f5a22d06267eb230dc1b1a691"
+    }
+  },
+  "limits": [
+    "Synthetic local data only; no real recipients, cloud charges or deployment.",
+    "Business API proofs do not integrate the clinical frontend: live routes remain staged.",
+    "Demo uses mock data and is separately labeled; it is not integration proof.",
+    "177 API assertions completed via encrypted checkpoints; read-only harness recovery and documented corrections, not an uninterrupted clean-room run.",
+    "The old MySQL direct-write probe was excluded; 562 SQL ACLs rechecked and real JDBC negative permissions are separately evidenced.",
+    "Full production gates for mail, attachments, backups, load, security and clinical acceptance remain on the board."
+  ],
+  "browserWritesFirstAttempt": {
+    "status": "failed",
+    "mockApi": false,
+    "checks": [
+      "review never shows password",
+      "tenant created through real browser cookie and CSRF",
+      "branch created through real browser cookie and CSRF",
+      "capacity refreshed after real write",
+      "real quota conflict returns HTTP409"
+    ],
+    "screenshots": [
+      "live-ui-tenant-review.png",
+      "live-ui-tenant-created.png",
+      "live-ui-branch-review.png",
+      "live-ui-branch-created.png",
+      "live-ui-writes-failure.png"
+    ],
+    "pageErrors": [],
+    "httpFailures": [
+      {
+        "path": "/api/auth/browser/session",
+        "status": 401
+      },
+      {
+        "path": "/api/auth/browser/session",
+        "status": 401
+      },
+      {
+        "path": "/api/tenant/branches",
+        "status": 409
+      }
+    ],
+    "failure": "locator.waitFor: Timeout 20000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.organization-message[role=\"alert\"]') to be visible\u001b[22m\n"
+  },
+  "originalApiSuiteSha256": "fa68f12e56d04e32aa6d0c1d14c57073db1e85123d01306ea0a1cdec0c83c29e",
+  "originalApiSuiteSha256Lf": "dc3b3515732839f056d5f40413084c70e0040f3993af2fd6bdc062c43a3199b1",
+  "visualReview": {
+    "screenshotsInspected": 18,
+    "pageOverflow": false,
+    "internalHorizontalTables": "intentional; table container scrolls on mobile",
+    "organizationDesktopInitialCapture": "loading state; separate loaded capture supplied",
+    "consoleReview": "expected HTTP401/409 negatives; no unexpected final HTTP5xx or JavaScript page errors",
+    "historical500": "original configuration defect retained in request traces; fixed and rechecked, never deleted"
+  }
+}

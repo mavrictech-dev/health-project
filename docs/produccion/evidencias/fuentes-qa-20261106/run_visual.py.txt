@@ -1,0 +1,10 @@
+from pathlib import Path
+import importlib.util,json,zlib,subprocess,sys
+r=Path(__file__).resolve().parent;p=r.parents[1]
+s=importlib.util.spec_from_file_location('a67',p/'scripts/provision-isolated-sqlserver-logins.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m)
+app=json.loads(m.Dpapi().unprotect((r/'application-credentials.dpapi').read_bytes()))
+v=json.loads(zlib.decompress(m.Dpapi().unprotect((r/'business-state.dpapi').read_bytes())))['values']
+config={'email':app['email'],'password':app['password'],'ownerEmail':'owner-a.'+v['RUN']+'@example.test','ownerPassword':v['PASSWORD'],'ownerHost':v['host'],'slug':'qa-ui-'+v['RUN'],'uiEmail':'ui-owner.'+v['RUN']+'@example.test','run':v['RUN']}
+script='browser_security.cjs' if '--security' in sys.argv else 'visual_writes.cjs' if '--writes' in sys.argv else 'visual_qa.cjs'
+out=subprocess.run(['node',str(r/script)],input=json.dumps(config).encode(),capture_output=True,timeout=240)
+text=out.stdout.decode()+out.stderr.decode();assert app['password'] not in text and v['PASSWORD'] not in text,'Secret in output';(r/'visual-run.log').write_text(text,encoding='utf-8');print(text);raise SystemExit(out.returncode)

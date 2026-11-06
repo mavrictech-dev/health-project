@@ -1,0 +1,31 @@
+import com.microsoft.sqlserver.jdbc.*;import com.mavric.health.persistence.sqlserver.*;import com.zaxxer.hikari.*;import org.springframework.jdbc.core.*;import org.springframework.jdbc.datasource.*;import org.springframework.transaction.support.*;import tools.jackson.databind.ObjectMapper;import java.io.*;import java.nio.charset.StandardCharsets;import java.sql.*;import java.util.*;
+/** Independent real-JDBC regression. Password, actor and token hash arrive on stdin. */
+public class JdbcWriteFirstRegression {
+ static final List<String> checks=new ArrayList<>();
+ static String read(DataInputStream i)throws Exception{int n=i.readInt();if(n<1||n>10000)throw new IllegalArgumentException();return new String(i.readNBytes(n),StandardCharsets.UTF_8);}
+ static void check(boolean b,String name){if(!b)throw new IllegalStateException(name);checks.add(name);}
+ static int count(Connection c)throws Exception{try(var s=c.createStatement();var r=s.executeQuery("SELECT @@TRANCOUNT")){r.next();return r.getInt(1);}}
+ public static void main(String[] args)throws Exception{
+  var in=new DataInputStream(System.in);String password=read(in),actor=read(in),hash=read(in);if(in.read()!=-1)throw new IllegalArgumentException();
+  var ds=new SQLServerDataSource();ds.setServerName("127.0.0.1");ds.setPortNumber(14335);ds.setDatabaseName("health_project_sqlserver_qa_isolated_20261105");ds.setUser("hp_qa_runtime_20261105");ds.setPassword(password);ds.setEncrypt("true");ds.setTrustServerCertificate(true);
+  try(var pool=new HikariDataSource()){
+   pool.setDataSource(ds);pool.setMaximumPoolSize(1);pool.setMinimumIdle(0);pool.setInitializationFailTimeout(-1);pool.setPoolName("HealthProjectWriteFirstQA");
+   var executor=new SqlServerExecutor(new JdbcTemplate(pool),new ObjectMapper(),SqlServerExecutor.Purpose.RUNTIME);
+   var c=new SqlServerContext(UUID.randomUUID().toString(),"POST","/qa/write-first","127.0.0.1","Independent transaction regression",actor,List.of("SAD"),null,hash,SqlServerContext.Scope.REQUEST);
+   String id=UUID.randomUUID().toString(),email="rollback-"+id+"@example.test",passwordHash=new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder(12).encode(UUID.randomUUID().toString());
+   try{executor.execute(SqlServerProcedure.USER_CREATE,c,id,"QA rolled back",email,passwordHash,null,null);throw new IllegalStateException("autocommit_write_allowed");}catch(com.mavric.health.shared.ApiException e){check(e.status==400&&e.code.equals("INVALID"),"autocommit_write_first_rejected");}
+   var tx=new TransactionTemplate(new DataSourceTransactionManager(pool));
+   tx.execute(status->{
+    executor.execute(SqlServerProcedure.USER_CREATE,c,id,"QA rolled back",email,passwordHash,null,null);
+    check(executor.execute(SqlServerProcedure.PLATFORM_USERS,c,id,1).resultSets().getFirst().size()==1,"spring_write_first_read_own_write");
+    try{check(count(DataSourceUtils.getConnection(pool))==1,"exactly_one_physical_transaction");}catch(Exception e){throw new RuntimeException(e);}
+    status.setRollbackOnly();return null;
+   });
+   check(executor.execute(SqlServerProcedure.PLATFORM_USERS,c,id,1).resultSets().getFirst().isEmpty(),"rollback_removes_write_and_trigger_effects");
+   try(var connection=pool.getConnection();var s=connection.createStatement();var r=s.executeQuery("SELECT @@TRANCOUNT,SESSION_CONTEXT(N'hp_actor_id'),SESSION_CONTEXT(N'hp_tenant_id'),SESSION_CONTEXT(N'hp_token_hash')")){r.next();check(r.getInt(1)==0&&r.getObject(2)==null&&r.getObject(3)==null&&r.getObject(4)==null,"same_physical_pool_connection_clean_after_rollback");}
+   tx.execute(status->{check(executor.execute(SqlServerProcedure.PLATFORM_USERS,c,id,1).resultSets().getFirst().isEmpty(),"next_transaction_healthy");return null;});
+   try(var connection=pool.getConnection()){check(count(connection)==0,"commit_leaves_no_nested_transaction");try(var s=connection.prepareCall("{call dbo.usp_require_transaction}")){s.execute();throw new IllegalStateException("private_helper_allowed");}catch(SQLException denied){check(denied.getErrorCode()==229,"private_transaction_helper_still_denied");}}
+   System.out.println(new ObjectMapper().writeValueAsString(Map.of("status","passed","mock",false,"physicalPoolSize",1,"checks",checks,"persistentFixture",false,"trustServerCertificateQaOnly",true)));
+  }
+ }
+}
