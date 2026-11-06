@@ -1,7 +1,9 @@
 # Entorno local para validar JDBC de Health Project
 
-Propuesta del arquitecto, 5 de noviembre de 2026. Pendiente de elegir destino;
-no se ha instalado ni configurado una instancia nueva.
+Contrato autorizado por el usuario el 5 de noviembre de 2026. Instancia nueva
+HEALTHPROJECTQA instalada (Summary Passed/0); configuracion y verificacion del
+endpoint JDBC siguen pendientes. Los apartados siguientes conservan el diseno
+y distinguen las comprobaciones que faltan.
 
 ## Estado contrastado
 
@@ -101,3 +103,10 @@ y esta limitada por cuota hasta20:45. Los artefactos A64 fueron revisados e
 integrados8d70803 con65tests,17checksreadonly y20fasesA63 independientes; falta
 su informe final/worker_done. No iniciar otra Task con ese trabajador antes de
 cerrar A64. No repetir apply ni pruebas exitosas para cerrar administrativamente.
+
+
+Actualizacion de ejecucion: instancia creada con WindowsAuth, servicio manual
+detenido y TCP/NP apagados; A65 prepara configuracion del nuevo namespace y
+Verify. Instancia compartida sin cambios verificados. Usuario autorizo creacion,
+no volver a pedir eleccion de destino. A64 ya completed enOrca; no bloqueo de
+cuota en este paso.

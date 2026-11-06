@@ -1426,3 +1426,32 @@ para autorizacion DB mediante usuarios WITHOUTLOGIN, no login/JDBC/TLS/HTTP/UI.
 A64 tiene evidencia suficiente para integrar estos cuatroartefactos revisados;
 el cierre formal/reportefinal Orca permanece PENDIENTE porcuota. No despachar
 trabajo nuevo al retenido hasta cerrar Task. No marcar run ni migracion completa.
+
+
+A64 cierre formal confirmado, 2026-11-05: informe msg_a3cf44225773 con cuatroSHA
+identicos a8d70803 y65workerPASS/17readonly; Taskstatuscompleted verificado.
+Sin repetir pruebas o modificar artefactos. Usuario reitero crear instancia y
+continuar, revocando la espera de eleccion de destino de D-73.
+Supervisor verifico ausencia previa de instancia/servicio/targetdir y firmaMicrosoft
+valida del medio completo C:/SQL2022/Developer_ENU. INI sin contrase?as preparado
+en tmp/healthprojectqa-install-20261105, SHA C2EE5C15B1F0DD255D24AD1EB451FF379601F3C0248EAFF783EB55E7B392D4FF.
+SETUP lanzado viaRunAs, elevacionWindows aceptada, PID12184. Summary de instalacion
+20261105_211020: FinalresultPassed,ExitcodeDecimal0,DatabaseEngineServicesPassed.
+INSTANCIA HEALTHPROJECTQA CREADA: idMSSQL16.HEALTHPROJECTQA, servicioManualStopped,
+LoginMode1WindowsAuth,TCP0/NP0,datosD:/HealthProject-QA/SqlServer. No SAPWD enargv.
+Instalacion independiente no valida servicio activo, loginSQL o JDBC.
+Comparacion baselineglobal: MSSQLSERVER ySQLBrowser conservan Status/StartType;
+LoginMode/TCP/NP existentes iguales. ProcesoSQLexistente precede instalacion,
+por lo que no fue reiniciado. Ver shared-state-verification.json en carpeta job.
+Un probe lpc de la instancia nueva dio errorconexion mientrasStopped; evidencia
+preservada, no afirmar motorconectado. No se repitio instalacion ni se tocaron
+credenciales/agentes/DBs existentes.
+A65 task_4a20b9ea8a16/ctx_f78898d0aa6b asignada al mismoworker/terminal/worktree;
+IdentityOnly y/status efectivos verificaron cuenta mendozadeafabisa@gmail.com,
+sesion01a19e4c-15af-74e0-a1b9-75fc7093b98f. Orcareceiptstart_unknown/live por
+turn_start_unobserved; terminalread prueba Working yprocesamiento del encargo,
+no taskduplicada ni resend. Ownership scripts/configure-isolated-sqlserver-qa.ps1
+y scripts/tests/test_isolated_sqlserver_config.py. SoloPlan/CPUworker, supervisor
+revisa yejecutaApplyelevado. Dispatchactualizado con instalacioncompletada por
+msg de coordinacion. Helper/arranque/loopback14335/mixedauthsaDisabled yVerify
+SQL de la instancia NUEVA aun pendientes. Sin backendJDBC/negocio/visual nuevos.
