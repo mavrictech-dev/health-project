@@ -1150,3 +1150,21 @@ Correccion debe limitarse al transporte y regresion SQL readonly de respuestas
 largas. Supervisor no integro aun A66. Nunca degradar checksum ni aceptar raw0
 como confirmacion. Siguiente gate despues de corregir A66: principals SQL y
 JDBC restringido; no acceso runtime mediante migrador/control/sesion Windows admin.
+
+D-76 (2026-11-05): A67 preparara dos logins/usuarios SQL nuevos en instanciaQA:
+hp_qa_runtime_20261105 SOLO hp_runtime_executor y hp_qa_bootstrap_20261105 SOLO
+hp_bootstrap_executor. Default DB aislada, policyON/expirationOFF, sin roles de
+servidor ni permisos adicionales salvo CONNECT necesario. Preservar migrador,
+562ACL, esquema y datos; verificar delta exacto de dos usuarios/dos membresias.
+Credenciales aleatorias distintas, almacen fijo tmp/sqlserver-isolated-credentials/
+credentials.dpapi bajo supervisorroot, DPAPI CurrentUser/UI forbidden, sin plaintext
+ni password en argv/env/SQLfile/log. Crear recursos solo supervisor tras review,
+SQL sensible por stdin de proceso con entorno minimo; una TX y diario previo,
+no retry/delete/compensacion ante resultados inciertos. Worker solo codigo/test,
+Plan readonly y DPAPI ficticio, dos archivos segun tmp/sql-01-a67-spec.md.
+A67 no incluye SAD/bootstrap ni prueba JDBC. Posterior QA JDBC usara TCPloopback
+con credenciales en memoria, encrypttrue y alcance TLS explicitado; despues HTTP/UI.
+A66 catalogo historico espera extraPrincipals0; postA67 se valida deltaexacto2
+sin reescribir ni debilitar guards A66 y sin reejecutar sus migraciones.
+Referencias: https://learn.microsoft.com/en-us/windows/win32/api/dpapi/nf-dpapi-cryptprotectdata
+ y https://learn.microsoft.com/en-us/sql/t-sql/statements/create-login-transact-sql?view=sql-server-ver16.

@@ -17,7 +17,7 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | INT-01 | Programador frontend | ARQ-02 | INTEGRADA (A validada offline) | INT-01.A+R1,46 tests/check/probe/live16 supervisor;14 archivos en health/production-wave0 | Validacion real de backend pendiente; no habilitacion productiva |
 | SAAS-01 | Programador frontend/backend | INT-01 | INTEGRADA (A validada frontend/interceptada) | SAAS-01.A task_c8012881a8b2 / ctx_883d9a5e2c94; R1 task_3b502d417304 / ctx_50459c870b25; 8 archivos | UI/contrato aceptados; integracion SQL Server, duplicados y rollback reales pendientes antes de validar parent |
 | ORG-01 | Programador frontend/calidad; revision arquitecto | SAAS-01 | INTEGRADA (A/B validadas frontend/interceptadas) | ORG-01.A task_8d397ccb04b9 / ctx_071961765824; ORG-01.B task_c2c5c52550b6 / ctx_c27357954da9; 68 tests, builds85/85, QA12/shell16/demo13 | UI de sedes/cupos y equipo solo lectura aceptadas; integracion SQL Server/rollback/concurrencia pendiente; Docker no es el bloqueo del motor local descubierto |
-| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A66 esquema real reconciliado; herramienta EN_REVISION) | Java990; HTTP negativo47; herramienta106 worker/18 nuevas independientes; esquema aislado37/133/31/562 verificado | Corregir framing largo sin repetir migracion; logins runtime/bootstrap, JDBC/TLS y negocioHTTP/visual pendientes |
+| SQL-01 | Arquitecto; implementacion y QA delegadas por Orca | D-09, ARQ-02 fisico | EN_CURSO (A66 integrada y catalogo SQL real validado) | Java990; HTTP negativo47; herramientas107 worker; A66 Verify independiente FP CBD9C3CE...74E2AB | Preparar A67 logins y credenciales separados; login JDBC/TLS, bootstrap y negocioHTTP/visual pendientes |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
 | PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
@@ -1611,3 +1611,23 @@ A66 devuelve defecto de framing al programador antes de integrar dos archivos.
 Sin logins runtime/bootstrap, SAD, JDBC/TLS ni backend HTTP negocio/visual nuevos.
 
 A66.R1 delegada task_df2133a607d7 / ctx_872dbdc51204 al mismo retenido (ambas identidades y cuenta/sesion efectiva verificadas). Ownership conserva SOLO dos archivos A66. Fix de framing y regresiones; probe SQL literal y Verify autorizados exclusivamente readonly. DB ya persistida CBD9C3CE...74E2AB: PROHIBIDO create/migrate/reapply/cleanup. Receipt follow_up/outcome_unknown por turn_start_unobserved; no reenviar, seguir next y esperar wake. No artefactos A66 integrados aun.
+
+A66.R1 ACEPTADA, 2026-11-05. Informes msg_cbe0e574bc3f y msg_dfaf44606337;
+task_df2133a607d7/ctx_872dbdc51204 completed. Diff de produccion UNA linea:
+prefijo A66JSON ahora CAST AS nvarchar(max). Invirtiendo solo esa linea recupera
+SHA original F65B9B36...DF6BC; guardas, migraciones, diarios, parser y checksum intactos.
+Worker107/107PASS23.158s; probe SQL real readonly payload28892bytes,14chunks4008
+mas ultimo1932,checksum y valorUnicode exactos. Verify readonly worker raw0 y FP
+CBD9C3CE913BFB57D3E257C8CA225E4F959F31669A90414C570F74B0DD74E2AB.
+Supervisor congelo dosSHA AF7D83DB40235A0243DA7809D0E354452E676C6B34B6332B8075FE1405DCBD19
+y39D99E6F890EA65C0798EC554C678265122D4FD2CD8DE2A5DBE11E72939A5584
+bajo tmp/sqlserver-a66-final-review, reviso delta completo y nueva regresion:
+1/1PASS0.527s raw0. Verify CLI independiente raw0/stderr0, fases master/catalog0,
+statusverified/CATALOG_VERIFIED y mismo FP exacto. Ver logs/JSON en snapshot.
+Dos archivos integrados por SHA exacto. Ninguna repeticion CREATE/migracion/mark
+ni cambio al diario historico ERROR. Alcance aprobado: herramienta corregida y
+catalogo real instalado, no JDBC/SQL login/TLS/negocioHTTP/visual. A67 preparara
+credenciales y principales separados con permisos existentes; mutaciones solo
+supervisor tras revision. Tabla A66 esperada sin usuarios runtime es evidencia
+de esta fase: al instalar principales nuevos se debera verificar delta exacto,
+no reejecutar migraciones ni relajar guards historicos del verificador A66.

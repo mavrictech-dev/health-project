@@ -1545,3 +1545,23 @@ se conserva y no se reinterpreta como una ejecucion exitosa de la herramienta.
 Proteccion MSSQLSERVER/SQLBrowser antes/despues c689d113...c116e igual.
 A66 devuelve defecto de framing al programador antes de integrar dos archivos.
 Sin logins runtime/bootstrap, SAD, JDBC/TLS ni backend HTTP negocio/visual nuevos.
+
+A66.R1 ACEPTADA, 2026-11-05. Informes msg_cbe0e574bc3f y msg_dfaf44606337;
+task_df2133a607d7/ctx_872dbdc51204 completed. Diff de produccion UNA linea:
+prefijo A66JSON ahora CAST AS nvarchar(max). Invirtiendo solo esa linea recupera
+SHA original F65B9B36...DF6BC; guardas, migraciones, diarios, parser y checksum intactos.
+Worker107/107PASS23.158s; probe SQL real readonly payload28892bytes,14chunks4008
+mas ultimo1932,checksum y valorUnicode exactos. Verify readonly worker raw0 y FP
+CBD9C3CE913BFB57D3E257C8CA225E4F959F31669A90414C570F74B0DD74E2AB.
+Supervisor congelo dosSHA AF7D83DB40235A0243DA7809D0E354452E676C6B34B6332B8075FE1405DCBD19
+y39D99E6F890EA65C0798EC554C678265122D4FD2CD8DE2A5DBE11E72939A5584
+bajo tmp/sqlserver-a66-final-review, reviso delta completo y nueva regresion:
+1/1PASS0.527s raw0. Verify CLI independiente raw0/stderr0, fases master/catalog0,
+statusverified/CATALOG_VERIFIED y mismo FP exacto. Ver logs/JSON en snapshot.
+Dos archivos integrados por SHA exacto. Ninguna repeticion CREATE/migracion/mark
+ni cambio al diario historico ERROR. Alcance aprobado: herramienta corregida y
+catalogo real instalado, no JDBC/SQL login/TLS/negocioHTTP/visual. A67 preparara
+credenciales y principales separados con permisos existentes; mutaciones solo
+supervisor tras revision. Tabla A66 esperada sin usuarios runtime es evidencia
+de esta fase: al instalar principales nuevos se debera verificar delta exacto,
+no reejecutar migraciones ni relajar guards historicos del verificador A66.

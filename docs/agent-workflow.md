@@ -1454,3 +1454,9 @@ por lectura nueva. No repetir create/migracion. Tool A66 pendiente de corregir
 framing largo; diario historico ERROR preservado. Roles y ACL instalados no son
 logins/runtime/JDBC validado. No se creo SAD ni usuarios/pacientes/tenants/sesiones.
 Ver TAREAS/REVISIONES y fingerprint CBD9C3CE...74E2AB. Instancia compartida intacta.
+
+A66 cerrada con herramienta corregida y Verify CLI independiente raw0; fingerprint
+CBD9C3CE...74E2AB. Esquema aislado instalado y comprobado. No repetir setup ni
+reescribir ERROR historico. Paso siguiente: logins runtime/bootstrap SQL separados,
+credenciales DPAPI CurrentUser locales sin plaintext/argv/Git, membresias solo a
+los roles aprobados; despues JDBC real. Aun sin login runtime ni SAD/HTTP/visual.
