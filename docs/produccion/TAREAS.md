@@ -1631,3 +1631,5 @@ credenciales y principales separados con permisos existentes; mutaciones solo
 supervisor tras revision. Tabla A66 esperada sin usuarios runtime es evidencia
 de esta fase: al instalar principales nuevos se debera verificar delta exacto,
 no reejecutar migraciones ni relajar guards historicos del verificador A66.
+
+A67 delegada task_e9b58257c00d / ctx_b1a926031df9, dependencia A66.R1 settled. IdentityOnly ambos y /status verifican cuenta programador mendozadeafabisa@gmail.com, sesion01a19e4c-15af-74e0-a1b9-75fc7093b98f y mismo worktree --no-daemon. Ownership SOLO scripts/provision-isolated-sqlserver-logins.py y scripts/tests/test_isolated_sqlserver_logins.py; D-76/tmp/sql-01-a67-spec.md. Worker no crea logins ni secretos operativos; solo codigo/test/Plan readonly y DPAPI ficticio. Receipt follow_up/outcome_unknown por turn_start_unobserved: no reenviar ni inferir salida, esperar wake conforme next. A66 aceptada y push222f08c; principals/JDBC/HTTP/UI aun pendientes.
