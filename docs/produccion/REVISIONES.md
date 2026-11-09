@@ -1,5 +1,131 @@
 # Revisiones del supervisor
 
+## PAC-01.A + E1.R1 — VALIDADA LOCAL CON API/SQL/UI REAL, 2026-11-09
+
+Informe msg_8588b1a7f856 y task_c0871e7d4bb8/ctx_0aba1f82bd60 settled succeeded.
+Pines de fuentes,654archivos baseline,3reportes (fallido/readonly/writes) y12PNG
+verificados por SHA. readonly13.1035s raw0,10PASS+3NA por paginas insuficientes;
+mutante28.4514s raw0,26controlesPASS (incluye12capturas/6logins),25fixtures nuevas,
+0reusadas/0reanudadas. No API simulada: runner congelado hace continue de trafico
+real al proxy/backend SQL Server. Datos exclusivamente sinteticos del propio run.
+
+Supervisor inspecciona12capturas reales de formulario/ficha humana/animal y
+conflictos409 de alta/edicion,1440/390. Texto legible, controles de recuperar
+borrador/recargar revision presentes; panel movil con desplazamiento interno.
+Tema real blanco; los otros temas conservan evidencia sintetica previa, no se
+atribuyen a este recorrido real. Capturas limitadas a fixtures propias.
+
+Verificacion propia independiente (sin repetir escrituras):12controlesHTTP raw0
+con3cookies nuevas,25GETdetalles coinciden con IDs/contenido esperado, revision3
+del EDIT/resto1, contacto opaco/alergias preservados,24humanos/1animal/0enotrotenant,
+paginacion21/1,4negativos404 y cookiehost401 sin perder sesion correcta; logout y
+rechazo401 de las3sesiones. Huella instancia compartida79708541...91eb02 sin cambio.
+Evidencia PACIENTES_QA_REAL_20261109.json/visuales-pacientes-reales-20261109 y fuente
+local tmp/pac-01-a-20261109/independent-real-review.py. Se preserva intento fallido.
+Aceptacion SOLO A y QA local: no grants/JDBC/reinicio nuevos, TLS ni PAC-01 completo.
+
+## PAC-01.A.QA.L1 — VALIDADA E INTEGRADA, 2026-11-09
+
+task_b463947557b3/ctx_1cd482db4bc0; msg_8974400028aa. Dos archivos leidos completos,
+guardas y Job Object ctypes revisados. Baselines650L1/622E1 verificados SHA a SHA
+sin cambios; dos fuentes nuevas integradas exactas249395F1...7EDFE y5DF37FF5...A4C2D.
+Supervisor21/21 unitariasPASS raw0/0.040s. Probes Windows reales SIN credenciales
+ni paginas: launch/close Edge con stdin posterior a asignacionjob raw0; timeout
+de Node+descendientes a2s termina job de4procesos a0 en2.015s. Entorno padre intacto,
+sin SQL/servicios ni helperA66 alterados. Snapshot tmp/pac-01-a-20261109/launcher-review.
+
+E1 reintentable con lanzador versionado, mismo task/runId/manifiesto y runner
+congelado. DocumentoEJECUCION actualizado prevalece sobre preambulo historico,
+wrapper temporal original preservado sin editar. No repetir provisiones ni
+levantar bloqueo TLS. Resultado originalfailed permanece como historial.
+E1.R1 delegada en misma task_c0871e7d4bb8, nuevo ctx_0aba1f82bd60 ready; documento
+actualizado y mensaje msg_2c03be6f8c5c sustituyen comando historico del preambulo.
+
+## PAC-01.A.QA.E1 — FALLIDA, diagnostico de lanzador, 2026-11-09
+
+Escalacion msg_e7a9154b5d1a y worker_donefailed msg_d15e4ae445c7. Una invocacion
+readonly rawExit1, attempt1794242208475, controlmanifest/UNEXPECTED_FAILURE y0
+fixtures/controles pasados. No se reintento ni se inicio fase mutante. Baseline622
+fuentes y pines sin cambios segun informe worker. No representa un fallo de SQL
+o de la UI: el navegador no llego al login. Informe original y attempt preservados.
+
+Supervisor reproduce launch sin credenciales ni paginas: entornoA66 carece de
+PROGRAMFILES/PROGRAMFILES(X86)/LOCALAPPDATA, msedge intenta ruta undefined/ProgramFiles.
+Probe con SOLO esas3claves adicionales raw0launch/close, sin cambios al entorno
+padre/helperSQL ni paginas de aplicacion. No instalar nada ni ampliar privilegios.
+L1 delegara lanzador versionado con allowlist especifica, tests y guardas; despues
+de revision se reintentara la MISMA taskE1 con comando/pin actualizados. A69 intacta.
+
+## PAC-01.A.QA herramientas — ACEPTADAS E INTEGRADAS, 2026-11-09
+
+Entrega msg_fd864244ef6c de task_5a7358409b8e/ctx_1c94305dd25c. Leidos runner y
+12tests completos, validacion de manifest, politica de red, reconciliacion y
+salida/artefactos sin secretos. Baseline501 intacto,8SHA A/R1 identicos en ambos
+checkouts; solo dos rutas nuevas. Integradas por SHA1BB53685...8FE32 y
+D79EBF2C...EB903. Worker sintaxis/TypeScript/88testsPASS. Supervisor ejecuta las
+12tests de herramienta integrada:12PASS/0fallos/0skip,889.8134ms, raw0, sin browser
+ni red real durante estas unitarias. No repite build/demo sin cambios de producto.
+
+Entorno real preparado despues: elevacionWindows aceptada para Start-only QA,
+servicio RunningManual y listeners loopback, fingerprint79708541...91eb02 intacto.
+JVM runtime separada readinessUP y proxy18300 sin mocks; tres HostContext existentes
+exactos. Sin setup/bootstrap/migraciones ni TLS aplicados. Manifiesto solo DPAPI y
+wrapper de ejecucion stdin revisado, no passwords argv/env/archivos planos. Fuente
+de launchers es la revisada6nov, copiada a evidencia nueva con cambios de directorio/
+classpath de clases QA y pin de baseline actual; flujo de control Start sin cambios.
+Checkpoint previo contiene5entradas, tres hosts conocidos y dos placeholders: se
+seleccionaron los3 por claves exactas sin reescribirlo, sin duplicar recursos.
+Siguiente E1 ejecutara readonly y luego escrituras de fixtures si la primera pasa.
+
+## PAC-01.A.R1 — ACEPTADA OFFLINE E INTEGRADA LOCAL, 2026-11-09
+
+task_217525ae83e8/ctx_2088bbc1a2ff, informe msg_ab7c97ac9a88. Diff R1 revisado:
+solo runtime-patients, patients.test y harness; otros5SHA intactos. Baseline501
+confirma sin cambios fuera de R1. Nueva prueba independiente Edge7controles raw0
+confirma POST409 recuperable sin reenvio automatico y PUT con revision actual;
+409noJSON,400,bloqueo incierto y cero erroresJS conservados. Inspeccionadas dos
+capturas1440/390 de alta rechazada: boton volver habilitado, confirmar bloqueado,
+texto de recuperacion y controles legibles. Snapshot tmp/pac-01-a-20261109/r1-review.
+
+Ocho fuentes copiadas al supervisor con validacion SHA exacta; el resto del
+frontend era igual entre checkouts normalizando newlines. Build supervisor
+raw0/85paginas/TypeScriptPASS;7controles browser repetidos sobre esa exportacion
+integrada raw0. Worker76tests,28sinteticos,buildlive85/builddemo85 y demo13/0API/0JS.
+No se atribuyen al supervisor las suites del worker; reproduccion propia separada.
+Evidencia versionada PACIENTES_CONTRATO_20261109.json y dos capturas sinteticas.
+
+Incidencias del harness/guardas supervisoras conservadas: literal acentuado se
+corrompio en pipe PS/Python (fallo esperado distinto, sin defecto producto);
+corregido solo harness. Primera guarda de integracion comparo snapshot posterior
+con checkout previo y rechazo antes de copiar; sustituida por comprobacion de
+fuentes existentes identicas a HEAD y nuevas ausentes. Integracion final8SHA exactos.
+Aceptacion limitada a implementacion/contratos/demo; PAC-01 integral y QA real
+siguen pendientes. No nuevos SQL/JDBC/HTTP reales, servicios ni credenciales.
+
+## PAC-01.A — DEVUELTA R-PAC-CREATE409, 2026-11-09
+
+Entrega task_31e1eebbbecf/ctx_265e4fe4a23b settled succeeded, informe
+msg_46d7498b80a4; no equivale a aceptacion. Supervisor leyo ocho archivos completos
+y diff de tres compartidos, contratos Java/SQL actuales y harness/reportes. SHA de
+las ocho rutas coinciden con entrega; baseline propio183 archivos y baseline
+worker496 confirman cero modificaciones fuera de ownership. Snapshot bajo
+tmp/pac-01-a-20261109/review. Revisadas visualmente desktop, conflicto, formulario
+movil y navy movil: legibles, scroll interno y panel consistentes.
+
+Worker informa TypeScript/74tests/build85/25checks sinteticos PASS. Nueva prueba
+supervisora en Edge raw0: seis controles positivos y una observacion de defecto;
+conflicto PUT sin retry, recarga usa revision8 en vez de7 y conserva contacto/
+alergias,400 conserva borrador editable,409 noJSON bloquea alta incierta, bloqueo
+persiste tras refrescar directorio y cero errores JavaScript. POST409 JSON valido
+deja ambos botones confirmar/volver deshabilitados y exige descartar el borrador.
+R-PAC-CREATE409: recuperar correccion manual del alta rechazada sin perder datos.
+La prueba observa el defecto; su exit0 no es aceptacion funcional del paquete.
+
+Correccion acotada en PAC-01-A-R1.md: tres rutas, conservar5SHA, regresiones y luego
+demo secuencial. Sin integracion de fuentes ni SQL/HTTP real. A69 sigue bloqueada.
+Follow-up Orca ready: task_217525ae83e8 / ctx_2088bbc1a2ff, mismo programador y
+terminal retenido; no se reutilizan los IDs settled para su worker_done.
+
 ## HP-ORCH-01 — VALIDADA, auditoria de lectura
 
 Dispatch ctx_06e3adc9a15a, worker_done msg_66a6758649a4 succeeded. Revision

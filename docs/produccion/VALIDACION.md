@@ -1,5 +1,105 @@
 # Validacion y limites de evidencia
 
+## PAC-01.A: recorrido real aceptado, 2026-11-09
+
+E1 readonly attempt1794243523795raw0:10PASS/3NA de paginacion; mutante
+attempt1794243570191raw0:26controlesPASS,25fixtures nuevas sin reusos.12capturas
+propias reales1440/390 inspeccionadas y SHA contrastados.654fuentes intactas.
+Controles26 incluyen12capturas y6logins; no inflar numero de escenarios de negocio.
+Fuente/entorno/limites en PACIENTES_QA_REAL_20261109.json. Primera attempt fallida
+1794242208475 se conserva y no se convierte en exito retrospectivamente.
+
+Comando supervisor nuevo: python -B tmp/pac-01-a-20261109/independent-real-review.py,
+raw0:12controlesHTTP reales con25detalles exactos y3sesiones revocadas; sin POST/PUT
+de negocio. GETs nuevos corroboran IDs,24humanos/1animal/0otrotenant, revisiones,
+contacto/alergias y paginacion;4rechazos404, cookiehost401 y3logout/reuso401.
+NoSQLdirecto ni mocks. Huella protegida despues79708541...91eb02, identica al arranque.
+Solo tema blanco en visual real nuevo; no nuevos grants/JDBC/reinicio/TLS. API
+autenticacion/auditoria crea actividad normal, no se afirma cero cambios DB.
+
+## L1 integrada: unitarias y procesos Windows, 2026-11-09
+
+Supervisor ejecuta python -B -m unittest discover -s scripts/tests -p
+test_patients_real_qa_launcher.py -q:21/21PASS raw0/0.040s. Baseline650/622 sin
+cambios y dosSHA integrados exactos. Nueva prueba real de contencion SIN DPAPI,
+manifesto, credenciales o paginasApp: Edge launch/close raw0 con entorno minimo
+mas3rutasWindows; timeout2s sobre Node/descendientes confirma4activos antes y0
+despues del TerminateJobObject,2.015s. No kills por nombre/procesos ajenos.
+Resultado actual-process-probes.json bajo tmp/pac-01-a-20261109/launcher-review.
+Esto valida arranque/contencion; no login, negocio, persistencia ni grants/TLS.
+E1.R1 solo podra escribir fixtures si su primera fase readonly nueva pasa.
+Coordinacion: intento de worker-start con retry-of tras poner la taskready fue
+rechazado task_not_startable antes de crear Dispatch o ejecutar QA. Se consulto
+recovery/dispatch-show (failure_count0, worker_report) y se inicio la misma task
+ya reabierta sin retry-of, conforme guia; no reset/breaker nuevoRun o taskduplicada.
+ctx_0aba1f82bd60 ready; msg_2c03be6f8c5c refuerza comando/pin nuevos antes de ejecutar.
+
+## E1 readonly fallida y diagnostico sin credenciales, 2026-11-09
+
+E1 task_c0871e7d4bb8/ctx_e57613f2dc29 fallo en la unica invocacion readonly,
+raw1/exit1, attempt1794242208475/report.json: manifestfailed/UNEXPECTED_FAILURE,
+fixturesvacias y0controles completados. Sin fase de escritura ni retry. Snapshot
+de622fuentes worker sin cambios y wrapper/runner conservanSHA aprobados.
+
+Supervisor ejecuto dos probes locales de launch/close de Edge sin credenciales,
+manifestos ni paginas: con entornoSQL-minimo raw1, distributionmsedge notfound
+en ruta undefined; con PROGRAMFILES/PROGRAMFILES(X86)/LOCALAPPDATA adicionales
+raw0. Solo entorno del proceso de prueba; A66.environment intacto. Resultados
+browser-launch-probe-original.json/fixed-environment.json bajo tmp/patients-real-env-20261109.
+Diagnostico no acredita recorrido de aplicacion, persistencia, grants o TLS.
+
+## PAC herramientas y preparacion real, 2026-11-09
+
+Dos fuentes de herramienta integradas por SHA exacto, baseline501/8SHA anteriores
+intactos. Supervisor: tsx --test tests/patients-real-qa.test.ts12/12PASS raw0,
+889.8134ms. Worker sintaxis/check/88testsPASS. Unitarias no ejecutan browser/red.
+
+Start-only elevado una vez con aceptacionWindows; os_verified con servicioQA
+RunningManual y escucha127.0.0.1:14335, DACloopback. Helper3FBC605A...BD831 sin
+cambios, fingerprint79708541...91eb02 igual antes/despues. runtime JVM392 y proxy
+21164 propios: readinessUP, appOPEN y3HostContext reales contrastados. No setup,
+bootstrap, migraciones, login nuevos ni cambios TLS. Credenciales via DPAPI/stdin.
+Artefactos de arranque en tmp/patients-real-env-20261109, preservando los del6nov.
+Primer armado de manifiesto paro antes de HTTP por suponer3entradas en checkpoint;
+la inspeccion de estructura mostro5 con2placeholders. Seleccion corregida por las
+3claves host conocidas, sin modificar checkpoint ni recurso persistente.
+E1 de navegador/negocio real aun no ejecutada; A69 pendiente sin nuevo intentoTLS.
+
+## PAC-01.A.R1 integrada: contratos y demo, 2026-11-09
+
+Ver PACIENTES_CONTRATO_20261109.json. Worker check/76tests/buildlive85,
+28browser sinteticos con15escrituras ficticias/0errores y builddemo85/13recorridos
+con0APIreales/0errores. Supervisor revisa delta3R1/5SHA sin cambios y baseline501;
+independent-browser.cjs en r1-review raw0/7controles, con POST409 recuperable y
+PUT409 usando revision8 en vez de7. Siete controles tambien pasan sobre build
+integrado supervisor85/TypeScriptPASS. Son pruebas interceptadas, no motor real.
+
+El primer intento R1 del harness fallo por literal acentuado convertido en '?' en
+pipe; el JSON original permanece. Correccion solo harness y pasada posterior.
+Guarda de integracion rechazo snapshot equivocado antes de copiar; luego ocho
+SHA exactos integrados. Ningun otro archivo historico del programador se copio.
+Capturas desktop/movil de rechazo recuperable inspeccionadas y versionadas.
+
+Plan readonly de SQL QA9nov: INSPECTION_ACCESS_DENIED, mutation_attemptedfalse,
+servicioStopped/Manual, fingerprint79708541...91eb02 igual antes/despues. No Start,
+Apply, certificados, migraciones, DPAPI operativo, backend o negocio real nuevos.
+A69 sigue bloqueada. PAC-01.A.QA prepara herramienta, ejecucion real posterior.
+
+## PAC-01.A: revision independiente, 2026-11-09
+
+Snapshot tmp/pac-01-a-20261109/review contiene fuentes/hashes exactos, informe
+worker, reportes y capturas sinteticas. ownership-proof.json verifica8SHA,
+baseline propio183 y worker496, sin delta fuera de ocho rutas. Ninguna fuente
+copiada al producto supervisor. Worker informa74tests/check/build85/25browser.
+
+Comando nuevo del supervisor: node tmp/pac-01-a-20261109/review/independent-browser.cjs,
+raw0, Edge sobre exportacion live del worker con preview propio loopback43123;
+servidor y navegador cerrados al salir. API interceptada exclusivamente sintetica,
+cinco escrituras de contrato, ningun SQL/backend/DPAPI operativo.6 controles
+positivos y1defecto reproducido POST409 con borrador bloqueado; ver JSON/captura.
+No presentar exit0 del harness de observacion como criterio de aceptacion pasado.
+Demo y QA real siguen pendientes; las evidencias del6nov no se repitieron.
+
 ## Entornos
 
 - Supervisor: D:/Mavric/Health Project; cambios previos del usuario preservados.

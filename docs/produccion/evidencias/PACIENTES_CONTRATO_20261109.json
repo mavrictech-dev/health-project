@@ -1,0 +1,139 @@
+{
+  "observedUtc": "2026-11-09T16:10:26.564451+00:00",
+  "run": "run_624b9269b491",
+  "architect": "mendozadeafabisa@gmail.com",
+  "programmer": "recuperapiura@gmail.com",
+  "task": "PAC-01.A.R1",
+  "dispatch": "ctx_2088bbc1a2ff",
+  "acceptance": "integrated local; offline and synthetic contract only",
+  "realSqlHttpBrowserQa": false,
+  "sourceHashes": [
+    {
+      "path": "frontend/src/components/runtime-patients.tsx",
+      "sha256": "D2D1E909CE46CE92328C7D942546B79DAFC8A1A329A858C11AD520AC86BE72B4"
+    },
+    {
+      "path": "frontend/src/lib/patient-types.ts",
+      "sha256": "83AB70E0B86C3C9CAD0B111C448630C9FA33A09C28034E0464ECC5C880E8AF70"
+    },
+    {
+      "path": "frontend/src/styles/live-patients.css",
+      "sha256": "59EB7A9E3A206E4F0480FE22F4AC4530721A41356E2EB4079BFA1D6E406EF56F"
+    },
+    {
+      "path": "frontend/src/lib/live-routes.ts",
+      "sha256": "41E6D34831D995671CC2F85926B5A299A421DD5BABB983D8ED017677CA73CA94"
+    },
+    {
+      "path": "frontend/src/components/runtime-workspace.tsx",
+      "sha256": "1E127437E853ADDE190E4D97F0DB2F56471E68325519ACFA2A130ECC32D07835"
+    },
+    {
+      "path": "frontend/tests/patients.test.ts",
+      "sha256": "A1FE7A4FB03BBDCDD22E78CDF55415BE7A85AA9D8A3F0A932F6AF842847393AA"
+    },
+    {
+      "path": "frontend/tests/live-shell.test.ts",
+      "sha256": "B03D9C2CD1AF122291D4DB0395A3D348F1C2349BB4E70CBB37925EFD4694A030"
+    },
+    {
+      "path": "frontend/scripts/patients-live-qa.cjs",
+      "sha256": "8957A1DC7F478354DEDB7154D99650084AF458E6DFD5A7EA93A8D6A6D0DC2F3E"
+    }
+  ],
+  "ownership": {
+    "eightHashesMatch": true,
+    "r1BaselineFiles": 501,
+    "onlyThreeChanged": [
+      "frontend/src/components/runtime-patients.tsx",
+      "frontend/tests/patients.test.ts",
+      "frontend/scripts/patients-live-qa.cjs"
+    ],
+    "otherFiveUnchanged": true,
+    "outsideOwnership": []
+  },
+  "workerResults": {
+    "typeScriptExit": 0,
+    "unitTests": 76,
+    "liveBuildPages": 85,
+    "syntheticContractChecks": 28,
+    "syntheticWrites": 15,
+    "pageErrors": 0,
+    "unexpectedApi": 0,
+    "demoBuildPages": 85,
+    "demoJourneys": 13,
+    "demoRealApiCalls": 0,
+    "demoJsErrors": 0
+  },
+  "supervisorResults": {
+    "r1IndependentBrowser": {
+      "mode": "synthetic independent review",
+      "checks": [
+        "409 no automatic write retry",
+        "explicit conflict reload uses fresh revision and preserves opaque contact/allergies",
+        "400 retains editable draft after rejected update",
+        "non-JSON 409 classified as uncertain and cannot resubmit",
+        "uncertain create remains blocked across manual directory refresh",
+        "POST409 preserves draft and permits only a new explicit reviewed confirmation",
+        "no JavaScript errors"
+      ],
+      "duplicateCreateObservation": {
+        "confirmDisabled": true,
+        "returnToDraftDisabled": false,
+        "message": "Alta rechazada\n\nEl servidor rechazÃ³ el alta porque el identificador no estÃ¡ disponible. Vuelve al borrador para corregirlo y revisar de nuevo. Referencia: independent"
+      },
+      "writesSynthetic": 6,
+      "getCount": 6,
+      "pageErrors": 0
+    },
+    "integratedBrowser": {
+      "mode": "synthetic independent review",
+      "checks": [
+        "409 no automatic write retry",
+        "explicit conflict reload uses fresh revision and preserves opaque contact/allergies",
+        "400 retains editable draft after rejected update",
+        "non-JSON 409 classified as uncertain and cannot resubmit",
+        "uncertain create remains blocked across manual directory refresh",
+        "POST409 preserves draft and permits only a new explicit reviewed confirmation",
+        "no JavaScript errors"
+      ],
+      "duplicateCreateObservation": {
+        "confirmDisabled": true,
+        "returnToDraftDisabled": false,
+        "message": "Alta rechazada\n\nEl servidor rechazÃ³ el alta porque el identificador no estÃ¡ disponible. Vuelve al borrador para corregirlo y revisar de nuevo. Referencia: independent"
+      },
+      "writesSynthetic": 6,
+      "getCount": 6,
+      "pageErrors": 0
+    },
+    "buildExit": 0,
+    "buildPages": 85,
+    "buildTypeScriptExit": 0,
+    "screenshotsInspected": [
+      "desktop",
+      "conflict",
+      "mobile-form",
+      "mobile-navy",
+      "create409-recoverable-1440",
+      "create409-recoverable-390"
+    ]
+  },
+  "qaEnvironment": {
+    "service": "MSSQL$HEALTHPROJECTQA",
+    "serviceObserved": "Stopped/Manual",
+    "inspection": "INSPECTION_ACCESS_DENIED",
+    "mutationAttempted": false,
+    "protectedBefore": "7970854109e3742fa8c345ca526ba38d8c69e9bef0f87288ca72af7dc791eb02",
+    "protectedAfter": "7970854109e3742fa8c345ca526ba38d8c69e9bef0f87288ca72af7dc791eb02",
+    "protectedUnchangedDuringInspection": true,
+    "tlsA69": "blocked; no retry"
+  },
+  "limits": [
+    "No actual SQL/HTTP/browser persistence checks in this delivery",
+    "No services or operational credentials accessed",
+    "Initial review returned POST409 issue; R1 resolves it",
+    "Supervisor harness first R1 attempt had an accented expected string corrupted by PowerShell/Python pipe; corrected harness only, rerun passed",
+    "Initial integration guard compared pre-change checkout with post-change review snapshot and stopped before copying; corrected guard to require unchanged HEAD paths, all eight then integrated",
+    "Sixth November SQL/JDBC/API evidence remains historical"
+  ]
+}

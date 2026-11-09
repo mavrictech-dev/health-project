@@ -1,0 +1,872 @@
+{
+  "observedUtc": "2026-11-09T17:09:23.499778+00:00",
+  "run": "run_624b9269b491",
+  "task": "task_c0871e7d4bb8",
+  "dispatch": "ctx_0aba1f82bd60",
+  "acceptance": "PAC-01.A VALIDATED LOCAL QA; remainder of PAC-01 pending",
+  "accounts": {
+    "architect": "mendozadeafabisa@gmail.com",
+    "programmer": "recuperapiura@gmail.com"
+  },
+  "workerSourceFilesUnchanged": 654,
+  "attempts": {
+    "historicalFailed": {
+      "attempt": "1794242208475",
+      "reportSHA256": "7581CB81C3758DD17BE5AC113C1083BB608A413D9856D035F5348918CF33321F",
+      "data": {
+        "schema": "health-patients-real-qa-report-v1",
+        "runId": "pacqa-20261109-a1",
+        "mode": "readonly",
+        "checks": [
+          {
+            "control": "manifest",
+            "status": "failed",
+            "code": "UNEXPECTED_FAILURE"
+          }
+        ],
+        "fixtures": [],
+        "sqlGrantsVerified": false
+      }
+    },
+    "readonly": {
+      "attempt": "1794243523795",
+      "reportSHA256": "5368D3B0FAC22BA7ED3765D502D06A8882C943DCF87B19BCD220AB760336CFFA",
+      "data": {
+        "schema": "health-patients-real-qa-report-v1",
+        "runId": "pacqa-20261109-a1",
+        "mode": "readonly",
+        "checks": [
+          {
+            "control": "login",
+            "status": "passed"
+          },
+          {
+            "control": "login",
+            "status": "passed"
+          },
+          {
+            "control": "login",
+            "status": "passed"
+          },
+          {
+            "control": "readonly-pagination",
+            "status": "not-applicable"
+          },
+          {
+            "control": "readonly-detail",
+            "status": "passed"
+          },
+          {
+            "control": "readonly-directory",
+            "status": "passed"
+          },
+          {
+            "control": "readonly-pagination",
+            "status": "not-applicable"
+          },
+          {
+            "control": "readonly-detail",
+            "status": "passed"
+          },
+          {
+            "control": "readonly-directory",
+            "status": "passed"
+          },
+          {
+            "control": "readonly-pagination",
+            "status": "not-applicable"
+          },
+          {
+            "control": "readonly-detail",
+            "status": "passed"
+          },
+          {
+            "control": "readonly-directory",
+            "status": "passed"
+          },
+          {
+            "control": "logout",
+            "status": "passed"
+          }
+        ],
+        "fixtures": [],
+        "sqlGrantsVerified": false
+      }
+    },
+    "writes": {
+      "attempt": "1794243570191",
+      "reportSHA256": "452084941C2352521919E1498504AB6B8E9C243B369CA4DB32E84DAD587F2F8A",
+      "data": {
+        "schema": "health-patients-real-qa-report-v1",
+        "runId": "pacqa-20261109-a1",
+        "mode": "synthetic-writes",
+        "checks": [
+          {
+            "control": "login",
+            "status": "passed"
+          },
+          {
+            "control": "login",
+            "status": "passed"
+          },
+          {
+            "control": "login",
+            "status": "passed"
+          },
+          {
+            "control": "fixture-capture",
+            "status": "passed"
+          },
+          {
+            "control": "fixture-capture",
+            "status": "passed"
+          },
+          {
+            "control": "human-ui",
+            "status": "passed"
+          },
+          {
+            "control": "fixture-capture",
+            "status": "passed"
+          },
+          {
+            "control": "fixture-capture",
+            "status": "passed"
+          },
+          {
+            "control": "animal-ui",
+            "status": "passed"
+          },
+          {
+            "control": "login",
+            "status": "passed"
+          },
+          {
+            "control": "fixture-capture",
+            "status": "passed"
+          },
+          {
+            "control": "fixture-capture",
+            "status": "passed"
+          },
+          {
+            "control": "login",
+            "status": "passed"
+          },
+          {
+            "control": "fixture-capture",
+            "status": "passed"
+          },
+          {
+            "control": "fixture-capture",
+            "status": "passed"
+          },
+          {
+            "control": "pagination",
+            "status": "passed"
+          },
+          {
+            "control": "login",
+            "status": "passed"
+          },
+          {
+            "control": "fixture-capture",
+            "status": "passed"
+          },
+          {
+            "control": "fixture-capture",
+            "status": "passed"
+          },
+          {
+            "control": "opaque-edit-conflict",
+            "status": "passed"
+          },
+          {
+            "control": "fixture-capture",
+            "status": "passed"
+          },
+          {
+            "control": "fixture-capture",
+            "status": "passed"
+          },
+          {
+            "control": "duplicate-recovery",
+            "status": "passed"
+          },
+          {
+            "control": "tenant-isolation",
+            "status": "passed"
+          },
+          {
+            "control": "host-session-isolation",
+            "status": "passed"
+          },
+          {
+            "control": "logout",
+            "status": "passed"
+          }
+        ],
+        "fixtures": [
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-UI",
+            "id": "367e0fcd-2e52-490e-bf9a-c8e8494fddcf",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-ANIMAL-UI",
+            "id": "96e68997-993a-4bdd-86e4-a8dbfe8a5878",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-00",
+            "id": "5ce7ef4a-06fb-4c1a-9c8f-1942ecdbb1a0",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-01",
+            "id": "3c597496-21af-4896-8004-2e6fc28d7ab9",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-02",
+            "id": "f9f62e0e-eb89-4e79-9f43-8a817f38d0ba",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-03",
+            "id": "4c2382ea-fc3a-423f-bb2a-ccfb5e760a37",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-04",
+            "id": "0910c525-21d9-4489-9a05-e3c35967ae94",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-05",
+            "id": "caebc024-669d-4964-8aca-1f7825896de6",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-06",
+            "id": "67b619a1-db0e-4a6f-950b-4d2215ae7ba9",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-07",
+            "id": "6de8f51c-064f-4c6c-9d69-e0b2f5050464",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-08",
+            "id": "607128b5-0458-4c71-ac1d-f9183b25eb49",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-09",
+            "id": "6e556985-a991-40db-aca1-22602982dc99",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-10",
+            "id": "2b78ee26-d520-4aae-bb86-817dfefa90bd",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-11",
+            "id": "30ea6536-412a-412a-a2d7-60cacae3c422",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-12",
+            "id": "13d143ed-9f0b-4ca1-881c-4b2ad78c384e",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-13",
+            "id": "4571a6e2-5444-442b-abaa-a195b1450f81",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-14",
+            "id": "9f6a1989-07e8-439f-9097-c3586b1a7f1c",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-15",
+            "id": "111919e9-5e49-4df3-b9bf-0205e66411b1",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-16",
+            "id": "132b3e41-ce97-4941-ad65-b6272dff8b21",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-17",
+            "id": "60e843ac-7eec-4546-8158-c409d13ceb23",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-18",
+            "id": "7c8bf492-5e94-4c2e-ba38-cd7832a75a0b",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-19",
+            "id": "87bc2767-bcf2-4b4c-a3c1-8751e65bf5a6",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-20",
+            "id": "66e3ffee-32d4-4dae-963f-ac73c539acf6",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-EDIT",
+            "id": "ab615c7a-b0ae-4875-acaf-7b8497caf0bd",
+            "status": "created"
+          },
+          {
+            "identifier": "PACQA-pacqa-20261109-a1-HUMAN-RECOVER",
+            "id": "69c1146f-f3f7-4610-8379-90a564ded454",
+            "status": "created"
+          }
+        ],
+        "sqlGrantsVerified": false
+      }
+    }
+  },
+  "workerPhaseSeconds": {
+    "readonly": 13.1035065,
+    "writes": 28.4514102
+  },
+  "realFixtureDataOnly": true,
+  "newFixtures": 25,
+  "workerReportedReused": 0,
+  "newHuman": 24,
+  "newAnimal": 1,
+  "independentApiReview": {
+    "status": "passed",
+    "transport": "real HTTP through local proxy and existing SQL Server runtime",
+    "checks": [
+      "fresh cookie session and exact host/tenant: human",
+      "fresh cookie session and exact host/tenant: otherHuman",
+      "fresh cookie session and exact host/tenant: animal",
+      "persisted run count and tenant scope: human",
+      "persisted run count and tenant scope: otherHuman",
+      "persisted run count and tenant scope: animal",
+      "all 25 original IDs persist; no duplicate run identifiers",
+      "25 detail responses match exact content, contact, allergies, domain and final revisions",
+      "persisted pagination lookahead21 and offset20 yields one matching row",
+      "four real cross-tenant/cross-domain detail requests reject with backend 404",
+      "cookie on foreign host rejects401; original host session remains valid",
+      "all three fresh sessions explicitly revoked and reject reuse"
+    ],
+    "fixtureCount": 25,
+    "fixtureDigests": [
+      {
+        "id": "ab615c7a-b0ae-4875-acaf-7b8497caf0bd",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-EDIT",
+        "sha256": "1112e96d5ca9f056665c70c7cc94e9b939329d4ecf11b2e19beb6d01d0dcc4f4"
+      },
+      {
+        "id": "5ce7ef4a-06fb-4c1a-9c8f-1942ecdbb1a0",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-00",
+        "sha256": "cbad5c534ead5d417b0cb311fd8386b40c66f6d4cb862480124611ebcb92ee35"
+      },
+      {
+        "id": "3c597496-21af-4896-8004-2e6fc28d7ab9",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-01",
+        "sha256": "a9a7086e3879b33b724858a7dbcfe407293298102ef3dc056c0d63d44c874d7d"
+      },
+      {
+        "id": "f9f62e0e-eb89-4e79-9f43-8a817f38d0ba",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-02",
+        "sha256": "1c06cb4a3f9bbb9cc37db27e0ec5f8abab68b94763a06e62135e94a103836a86"
+      },
+      {
+        "id": "4c2382ea-fc3a-423f-bb2a-ccfb5e760a37",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-03",
+        "sha256": "6058e214be0a099e20a351975c1683a03d2eb6d4985a4978781a7eab4dfce108"
+      },
+      {
+        "id": "0910c525-21d9-4489-9a05-e3c35967ae94",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-04",
+        "sha256": "f0bd0bddc971f801c51afd8cfe3fb176342d67e9682f0935c8f18975d2f8248e"
+      },
+      {
+        "id": "caebc024-669d-4964-8aca-1f7825896de6",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-05",
+        "sha256": "819fa393831800595093c651135c47ebc86717577daaa8ea9199c13196a39b76"
+      },
+      {
+        "id": "67b619a1-db0e-4a6f-950b-4d2215ae7ba9",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-06",
+        "sha256": "36ef17a3b06f2b1892ddfae44ee36e3e9676f6e10881e209baa74649ff4aa940"
+      },
+      {
+        "id": "6de8f51c-064f-4c6c-9d69-e0b2f5050464",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-07",
+        "sha256": "01d228b3b5c7f262631061e43e31f5dd52f5ba2e7856263ef3ede72ab4363e75"
+      },
+      {
+        "id": "607128b5-0458-4c71-ac1d-f9183b25eb49",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-08",
+        "sha256": "3875d15a19b6f296e001fc51892f0986ed9c35cccc853868054288eeaac76de0"
+      },
+      {
+        "id": "6e556985-a991-40db-aca1-22602982dc99",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-09",
+        "sha256": "1f17726b60ac02c16ff0ffcffb13c5dc2f1714512d1d90c6ca57810b9248bcba"
+      },
+      {
+        "id": "2b78ee26-d520-4aae-bb86-817dfefa90bd",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-10",
+        "sha256": "bf85ceccf9a530e29dc082d69094e26622fdb007ab58ac72d247b6ac90997abd"
+      },
+      {
+        "id": "30ea6536-412a-412a-a2d7-60cacae3c422",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-11",
+        "sha256": "501014b5cdb82046b21624db445773a69640ef7ad8e0aaf87f98b723776d9c00"
+      },
+      {
+        "id": "13d143ed-9f0b-4ca1-881c-4b2ad78c384e",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-12",
+        "sha256": "cbf3c2cef509cbd94c9c183d435c79c9a5584aaf2b09bf57905ba2542aab2358"
+      },
+      {
+        "id": "4571a6e2-5444-442b-abaa-a195b1450f81",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-13",
+        "sha256": "a94df3cbb2083ae1f43816f20db2ac5db50f1d40e24e2abc77a6bad1fbb87e28"
+      },
+      {
+        "id": "9f6a1989-07e8-439f-9097-c3586b1a7f1c",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-14",
+        "sha256": "f0481e48e71795b2bcbf608fc66cbf8ebdf9e94d0491b258b525fead585b37fa"
+      },
+      {
+        "id": "111919e9-5e49-4df3-b9bf-0205e66411b1",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-15",
+        "sha256": "8674b2533e71e0d928e86e57335e1b51814d8c093120398ca721d94987940ea7"
+      },
+      {
+        "id": "132b3e41-ce97-4941-ad65-b6272dff8b21",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-16",
+        "sha256": "7d81af950a5ca79943a38191d1e32c31ebdf9b78cd239073c75d8f71d597693f"
+      },
+      {
+        "id": "60e843ac-7eec-4546-8158-c409d13ceb23",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-17",
+        "sha256": "c64104b76b3de16e1430dc14fbaa17c58bb32d92f9f41f09fc9d2bcab22ffd0f"
+      },
+      {
+        "id": "7c8bf492-5e94-4c2e-ba38-cd7832a75a0b",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-18",
+        "sha256": "846419d457070a7ea4e35fc172c161c427c775d2c0e640acb7b7508837956843"
+      },
+      {
+        "id": "87bc2767-bcf2-4b4c-a3c1-8751e65bf5a6",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-19",
+        "sha256": "e0b6e8471c801c9f23287b1c103acfb107333b3d2b683c14aafdded8c0fa1ec8"
+      },
+      {
+        "id": "66e3ffee-32d4-4dae-963f-ac73c539acf6",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-PAGE-20",
+        "sha256": "8e140731052212a394bbe409817ff1c9ce2c7edcb9af53e825a6b58166eda7f3"
+      },
+      {
+        "id": "69c1146f-f3f7-4610-8379-90a564ded454",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-RECOVER",
+        "sha256": "b4b619823dfccb69884490202066f7a8086b5fe892f5f88b4964fd8152b55ac0"
+      },
+      {
+        "id": "367e0fcd-2e52-490e-bf9a-c8e8494fddcf",
+        "identifier": "PACQA-pacqa-20261109-a1-HUMAN-UI",
+        "sha256": "6eb8d36b8f92df3929ae59b601df653ce9f93835a4680aacd6af2437a80ce2cf"
+      },
+      {
+        "id": "96e68997-993a-4bdd-86e4-a8dbfe8a5878",
+        "identifier": "PACQA-pacqa-20261109-a1-ANIMAL-UI",
+        "sha256": "e17da7ada330c9020c86ef598137c268e2ed886caba888a481179585abe86a90"
+      }
+    ],
+    "requests": [
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/public/context",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "POST",
+        "resource": "/auth/browser/login",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/auth/browser/session",
+        "status": 200
+      },
+      {
+        "slot": "otherHuman",
+        "method": "GET",
+        "resource": "/public/context",
+        "status": 200
+      },
+      {
+        "slot": "otherHuman",
+        "method": "POST",
+        "resource": "/auth/browser/login",
+        "status": 200
+      },
+      {
+        "slot": "otherHuman",
+        "method": "GET",
+        "resource": "/auth/browser/session",
+        "status": 200
+      },
+      {
+        "slot": "animal",
+        "method": "GET",
+        "resource": "/public/context",
+        "status": 200
+      },
+      {
+        "slot": "animal",
+        "method": "POST",
+        "resource": "/auth/browser/login",
+        "status": 200
+      },
+      {
+        "slot": "animal",
+        "method": "GET",
+        "resource": "/auth/browser/session",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients",
+        "status": 200
+      },
+      {
+        "slot": "otherHuman",
+        "method": "GET",
+        "resource": "/patients",
+        "status": 200
+      },
+      {
+        "slot": "animal",
+        "method": "GET",
+        "resource": "/patients",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/ab615c7a-b0ae-4875-acaf-7b8497caf0bd",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/5ce7ef4a-06fb-4c1a-9c8f-1942ecdbb1a0",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/3c597496-21af-4896-8004-2e6fc28d7ab9",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/f9f62e0e-eb89-4e79-9f43-8a817f38d0ba",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/4c2382ea-fc3a-423f-bb2a-ccfb5e760a37",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/0910c525-21d9-4489-9a05-e3c35967ae94",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/caebc024-669d-4964-8aca-1f7825896de6",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/67b619a1-db0e-4a6f-950b-4d2215ae7ba9",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/6de8f51c-064f-4c6c-9d69-e0b2f5050464",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/607128b5-0458-4c71-ac1d-f9183b25eb49",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/6e556985-a991-40db-aca1-22602982dc99",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/2b78ee26-d520-4aae-bb86-817dfefa90bd",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/30ea6536-412a-412a-a2d7-60cacae3c422",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/13d143ed-9f0b-4ca1-881c-4b2ad78c384e",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/4571a6e2-5444-442b-abaa-a195b1450f81",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/9f6a1989-07e8-439f-9097-c3586b1a7f1c",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/111919e9-5e49-4df3-b9bf-0205e66411b1",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/132b3e41-ce97-4941-ad65-b6272dff8b21",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/60e843ac-7eec-4546-8158-c409d13ceb23",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/7c8bf492-5e94-4c2e-ba38-cd7832a75a0b",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/87bc2767-bcf2-4b4c-a3c1-8751e65bf5a6",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/66e3ffee-32d4-4dae-963f-ac73c539acf6",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/69c1146f-f3f7-4610-8379-90a564ded454",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/367e0fcd-2e52-490e-bf9a-c8e8494fddcf",
+        "status": 200
+      },
+      {
+        "slot": "animal",
+        "method": "GET",
+        "resource": "/patients/96e68997-993a-4bdd-86e4-a8dbfe8a5878",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients",
+        "status": 200
+      },
+      {
+        "slot": "otherHuman",
+        "method": "GET",
+        "resource": "/patients/367e0fcd-2e52-490e-bf9a-c8e8494fddcf",
+        "status": 404
+      },
+      {
+        "slot": "otherHuman",
+        "method": "GET",
+        "resource": "/patients/96e68997-993a-4bdd-86e4-a8dbfe8a5878",
+        "status": 404
+      },
+      {
+        "slot": "animal",
+        "method": "GET",
+        "resource": "/patients/367e0fcd-2e52-490e-bf9a-c8e8494fddcf",
+        "status": 404
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/patients/96e68997-993a-4bdd-86e4-a8dbfe8a5878",
+        "status": 404
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/auth/browser/session",
+        "status": 401
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/auth/browser/session",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "DELETE",
+        "resource": "/auth/browser/session",
+        "status": 200
+      },
+      {
+        "slot": "human",
+        "method": "GET",
+        "resource": "/auth/browser/session",
+        "status": 401
+      },
+      {
+        "slot": "otherHuman",
+        "method": "DELETE",
+        "resource": "/auth/browser/session",
+        "status": 200
+      },
+      {
+        "slot": "otherHuman",
+        "method": "GET",
+        "resource": "/auth/browser/session",
+        "status": 401
+      },
+      {
+        "slot": "animal",
+        "method": "DELETE",
+        "resource": "/auth/browser/session",
+        "status": 200
+      },
+      {
+        "slot": "animal",
+        "method": "GET",
+        "resource": "/auth/browser/session",
+        "status": 401
+      }
+    ],
+    "businessWrites": 0,
+    "applicationSessionsCreatedAndRevoked": 3,
+    "tlsChainValidated": false,
+    "newSqlGrantTests": false
+  },
+  "capturesInspectedBySupervisor": [
+    {
+      "path": "visuales-pacientes-reales-20261109/animal-form-1440.png",
+      "sha256": "333AF8BAB8665F52C80EC4F67B50B3FA383909A95EF613E591CBA42CFDE7E1E1"
+    },
+    {
+      "path": "visuales-pacientes-reales-20261109/animal-form-390.png",
+      "sha256": "3CFB90B48697196DF612C274CD87FB52822EC10B35F1AFDEC1C09E74406D04FA"
+    },
+    {
+      "path": "visuales-pacientes-reales-20261109/animal-persisted-1440.png",
+      "sha256": "BA0D0E67E7E45E28240DBB8BB353AB9A8A9091BCEA9F21084003492232C2E447"
+    },
+    {
+      "path": "visuales-pacientes-reales-20261109/animal-persisted-390.png",
+      "sha256": "4E85A3CB145F9BC688695C3376F8F3ABB2F14A657657142BFB66756C28BAFE88"
+    },
+    {
+      "path": "visuales-pacientes-reales-20261109/create-conflict-1440.png",
+      "sha256": "59160581737CE526B233EE6183253E0F86FD80096C50496BB47DAD0D6E5F2DCA"
+    },
+    {
+      "path": "visuales-pacientes-reales-20261109/create-conflict-390.png",
+      "sha256": "ABE648BCA96E584EB72A1C5C002A9898F5A96B991732020F50479A3FBF38752B"
+    },
+    {
+      "path": "visuales-pacientes-reales-20261109/edit-conflict-1440.png",
+      "sha256": "AADDEA8F5B230313D05739B13A319CBC99A9F6D4B5F21F99913A36A04AFEB738"
+    },
+    {
+      "path": "visuales-pacientes-reales-20261109/edit-conflict-390.png",
+      "sha256": "EA1D3589C6B2958F6CADD8A3127BA475414CA9F1468D6B7BBF14CE8A83E5D0E6"
+    },
+    {
+      "path": "visuales-pacientes-reales-20261109/human-form-1440.png",
+      "sha256": "10FC78CD086EA7286F56A219712C59ABE04F5D83DF57DF31530E6CB7B71A182D"
+    },
+    {
+      "path": "visuales-pacientes-reales-20261109/human-form-390.png",
+      "sha256": "FF36A6162C3F5B2D299043DD9EBF263C41F8723010C4735520ECDF8E9A0A45EA"
+    },
+    {
+      "path": "visuales-pacientes-reales-20261109/human-persisted-1440.png",
+      "sha256": "84D7FE44D5000BC29BDEBA91854A6DDCA38B0EF151AA2755778ECB2946A984F4"
+    },
+    {
+      "path": "visuales-pacientes-reales-20261109/human-persisted-390.png",
+      "sha256": "066BB74C32B73639EEA2A71DD810393F3FEA97444C11CF63FEAE2E7FDBB41ABC"
+    }
+  ],
+  "transport": "real HTTP through local proxy, runtime SQL Server/SP; no API response mocks",
+  "newSqlGrantTests": false,
+  "tlsChainValidated": false,
+  "realVisualTheme": "light",
+  "protectedFingerprintAfter": "7970854109e3742fa8c345ca526ba38d8c69e9bef0f87288ca72af7dc791eb02",
+  "businessFixturesPreserved": true,
+  "otherProjectsUntouched": true,
+  "productionApproved": false,
+  "limits": [
+    "No new SQL grants/JDBC regression or backend restart test claimed",
+    "A69 strict TLS remains blocked",
+    "Linked responsibles and rest of PAC-01 pending",
+    "Other visual themes verified with synthetic transport earlier; current real screenshots light only",
+    "Initial browser-launch failure remains recorded; no concealed reset or cleanup"
+  ]
+}

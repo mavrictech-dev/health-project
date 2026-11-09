@@ -1,0 +1,77 @@
+{
+  "run": "run_624b9269b491",
+  "task": "task_b463947557b3",
+  "dispatch": "ctx_1cd482db4bc0",
+  "acceptance": "launcher integrated; actual business execution pending",
+  "ownership": {
+    "observedUtc": "2026-11-09T16:54:24.329511+00:00",
+    "baselines": [
+      {
+        "label": "L1",
+        "unchangedFiles": 650
+      },
+      {
+        "label": "E1",
+        "unchangedFiles": 622
+      }
+    ],
+    "hashes": [
+      {
+        "path": "scripts/run-patients-real-qa.py",
+        "sha256": "249395F1120CDE3F68426339683BCC2117D3E4993E5C2F5553513FBB56E7EDFE"
+      },
+      {
+        "path": "scripts/tests/test_patients_real_qa_launcher.py",
+        "sha256": "5DF37FF5B7677F7EBF6A5F85BB54D663A814FE328B22AA74A24C9220231A4C2D"
+      }
+    ],
+    "integratedExact": true,
+    "outsideChanges": []
+  },
+  "independentUnitTests": {
+    "passed": 21,
+    "failed": 0,
+    "rawExit": 0,
+    "seconds": 0.04
+  },
+  "actualProcessProbes": {
+    "credentialsLoaded": false,
+    "applicationPagesOpened": false,
+    "parentEnvironmentChanged": false,
+    "checks": [
+      {
+        "name": "actual Edge launch/close after job assignment and EOF",
+        "exit": 0,
+        "result": {
+          "mode": "--readonly",
+          "rawExit": 0,
+          "signals": [
+            {
+              "control": "runner",
+              "status": "passed"
+            }
+          ],
+          "credentialsPrinted": false
+        },
+        "job": {
+          "activeBeforeTermination": 0,
+          "activeAfterTermination": 0
+        }
+      },
+      {
+        "name": "actual own Node plus descendant timeout cleanup",
+        "code": "RUNNER_TIMEOUT",
+        "elapsedSeconds": 2.015,
+        "job": {
+          "activeBeforeTermination": 4,
+          "activeAfterTermination": 0
+        }
+      }
+    ]
+  },
+  "e1OriginalAttemptPreserved": "1794242208475",
+  "e1TaskToRetry": "task_c0871e7d4bb8",
+  "runnerUnchanged": true,
+  "credentialsUsedInProbes": false,
+  "tlsChainValidated": false
+}

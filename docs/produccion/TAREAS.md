@@ -19,15 +19,20 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | --- | --- | --- | --- | --- | --- |
 | ARQ-01 | Arquitecto | Ninguna | VALIDADA | ESTADO.md; fuentes y HP-ORCH-01 | Matriz revisada; brechas runtime conservadas |
 | ARQ-02 | Arquitecto + programador | ARQ-01 | REABIERTA (persistencia SQL Server) | DECISIONES.md D-02/04/05; msg_393227f665f1 acuerdo | Contratos HTTP conservados; contrato de persistencia debe cumplir D-09/SQL Server y 100 % SP |
-| QA-01 | Supervisor secuencial D-79 | ARQ-01 | EN_CURSO (negocio y visual real aceptados; TLS pendiente) | CIERRE_LOCAL_20261106.json:177HTTP/8JDBC/7reinicio/6CSRF,18capturas | No cierra carga, correo/adjuntos ni gates productivos |
-| INT-01 | Supervisor; entregas del programador revisadas | ARQ-02 | PARCIAL (acceso/shell validado real) | Login/logout/revocación y Playwright real; CIERRE_LOCAL_20261106.json | Módulos clínicos frontend siguen por etapas |
+| QA-01 | Programador recuperapiura; supervisor mendozadeafabisa | ARQ-01 | EN_CURSO (PAC-A y negocio/visual real aceptados; TLS pendiente) | PACIENTES_QA_REAL_20261109.json; CIERRE_LOCAL_20261106.json | No cierra carga, correo/adjuntos ni gates productivos; evidencia6nov conserva fecha |
+| INT-01 | Supervisor; entregas del programador revisadas | ARQ-02 | PARCIAL (acceso/shell y PAC-A validados reales) | Login/logout/revocación y Playwright real; CIERRE_LOCAL_20261106.json/PACIENTES_QA_REAL_20261109.json | Resto de módulos clínicos frontend siguen por etapas |
 | SAAS-01 | Supervisor; paquetes secuenciales D-79 | INT-01 | PARCIAL (A validada con SQL/HTTP/UI real) | Alta navegador cookie+CSRF;177 comprobaciones negocio/rollback | Ciclo comercial completo y gates productivos pendientes |
 | ORG-01 | Supervisor; entregas A/B revisadas | SAAS-01 | PARCIAL (A/B validadas reales) | Alta sede/refresco cupos/409 navegador; equipo readonly;18capturas | No implica editor de membresías ni todas las etapas del plan |
-| SQL-01 | Supervisor secuencial D-79; programador cuota0 | D-09, ARQ-02 físico | EN_CURSO (A67/A68 aceptadas; A69 bloqueada TLS) | V10–V12;133SP/562ACL reconciliados; CIERRE_LOCAL_20261106.json | Bootstrap/login/negocio/visual reales pasan; falta cadena TLS y gates restantes |
+| SQL-01 | Supervisor mendozadeafabisa; programador recuperapiura | D-09, ARQ-02 físico | EN_CURSO (A67/A68 y PAC-A aceptadas; A69 bloqueada TLS) | V10–V12;133SP/562ACL reconciliados6nov; PACIENTES_QA_REAL_20261109.json | Runtime SQL/HTTP y PAC-A real pasan; no nuevos grants/JDBC ni cadena TLS en este corte |
 | SQL-01.A68 | Supervisor D-79 | A67 | VALIDADA LOCAL | task_43d86e5dd1d1; CIERRE_LOCAL_20261106.json | Correcciones JDBC/UUID/409 y QA real; no aprobación productiva |
 | SQL-01.A69 | Supervisor D-79 | A68 | BLOQUEADA | task_7e312870e8d4; scripts/configure-isolated-sqlserver-tls.ps1 | Windows canceló UAC; pregunta de nueva aceptación pendiente, apply no ejecutado |
 | IAM-01 | Programador/operacion | ARQ-02, ORG-01 circuito | POR_VERIFICAR | — | Invitaciones/correo publico |
-| PAC-01 | Programador | INT-01, ORG-01 | POR_VERIFICAR | — | Pacientes/responsables y revisiones |
+| PAC-01 | Programador recuperapiura; supervisor mendozadeafabisa | INT-01, ORG-01, A68 | PARCIAL (A validada real) | PACIENTES_QA_REAL_20261109.json; D-86 | Directorio/ficha/alta/edicion/revision/paginacion/persistencia aceptados; vinculos y responsables pendientes |
+| PAC-01.A | Programador recuperapiura; revision supervisor | A68 | VALIDADA LOCAL REAL | PACIENTES_QA_REAL_20261109.json; D-86 |25fixtures reales/26controles worker+12independientes,12capturas; sin aprobacion productiva |
+| PAC-01.A.R1 | Programador recuperapiura; supervisor | Revision A | VALIDADA OFFLINE | task_217525ae83e8 / ctx_2088bbc1a2ff; PACIENTES_CONTRATO_20261109.json |76tests/28sinteticos/demo13; supervisor7controles y build85 integrado; no SQL real |
+| PAC-01.A.QA | Programador recuperapiura; supervisor | R1 aceptada | VALIDADA LOCAL | task_5a7358409b8e / ctx_1c94305dd25c; PAC-01-A-QA-EJECUCION.md | Herramientas/L1 y recorrido E1 revisados;88tests frontend+21launcher separados, no TLS |
+| PAC-01.A.QA.E1 | Programador recuperapiura; revision supervisor | Herramientas y entorno revisados | VALIDADA LOCAL | task_c0871e7d4bb8 / ctx_0aba1f82bd60; PACIENTES_QA_REAL_20261109.json | readonly10PASS/3NA y escrituras26PASS; supervisor12controlesAPI/12capturas; fallo inicial preservado |
+| PAC-01.A.QA.L1 | Programador recuperapiura; supervisor | Diagnostico E1 | VALIDADA E INTEGRADA | task_b463947557b3 / ctx_1cd482db4bc0; PAC-01-A-QA-LANZADOR.md |21tests independientes y probes reales sin credenciales: EdgePASS/timeout4->0; listo retryE1 con nuevo lanzador |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
 | CLI-01 | Programador | PAC-01, AGE-01 | POR_VERIFICAR | — | Historia entre sedes |
 | ESP-01 | Programador | CLI-01 | POR_VERIFICAR | — | Graficos persistentes |

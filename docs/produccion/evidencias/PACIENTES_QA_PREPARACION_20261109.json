@@ -1,0 +1,76 @@
+{
+  "run": "run_624b9269b491",
+  "phase": "tools accepted and environment prepared; browser business execution pending",
+  "toolOwnership": {
+    "observedUtc": "2026-11-09T16:28:09.113241+00:00",
+    "baselineFiles": 501,
+    "baselineAllUnchanged": true,
+    "eightAR1UnchangedInBothWorktrees": true,
+    "integrated": [
+      {
+        "path": "frontend/scripts/patients-real-qa.cjs",
+        "sha256": "1BB53685CF5B375B434D75DABE8BD61260672E167C5EADBC0271B1DBF0D8FE32"
+      },
+      {
+        "path": "frontend/tests/patients-real-qa.test.ts",
+        "sha256": "D79EBF2C4D4A8D2BB7E9144D57F7A1684609767E5D846081E7C52D5FC8FEB903"
+      }
+    ]
+  },
+  "tests": {
+    "workerFrontend": 88,
+    "supervisorTool": 12,
+    "supervisorToolFailures": 0,
+    "supervisorToolDurationMs": 889.8134
+  },
+  "qaService": {
+    "service": "MSSQL$HEALTHPROJECTQA",
+    "serviceState": "Running",
+    "serviceStartMode": "Manual",
+    "endpoint": "127.0.0.1:14335",
+    "processId": 9124,
+    "listeners": [
+      {
+        "LocalAddress": "::1",
+        "LocalPort": 61409,
+        "OwningProcess": 9124
+      },
+      {
+        "LocalAddress": "127.0.0.1",
+        "LocalPort": 61409,
+        "OwningProcess": 9124
+      },
+      {
+        "LocalAddress": "127.0.0.1",
+        "LocalPort": 14335,
+        "OwningProcess": 9124
+      }
+    ],
+    "protectedBefore": "7970854109e3742fa8c345ca526ba38d8c69e9bef0f87288ca72af7dc791eb02",
+    "protectedAfter": "7970854109e3742fa8c345ca526ba38d8c69e9bef0f87288ca72af7dc791eb02",
+    "protectedUnchanged": true,
+    "helperSHA256": "3FBC605A36A6BE720B4D87E3F50D64163E167D5BA96C2C621C3B672B3A2BD831",
+    "completedUtc": "2026-11-09T16:29:41.6564177Z"
+  },
+  "runtime": {
+    "port": 18080,
+    "profile": "sqlserver-qa",
+    "principal": "hp_qa_runtime_20261105",
+    "bootstrapConfigured": false,
+    "jobsEnabled": false,
+    "readiness": "UP",
+    "applicationMode": "OPEN",
+    "proxyPort": 18300,
+    "mockApi": false,
+    "hostContextsMatched": 3
+  },
+  "executionWrapperSHA256": "E192184A8AEB6950DB29F2E21E021B7C2EF766C136E5378A789E622DB11C73E6",
+  "credentials": "DPAPI CurrentUser -> process stdin only; no plaintext/argv/env exposure",
+  "runId": "pacqa-20261109-a1",
+  "setupReplayed": false,
+  "bootstrapReplayed": false,
+  "newRuntimeGrantTests": false,
+  "tlsChainValidated": false,
+  "tlsA69": "blocked, unchanged; elevation accepted exclusively for QA service Start",
+  "sixNovemberEvidenceReexecuted": false
+}

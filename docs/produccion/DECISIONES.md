@@ -1,5 +1,113 @@
 # Decisiones y contratos de integracion
 
+## D-86: directorio/ficha de pacientes aceptados en QA real, 2026-11-09
+
+PAC-01.A queda VALIDADA LOCAL con SQL Server/HTTP/UI real. E1 misma task_c0871e7d4bb8,
+ctx_0aba1f82bd60 succeeded: readonly10PASS/3NA solo paginacion y fase mutante26PASS,
+25fixtures nuevas (24humanas/1animal), sin reusos ni reanudaciones.26incluye12
+capturas y6logins, no se presenta como26escenarios de negocio distintos. Contrato
+aceptado: alta/consulta/busqueda/paginacion/edicion revisionada, persistencia tras
+recarga y nueva sesion, conflictos sin sobrescritura, contacto opaco/alergias
+conservados, separacion de tenants/dominios y rechazo de cookie en otro host.
+
+Supervisor contrasta3reportes/SHA,654fuentes sin cambios,12capturas reales1440/390
+inspeccionadas (tema blanco). Verificacion HTTP independiente con3sesiones nuevas:
+12controlesPASS,25IDs/contenidos/revisiones finales exactos,21lookahead/offset20,
+4negativos404 y host401; revoca sus3sesiones. Cero escrituras de negocio propias;
+las trazas/sesiones/auditorias normales de QA se preservan. Huella protegida sigue
+79708541...91eb02. Evidencia PACIENTES_QA_REAL_20261109.json y12PNG sinteticos reales.
+
+No repite grants/JDBC, reinicio backend ni cadena TLS; A69 sigue bloqueada y QA
+usa trustServerCertificate=true. PAC-01 completo sigue PARCIAL: vinculos y
+responsables pendientes, sin aceptar portal/historia/criterios clinicos/productivos.
+Siguiente B1 prepara lectura de vinculos por un SP nuevo y pruebas SQL propuestas;
+no modifica las migraciones aplicadas ni instala nada hasta revision independiente.
+
+## D-85: herramientas aceptadas y ejecucion QA aislada, 2026-11-09
+
+Runner real/tests de PAC-01.A.QA aceptados tras lectura independiente, baseline501
+sin cambios,8SHA A/R1 intactos y12tests integradosPASS raw0. Sintaxis/check/88tests
+del worker conservan autoria. Dos fuentes nuevas integradas, sin editar producto.
+Evidencia PACIENTES_QA_PREPARACION_20261109.json. Herramienta preparada no equivale
+a browser/negocio real ejecutado; se encarga ahora E1 segun contrato especifico.
+
+La elevacion Windows fue aceptada EXCLUSIVAMENTE para Start-only deHEALTHPROJECTQA:
+wrapper anterior conservado y copia nueva con pin79708541...91eb02 y directorio
+de evidencia actual. Plan exactoStart1, OS/listeners loopback y guardas PASS,
+instancia compartida protegida con fingerprint antes/despues identico. Ningun
+replay de setup, bootstrap, migracion, cuenta o credencial. Runtime real separado
+solo hp_qa_runtime_20261105, jobsfalse, readinessUP; proxy18300 y3HostContext QA
+reales contrastados. Manifest de usuarios sinteticos SOLO DPAPI CurrentUser,
+wrapper aprobado lo entrega por stdin al runner con SHA pinado. No secretos en
+argv/env/config plana/logs/Orca. Se preservaron todos los artefactos historicos.
+
+E1 autoriza dos invocaciones secuenciales: readonly primero, escrituras sinteticas
+del runpacqa-20261109-a1 SOLO si la primera pasa. Fixtures deterministas por run,
+reconciliacion sin duplicados, detener ante fallo/colision/incertidumbre, sin retry,
+cleanup o cambio de runId. Ownership de fuentesNULO; solo reportes/capturas propias.
+Supervisor no realiza negocio en paralelo. TLS A69 conserva su bloqueo especifico:
+aceptarStartQA no autoriza certificados/binding/ForceEncryption ni valida cadena.
+E1 delegada task_c0871e7d4bb8/ctx_e57613f2dc29, ready al mismo terminal retenido;
+ningun otro escritor del estado QA. Esperar aviso y revisar resultados independientes.
+
+## D-84: aceptar pacientes offline y preparar QA real, 2026-11-09
+
+PAC-01.A.R1 aceptada en su alcance de frontend/contratos tras revision independiente.
+El defecto R-PAC-CREATE409 queda corregido: borrador recuperable, nueva revision/
+confirmacion manual, sin retry automatico; PUT409 y altas inciertas siguen bloqueadas.
+Ocho archivos integrados localmente por SHA exacto a health/production-wave0,
+sin copiar otros cambios historicos del worker ni hacer commit/push.76 pruebas,
+build85,28 recorridos sinteticos y demo13/0API/0errores informados por worker;
+supervisor confirma ownership, delta3R1/5SHAintactos, inspeccion visual,7 controles
+independientes y build85/TypeScript mas7controles sobre exportacion integrada.
+Evidencia PACIENTES_CONTRATO_20261109.json. No constituye QA real SQL/HTTP/UI.
+
+Siguiente task_5a7358409b8e prepara SOLO harness real/guardas/tests, dos rutas nuevas
+segun PAC-01-A-QA.md. Worker no arranca entorno ni descifra credenciales. Su tarea
+no cambia producto ni declara realizadas las pruebas de persistencia. Ejecucion
+real se encargara despues de revisar herramienta y preparar entorno supervisado.
+Solo datos sinteticos .example.test y SP runtime existentes; sin setup ni replay.
+
+QA observada Stopped/Manual; Plan no elevado devuelve INSPECTION_ACCESS_DENIED,
+sin intento de mutacion. Fingerprint protegido actual79708541...91eb02 igual antes/
+despues de esa lectura. Difiere del observado6nov6217e698...175e3d: no inferir causa
+ni reutilizar guardas antiguas como si fueran baseline actual. Preparacion exige
+inspeccion privilegiada revisable y proteccion exacta de la instancia compartida.
+TLS A69 sigue con su bloqueo especifico, sin nuevo intento de UAC/certificados.
+Dispatch QA ctx_1c94305dd25c ready al mismo terminal retenido, keep-open. No
+encargos concurrentes ni ampliacion de ownership del producto; esperar aviso Orca.
+
+## D-83: continuidad y primer paquete de pacientes, 2026-11-09
+
+El usuario confirma retomar pendientes y delegar programacion al agente asignado;
+aclara que el traspaso de cuentas no pausa ese objetivo. Supervisor nuevo asume
+run_624b9269b491 desde term_6b053e36-a960-4dd8-a63d-45e6c3b6c24a. Commit de
+traspaso41f7600 comprobado. Ambas identidades efectivas verificadas en recibos
+CUENTAS_ORCA_20261109 y nueva lectura del /status del programador recuperapiura.
+Se preservan sus87 rutas locales historicas y la conversacion anterior del usuario.
+
+PAC-01.A task_31e1eebbbecf depende de A68 y conecta directorio/ficha administrativa
+al shell live con contratos existentes, sin cambios backend/SQL. Ownership de ocho
+rutas frontend, diseno, permisos, paginacion sin total, revision/conflicto y
+tratamiento de altas ambiguas en PAC-01-A.md. Lectura ADM/REC/PRO/ASI/AUD;
+escritura ADM/REC/PRO sujeta a servidor. No habilita vinculos, historia ni perfiles
+clinicos. Backend actual se consulta desde supervisor; no copiar masivamente el
+worktree antiguo. Frontend compartido asignado fue comparado igual normalizando
+newlines. El informe worker queda EN_REVISION hasta revision independiente.
+
+SQL QA observado Stopped/Manual hoy: paquete de implementacion y QA offline,
+recorrido real posterior secuencial con entorno supervisado. No reejecutar setup,
+descifrar store operativo, arrancar servicios ni mutar DB en este Dispatch. A69
+mantiene bloqueo UAC/TLS; ni este encargo ni cambio de cuentas lo levantan.
+Resultados A68 del6nov conservan fecha y alcance, sin repetirlos ni atribuirlos hoy.
+
+Dispatch ctx_265e4fe4a23b iniciado al terminal verificado del programador con
+keep-open; Orca worker-list confirma ready/in_progress/live. No se duplico envio.
+Baseline previo tmp/pac-01-a-20261109/worker-baseline.json conserva SHA de183
+archivos individuales de las87 entradas historicas. Coordinador vinculado con
+consumer_generation7, buzon vacio al asumir. Proximo paso al aviso Orca: procesar
+preguntas/entrega y revisar delta, pruebas y evidencia antes de integrar.
+
 ## D-82: cuentas invertidas por solicitud del usuario, 2026-11-09
 
 Arquitecto/coordinador mendozadeafabisa@gmail.com en checkout supervisor;

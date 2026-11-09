@@ -1,5 +1,30 @@
 # Orquestacion Codex de Health Project
 
+## Continuidad vigente: pacientes reales de QA, 2026-11-09
+
+Pareja D-82: arquitecto mendozadeafabisa (term_6b053e36-a960-4dd8-a63d-45e6c3b6c24a),
+programador recuperapiura (term_493e985d-a5b9-4230-942c-edd10b53f8ef). Run unico
+run_624b9269b491, generation7 del coordinador. E1 task_c0871e7d4bb8/ctx_0aba1f82bd60
+aceptada independientemente: PAC-01.A directorio/ficha/altas/edicion/paginacion y
+revisiones reales,25fixtures sinteticas,12capturas reales inspeccionadas y12checks
+API independientes. Fallo inicial y fix de entorno Edge conservados. Consultar
+D-83..D-86,TAREAS,REVISIONES y evidencia PACIENTES_QA_REAL_20261109.json.
+
+HEALTHPROJECTQA RunningManual tras Start-only aceptado por Windows; backendQA18080
+y proxy18300 propios (runtimePID392/proxyPID21164 observados), jobsfalse y login
+runtime separado. Confirmar procesos/estado antes de operar, PIDs no permanentes.
+SQL solo loopback14335; huella protegida79708541...91eb02 intacta. No recrear base,
+principales,DPAPI,bootstrap ni reaplicarV1..V12.25pacientes QA y actividad normal
+de sesiones/trazas se conservan; verificadores historicos de setup vacio no aplican.
+Lanzador aprobado scripts/run-patients-real-qa.py lleva manifiesto DPAPI solo a
+stdin del runner; nunca copiar store,secretos,argv/env o artefactos operativos aGit.
+
+A69 TLS sigue bloqueada: aceptacion de StartQA no acepta TLS/certificados/UAC.
+No nuevos grants/JDBC o reinicio en este corte. PAC-01 completo es parcial;
+vinculos/responsables y resto de recorridos/gates siguen pendientes. Supervisor
+unico escritor de documentos y veredicto, programacion/QA por Orca en paquetes
+secuenciales. Las cuentas/cuota0 y estados anteriores siguientes son historicos.
+
 ## Asignacion vigente — 2026-11-09
 
 El usuario invirtio las cuentas por limites semanales. Esta asignacion sustituye

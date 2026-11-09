@@ -61,3 +61,11 @@ test('static route generator preserves the existing runtime routes and all three
   assert.equal(exported.length,81);
   for(const route of ['/operacion/soporte','/operacion/trazabilidad','/operacion/monitor'])assert.ok(exported.includes(route));
 });
+
+test('patient directory routes are restricted to internal read roles in the matching tenant',()=>{
+ for(const role of ['ADM','REC','PRO','ASI','AUD'])assert.deepEqual(liveRoute('/app/pacientes',user(role,'tenant-a'),tenant),{kind:'allowed',view:'patients'});
+ for(const role of ['SAD','SOP','PAC','RES','CAJ','unknown'])assert.equal(liveRoute('/app/pacientes',user(role,'tenant-a'),tenant).kind,'forbidden');
+ assert.equal(liveRoute('/app/pacientes',user('ADM','tenant-b'),tenant).kind,'forbidden');
+ assert.equal(liveRoute('/app/pacientes',user('ADM','tenant-a'),platform).kind,'forbidden');
+ for(const role of ['SAD','SOP','PAC','RES'])assert.equal(liveEntries({id:'u',tenantId:'tenant-a',roles:['ADM',role]}).some(e=>e.view==='patients'),false);
+});
