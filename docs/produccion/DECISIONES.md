@@ -1,5 +1,22 @@
 # Decisiones y contratos de integracion
 
+## D-82: cuentas invertidas por solicitud del usuario, 2026-11-09
+
+Arquitecto/coordinador mendozadeafabisa@gmail.com en checkout supervisor;
+programador recuperapiura@gmail.com en worktree separado. Sustituye la asignacion
+de cuentas anterior, sin modificar el reparto de responsabilidades ni alcances.
+Ambos/status efectivos verificados en sesiones nuevas e independientes --no-daemon:
+arquitecto91% semanal, programador15% al observarlas. No seleccion global, login,
+logout ni copia de credenciales. Las conversaciones anteriores se preservan.
+
+AGENTS.md y launcher reflejan la asignacion nueva; el launcher rechaza los dos
+pares rol/correo anteriores. Pruebas IdentityOnly positivas de ambos perfiles y
+/status independientes. La carpeta/titulo del terminal no acredita identidad.
+El programador sigue sin ser supervisor ni escritor del tablero. La comprobacion
+posterior a reiniciar Orca sigue obligatoria; no se ha probado persistencia de
+perfil a traves de reinicios. Evidencia CUENTAS_ORCA_20261109.json y traspaso
+TRASPASO_ARQUITECTO_20261109.md. Sin cambios de producto/FactuEz/main.
+
 ## D-01: alcance y autoridad
 
 Nuevo encargo directo del usuario amplia setup a ejecucion del plan. Misma pareja,

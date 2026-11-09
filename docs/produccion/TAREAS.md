@@ -1,5 +1,11 @@
 # Tablero de ejecucion
 
+Actualizacion de cuentas 2026-11-09 (D-82): arquitecto mendozadeafabisa@gmail.com,
+programador recuperapiura@gmail.com. Ambos/status nuevos verificados; cuotas
+semanales observadas91%/15%. Sustituye las referencias de cuentas/cuota0 historicas,
+sin aprobar tareas adicionales ni retirar el bloqueo TLS. Ver CUENTAS_ORCA_20261109.json
+y TRASPASO_ARQUITECTO_20261109.md. Sin cambios del producto en esta reasignacion.
+
 Registro inicial del 2 de noviembre de 2026: todos los IDs del plan se crearon
 POR_VERIFICAR. Los cambios siguientes requieren evidencia y revision del
 supervisor. Estados: POR_VERIFICAR → LISTA → EN_CURSO → EN_REVISION → INTEGRADA →

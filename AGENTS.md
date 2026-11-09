@@ -11,8 +11,9 @@ Codex programador mediante Orca; revisa diffs y verifica backend, frontend y
 comportamiento visual de forma independiente. La finalizacion del trabajador no
 equivale a aprobacion.
 
-Asignacion confirmada por el usuario: arquitecto `recuperapiura@gmail.com` y
-programador `mendozadeafabisa@gmail.com`. Verificar la identidad efectiva antes de
+Asignacion vigente del usuario (2026-11-09): arquitecto `mendozadeafabisa@gmail.com` y
+programador `recuperapiura@gmail.com`. Sustituye la asignacion anterior por limites
+semanales. Verificar la identidad efectiva antes de
 delegar; usar cuenta por proceso y `--no-daemon`, sin seleccion global.
 
 El Codex con preambulo activo de Task/Dispatch es el programador. Trabaja en su

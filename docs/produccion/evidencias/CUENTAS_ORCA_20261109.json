@@ -1,0 +1,27 @@
+{
+  "observedUtc": "2026-11-09T15:28:56.915802+00:00",
+  "project": "Health Project",
+  "assignmentSource": "user 2026-11-09 weekly limits",
+  "globalAccountsChanged": false,
+  "existingConversationsPreserved": true,
+  "agents": {
+    "architect": {
+      "terminal": "term_6b053e36-a960-4dd8-a63d-45e6c3b6c24a",
+      "email": "mendozadeafabisa@gmail.com",
+      "session": "01a1c0ec-8c13-7c30-9456-f646d3873b31",
+      "directoryDisplay": "D:\\Mavric\\Health Project",
+      "weeklyLimitDisplay": "Weekly limit:        [\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2591\u2591] 91% left (resets 11:21 on 13 Nov)",
+      "effectiveStatusVerified": true,
+      "launch": "project launcher with per-process CODEX_HOME and --no-daemon"
+    },
+    "programmer": {
+      "terminal": "term_493e985d-a5b9-4230-942c-edd10b53f8ef",
+      "email": "recuperapiura@gmail.com",
+      "session": "01a1c0ec-8fda-7302-b9d7-51fe494853d6",
+      "directoryDisplay": "~\\orca\\workspaces\\Health Project\\health-programmer",
+      "weeklyLimitDisplay": "Weekly limit:        [\u2588\u2588\u2588\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591\u2591] 15% left (resets 05:32 on 11 Nov)",
+      "effectiveStatusVerified": true,
+      "launch": "project launcher with per-process CODEX_HOME and --no-daemon"
+    }
+  }
+}

@@ -1,5 +1,40 @@
 # Orquestacion Codex de Health Project
 
+## Asignacion vigente — 2026-11-09
+
+El usuario invirtio las cuentas por limites semanales. Esta asignacion sustituye
+las cuentas/handles historicos del resto del documento:
+
+| Rol | Cuenta efectiva /status | Terminal | Session |
+| --- | --- | --- | --- |
+| Arquitecto/coordinador, checkout supervisor | mendozadeafabisa@gmail.com | term_6b053e36-a960-4dd8-a63d-45e6c3b6c24a | 01a1c0ec-8c13-7c30-9456-f646d3873b31 |
+| Programador, worktree health-programmer | recuperapiura@gmail.com | term_493e985d-a5b9-4230-942c-edd10b53f8ef | 01a1c0ec-8fda-7302-b9d7-51fe494853d6 |
+
+Cuota semanal observada el9nov: arquitecto91%, programador15%. Ambos arrancados
+con home por proceso y --no-daemon, sin seleccionar cuentas globalmente ni hacer
+login/logout. start-health-agent.ps1 ahora rechaza ExpectedEmail contrario al rol.
+
+Comandos vigentes:
+
+```powershell
+& 'D:/Mavric/Health Project/scripts/start-health-agent.ps1' -Role architect -WorktreePath 'D:/Mavric/Health Project' -CodexHome 'C:/Users/maxmo/AppData/Roaming/orca/codex-accounts/56f09e5c-eecb-404f-96c1-ac72fa3882f5/home' -ExpectedEmail 'mendozadeafabisa@gmail.com'
+& 'D:/Mavric/Health Project/scripts/start-programmer.ps1' -WorktreePath 'C:/Users/maxmo/orca/workspaces/Health Project/health-programmer' -CodexHome 'C:/Users/maxmo/.codex' -ExpectedEmail 'recuperapiura@gmail.com'
+```
+
+Se uso el lanzamiento personalizado de low-level-topology: terminal create con
+PowerShell y, despues, /status en cada instancia. La CLI agent launch instalada
+no permite elegir cuenta Codex por invocacion. Carpeta/titulo no prueban cuenta;
+tras restaurar/reabrir verificar otra vez identidad efectiva antes de delegar.
+La captura del usuario mostro la discrepancia anterior; su causa no se supone.
+
+Las conversaciones previas se conservan; solo se cerro la instancia efimera propia
+que acababa de abrirse para el reparto anterior y unicamente habia ejecutado/status.
+El worktree conserva87 rutas locales previas. El nuevo programador muestra
+Agents.md none: antes de implementar, su dispatch debe exigir leer expresamente
+AGENTS.md del supervisor y las instrucciones aplicables. Ningun producto modificado.
+Evidencia: produccion/evidencias/CUENTAS_ORCA_20261109.json. Traspaso:
+produccion/TRASPASO_ARQUITECTO_20261109.md.
+
 Registro: 2 de noviembre de 2026. Configuracion y auditoria HP-ORCH-01 cerradas.
 El encargo directo posterior autoriza ejecutar ARQ-01, ARQ-02, QA-01 y continuar
 por dependencias del plan. No autoriza commit, push, integracion en main,

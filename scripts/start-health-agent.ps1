@@ -11,6 +11,14 @@ param(
 # No account selection, login, logout, credential copying, or global config writes.
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+# User assignment, 2026-11-09. A directory or tab label never proves identity.
+$roleEmails = @{
+    architect = 'mendozadeafabisa@gmail.com'
+    programmer = 'recuperapiura@gmail.com'
+}
+if ($ExpectedEmail -ne $roleEmails[$Role]) {
+    throw 'La cuenta solicitada no corresponde a la asignacion vigente de este rol en Health Project.'
+}
 $repositoryRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
 $targetRoot = (Resolve-Path -LiteralPath $WorktreePath).Path
 $accountRoot = (Resolve-Path -LiteralPath $CodexHome).Path

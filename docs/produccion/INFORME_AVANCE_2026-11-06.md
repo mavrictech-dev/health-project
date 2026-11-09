@@ -1,5 +1,11 @@
 # Health Project: avance comprobado al 6 de noviembre de 2026
 
+Actualizacion de cuentas del9nov: el usuario asigno mendozadeafabisa@gmail.com
+al arquitecto y recuperapiura@gmail.com al programador. Nuevas sesiones/status
+verificados, cuotas semanales91%/15% al observarlas. Este cambio sustituye las
+cuentas y cuota0 historicas de abajo; no cambia los resultados tecnicos del6nov.
+Ver TRASPASO_ARQUITECTO_20261109.md y evidencias/CUENTAS_ORCA_20261109.json.
+
 A67 está corregida y aceptada. Bootstrap, login, negocio SQL/HTTP y los recorridos
 live de acceso/SaaS/organización ya tienen evidencia real. **TLS estricto sigue
 pendiente de la elevación de Windows**; el proyecto no está aprobado para producción.
