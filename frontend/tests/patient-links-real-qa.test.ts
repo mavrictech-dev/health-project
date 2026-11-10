@@ -49,7 +49,7 @@ test('browser policy and APIRequestContext guard independently deny writes, fore
  for(const method of ['POST','PUT','PATCH','DELETE'])assert.equal(qa.allowedRequest(method,origin+'/api/patients/'+qa.HUMAN+'/links',policy),false);
  for(const path of ['/api/support','/api/patients/'+qa.HUMAN+'/history','/api/patients/'+qa.HUMAN+'/links?limit=200&offset=0','/api/patients/'+qa.HUMAN+'/links?limit=21&offset=-1','/actuator/health/readiness'])assert.equal(qa.allowedRequest('GET',origin+path,policy),false);
  assert.equal(qa.allowedRequest('GET','http://'+qa.HOSTS.otherHuman+':18300/api/public/context',policy),false);
- let requests=0;const client={origin,policy,identity:{csrfToken:'offline'},context:{request:{fetch:async()=>{requests++;return {};}}}};
+ let requests=0;const client={origin,policy,identity:{csrfToken:'offline'},page:{evaluate:async()=>{requests++;return {status:200,requestId:actor,jsonValid:true,data:{}};}}};
  await assert.rejects(qa.guardedRequest(client,'/api/patients','POST',{}),(e:unknown)=>(e as {code:string}).code==='UNSAFE_REQUEST');assert.equal(requests,0);await qa.guardedRequest(client,'/api/public/context');assert.equal(requests,1);
  let handler:(r:unknown)=>Promise<void>=async()=>{},unsafe=0,continued=0,aborted=0;
  await qa.installBrowserGuard({route:async(_pattern:string,callback:typeof handler)=>{handler=callback;}},policy,()=>{unsafe++;});
@@ -57,6 +57,38 @@ test('browser policy and APIRequestContext guard independently deny writes, fore
   await handler({request:()=>({method:()=>method,url:()=>url}),continue:async()=>{continued++;assert.equal(valid,true);},abort:async()=>{aborted++;assert.equal(valid,false);},get fulfill(){throw Error('Response substitution forbidden');}});
  }
  assert.equal(continued,1);assert.equal(aborted,2);assert.equal(unsafe,2);
+ await handler({request:()=>({method:()=>'GET',url:()=>origin+'/api/public/context'}),continue:async()=>{throw Error('OFFLINE-PRIVATE');},abort:async()=>{throw Error('OFFLINE-PRIVATE');},get fulfill(){throw Error('forbidden');}});assert.equal(unsafe,3);
+});
+test('browser fetch executes same-origin callback with cookies/no-store/redirect guard and own CSRF',async()=>{
+ const origin='http://'+qa.HOSTS.human+':18300',policy={origin,loginAllowed:false,logoutAllowed:true,ids:new Set([qa.HUMAN]),queries:new Set([''])};
+ const savedFetch=globalThis.fetch,savedWindow=Object.getOwnPropertyDescriptor(globalThis,'window');let current=origin,calls=0,fetchOptions:RequestInit|undefined;
+ Object.defineProperty(globalThis,'window',{configurable:true,value:{location:{get origin(){return current;}}}});
+ const page={evaluate:async(fn:(args:unknown)=>unknown,args:unknown)=>fn(args)};
+ const client={origin,policy,identity:{csrfToken:'OFFLINE_CSRF'},page};
+ globalThis.fetch=async(resource,options)=>{calls++;assert.equal(String(resource),'/api/auth/browser/session');fetchOptions=options;return new Response('{}',{status:200,headers:{'X-Request-Id':actor}});};
+ try{
+  const response=await qa.guardedRequest(client,'/api/auth/browser/session','DELETE');assert.equal(response.status(),200);assert.deepEqual(await response.json(),{});assert.equal(response.url(),origin+'/api/auth/browser/session');assert.deepEqual(response.headers(),{'x-request-id':actor});
+  assert.equal(fetchOptions?.credentials,'same-origin');assert.equal(fetchOptions?.cache,'no-store');assert.equal(fetchOptions?.redirect,'error');assert.equal((fetchOptions?.headers as Record<string,string>)['X-CSRF-Token'],'OFFLINE_CSRF');assert.equal('Host' in (fetchOptions?.headers as object),false);assert.equal('Cookie' in (fetchOptions?.headers as object),false);
+  current='http://'+qa.HOSTS.otherHuman+':18300';await assert.rejects(qa.guardedRequest(client,'/api/auth/browser/session'));assert.equal(calls,1);
+  current=origin;for(const status of [401,403]){globalThis.fetch=async()=>new Response('{"status":'+status+'}',{status,headers:{'X-Request-Id':actor}});const negative=await qa.guardedRequest(client,'/api/auth/browser/session');assert.equal(negative.status(),status);assert.equal((await negative.json()).status,status);}
+  globalThis.fetch=async()=>new Response('<html>bad</html>',{status:503});const bad=await qa.guardedRequest(client,'/api/auth/browser/session');assert.equal(bad.status(),503);await assert.rejects(bad.json(),(e:unknown)=>(e as {code:string}).code==='INVALID_RESPONSE');
+ }finally{globalThis.fetch=savedFetch;if(savedWindow)Object.defineProperty(globalThis,'window',savedWindow);else Reflect.deleteProperty(globalThis,'window');}
+ assert.deepEqual(qa.launchOptions(),{channel:'msedge',headless:true,args:['--host-resolver-rules=MAP health.localhost 127.0.0.1, MAP *.health.localhost 127.0.0.1','--no-proxy-server']});
+});
+test('API response observed by browser and adapter deduplicates once, UI adds one; conflicts always fail',async()=>{
+ const origin='http://'+qa.HOSTS.human+':18300',resource='/api/patients/'+qa.HUMAN+'/links?limit=21&offset=0',records=qa.recorder();
+ const client={entry:{tenantId:tenant},identity:{id:actor},origin,policy:{origin,ids:new Set([qa.HUMAN])},page:{evaluate:async()=>({status:200,requestId:actor,jsonValid:true,data:[row()]})}};
+ const browserReply={url:()=>origin+resource,status:()=>200,headers:()=>({'x-request-id':actor}),json:async()=>[row()]};
+ await qa.recordResponse(records,client,browserReply,'human-page');const adapter=await qa.guardedRequest(client,resource);await qa.recordResponse(records,client,adapter,'human-page');assert.equal(records.values().length,1);
+ await qa.recordResponse(records,client,{...browserReply,headers:()=>({'x-request-id':tenant})},'human-ui');assert.equal(records.values().length,2);
+ for(const [changed,phase] of [[{status:()=>404},'human-page'],[{},'other-phase']] as const)await assert.rejects(qa.recordResponse(records,client,{...browserReply,...changed},phase),(e:unknown)=>(e as {code:string}).code==='REQUEST_ID_COLLISION');
+ for(const changed of [{actorId:tenant},{tenantId:actor},{patientId:tenant}])failure('REQUEST_ID_COLLISION',()=>records.add({...records.values()[0],...changed}));
+});
+test('closed diagnostics never serialize messages/stack/URLs or raw and escaped secrets',()=>{
+ const secret='OFFLINE-"-ñ-PRIVATE',escaped=JSON.stringify(secret);
+ const cases:[Error,string][]=[[new Error('net::ERR_NAME_NOT_RESOLVED '+escaped),'DNS'],[new Error('ECONNREFUSED '+secret),'CONNECT'],[Object.assign(new Error('timed out '+secret),{name:'TimeoutError'}),'TIMEOUT'],[new TypeError(secret),'JAVASCRIPT'],[new Error('page.evaluate: ReferenceError '+secret),'JAVASCRIPT'],[new qa.QaFailure('ASSERTION_FAILED'),'ASSERTION'],[new Error(secret),'UNKNOWN']];
+ for(const [error,category] of cases){error.stack='PRIVATE stack '+escaped;const value=qa.diagnostic(error,'public-context');assert.deepEqual(value,{step:'public-context',category});const output=JSON.stringify(value);assert.equal(output.includes(secret),false);assert.equal(output.includes(escaped),false);assert.equal(output.includes('PRIVATE'),false);}
+ assert.deepEqual(qa.diagnostic(new Error(secret),'https://private.invalid/'+secret),{step:'unknown',category:'UNKNOWN'});
 });
 test('requestId records deduplicate real IDs and never admit unknown metadata, emails or forged identity',()=>{
  const record={requestId:actor,status:200,actorId:actor,tenantId:tenant,patientId:qa.HUMAN,phase:'human-page'},r=qa.recorder();r.add(record);r.add({...record});assert.equal(r.values().length,1);

@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-10",
+  "taskId": "task_8fc4de487847",
+  "dispatchId": "ctx_81f27beb2ebc",
+  "status": "FAILED_REVIEWED",
+  "artifactsVerified": 28,
+  "sourceHashesVerified": 695,
+  "inputPinsVerified": 726,
+  "invocations": 1,
+  "rawExit": 1,
+  "runnerPhase": "human-login",
+  "runnerCode": "UNEXPECTED_FAILURE",
+  "checks": 0,
+  "linkReads": 0,
+  "newSessions": 0,
+  "businessDataAndAclConserved": true,
+  "existingHistoryConserved": true,
+  "appProxyActiveAfterClose": 0,
+  "nodeEdgeActiveCount": null,
+  "cleanupLimit": "Node/Edge numeric telemetry absent; no proof asserted from generic failure",
+  "rootCause": "Not determined from closed output",
+  "sourceFinding": "New QA uses APIRequestContext.fetch and omits successful prior QA fixed host resolver/no-proxy flags; earlier proven patient QA uses browser page.evaluate fetch under fixed loopback host mappings. This is a transport hypothesis, not a confirmed incident cause.",
+  "realAuditPositiveProven": false,
+  "additionalOperationalDiagnosticsBySupervisor": 0,
+  "limits": [
+    "No real link read/UI acceptance",
+    "Failed ledgers, report directory and initial captures preserved; no rerun or compensating data mutation"
+  ]
+}

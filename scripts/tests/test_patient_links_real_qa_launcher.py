@@ -10,7 +10,7 @@ def manifest():
     for i,(key,host) in enumerate(L.HOSTS.items(),1):value[key]={'hostname':host,'tenantId':str(i)*8+'-'+str(i)*4+'-'+str(i)*4+'-'+str(i)*4+'-'+str(i)*12,'email':key+'@example.test','password':PRIVATE}
     return value
 def report():
-    return {'schema':'patient-links-real-qa-v1','runId':B.RUN_ID,'mode':'readonly','status':'PASS','checks':sorted(L.CHECKS),'reads':[{'requestId':str(i)*8+'-'+str(i)*4+'-'+str(i)*4+'-'+str(i)*4+'-'+str(i)*12,'status':status,'actorId':None if status==401 else UUID,'tenantId':UUID,'patientId':UUID,'phase':'offline'} for i,status in enumerate([200,401,404],1)],'screenshots':[{'path':'test-results/patient-links-real-qa/'+B.RUN_ID+'/b5-readonly/test-'+str(i)+'.png','sha256':'A'*64} for i in range(8)],'uiPaging21Exercised':False,'inactiveObserved':True,'sqlAuditValidated':False,'businessWrites':0,'apiOrSqlAuditCountInferred':False,'phase':'offline'}
+    return {'schema':'patient-links-real-qa-v1','runId':B.RUN_ID,'mode':'readonly','status':'PASS','checks':sorted(L.CHECKS),'reads':[{'requestId':str(i)*8+'-'+str(i)*4+'-'+str(i)*4+'-'+str(i)*4+'-'+str(i)*12,'status':status,'actorId':None if status==401 else UUID,'tenantId':UUID,'patientId':UUID,'phase':'offline'} for i,status in enumerate([200,401,404],1)],'screenshots':[{'path':'test-results/patient-links-real-qa/'+B.RUN_ID+'/b5-readonly-e3/test-'+str(i)+'.png','sha256':'A'*64} for i in range(8)],'uiPaging21Exercised':False,'inactiveObserved':True,'sqlAuditValidated':False,'businessWrites':0,'apiOrSqlAuditCountInferred':False,'phase':'offline'}
 class FakeOperations:
     def __init__(self):self.events=[];self.reserved=False;self.active=False;self.failure=None;self.safe=None;self.value=report();self.module=Mock();self.module.filter_result.side_effect=lambda response,mode,passwords:B.filter_result(response,mode,passwords)
     def preflight(self,pins):self.events.append('pins')
@@ -30,6 +30,8 @@ class FakeOperations:
         if self.failure:raise self.failure
         return subprocess.CompletedProcess(['not-executed'],0,b'{"control":"runner","status":"passed"}\n',b'')
     def report(self,passwords):assert self.active;return L.validate_report(self.value,passwords)
+    def cleanup_evidence(self):
+        return {'assigned':True,'stopAttempted':True,'activeProcessesAfterStop':0,'jobClosed':True,'processWaited':True,'processDrained':True,'streamsClosed':True,'unassignedProcessKilled':False,'code':'COMPLETE'}
     def finish(self,value):self.events.append('finish');assert not self.active;self.safe=value
 class Tests(unittest.TestCase):
     def failure(self,code,fn):
@@ -44,14 +46,14 @@ class Tests(unittest.TestCase):
         with patch.object(L,'BASE',Path(B.__file__)):module=L.Operations().base()
         self.assertEqual(120,module.TIMEOUT_SECONDS);self.assertEqual(900,B.TIMEOUT_SECONDS);self.assertEqual(L.BASE_SHA,L.sha(B.__file__))
     def test_exact_three_environment_constant_deltas_and_manifest_copy_history(self):
-        old=(T/'B4P1-environment.py').read_bytes();new=(T/'B5P1-environment.py').read_bytes()
-        for a,b in [(b"MANIFEST=TEMP/'B4P1-reviewed-pins.json'",b"MANIFEST=TEMP/'B5P1-reviewed-pins.json'"),(b"LEDGER=PREPARED/'readiness-attempt.json'",b"LEDGER=PREPARED/'B5-readonly-attempt.json'"),(b"COMPLETED=PREPARED/'readiness-completed.json'",b"COMPLETED=PREPARED/'B5-readonly-completed.json'")]:self.assertEqual(1,old.count(a));new=new.replace(b,a)
-        self.assertEqual(old,new);self.assertEqual((T/'B4P1-reviewed-pins.json').read_bytes(),(T/'B5P1-reviewed-pins.json').read_bytes())
-        before=json.loads((T/'B5P1-history-before.json').read_text());self.assertTrue(all(L.sha(p)==pin for p,pin in before.items()))
-        spec=importlib.util.spec_from_file_location('b5_context_inert',T/'B5P1-environment.py');module=importlib.util.module_from_spec(spec)
+        old=(T/'B4P1-environment.py').read_bytes();new=(T/'B5R2-environment.py').read_bytes()
+        for a,b in [(b"MANIFEST=TEMP/'B4P1-reviewed-pins.json'",b"MANIFEST=TEMP/'B5R2-reviewed-pins.json'"),(b"LEDGER=PREPARED/'readiness-attempt.json'",b"LEDGER=PREPARED/'B5-E3-readonly-attempt.json'"),(b"COMPLETED=PREPARED/'readiness-completed.json'",b"COMPLETED=PREPARED/'B5-E3-readonly-completed.json'")]:self.assertEqual(1,old.count(a));new=new.replace(b,a)
+        self.assertEqual(old,new);self.assertEqual((T/'B4P1-reviewed-pins.json').read_bytes(),(T/'B5R2-reviewed-pins.json').read_bytes())
+        before=json.loads((T/'B5R2-history-before.json').read_text());self.assertTrue(all(L.sha(p)==pin for p,pin in before.items()))
+        spec=importlib.util.spec_from_file_location('b5_context_inert',T/'B5R2-environment.py');module=importlib.util.module_from_spec(spec)
         with patch.object(subprocess,'Popen',side_effect=AssertionError):spec.loader.exec_module(module);context=module.managed_environment('bad','bad')
-        self.assertIsNotNone(context);self.assertEqual('B5-readonly-attempt.json',module.LEDGER.name);self.assertEqual('B5-readonly-completed.json',module.COMPLETED.name);self.assertFalse(module.LEDGER.exists())
-        with tempfile.TemporaryDirectory(prefix='B5P1-test-',dir=T) as folder:
+        self.assertIsNotNone(context);self.assertEqual('B5-E3-readonly-attempt.json',module.LEDGER.name);self.assertEqual('B5-E3-readonly-completed.json',module.COMPLETED.name);self.assertFalse(module.LEDGER.exists())
+        with tempfile.TemporaryDirectory(prefix='B5R2-test-',dir=T) as folder:
             ledger=Path(folder)/module.LEDGER.name;module.write_new(ledger,{'status':'STARTED'});before=ledger.read_bytes()
             with self.assertRaises(module.SafeError) as caught:module.write_new(ledger,{'status':'retry'})
             self.assertEqual('PRIOR_ATTEMPT',caught.exception.code);self.assertEqual(before,ledger.read_bytes())
@@ -80,10 +82,10 @@ class Tests(unittest.TestCase):
             self.failure('PATH_SCOPE_CHANGED',lambda:L.Operations().preflight({}))
         with patch.object(L,'__file__',str(L.ROOT/'scripts/run-patient-links-real-qa.py')):
             self.failure('PIN_INVALID',lambda:L.Operations().preflight({}))
-        with tempfile.TemporaryDirectory(prefix='B5P1-test-',dir=T) as folder:
+        with tempfile.TemporaryDirectory(prefix='B5R2-test-',dir=T) as folder:
             p=Path(folder)/'attempt.json';L.write_new(p,{'status':'STARTED'});self.failure('PRIOR_ATTEMPT',lambda:L.write_new(p,{'status':'retry'}))
     def test_cipher_and_helper_pins_precede_decrypt_using_synthetic_files(self):
-        with tempfile.TemporaryDirectory(prefix='B5P1-test-',dir=T) as folder:
+        with tempfile.TemporaryDirectory(prefix='B5R2-test-',dir=T) as folder:
             sealed=Path(folder)/'fake.dpapi';sealed.write_bytes(b'not-dpapi');helper=Path(folder)/'helper.py';helper.write_bytes(b'public-helper-double');base=Mock();base.decrypt_manifest.return_value=json.dumps(manifest()).encode();base.validate_manifest.side_effect=B.validate_manifest
             with patch.multiple(L,SEALED=sealed,HELPER=helper,CIPHER_SHA=hashlib.sha256(b'not-dpapi').hexdigest(),HELPER_SHA=L.sha(helper)):
                 wire,passwords=L.Operations().payload(base);self.assertEqual([PRIVATE]*3,passwords);self.assertIn(PRIVATE.encode(),wire);base.decrypt_manifest.assert_called_once();base.decrypt_manifest.reset_mock();sealed.write_bytes(b'changed');self.failure('MANIFEST_CHANGED',lambda:L.Operations().payload(base));base.decrypt_manifest.assert_not_called()
@@ -99,7 +101,7 @@ class Tests(unittest.TestCase):
         with self.assertRaises(RuntimeError):B.contained_run(['node.exe'],b'synthetic',Path('C:/fake'),{},popen=lambda *a,**kw:process,job_factory=lambda:job)
         process.kill.assert_called_once()
     def test_prerequisite_failure_survives_unchanged_environment_context_teardown(self):
-        ops=FakeOperations();ops.value={'schema':'patient-links-real-qa-v1','runId':B.RUN_ID,'mode':'readonly','status':'FAIL','code':'PREREQUISITE_FAILED','phase':'human-prerequisite','checks':[],'reads':[],'screenshots':[],'uiPaging21Exercised':False,'inactiveObserved':False,'sqlAuditValidated':False,'businessWrites':0,'apiOrSqlAuditCountInferred':False}
+        ops=FakeOperations();ops.value={'schema':'patient-links-real-qa-v1','runId':B.RUN_ID,'mode':'readonly','status':'FAIL','code':'PREREQUISITE_FAILED','phase':'human-prerequisite','diagnostic':{'step':'fixture-lookup','category':'ASSERTION'},'checks':[],'reads':[],'screenshots':[],'uiPaging21Exercised':False,'inactiveObserved':False,'sqlAuditValidated':False,'businessWrites':0,'apiOrSqlAuditCountInferred':False}
         ops.transport=lambda *args:subprocess.CompletedProcess([],1,b'{"control":"runner","status":"failed"}\n',b'')
         @contextlib.contextmanager
         def rewriting_context(*args):
@@ -110,10 +112,10 @@ class Tests(unittest.TestCase):
         ops.managed_environment=rewriting_context
         result=L.execute({'environment':'A'*64,'manifest':'B'*64},ops);self.assertEqual('PREREQUISITE_FAILED',result['code']);self.assertFalse(ops.active)
     def test_preflight_real_hash_checks_paths_missing_inputs_and_no_cipher_read(self):
-        with tempfile.TemporaryDirectory(prefix='B5P1-test-',dir=T) as folder:
+        with tempfile.TemporaryDirectory(prefix='B5R2-test-',dir=T) as folder:
             root=Path(folder);selfpath=root/'scripts/run-patient-links-real-qa.py';runner=root/'frontend/scripts/patient-links-real-qa.cjs';base=root/'scripts/base.py';env=root/'B5P1-environment.py';manifest_path=root/'B5P1-reviewed-pins.json';readiness=root/'readiness.json';helper=root/'helper.py'
             for p in [selfpath,runner,base,env,helper]:p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(b'offline-source')
-            manifest_path.write_bytes((T/'B5P1-reviewed-pins.json').read_bytes());readiness.write_text(json.dumps({'manifestCipherSHA256':L.CIPHER_SHA}))
+            manifest_path.write_bytes((T/'B5R2-reviewed-pins.json').read_bytes());readiness.write_text(json.dumps({'manifestCipherSHA256':L.CIPHER_SHA}))
             pins={'launcher':L.sha(selfpath),'runner':L.sha(runner),'environment':L.sha(env),'manifest':L.sha(manifest_path)}
             with patch.multiple(L,ROOT=root,__file__=str(selfpath),RUNNER=runner,BASE=base,BASE_SHA=L.sha(base),ENV=env,MANIFEST=manifest_path,READINESS=readiness,READINESS_SHA=L.sha(readiness),HELPER=helper,HELPER_SHA=L.sha(helper),LEDGER=root/'attempt.json',COMPLETED=root/'completed.json',REPORT=root/'reports/report.json'),patch.object(L,'imported',side_effect=AssertionError('context/helper imported in preflight')):
                 L.Operations().preflight(pins)
@@ -130,4 +132,54 @@ class Tests(unittest.TestCase):
         for form in (password.encode(),json.dumps(password,ensure_ascii=True)[1:-1].encode(),json.dumps(password,ensure_ascii=False)[1:-1].encode()):
             with self.assertRaises(B.LaunchError) as caught:B.filter_result(subprocess.CompletedProcess([],1,b'',form),'--readonly',[password])
             self.assertEqual('UNSAFE_RUNNER_OUTPUT',caught.exception.code)
+    def test_observed_cleanup_real_kernel_values_before_close_normal_childfail_and_timeout(self):
+        for mode in ('normal','child-fail','timeout','assign-fail','query-fail','close-fail','active-remains','drain-fail','wait-fail','stream-close-fail'):
+            with self.subTest(mode=mode):
+                events=[];kernel=Mock();kernel.CreateJobObjectW.return_value=123;kernel.SetInformationJobObject.return_value=1;kernel.AssignProcessToJobObject.side_effect=lambda *args:events.append('assign') or (0 if mode=='assign-fail' else 1);kernel.TerminateJobObject.side_effect=lambda *args:events.append('stop') or 1;kernel.CloseHandle.side_effect=lambda *args:events.append('close-job') or (0 if mode=='close-fail' else 1)
+                queries=[0]
+                def query(handle,kind,ptr,size,out):
+                    queries[0]+=1;events.append('query-active');ptr._obj.ActiveProcesses=2 if mode=='active-remains' and queries[0]==2 else 0
+                    return 0 if mode=='query-fail' and queries[0]==2 else 1
+                kernel.QueryInformationJobObject.side_effect=query
+                process=Mock();process._handle=456;process.returncode=1 if mode=='child-fail' else 0;process.poll.return_value=None;communications=[0]
+                if mode=='stream-close-fail':process.stdout.close.side_effect=OSError(PRIVATE)
+                def communicate(**kwargs):
+                    communications[0]+=1;events.append('stdin' if 'input' in kwargs else 'drain')
+                    if 'input' in kwargs and mode=='timeout':raise subprocess.TimeoutExpired(['node.exe'],120)
+                    if 'input' not in kwargs and mode=='drain-fail':raise OSError(PRIVATE)
+                    return (b'{"control":"runner","status":"'+(b'failed' if mode=='child-fail' else b'passed')+b'"}\n',b'')
+                process.communicate.side_effect=communicate
+                def wait(**kwargs):
+                    events.append('wait')
+                    if mode=='wait-fail':raise OSError(PRIVATE)
+                    return process.returncode
+                process.wait.side_effect=wait
+                telemetry=L.cleanup_state()
+                def invoke():return L.observed_transport(B,['node.exe','fixed','--readonly'],b'offline-stdin',Path('C:/fake'),{},telemetry,popen=lambda *args,**kwargs:process,kernel=kernel)
+                if mode in ('normal','child-fail'):
+                    value=invoke();self.assertEqual(process.returncode,value.returncode);self.assertEqual('COMPLETE',telemetry['code']);self.assertEqual(0,telemetry['activeProcessesAfterStop']);self.assertTrue(telemetry['jobClosed'] and telemetry['processWaited'] and telemetry['processDrained'] and telemetry['streamsClosed'])
+                else:
+                    with self.assertRaises(Exception):invoke()
+                    if mode=='timeout':self.assertEqual('COMPLETE',telemetry['code']);self.assertEqual(0,telemetry['activeProcessesAfterStop'])
+                    elif mode=='assign-fail':self.assertEqual('ASSIGN_FAILED',telemetry['code']);self.assertIsNone(telemetry['activeProcessesAfterStop']);self.assertNotIn('stdin',events);self.assertTrue(telemetry['unassignedProcessKilled'])
+                    elif mode=='query-fail':self.assertEqual('ACTIVE_QUERY_FAILED',telemetry['code']);self.assertIsNone(telemetry['activeProcessesAfterStop'])
+                    elif mode=='active-remains':self.assertEqual('ACTIVE_REMAINS',telemetry['code']);self.assertEqual(2,telemetry['activeProcessesAfterStop'])
+                    else:self.assertEqual({'close-fail':'JOB_CLOSE_FAILED','drain-fail':'PROCESS_DRAIN_FAILED','wait-fail':'PROCESS_WAIT_FAILED','stream-close-fail':'STREAM_CLOSE_FAILED'}[mode],telemetry['code'])
+                if mode!='assign-fail':self.assertLess(events.index('assign'),events.index('stdin'));self.assertLess(max(i for i,v in enumerate(events) if v=='query-active'),events.index('close-job'))
+                self.assertNotIn(PRIVATE,json.dumps(telemetry));L.validate_cleanup(telemetry)
+    def test_closed_diagnostic_schema_and_cleanup_contradictions_never_pass(self):
+        for value in [{'step':PRIVATE,'category':'UNKNOWN'},{'step':'public-context','category':PRIVATE},{'step':'public-context','category':'DNS','message':PRIVATE}]:self.failure('OUTPUT_INVALID',lambda:L.validate_diagnostic(value))
+        self.assertEqual({'step':'public-context','category':'CONNECT'},L.validate_diagnostic({'step':'public-context','category':'CONNECT'}))
+        for value in [{**L.cleanup_state(),'code':'COMPLETE'},{**L.cleanup_state(),'activeProcessesAfterStop':0},{**L.cleanup_state(),'code':PRIVATE}]:self.failure('OUTPUT_INVALID',lambda:L.validate_cleanup(value))
+        ops=FakeOperations();ops.cleanup_evidence=lambda:L.cleanup_state();result=L.execute({'environment':'A'*64,'manifest':'B'*64},ops);self.assertEqual('FAIL',result['status']);self.assertEqual('PROCESS_CLEANUP_FAILED',result['code']);self.assertIsNone(result['nodeCleanup']['activeProcessesAfterStop'])
+    def test_report_diagnostic_reaches_safe_result_and_never_emits_raw_exception(self):
+        ops=FakeOperations();ops.value={'schema':'patient-links-real-qa-v1','runId':B.RUN_ID,'mode':'readonly','status':'FAIL','code':'UNEXPECTED_FAILURE','phase':'human-login','diagnostic':{'step':'navigation-access','category':'DNS'},'checks':[],'reads':[],'screenshots':[],'uiPaging21Exercised':False,'inactiveObserved':False,'sqlAuditValidated':False,'businessWrites':0,'apiOrSqlAuditCountInferred':False}
+        ops.transport=lambda *args:subprocess.CompletedProcess([],1,b'{"control":"runner","status":"failed"}\n',b'')
+        result=L.execute({'environment':'A'*64,'manifest':'B'*64},ops);self.assertEqual('FAIL',result['status']);self.assertEqual({'step':'navigation-access','category':'DNS'},result['diagnostic']);self.assertEqual(0,result['nodeCleanup']['activeProcessesAfterStop'])
+        for value in [{'step':'navigation-access','category':PRIVATE},{'step':'navigation-access','category':'DNS','stack':PRIVATE}]:
+            modified=dict(ops.value);modified['diagnostic']=value;self.failure('UNSAFE_RUNNER_OUTPUT',lambda:L.validate_report(modified,[PRIVATE]))
+        modified=dict(ops.value);modified['diagnostic']={'step':'navigation-access','category':'UNREVIEWED'};self.failure('OUTPUT_INVALID',lambda:L.validate_report(modified,[]))
+        out,err=io.StringIO(),io.StringIO()
+        with patch.object(L,'execute',side_effect=RuntimeError(PRIVATE)),contextlib.redirect_stdout(out),contextlib.redirect_stderr(err):self.assertEqual(1,L.main(['--execute-readonly']))
+        self.assertNotIn(PRIVATE,out.getvalue()+err.getvalue());self.assertEqual('',err.getvalue());self.assertEqual('EXECUTION_FAILED',json.loads(out.getvalue())['code'])
 if __name__=='__main__':unittest.main(verbosity=2)

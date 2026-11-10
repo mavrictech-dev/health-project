@@ -1,5 +1,45 @@
 # Decisiones y contratos de integracion
 
+## D-87.Z: R2 integrada offline; nueva QA real E3, 2026-11-10
+
+R2 task_b571f0e96469/ctx_abcd60b65a34: supervisor verifica 51 artefactos,
+695 fuentes, 726 pines y 56 historicos E1/E2, integra solo cuatro herramientas
+por SHA y comprueba check/106 frontend/17 Python PASS en root. Transporte browser
+same-origin con guardas readonly, diagnosticos cerrados y Job accounting antes
+de cerrar handle; contexto nuevo con tres constantes y manifest identico.
+Dos fallos unitarios iniciales conservados. Evidencia
+VINCULOS_QA_CORRECCION_R2_20261110.json. Sin DPAPI/SQL/HTTP/Edge/probes reales.
+
+E2 task_8fc4de487847/ctx_81f27beb2ebc permanece FALLIDA, REVISADA:
+human-login/UNEXPECTED_FAILURE, cero lecturas/sesiones nuevas; negocio/ACL e
+historia conservados, app/proxy Jobs0. Conteo Node/Edge no probado y causa
+indeterminada. VINCULOS_QA_FALLO_E2_20261110.json conserva limites y artefactos.
+Siguiente E3 segun PAC-01-B5-E3.md: una QA real readonly en namespace nuevo,
+cuatro consultas admin de evidencia y cleanup numerico cerrado. No implica
+aprobar QA real, produccion o todo PAC-01 desde los dobles offline.
+
+## D-87.Y: E2fallida revisada; R2solo QAoffline, 2026-11-10
+
+R2 delegada task_b571f0e96469 / ctx_abcd60b65a34, followUpOf
+ctx_81f27beb2ebc. Recibo recuperado sin duplicar envio: input_accepted,
+agente live en terminal retenida term_7286bcc6-6224-4d5f-a389-b06a09939ca3.
+Supervisor espera entrega para revision independiente; E3 no ejecutada.
+
+msg_135970ff37d8/task_8fc4de487847/ctx_81f27beb2ebc failed:1invocacionraw1,
+human-login/UNEXPECTED_FAILURE,0checks/lecturas/sesionesnuevas. Supervisor
+congela28artefactos/695SHA/726pines ycontrasta4queries readonly: negocio/ACL e
+historia iguales, READauditnuevo0, app/proxyJobs0. Node/Edge0no probado por
+resumen generico; no inventar ese conteo. Sin positivoAPI/UI/audit. Evidencia
+VINCULOS_QA_FALLO_E2_20261110.json. E2permaneceFALLIDA, sin repetirla ni borrar
+sus diarios/directorio,0diagnosticos operativos adicionales por supervisor.
+
+R2segunPAC-01-B5-R2.md prepara4herramientas QA: transporte browserfetch+flags
+loopback usadosporQA A previa (hipotesis, causaactualnoexpuesta), categorias/
+pasos cerrados sin secretos ycleanuptelemetry observable viajobfactory. Namespace
+E3 nuevo fijo ycontextocopia3constantes preservanE1/E2; no ejecucion enR2.
+No producto, TLSconfig, datos, SQL oNativeprobes en esta correccionoffline.
+
+
 ## D-87.X: B5P1+R1 aceptadas; E2 readonly real y auditoria, 2026-11-10
 
 R1msg_3710c4373267/task_5b68545267fc/ctx_2954143ce013 succeeded, delta solo
@@ -23,6 +63,8 @@ revocadas, auditLOGIN/LOGOUT previstos; no esperar auth/audit globales iguales.
 Sinretry/config/certificados/servicios o diagnosticoextra; siFAIL volver a
 review sin compensar. E1cerrada ytarget/data/projectscope invariantes. Nada
 habilita produccion, escrituras de vinculos o completar todoPAC-01.
+
+Herramientas/contratoE2 publicados ba97e23c06b2563d20574d54154599fbc251be6c, remotoSHA confirmado. E2delegada task_8fc4de487847/ctx_81f27beb2ebc, follow_up ready al mismo programadorretenido. Supervisor sin SQL/API/navegador concurrente duranteQA exclusiva; espera resultadoOrca para revisar evidencias reales.
 
 ## D-87.W: B5P1 revision y correccion de prueba de checkout, 2026-11-10
 

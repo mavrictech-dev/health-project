@@ -1,5 +1,23 @@
 # Revisiones del supervisor
 
+## B5R2 aceptada offline; E2 fallida preservada, 2026-11-10
+
+R2 task_b571f0e96469/ctx_abcd60b65a34: supervisor verifica 51 artefactos,
+695 fuentes, 726 pines y 56 historicos E1/E2, integra solo cuatro herramientas
+por SHA y comprueba check/106 frontend/17 Python PASS en root. Transporte browser
+same-origin con guardas readonly, diagnosticos cerrados y Job accounting antes
+de cerrar handle; contexto nuevo con tres constantes y manifest identico.
+Dos fallos unitarios iniciales conservados. Evidencia
+VINCULOS_QA_CORRECCION_R2_20261110.json. Sin DPAPI/SQL/HTTP/Edge/probes reales.
+
+E2 task_8fc4de487847/ctx_81f27beb2ebc permanece FALLIDA, REVISADA:
+human-login/UNEXPECTED_FAILURE, cero lecturas/sesiones nuevas; negocio/ACL e
+historia conservados, app/proxy Jobs0. Conteo Node/Edge no probado y causa
+indeterminada. VINCULOS_QA_FALLO_E2_20261110.json conserva limites y artefactos.
+Siguiente E3 segun PAC-01-B5-E3.md: una QA real readonly en namespace nuevo,
+cuatro consultas admin de evidencia y cleanup numerico cerrado. No implica
+aprobar QA real, produccion o todo PAC-01 desde los dobles offline.
+
 ## B5P1+R1: INTEGRADAS Y VALIDADAS OFFLINE, 2026-11-10
 
 47+17artefactos revisados,691SHA/726pines y687anteriores preservados. R1solo
