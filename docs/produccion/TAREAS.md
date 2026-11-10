@@ -54,7 +54,9 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | PAC-01.B5.P1.R1 | Programador recuperapiura; revision supervisor | ReviewP1 | VALIDADA E INTEGRADA | task_5b68545267fc / ctx_2954143ce013; D-87.X |Solo testscope, paths explicitos; suite14Python enrootPASS;0deltaotras690 |
 | PAC-01.B5.E2 | Programador recuperapiura; revision supervisor | P1+R1 integradas/revisadas | FALLIDA, REVISADA | task_8fc4de487847 / ctx_81f27beb2ebc; VINCULOS_QA_FALLO_E2_20261110.json |human-loginraw1/UNEXPECTED,0lecturas/sesiones;695SHA/726pines/negocio conservados, nodecleanupcountno probado |
 | PAC-01.B5.R2 | Programador recuperapiura; revision supervisor | E2failed revisada | VALIDADA E INTEGRADA OFFLINE | task_b571f0e96469 / ctx_abcd60b65a34; PAC-01-B5-R2.md |4herramientasQA: browsertransport/diagnostico/cleanuptelemetry ynamespaceE3; solooffline |
-| PAC-01.B5.E3 | Programador recuperapiura; revision supervisor | R2 revisada/integrada | LISTA | PAC-01-B5-E3.md; D-87.Z | UNA QA real readonly con correlacion audit y cleanup medido; E2 preservada |
+| PAC-01.B5.E3 | Programador recuperapiura; revision supervisor | R2 revisada/integrada | FALLIDA, REVISADA | task_90e714865b19 / ctx_c5fefc021198; VINCULOS_QA_FALLO_E3_20261110.json | cookie-validation/SESSION_MISMATCH,0lecturas; sesion1 revocada, negocio/historia iguales y cleanup medido0 |
+| PAC-01.B5.R3 | Programador recuperapiura; revision supervisor | E3 fallida revisada | VALIDADA E INTEGRADA OFFLINE | task_a96d20ae95f1 / ctx_a3cf0f3b75a2; PAC-01-B5-R3.md; D-87.AA | Cookie URL /api/ y regresion, namespace E4 nuevo; solo offline |
+| PAC-01.B5.E4 | Programador recuperapiura; revision supervisor | R3 revisada/integrada | LISTA | PAC-01-B5-E4.md; D-87.AB | UNA QA real readonly, epoch nuevo, audit y cleanup medido; E2/E3 preservadas |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
 | CLI-01 | Programador | PAC-01, AGE-01 | POR_VERIFICAR | — | Historia entre sedes |
 | ESP-01 | Programador | CLI-01 | POR_VERIFICAR | — | Graficos persistentes |

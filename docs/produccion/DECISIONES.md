@@ -1,6 +1,54 @@
 # Decisiones y contratos de integracion
 
+## D-87.AB: R3 integrada offline; QA real E4 separada, 2026-11-10
+
+R3 task_a96d20ae95f1/ctx_a3cf0f3b75a2 aceptada: supervisor contrasta 33
+artefactos/695 fuentes/726 pines/141 historicos, integra cuatro fuentes por SHA,
+check/107 frontend/17 Python PASS. Helper cookie consulta /api/ y exige HttpOnly;
+regresion rechaza la consulta raiz. Resto solo namespace/contexto E4 de tres
+constantes con manifest identico; transporte/guardas/cleanup intactos. Evidencia
+VINCULOS_QA_CORRECCION_R3_20261110.json. Ningun arranque/red/SQL/DPAPI real en R3.
+
+E3 task_90e714865b19/ctx_c5fefc021198 FALLIDA, REVISADA: una ejecucion raw1,
+SESSION_MISMATCH/cookie-validation, cero lecturas, una sesion nueva/revocada.
+29 artefactos/695 fuentes/726 pines/106 historicos contrastados; negocio/ACL e
+historia iguales, cleanup Node/Edge/app/proxy medido0. Defecto de consulta cookie
+consistente con fallo confirmado usando filtro Playwright puro, sin navegador.
+VINCULOS_QA_FALLO_E3_20261110.json. E2/E3 no se transforman en PASS desde modelos.
+Siguiente UNA QA real readonly E4 segun PAC-01-B5-E4.md, epoch fresco y cuatro
+queries admin de conservacion/correlacion, sin reintentos o escrituras de negocio.
+
+## D-87.AA: E3 fallida revisada; correccion de alcance de cookie, 2026-11-10
+
+R3 delegada task_a96d20ae95f1 / ctx_a3cf0f3b75a2 como follow_up del programador
+retenido. No nueva ejecucion real hasta review; supervisor preserva fuentes.
+
+task_90e714865b19/ctx_c5fefc021198 failed, msg_fb546901b79c: una ejecucion
+raw1/SESSION_MISMATCH, human-login/cookie-validation/ASSERTION, cero lecturas.
+Supervisor contrasta 29 artefactos/695 fuentes/726 pines/106 historicos, cuatro
+queries raw0, negocio/ACL/historia iguales y cleanup medido Node/Edge/app/proxy0.
+Una sesion nueva/revocada y login/logout1; unexpectedNewSessions1 se conserva:
+el template la compara con actores de lecturas observadas, aqui conjunto vacio.
+No evidencia positiva API/UI/audit de lecturas ni reintento de E3.
+
+Backend cookie Path=/api; QA nueva consulta context.cookies(origin), que filtra
+para raiz /. QA previa aceptada consulta origin+'/api/'. Supervisor verifica
+funcion pura filterCookies de Playwright instalado con una cookie sintetica:
+raiz0/api1, sin navegador/red/SQL. Defecto determinista de scope en herramienta,
+consistente con paso fallido; no inspeccion de cookies reales ni atribucion de
+causa al E2 anterior. VINCULOS_QA_FALLO_E3_20261110.json conserva evidencia.
+
+R3 segun PAC-01-B5-R3.md: cuatro herramientas QA, corregir consulta a /api/ con
+regresion significativa; nuevo namespace/contexto E4 de tres constantes, resto
+R2 intacto. Solo offline, sin secretos, procesos operativos, servicios o QA real;
+E4 requiere revision e integracion y encargo posterior. Misma pareja/Run.
+
 ## D-87.Z: R2 integrada offline; nueva QA real E3, 2026-11-10
+
+Publicacion revisada be8c03c5d0c9f6a1c0b9e607e683cb3251217734,
+origin/health/production-wave0 confirmado. E3 delegada task_90e714865b19 /
+ctx_c5fefc021198 como follow_up del programador retenido; supervisor sin trafico
+SQL/API/browser concurrente durante QA exclusiva. Espera entrega Orca para review.
 
 R2 task_b571f0e96469/ctx_abcd60b65a34: supervisor verifica 51 artefactos,
 695 fuentes, 726 pines y 56 historicos E1/E2, integra solo cuatro herramientas

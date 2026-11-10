@@ -1,0 +1,41 @@
+{
+  "taskId": "task_a96d20ae95f1",
+  "dispatchId": "ctx_a3cf0f3b75a2",
+  "artifactsVerified": 33,
+  "workerSourcesVerified": 695,
+  "outsideOwnershipUnchanged": 691,
+  "pinsVerified": 726,
+  "historyFilesVerified": 141,
+  "contextExactThreeConstants": true,
+  "integratedSources": {
+    "frontend/scripts/patient-links-real-qa.cjs": "D4FE45D372AC9573607145DE92A76AFC0D3407DE96B8740C49DFBEC7A057DD04",
+    "frontend/tests/patient-links-real-qa.test.ts": "8F904B1AED329EEB66A7CF43F9CA6EFFAE859F315CE108F513EEBBD682572C2A",
+    "scripts/run-patient-links-real-qa.py": "5E388E6F25241A9597B5C31C93DD59310A534A71E9FF869D43FFD814E50ECE10",
+    "scripts/tests/test_patient_links_real_qa_launcher.py": "ECCDD39DC393852E82AB5782091C29A71DC12E6DE351FB5EE258252725217549"
+  },
+  "review": "Cookie helper used by login queries same-origin /api/ with HttpOnly required. Test rejects old root query, missing/foreign/non-HttpOnly metadata. Remaining diff only fixed E4 namespace/context; base transport, guards, diagnostics and cleanup unchanged. Real corrected run pending.",
+  "date": "2026-11-10",
+  "status": "VALIDATED_AND_INTEGRATED_OFFLINE",
+  "independentFrontendTests": 107,
+  "independentPythonTests": 17,
+  "independentTypecheck": "PASS",
+  "independentCommandExits": [
+    0,
+    0,
+    0
+  ],
+  "workerRootQueryMutantRejected": true,
+  "realQAExecuted": false,
+  "contextSHA256": "2427567B83990FB41701E733BBD9819CBD52E901913B006C6D4781F4AB427C1B",
+  "manifestSHA256": "6BF5A98784DC300D3062449BDDEC7E66D05814FF3BD6EB29E2CDC1B911E35FA6",
+  "limits": [
+    "Offline helper tests do not prove corrected real login or links API/UI",
+    "No operational DPAPI, SQL, HTTP, Edge, service changes or native probes during R3 review",
+    "E2 and E3 remain FAILED; E4 requires separate reviewed exclusive execution"
+  ],
+  "independentLogs": {
+    "supervisor-check.log": "F9387A8AA616DBB09B1A5EC09F5F9BC424A1165258E3AAA5C27316B6CF144BC4",
+    "supervisor-python.log": "E3127C77FE83439CFD835A358533DA0A49DA12B7AAF4DA9C403C2690CF4B673B",
+    "supervisor-unit.log": "9DC9BD1DE48053A76E4BE77A84FA2D07F771091D28E91CFA2D6366F0B07E23A8"
+  }
+}

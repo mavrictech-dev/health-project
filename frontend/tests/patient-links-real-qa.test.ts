@@ -9,6 +9,28 @@ const manifest=()=>({schema:'health-patients-real-qa-v1',qaDatabase:'health_proj
 const row=(n=0)=>({tenantId:tenant,patientId:qa.HUMAN,userId:`aaaaaaaa-aaaa-aaaa-aaaa-${String(n).padStart(12,'0')}`,userName:'Historical',relationship:'',active:false,scopes:['UNKNOWN','UNKNOWN','DOCUMENTS']});
 function failure(code:string,fn:()=>unknown){assert.throws(fn,(error:unknown)=>(error as {code:string}).code===code&&!String(error).includes('secret'));}
 
+test('session cookie validation queries the exact same-origin API path with HttpOnly required',async()=>{
+ const origin='http://'+qa.HOSTS.human+':18300';
+ type CookieMetadata={name:string;httpOnly:boolean;path:string};
+ const session:CookieMetadata={name:'health_session',httpOnly:true,path:'/api'};
+ const check=async(cookies:CookieMetadata[],accepted:boolean)=>{
+  const calls:string[]=[];
+  const context={cookies:async(url:string)=>{calls.push(url);return cookies.filter(cookie=>new URL(url).origin===origin&&new URL(url).pathname.startsWith(cookie.path));}};
+  if(accepted)await qa.checkSessionCookie(context,origin);
+  else await assert.rejects(qa.checkSessionCookie(context,origin),(error:unknown)=>(error as {code:string}).code==='SESSION_MISMATCH');
+  assert.deepEqual(calls,[origin+'/api/']);
+ };
+ await check([session],true);
+ await check([],false);
+ await check([{...session,name:'other_session'}],false);
+ await check([{...session,httpOnly:false}],false);
+ // The path-filtering double excludes /api cookies from a root URL.
+ assert.equal(new URL(origin).pathname.startsWith(session.path),false);
+ const calls:string[]=[];
+ await assert.rejects(qa.checkSessionCookie({cookies:async(url:string)=>{calls.push(url);return new URL(url).origin===origin?[session]:[];}},'http://'+qa.HOSTS.otherHuman+':18300'),(error:unknown)=>(error as {code:string}).code==='SESSION_MISMATCH');
+ assert.deepEqual(calls,['http://'+qa.HOSTS.otherHuman+':18300/api/']);
+});
+
 test('real links runner import is inert: no filesystem, Playwright, process or network modules loaded',()=>{
  const file=require.resolve('../scripts/patient-links-real-qa.cjs'),Module=require('node:module'),original=Module._load;
  delete require.cache[file];

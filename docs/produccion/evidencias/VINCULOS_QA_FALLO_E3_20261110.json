@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-10",
+  "taskId": "task_90e714865b19",
+  "dispatchId": "ctx_c5fefc021198",
+  "status": "FAILED_REVIEWED",
+  "artifactsVerified": 29,
+  "sourceHashesVerified": 695,
+  "inputPinsVerified": 726,
+  "historyFilesVerified": 106,
+  "launcherInvocations": 1,
+  "rawExit": 1,
+  "runnerCode": "SESSION_MISMATCH",
+  "runnerPhase": "human-login",
+  "diagnostic": {
+    "step": "cookie-validation",
+    "category": "ASSERTION"
+  },
+  "checks": 0,
+  "linkReads": 0,
+  "newSessions": 1,
+  "newSessionsRevoked": 1,
+  "businessAndAclConserved": true,
+  "existingHistoryConserved": true,
+  "protectedServicesConserved": true,
+  "nodeEdgeActiveAfterStop": 0,
+  "appActiveAfterClose": 0,
+  "proxyActiveAfterClose": 0,
+  "realReadAuditPositiveProven": false,
+  "sourceFinding": {
+    "serverCookiePath": "/api",
+    "runnerCookieQuery": "origin root /",
+    "priorAcceptedQaCookieQuery": "origin + /api/",
+    "installedPlaywrightFilterSHA256": "2325CA4C1C83070E89DC49FB82525508F0A68E0CF12E2A624277968DA216B7E0",
+    "pureInstalledFilterExperiment": {
+      "rootCookieCount": 0,
+      "apiCookieCount": 1,
+      "syntheticOnly": true,
+      "browserRuns": 0,
+      "networkRequests": 0
+    },
+    "assessment": "Deterministic QA cookie URL-scope defect, consistent with the observed cookie-validation failure after successful session validation. Corrected real run is still pending; no operational cookie inspection performed."
+  },
+  "limits": [
+    "E3 remains FAILED; no positive API/UI/read-audit acceptance",
+    "No additional SQL, HTTP, browser, DPAPI or service operations during supervisor review",
+    "unexpectedNewSessions=1 is retained: template matches sessions only to observed link-read actors; this failed run has zero observed reads, not proof of an unauthorized login",
+    "Failed E3 namespace and all E1/E2/R2 artifacts preserved"
+  ]
+}

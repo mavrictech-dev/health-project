@@ -1,5 +1,23 @@
 # Revisiones del supervisor
 
+## B5R3 integrada offline; E3 fallida preservada, 2026-11-10
+
+R3 task_a96d20ae95f1/ctx_a3cf0f3b75a2 aceptada: supervisor contrasta 33
+artefactos/695 fuentes/726 pines/141 historicos, integra cuatro fuentes por SHA,
+check/107 frontend/17 Python PASS. Helper cookie consulta /api/ y exige HttpOnly;
+regresion rechaza la consulta raiz. Resto solo namespace/contexto E4 de tres
+constantes con manifest identico; transporte/guardas/cleanup intactos. Evidencia
+VINCULOS_QA_CORRECCION_R3_20261110.json. Ningun arranque/red/SQL/DPAPI real en R3.
+
+E3 task_90e714865b19/ctx_c5fefc021198 FALLIDA, REVISADA: una ejecucion raw1,
+SESSION_MISMATCH/cookie-validation, cero lecturas, una sesion nueva/revocada.
+29 artefactos/695 fuentes/726 pines/106 historicos contrastados; negocio/ACL e
+historia iguales, cleanup Node/Edge/app/proxy medido0. Defecto de consulta cookie
+consistente con fallo confirmado usando filtro Playwright puro, sin navegador.
+VINCULOS_QA_FALLO_E3_20261110.json. E2/E3 no se transforman en PASS desde modelos.
+Siguiente UNA QA real readonly E4 segun PAC-01-B5-E4.md, epoch fresco y cuatro
+queries admin de conservacion/correlacion, sin reintentos o escrituras de negocio.
+
 ## B5R2 aceptada offline; E2 fallida preservada, 2026-11-10
 
 R2 task_b571f0e96469/ctx_abcd60b65a34: supervisor verifica 51 artefactos,

@@ -10,7 +10,7 @@ def manifest():
     for i,(key,host) in enumerate(L.HOSTS.items(),1):value[key]={'hostname':host,'tenantId':str(i)*8+'-'+str(i)*4+'-'+str(i)*4+'-'+str(i)*4+'-'+str(i)*12,'email':key+'@example.test','password':PRIVATE}
     return value
 def report():
-    return {'schema':'patient-links-real-qa-v1','runId':B.RUN_ID,'mode':'readonly','status':'PASS','checks':sorted(L.CHECKS),'reads':[{'requestId':str(i)*8+'-'+str(i)*4+'-'+str(i)*4+'-'+str(i)*4+'-'+str(i)*12,'status':status,'actorId':None if status==401 else UUID,'tenantId':UUID,'patientId':UUID,'phase':'offline'} for i,status in enumerate([200,401,404],1)],'screenshots':[{'path':'test-results/patient-links-real-qa/'+B.RUN_ID+'/b5-readonly-e3/test-'+str(i)+'.png','sha256':'A'*64} for i in range(8)],'uiPaging21Exercised':False,'inactiveObserved':True,'sqlAuditValidated':False,'businessWrites':0,'apiOrSqlAuditCountInferred':False,'phase':'offline'}
+    return {'schema':'patient-links-real-qa-v1','runId':B.RUN_ID,'mode':'readonly','status':'PASS','checks':sorted(L.CHECKS),'reads':[{'requestId':str(i)*8+'-'+str(i)*4+'-'+str(i)*4+'-'+str(i)*4+'-'+str(i)*12,'status':status,'actorId':None if status==401 else UUID,'tenantId':UUID,'patientId':UUID,'phase':'offline'} for i,status in enumerate([200,401,404],1)],'screenshots':[{'path':'test-results/patient-links-real-qa/'+B.RUN_ID+'/b5-readonly-e4/test-'+str(i)+'.png','sha256':'A'*64} for i in range(8)],'uiPaging21Exercised':False,'inactiveObserved':True,'sqlAuditValidated':False,'businessWrites':0,'apiOrSqlAuditCountInferred':False,'phase':'offline'}
 class FakeOperations:
     def __init__(self):self.events=[];self.reserved=False;self.active=False;self.failure=None;self.safe=None;self.value=report();self.module=Mock();self.module.filter_result.side_effect=lambda response,mode,passwords:B.filter_result(response,mode,passwords)
     def preflight(self,pins):self.events.append('pins')
@@ -46,14 +46,18 @@ class Tests(unittest.TestCase):
         with patch.object(L,'BASE',Path(B.__file__)):module=L.Operations().base()
         self.assertEqual(120,module.TIMEOUT_SECONDS);self.assertEqual(900,B.TIMEOUT_SECONDS);self.assertEqual(L.BASE_SHA,L.sha(B.__file__))
     def test_exact_three_environment_constant_deltas_and_manifest_copy_history(self):
-        old=(T/'B4P1-environment.py').read_bytes();new=(T/'B5R2-environment.py').read_bytes()
-        for a,b in [(b"MANIFEST=TEMP/'B4P1-reviewed-pins.json'",b"MANIFEST=TEMP/'B5R2-reviewed-pins.json'"),(b"LEDGER=PREPARED/'readiness-attempt.json'",b"LEDGER=PREPARED/'B5-E3-readonly-attempt.json'"),(b"COMPLETED=PREPARED/'readiness-completed.json'",b"COMPLETED=PREPARED/'B5-E3-readonly-completed.json'")]:self.assertEqual(1,old.count(a));new=new.replace(b,a)
-        self.assertEqual(old,new);self.assertEqual((T/'B4P1-reviewed-pins.json').read_bytes(),(T/'B5R2-reviewed-pins.json').read_bytes())
-        before=json.loads((T/'B5R2-history-before.json').read_text());self.assertTrue(all(L.sha(p)==pin for p,pin in before.items()))
-        spec=importlib.util.spec_from_file_location('b5_context_inert',T/'B5R2-environment.py');module=importlib.util.module_from_spec(spec)
+        old=(T/'B4P1-environment.py').read_bytes();new=(T/'B5R3-environment.py').read_bytes()
+        for a,b in [(b"MANIFEST=TEMP/'B4P1-reviewed-pins.json'",b"MANIFEST=TEMP/'B5R3-reviewed-pins.json'"),(b"LEDGER=PREPARED/'readiness-attempt.json'",b"LEDGER=PREPARED/'B5-E4-readonly-attempt.json'"),(b"COMPLETED=PREPARED/'readiness-completed.json'",b"COMPLETED=PREPARED/'B5-E4-readonly-completed.json'")]:self.assertEqual(1,old.count(a));new=new.replace(b,a)
+        self.assertEqual(old,new);self.assertEqual((T/'B4P1-reviewed-pins.json').read_bytes(),(T/'B5R3-reviewed-pins.json').read_bytes())
+        before=json.loads((T/'B5R3-history-before.json').read_text());self.assertTrue(all(L.sha(p)==pin for p,pin in before.items()))
+        spec=importlib.util.spec_from_file_location('b5_context_inert',T/'B5R3-environment.py');module=importlib.util.module_from_spec(spec)
         with patch.object(subprocess,'Popen',side_effect=AssertionError):spec.loader.exec_module(module);context=module.managed_environment('bad','bad')
-        self.assertIsNotNone(context);self.assertEqual('B5-E3-readonly-attempt.json',module.LEDGER.name);self.assertEqual('B5-E3-readonly-completed.json',module.COMPLETED.name);self.assertFalse(module.LEDGER.exists())
-        with tempfile.TemporaryDirectory(prefix='B5R2-test-',dir=T) as folder:
+        self.assertIsNotNone(context);self.assertEqual('B5-E4-readonly-attempt.json',module.LEDGER.name);self.assertEqual('B5-E4-readonly-completed.json',module.COMPLETED.name);self.assertFalse(module.LEDGER.exists())
+        self.assertEqual(T/'B5R3-environment.py',L.ENV);self.assertEqual(T/'B5R3-reviewed-pins.json',L.MANIFEST)
+        self.assertEqual('B5-E4-browser-attempt.json',L.LEDGER.name);self.assertEqual('B5-E4-browser-completed.json',L.COMPLETED.name)
+        self.assertEqual('b5-readonly-e4',L.REPORT.parent.name)
+        for p in (module.LEDGER,module.COMPLETED,L.LEDGER,L.COMPLETED,L.REPORT.parent):self.assertFalse(p.exists())
+        with tempfile.TemporaryDirectory(prefix='B5R3-test-',dir=T) as folder:
             ledger=Path(folder)/module.LEDGER.name;module.write_new(ledger,{'status':'STARTED'});before=ledger.read_bytes()
             with self.assertRaises(module.SafeError) as caught:module.write_new(ledger,{'status':'retry'})
             self.assertEqual('PRIOR_ATTEMPT',caught.exception.code);self.assertEqual(before,ledger.read_bytes())
@@ -73,6 +77,7 @@ class Tests(unittest.TestCase):
             value=report();value.update(changes)
             with self.assertRaises(L.Failure):L.validate_report(value,[PRIVATE])
         value=report();value['reads'].append(value['reads'][0]);self.failure('OUTPUT_INVALID',lambda:L.validate_report(value,[PRIVATE]))
+        value=report();value['screenshots'][0]['path']=value['screenshots'][0]['path'].replace('b5-readonly-e4','b5-readonly-e3');self.failure('OUTPUT_INVALID',lambda:L.validate_report(value,[PRIVATE]))
         for stdout,stderr in [(b'{"control":"runner","status":"passed"}\n'+PRIVATE.encode(),b''),(b'{"control":"runner","status":"passed"}\n',PRIVATE.encode())]:
             with self.assertRaises(B.LaunchError) as caught:B.filter_result(subprocess.CompletedProcess([],0,stdout,stderr),'--readonly',[PRIVATE])
             self.assertEqual('UNSAFE_RUNNER_OUTPUT',caught.exception.code)
@@ -82,10 +87,10 @@ class Tests(unittest.TestCase):
             self.failure('PATH_SCOPE_CHANGED',lambda:L.Operations().preflight({}))
         with patch.object(L,'__file__',str(L.ROOT/'scripts/run-patient-links-real-qa.py')):
             self.failure('PIN_INVALID',lambda:L.Operations().preflight({}))
-        with tempfile.TemporaryDirectory(prefix='B5R2-test-',dir=T) as folder:
+        with tempfile.TemporaryDirectory(prefix='B5R3-test-',dir=T) as folder:
             p=Path(folder)/'attempt.json';L.write_new(p,{'status':'STARTED'});self.failure('PRIOR_ATTEMPT',lambda:L.write_new(p,{'status':'retry'}))
     def test_cipher_and_helper_pins_precede_decrypt_using_synthetic_files(self):
-        with tempfile.TemporaryDirectory(prefix='B5R2-test-',dir=T) as folder:
+        with tempfile.TemporaryDirectory(prefix='B5R3-test-',dir=T) as folder:
             sealed=Path(folder)/'fake.dpapi';sealed.write_bytes(b'not-dpapi');helper=Path(folder)/'helper.py';helper.write_bytes(b'public-helper-double');base=Mock();base.decrypt_manifest.return_value=json.dumps(manifest()).encode();base.validate_manifest.side_effect=B.validate_manifest
             with patch.multiple(L,SEALED=sealed,HELPER=helper,CIPHER_SHA=hashlib.sha256(b'not-dpapi').hexdigest(),HELPER_SHA=L.sha(helper)):
                 wire,passwords=L.Operations().payload(base);self.assertEqual([PRIVATE]*3,passwords);self.assertIn(PRIVATE.encode(),wire);base.decrypt_manifest.assert_called_once();base.decrypt_manifest.reset_mock();sealed.write_bytes(b'changed');self.failure('MANIFEST_CHANGED',lambda:L.Operations().payload(base));base.decrypt_manifest.assert_not_called()
@@ -112,10 +117,10 @@ class Tests(unittest.TestCase):
         ops.managed_environment=rewriting_context
         result=L.execute({'environment':'A'*64,'manifest':'B'*64},ops);self.assertEqual('PREREQUISITE_FAILED',result['code']);self.assertFalse(ops.active)
     def test_preflight_real_hash_checks_paths_missing_inputs_and_no_cipher_read(self):
-        with tempfile.TemporaryDirectory(prefix='B5R2-test-',dir=T) as folder:
+        with tempfile.TemporaryDirectory(prefix='B5R3-test-',dir=T) as folder:
             root=Path(folder);selfpath=root/'scripts/run-patient-links-real-qa.py';runner=root/'frontend/scripts/patient-links-real-qa.cjs';base=root/'scripts/base.py';env=root/'B5P1-environment.py';manifest_path=root/'B5P1-reviewed-pins.json';readiness=root/'readiness.json';helper=root/'helper.py'
             for p in [selfpath,runner,base,env,helper]:p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(b'offline-source')
-            manifest_path.write_bytes((T/'B5R2-reviewed-pins.json').read_bytes());readiness.write_text(json.dumps({'manifestCipherSHA256':L.CIPHER_SHA}))
+            manifest_path.write_bytes((T/'B5R3-reviewed-pins.json').read_bytes());readiness.write_text(json.dumps({'manifestCipherSHA256':L.CIPHER_SHA}))
             pins={'launcher':L.sha(selfpath),'runner':L.sha(runner),'environment':L.sha(env),'manifest':L.sha(manifest_path)}
             with patch.multiple(L,ROOT=root,__file__=str(selfpath),RUNNER=runner,BASE=base,BASE_SHA=L.sha(base),ENV=env,MANIFEST=manifest_path,READINESS=readiness,READINESS_SHA=L.sha(readiness),HELPER=helper,HELPER_SHA=L.sha(helper),LEDGER=root/'attempt.json',COMPLETED=root/'completed.json',REPORT=root/'reports/report.json'),patch.object(L,'imported',side_effect=AssertionError('context/helper imported in preflight')):
                 L.Operations().preflight(pins)

@@ -37,6 +37,7 @@ function validateManifest(value){
 function parseFlags(args){demand(Array.isArray(args)&&args.length===1&&args[0]==='--readonly','INVALID_FLAGS');return {readonly:true};}
 function checkHost(value,entry,domain){demand(object(value)&&value.platform===false&&value.hostname===entry.hostname&&value.id===entry.tenantId&&canonical(value.id)&&value.domain===domain,'HOST_MISMATCH');}
 function checkSession(value,entry){const user=value?.user;demand(object(user)&&canonical(user.id)&&user.tenantId===entry.tenantId&&user.email===entry.email&&Array.isArray(user.roles)&&Array.from(user.roles).every(r=>typeof r==='string')&&!user.roles.some(r=>['SAD','SOP','PAC','RES'].includes(r))&&user.roles.some(r=>r==='ADM'||r==='REC')&&typeof value.csrfToken==='string'&&!!value.csrfToken,'SESSION_MISMATCH');return {id:user.id,csrfToken:value.csrfToken};}
+async function checkSessionCookie(context,origin){const cookies=await context.cookies(origin+'/api/');demand(cookies.some(c=>c.name==='health_session'&&c.httpOnly===true),'SESSION_MISMATCH');}
 function readLinks(value,tenantId,patientId,limit){
  demand(canonical(tenantId)&&canonical(patientId)&&Number.isInteger(limit)&&limit>=1&&limit<=21&&Array.isArray(value)&&value.length<=limit,'INVALID_RESPONSE');const users=new Set();
  return Object.freeze(Array.from(value,row=>{
@@ -88,7 +89,7 @@ async function readStdin(stream){const decoder=new TextDecoder('utf-8',{fatal:tr
 function scopeLabel(value){switch(value){case 'APPOINTMENTS':return 'Citas';case 'DOCUMENTS':return 'Documentos';case 'BILLING':return 'Facturación';default:return 'Referencia histórica: '+(value||'(vacía)');}}
 async function run(manifest,playwright){
  const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
- const directory=path.resolve('test-results/patient-links-real-qa',RUN,'b5-readonly-e3');
+ const directory=path.resolve('test-results/patient-links-real-qa',RUN,'b5-readonly-e4');
  demand(!fs.existsSync(directory),'REPORT_FAILED');fs.mkdirSync(directory,{recursive:true});
  const records=recorder(),clients=[],checks=[],screenshots=[],pending=new Set();let unsafe=false,responseError=null,pageError=null,fatal=null,failureDiagnostic=null,browser,phase='setup',step='setup';
  const report={schema:'patient-links-real-qa-v1',runId:RUN,mode:'readonly',status:'FAIL',checks,reads:[],screenshots,uiPaging21Exercised:false,inactiveObserved:false,sqlAuditValidated:false};
@@ -109,7 +110,7 @@ async function run(manifest,playwright){
   await installBrowserGuard(context,client.policy,error=>{unsafe=true;if(error)failureDiagnostic=diagnostic(error,step);});
   page.on('response',response=>{if(!new URL(response.url()).pathname.endsWith('/links'))return;const p=observe(client,response,client.phase).then(rows=>{client.lastRows=rows;}).catch(error=>{responseError=error instanceof QaFailure?error:new QaFailure('INVALID_RESPONSE');});pending.add(p);p.finally(()=>pending.delete(p));});
   step='navigation-access';await page.goto(origin+'/acceso/',{waitUntil:'networkidle'});step='public-context';checkHost(await api(client,'/public/context'),entry,domain);
-  if(login){step='login-form';await page.locator('#auth-email').fill(entry.email);await page.locator('#auth-password').fill(entry.password);step='login-submit';await page.getByRole('button',{name:'Iniciar sesión',exact:true}).click();step='login-navigation';await page.waitForURL(url=>url.pathname.startsWith('/app/'),{waitUntil:'networkidle'});client.policy.loginAllowed=false;step='session-validation';client.identity=checkSession(await api(client,'/auth/browser/session'),entry);step='public-context';checkHost(await api(client,'/public/context'),entry,domain);step='cookie-validation';const cookies=await context.cookies(origin);demand(cookies.some(c=>c.name==='health_session'&&c.httpOnly),'SESSION_MISMATCH');}
+  if(login){step='login-form';await page.locator('#auth-email').fill(entry.email);await page.locator('#auth-password').fill(entry.password);step='login-submit';await page.getByRole('button',{name:'Iniciar sesión',exact:true}).click();step='login-navigation';await page.waitForURL(url=>url.pathname.startsWith('/app/'),{waitUntil:'networkidle'});client.policy.loginAllowed=false;step='session-validation';client.identity=checkSession(await api(client,'/auth/browser/session'),entry);step='public-context';checkHost(await api(client,'/public/context'),entry,domain);step='cookie-validation';await checkSessionCookie(context,origin);}
   return client;
  }
  async function open(client,p){
@@ -155,5 +156,5 @@ async function run(manifest,playwright){
  return report;
 }
 async function cli(args,stream,load=()=>require('playwright')){parseFlags(args);demand(!process.env.DEBUG&&!process.env.PWDEBUG&&!process.env.PLAYWRIGHT_TRACE_DIR,'UNSAFE_DIAGNOSTICS');const manifest=await readStdin(stream);return run(manifest,load());}
-module.exports={validateManifest,parseFlags,checkHost,checkSession,readLinks,checkSubpages,patient,fixtureResponse,findAnimal,problem,allowedRequest,guardedRequest,installBrowserGuard,recorder,recordResponse,readStdin,scopeLabel,diagnostic,launchOptions,cli,QaFailure,HOSTS,HUMAN,ANIMAL_IDENTIFIER};
+module.exports={validateManifest,parseFlags,checkHost,checkSession,checkSessionCookie,readLinks,checkSubpages,patient,fixtureResponse,findAnimal,problem,allowedRequest,guardedRequest,installBrowserGuard,recorder,recordResponse,readStdin,scopeLabel,diagnostic,launchOptions,cli,QaFailure,HOSTS,HUMAN,ANIMAL_IDENTIFIER};
 if(require.main===module)void cli(process.argv.slice(2),process.stdin).then(report=>{process.exitCode=report.status==='PASS'?0:1;process.stdout.write(JSON.stringify({control:'runner',status:report.status==='PASS'?'passed':'failed'})+'\n');}).catch(error=>{process.exitCode=1;process.stderr.write(JSON.stringify({control:'runner',status:'failed',code:error instanceof QaFailure?error.code:'UNEXPECTED_FAILURE'})+'\n');});
