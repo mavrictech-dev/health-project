@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-10",
+  "taskId": "task_a5de78616b7f",
+  "dispatchId": "ctx_7444a0818a45",
+  "status": "ACCEPTED_LOCAL_BACKEND_STRICT_READINESS",
+  "artifactsVerified": 15,
+  "sourceHashesVerified": 687,
+  "inputPinsVerified": 726,
+  "launcherInvocations": 1,
+  "rawExit": 0,
+  "launcherSeconds": 12.171999999998661,
+  "readinessHttpPolls": 1,
+  "appActiveAfterClose": 0,
+  "proxyActiveAfterClose": 0,
+  "workerDatabaseBeforeAfterEqual": true,
+  "supervisorFreshDatabaseEqual": true,
+  "roleAclCount": 564,
+  "v13Installed": 1,
+  "protectedFingerprint": "a04d8236d807b3527dce32d8c8168e2e691902c89c0dd3eb79dda933ae8ca2af",
+  "noProtectedChanges": true,
+  "actualRuntimeSQLCallCount": null,
+  "review": [
+    "Frozen launcher and E1 observer inspected; one actual subprocess invocation, no automatic retries",
+    "Reviewed launcher only emits READY after backend health200/statusUP and exact proxy startup, with pinned strictfalse/encrypttrue and dedicated public truststore",
+    "Completion and pre/post conserved hashes checked; independent fresh SQL readonly baseline matches",
+    "P1/E1 source files, audit ledgers and results preserved; no readiness rerun by supervisor"
+  ],
+  "limits": [
+    "Local positive backend readiness with strict JDBC certificate configuration only; no production TLS or new CA/hostname negative test",
+    "readinessPolls is HTTPcount, not inferred SQL/JDBC count",
+    "No business API/login/browser/links validation in E1",
+    "Frozen launcher productTLSValidatedfalse remains unchanged"
+  ],
+  "supervisorProtectedFingerprint": "a04d8236d807b3527dce32d8c8168e2e691902c89c0dd3eb79dda933ae8ca2af",
+  "supervisorListenerObservation": {
+    "sqlOnly": "127.0.0.1:14335",
+    "qaProcessId": 13304,
+    "backendAndProxyClosed": true
+  }
+}

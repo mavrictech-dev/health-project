@@ -1,5 +1,14 @@
 # Orquestacion Codex de Health Project
 
+## B4E1 aceptada local; preparar B5readonly, 2026-11-10
+
+task_a5de78616b7f/ctx_7444a0818a45 aceptada tras review15artefactos/687SHA/726pines,
+unaREADYreal12.172s,closureJobs0, datos/huellaiguales ybaselineindependiente igual.
+Evidencia BACKEND_TLS_READINESS_20261110.json. No rerunE1 ni alterar sus diarios.
+B5P1 cuatrofuentes nuevas ycontextoTEMP operaciondistinta fija, solo3deltas y
+manifestidentico; preparacionoffline segun PAC-01-B5-PREPARACION.md. Misma pareja/
+Run, QAAPI/UI real solo enE2 posterior. Sin crearfixtures otrustglobal/servicios.
+
 ## B4P1 aceptada; E1 readiness real separada, 2026-11-10
 
 MismoTask/Dispatch deP1 entrego tras continuidad; supervisor73artefactos/726pines/

@@ -1,5 +1,26 @@
 # Decisiones y contratos de integracion
 
+## D-87.V: readiness real backend estricto aceptada; B5 QAreadonly, 2026-11-10
+
+msg_c93624d27935/task_a5de78616b7f/ctx_7444a0818a45 succeeded. Supervisor
+congela15artefactos,contrasta687SHA/726pines ycodigo/harness1invocacion,raw0
+READY_FOR_QA/12.172s/pollHTTP1. CompletionambosJobsactivos0 ypuertosappcerrados;
+SQLQA Running14335/PID13304. Workerpre/postbase/huella iguales; baseline fresco
+independiente igual alantesE1/B1POST, installed1/ACL564/OPEN; protecciona04...af
+independiente igual. No reejecutar readiness. Aceptar LOCALBACKEND positivo con
+configJDBC encrypttrue/trustfalse/truststore dedicado; no TLSproductivo/negativos
+nuevos ni contarSQLdesdeunpoll. productTLSValidatedfalse del launcher inmutable.
+Evidencia BACKEND_TLS_READINESS_20261110.json. APInegocio/UI de vinculos no probados.
+
+B5P1 prepara cuatro archivosQA y contextoTEMP nuevo para futura operacionreal
+readonly con fixtures existentes; contrato PAC-01-B5-PREPARACION.md. SinDPAPI/
+SQL/HTTP/browser/probes enP1. CopiaB4env con SOLOmanifest/ledger/completion nuevos
+ymanifest726identico conservaE1consumido; no es retry de gatefallido ni borrar
+historia. FuturaE2 mantendra contexto durantebrowser, login/logout propios yGET
+negocio; sin crear datos/cambiar roles o permisos. Review antes de ejecucion.
+Fixturesmissing/mutadas se informan prerequisitofallido, no se fabrican ni
+se atribuye21filasreales a la evidenciaSQL/sintetica anterior. PAC-01 parcial.
+
 ## D-87.U: B4P1 aceptada offline; gate E1 real acotado, 2026-11-10
 
 msg_8b8dbe4fad02/task_131aca7351c3/ctx_4fcac67b4740 succeeded tras retomar
@@ -20,6 +41,8 @@ Prebaseline supervisor igual al B1POST(installed1/564ACL/OPEN), huella protegida
 a04d8236...ae8ca2af igual; SQLQA Running. Worker pre/post readonly hashes/huella
 yactivos0, sinretry oSQLdiagnostico. E1failed vuelve a review sin compensacion.
 No nuevo UAC/certificados/servicios/migraciones/DPAPIrecreado/bootstrap/main.
+
+Preparacionrevisada y contratoE1 publicados ca92570a0d848ac6325c5079be138fd3e593295c, remotoSHA confirmado. E1delegada task_a5de78616b7f/ctx_7444a0818a45, follow_up ready al programadorretenido. Supervisor sin SQL/API/trafico concurrente durante el unico execute autorizado; espera resultadoOrca para revision independiente.
 
 ## D-87.T: cuota programador y revision parcial B4P1, 2026-11-10
 

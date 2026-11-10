@@ -1,5 +1,15 @@
 # Revisiones del supervisor
 
+## B4E1: VALIDADA READINESS REAL LOCAL, 2026-11-10
+
+UNAinvocacion revisada raw0READY_FOR_QA/12.172s, HTTPpoll1; Jobsapp/proxyactivos0.
+Supervisor15artefactos/687SHA/726pines, codigo ydiarios contrastados; baseline
+fresco independiente igual a pre/post, servicioQA/puerto14335 yhuellaprotegida
+a04...af intactos, app18080/proxy18300 cerrados. Positivo backendQA conJDBC
+estricto/truststore dedicado, no produccion o nuevos negativosCA/hostname, y
+poll no cuentaSQL. Evidencia BACKEND_TLS_READINESS_20261110.json. No APInegocio/
+browser/fixture enE1. B5prepara QArealreadonly tras review,D-87.V.
+
 ## B4P1: VALIDADA PREPARACION OFFLINE, 2026-11-10
 
 73artefactos/726pines/687fuentes contrastados;3classes recompilados por supervisor
