@@ -1,5 +1,24 @@
 # Decisiones y contratos de integracion
 
+## D-87.T: cuota programador y revision parcial B4P1, 2026-11-10
+
+Escalacion msg_stop_6bc70500149e3db2f663a2eb por limite proveedor, reintento
+anunciado14:06 local. Dispatchctx_4fcac67b4740/Tasktask_131aca7351c3 siguen
+abiertos yterminal live retenido; no worker_done/abandon/retryTasknuevo. Sin
+cambiar cuentas/globales/modelos ni gasto. B4P1 no aceptada; tableroBLOQUEADA
+por cuota y correcciones pendientes. B1/B2/B3 aceptadas conservan su alcance.
+
+Supervisor congela15archivos parciales,687SHA previos intactos,18tests con1fallo
+real preservado. Auditoria pura identifica ZipInfoWindows normaliza slash/NUL
+antes de validacion, reproduce carrera stdoutproxy aun vacio conbackend200
+sinHTTPreal, y revisa fuga deFD si os.pipe2/3 falla antes de tracking. Correccion
+al mismo programador segun PAC-01-B4-REVISION-PARCIAL.md, no editar su ownership.
+No app/proxy/SQL/DPAPI oprobesnativos por supervisor. Javacraw0 no implica runtime
+validado. Evidencia BACKEND_TLS_PREPARACION_PARCIAL_20261110.json. Sin E1 hasta
+P1completa yreview, y sin declarar cancelado el objetivo por este limite temporal.
+
+Correccion enviada al Dispatch abierto mediante msg_6abef3b426ce. Nueva escalacion msg_stop_a0001f251f4a701c1bdbd71a confirma la misma cuota14:06, sin nueva implementacion/worker_done. No reenviar repetidamente ni crear otro agente: conservar mensaje en cola y retomar mismo contexto cuando proveedor permita.
+
 ## D-87.S: B3 UI aceptada sintetica; preparacion backend estricto, 2026-11-10
 
 msg_147fd4ee42df/task_70d39caaf8e6/ctx_7e6db58956df succeeded. Supervisor
@@ -19,6 +38,8 @@ Sin arrancar backend/proxy/SQL ni DPAPI en P1; solo compilacion/tests yUNA
 inspeccionpublicaJVM+UNprobeinocuoJobtimeout permitidos. EjecucionreadinessE1
 posterior a review separada. No tocar certificados/binding/servicios/globaltrust
 o repetir A69/B1. PAC-01general siguePARCIAL y gestionar vinculos sigue pendiente.
+
+B3 publicada en origin/health/production-wave0:49339a6e5bb0d1bac15c6473468882ad3cd1c58f, remotoSHA confirmado. B4P1delegada task_131aca7351c3/ctx_4fcac67b4740, follow_up ready al mismo programador. OwnershipTEMP-only y2probespublicos sinsecretos; no modificar producto o generar traficoQA concurrente. Supervisor espera resultado para revisar antes de E1.
 
 ## D-87.R: B2 API integrada offline; gate B3 UI, 2026-11-10
 

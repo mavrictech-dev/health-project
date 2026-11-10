@@ -1,5 +1,15 @@
 # Revisiones del supervisor
 
+## B4P1: revision parcial NO aceptada, 2026-11-10
+
+Limite del proveedor anunciado14:06, Task/Dispatch abiertos.687fuentes intactas,
+15archivos parciales congelados; primera suite18tests con1FAIL. Auditoria pura
+reproduce metadataZIP normalizada y carrera deproxy,0SQL/HTTP/DPAPI reales;
+cleanupFD observado estaticamente. Correcciones en mismoencargo msg_6abef3b426ce,
+no runtime/QAreal ni probesnativos por supervisor. D-87.T y evidencia
+BACKEND_TLS_PREPARACION_PARCIAL_20261110.json. No aprobar P1 ni ejecutar E1.
+
+
 ## PAC-01.B3: INTEGRADA Y VALIDADA SINTETICA, 2026-11-10
 
 Supervisor141artefactos/683SHA,6fuentes y15capturas inspeccionadas; bundles

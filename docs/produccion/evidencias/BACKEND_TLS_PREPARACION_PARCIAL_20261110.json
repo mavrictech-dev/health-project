@@ -1,0 +1,70 @@
+{
+  "status": "INCOMPLETE_NOT_ACCEPTED",
+  "sourceBaselineChecked": 687,
+  "sourceChanges": [],
+  "artifactsFrozen": 15,
+  "unitAttempt1": {
+    "tests": 18,
+    "failures": 1,
+    "status": "FAILED"
+  },
+  "rawZipMetadataCases": [
+    {
+      "raw": "BOOT-INF/classes/x\\y",
+      "origFilename": "BOOT-INF/classes/x\\y",
+      "filename": "BOOT-INF/classes/x/y",
+      "outcome": {
+        "accepted": [
+          "BOOT-INF/classes/x/y"
+        ]
+      }
+    },
+    {
+      "raw": "BOOT-INF/classes/./a.class",
+      "origFilename": "BOOT-INF/classes/./a.class",
+      "filename": "BOOT-INF/classes/./a.class",
+      "outcome": {
+        "accepted": [
+          "BOOT-INF/classes/./a.class"
+        ]
+      }
+    },
+    {
+      "raw": "BOOT-INF/classes//a.class",
+      "origFilename": "BOOT-INF/classes//a.class",
+      "filename": "BOOT-INF/classes//a.class",
+      "outcome": {
+        "accepted": [
+          "BOOT-INF/classes//a.class"
+        ]
+      }
+    },
+    {
+      "raw": "BOOT-INF/classes/a\u0000.class",
+      "origFilename": "BOOT-INF/classes/a\u0000.class",
+      "filename": "BOOT-INF/classes/a",
+      "outcome": {
+        "accepted": [
+          "BOOT-INF/classes/a"
+        ]
+      }
+    }
+  ],
+  "proxyStartupRace": {
+    "reproduced": true,
+    "code": "PROXY_REJECTED",
+    "backendHealth": 200,
+    "proxyStartupOutput": "not yet emitted",
+    "HTTPConnectionsReal": 0
+  },
+  "additionalStaticFinding": "NativeJob creates three os.pipe pairs in one tuple expression before assigning self.pipes; an intermediate os.pipe failure leaves earlier descriptors untracked. Fix tracking and test failure cleanup.",
+  "realNativeProbesBySupervisor": 0,
+  "SQLConnectionsBySupervisor": 0,
+  "DPAPILoadsBySupervisor": 0,
+  "limitations": "Partial artifacts, no worker_done or final report; no acceptance or real runtime execution. Quota escalation remains open.",
+  "date": "2026-11-10",
+  "taskId": "task_131aca7351c3",
+  "dispatchId": "ctx_4fcac67b4740",
+  "escalationId": "msg_stop_6bc70500149e3db2f663a2eb",
+  "providerRetryAfterObserved": "2026-11-10 14:06 America/Lima; provider indication, availability not independently guaranteed"
+}

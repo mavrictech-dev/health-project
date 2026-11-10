@@ -1,5 +1,14 @@
 # Orquestacion Codex de Health Project
 
+## B4P1 bloqueada por cuota; correccion en mismo Dispatch, 2026-11-10
+
+Escalacionmsg_stop_6bc70500149e3db2f663a2eb: programador alcanzo limite proveedor
+hasta14:06 anunciado. Tasktask_131aca7351c3/ctx_4fcac67b4740 abiertos, sesion
+retenida; no nuevo Run/cuenta ni fakeworker_done. Supervisor687SHA intactos y
+15archivos parciales congelados, suite18con1FAIL; correcciones ZIP/esperaproxy/
+cleanupFD precisadas en PAC-01-B4-REVISION-PARCIAL.md. Sin ejecutar runtime,
+SQL/DPAPI ni probes nativos. Reanudar mismo agente cuando proveedor permita.
+
 ## B3UI aceptada sintetica; B4P1 preparada, 2026-11-10
 
 B3 task_70d39caaf8e6/ctx_7e6db58956df aceptada tras review141artefactos/683SHA,
