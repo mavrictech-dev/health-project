@@ -1,5 +1,43 @@
 # Revisiones del supervisor
 
+## A69: VALIDADA LOCAL JDBC TLS, 2026-11-10
+
+msg_2f0f72bec751, task_741dbe3719c7/ctx_7829652bd835 succeeded. Unlauncher
+pinneado raw0COMPLETE2.315s,4checksreales/3conexiones/1SPhealth/0retry. Supervisor
+contrasta675fuentes/pins,8artefactosreporte y5salidas,ledger/completion/result;
+keytoolindependientePKCS12 confirma solo1CAtrustedCertEntry y0entradasen negativo,
+sinprivatekeys. CA DER hash coincide con certificado configurado. Fuente+harness
+previamente revisados e inspeccion nativa real de proceso ya aceptados enP2.
+BaselineDB posterior igual a E2finalpreTLS, incluidos datos/sesiones/auditoria y
+esquema/ACL/principales; huella protegida igual. Se cierra A69LOCALJDBC. Sin repetir
+3conexiones aceptadas, ni editarbindingP1false historico. No TLSproductivo,
+HTTPSpublico ni configuracion del backendlauncher. EvidenciaTLS_LOCAL_20261110.json.
+
+## A69.P1 y binding supervisado: aceptacion parcial local, 2026-11-10
+
+Informe msg_426d6b431880;2fuentes/11artefactos/672baseline contrastados, suite
+independiente15tests25.459sPASS0fallos. Script y suite integrados por SHA; Apply
+supervisor bajo nuevo permiso de usuario y Windows aceptado UNAvez. Wrapperexit0,
+bindingbound,ForceEncryption1,QA reiniciadaRunning y huella protegida identica.
+Supervisor contrastaCERpublicos SHA256/thumbprints y diario finalcompleted/bound;
+CA/leafMy,0coincidenciasRoot LocalMachine/CurrentUser. No export privado/confianza
+globalOS. CadenaJDBC NO verificada aun; no cierre de A69 ni TLS productivo. P2
+prepara harnessoffline y gate posterior. D-87.I y evidencia local a69-20261110.
+
+## PAC-01.B1.R2: VALIDADA OFFLINE, 2026-11-10
+
+msg_65cb13a6eb51, task_4c1004abeb3d/ctx_9c62d76c4893. Diff exclusivo del SQL
+de prueba: capturas standalone antes de metadata en COMMON, despues de cada
+lectura/REVERT en PRE y despues de impersonacion/error en POST. Conserva0/0 y1/1,
+CONTROL, exclusiones de roles y errores exactos. Ninguna modificacion del runner
+o V13; no se cambian fuentes de producto del supervisor antes del gate de motor.
+Supervisor contrasta672fuentes actuales,15artefactosSHA y cuatro checkpoints;
+671fuentes intactas, unico delta autorizado.125lotes/11mutaciones worker son
+regresion OFFLINE,0conexionSQL; no validan compilacion V13 o40fases de negocio.
+Dos errores iniciales del harness/reporte quedaron corregidos y preservados.
+Veredicto independiente r2-review/supervisor-acceptance.json y D-87.F. La entrega
+SQL completa sigue pendiente de motor; E1 previofallido0/40 no se convierte enPASS.
+
 ## PAC-01.A + E1.R1 — VALIDADA LOCAL CON API/SQL/UI REAL, 2026-11-09
 
 Informe msg_8588b1a7f856 y task_c0871e7d4bb8/ctx_0aba1f82bd60 settled succeeded.

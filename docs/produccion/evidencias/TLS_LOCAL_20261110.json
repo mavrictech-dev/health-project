@@ -1,0 +1,131 @@
+{
+  "schemaVersion": 1,
+  "dateUtc": "2026-11-10T16:16:06.753789+00:00",
+  "scope": "HEALTHPROJECTQA local synthetic only",
+  "status": "VALIDATED_LOCAL_JDBC_TLS",
+  "productionApproved": false,
+  "applicationRuntimeTLSConfigured": false,
+  "run": "run_624b9269b491",
+  "tasks": {
+    "parent": "task_7e312870e8d4",
+    "tool": "task_967fa9dfa0c7",
+    "harness": "task_e86914ae1c26",
+    "realQA": "task_741dbe3719c7",
+    "dispatch": "ctx_7829652bd835"
+  },
+  "tool": {
+    "sha256": "4663F01F81EDCCEC0FCAA4CCD33C07A69E3297F7BA3E40C61B8AFFC20E4F9C8F",
+    "supervisorTests": 15,
+    "supervisorSeconds": 25.459
+  },
+  "preparation": {
+    "javaOfflineAssertions": 53,
+    "pythonTestGroups": 10,
+    "compiledClassesHashCompared": 8,
+    "sourceFilesVerified": 675,
+    "realNoSecretJobPublicInspection": "PASS",
+    "realNoSecretJobTimeoutSeconds": 1.016
+  },
+  "binding": {
+    "status": "bound",
+    "operationId": "a69-20261110-review001",
+    "instance": "HEALTHPROJECTQA",
+    "rootThumbprint": "00B92464F45C8962A249DF92D6A3019F8E377A2F",
+    "leafThumbprint": "D398CD5FC7AC5F4F8892FF9ABE69103B1CC0D86A",
+    "forceEncryption": 1,
+    "protectedBefore": "a04d8236d807b3527dce32d8c8168e2e691902c89c0dd3eb79dda933ae8ca2af",
+    "protectedAfter": "a04d8236d807b3527dce32d8c8168e2e691902c89c0dd3eb79dda933ae8ca2af",
+    "protectedUnchanged": true,
+    "osRootTrustChanged": false,
+    "privateKeysExported": false,
+    "completedUtc": "2026-11-10T15:39:40.9946706Z"
+  },
+  "jdbc": {
+    "oneExecution": true,
+    "retries": 0,
+    "result": {
+      "mode": "execute-once",
+      "status": "PASS",
+      "code": "COMPLETE",
+      "handshake": true,
+      "healthSP": true,
+      "caNegative": true,
+      "hostnameNegative": true,
+      "connectionAttempts": 3,
+      "healthCalls": 1,
+      "productTLSValidated": false
+    },
+    "driverVersion": "13.4.0.jre11",
+    "encrypt": true,
+    "trustServerCertificate": false,
+    "runtimePrincipalOnly": true,
+    "credentialTransport": "memory and binary stdin only",
+    "publicCertificateTruststoresExclusiveToJVM": true,
+    "durationToolSeconds": 2.3151186
+  },
+  "independentReview": {
+    "status": "ACCEPTED_TLS_LOCAL_QA",
+    "checksPassed": 4,
+    "connections": 3,
+    "healthCalls": 1,
+    "retries": 0,
+    "sourceFilesVerified": 675,
+    "newArtifactHashesVerified": 5,
+    "storesIndependentInspection": [
+      {
+        "file": "qa-public.p12",
+        "entries": 1,
+        "privateKeyEntries": 0,
+        "rootSha256Matches": true
+      },
+      {
+        "file": "empty-public.p12",
+        "entries": 0,
+        "privateKeyEntries": 0,
+        "rootSha256Matches": false
+      }
+    ],
+    "postJDBCBaselineEqualsE2BeforeTLS": true,
+    "applicationTablesAndCatalogUnchanged": true,
+    "protectedFingerprintUnchanged": true,
+    "applicationRuntimeTrustConfigurationNotChanged": true,
+    "productionApproved": false,
+    "chainAndHostnameValidated": true
+  },
+  "postJDBCBaseline": {
+    "users": "B7BB7FB76F32D2A11204E1F8D526FF1CD29272979D6B1BA60BD787A0966CA4D7",
+    "tenants": "6E2B61315C17C2F75AF16FBA303CC3429EBB3204B85C7C28D20116CD4EBAB878",
+    "memberships": "8043961DF8EE976CF90B2B24AD9CF17F533F9FD56CDAF4887D2F56319A42CF83",
+    "auth_sessions": "9F439F728F9F92BBC7A60778B1A0193F892BE96662EB0721A21E61BCEF1887B3",
+    "patients": "5BA385B6685517499F9A30698548E8601772E69AD5146FF8B9B3E846DA51AC31",
+    "patient_links": "0D3D66AF2FEC80DD753EA7DAE3C60D690129BE93ABE01DC736C84C348FF1B17C",
+    "audit_events": "285206A07BB8D3769A82F381831E62170CEC17795C9377D1666941E388E3E110",
+    "application_state": "5ECAA9BDB460FB4AF9BE45EAD2EF38AF2E4B9CD53CDE1D1B3B02991043FFB349",
+    "modules": "A2C9B39723D78BA3723EB01D05080E2A7A99748DDCC71FE0C4F87F04AF7A8A0D",
+    "columns": "D554D44CE496202B65A0D8F597BEEE9DAB461E5073B6970D548703C68964ACB7",
+    "acl": "74ED0B3E824A1768864D320AD0CE1584E8A812DDFE5E20BB481B09CC4899F90E",
+    "principals": "6EB610FF9DFF1A32A016D322F6CCB0EDB06F35787D5BFCBDD0F669F3A06A4EDA",
+    "role_memberships": "247321E76E28B18EB688779C3330A1214C232B54C9FBD9F7E5FB8158C650AB2A",
+    "installed": 0,
+    "role_acl_count": 562,
+    "optional_history": 0,
+    "application_mode": "OPEN"
+  },
+  "artifactHashes": {
+    "publicRootDER": "5239D56864F2DE648181D9EEA463C4D7EA1341A83ACD5263FBCD25BA020FF606",
+    "publicLeafDER": "F433FEAB52E37A78791A42931015A341825FB0AA1FF6F972B40DF5C5DE361B8D",
+    "A69P2-client-attempt.json": "CDC99BB6FBE55FEC222C602FD2976012F92AB91262FE6247AC454DEC194A8AD5",
+    "A69P2-client-completed.json": "511AD45F807A038FFF3F087295ACE6E164436337D50E6DA8E2D914838EE42743",
+    "A69P2-result.json": "09B427AF12CA42472988A8892D8960EE7C6C2E6F6CEF45D5C0F0786055E5EE36",
+    "empty-public.p12": "B6622A9B88BB983E01598DDB898B08566CDA3F0C49DD05E17BBB13995D7F6CB0",
+    "qa-public.p12": "7988CDDE0249F594CCA47039E04D90F7C3BA43689F3093EA010BE77E6685C037"
+  },
+  "limits": [
+    "Local private CA and JDBC QA only, not production/public HTTPS or deployment.",
+    "The prior failed supervisor pre-JDBC baseline script executed no SQL; post-JDBC baseline equals the earlier E2 baseline across TLS restart and QA.",
+    "Historical P1 binding evidence with chainValidated false remains immutable; this aggregate records later accepted JDBC validation.",
+    "Existing backend launcher/runtime trust configuration was not changed in this delivery.",
+    "V13 remains absent and role ACL count562; dbo ownership correction and patients-links matrix remain pending.",
+    "No secrets, DPAPI data, private keys, public truststore files or operational tmp artifacts are published."
+  ]
+}

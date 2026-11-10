@@ -1,5 +1,49 @@
 # Orquestacion Codex de Health Project
 
+## A69 cerrada local JDBC, 2026-11-10
+
+TLS_LOCAL_20261110.json: unexecute-once3conexiones/1healthSP,4checksPASS reales
+(handshake/health/CAnegative/hostnameNegative). Revision independiente de hashes,
+stores publicos yDBbaselineposterior igual a E2preTLS, huella protegida intacta.
+A69 Taskcompleted LOCALJDBC, no TLSproductivo ni cambio de backendlauncher.
+Diarios/binding/stores retenidos sinretry; estadosTLSpendiente siguientes son
+historicos. Retomar B1R3 solo guarda ownershipdbo realWindows ypin de verificador;
+V13ausente/ACL562, matriz40fases aun no validada. Mantener pareja/Run existentes.
+
+## TLS local reautorizado y binding aplicado, 2026-11-10
+
+Usuario autoriza nuevo intento y Windows acepta elevacion. A69P1 revisada,
+15tests independientesPASS e integrada; Apply UNAvez op a69-20261110-review001
+bound/ForceEncryption1/reinicioQA, huella protegida sin cambios. CA/leafMy,
+sinRootglobal ni exportprivado. CadenaJDBC sigue pendiente, A69 no cerrada.
+P2 task_e86914ae1c26/ctx_d8511b025406 prepara harnessoffline en mismo programador,
+sin otra Apply/servicios/DPAPI/SQL. E2 paciente fallo0/40 en guardadbotypeS vs
+WindowsU;3baselines exactos, V13ausente/562ACL. CorreccionSQL separada pendiente.
+Las referencias siguientes a prohibicion de retryTLS preceden a este nuevo permiso.
+
+## QA SQL disponible para E2, 2026-11-10
+
+Por nuevo encargo del usuario, arranque Start-only elevado exclusivo de
+HEALTHPROJECTQA completado exit0/os_verified. Running/Manual, loopback14335,
+huella protegida a04d8236...ae8ca2af antes/despues identica. Docker del usuario
+levanta Compose heredado MySQL y no sustituye la QA SQL Server existente. R2
+aceptada offline y COMMON+baseline real readonly supervisorPASS, V13 ausente y
+ACL562. E2 task_091da7344237/ctx_622d6efdec77 ejecuta una matriz PRE rollback-only;
+supervisor sin trafico concurrente. No instalacion persistente ni POST, TLS sigue
+bloqueada. Las menciones siguientes de QA detenida son observaciones anteriores.
+
+## Recuperacion vigente de terminales, 2026-11-10
+
+Mismo Run run_624b9269b491 revinculado al coordinador actual
+term_f04e8b91-4227-4638-a1cf-cce7a8f01802; terminales historicos conservados.
+Programador recuperapiura /status efectivo verificado en reemplazo retenido
+term_7286bcc6-6224-4d5f-a389-b06a09939ca3, sesion01a1c5c7-d534-7d01-ac3a-c18bf31075ec,
+mismo worktree, --no-daemon. No cambios de cuentas globales ni nueva rama/checkout.
+E1 B1 intento0/40 fallido queda en historial; Orca recupero dispatchabandoned y
+supervisor asienta Taskfailed sin simular worker_done. R2 codigo/regresiones
+offline segun PAC-01-B1-R2.md; motorQA detenido y TLS sigue bloqueado. Los estados
+de servicios/terminales del9nov que siguen son historicos, no disponibilidad actual.
+
 ## Continuidad vigente: pacientes reales de QA, 2026-11-09
 
 Pareja D-82: arquitecto mendozadeafabisa (term_6b053e36-a960-4dd8-a63d-45e6c3b6c24a),

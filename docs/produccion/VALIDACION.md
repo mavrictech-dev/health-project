@@ -1,5 +1,37 @@
 # Validacion y limites de evidencia
 
+## TLS local JDBC: gate cerrado, 2026-11-10
+
+A69E1 execute-once real raw0COMPLETE,2.315s: handshake/healthSP/CAnegative/
+hostnameNegative4/4,3conexiones y1{call dbo.usp_health_ready},trustServerCertificatefalse.
+Supervisor hashes675fuentes,8artefactosreporte/5nuevos ykeytoolstoresPASS. Solo
+CApublica1entrada/negativovacio0,0privatekeys. PostDBbaseline igual a E2preTLS,
+huella protegida conservada;0V13/562ACL. FaltanteprebaselineporSyntaxError no se
+oculta: comparacion abarca restartTLS yJDBC, no capturaantesJDBCpostrestart.
+Alcance TLSLOCALQA con CAprivada yclienteJDBC dedicado, no backendruntime
+reconfigurado/HTTPSpublico/produccion. TLS_LOCAL_20261110.json es evidenciafinal;
+los resultados de binding que siguen son estados anteriores inmutables.
+
+## TLS local: binding completado, JDBC pendiente, 2026-11-10
+
+A69P1 suite supervisor15/15PASS25.459s, efectoOSmock. Tras review/integracion y
+autorizacion usuario, Apply real exclusivo QA exit0/bound:ForceEncryption1,
+reinicioQA y Running; huella protegida a04d8236...ae8ca2af igual antes/despues.
+CA/leaf soloMy yCERpublicos hash/thumbprint verificados;0Root global de ambos.
+Diario retenido completed/bound. No validacioncadenaJDBC/hostname/CAnegative aun,
+ni prueba de TLS productivo/publicCA/HTTPS. HarnessP2 en preparacionoffline.
+
+## PAC-01.B1.R2: comprobacion offline, 2026-11-10
+
+Supervisor:672hashes de fuentes,15artefactos, diff y cuatro puntos de captura
+PASS; V13CB57FAD4...D5CC060 inmutable, runnerbyte-equivalente. SQL verificador
+8BCAF401...94B3A61. Worker:125lotes de SQL interceptados con subprocess mock,
+40PRE/1POST sinteticos y11mutaciones rechazadas, sin procesoSQL ni conexion.
+No contar esos lotes como prueba real de SQL Server. Motor/compilacion/auditoria/
+ACL de V13 no ejecutados; gate pendiente tras disponibilidad de instanciaQA.
+Invocacion Start-only separada falla en lanzamiento Windows antes de entered;
+QA sigueStopped. No retry, accionTLS ni ejecucion SQL. Causa nativa no disponible.
+
 ## PAC-01.A: recorrido real aceptado, 2026-11-09
 
 E1 readonly attempt1794243523795raw0:10PASS/3NA de paginacion; mutante

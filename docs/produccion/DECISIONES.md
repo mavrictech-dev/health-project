@@ -1,5 +1,265 @@
 # Decisiones y contratos de integracion
 
+## D-87.K: TLS local validado, retomar guardadbo, 2026-11-10
+
+A69.QA.E1 msg_2f0f72bec751 task_741dbe3719c7/ctx_7829652bd835 succeeded.
+UNlauncherexecute-once,raw0COMPLETE,4checks reales(1handshake,1healthSP y2rechazos
+CA/hostname),3conexiones/1SPhealth,0retries. Supervisor contrasta675fuentes,
+inputs/8artefactos reporte/5salidas nuevas, ledger/completion/result coherentes;
+keytoolindependiente confirma1trustedCertEntryCApin y0entradas enstorevacío,
+sinprivatekeys. BaselineSQL posterior exacto al E2final previoTLS: negocio,
+sesiones/auditoria,modulos/columnas/ACL/principales sin deriva. Huella protegida
+a04d8236...ae8ca2af intacta,QA Running. Error de sintaxis del harnessprebaseline
+previo queda historico; no se inventa capturaantesJDBCpostrestart.
+
+A69 VALIDADA LOCAL JDBC TLS, evidencia TLS_LOCAL_20261110.json. No TLSproducto,
+HTTPSpublico/despliegue ni configuracionTLS del backendlauncher: no se cambiaron
+sus propiedades. BindingP1false historico permanece inmutable; nuevo agregado
+describe validacion posterior. Diarios/resultados/stores se retienen, sinreissue.
+
+Retomar B1R3:metadata independiente confirma dbo1 WindowsU/auth3/schemaowner1
+ySIDigualsys.databases.owner_sid. Solo precondicion propuestaV13 y pinverificador;
+paresS/INSTANCE1 oU/WINDOWS3 permitidos con ownershipreal exacto. No cambiarowner
+o permisos reales ni cuerpoSP/ACL, no matrices/autocommit/install todavia. Se
+autoriza unprobe delprimerbatchpreflight metadata-only enTXexterna revertida,
+sinDDL/filasnegocio, despues de diff/regresionoffline. Contrato PAC-01-B1-R3.md.
+
+## D-87.J: harness TLS P2 aceptado y gate JDBC real, 2026-11-10
+
+P2 msg_777a4a497b0f succeeded EN_REVISION,0rutasrepo. Supervisor revisa completos
+Java,launcher y suites, contrasta675fuentes/pins y32artefactos; recompila8clases
+conSHAidentico,53checksJavaoffline y10gruposPython PASS. ProbeJobnativo REAL
+inspect-publicPASS y timeout1.016s PROCESS_TIMEOUT sinsecreto/conexion/store.
+Solo preparacion, no validacionhandshakeJDBC. Fuentes congeladas p2-review.
+
+El intento auxiliar supervisor de recapturar baseline tras restartTLS fallo por
+sintaxisPython antes de SQL. Baseline vigente disponible es E2final previo al
+restart, no se afirma igualdad posterior aun. Se verificara despues sin trafico
+concurrente; no se requiere repetir probe previo. Se autoriza UN execute-once
+del launcher926CCF2E...419FDDF conmanifest572C2F5A...D6B010. Runtimecredential
+solo helperpin/Memory/stdin,3conexionesmax y1healthSP,2storesPUBLICOS exclusivos
+sin cacerts/Rootglobal; ledgerCreateNew antes de secretos/procesos. No Apply,
+reissue/restart/compensacion o retry. Contrato SQL-01-A69-QA-E1.md. BindingP1
+historialfalse no se edita; aceptacion final de cadena y negativos aun pendiente.
+
+QA.E1 task_741dbe3719c7/ctx_7829652bd835 recibo follow_up ready; aclaracion sobre
+baseline enviada al mismo Dispatch, sin cambiar fuentes/pins o repetir conexiones.
+
+## D-87.I: herramienta TLS revisada y binding real, 2026-11-10
+
+A69P1 msg_426d6b431880/task_967fa9dfa0c7/ctx_a8da76cc5193 succeeded. Supervisor
+congela2fuentes/informe, contrasta672fuentes y11artefactos, revisa funciones y suite,
+ejecuta15tests independientes25.459s PASS con efectosOSmock. Integra solo script
+4663F01F...0E4F9C8F y suite0ED1DC3B...ADEE79A,PlanreadonlyPASS. Fuente/helperpins
+comprobados y sin colisiones/reserva/evidencia previa. No otros cambios producto.
+
+Con permiso usuario D-87.H se aplica UNA vez con wrapper pinneado y elevacion
+Windows aceptada. Operacion a69-20261110-review001: exit0,bound,ForceEncryption1,
+reinicioQA y Running posterior. Huella protegida a04d8236...ae8ca2af igual antes/
+despues. CA/leaf soloLocalMachine/My, claves noexportables, ACERead servicioQA
+en leaf,exportCERpublicos. Rootstores LocalMachine/CurrentUser0coincidencias
+de ambos certificados. Diario global durable finalcompleted/bound retenido.
+Supervisor compara resultado/CERhashthumbprints/diario; cadenaJDBC sigueFALSE.
+
+CAthumb00B92464F45C8962A249DF92D6A3019F8E377A2F,leafD398CD5FC7AC5F4F8892FF9ABE69103B1CC0D86A.
+Evidencia local tmp/tls-a69-20261110-review001 y tmp/a69-20261110/application.
+No otra Apply/reissue/restart; no confianzaOSglobal, credenciales o servicios ajenos.
+Siguiente P2 prepara harnessJDBC/truststoreexclusivo y negativos CA/hostname solo
+offline para revision, sin DPAPI/SQL ahora. Contrato SQL-01-A69-P2.md. V13 no
+instalada, E2failed0/40 y correcciondboWindows separada siguen pendientes.
+
+P2 delegada task_e86914ae1c26/ctx_d8511b025406, recibo follow_up ready en el
+mismo programador. Supervisor mantiene QA sin actividad concurrente.
+
+## D-87.H: E2 devuelta y nuevo permiso TLS local, 2026-11-10
+
+Usuario responde "ya" tras explicacion de reintentoTLS/UAC; supervisor explicita
+interpretacion como permiso TLSLOCALQA. Restriccion anterior de no reintentarTLS
+se sustituye por esta autorizacion acotada; Windows aun debe aceptar elevacion
+al aplicar. No produccion ni confianza global OS ni efectos en otros proyectos.
+
+E2 worker_done failed msg_5ed2e2138e6a, task_091da7344237/ctx_622d6efdec77. Un
+intento0/40, primerpositive_adm Msg51000 Line17 en V13, errorframe invalido porque
+la guarda impidio ejecutar la fase. Supervisor contrasta9artefactosSHA,3baselines
+identicos desde conexiones nuevas y valores0installed/562ACL. Huellas negocio,
+catalogo,principales yACL exactas al baseline readonly propio previo. Se conserva
+fallo y no se repite matriz. Diagnostico supervisor metadata-only: dbo principal1
+es WINDOWS_USER(typeU), schemaOwner1,133SP. Propuesta V13 exigia typeS aunque
+contrato solo exige dbo propietario esperado; correccion R3 SQL aun no asignada.
+
+Primero A69.P1 actualiza herramientaTLS para estadoactual y pruebas offline,
+ownership scripts/configure-isolated-sqlserver-tls.ps1 y suite nueva. Script6nov
+tiene baseline/ruta fija historica: no ejecutar Apply tal cual. Plan/Apply deben
+ser cerrados, fingerprint explicito, evidencia nueva/diario/guardas previas y
+ninguna mutacion en worker; supervisor revisara antes de aplicar. ReinicioQA no
+solapa pruebasSQL porque E2settledfailed. Contrato SQL-01-A69-P1.md. Cuenta/Run
+sin cambios; ningun reintentoSQL o accionTLS se ha ejecutado por este permiso aun.
+
+A69 parentTask task_7e312870e8d4 pasa ready por nueva autorizacion; preparacion
+hija task_967fa9dfa0c7/ctx_a8da76cc5193 ready/keptOpen en terminal retenida.
+No se cambia status de E2failed ni se marca cadenaTLS como validada.
+
+## D-87.G: QA arrancada, baseline R2 real PASS y gate E2, 2026-11-10
+
+Usuario reitera terminar pendientes y comunica Docker levantado. Inspeccion
+readonly confirma ComposeHealth heredado MySQL, no destinoSQLServer. No tocar
+otros proyectos/contenedores. Reintento de arranque exclusivo QA por nuevo encargo:
+wrapper identico revisado cambia SOLO outputdir environment-attempt2, Windows
+acepta elevacion y finaliza exit0/os_verified; no TLS/binding/config cambios.
+HEALTHPROJECTQA RunningManual PID19056 observado, loopback14335/DAC61409, huella
+protegida a04d8236...ae8ca2af identica antes/despues. No otros servicios modificados.
+
+Supervisor ejecuta probe readonly COMMON+baseline con fuenteR2 congelada:raw0,
+stderr0, installed0/562ACL/history0/modeOPEN y fingerprints de tablas/modulos/
+columnas/principales/ACL obtenidos. Confirma que la guarda corregida acepta el
+entorno real, no compila ni instala V13. Evidencia supervisor-baseline.json en
+environment-attempt2. Se autoriza E2 PRE una vez,40fases rollback-only desde
+snapshot r2-review, sin POST ni COMMIT. Contrato PAC-01-B1-QA-E2.md, misma pareja
+de cuentas y mismo Run, no nuevo entorno DB ni setup/reapply.
+
+E2 delegada por follow_up al retenido: task_091da7344237 /
+ctx_622d6efdec77, recibo ready. Supervisor no genera trafico SQL/API concurrente.
+
+## D-87.F: R2 aceptada offline y arranque QA preparado, 2026-11-10
+
+Entrega msg_65cb13a6eb51 task_4c1004abeb3d/ctx_9c62d76c4893 succeeded EN_REVISION.
+Supervisor congela fuentes/reporte, revisa diff COMMON/PRE/POST, contrasta672SHA
+y15artefactos y verifica cuatro puntos de captura frescos. Runner y V13 intactos;
+SQL de prueba nuevo8BCAF401111C311297B4E75331DE3E1BC48716029D87D5E5667E2CAAB94B3A61.
+125lotes interceptados/11mutaciones son OFFLINE, sin conexiones de motor; R2
+VALIDADA OFFLINE, no aceptacion de V13 ni negocio. Historial de dos errores del
+harness/reporte worker conservado, no omitido. Evidencia local r2-review.
+
+Plan OS sin elevacion falla INSPECTION_ACCESS_DENIED sin mutacion. Helper QA
+conserva SHA3FBC605A...A2BD831. Wrapper Start-only comparado con version9nov:
+solo cambia directorio de evidencia, prefijo y huella protegida actual
+a04d8236d807b3527dce32d8c8168e2e691902c89c0dd3eb79dda933ae8ca2af. Observacion
+actual MSSQLSERVER Running/Auto PID21208,SQLBrowser Stopped/Disabled; huella incluye
+estado/PID, no se exige la observacion9nov tras recuperacion externa. Se exige
+igualdad actual antes/despues. Wrapper hash B47D97713938ECBD0D6DCFD74FB9BF6CD64AEC2711495D00CDFD8056AC023C60,
+exige plan EXACTO una accionStart con QAStopped o aborta sin configurar. No SQL,
+TLS/binding/restart ni servicio ajeno. Invocado UNA vez mediante RunAs Windows;
+no se asume aceptacion ni arranque hasta artefacto final/os_verified.
+
+Resultado de esa invocacion: launch_failed/System.InvalidOperationException,
+sin nativeError disponible en recibo; no se atribuye cancelacion ni causa concreta.
+Wrapper no llego a entered, servicio sigueStopped. No retry automatico; el bloqueo
+de motor ahora requiere completar arranque local con permisos Windows. No hubo
+accionTLS ni ejecucion de SQL, y V13 sigue sin instalarse.
+
+## D-87.E: continuidad tras recuperacion de Orca, 2026-11-10
+
+Usuario reitera continuar pendientes. Mismo Run run_624b9269b491 revinculado;
+raiz/rama/worktrees y fuentes propuestas conservados, HEAD4d461e7. Orca recupero
+ctx_8d16509fd38f como abandoned/terminal_missing/outcome failed; Task E1 figuraba
+ready. Supervisor la asienta failed con informe real0/40 y fallo previo, sin
+inventar worker_done ni repetir matriz o cambiar estado de tareas ajenas.
+
+Terminal antiguo stale, se redescubre el reemplazo retenido sin cerrar ventanas:
+term_7286bcc6-6224-4d5f-a389-b06a09939ca3, /status recuperapiura@gmail.com,
+session01a1c5c7-d534-7d01-ac3a-c18bf31075ec, mismo worktree; --no-daemon confirmado.
+Identidades almacenadas de ambos roles verificadas mediante IdentityOnly, sin
+cuentas globales. Cuota5h100% y semanal2% observada: no garantia futura. Terminal
+coordinador actual term_f04e8b91-4227-4638-a1cf-cce7a8f01802; conversaciones previas
+conservadas, sin enviarles tareas ni cerrar terminales.
+
+HEALTHPROJECTQA Stopped/Manual. R2 se limita ahora a codigo/regresiones offline
+del verificador; no probeSQL ni servicios/UAC/TLS. Fuentes worker V13 y test SQL
+conservan SHA aprobados. Se mantiene arquitectura EXECUTE/SP y gate independiente
+de motor posterior. Contrato PAC-01-B1-R2.md actualizado; no activar producto parcial.
+
+R2 iniciada en terminal retenida verificada: task_4c1004abeb3d /
+ctx_9c62d76c4893, mismo Run, recibo ready/keptOpen. Implementacion delegada;
+aceptacion independiente pendiente. Supervisor mantiene ownership de documentos.
+
+## D-87.D: E1 falla guarda inicial y cierre bloqueado por cuota, 2026-11-09
+
+msg_51ddce127576/msg_stop_fdf88eefd7058a56aaa36d5e: UNICO intento E1 falla
+BASELINE_FAILED antes de fases.0/40,sqlcmd16,Msg59999 Line17COMMON; sin instalacion,
+fixtures,POST o fingerprint valido. Informe/harness/ledger preservados en
+tmp/pac-01-b1-20261109/engine-review. Programador agota cuota antes de worker_done;
+Orca Dispatch sigue abierto, no se simula cierre ni se despacha dependiente.
+
+Supervisor diagnostica con dos conexiones de metadatos/session solamente. V13
+ausente,133SP/562ACL,0principalesB1. Estado standalone externo0/0, predicado
+combinado de estado/permisos rechaza y control separado acepta. Recurre bugA62;
+COMMON debe capturar estado fuera de expresiones metadata, conservando permisos.
+Diagnostico anterior con count2/state1 inline no prueba TX externa. No hubo retry
+de matriz ni cambios de producto/datos persistentes; fingerprint negocio completo
+no obtenido, no se inventa igualdad. R2 preparado PAC-01-B1-R2.md, sin despachar
+hasta cierre del intento failed. Preservar cuentas/sesion y bloqueoUAC/TLS.
+
+## D-87.C: R1 aceptada para transporte y gate PRE, 2026-11-09
+
+R1 recibida msg_d5d25026633d; el cierre formal requirio guia de recuperacion y
+msg_2754383ea860, sin reset/retry/cambio de terminal. Supervisor congela fuentes
+e informe, verifica delta exclusivo del SQL de prueba, V13 inmutable y672SHA.
+Diff limitado a LPC, -y0 sin-h, alias y parser estricto; argv/input real con mock,
+frame Unicode largo y5negativos independientes pasan. Hash del probe readonly
+unico y payload8000caracteres contrastados; no repetir conexion para validar R1.
+Primer harness supervisor fallo hash por literal Unicode recodificado en stdin
+PowerShell; corregido con escapes ASCII, historial preservado y sin probe repetido.
+
+R1 VALIDADA TRANSPORTE; no prueba motor/negocio ni instalaV13. Se autoriza E1
+PRE_APLICACION una vez sobre snapshot r1-review, mismas fuentes SHA,40fases
+rollback-only con fingerprints antes/despues y runtime impersonado restringido.
+QA exclusiva sin trafico API concurrente; parar al primer fallo, sin corregir ni
+reintentar. Contrato PAC-01-B1-QA-E1.md. POST/autocommit espera instalacion posterior;
+no COMMIT ni aplicacion persistente en este gate, UAC/TLS sigue bloqueada.
+
+E1 delegada al mismo programador, task_5574317f354b / ctx_8d16509fd38f,
+Run run_624b9269b491 existente; recibo follow_up state ready.
+
+## D-87.B: revision de B1 devuelta por transporte, 2026-11-09
+
+Entrega task_c53c79f7a74c/ctx_a5d34612a3a6 recibida EN_REVISION. Supervisor
+congela2fuentes y reporte, contrasta670fuentes previas sin cambios y V1..V12
+inmutables. V13 cumple lectura estatica inicial, no constituye aceptacion de motor.
+Controlador combina -h/-y0 incompatibles (sqlcmd exit1 antes de conectar).
+Probe readonly posterior: TCP Windows Integrated fallaSSPI; LPC local responde
+instancia/base/CONTROL correctos. Sin aplicarV13 ni ejecutar matriz/fixtures.
+R1 limita ownership al SQL de prueba, fija LPC administrativo, preserva V13 SHA
+CB57FAD4A4F639F5F442C2AC8ADAFFC92001B9953A108FF1DEF4CF861D5CC060 y exige
+regresion del argv real. Autoriza solo un probe readonly metadatos/JSON sintetico
+largo, no fases PRE/POST ni mutaciones. Contrato PAC-01-B1-R1.md. JDBC runtime,
+cuentas, servicios y bloqueoUAC/TLS conservados. No se integra producto aun.
+
+R1 delegada por Orca al mismo programador verificado, task_c4c2ade2df22 /
+ctx_2cfd21810392, Run existente run_624b9269b491; recibo follow_up state ready.
+
+## D-87: siguiente lectura administrativa de vinculos, 2026-11-09
+
+Entrega PAC-01.A revisada publicada4d461e7094563494aa9098362683cadf0f6fea6b en
+origin/health/production-wave0,40rutas explicitas de codigo/docs/evidencia sintetica;
+remoto confirmado en el mismoSHA, sin main/despliegue/secretos/DPAPI/tmp/logs.
+PAC-01.B1 task_c53c79f7a74c prepara V13 y prueba SQL, SOLO2rutas nuevas del worker,
+sin SQL/API/servicios/credenciales operativos en ese Dispatch. Contrato PAC-01-B1.md.
+
+Nueva entrada propuesta usp_patient_links_list(patient_id,limit,offset), una
+proyeccion minima de vinculos existentes con user_name, sin email/credenciales/
+contenido clinico o directorio global. Tenant por contexto, scopeREQUEST/TX externa,
+ADM/REC actuales sin perfiles plataforma/portal (mixtoADM+PAC tambien denegado),
+paciente propio y auditoriaPATIENT_LINKS_READ. Activos/inactivos historicos visibles;
+active se refiere al vinculo y no promete acceso efectivo a portal. Lectura
+administrativa permitida sin guarda de escritura/contratoPORTAL vigente para
+conservar consulta; escritura existente mantiene sus restricciones. No nueva
+resolucion de identidades, vinculacion, consentimientos ni habilitacion portal.
+
+V13 futura agrega unSP y ACL exactaGRANTruntime/DENYbootstrap (+2), sin tablas,
+columnas,indices,triggers o migraciones previas editadas. Revision de motor antes
+de aplicar y adaptador/API/UI por paquetes siguientes. Procedimientos propuestos
+no se consideran instalados ni backend parcialmente activado. Los25fixtures A y
+todo trabajo historico se conservan; no reejecutar setup por conteos postrafico.
+
+D-87.A: pregunta msg_21e8d28abfea sobre imposibilidad de autocommit mientras el SP
+nuevo exista solo dentro de la transaccionDDL rollback-only. Se acuerdan dos fases
+en el MISMO archivo: PRE_APLICACION revertida y AUTOCOMMIT_POST_APLICACION con SP
+previamente instalado tras revision independiente. Segunda fase conexionnueva,
+IMPLICIT_TRANSACTIONS OFF/@@TRANCOUNT0, runtime restringido y51000 antes de
+lectura/auditoria; sin instalar/COMMIT/fixtures para facilitarla. Sin SP instalado
+queda PENDIENTE_POR_PRERREQUISITO, noPASS. Este Dispatch sigue sin ejecucion SQL,
+sin ampliar ownership ni autorizar instalacion. Resultados se documentan separados.
+
 ## D-86: directorio/ficha de pacientes aceptados en QA real, 2026-11-09
 
 PAC-01.A queda VALIDADA LOCAL con SQL Server/HTTP/UI real. E1 misma task_c0871e7d4bb8,
