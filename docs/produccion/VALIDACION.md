@@ -1,5 +1,15 @@
 # Validacion y limites de evidencia
 
+## PAC-01.B2: INTEGRADA Y VALIDADA OFFLINE, 2026-11-10
+
+Ocho rutas revisadas,117artefactos/10build y678SHA comprobados; worker161focused
+y1007verifyPASS. Supervisor integra exacto y verifica Maven JDK21 propio1007/1007,
+0fails/errors/skips/raw0,68XML recontados. Lectura GETlinks SQL-only,descriptor
+tipado y proyeccion defensiva, roles ADM/REC sinPAC/RES mixtos; PUT/list/get/save/
+history sin cambios. Tests offline MockMvc/modelos no prueban HTTP/SQLreal.
+Evidencia PACIENTES_VINCULOS_API_20261110.json y D-87.R. B3UI preparado y QA
+real posterior pendiente; no TLS del backend, produccion o finalizacionPAC-01.
+
 ## Vinculos de pacientes: SQL local aceptada, 2026-11-10
 
 PRE E4:40 fases reales (5positivas/55lecturas y35negativas),81baseline crudos

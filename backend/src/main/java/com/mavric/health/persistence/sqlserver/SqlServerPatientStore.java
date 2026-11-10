@@ -33,6 +33,27 @@ public final class SqlServerPatientStore {
   var contact=json(input.contact(),true,0,Collections.newSetFromMap(new IdentityHashMap<>()));String payload;try{Checks.json(contact,mapper);var body=new LinkedHashMap<String,Object>();body.put("name",input.name());body.put("domain",input.domain());body.put("identifier",input.identifier());body.put("birthDate",birth==null?null:birth.toString());body.put("species",input.species());body.put("contact",contact);body.put("allergies",List.copyOf(allergies));payload=mapper.writeValueAsString(body);}catch(tools.jackson.core.JacksonException invalid){throw SqlServerErrors.invalid();}
   String key=id==null?Checks.id():id;var rows=read(executor.execute(SqlServerProcedure.PATIENT_SAVE,c,key,payload,expected),request,1);if(rows.size()!=1)throw SqlServerErrors.database();return matching(rows.getFirst(),key);
  });}
+ /** Administrative read: historical link values are projected, never interpreted as write permissions. */
+ public List<Map<String,Object>> links(HttpServletRequest request,String patient,int limit,int offset){return within(()->{
+  var c=context(request,null,Set.of("ADM","REC"));
+  if(c.roles().contains("PAC") || c.roles().contains("RES"))throw ApiException.forbidden();
+  if(!canonical(c.requestId()))throw SqlServerErrors.database();
+  Checks.id(patient);int size=Checks.limit(limit);
+  var result=executor.execute(SqlServerProcedure.PATIENT_LINKS_LIST,c,patient,size,Math.max(0,offset));
+  if(result==null || result.resultSets().size()!=1 || result.resultSets().getFirst().size()>size)throw SqlServerErrors.database();
+  var users=new HashSet<String>();var rows=new ArrayList<Map<String,Object>>();
+  for(var row:result.resultSets().getFirst()){
+   String tenant=id(row,"tenantId"),key=id(row,"patientId"),user=id(row,"userId");
+   if(!c.tenantId().equals(tenant) || !patient.equals(key) || !users.add(user))throw SqlServerErrors.database();
+   String name=text(row,"userName",false),relationship=text(row,"relationship",false);
+   if(name.length()>160 || relationship.length()>80)throw SqlServerErrors.database();
+   boolean active=bool(row,"active");Object raw=field(row,"scopes");
+   if(!(raw instanceof List<?> values))throw SqlServerErrors.database();
+   var scopes=new ArrayList<String>();for(Object value:values){if(!(value instanceof String scope))throw SqlServerErrors.database();scopes.add(scope);}
+   var out=new LinkedHashMap<String,Object>();out.put("tenantId",tenant);out.put("patientId",key);out.put("userId",user);out.put("userName",name);out.put("relationship",relationship);out.put("active",active);out.put("scopes",List.copyOf(scopes));rows.add(Collections.unmodifiableMap(out));
+  }
+  return List.copyOf(rows);
+ });}
  public Map<String,Object> link(HttpServletRequest request,String patient,com.mavric.health.patients.domain.Requests.Link input){return within(()->{
   var c=context(request,"PORTAL",Set.of("ADM","REC"));Checks.id(patient);if(input==null || input.relationship()==null || input.relationship().isBlank() || input.relationship().length()>80 || input.scopes()==null || input.scopes().isEmpty())throw SqlServerErrors.invalid();Checks.id(input.userId());var scopes=new ArrayList<String>();for(Object value:input.scopes()){if(!(value instanceof String scope) || !Set.of("APPOINTMENTS","DOCUMENTS","BILLING").contains(scope))throw SqlServerErrors.invalid();scopes.add(scope);}String body;try{body=mapper.writeValueAsString(Map.of("userId",input.userId(),"relationship",input.relationship(),"active",input.active(),"scopes",List.copyOf(scopes)));}catch(tools.jackson.core.JacksonException invalid){throw SqlServerErrors.invalid();}
   var result=executor.execute(SqlServerProcedure.PATIENT_LINK_SAVE,c,patient,body);if(result==null || result.resultSets().size()!=1 || result.resultSets().getFirst().size()!=1)throw SqlServerErrors.database();var row=result.resultSets().getFirst().getFirst();if(!c.tenantId().equals(id(row,"tenantId")) || !patient.equals(id(row,"patientId")) || !input.userId().equals(id(row,"userId")))throw SqlServerErrors.database();Object values=field(row,"scopes");if(!(values instanceof List<?> list) || list.isEmpty())throw SqlServerErrors.database();var stored=new ArrayList<String>();for(Object value:list){if(!(value instanceof String scope) || !Set.of("APPOINTMENTS","DOCUMENTS","BILLING").contains(scope) || stored.contains(scope))throw SqlServerErrors.database();stored.add(scope);}return Map.of("tenantId",c.tenantId(),"patientId",patient,"userId",input.userId(),"relationship",text(row,"relationship",false),"active",bool(row,"active"),"scopes",List.copyOf(stored));

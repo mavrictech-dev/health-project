@@ -1,5 +1,24 @@
 # Decisiones y contratos de integracion
 
+## D-87.R: B2 API integrada offline; gate B3 UI, 2026-11-10
+
+msg_c002ce76f938/task_b79ceb263c47/ctx_233b5c88077b succeeded EN_REVISION.
+Supervisor congela117artefactos+10build,678SHA,7modificaciones+1alta exclusivas;
+lee4diffs producto y4tests, contratos V8historicos conservados/V13delta explicito.
+Integra8fuentes por SHA exacta y ejecuta Maven verify propio JDK21:1007tests,
+0fails/errors/skips, raw0BUILD SUCCESS.68XMLworker y68XMLsupervisor contrastados.
+Aceptada INTEGRADA OFFLINE, no HTTP/SQLreal/UI ni backendtruststore configurado.
+Evidencia PACIENTES_VINCULOS_API_20261110.json. Fallos auxiliares de agregacion
+(prefijoXML y codificacionUTF16logPowerShell) retenidos, sin reejecutar tests ni
+confundirlos con fallos de producto. B1 no se repite ni se reaplica.
+
+Siguiente B3consulta UI, seis rutas explicitas PAC-01-B3-UI.md, mismo programador.
+Entrada opt-in desde ficha, ADM/REC separados de writable,20+lookahead21,
+sin nueva escritura/directorioglobal; abort/invalidation de contexto y errores
+seguros. Playwright interceptado y regresionA/democomo pruebas sinteticas;
+QA real HTTP/SQL/TLSruntime separado posterior a review. No certificados/UAC/
+servicios/DPAPI en B3. PAC-01 completo conserva estadoPARCIAL.
+
 ## D-87.Q: B1 SQL validada local y continuidad API, 2026-11-10
 
 POST msg_b4a030de36f1/task_a365f58c15b4/ctx_c0ff2493b6d1 succeeded.
@@ -19,6 +38,8 @@ scopes historicos se muestran como lista de strings, incluidos vacios y valores
 desconocidos, sin conceder derechos ni reutilizar validaciones de escritura.
 UI/HTTP/SQL reales y backend con truststore dedicado estricto quedan para gate
 posterior; no modificar certificados/servicios ni repetir A69 por esta entrega.
+
+B1 publicada en origin/health/production-wave0:677b19d61a270b24965510ac4de6af9645149fd2, SHA remoto confirmado. B2 delegada task_b79ceb263c47/ctx_233b5c88077b al mismo programador retenido, follow_up ready. Supervisor no modifica sus ocho rutas durante implementacion; espera aviso Orca para review.
 
 ## D-87.P: instalacion V13 reconciliada, gate POST, 2026-11-10
 

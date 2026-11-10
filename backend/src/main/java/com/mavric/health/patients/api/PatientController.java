@@ -9,6 +9,7 @@ public class PatientController {
     public PatientController(PatientService service) { this.service=service; }
     @GetMapping Object list(@RequestParam(defaultValue="") String query,@RequestParam(defaultValue="50") int limit,@RequestParam(defaultValue="0") int offset) { return service.list(query,limit,offset); }
     @GetMapping("/{id}") Object get(@PathVariable String id) { return service.get(id); }
+    @GetMapping("/{id}/links") Object links(@PathVariable String id,@RequestParam(defaultValue="50") String limit,@RequestParam(defaultValue="0") String offset) { return service.links(id,Integer.parseInt(limit),Integer.parseInt(offset)); }
     @PostMapping Object create(@Valid @RequestBody Patient p) { return service.save(null,p,0); }
     @PutMapping("/{id}") Object edit(@PathVariable String id,@Valid @RequestBody Edit p) { return service.save(id,p.patient(),p.expectedRevision()); }
     @PutMapping("/{id}/links") Object link(@PathVariable String id,@Valid @RequestBody Link p) { return service.link(id,p); }

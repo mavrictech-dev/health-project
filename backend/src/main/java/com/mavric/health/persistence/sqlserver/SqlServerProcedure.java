@@ -5,7 +5,7 @@ import java.time.Instant;
 import java.util.Collections;
 import java.util.List;
 
-/** Closed V3-V6 input contracts approved by V8; SQL defaults are explicit caller arguments. */
+/** Closed V3-V6/V8 contracts plus the explicit V13 read; SQL defaults are explicit caller arguments. */
 public enum SqlServerProcedure {
     // V3 / runtime; arguments stay positional, including SQL defaults.
     TENANT_BY_SLUG("usp_tenant_by_slug",
@@ -269,6 +269,11 @@ public enum SqlServerProcedure {
     PATIENT_GET("usp_patient_get",
             input("patient_id", JDBCType.CHAR, 36, null)),
     // V5 / runtime; arguments stay positional, including SQL defaults.
+    PATIENT_LINKS_LIST("usp_patient_links_list",
+            input("patient_id", JDBCType.CHAR, 36, null),
+            input("limit", JDBCType.INTEGER, 0, "50"),
+            input("offset", JDBCType.INTEGER, 0, "0")),
+
     PATIENT_HISTORY("usp_patient_history",
             input("patient_id", JDBCType.CHAR, 36, null)),
     // V5 / runtime; arguments stay positional, including SQL defaults.

@@ -1,0 +1,79 @@
+{
+  "date": "2026-11-10",
+  "taskId": "task_b79ceb263c47",
+  "dispatchId": "ctx_233b5c88077b",
+  "status": "ACCEPTED_INTEGRATED_OFFLINE",
+  "sourcePaths": 8,
+  "sourceHashesVerified": 678,
+  "workerArtifactsVerified": 117,
+  "workerBuildArtifactsVerified": 10,
+  "workerSurefireXmlFiles": 68,
+  "workerVerifyTotals": {
+    "tests": 1007,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "supervisorVerify": {
+    "command": "mvnw.cmd verify",
+    "jdk": "Temurin21.0.5",
+    "rawExit": 0,
+    "surefireXmlFiles": 68,
+    "totals": {
+      "tests": 1007,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "logSHA256": "23FF046104449D142239C0A2D27D86E70634865219930BF6D2D4200FFA246A90"
+  },
+  "sourcePins": [
+    {
+      "path": "backend/src/main/java/com/mavric/health/patients/api/PatientController.java",
+      "sha256": "33836870C1F46A37D3D0DE994EEA3C169E33032E9AF73E22EFFF7911B0D84719"
+    },
+    {
+      "path": "backend/src/main/java/com/mavric/health/patients/application/PatientService.java",
+      "sha256": "8530447AEA0A71BB435330588901134355BFF61E5198C139FBC817BE3FCE005B"
+    },
+    {
+      "path": "backend/src/main/java/com/mavric/health/persistence/sqlserver/SqlServerPatientStore.java",
+      "sha256": "AC7E01F82ADF6C6CF1BD790C21DD01087BBDB99AE556806C4639185E6E255F41"
+    },
+    {
+      "path": "backend/src/main/java/com/mavric/health/persistence/sqlserver/SqlServerProcedure.java",
+      "sha256": "297EA69B7600DB454B411A5F129EAF3EF568D283813821B83A5E07B7C813CE3B"
+    },
+    {
+      "path": "backend/src/test/java/com/mavric/health/patients/application/PatientServiceSqlServerTest.java",
+      "sha256": "90F4C9423405BD3F15AD0DA4222A15244519A068F61263F38885B50EAE642FAC"
+    },
+    {
+      "path": "backend/src/test/java/com/mavric/health/persistence/sqlserver/SqlServerPatientStoreTest.java",
+      "sha256": "036F80D2ABE34CA265056C51F2B5E704D624E646535EF3F9268A35030D3CE81E"
+    },
+    {
+      "path": "backend/src/test/java/com/mavric/health/persistence/sqlserver/SqlServerProcedureContractTest.java",
+      "sha256": "C648330714233072CFD1CB54AAE0190705621A0105564C78C55EDDD14C0856AF"
+    },
+    {
+      "path": "backend/src/test/java/com/mavric/health/patients/api/PatientLinksControllerSqlServerTest.java",
+      "sha256": "87651B3CEBCD3E8C2CC61FC20AF736F257D1C433D4AD63C6E855393804C33AE8"
+    }
+  ],
+  "review": [
+    "All four production diffs inspected; existing list/get/save/link/history remain unchanged",
+    "All four test diffs/new controller test inspected; historical V8 contracts preserved and V13 explicit delta",
+    "Eight files integrated by exact worker snapshot hashes; no executor, migration, config or frontend edits",
+    "Offline native MockMvc routing/error/role guards and modeled transaction tests are not real SQL/HTTP proof"
+  ],
+  "reviewHarnessHistory": [
+    "First supervisor artifact selector expected TEST-*.xml but artifacts are B2-verify-TEST-*.xml; rejected zero count. Corrected exact prefix and independently parsed68reports.",
+    "First supervisor evidence aggregator assumed UTF8 for PowerShell log; rejected UTF16 BOM before evidence writes. Corrected explicit BOM detection and checked immutable log; no Maven rerun or source edit."
+  ],
+  "limits": [
+    "Real HTTP/SQL and UI QA pending",
+    "No production approval or backend TLS configuration change",
+    "No B1 PRE/POST repeat"
+  ]
+}

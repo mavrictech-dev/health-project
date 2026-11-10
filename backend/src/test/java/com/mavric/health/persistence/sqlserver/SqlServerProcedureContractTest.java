@@ -78,7 +78,8 @@ class SqlServerProcedureContractTest {
         Map<String,SqlServerProcedure> catalog=new TreeMap<>();
         for (SqlServerProcedure procedure:SqlServerProcedure.values())
             assertNull(catalog.put(name(procedure),procedure),"Duplicate descriptor");
-        assertEquals(108,catalog.size());
+        assertEquals(109,catalog.size());
+        assertNotNull(catalog.remove("usp_patient_links_list"),"Only the explicit V13 delta extends V8");
         assertEquals(publicNames(snapshot),catalog.keySet());
         assertFalse(catalog.containsKey("usp_request_context"));
         assertEquals(2,catalog.values().stream().filter(SqlServerProcedure::bootstrap).count());
@@ -88,7 +89,7 @@ class SqlServerProcedureContractTest {
 
     @TestFactory Stream<DynamicTest> eachPublicSignatureMatchesOrderTypeLengthNameAndDefaultFromSqlResources() throws Exception {
         Snapshot snapshot=snapshot();
-        return Arrays.stream(SqlServerProcedure.values()).map(procedure -> DynamicTest.dynamicTest(name(procedure),()-> {
+        return Arrays.stream(SqlServerProcedure.values()).filter(p->p!=SqlServerProcedure.PATIENT_LINKS_LIST).map(procedure -> DynamicTest.dynamicTest(name(procedure),()-> {
             Contract contract=snapshot.procedures().get(name(procedure));
             assertNotNull(contract);
             assertEquals(snapshot.access().get(contract.name()).equals("bootstrap"),procedure.bootstrap());
@@ -108,6 +109,24 @@ class SqlServerProcedureContractTest {
                 assertEquals(Set.of("char","varchar").contains(sql.sqlType()),java.ascii(),location+" ASCII policy");
             }
         }));
+    }
+
+    @Test void v13AddsOnlyPinnedRuntimeLinksReadWithExactSignatureAndObjectPermissions() throws Exception {
+        String sql=resource("V13__patient_links_read.sql");
+        assertEquals("667D8C0731557625C662285DC0E56C885B57E50E7AFA5AF63EBEA2030E3ACF51",
+                HexFormat.of().withUpperCase().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(sql.getBytes(StandardCharsets.UTF_8))));
+        var parsed=procedures(sql);
+        assertEquals(Set.of("usp_patient_links_list"),parsed.keySet());
+        var contract=parsed.get("usp_patient_links_list");var procedure=SqlServerProcedure.PATIENT_LINKS_LIST;
+        assertFalse(procedure.bootstrap());assertEquals("{call dbo.usp_patient_links_list(?,?,?)}",procedure.call());
+        assertEquals(List.of(new SqlParameter("patient_id","char",36,0,null,false),new SqlParameter("limit","int",0,0,"50",false),new SqlParameter("offset","int",0,0,"0",false)),contract.parameters());
+        assertEquals(3,procedure.parameters().size());
+        for(int i=0;i<3;i++){var expected=contract.parameters().get(i);var actual=procedure.parameters().get(i);assertEquals(expected.name(),actual.sqlName());assertEquals(expected.jdbcType(),actual.type());assertEquals(expected.length(),actual.length());assertEquals(expected.defaultLiteral(),actual.defaultLiteral());assertEquals(i==0,actual.ascii());}
+        var tokens=lex(sql);var permissions=new ArrayList<List<String>>();
+        for(int i=0;i<tokens.size();i++)if(is(tokens.get(i),"GRANT") || is(tokens.get(i),"DENY") || is(tokens.get(i),"REVOKE")){
+            var cursor=new Cursor(tokens,i);var statement=new ArrayList<String>();do{statement.add(cursor.take());}while(!statement.getLast().equals(";"));permissions.add(statement);
+        }
+        assertEquals(List.of(List.of("GRANT","EXECUTE","ON","OBJECT",":",":","dbo",".","usp_patient_links_list","TO","hp_runtime_executor",";"),List.of("DENY","EXECUTE","ON","OBJECT",":",":","dbo",".","usp_patient_links_list","TO","hp_bootstrap_executor",";")),permissions);
     }
 
     @Test void contextRemainsInternalAndAllTenParametersAreBoundAndClearedFromIndependentSqlTypes() throws Exception {

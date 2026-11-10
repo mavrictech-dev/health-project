@@ -1,5 +1,13 @@
 # Orquestacion Codex de Health Project
 
+## B2 integrada offline; siguiente B3, 2026-11-10
+
+Task_b79ceb263c47/ctx_233b5c88077b aceptada tras review117artefactos/10build,
+678SHA,8rutas e integracion exacta. Maven supervisorJDK21verify1007/1007PASS;
+evidencia PACIENTES_VINCULOS_API_20261110.json. B3seisrutas segunPAC-01-B3-UI.md,
+misma cuenta/sesion/Run; fuentesprevias preservadas. UI opt-in, pruebas sinteticas
+yregresionA/demo, sin accionesSQL/TLS/DPAPI/servicios. QAreal solo tras review.
+
 ## B1 SQL cerrada; siguiente API offline, 2026-11-10
 
 Mismo Run y pareja vigente. B1PRE40/40 aceptada (55lecturas,35negativas), V13
