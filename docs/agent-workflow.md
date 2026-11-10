@@ -1,5 +1,16 @@
 # Orquestacion Codex de Health Project
 
+## B1 SQL cerrada; siguiente API offline, 2026-11-10
+
+Mismo Run y pareja vigente. B1PRE40/40 aceptada (55lecturas,35negativas), V13
+instalada/reconciliada una vez:134SP/564ACL. POSTtask_a365f58c15b4 aceptada por
+revision independiente17artefactos/677fuentes/3baseline/1negativo51000/TX0;
+freshsupervisor igual al install. No repetir PRE/POST ni reapply. Evidencia
+PACIENTES_VINCULOS_SQL_20261110.json. B2 contrato PAC-01-B2-API.md:8rutas
+Java/tests, sin SQLreal/HTTP/UI/TLS/servicios ni cambios de fuentes supervisor
+hasta review. Las afirmaciones siguientes sobre V13ausente/QApendiente son
+historicas. A69 JDBC local sigue aceptada; backend truststore aun por configurar.
+
 ## A69 cerrada local JDBC, 2026-11-10
 
 TLS_LOCAL_20261110.json: unexecute-once3conexiones/1healthSP,4checksPASS reales

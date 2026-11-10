@@ -1,0 +1,154 @@
+{
+  "date": "2026-11-10",
+  "runId": "run_624b9269b491",
+  "scope": "PAC-01.B1 SQL local QA only",
+  "status": "VALIDATED_LOCAL_SQL",
+  "accounts": {
+    "architect": "mendozadeafabisa@gmail.com",
+    "programmer": "recuperapiura@gmail.com"
+  },
+  "sources": [
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V13__patient_links_read.sql",
+      "sha256": "667D8C0731557625C662285DC0E56C885B57E50E7AFA5AF63EBEA2030E3ACF51"
+    },
+    {
+      "path": "backend/scripts/verify-sqlserver-patient-links-read.sql",
+      "sha256": "8DF151ED742B4F17BF10963CD5789E0FF07C7C837194A08B47B04E73BAC15CA1"
+    }
+  ],
+  "preApplication": {
+    "taskId": "task_ea32e297d259",
+    "dispatchId": "ctx_b254a48d7c5c",
+    "attempts": 1,
+    "retries": 0,
+    "elapsedSeconds": 35.522426,
+    "phases": 40,
+    "positivePhases": 5,
+    "businessReads": 55,
+    "negativePhases": 35,
+    "freshBaselineFrames": 81,
+    "supervisor": {
+      "status": "ACCEPTED_PRE_APPLICATION_REAL",
+      "phases": 40,
+      "positivePhases": 5,
+      "negativePhases": 35,
+      "businessReads": 55,
+      "rawBaselineFramesIndependentlyVerified": 81,
+      "rawPhaseFramesIndependentlyVerified": 40,
+      "sourceHashesVerified": 675,
+      "artifactHashesVerified": 286,
+      "freshFinalBaselineEqualsAll81": true,
+      "v13Installed": false,
+      "roleAclCount": 562,
+      "migrationSha256": "667D8C0731557625C662285DC0E56C885B57E50E7AFA5AF63EBEA2030E3ACF51",
+      "verifierSha256": "8DF151ED742B4F17BF10963CD5789E0FF07C7C837194A08B47B04E73BAC15CA1",
+      "postAutocommitTestExecuted": false,
+      "productionApproved": false
+    }
+  },
+  "installation": {
+    "attempts": 1,
+    "status": "COMMIT_ACKNOWLEDGED",
+    "principal": "hp_qa_isolated_migrator",
+    "transaction": "one external transaction; REVERT before COMMIT",
+    "ackEqualsFreshConnection": true,
+    "dataColumnPrincipalMembershipHashesUnchanged": true,
+    "existingModuleAndAclPreserved": true,
+    "moduleDelta": 1,
+    "objectAclDelta": 2,
+    "proceduresAfter": 134,
+    "roleAclAfter": 564,
+    "metadataReview": {
+      "procedures": 134,
+      "moduleHash": "238A044649B952D40ABD1DAADD10AE1C49C596AF34DFDD7724CAD9F73EEF21AA",
+      "callerContext": true,
+      "ansiNulls": true,
+      "quotedIdentifier": true,
+      "acl": [
+        {
+          "role": "hp_bootstrap_executor",
+          "permissionType": "EX",
+          "permissionState": "D",
+          "minor_id": 0,
+          "grantor": "dbo"
+        },
+        {
+          "role": "hp_runtime_executor",
+          "permissionType": "EX",
+          "permissionState": "G",
+          "minor_id": 0,
+          "grantor": "dbo"
+        }
+      ],
+      "expectedModuleHash": "238A044649B952D40ABD1DAADD10AE1C49C596AF34DFDD7724CAD9F73EEF21AA"
+    }
+  },
+  "postApplication": {
+    "taskId": "task_a365f58c15b4",
+    "dispatchId": "ctx_c0ff2493b6d1",
+    "attempts": 1,
+    "retries": 0,
+    "elapsedSeconds": 0.77795,
+    "cases": 1,
+    "expectedError": 51000,
+    "expectedMessage": "HP_INVALID:External transaction required",
+    "transactionCount": 0,
+    "xactState": 0,
+    "implicitTransactions": "OFF",
+    "auditUnchanged": true,
+    "freshBaselineFrames": 3,
+    "matchesInstallAckAndFresh": true,
+    "supervisor": {
+      "status": "ACCEPTED_LOCAL_SQL",
+      "artifactsVerified": 17,
+      "sourcesVerified": 677,
+      "rawBaselinesReparsed": 3,
+      "rawChecksReparsed": [
+        {
+          "phase": "autocommit",
+          "status": "PASS",
+          "rawExit": 0,
+          "error": 51000,
+          "xactState": 0,
+          "baselineRestored": true
+        }
+      ],
+      "matchesInstallAckAndFresh": true,
+      "additionalReadonlyBaselineMatches": true,
+      "migrationReapplied": false,
+      "newPREExecutions": 0,
+      "newPagingReads": 0,
+      "limits": [
+        "No Java/API/UI validation",
+        "No production enablement",
+        "LPC review is not a new TLS proof"
+      ]
+    }
+  },
+  "preservedFailedAttempts": [
+    {
+      "attempt": "E1",
+      "phases": 0,
+      "reason": "Transaction state read combined with metadata in QA guard"
+    },
+    {
+      "attempt": "E2",
+      "phases": 0,
+      "reason": "Owner guard incorrectly excluded legitimate Windows dbo"
+    },
+    {
+      "attempt": "E3",
+      "phases": 0,
+      "reason": "Reserved fixture identifier off; rejected invalid frame despite raw exit0"
+    }
+  ],
+  "limits": [
+    "Local isolated synthetic SQL Server QA; no production approval",
+    "POST is one new autocommit rejection; not another40-phase matrix or55 reads",
+    "No Java/API/UI links-read implementation or validation in B1",
+    "No backend runtime TLS reconfiguration; A69 dedicated JDBC evidence remains separate",
+    "No real data/recipients, deployment, main merge or FactuEz changes",
+    "Operational raw reports, ledgers and DPAPI remain local and excluded from Git"
+  ]
+}

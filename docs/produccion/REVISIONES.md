@@ -1,5 +1,18 @@
 # Revisiones del supervisor
 
+## PAC-01.B1: VALIDADA LOCAL SQL, 2026-11-10
+
+PRE E4:40 fases reales (5positivas/55lecturas y35negativas),81baseline crudos
+y40frames reinterpretados,675fuentes/286artefactos verificados. V13 integrada
+exacta y aplicada una vez en QA por migrador separado; ACK y nueva conexion
+coinciden,134SP/564ACL, datos/esquema previo/principales/roles preservados.
+Metadata independiente confirma definicion/callercontext y delta2ACL.
+POST:17artefactos/677fuentes verificados,3baseline crudos y1rechazo51000/TX0,
+sin auditoria; todos iguales al install y fresh independiente. Sin reejecucion
+de PRE o instalacion. Evidencia PACIENTES_VINCULOS_SQL_20261110.json, D-87.O/P/Q.
+Se acepta solo SQL local; API/UI y TLS del backend pendientes. E1/E2/E3 no se
+reclasifican como exitos. PAC-01.B2 definido para programador y revision posterior.
+
 ## A69: VALIDADA LOCAL JDBC TLS, 2026-11-10
 
 msg_2f0f72bec751, task_741dbe3719c7/ctx_7829652bd835 succeeded. Unlauncher

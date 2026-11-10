@@ -1,5 +1,127 @@
 # Decisiones y contratos de integracion
 
+## D-87.Q: B1 SQL validada local y continuidad API, 2026-11-10
+
+POST msg_b4a030de36f1/task_a365f58c15b4/ctx_c0ff2493b6d1 succeeded.
+Supervisor congela17artefactos y reporte, contrasta677SHA y reinterpreta tres
+baseline crudos y el unico resultado autocommit. Error51000 exacto, TX0/state0,
+IMPLICITOFF y sin auditoria nueva. Tres capturas iguales al ACK/fresh de
+instalacion; otra conexion readonly independiente tambien coincide. Sin retry,
+reaplicar V13 o repetir PRE. B1 VALIDADA LOCAL SQL: PRE40/40 y55lecturas previas,
+una instalacion supervisada reconciliada, un negativoPOST,134SP/564ACL.
+Evidencia PACIENTES_VINCULOS_SQL_20261110.json; historialE1/E2/E3 conservado.
+
+Siguiente dependencia PAC-01.B2: GET /api/patients/{id}/links, solo store SQL
+Server y SP tipado nuevo, ADM/REC con rechazo PAC/RES incluso mixtos, lectura
+historica sin PORTAL/write guard. Contrato PAC-01-B2-API.md:8rutas exclusivas,
+implementacion/pruebas offline por programador retenido, revision independiente.
+scopes historicos se muestran como lista de strings, incluidos vacios y valores
+desconocidos, sin conceder derechos ni reutilizar validaciones de escritura.
+UI/HTTP/SQL reales y backend con truststore dedicado estricto quedan para gate
+posterior; no modificar certificados/servicios ni repetir A69 por esta entrega.
+
+## D-87.P: instalacion V13 reconciliada, gate POST, 2026-11-10
+
+UNexecute install-v13-reviewed.py--execute:raw0COMMIT_ACKNOWLEDGED, reconexion
+freshBaseline igual al ACK, installed1/ACL564. UnaTXexterna bajoEXEAS usuario
+hp_qa_isolated_migrator yREVERTantesCOMMIT, ningun setup/logins/owner/negocio.
+Checks dePREreutilizadosvalidan oldACL/modulos exactos+1SP+2ACL,7columnas/3params,
+hashes de8tablas/columnas/principales/roles/mode iguales antescommit. No retry.
+
+Inspeccionindependiente de definicionUTF16LFtrim coincide
+238A044649B952D40ABD1DAADD10AE1C49C596AF34DFDD7724CAD9F73EEF21AA,
+134SP,callercontext,ANSI/QUOTEDON,ACLsoloEX/Ghp_runtime yEX/Dhp_bootstrap, grantordbo.
+Primerassertmetadatosauxiliarno acepto char4p.type sinRTRIM; proyeccion explicita
+RTRIM ycomparacionexactaPASS, sin reiterar instalacion ni cambiarpermisos.
+Outcome/SQL/diario conservados en tmp/pac-01-b1-20261110/install.
+
+SoloQA local, backend/Java/UI no activados. Se autoriza POST una vez conmain
+AUTOCOMMIT_POST_APLICACION, fuentescanonicas integradas yusuarioSQLruntime real
+impersonado, sinfixture/DDL/COMMIT. Esperar51000antesaudit/TX0 y3baselineiguales.
+Contrato PAC-01-B1-QA-POST.md. No PREreapply, TLS/servicios/DPAPI o probesextra.
+
+POST delegada task_a365f58c15b4/ctx_c0ff2493b6d1, recibo follow_up ready en
+programador retenido; supervisor sin trafico concurrente hasta cierre.
+
+## D-87.O: E4 aceptada, integrar y aplicar V13 soloQA, 2026-11-10
+
+E4msg_4d0afb1b91ad/task_ea32e297d259/ctx_b254a48d7c5c succeeded. Supervisor
+congela286artefactos/reporte,675SHA yrevalida salidas CRUD crudas conparserrevisado:
+40framesfase,81framesbaseline identicos,5positivas/55lecturas y35negativas reales,
+raw16/3998exacto dondecorresponde. Freshbaseline independiente igual a todaslas81,
+V13ausente/562ACL;0retries,35.522426s. E1/E2/E3 fallidos se preservan sinrelabelling.
+
+Se acepta PREreal y se integran2fuentes exactas a supervisor:V13667D8C07...E3ACF51
+yverificador8DF151ED...BAC15CA1. Decision supervisora de instalacion solo enQA
+existente por dependencia cumplida, bajo autorizacion continuada del usuario.
+No otro setup/flywayV1..V12, principal/owner/filasnegocio o grantglobal. Aplicar
+V13 una vez con hp_qa_isolated_migrator existente separado, unaTXexterna, checks
+catalogo/7columnas/firma y delta2ACL reutilizados EXACTOS de PREvalidada, hashes
+de datos/columnas/principales/membresias/mode iguales antes de COMMIT. Revertir
+impersonacion,COMMITsolo si1/1 yack0/0, reconciliar enconexionnueva, sinretry.
+
+Plan temporal install-v13-reviewed.py/apply-reviewed.sql, payloadSHA
+F858C5D926E7D93E2C992C52EC8952E27EF7CFDC10D37ABEA2B0D4E15D8AE488,
+unaCREATEPROCEDURE y2ACL. Primera preparacion fallo antesSQL por guardademasiado
+amplia que rechazaba INSERT@columns(metadata7descriptores delcheckrevisado);
+se permite exactamentedichotarget temporal, ninguna escritura de tablasnegocio.
+Historialretenido,0intentosSQL hasta plancompleto. No nuevo UAC/TLS/servicios.
+POST/autocommit siguependiente tras instalacion y nuevaQAdelegada. No backend/UI
+activados ni consideracion de migracion completa/produccion.
+
+## D-87.N: R4 aceptada y gate E4, 2026-11-10
+
+R4msg_e2e802a7642e/task_973a8f8ea6c5/ctx_5f00ab4aab73 succeeded. Supervisor
+congela fuentes/22artefactos,675SHA ydiff exacto5lugares, V13inmutable. Inspecciona
+todoPARSEONLYON->SQLgenerado->OFFaislado, salidasraw0vacias ydoomframe/3998raw16.
+RegresionindependienteargvrealV11 y7combinacionesinsegurasraw/Msgextra rechazadas.
+ProbeSYNTHETIC3998 no se etiquetaSPforeignauthorization ni fingerprintrestored.
+Baselineposterior completo igual aE3final,0V13/562ACL. R4VALIDADA SINTAXIS/PROTOCOLO,
+noSPcompilado/40casosnegocio. Verificador8DF151ED...BAC15CA1 congelado r4-review,
+V13667D8C07...E3ACF51 intacta. Se autoriza E4UNA PRE40fases rollback-only, sin
+probesextra/retry/instalacion/POST/COMMIT. Contrato PAC-01-B1-QA-E4.md, QAexclusiva.
+
+E4 delegada task_ea32e297d259/ctx_b254a48d7c5c, recibo follow_up ready en el
+retenido. Supervisor sin traficoSQL/API concurrente hasta resultado.
+
+## D-87.M: E3 falla sintaxis QA, R4 acotada, 2026-11-10
+
+E3msg_6c11a3c5dbde failed0/40,Msg156Level15 cerca'off' en @cases. Supervisor
+congela reporte/10artefactos y comprueba3baselinesidenticos,V13ausente/562ACL.
+Reconstruccionoffline delbatchubica columnaoff ylectura@off=off. Rawsqlcmd0
+con-V16 no causaPASS: frameinvalidoconstatoFAIL. No reiterar matriz defectuosa.
+
+Diagnosticos supervisor independientes,sinDDL/DML/negocio: -V11 retorna15 ante
+errorSQLseverity15; TXsesionsinteticaTHROW51002/CATCHstate-1 retorna16+solo3998
+al rollbackautomaticofinbatch. Protocoloactual no corresponde alraw1 delmodelo.
+Se autoriza R4 SOLO verificador:off->page_offset,-V11 yraw16estricto para3998,
+mismaframe/error/estado/baselines/40casos. V13/pin667D8C07...E3ACF51 inmutables.
+QAmax2probes cerrados:PARSEONLY todoSQLgenerado(noexecute/compile) ydoommetadata
+sintetico. Sinmatriz/instalacion/COMMIT hasta revision. Contrato PAC-01-B1-R4.md.
+Source oficial de PARSEONLY enlazada en contrato; no NOEXEC o sustitutos que
+compilen/ejecuten fixtures. TLSlocalvalidada no se reabre ni se cambia.
+
+R4 delegada task_973a8f8ea6c5/ctx_5f00ab4aab73, recibo follow_up ready en el
+programador retenido. Supervisor sin traficoQA concurrente durante los2probes.
+
+## D-87.L: R3 preflight aceptado, gate E3, 2026-11-10
+
+R3 msg_36375b32d969/task_7fe6306bdf1a/ctx_eb857fa274ca succeeded EN_REVISION.
+Supervisor congela2fuentes/reporte/artefactos, verifica675SHA y18artefactos,
+diffsoloowner/pin y SP+ACL byte-identicos, ejecuta regresion enTEMP independiente
+2pares/40negativos/14variantesPASS. ProbeSQLunico0/0->1/1->rollback0/0PASS revisado,
+sin repetirlo. BaselineindependienteantesE3 igual al postTLS yE2,0V13/562ACL.
+R3 VALIDADA PREFLIGHT, sin compilar/instalarSP o matriz. FalloLF/CRLF previo0SQL
+preservado; no tolerancia de pins ni cambioowner real.
+
+Fuentes congeladas r3-review V13667D8C07...E3ACF51 yverificador38F432F1...90344B.
+Autorizar E3unaPRE40fases rollback-only, mismo contrato/guardas/fixtures/errores y
+parada al primerfallo;QAexclusiva, no TLSrestart/DPAPI,POST o COMMIT. Contrato
+PAC-01-B1-QA-E3.md. CuerpoSP/ACL y controladorR2 quedan iguales a lo revisado.
+
+E3 delegada task_8dd7018f8dd2/ctx_60264a630817,recibo follow_up ready en el
+programador retenido. Supervisor no genera trafico concurrente durante matriz.
+
 ## D-87.K: TLS local validado, retomar guardadbo, 2026-11-10
 
 A69.QA.E1 msg_2f0f72bec751 task_741dbe3719c7/ctx_7829652bd835 succeeded.
@@ -23,6 +145,20 @@ paresS/INSTANCE1 oU/WINDOWS3 permitidos con ownershipreal exacto. No cambiarowne
 o permisos reales ni cuerpoSP/ACL, no matrices/autocommit/install todavia. Se
 autoriza unprobe delprimerbatchpreflight metadata-only enTXexterna revertida,
 sinDDL/filasnegocio, despues de diff/regresionoffline. Contrato PAC-01-B1-R3.md.
+
+Entrega TLS revisada publicada ce9b181011f0b1bad16722bb62daf0cb1bfd5c2e en
+origin/health/production-wave0, remotoSHA confirmado;17rutas explicitas, sin
+tmp/DPAPI/store/privatekeys ni main. R3 delegada task_7fe6306bdf1a /
+ctx_eb857fa274ca, recibo follow_up ready en programador retenido, mismo Run.
+
+D-87.K.A pregunta msg_375c136a0188: harnessR3 detuvo pin antes de ledger/SQL
+porque hashLF del texto no coincide con bytesCRLF escritos por Windows. Supervisor
+contrasta amboshashes ySQLcompleto metadata-only,ledgerreal ausente y2fuentes
+propuestasSHAcorrectos. Reply msg_a0c87dff2ba8 autoriza SOLO constantepin del
+harnessTEMP al hash real A6EF41B560EB682F771B45C9A63D3CA2AE3AB0B6369167CD51D8F88CDDF90048,
+sin normalizar/tolerar diferencias o editarSQL. Preservar fallo previo0conexion;
+se permite UNprobe aun no consumido, sin nuevo retry si falla. R3 sigue EN_CURSO,
+sin compilacionSP/matriz/instalacion ni aceptar la entrega antes de resultado.
 
 ## D-87.J: harness TLS P2 aceptado y gate JDBC real, 2026-11-10
 
