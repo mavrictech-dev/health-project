@@ -4,17 +4,20 @@ Canonical integration + explicit reviewed hashes are required before future exec
 import argparse,contextlib,ctypes,hashlib,importlib.util,json,os,re,stat,sys,subprocess
 from pathlib import Path
 ROOT=Path('D:/Mavric/Health Project');TEMP=Path('C:/Users/maxmo/AppData/Local/Temp')
-BASE=ROOT/'scripts/run-patients-real-qa.py';RUNNER=ROOT/'frontend/scripts/patient-links-real-qa.cjs';ENV=TEMP/'B5R3-environment.py';MANIFEST=TEMP/'B5R3-reviewed-pins.json';PREPARED=TEMP/'B4P1-prepared'
-LEDGER=PREPARED/'B5-E4-browser-attempt.json';COMPLETED=PREPARED/'B5-E4-browser-completed.json'
+EXPORT_ROOT=ROOT/'frontend/out'
+BASE=ROOT/'scripts/run-patients-real-qa.py';RUNNER=ROOT/'frontend/scripts/patient-links-real-qa.cjs';ENV=TEMP/'B5R4-environment.py';MANIFEST=TEMP/'B5R4-reviewed-pins.json';PREPARED=TEMP/'B4P1-prepared'
+LEDGER=PREPARED/'B5-E5-browser-attempt.json';COMPLETED=PREPARED/'B5-E5-browser-completed.json'
 READINESS=ROOT/'tmp/patients-real-env-20261109/environment-readiness.json';SEALED=READINESS.with_name('patients-manifest.dpapi');HELPER=ROOT/'scripts/provision-isolated-sqlserver-logins.py'
 BASE_SHA='249395F1120CDE3F68426339683BCC2117D3E4993E5C2F5553513FBB56E7EDFE';READINESS_SHA='94C962F88B2C346B6D3CE3DC2C461129B6730E02AF138E392A063C61B9F4EE08';CIPHER_SHA='adf5bada134203d6d69c2d1a662073fe411d2f8ff3f6e983e54fdbcff45d1aed';HELPER_SHA='4415F6DB8260B000F64023DA6D94E088FB49DE53FC55A9EF4140AA0329740EAD'
 HOSTS={'human':'qa-3fe6475a3f-a.health.localhost','otherHuman':'qa-3fe6475a3f-b.health.localhost','animal':'qa-3fe6475a3f-v.health.localhost'}
 CHECKS={'human-api-seven-fields-order-subpages','human-ui-opt-in-return-close-refresh','themes-mobile-desktop-keyboard','animal-api-ui-empty','other-tenant-neutral-404','anonymous-401','logout-query-expires-removes-rows'}
-REPORT=ROOT/'frontend/test-results/patient-links-real-qa/pacqa-20261109-a1/b5-readonly-e4/report.json'
+REPORT=ROOT/'frontend/test-results/patient-links-real-qa/pacqa-20261109-a1/b5-readonly-e5/report.json'
 CODES={'PIN_INVALID','INPUT_CHANGED','PATH_SCOPE_CHANGED','PRIOR_ATTEMPT','MANIFEST_CHANGED','MANIFEST_SCOPE_CHANGED','OUTPUT_INVALID','DEADLINE_FAILED','EXECUTION_FAILED','ENVIRONMENT_FAILED','UNSAFE_RUNNER_OUTPUT','RUNNER_TIMEOUT','READINESS_INVALID','PREREQUISITE_FAILED','PROCESS_TIMEOUT','PROCESS_ACTIVE_REMAINS','PROCESS_EARLY_EXIT','PUBLIC_REJECTED','PROCESS_JOB_FAILED','PROCESS_OUTPUT_LIMIT','PROCESS_IO_FAILED','SECRET_OUTPUT_REJECTED'}
 CODES.update({'PROCESS_CLEANUP_FAILED','PROCESS_CONTAINMENT_FAILED'})
 STEPS={'setup','browser-launch','context-create','page-create','navigation-access','public-context','login-form','login-submit','login-navigation','session-validation','cookie-validation','api-request','fixture-lookup','ui-ficha','ui-links','ui-assert','capture','logout','cleanup','input','unknown'}
 CATEGORIES={'DNS','CONNECT','TIMEOUT','JAVASCRIPT','ASSERTION','UNKNOWN'}
+DENIAL_METHODS={'GET','HEAD','POST','PUT','PATCH','DELETE','OPTIONS','OTHER'}
+DENIAL_CATEGORIES={'INVALID_URL','FOREIGN_ORIGIN','API_READ','API_WRITE','STATIC_PATH','ROUTE_HANDLER'}
 CLEANUP_CODES={'NOT_STARTED','COMPLETE','ASSIGN_FAILED','JOB_STOP_FAILED','ACTIVE_QUERY_FAILED','ACTIVE_REMAINS','JOB_CLOSE_FAILED','PROCESS_DRAIN_FAILED','PROCESS_WAIT_FAILED','STREAM_CLOSE_FAILED','TRANSPORT_FAILED'}
 RUNNER_CODES={'INVALID_FLAGS','INVALID_MANIFEST','INPUT_FAILED','HOST_MISMATCH','SESSION_MISMATCH','INVALID_RESPONSE','UNSAFE_REQUEST','PREREQUISITE_FAILED','REQUEST_ID_INVALID','REQUEST_ID_COLLISION','ASSERTION_FAILED','BROWSER_ERROR','REPORT_FAILED','UNSAFE_DIAGNOSTICS','UNEXPECTED_FAILURE'}
 class Failure(Exception):
@@ -37,9 +40,23 @@ def validate_scope(value,base):
     require(all(value[key]['hostname']==host for key,host in HOSTS.items()),'MANIFEST_SCOPE_CHANGED');return passwords
 def validate_diagnostic(value):
     require(type(value) is dict and set(value)=={'step','category'} and type(value['step']) is str and value['step'] in STEPS and type(value['category']) is str and value['category'] in CATEGORIES,'OUTPUT_INVALID');return dict(value)
+
+def validate_denial(value):
+    require(type(value) is dict and set(value)=={'method','category'} and type(value['method']) is str and value['method'] in DENIAL_METHODS and type(value['category']) is str and value['category'] in DENIAL_CATEGORIES,'OUTPUT_INVALID');return dict(value)
+
+def validate_static_export():
+    # Fixed reviewed manifest; inspect only the exact export entries, never crawl another root.
+    require(sha(MANIFEST)=='6BF5A98784DC300D3062449BDDEC7E66D05814FF3BD6EB29E2CDC1B911E35FA6','INPUT_CHANGED')
+    pins=json.loads(MANIFEST.read_text(encoding='utf-8'));require(type(pins) is dict and len(pins)==726,'INPUT_CHANGED')
+    files=[(Path(p),pin) for p,pin in pins.items() if Path(p).is_relative_to(EXPORT_ROOT)]
+    require(len(files)==444,'INPUT_CHANGED')
+    for path,pin in files:
+        relative=path.relative_to(EXPORT_ROOT)
+        require(all(part not in ('.','..') and bool(re.fullmatch('[A-Za-z0-9_@$+.-]+',part)) for part in relative.parts),'PATH_SCOPE_CHANGED')
+        no_reparse(path);require(path.is_file() and sha(path)==pin,'INPUT_CHANGED')
 def validate_report(value,passwords):
     # Report is a closed summary: no names, email, bodies, cookies, CSRF or arbitrary exceptions.
-    allowed={'schema','runId','mode','status','checks','reads','screenshots','uiPaging21Exercised','inactiveObserved','sqlAuditValidated','pagingLimit','code','phase','businessWrites','apiOrSqlAuditCountInferred','diagnostic'}
+    allowed={'schema','runId','mode','status','checks','reads','screenshots','uiPaging21Exercised','inactiveObserved','sqlAuditValidated','pagingLimit','code','phase','businessWrites','apiOrSqlAuditCountInferred','diagnostic','denial'}
     require(type(value) is dict and set(value)<=allowed and value.get('schema')=='patient-links-real-qa-v1' and value.get('runId')=='pacqa-20261109-a1' and value.get('mode')=='readonly' and value.get('status') in ('PASS','FAIL'),'OUTPUT_INVALID')
     text=json.dumps(value,ensure_ascii=False)
     for password in passwords:require(password not in text and json.dumps(password,ensure_ascii=True)[1:-1] not in text,'UNSAFE_RUNNER_OUTPUT')
@@ -51,7 +68,8 @@ def validate_report(value,passwords):
         if key in value:require(type(value[key]) is str and re.fullmatch('[A-Za-z0-9_-]{1,80}',value[key]),'OUTPUT_INVALID')
     if 'code' in value:require(value['code'] in RUNNER_CODES,'OUTPUT_INVALID')
     if value['status']=='FAIL':validate_diagnostic(value.get('diagnostic'))
-    else:require('diagnostic' not in value,'OUTPUT_INVALID')
+    else:require('diagnostic' not in value and 'denial' not in value,'OUTPUT_INVALID')
+    if 'denial' in value:validate_denial(value['denial'])
     if 'pagingLimit' in value:require(value['pagingLimit']=='Fixture has fewer than 21 links; real UI lookahead navigation not exercised','OUTPUT_INVALID')
     require(type(value.get('reads')) is list and len(value['reads'])<=200,'OUTPUT_INVALID');seen=set()
     for row in value['reads']:
@@ -59,7 +77,7 @@ def validate_report(value,passwords):
         for key in ('requestId','tenantId','patientId'):require(type(row[key]) is str and bool(re.fullmatch('[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}',row[key])),'OUTPUT_INVALID')
         require(row['requestId'] not in seen,'OUTPUT_INVALID');seen.add(row['requestId']);require(type(row['status']) is int and 100<=row['status']<=599 and (row['actorId'] is None or type(row['actorId']) is str and bool(re.fullmatch('[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}',row['actorId']))) and (row['status']!=401 or row['actorId'] is None) and type(row['phase']) is str and bool(re.fullmatch('[a-z0-9-]{1,60}',row['phase'])),'OUTPUT_INVALID')
     require(type(value.get('screenshots')) is list and len(value['screenshots'])<=20,'OUTPUT_INVALID')
-    for shot in value['screenshots']:require(type(shot) is dict and set(shot)=={'path','sha256'} and type(shot['path']) is str and bool(re.fullmatch(r'test-results/patient-links-real-qa/pacqa-20261109-a1/b5-readonly-e4/[a-z0-9-]+\.png',shot['path'])) and type(shot['sha256']) is str and bool(re.fullmatch('[A-F0-9]{64}',shot['sha256'])),'OUTPUT_INVALID')
+    for shot in value['screenshots']:require(type(shot) is dict and set(shot)=={'path','sha256'} and type(shot['path']) is str and bool(re.fullmatch(r'test-results/patient-links-real-qa/pacqa-20261109-a1/b5-readonly-e5/[a-z0-9-]+\.png',shot['path'])) and type(shot['sha256']) is str and bool(re.fullmatch('[A-F0-9]{64}',shot['sha256'])),'OUTPUT_INVALID')
     if value['status']=='PASS':require({200,401,404}<={row['status'] for row in value['reads']} and len(value['screenshots'])>=8,'OUTPUT_INVALID')
     return value
 def cleanup_state():return {'assigned':False,'stopAttempted':False,'activeProcessesAfterStop':None,'jobClosed':False,'processWaited':False,'processDrained':False,'streamsClosed':False,'unassignedProcessKilled':False,'code':'NOT_STARTED'}
@@ -136,6 +154,7 @@ class Operations:
         require(type(pins) is dict and set(pins)=={'launcher','runner','environment','manifest'} and all(type(v) is str and re.fullmatch('[A-Fa-f0-9]{64}',v) for v in pins.values()),'PIN_INVALID')
         require(pins['manifest'].upper()=='6BF5A98784DC300D3062449BDDEC7E66D05814FF3BD6EB29E2CDC1B911E35FA6','INPUT_CHANGED')
         for path,pin in {Path(__file__):pins['launcher'],RUNNER:pins['runner'],ENV:pins['environment'],MANIFEST:pins['manifest'],BASE:BASE_SHA,READINESS:READINESS_SHA,HELPER:HELPER_SHA}.items():no_reparse(path);require(sha(path)==pin.upper(),'INPUT_CHANGED')
+        validate_static_export()
         require(not LEDGER.exists() and not COMPLETED.exists() and not REPORT.parent.exists(),'PRIOR_ATTEMPT')
         readiness=json.loads(READINESS.read_text(encoding='utf-8-sig'));require(readiness.get('manifestCipherSHA256')==CIPHER_SHA,'READINESS_INVALID')
     def reserve(self):write_new(LEDGER,{'status':'STARTED','mode':'readonly','automaticRetry':False,'reviewRequired':True})
@@ -167,13 +186,15 @@ def execute(pins,operations=None):
                 response=ops.transport(base,wire);filtered=base.filter_result(response,'--readonly',passwords);handle['ensure_alive']()
                 report=ops.report(passwords);require((filtered['rawExit']==0)==(report['status']=='PASS'),'OUTPUT_INVALID')
                 if report['status']=='FAIL':result['diagnostic']=validate_diagnostic(report['diagnostic'])
+                if 'denial' in report:result['denial']=validate_denial(report['denial'])
                 require(report['status']=='PASS','PREREQUISITE_FAILED' if report.get('code')=='PREREQUISITE_FAILED' else 'EXECUTION_FAILED')
                 result={'status':'PASS','mode':'readonly','rawExit':filtered['rawExit'],'automaticRetry':False,'credentialsPrinted':False,'checks':len(report['checks']),'linkReadsObserved':len(report['reads']),'uiPaging21Exercised':report['uiPaging21Exercised'],'sqlAuditValidated':False}
             except Exception as error:
                 # Preserve the QA failure through the unchanged context's normal teardown.
                 # If teardown itself fails, the outer exception takes precedence.
-                detail=result.get('diagnostic');result={'status':'FAIL','code':getattr(error,'code',None) if getattr(error,'code',None) in CODES else 'EXECUTION_FAILED','automaticRetry':False,'credentialsPrinted':False}
+                detail=result.get('diagnostic');denied=result.get('denial');result={'status':'FAIL','code':getattr(error,'code',None) if getattr(error,'code',None) in CODES else 'EXECUTION_FAILED','automaticRetry':False,'credentialsPrinted':False}
                 if detail is not None:result['diagnostic']=detail
+                if denied is not None:result['denial']=denied
     except Exception as error:result={'status':'FAIL','code':error.code if isinstance(error,Failure) else (error.code if getattr(error,'code',None) in CODES else 'EXECUTION_FAILED'),'automaticRetry':False,'credentialsPrinted':False}
     finally:
         wire=None;passwords.clear() # Immutable bytes/strings cannot be promised erased.

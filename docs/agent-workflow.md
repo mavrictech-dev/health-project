@@ -1,5 +1,24 @@
 # Orquestacion Codex de Health Project
 
+## B5R4 integrada offline; E4 fallida con API parcial, 2026-11-10
+
+R4 task_2610b1d024fb/ctx_eb4e947dbb4f aceptada: 37 artefactos/695 fuentes,
+726 pines/214 historicos verificados; cuatro fuentes integradas por SHA.
+Supervisor check/111 frontend/19 Python PASS; 609 decisiones API conservadas.
+444 archivos estaticos pinneados/249 alias exactos, validacion hash/reparse antes
+de secretos; primera denegacion cerrada, sin ampliar API/escrituras. Contexto E5
+solo tres constantes/manifest identico, cookie/transporte/cleanup intactos.
+VINCULOS_QA_CORRECCION_R4_20261110.json; sin red/SQL/DPAPI/Edge real en preparacion.
+
+E4 task_d85679301779/ctx_9f7c59b345f1 sigue FALLIDA, REVISADA: un control API,
+tres lecturas200 con tres auditorias correlacionadas, cero violaciones; despues
+UNSAFE_REQUEST en human-ui, seis controles pendientes. Negocio/ACL/historia y
+procesos protegidos iguales; una sesion nueva/revocada y cleanup medido0.
+33 artefactos/695 fuentes/726 pines/175 historicos contrastados; solicitud exacta
+rechazada/causa no observadas. VINCULOS_QA_FALLO_E4_20261110.json. Evidencia API
+parcial no equivale a UI/negativos ni QA completa. Siguiente E5 segun contrato
+PAC-01-B5-E5.md: UNA QA real readonly con epoch fresco/audit y cleanup medidos.
+
 ## B5R3 integrada offline; E3 fallida preservada, 2026-11-10
 
 R3 task_a96d20ae95f1/ctx_a3cf0f3b75a2 aceptada: supervisor contrasta 33

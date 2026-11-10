@@ -1,0 +1,44 @@
+{
+  "taskId": "task_2610b1d024fb",
+  "dispatchId": "ctx_eb4e947dbb4f",
+  "artifactsVerified": 37,
+  "workerSourcesVerified": 695,
+  "outsideOwnershipUnchanged": 691,
+  "pinsVerified": 726,
+  "historyFilesVerified": 214,
+  "contextExactThreeConstants": true,
+  "integratedSources": {
+    "frontend/scripts/patient-links-real-qa.cjs": "F3272DAA41744593831C992ED09FB8C855B0A83879DCA2C68448818985DD9022",
+    "frontend/tests/patient-links-real-qa.test.ts": "6409AA334264283897297EF9B72BE36722507EA72612BBD36AE1ABAFAADC0094",
+    "scripts/run-patient-links-real-qa.py": "804B2B5A969876291A1B35C14DD68C3213683D6B61FF6D57110D109433EBF614",
+    "scripts/tests/test_patient_links_real_qa_launcher.py": "FC74ADF9C026DB26FFB78A4F9DE861D2138BA129661ADFAF59E290EBF84BA5AA"
+  },
+  "review": "Static inventory/aliases and closed denial reviewed; API/auth decision predicates unchanged, 444 export files verified before context/credentials. Same-origin and write guards retained; E5 fixed namespace/context. No product, base transport or cleanup changes. Real QA pending.",
+  "date": "2026-11-10",
+  "status": "VALIDATED_AND_INTEGRATED_OFFLINE",
+  "independentFrontendTests": 111,
+  "independentPythonTests": 19,
+  "independentTypecheck": "PASS",
+  "independentCommandExits": [
+    0,
+    0,
+    0
+  ],
+  "apiDecisionComparisons": 609,
+  "staticFiles": 444,
+  "staticRoutes": 693,
+  "staticAliases": 249,
+  "realQAExecuted": false,
+  "contextSHA256": "C5BB8B5D909121FA986BCCC83413C200229226925F3B118027CA26BC0B5A4BEF",
+  "manifestSHA256": "6BF5A98784DC300D3062449BDDEC7E66D05814FF3BD6EB29E2CDC1B911E35FA6",
+  "limits": [
+    "Offline guards/models do not prove real UI success",
+    "No operational DPAPI, SQL, HTTP, Edge, service changes or native probes in R4 review",
+    "E4 exact denied request and incident cause remain unobserved; E4 stays FAILED with partial API/audit evidence only"
+  ],
+  "independentLogs": {
+    "supervisor-check.log": "F9387A8AA616DBB09B1A5EC09F5F9BC424A1165258E3AAA5C27316B6CF144BC4",
+    "supervisor-python.log": "F9717E45AB0CD9B87B6CADF82FD239A26CC44C1676D4FCBDCDE1B99325017FA4",
+    "supervisor-unit.log": "E305D427CBAFF88D57ED131A7ECF65881C1D8CEE5737A67EA1978A6AE90F1FCE"
+  }
+}

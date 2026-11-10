@@ -65,7 +65,7 @@ test('real order/subpages and animal prerequisite do not fabricate fixtures or s
  for(const rows of [[],[p,p],[{...p,tenantId:tenant}],[{...p,identifier:'other'}],[{...p,domain:'HUMAN'}]])failure('PREREQUISITE_FAILED',()=>qa.findAnimal(rows,entry));
 });
 test('browser policy and APIRequestContext guard independently deny writes, foreign host, extra API and injection',async()=>{
- const origin='http://'+qa.HOSTS.human+':18300',policy={origin,loginAllowed:true,loginEmail:'offline@example.test',loginPassword:'OFFLINE',logoutAllowed:true,ids:new Set([qa.HUMAN]),queries:new Set(['',qa.ANIMAL_IDENTIFIER])};
+ const origin='http://'+qa.HOSTS.human+':18300',policy={origin,staticRoutes:qa.buildStaticRoutes(['acceso/index.html','_next/a.js','app/pacientes/index.html']),loginAllowed:true,loginEmail:'offline@example.test',loginPassword:'OFFLINE',logoutAllowed:true,ids:new Set([qa.HUMAN]),queries:new Set(['',qa.ANIMAL_IDENTIFIER])};
  for(const path of ['/acceso/','/_next/a.js','/app/pacientes/','/api/public/context','/api/auth/browser/session','/api/patients/'+qa.HUMAN,'/api/patients/'+qa.HUMAN+'/links?limit=21&offset=0'])assert.equal(qa.allowedRequest('GET',origin+path,policy),true);
  assert.equal(qa.allowedRequest('POST',origin+'/api/auth/browser/login',policy,{email:policy.loginEmail,password:policy.loginPassword}),true);assert.equal(qa.allowedRequest('POST',origin+'/api/auth/browser/login',policy,{email:'other@example.test',password:policy.loginPassword}),false);assert.equal(qa.allowedRequest('DELETE',origin+'/api/auth/browser/session',policy),true);
  for(const method of ['POST','PUT','PATCH','DELETE'])assert.equal(qa.allowedRequest(method,origin+'/api/patients/'+qa.HUMAN+'/links',policy),false);
@@ -81,6 +81,64 @@ test('browser policy and APIRequestContext guard independently deny writes, fore
  assert.equal(continued,1);assert.equal(aborted,2);assert.equal(unsafe,2);
  await handler({request:()=>({method:()=>'GET',url:()=>origin+'/api/public/context'}),continue:async()=>{throw Error('OFFLINE-PRIVATE');},abort:async()=>{throw Error('OFFLINE-PRIVATE');},get fulfill(){throw Error('forbidden');}});assert.equal(unsafe,3);
 });
+test('approved export produces only exact file, index and invertible Windows RSC aliases',()=>{
+ const fs=require('node:fs'),crypto=require('node:crypto'),raw=fs.readFileSync('C:/Users/maxmo/AppData/Local/Temp/B5R4-reviewed-pins.json');
+ assert.equal(crypto.createHash('sha256').update(raw).digest('hex').toUpperCase(),'6BF5A98784DC300D3062449BDDEC7E66D05814FF3BD6EB29E2CDC1B911E35FA6');
+ const pins=JSON.parse(raw.toString('utf8')),root='D:/Mavric/Health Project/frontend/out/';
+ const expected=Object.keys(pins).map(p=>p.replaceAll('\\','/')).filter(p=>p.startsWith(root)).map(p=>p.slice(root.length)).sort();
+ assert.equal(Object.keys(pins).length,726);assert.equal(expected.length,444);assert.deepEqual([...qa.STATIC_FILES],expected);assert.equal(Object.isFrozen(qa.STATIC_FILES),true);
+ const routes=qa.buildStaticRoutes(qa.STATIC_FILES),origin='http://'+qa.HOSTS.human+':18300',policy={origin,staticRoutes:routes};
+ for(const file of expected)for(const method of ['GET','HEAD'])assert.equal(qa.allowedRequest(method,origin+'/'+file,policy),true,file);
+ for(const p of ['/','/index.html','/demo','/demo/','/demo/index.html','/__next._tree.txt','/demo/__next.$c$path.__PAGE__.txt','/app/pacientes','/app/pacientes/','/acceso/','/file.svg','/_next/static/media/'+expected.find(p=>p.includes('/media/'))!.split('/').at(-1)]){
+  for(const method of ['GET','HEAD'])assert.equal(qa.allowedRequest(method,origin+p,policy),true,p);
+  for(const method of ['POST','PUT','PATCH','DELETE','OPTIONS'])assert.equal(qa.allowedRequest(method,origin+p,policy),false);
+ }
+ assert.equal(qa.allowedRequest('GET',origin+'/__next._tree.txt?_rsc=offline',policy),true);
+ // An alias must map back to a real inventory member under the proxy's exact rule.
+ for(const file of expected){const parts=file.split('/'),dir=parts.at(-2),leaf=parts.at(-1);if(dir?.startsWith('__next.')&&!leaf!.slice(0,-4).includes('.')&&leaf!.endsWith('.txt')){
+  const alias='/'+[...parts.slice(0,-2),dir+'.'+leaf].join('/');const match=alias.match(/^(.*\/)(__next\.[^/]+)\.txt$/)!;const dot=match[2].lastIndexOf('.');
+  assert.equal(match[1].slice(1)+match[2].slice(0,dot)+'/'+match[2].slice(dot+1)+'.txt',file);assert.equal(routes.has(alias),true);
+ }}
+ for(const p of ['/demo/__next.demo.__PAGE__.txt','/_next/not-in-export.js','/app/not-in-export/','/unknown.txt','/support','/demo/unknown.txt','/api','/actuator'])assert.equal(qa.allowedRequest('GET',origin+p,policy),false,p);
+ assert.equal(qa.allowedRequest('GET','http://'+qa.HOSTS.otherHuman+':18300/demo/',policy),false);
+});
+
+test('static inventory and request parser reject traversal/encoded paths and never turn API or actuator into assets',()=>{
+ for(const name of ['/index.html','../index.html','a/../b.txt','a//b.txt','./a.txt','a\\b.txt','a%2fb.txt','a?b.txt','a#b.txt','C:/a.txt','a/NUL.txt','a./b.txt','a/CON','a/..','a/'])failure('INVALID_RESPONSE',()=>qa.buildStaticRoutes([name]));
+ failure('INVALID_RESPONSE',()=>qa.buildStaticRoutes(['index.html','index.html']));
+ const origin='http://'+qa.HOSTS.human+':18300',routes=qa.buildStaticRoutes(['index.html','demo/index.html','api/index.html','api/private.txt','actuator/index.html','actuator/health.txt','API/private.txt']),policy={origin,staticRoutes:routes};
+ assert.equal([...routes].some((p:string)=>/^\/(api|actuator)(\/|$)/i.test(p)),false);
+ for(const p of ['/api/private.txt','/api/','/api','/actuator/health.txt','/actuator/','/API/private.txt','/demo/../index.html','/%2e%2e/index.html','/demo%2findex.html','/demo%5cindex.html','/demo%252findex.html','//index.html','/demo/./index.html','/demo\\index.html'])assert.equal(qa.allowedRequest('GET',origin+p,policy),false,p);
+ assert.equal(qa.allowedRequest('GET','http://user:canary@'+qa.HOSTS.human+':18300/index.html',policy),false);
+});
+
+test('API decisions remain identical to the pre-R4 guard for the closed business/auth matrix',()=>{
+ const previous=require('C:/Users/maxmo/AppData/Local/Temp/B5R4-source-1-before.bin');
+ const origin='http://'+qa.HOSTS.human+':18300',policy={origin,loginAllowed:true,loginEmail:'offline@example.test',loginPassword:'OFFLINE',logoutAllowed:true,ids:new Set([qa.HUMAN]),queries:new Set(['',qa.ANIMAL_IDENTIFIER]),staticRoutes:qa.buildStaticRoutes(qa.STATIC_FILES)};
+ const paths=['/api','/api/','/api/public/context','/api/public/status','/api/public/context?q=x','/api/auth/browser/login','/api/auth/browser/session','/api/support','/api/accounts','/api/monitor','/api/auth/register','/api/patients?limit=2&offset=0&query=','/api/patients?limit=21&offset=0&query='+qa.ANIMAL_IDENTIFIER,'/api/patients?limit=50&offset=0&query=','/api/patients/'+qa.HUMAN,'/api/patients/'+actor,'/api/patients/'+qa.HUMAN+'/history',...['1','21','200'].flatMap(limit=>['0','1','20','-1'].map(offset=>'/api/patients/'+qa.HUMAN+'/links?limit='+limit+'&offset='+offset))];
+ for(const p of paths)for(const method of ['GET','HEAD','POST','PUT','PATCH','DELETE','OPTIONS'])for(const body of [undefined,{email:policy.loginEmail,password:policy.loginPassword},{}])assert.equal(qa.allowedRequest(method,origin+p,policy,body),previous.allowedRequest(method,origin+p,policy,body),method+' '+p);
+});
+
+test('both guardians abort forbidden requests and record only the first closed denial without canary data',async()=>{
+ const origin='http://'+qa.HOSTS.human+':18300',denied=qa.denialRecorder(),policy={origin,staticRoutes:qa.buildStaticRoutes(['demo/index.html']),onDenied:denied.add,ids:new Set([qa.HUMAN]),queries:new Set([''])};
+ const canary='OFFLINE-private-URL-cookie-password';let handler:(r:unknown)=>Promise<void>=async()=>{},aborted=0,continued=0,unsafe=0,evaluated=0;
+ await qa.installBrowserGuard({route:async(_pattern:string,callback:typeof handler)=>{handler=callback;}},policy,()=>{unsafe++;});
+ const request=async(method:string,url:string,throws=false)=>handler({request:()=>({method:()=>method,url:()=>url,postDataJSON:()=>{throw new Error(canary);}}),continue:async()=>{if(throws)throw new Error(canary);continued++;},abort:async()=>{aborted++;},get fulfill(){throw new Error('forbidden');}});
+ await request('GET',origin+'/demo/');assert.equal(continued,1);await request('GET',origin+'/unknown.txt?password='+canary);
+ await request('PUT',origin+'/api/patients/'+qa.HUMAN);await request('GET','http://foreign.invalid/'+canary);await request('POST',origin+'/api/auth/browser/login');
+ assert.equal(aborted,4);assert.equal(unsafe,4);assert.deepEqual(denied.value(),{method:'GET',category:'STATIC_PATH'});assert.equal(Object.isFrozen(denied.value()),true);
+ const client={origin,policy,identity:{csrfToken:canary},page:{evaluate:async()=>{evaluated++;}}};await assert.rejects(qa.guardedRequest(client,'/api/private?token='+canary),(e:unknown)=>(e as {code:string}).code==='UNSAFE_REQUEST');assert.equal(evaluated,0);assert.deepEqual(denied.value(),{method:'GET',category:'STATIC_PATH'});
+ for(const [method,address,category] of [['GET','not a URL '+canary,'INVALID_URL'],['GET','http://foreign.invalid/'+canary,'FOREIGN_ORIGIN'],['GET',origin+'/api/private?password='+canary,'API_READ'],['POST',origin+'/api/private','API_WRITE'],['GET',origin+'/unknown.txt','STATIC_PATH']] as const){const value=qa.denialDiagnostic(method,address,policy);assert.deepEqual(value,{method,category});assert.equal(JSON.stringify(value).includes(canary),false);}
+ assert.deepEqual(qa.denialDiagnostic(canary,origin+'/demo/',policy,true),{method:'OTHER',category:'ROUTE_HANDLER'});
+ const handlerDenial=qa.denialRecorder();policy.onDenied=handlerDenial.add;await request('GET',origin+'/demo/',true);assert.deepEqual(handlerDenial.value(),{method:'GET',category:'ROUTE_HANDLER'});assert.equal(aborted,5);
+ const late=denied.finish({status:'PASS'});assert.deepEqual(late,{status:'FAIL',code:'UNSAFE_REQUEST',diagnostic:{step:'cleanup',category:'UNKNOWN'},denial:{method:'GET',category:'STATIC_PATH'}});
+ const prior={status:'FAIL',code:'INVALID_RESPONSE',diagnostic:{step:'ui-ficha',category:'ASSERTION'}};denied.finish(prior);assert.equal(prior.code,'INVALID_RESPONSE');assert.deepEqual(prior.diagnostic,{step:'ui-ficha',category:'ASSERTION'});
+ let failingHandler:(r:unknown)=>Promise<void>=async()=>{},abortOnCallbackError=0;
+ await qa.installBrowserGuard({route:async(_pattern:string,callback:typeof failingHandler)=>{failingHandler=callback;}},policy,()=>{throw new Error(canary);});
+ await assert.rejects(failingHandler({request:()=>({method:()=>'GET',url:()=>origin+'/unknown.txt'}),abort:async()=>{abortOnCallbackError++;},continue:async()=>{throw new Error('must not continue');}}));assert.equal(abortOnCallbackError,1);
+ failure('INVALID_RESPONSE',()=>qa.denialRecorder().add({method:'GET',category:'STATIC_PATH',url:canary}));failure('INVALID_RESPONSE',()=>qa.denialRecorder().add({method:canary,category:'STATIC_PATH'}));
+});
+
 test('browser fetch executes same-origin callback with cookies/no-store/redirect guard and own CSRF',async()=>{
  const origin='http://'+qa.HOSTS.human+':18300',policy={origin,loginAllowed:false,logoutAllowed:true,ids:new Set([qa.HUMAN]),queries:new Set([''])};
  const savedFetch=globalThis.fetch,savedWindow=Object.getOwnPropertyDescriptor(globalThis,'window');let current=origin,calls=0,fetchOptions:RequestInit|undefined;

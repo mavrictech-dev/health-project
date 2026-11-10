@@ -1,6 +1,51 @@
 # Decisiones y contratos de integracion
 
+## D-87.AD: R4 integrada offline; QA E5 separada, 2026-11-10
+
+R4 task_2610b1d024fb/ctx_eb4e947dbb4f aceptada: 37 artefactos/695 fuentes,
+726 pines/214 historicos verificados; cuatro fuentes integradas por SHA.
+Supervisor check/111 frontend/19 Python PASS; 609 decisiones API conservadas.
+444 archivos estaticos pinneados/249 alias exactos, validacion hash/reparse antes
+de secretos; primera denegacion cerrada, sin ampliar API/escrituras. Contexto E5
+solo tres constantes/manifest identico, cookie/transporte/cleanup intactos.
+VINCULOS_QA_CORRECCION_R4_20261110.json; sin red/SQL/DPAPI/Edge real en preparacion.
+
+E4 task_d85679301779/ctx_9f7c59b345f1 sigue FALLIDA, REVISADA: un control API,
+tres lecturas200 con tres auditorias correlacionadas, cero violaciones; despues
+UNSAFE_REQUEST en human-ui, seis controles pendientes. Negocio/ACL/historia y
+procesos protegidos iguales; una sesion nueva/revocada y cleanup medido0.
+33 artefactos/695 fuentes/726 pines/175 historicos contrastados; solicitud exacta
+rechazada/causa no observadas. VINCULOS_QA_FALLO_E4_20261110.json. Evidencia API
+parcial no equivale a UI/negativos ni QA completa. Siguiente E5 segun contrato
+PAC-01-B5-E5.md: UNA QA real readonly con epoch fresco/audit y cleanup medidos.
+
+## D-87.AC: E4 fallida con evidencia API parcial; R4 offline, 2026-11-10
+
+R4 delegada task_2610b1d024fb / ctx_eb4e947dbb4f como follow_up al mismo
+programador retenido. Preparacion offline exclusiva; E5 aun no ejecutada.
+
+msg_71ae16b105b2/task_d85679301779/ctx_9f7c59b345f1 failed: una ejecucion
+raw1, UNSAFE_REQUEST en human-ui/ui-ficha tras human-api-seven-fields-order-subpages.
+Tres lecturas200 y tres auditorias reales correlacionadas, sin violaciones ni
+eventos extra. Esto es evidencia parcial, no aprobacion de toda API/UI o negativos.
+Supervisor contrasta 33 artefactos/695 fuentes/726 pines/175 historicos, cuatro
+queries raw0, negocio/ACL/historia iguales; sesion1 nueva/revocada y cleanup
+Node/Edge/app/proxy0 medido. VINCULOS_QA_FALLO_E4_20261110.json, E4 sigue FAILED.
+
+Solicitud denegada exacta no capturada. Analisis puro demuestra incompatibilidad:
+guard bloquea rutas estaticas Next root/demo existentes en export pinneado y Link
+de RuntimeHome. No confirmar que fueran el request real. R4 segun contrato
+PAC-01-B5-R4.md permite GET/HEAD same-origin SOLO inventario export revisado y sus
+alias exactos; API allowlist/denegacion de escrituras intactas. Diagnostico de
+denegacion cerrado sin URL/secretos. Cuatro herramientas QA y nuevo contexto E5
+de tres constantes, todo offline; E5 requiere revision y nuevo encargo.
+
 ## D-87.AB: R3 integrada offline; QA real E4 separada, 2026-11-10
+
+Publicacion revisada 5d403df245e24e792f546fdded5bcbdb0001b12d,
+origin/health/production-wave0 confirmado. E4 delegada task_d85679301779 /
+ctx_9f7c59b345f1 como follow_up del mismo programador retenido. Supervisor sin
+SQL/API/browser concurrente durante QA exclusiva; review tras entrega Orca.
 
 R3 task_a96d20ae95f1/ctx_a3cf0f3b75a2 aceptada: supervisor contrasta 33
 artefactos/695 fuentes/726 pines/141 historicos, integra cuatro fuentes por SHA,

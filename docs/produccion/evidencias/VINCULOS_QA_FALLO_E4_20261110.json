@@ -1,0 +1,53 @@
+{
+  "date": "2026-11-10",
+  "taskId": "task_d85679301779",
+  "dispatchId": "ctx_9f7c59b345f1",
+  "status": "FAILED_REVIEWED",
+  "artifactsVerified": 33,
+  "sourceHashesVerified": 695,
+  "inputPinsVerified": 726,
+  "exportFilesAmongPins": 444,
+  "historyFilesVerified": 175,
+  "launcherInvocations": 1,
+  "rawExit": 1,
+  "runnerCode": "UNSAFE_REQUEST",
+  "runnerPhase": "human-ui",
+  "diagnostic": {
+    "step": "ui-ficha",
+    "category": "ASSERTION"
+  },
+  "checks": 1,
+  "linkReads": 3,
+  "partialReadAudit": {
+    "successfulReads": 3,
+    "correlatedAuditEvents": 3,
+    "violations": 0,
+    "unobservedNewLinkAuditEvents": 0,
+    "negativeCasesExercised": false
+  },
+  "newSessions": 1,
+  "newSessionsRevoked": 1,
+  "businessAndAclConserved": true,
+  "existingHistoryConserved": true,
+  "protectedServicesConserved": true,
+  "nodeEdgeActiveAfterStop": 0,
+  "appActiveAfterClose": 0,
+  "proxyActiveAfterClose": 0,
+  "completeApiUiQaValidated": false,
+  "sourceFinding": {
+    "exactRejectedRequest": "NOT_CAPTURED",
+    "staticCandidatesRejectedByPurePolicy": [
+      "/demo/",
+      "/demo/__next.demo.__PAGE__.txt",
+      "/__next._tree.txt"
+    ],
+    "localEvidence": "RuntimeHome renders a Next Link to /demo/; installed Next docs describe static navigation payloads, and pinned out contains root/demo __next text artifacts. Pure allowedRequest rejects these paths.",
+    "assessment": "Confirmed static-policy incompatibility; relationship to exact E4 rejected request remains unproven."
+  },
+  "additionalOperationalDiagnosticsBySupervisor": 0,
+  "limits": [
+    "E4 remains FAILED with six functional controls uncompleted; partial API/audit evidence does not accept entire delivery",
+    "No real UI captures, animal, cross-tenant, anonymous/logout negatives, themes/mobile or UI paging acceptance",
+    "No additional SQL/HTTP/browser/DPAPI/service actions in review; all history preserved"
+  ]
+}

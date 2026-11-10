@@ -56,7 +56,9 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | PAC-01.B5.R2 | Programador recuperapiura; revision supervisor | E2failed revisada | VALIDADA E INTEGRADA OFFLINE | task_b571f0e96469 / ctx_abcd60b65a34; PAC-01-B5-R2.md |4herramientasQA: browsertransport/diagnostico/cleanuptelemetry ynamespaceE3; solooffline |
 | PAC-01.B5.E3 | Programador recuperapiura; revision supervisor | R2 revisada/integrada | FALLIDA, REVISADA | task_90e714865b19 / ctx_c5fefc021198; VINCULOS_QA_FALLO_E3_20261110.json | cookie-validation/SESSION_MISMATCH,0lecturas; sesion1 revocada, negocio/historia iguales y cleanup medido0 |
 | PAC-01.B5.R3 | Programador recuperapiura; revision supervisor | E3 fallida revisada | VALIDADA E INTEGRADA OFFLINE | task_a96d20ae95f1 / ctx_a3cf0f3b75a2; PAC-01-B5-R3.md; D-87.AA | Cookie URL /api/ y regresion, namespace E4 nuevo; solo offline |
-| PAC-01.B5.E4 | Programador recuperapiura; revision supervisor | R3 revisada/integrada | LISTA | PAC-01-B5-E4.md; D-87.AB | UNA QA real readonly, epoch nuevo, audit y cleanup medido; E2/E3 preservadas |
+| PAC-01.B5.E4 | Programador recuperapiura; revision supervisor | R3 revisada/integrada | FALLIDA, REVISADA | task_d85679301779 / ctx_9f7c59b345f1; VINCULOS_QA_FALLO_E4_20261110.json | API3lecturas/3audit correlacionadas; UNSAFE_REQUEST UI,6controles pendientes; negocio/historia iguales y cleanup0 |
+| PAC-01.B5.R4 | Programador recuperapiura; revision supervisor | E4 fallida revisada | VALIDADA E INTEGRADA OFFLINE | task_2610b1d024fb / ctx_eb4e947dbb4f; PAC-01-B5-R4.md; D-87.AC | Inventario static export/alias exactos, diagnostico cerrado, namespace E5; solo offline |
+| PAC-01.B5.E5 | Programador recuperapiura; revision supervisor | R4 revisada/integrada | LISTA | PAC-01-B5-E5.md; D-87.AD | UNA QA real readonly; recursos estaticos inventariados, audit y cleanup medidos |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
 | CLI-01 | Programador | PAC-01, AGE-01 | POR_VERIFICAR | — | Historia entre sedes |
 | ESP-01 | Programador | CLI-01 | POR_VERIFICAR | — | Graficos persistentes |
