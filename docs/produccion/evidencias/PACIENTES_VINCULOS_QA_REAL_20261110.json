@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-10",
+  "taskId": "task_c91a2e2ed153",
+  "dispatchId": "ctx_5ae9ea240b92",
+  "status": "VALIDATED_LOCAL_REAL_READONLY",
+  "artifactsVerified": 35,
+  "sourceHashesVerified": 695,
+  "inputPinsVerified": 726,
+  "historicalFilesVerified": 252,
+  "launcherInvocations": 1,
+  "rawExit": 0,
+  "launcherSeconds": 34.0,
+  "functionalChecks": [
+    "human-api-seven-fields-order-subpages",
+    "human-ui-opt-in-return-close-refresh",
+    "themes-mobile-desktop-keyboard",
+    "animal-api-ui-empty",
+    "other-tenant-neutral-404",
+    "anonymous-401",
+    "logout-query-expires-removes-rows"
+  ],
+  "observedReads": 18,
+  "httpStatuses": {
+    "200": 15,
+    "401": 2,
+    "404": 1
+  },
+  "readAuditEvents": 15,
+  "readAuditViolations": 0,
+  "unobservedReadAuditEvents": 0,
+  "negativeReadAuditEvents": 0,
+  "postAuditSqlReconstructedExactlyFromClosedReportAndFreshCutoffs": true,
+  "newSessions": 3,
+  "newSessionsRevoked": 3,
+  "unexpectedSessionsOrAuditActions": 0,
+  "stableBusinessAndAclConserved": true,
+  "existingHistoryConserved": true,
+  "freshIndependentReadonlyBaselineEqualsWorkerPost": true,
+  "freshIndependentSystemEqualsWorkerPost": true,
+  "nodeEdgeActiveAfterStop": 0,
+  "appActiveAfterClose": 0,
+  "proxyActiveAfterClose": 0,
+  "screenshotsInspectedIndependently": 8,
+  "visualVerdict": "PASS: desktop1440/mobile390 in light/dark/navy readable without clipping; historical inactive link and empty animal state explicit, scope/access explanation visible; keyboard focus visible; no extra dialog or technical IDs displayed.",
+  "screenshots": [
+    {
+      "path": "docs/produccion/visuales-vinculos-reales-20261110/human-desktop.png",
+      "sha256": "18B615F80A9942C9A1E6576E8D3C55215E8CA12519D857012626338BC91E9691"
+    },
+    {
+      "path": "docs/produccion/visuales-vinculos-reales-20261110/human-1440-blanco.png",
+      "sha256": "18B615F80A9942C9A1E6576E8D3C55215E8CA12519D857012626338BC91E9691"
+    },
+    {
+      "path": "docs/produccion/visuales-vinculos-reales-20261110/human-1440-negro.png",
+      "sha256": "D625C17493A0CC19974F7C1DD7D500EFB88501BC55FB79763542F2C61D1F121C"
+    },
+    {
+      "path": "docs/produccion/visuales-vinculos-reales-20261110/human-1440-navy.png",
+      "sha256": "0E6E2DF9313E7F336A76663AF1A6870156D8C490FC98C14C21C1A1FE0C7BA24A"
+    },
+    {
+      "path": "docs/produccion/visuales-vinculos-reales-20261110/human-390-blanco.png",
+      "sha256": "C0CA635DFBD3BCC6D63D416128BC4A124343C561F50910A377D6FAB93A83164F"
+    },
+    {
+      "path": "docs/produccion/visuales-vinculos-reales-20261110/human-390-negro.png",
+      "sha256": "9842FE86A2EB67FA530CE85E33A3DEE3E252EC3CCB65FA9F0FFB2B3ACEDEAD7C"
+    },
+    {
+      "path": "docs/produccion/visuales-vinculos-reales-20261110/human-390-navy.png",
+      "sha256": "697E391D6313AA0A75ABA4F7598101902794D5B5637D860B7EF18CDD906BEB32"
+    },
+    {
+      "path": "docs/produccion/visuales-vinculos-reales-20261110/animal-empty.png",
+      "sha256": "197BC46D140DFBB1209C3EAD7D14E106AF5EA80BC8C8FEA0F2322DEAFB27D748"
+    }
+  ],
+  "uiPaging21Exercised": false,
+  "sqlAuditValidatedAggregate": true,
+  "runnerSqlAuditValidatedHistorical": false,
+  "productionValidated": false,
+  "limits": [
+    "Fewer than21 real links: real UI lookahead navigation not exercised; prior SQL/synthetic paging evidence remains separate",
+    "No product SQL connection/call count inferred",
+    "Read-only links accepted; link management/responsibles and rest of PAC-01 remain pending",
+    "E2/E3/E4 failed attempts preserved without relabeling; historical partial reads excluded from E5 totals",
+    "Supervisor added one fresh readonly baseline/system observation; no QA rerun/browser/DPAPI/service mutations"
+  ]
+}

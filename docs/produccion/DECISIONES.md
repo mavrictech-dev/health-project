@@ -1,6 +1,35 @@
 # Decisiones y contratos de integracion
 
+## D-87.AE: lectura de vinculos validada real; siguiente gestion, 2026-11-10
+
+task_c91a2e2ed153/ctx_5ae9ea240b92, una invocacion raw0/34s: siete controles
+completos,18 lecturas reales (15x200/2x401/1x404),15 auditorias exactas para200
+y0para negativas, sin violaciones/eventos extra. Tres sesiones nuevas revocadas,
+login/logout3, negocio/ACL e historia conservados; Node/Edge/app/proxy activos0
+medidos. Cuatro queries readonly del trabajador raw0; no datos de negocio escritos.
+
+Supervisor35artefactos/695fuentes/726pines/252historicos contrastados; reconstruye
+exactamente postaudit desde18requestIDs ycutoffs propios. UNA baseline readonly
+fresca y observacion de sistema propias iguales al postestado, sin repetir QA,
+navegador, DPAPI o servicios. Ocho capturas desktop1440/mobile390 light/dark/navy
+yANIMALempty inspeccionadas: legibles/sin clipping, foco visible y estado historico
+inactivo explicito, sin UUID/secretos. Capturas preservadas en
+visuales-vinculos-reales-20261110; PACIENTES_VINCULOS_QA_REAL_20261110.json.
+
+uiPaging21Exercised=false porfixture real pequena; no afirmar21filas reales,
+evidencia SQL/sintetica previa sigue aparte. sqlAuditValidated=false del runner
+historico permanece intacto, agregado supervisor valida correlacion SQLreal.
+No inferir conteo de conexiones/SP ni produccion. E2/E3/E4 siguen FAILED y sus
+lecturas parciales no se suman a E5. Consulta de vinculos B aceptada, PAC-01
+general PARCIAL: gestion/responsables pendientes. C0 prepara brechas/contrato
+siguiente segun PAC-01-C0.md sin editar fuentes o ejecutar operaciones reales.
+
 ## D-87.AD: R4 integrada offline; QA E5 separada, 2026-11-10
+
+Publicacion revisada 92123ced63feaf17155ee2f08d4a8d68eabcf065,
+origin/health/production-wave0 confirmado. E5 delegada task_c91a2e2ed153 /
+ctx_5ae9ea240b92 como follow_up del mismo programador retenido. Supervisor sin
+SQL/API/browser concurrente durante QA exclusiva; revision tras entrega Orca.
 
 R4 task_2610b1d024fb/ctx_eb4e947dbb4f aceptada: 37 artefactos/695 fuentes,
 726 pines/214 historicos verificados; cuatro fuentes integradas por SHA.
