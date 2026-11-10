@@ -1,5 +1,13 @@
 # Orquestacion Codex de Health Project
 
+## B4P1 aceptada; E1 readiness real separada, 2026-11-10
+
+MismoTask/Dispatch deP1 entrego tras continuidad; supervisor73artefactos/726pines/
+687SHA,3classes y26tests propiosPASS. Dosprobes public/timeout ya consumidos,
+no repetir. Evidencia BACKEND_TLS_PREPARACION_20261110.json. Siguiente E1 segun
+PAC-01-B4-E1.md: UNAreadiness real con launcher/manifest pinneados, runtimeonly,
+Jobclosure0/preposthashes, sin SQLdiagnostico oTLSservicios. Misma pareja/Run.
+
 ## B4P1 bloqueada por cuota; correccion en mismo Dispatch, 2026-11-10
 
 Escalacionmsg_stop_6bc70500149e3db2f663a2eb: programador alcanzo limite proveedor

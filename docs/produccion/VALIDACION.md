@@ -1,5 +1,15 @@
 # Validacion y limites de evidencia
 
+## B4P1: VALIDADA PREPARACION OFFLINE, 2026-11-10
+
+73artefactos/726pines/687fuentes contrastados;3classes recompilados por supervisor
+identicos y26tests offline propiosPASS. Codigo/correccionesZIP/esperaproxy/
+cleanupFD revisados. Dosprobes nativos previos consumidos:publicraw0 ytimeout
+raw1esperado/PROCESS_TIMEOUT, activos0; no repetidos en review.155guardaspublicas
+no son155casos. Sin app/SQL/HTTP/DPAPIreal. Evidencia BACKEND_TLS_PREPARACION_20261110.json.
+Quota/fallosprevios quedan historicos; B4P1aceptada sin aceptar E1. Se define
+unarranquereadinessreal segunD-87.U/PAC-01-B4-E1.md, sin servicio/certificado/retry.
+
 ## B4P1: revision parcial NO aceptada, 2026-11-10
 
 Limite del proveedor anunciado14:06, Task/Dispatch abiertos.687fuentes intactas,

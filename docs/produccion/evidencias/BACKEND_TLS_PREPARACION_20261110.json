@@ -1,0 +1,171 @@
+{
+  "date": "2026-11-10",
+  "taskId": "task_131aca7351c3",
+  "dispatchId": "ctx_4fcac67b4740",
+  "status": "ACCEPTED_PREPARATION_OFFLINE",
+  "artifactsVerified": 73,
+  "inputPinsVerified": 726,
+  "sourceHashesVerified": 687,
+  "classesIndependentlyCompiledAndMatched": 3,
+  "supervisorOfflineTests": 26,
+  "prepared": {
+    "javaSource": {
+      "path": "C:\\Users\\maxmo\\AppData\\Local\\Temp\\B4P1StrictRuntime.java",
+      "sha256": "E2C6E0D67D03A0AC69474B24316C354FF7DF74E07B51A495755DB3D3B572EC39"
+    },
+    "environment": {
+      "path": "C:\\Users\\maxmo\\AppData\\Local\\Temp\\B4P1-environment.py",
+      "sha256": "F5CD650F52A424BFA775D97D5EE6EF88AD903CDF47C8E074090F6AA13E1B41B0"
+    },
+    "tests": {
+      "path": "C:\\Users\\maxmo\\AppData\\Local\\Temp\\B4P1-tests.py",
+      "sha256": "3403D08D5FC9234C1D80AAEAC23D5BA20C22B8E9CAFDF8C8359A98EBF8C04CFD"
+    },
+    "reviewedManifest": {
+      "path": "C:\\Users\\maxmo\\AppData\\Local\\Temp\\B4P1-reviewed-pins.json",
+      "sha256": "6BF5A98784DC300D3062449BDDEC7E66D05814FF3BD6EB29E2CDC1B911E35FA6",
+      "pins": 726
+    },
+    "classpath": {
+      "classpath": "C:\\Users\\maxmo\\AppData\\Local\\Temp\\B4P1-prepared\\classes-final;C:\\Users\\maxmo\\AppData\\Local\\Temp\\B4P1-prepared\\app\\BOOT-INF\\classes;C:\\Users\\maxmo\\AppData\\Local\\Temp\\B4P1-prepared\\app\\BOOT-INF\\lib\\*",
+      "classes": "C:\\Users\\maxmo\\AppData\\Local\\Temp\\B4P1-prepared\\classes-final"
+    },
+    "classes": {
+      "C:\\Users\\maxmo\\AppData\\Local\\Temp\\B4P1-prepared\\classes-final\\B4P1StrictRuntime$Call.class": "BACB80C7415D45C90BDB040508EC45A14CF55AAD00C98849C1B91811F3115FE1",
+      "C:\\Users\\maxmo\\AppData\\Local\\Temp\\B4P1-prepared\\classes-final\\B4P1StrictRuntime$Sleeper.class": "D411A957D399E94CD470630D60F474DF6DAEE00DCCC547DBA2DA2640D692CA5B",
+      "C:\\Users\\maxmo\\AppData\\Local\\Temp\\B4P1-prepared\\classes-final\\B4P1StrictRuntime.class": "440B937C62B8E6A9C7187C8A9164439F811A1938224292070B82F3AF7EB94D74"
+    },
+    "extractionManifest": {
+      "path": "C:\\Users\\maxmo\\AppData\\Local\\Temp\\B4P1-extraction-manifest.json",
+      "sha256": "4E9CE606AFEDF6B54BD37DA74E3158CCBDAB11FF02EF89BB511802608950060C",
+      "files": 261,
+      "directory": "C:\\Users\\maxmo\\AppData\\Local\\Temp\\B4P1-prepared\\app",
+      "reextractions": 0
+    },
+    "fourPinnedProductClasses": {
+      "com/mavric/health/patients/api/PatientController.class": "BA430035577A1FE5E886132E6AE602AEEC855FADDA3B88D68D4A05B55FE4DE7E",
+      "com/mavric/health/patients/application/PatientService.class": "D9AFE06A8B340E23BD06B19BFBE0CBC000342434B870DE8F357304D32FA84EDE",
+      "com/mavric/health/persistence/sqlserver/SqlServerPatientStore.class": "B474FB2CA5D5FB2F345A8085CE7EC1816A321628875933C543C9297DFB4AC518",
+      "com/mavric/health/persistence/sqlserver/SqlServerProcedure.class": "8CAA2540B920D0A30E5F25B37BC21D0DCC351375C4E6C8216C7D5B28382342BC"
+    },
+    "driverSHA256": "E36F5237C1267983E5B88DC2169F6B9D7E50ECEEC6DC1CA31018E3877E14AF66",
+    "jarSHA256": "85D8FEA06D8F572C86B6EA7473066036723F22E8DAF71C036EBB93027D55512F",
+    "publicStoreSHA256": "7988CDDE0249F594CCA47039E04D90F7C3BA43689F3093EA010BE77E6685C037"
+  },
+  "nativeProbes": {
+    "authorizedLimit": 2,
+    "consumed": 2,
+    "publicInspection": {
+      "status": "PASS",
+      "rawExit": 0,
+      "activeProcessesAfterClose": 0,
+      "DPAPILoads": 0,
+      "connections": 0,
+      "appStarted": false,
+      "stdoutBytes": 124,
+      "stderrBytes": 0,
+      "publicResult": {
+        "mode": "inspect-public",
+        "status": "PASS",
+        "strictTLS": true,
+        "checks": 155,
+        "connections": 0,
+        "appStarted": false,
+        "privateKeys": 0
+      },
+      "seconds": 0.6719999999986612,
+      "start": "2026-11-10T21:24:50.972258+00:00",
+      "end": "2026-11-10T21:24:51.643378+00:00"
+    },
+    "ownedTimeout": {
+      "status": "PASS",
+      "rawExit": 1,
+      "activeProcessesAfterClose": 0,
+      "DPAPILoads": 0,
+      "connections": 0,
+      "appStarted": false,
+      "observedCode": "PROCESS_TIMEOUT",
+      "seconds": 1.0159999999996217,
+      "start": "2026-11-10T21:24:51.649910+00:00",
+      "end": "2026-11-10T21:24:52.674717+00:00"
+    },
+    "retryCount": 0,
+    "noFurtherP1NativeProbeAuthorized": true,
+    "inspectionGuardEvaluations": 155,
+    "note": "155 guard evaluations include bytecode parsing bounds and are NOT 155 independent functional cases. These probes neither start Spring/datasource/pool nor connect to SQL/HTTP."
+  },
+  "supervisor": {
+    "javacRawExit": 0,
+    "classesIndependentlyCompiledAndMatched": 3,
+    "pythonRawExit": 0,
+    "offlineTests": 26,
+    "realProbesRepeated": 0,
+    "DPAPILoads": 0,
+    "SQLConnections": 0,
+    "appStarted": false
+  },
+  "review": [
+    "Complete environment/Java/preparation helper and tests inspected; no product sources edited",
+    "Original ZIP metadata/raw segments, delayed proxy startup and incremental pipe tracking corrections accepted",
+    "Pinned bytecode inspection confirms factory encrypt true and trust binding without constructing datasource/pool",
+    "Suspended native creation and restricted inherited handles, Job assignment before resume/stdin, owned cleanup/peer deadline verified from source and tests",
+    "73artifact hashes,726input hashes,687source hashes,3class hashes verified; existing extraction retained",
+    "Public inspection result and timeout ledgers inspected; actual-probe source uses NativeJob, no mocks; both active counts zero",
+    "PreE1 readonly SQL hashes equal acceptedB1POST; protected fingerprint a04d8236d807b3527dce32d8c8168e2e691902c89c0dd3eb79dda933ae8ca2af unchanged"
+  ],
+  "history": [
+    {
+      "phase": "partial initial",
+      "suiteTests": 18,
+      "failures": 1,
+      "errors": 0,
+      "artifact": "C:\\Users\\maxmo\\AppData\\Local\\Temp\\B4P1-tests-attempt1.log",
+      "detail": "ZIP normalizations in Windows accepted a forbidden original name; retained original failure and supervisor stopped-review audit."
+    },
+    {
+      "phase": "provider limit",
+      "detail": "Task/Dispatch remained open across provider quota interruption; same terminal/account/worktree resumed after coordinator authorization, no new Task/Run or account/model change."
+    },
+    {
+      "phase": "correction attempt2",
+      "suiteTests": 23,
+      "failures": 1,
+      "errors": 11,
+      "artifact": "C:\\Users\\maxmo\\AppData\\Local\\Temp\\B4P1-tests-attempt2.log",
+      "detail": "Test helper imported a distinct SafeError type and used relative deadlines against monotonic time; corrected typed helper expectations and absolute deadlines without weakening guard assertions."
+    },
+    {
+      "phase": "attempt3",
+      "suiteTests": 23,
+      "rawExit": 0
+    },
+    {
+      "phase": "attempt4",
+      "suiteTests": 24,
+      "rawExit": 0,
+      "detail": "Added full inventory changed/missing/extra input coverage."
+    },
+    {
+      "phase": "attempt5",
+      "suiteTests": 25,
+      "rawExit": 0,
+      "detail": "Added shared deadline/peer Job cleanup and repeated pins immediately before the future credential load."
+    },
+    {
+      "phase": "attempt6 final",
+      "suiteTests": 26,
+      "rawExit": 0,
+      "detail": "Added actual NativeJob API sequence with kernel doubles; Java final classes in a new classes-final directory, original classes retained."
+    }
+  ],
+  "limits": {
+    "realReadinessExecuted": false,
+    "backendStarted": false,
+    "DPAPILoads": 0,
+    "SQLConnectionsInP1": 0,
+    "HTTPConnectionsInP1": 0,
+    "nativeProbesRepeatedBySupervisor": 0,
+    "productionApproved": false,
+    "note": "155 public guard evaluations are not155 functional tests. Future E1 is a separate single real readiness gate; API/UI real QA remains pending."
+  }
+}

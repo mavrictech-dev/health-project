@@ -1,5 +1,26 @@
 # Decisiones y contratos de integracion
 
+## D-87.U: B4P1 aceptada offline; gate E1 real acotado, 2026-11-10
+
+msg_8b8dbe4fad02/task_131aca7351c3/ctx_4fcac67b4740 succeeded tras retomar
+misma cuenta/sesion/Task. Supervisor congela73artefactos,contrasta726pines y
+687SHA sin cambios; recompila3classes y coincide exacto,26tests propiosPASS.
+Revisa codigo completo/correccionesZIP/proxy/FD y dos resultados nativos:
+publicinspectraw0/155guardas ytimeoutinocuo1.016s/raw1esperado,ambosactivos0.
+No repite probes ni modifica producto. Fallos18/1 y23/1+11 se preservan;26final
+no sustituye historial. Evidencia BACKEND_TLS_PREPARACION_20261110.json.
+P1 VALIDADA PREPARACION, no backend/TLSruntime/SQL/API/UI real ni produccion.
+
+Autorizar E1UNA invocacion --execute-readiness con launcherF5CD650F...3E1B41B0
+y manifest6BF5A987...1E35FA6 inmutables; contrato PAC-01-B4-E1.md. Publicinspect
+interno E1 una vez antes de load runtimepassword, ChildWindowsJobs ydefault
+targets127.0.0.1 SQL14335/backend18080/proxy18300,trustfalse/encrypttrue.
+Solo readiness real y teardown propios, no APInegocio/login/fixture oTLSapply.
+Prebaseline supervisor igual al B1POST(installed1/564ACL/OPEN), huella protegida
+a04d8236...ae8ca2af igual; SQLQA Running. Worker pre/post readonly hashes/huella
+yactivos0, sinretry oSQLdiagnostico. E1failed vuelve a review sin compensacion.
+No nuevo UAC/certificados/servicios/migraciones/DPAPIrecreado/bootstrap/main.
+
 ## D-87.T: cuota programador y revision parcial B4P1, 2026-11-10
 
 Escalacion msg_stop_6bc70500149e3db2f663a2eb por limite proveedor, reintento
@@ -18,6 +39,8 @@ validado. Evidencia BACKEND_TLS_PREPARACION_PARCIAL_20261110.json. Sin E1 hasta
 P1completa yreview, y sin declarar cancelado el objetivo por este limite temporal.
 
 Correccion enviada al Dispatch abierto mediante msg_6abef3b426ce. Nueva escalacion msg_stop_a0001f251f4a701c1bdbd71a confirma la misma cuota14:06, sin nueva implementacion/worker_done. No reenviar repetidamente ni crear otro agente: conservar mensaje en cola y retomar mismo contexto cuando proveedor permita.
+
+Usuario ordena continuar16:14, pasado14:06 anunciado. Estado Orca conserva Task/Dispatch abierto, terminalretained y livenessunverifiable; pantalla muestra ultimo limite, no prueba cuota actual ni salida. IdentityOnly recuperapiura coincide. Se envia continuacion msg_703200f4cf9f al MISMOctx_4fcac67b4740, reciboaceptado, sinstop/abandon/retryTasknuevo. Capacidad/inicio efectivo pendientes de resultado; no afirmar ya corregido o listo. Mantener alcanceP1 y esperar avisoOrca, sinpolling.
 
 ## D-87.S: B3 UI aceptada sintetica; preparacion backend estricto, 2026-11-10
 
