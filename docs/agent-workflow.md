@@ -1,5 +1,13 @@
 # Orquestacion Codex de Health Project
 
+## B3UI aceptada sintetica; B4P1 preparada, 2026-11-10
+
+B3 task_70d39caaf8e6/ctx_7e6db58956df aceptada tras review141artefactos/683SHA,
+6fuentes/15capturas; supervisor94unit/build85 y8controlespropios/0writesPASS.
+No prueba SQLreal. Evidencia PACIENTES_VINCULOS_UI_20261110.json. B4P1 contrato
+PAC-01-B4-PREPARACION.md, TEMP-only, preparacionoffline sin DPAPI/app/SQL/servicios;
+solo2probes sinsecretos. Misma pareja/Run/ownership y revision antes de E1real.
+
 ## B2 integrada offline; siguiente B3, 2026-11-10
 
 Task_b79ceb263c47/ctx_233b5c88077b aceptada tras review117artefactos/10build,

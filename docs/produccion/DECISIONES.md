@@ -1,5 +1,25 @@
 # Decisiones y contratos de integracion
 
+## D-87.S: B3 UI aceptada sintetica; preparacion backend estricto, 2026-11-10
+
+msg_147fd4ee42df/task_70d39caaf8e6/ctx_7e6db58956df succeeded. Supervisor
+congela141artefactos,683SHA y2bundles444archivos cadauno; revisa6fuentes y15
+capturas desktop1440/mobile390/temas/estados. Integra6rutas por SHA exacta,
+check94unit/build85PASS y8controles Playwright independientes sobre bundle
+integrado,0writes/0errores. Consulta opt-in ADM/REC sinPAC/RES mixtos, sin
+cambiar operacionesA. Worker29links/28regresionA/demo13PASS son sinteticos;
+15writes del runnerA son interceptadas y separadas de0writes de links.
+Evidencia PACIENTES_VINCULOS_UI_20261110.json y16capturas versionadas/revisadas.
+Aceptada INTEGRADA SINTETICA, no HTTP/SQLreal, auditoria o persistencia.
+
+Siguiente B4P1 prepara TEMP-only launcher/contextmanager de entorno backendQA
+con truststorePUBLICO ya aceptado, trustServerCertificatefalse/encrypttrue,
+jarB2supervisor pinneado y proxy existente. Contrato PAC-01-B4-PREPARACION.md.
+Sin arrancar backend/proxy/SQL ni DPAPI en P1; solo compilacion/tests yUNA
+inspeccionpublicaJVM+UNprobeinocuoJobtimeout permitidos. EjecucionreadinessE1
+posterior a review separada. No tocar certificados/binding/servicios/globaltrust
+o repetir A69/B1. PAC-01general siguePARCIAL y gestionar vinculos sigue pendiente.
+
 ## D-87.R: B2 API integrada offline; gate B3 UI, 2026-11-10
 
 msg_c002ce76f938/task_b79ceb263c47/ctx_233b5c88077b succeeded EN_REVISION.
@@ -18,6 +38,8 @@ sin nueva escritura/directorioglobal; abort/invalidation de contexto y errores
 seguros. Playwright interceptado y regresionA/democomo pruebas sinteticas;
 QA real HTTP/SQL/TLSruntime separado posterior a review. No certificados/UAC/
 servicios/DPAPI en B3. PAC-01 completo conserva estadoPARCIAL.
+
+B2 publicada en origin/health/production-wave0:414d351a79ae71d9cf0a149fc0f1c860ee8629ee, SHA remoto confirmado. B3delegada task_70d39caaf8e6/ctx_7e6db58956df, follow_up ready al retenido. Primera invocacionCLI rechazo argumentos por comillas nativasPowerShell antes de crear Task; envio corregido con argv estructurado al mismoorca.exe, sin duplicar asignacion ni cambiar contrato. Supervisor espera aviso Orca para revision.
 
 ## D-87.Q: B1 SQL validada local y continuidad API, 2026-11-10
 

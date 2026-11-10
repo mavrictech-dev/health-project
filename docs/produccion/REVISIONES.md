@@ -1,5 +1,15 @@
 # Revisiones del supervisor
 
+## PAC-01.B3: INTEGRADA Y VALIDADA SINTETICA, 2026-11-10
+
+Supervisor141artefactos/683SHA,6fuentes y15capturas inspeccionadas; bundles
+normal/demo444archivos verificados cadauno. Integracionexacta,check94unit/build85
+propiosPASS;8controles navegador propios,0writes/0errores, captura390 inspeccionada.
+Worker29links/28regresionA/demo13PASS; no contar interceptaciones como backend,
+SQL,persistencia,audit oTLSreal. Consulta opt-in/roles/paginacion/abort/errores
+aceptada, A sin regresion observada. Evidencia PACIENTES_VINCULOS_UI_20261110.json
+y16capturas. BackendQA estricto y QAreal pendientes, D-87.S/PAC-01-B4-PREPARACION.md.
+
 ## PAC-01.B2: INTEGRADA Y VALIDADA OFFLINE, 2026-11-10
 
 Ocho rutas revisadas,117artefactos/10build y678SHA comprobados; worker161focused

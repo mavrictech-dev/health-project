@@ -1,0 +1,202 @@
+{
+  "date": "2026-11-10",
+  "taskId": "task_70d39caaf8e6",
+  "dispatchId": "ctx_7e6db58956df",
+  "status": "ACCEPTED_INTEGRATED_SYNTHETIC_UI",
+  "sourcePaths": 6,
+  "sourceHashesVerified": 683,
+  "workerArtifactsVerified": 141,
+  "workerBuildsVerified": [
+    {
+      "mode": "C:\\Users\\maxmo\\orca\\workspaces\\Health Project\\health-programmer\\frontend\\out",
+      "files": 444,
+      "manifestSHA256": "BB16CF05A4324AE85D850D074B1137865327CD5A18D40067CF8834B06EF872A8"
+    },
+    {
+      "mode": "C:\\Users\\maxmo\\orca\\workspaces\\Health Project\\health-programmer\\frontend\\out-demo",
+      "files": 444,
+      "manifestSHA256": "5317239B805DD9266C95AD58E4FEEE04CAB07E596A017951252DB65ACC1B978A"
+    }
+  ],
+  "workerResults": {
+    "unit": {
+      "tests": 94,
+      "pass": 94,
+      "fail": 0,
+      "skipped": 0,
+      "newFocusedTests": 6
+    },
+    "linksSynthetic": {
+      "checks": 29,
+      "writes": 0,
+      "abortedRequests": 3,
+      "unexpectedApi": 0,
+      "pageErrors": 0
+    },
+    "patientsRegression": {
+      "checks": 28,
+      "syntheticRegressionWrites": 15
+    },
+    "demo": {
+      "checks": 13,
+      "apiRequests": 0
+    }
+  },
+  "supervisor": {
+    "check": "PASS",
+    "unit": {
+      "tests": 94,
+      "pass": 94,
+      "fail": 0,
+      "skip": 0
+    },
+    "build": "PASS85staticPages",
+    "logs": {
+      "check": {
+        "sha256": "F9387A8AA616DBB09B1A5EC09F5F9BC424A1165258E3AAA5C27316B6CF144BC4",
+        "rawExit": 0
+      },
+      "unit": {
+        "sha256": "5FE486B260972439DFEF5656996B7900E37C07097DB558D86A3E72771DF98E70",
+        "rawExit": 0
+      },
+      "build": {
+        "sha256": "5CBA5820C6632401ED3CB640E9F76B36B680577F6DEAB2D4D146F7909B8DE185",
+        "rawExit": 0
+      }
+    },
+    "independentBrowser": {
+      "mode": "SUPERVISOR_SYNTHETIC_ONLY",
+      "passed": 8,
+      "checks": [
+        "opt-in one request and20 safe rows",
+        "second page exactly1 and disabled next",
+        "403 clears rows and hides raw detail",
+        "foreign tenant response rejected",
+        "PRO has patient detail without links capability",
+        "REC animal suspended without PORTAL reads",
+        "integrated mobile no page overflow",
+        "401 expires session and clears view"
+      ],
+      "requests": 6,
+      "writes": 0,
+      "pageErrors": [],
+      "limits": "Intercepted API; no real SQL/HTTP authorization/persistence/TLS proof"
+    },
+    "sourceReview": "All six sources inspected; preexisting patient-write logic unchanged; authorization, projection, cancellation and pagination checked",
+    "visualReview": "All15worker captures and one independent capture inspected at1440/390: loading/empty/errors/list/paging/long text/three themes. Readable, internal vertical scrolling, no page horizontal overflow, visible keyboard focus."
+  },
+  "sources": [
+    {
+      "path": "frontend/src/components/runtime-patients.tsx",
+      "sha256": "6F434CF5F024AE41AB002629DB724CB02538AEA47FD7B04AE99DCE782CBD46FD"
+    },
+    {
+      "path": "frontend/src/components/runtime-patient-links.tsx",
+      "sha256": "7EC5363966AFCCD7F67948B7BC024BA800A6E3B1C3543C7AA32FCEB24A09BC72"
+    },
+    {
+      "path": "frontend/src/lib/patient-link-types.ts",
+      "sha256": "8DF19A1AFAB9DA7CA7C7421BFE802F82463047ED5DDD339873406DFED1880FE7"
+    },
+    {
+      "path": "frontend/src/styles/live-patients.css",
+      "sha256": "7C9C4C6C402A101967D448FC7471867B22AD823DCC2D4C1FA1D4C36ABA5FC6E4"
+    },
+    {
+      "path": "frontend/tests/patient-links.test.ts",
+      "sha256": "E7F18DD15666C7A1B03ECF3179BF70498A880726F68116349A0036A507DBB955"
+    },
+    {
+      "path": "frontend/scripts/patient-links-live-qa.cjs",
+      "sha256": "983AFE7CED3075FC8ABA6613586185338EEAE3BB1ADB2EC55A6AE33FEE7B077A"
+    }
+  ],
+  "visuals": [
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/desktop-list.png",
+      "sha256": "E4120F2FE14A431779E19433027E8CC0BA20C6E443379809C82A7241D8B7CB65",
+      "supervisorInspected": true
+    },
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/desktop-pagination.png",
+      "sha256": "D8A65A99E2C0DE2D17F79554E34D0614EC35487DB836F9FF8ED4DA3632EA3790",
+      "supervisorInspected": true
+    },
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/loading.png",
+      "sha256": "DF838EA498E345C62336FAFE73EB971E0E38048B0D33C01F778AD7DFBE99CA70",
+      "supervisorInspected": true
+    },
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/empty.png",
+      "sha256": "8D20BB6DD241AF5579F20EFB9546AC24060C1924D90ED8744292E73EFA34CAAD",
+      "supervisorInspected": true
+    },
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/error-403.png",
+      "sha256": "7DFDC9532864053471C1B9FFCDA1D86A8F38E17805B3FF28A23900570A27B492",
+      "supervisorInspected": true
+    },
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/error-404.png",
+      "sha256": "14EBA2184B4D1577DD58470F672B64B7B1A24C78ACBD41C950CB861AF1FD5C77",
+      "supervisorInspected": true
+    },
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/error-503.png",
+      "sha256": "48CF80FC351737E9382D4AE4326936BBA9B97CFAA218A8E432E2BCA2DC84EB2D",
+      "supervisorInspected": true
+    },
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/error-network.png",
+      "sha256": "D4797656AD7DC510259B2042470866C4892DF004CA9A547A3AB30DD798E5706E",
+      "supervisorInspected": true
+    },
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/desktop-long.png",
+      "sha256": "401D3E8709E4A0CB6AC195DDD7D17A7CD3F030780E2025D3D2742D3F753094DB",
+      "supervisorInspected": true
+    },
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/mobile-blanco.png",
+      "sha256": "BC8D812BF99C5BC19CA395767CF214AC253FE6C4235EBB12A82246EA748F2D76",
+      "supervisorInspected": true
+    },
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/mobile-negro.png",
+      "sha256": "81618586FA6B3324E66DA8F892716CDF572EAAB3856BD0DF899023FAE8EA264C",
+      "supervisorInspected": true
+    },
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/mobile-navy.png",
+      "sha256": "E3908753E3446F8DC884B11E37BEBC387D4A795F623F0CBDF01C08DA4B957E69",
+      "supervisorInspected": true
+    },
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/desktop-blanco.png",
+      "sha256": "E4120F2FE14A431779E19433027E8CC0BA20C6E443379809C82A7241D8B7CB65",
+      "supervisorInspected": true
+    },
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/desktop-negro.png",
+      "sha256": "3283C1057787A3654D05A19F31F11AEE240A486B60B9A3F2EB24FFAEB33E5B47",
+      "supervisorInspected": true
+    },
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/desktop-navy.png",
+      "sha256": "44D9A565C36D1131E21AEA86EEF0CB7C6B65EAA50FE7C55F592FA2156B292DD7",
+      "supervisorInspected": true
+    },
+    {
+      "path": "docs/produccion/evidencias/visuales-vinculos-20261110/supervisor-mobile.png",
+      "sha256": "87297A548B579D975B2D14BC48CFF5E5A54C5B1B845A74C3FAE9E4981011BA69",
+      "supervisorInspected": true
+    }
+  ],
+  "limits": [
+    "Synthetic intercepted UI only; no real backend/SQL/persistence/audit proof",
+    "B4 strict backend environment preparation and live QA remain pending",
+    "No production approval/deployment or new TLS binding"
+  ]
+}
