@@ -1,5 +1,44 @@
 # Decisiones y contratos de integracion
 
+## D-87.X: B5P1+R1 aceptadas; E2 readonly real y auditoria, 2026-11-10
+
+R1msg_3710c4373267/task_5b68545267fc/ctx_2954143ce013 succeeded, delta solo
+testscope conpaths simulados. Supervisor congela17artefactos,691SHA/726pines
+y690fuentes sin delta; integra4fuentes B5exactas (testSHAfinalA8238F9C...),
+check/103unitfrontend y14Python propios enrootPASS. P1previa47artefactos y
+contexto3constantes/manifestidentico/diariosE1 preservados. Sin ejecutarB5real,
+DPAPI oEdge en preparacion. Evidencia VINCULOS_QA_PREPARACION_20261110.json.
+
+Supervisor preflightreadonly confirmaHUMAN1paciente/1link yANIMAL1paciente/0link.
+Pre/post plantillaaudit preparada, primero rechazosSQL468/8124 porcollation y
+aggregateouterref preservados, corregidos soloTEMPmetadata. Final emptyset
+motorreadonlyPASS no es positivo deREADaudit. Template0745D9B0...676CFCD ypre
+488152DE...713945 quedanpinneados; E2debe capturar nuevoscutoffs/epoch reales.
+
+Autorizar UNAejecucionB5E2 segun PAC-01-B5-E2.md: contextoB5, login/logout
+propios+GETnegocio, sinfixtures/mutacionesnegocio. AdminLPCreadonly4queries
+pre/poststable/audit,1eventopor200 y0por401/404, actor/tenant/patient/request/
+GETroute/metadata{}exactos, hashhistoria conservada. Auth3sesiones nuevas y
+revocadas, auditLOGIN/LOGOUT previstos; no esperar auth/audit globales iguales.
+Sinretry/config/certificados/servicios o diagnosticoextra; siFAIL volver a
+review sin compensar. E1cerrada ytarget/data/projectscope invariantes. Nada
+habilita produccion, escrituras de vinculos o completar todoPAC-01.
+
+## D-87.W: B5P1 revision y correccion de prueba de checkout, 2026-11-10
+
+P1msg_095fd1c14336 succeeded EN_REVISION; supervisor congela47artefactos y
+verifica691SHA/726pines,687fuentes previas intactas. Contextocopia solo3constantes,
+manifestidentico ydiariosE1 conservados. Revision detecta testscope depende
+__file__real: esperaPATH_SCOPE_CHANGED pero enrootcanonical devuelvePIN_INVALID
+con{}. Reproducido conmoduloinerte/patch enmemoria,0DPAPI/SQL/HTTP/procesos.
+No integrar aun. R1SOLO testPython segunPAC-01-B5-P1-R1.md, suitePython ydoscasos
+pathsimulados; no repetirfrontend103/check sin cambios. P1no aprobada/E2noejecutada.
+Logout autorizado esDELETE de auth/browser/session propio (protocoloexistente),
+no DELETEnegocio; aclaraciondecontrato, sin cambiofuncional en las otras fuentes.
+
+
+R1delegada task_5b68545267fc/ctx_2954143ce013, follow_upready al mismo programadorretenido. Supervisor no edita la fuente de test asignada; espera resultadoOrca.
+
 ## D-87.V: readiness real backend estricto aceptada; B5 QAreadonly, 2026-11-10
 
 msg_c93624d27935/task_a5de78616b7f/ctx_7444a0818a45 succeeded. Supervisor
@@ -20,6 +59,8 @@ historia. FuturaE2 mantendra contexto durantebrowser, login/logout propios yGET
 negocio; sin crear datos/cambiar roles o permisos. Review antes de ejecucion.
 Fixturesmissing/mutadas se informan prerequisitofallido, no se fabrican ni
 se atribuye21filasreales a la evidenciaSQL/sintetica anterior. PAC-01 parcial.
+
+E1aceptada publicada bf7e2a9fe7f6dce474d82f2df551d4cb2b7d9eff, remotoSHA confirmado. B5P1delegada task_2a13d59328f9/ctx_4e58d4bba3bf, follow_up ready en programadorretenido. Cuatro rutas nuevas yTEMP exclusivos, sin QAreal en preparacion; supervisor no modifica ownership y espera avisoOrca para review.
 
 ## D-87.U: B4P1 aceptada offline; gate E1 real acotado, 2026-11-10
 

@@ -1,5 +1,13 @@
 # Orquestacion Codex de Health Project
 
+## B5P1/R1 integradas; gateE2, 2026-11-10
+
+R1task_5b68545267fc/ctx_2954143ce013 aceptada: testscopeportable,17artefactos y
+691SHA/726pines comprobados.4fuentes integradas, supervisor103unit/check y14Python
+PASS. Contexto3constantes/manifestidentico/diariosE1 preservados. Siguiente UNA
+QArealreadonly conauditpre/post segunPAC-01-B5-E2.md, misma pareja/Run. Fuentes
+actuales695 contando cuatroadiciones legitimas enroot; no rollbackdeintegracion.
+
 ## B4E1 aceptada local; preparar B5readonly, 2026-11-10
 
 task_a5de78616b7f/ctx_7444a0818a45 aceptada tras review15artefactos/687SHA/726pines,

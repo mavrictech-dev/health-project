@@ -50,7 +50,9 @@ health/production-wave0 el 2026-11-04; sin integracion en main ni despliegue.
 | PAC-01.B3 | Programador recuperapiura; revision supervisor | B2 API integrada offline | VALIDADA E INTEGRADA SINTETICA | task_70d39caaf8e6 / ctx_7e6db58956df; PACIENTES_VINCULOS_UI_20261110.json |6rutas/15capturas revisadas; supervisor94unit/build85/8UI PASS; QAreal pendiente |
 | PAC-01.B4.P1 | Programador recuperapiura; revision supervisor | B3 UI sintetica integrada | VALIDADA PREPARACION OFFLINE | task_131aca7351c3 / ctx_4fcac67b4740; BACKEND_TLS_PREPARACION_20261110.json |73artefactos/726pines/687SHA/3classes/26tests independientesPASS;2probesactivos0; sin runtime/SQL/DPAPIreal |
 | PAC-01.B4.E1 | Programador recuperapiura; revision supervisor | P1 preparada/revisada | VALIDADA READINESS REAL LOCAL | task_a5de78616b7f / ctx_7444a0818a45; BACKEND_TLS_READINESS_20261110.json |UNAraw0READY12.172s/poll1,closureJobs0 ybaseline/huellaindependienteiguales; no API/UI |
-| PAC-01.B5.P1 | Programador recuperapiura; revision supervisor | B4E1 local aceptada | LISTA | PAC-01-B5-PREPARACION.md |4fuentes QA nuevas +contextoTEMP, solooffline; lecturaAPI/UI realE2 trasreview |
+| PAC-01.B5.P1 | Programador recuperapiura; revision supervisor | B4E1 local aceptada | VALIDADA E INTEGRADA OFFLINE | task_2a13d59328f9 / ctx_4e58d4bba3bf; VINCULOS_QA_PREPARACION_20261110.json |4fuentes/103unit+14Python independientesPASS; contexto/manifest/diarios preservados; E2pendiente |
+| PAC-01.B5.P1.R1 | Programador recuperapiura; revision supervisor | ReviewP1 | VALIDADA E INTEGRADA | task_5b68545267fc / ctx_2954143ce013; D-87.X |Solo testscope, paths explicitos; suite14Python enrootPASS;0deltaotras690 |
+| PAC-01.B5.E2 | Programador recuperapiura; revision supervisor | P1+R1 integradas/revisadas | LISTA | PAC-01-B5-E2.md |UNAQAreal API/UIreadonly +4queries prepostaudit; sin fixture o mutacionnegocio |
 | AGE-01 | Programador | PAC-01, ORG-01 | POR_VERIFICAR | — | Agenda concurrente |
 | CLI-01 | Programador | PAC-01, AGE-01 | POR_VERIFICAR | — | Historia entre sedes |
 | ESP-01 | Programador | CLI-01 | POR_VERIFICAR | — | Graficos persistentes |

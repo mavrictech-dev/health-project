@@ -1,5 +1,15 @@
 # Validacion y limites de evidencia
 
+## B5P1+R1: INTEGRADAS Y VALIDADAS OFFLINE, 2026-11-10
+
+47+17artefactos revisados,691SHA/726pines y687anteriores preservados. R1solo
+testscopeportable. Supervisor integra4fuentes porSHA,check103unit y14Python
+enrootPASS. ContextoTEMPsolo3constantes/manifestidentico/diariosE1 intactos.
+Preflightreadonly confirmafixturesHUMANnonempty yANIMALempty; pruebaemptyde
+plantillaaudit no equivale a lecturaAPIreal. Evidencia VINCULOS_QA_PREPARACION_20261110.json.
+E2unicaQArealreadonly ycorrelacionaudit definidas D-87.X/PAC-01-B5-E2.md,
+sinsecretos/procesos/navegadorenP1; no produccion ni datafixtures nuevas.
+
 ## B4E1: VALIDADA READINESS REAL LOCAL, 2026-11-10
 
 UNAinvocacion revisada raw0READY_FOR_QA/12.172s, HTTPpoll1; Jobsapp/proxyactivos0.
