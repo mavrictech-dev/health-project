@@ -1,5 +1,28 @@
 # Revisiones del supervisor
 
+## C0 aceptada estatica; C1.P1 SQL de revision y retirada, 2026-11-11
+
+C0 task_cbe1631fad10/ctx_1ca0fc8f62cf completa, entrega msg_ac0c0af0950a.
+Supervisor verifica16artefactos,71referencias/46SHA,13migraciones y11consumidores,
+695fuentes/726pines/301historicos/21snapshots intactos; informe/hash/anexo R55
+cerrados. VINCULOS_GESTION_ANALISIS_20261111.json y PAC-01-C0-ANALISIS_20261111.md.
+No suites o motor repetidos, no gestion implementada/validada desde analisis.
+Recuperacion C0 queda historica y E5 readonly real conserva aceptacion.
+
+Decision C1.P1 segun PAC-01-C1-P1.md: NUEVA V14 de revision propiaINT/CAS y
+retirada explicita que conserva historicos. Endurecer escritor existente para
+cerrar bypass sin version; no-op aceptado incrementa revision y genera evento
+semantico. Nuevo edit_get separado mantiene snapshot datos/version; B conserva
+siete campos. Actor REQUEST ADM/REC reales sinPACRESmix, TXcommittable/PORTAL/
+OPEN; grant a destinatarios activos/verificados con membresia soloPACRES; retirada
+no revalida elegibilidad de concesion. Writer ACK5, edit_get8, API compatible
+posterior antes de instalar/activar. BILLING mantiene consumo gated porFINANCE.
+
+Ownership programador SOLO nuevo V14 y TEMP de plan/review; no SQL/HTTP/servicios,
+instalacion, Java/UI o verifieroperativo en P1. Candidatos y contactos sin cuenta
+son paquetes posteriores, no lookupglobal/altaautomatica/portal. Preparacion
+SQL no implica evidencia de motor: QA/integracion requieren gates separados.
+
 ## C0 parcial; limite de uso del programador, 2026-11-10
 
 Escalacion msg_stop_cc370d3de8c498ed0032a713: C0 task_cbe1631fad10 /

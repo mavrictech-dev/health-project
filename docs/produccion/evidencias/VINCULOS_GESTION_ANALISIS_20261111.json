@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-11",
+  "taskId": "task_cbe1631fad10",
+  "dispatchId": "ctx_1ca0fc8f62cf",
+  "status": "VALIDATED_STATIC_ANALYSIS_ONLY",
+  "artifactsVerified": 16,
+  "programmerReportSHA256": "A55037ECB57F59A69F35C19949840BBB1B6D334B4330FD11767FAD12B5ED9476",
+  "analysisSHA256": "7F3A80F7EA9106FA4B3C0DD154754F8AB672B8092C82BF2FB6B2036AC55D6051",
+  "referencesSHA256": "F2D9C74667F5F3D6AB93D32AB3B68E6EF5ADB922963D815941F72FF880B2BC34",
+  "referenceRangesVerified": 71,
+  "referenceFilesHashesVerified": 46,
+  "frozenMigrationsVerified": 13,
+  "writerConsumerFilesVerified": 11,
+  "sourceHashesVerifiedUnchanged": 695,
+  "inputPinsVerifiedUnchanged": 726,
+  "historicalFilesVerifiedUnchanged": 301,
+  "partialSnapshotsVerifiedUnchanged": 21,
+  "gitStatesConservedByCapturedEvidence": true,
+  "supervisorSourceReview": [
+    "Link-specific CAS is absent from DTO, schema and V5 writer; patient revision is not a replacement",
+    "Historical deactivation must not require grant eligibility or rewriting historical relationship/scopes",
+    "New editing GET must not extend accepted seven-field list GET",
+    "Internal REQUEST/tenant/session/database membership authority, typed SP access and object ACL remain mandatory",
+    "Current writer must be hardened together with new revision; leaving legacy unconditional writes reachable is rejected",
+    "Candidate lookup and responsible without account require separate tenant-scoped contracts; contact must not create portal permission"
+  ],
+  "decision": "Accept C0; authorize a separately specified offline C1.P1 foundation migration, not runtime execution or UI. Resolve all C1-specific contract choices before delegation.",
+  "managementImplemented": false,
+  "managementValidated": false,
+  "newOperationalSqlOrHttp": 0,
+  "suitesOrBuildRepeated": 0,
+  "limitations": [
+    "Source analysis only; no installed-catalog, concurrency or management acceptance",
+    "Proposal matrix cases were not executed; responsibilities without account remain a separate future package",
+    "Old partial, recovery and failed E2-E4 history retained; E5 acceptance preserved"
+  ]
+}

@@ -1,5 +1,50 @@
 # Decisiones y contratos de integracion
 
+## D-87.AH: C0 aceptada; contrato SQL C1.P1, 2026-11-11
+
+C0 task_cbe1631fad10/ctx_1ca0fc8f62cf completa, entrega msg_ac0c0af0950a.
+Supervisor verifica16artefactos,71referencias/46SHA,13migraciones y11consumidores,
+695fuentes/726pines/301historicos/21snapshots intactos; informe/hash/anexo R55
+cerrados. VINCULOS_GESTION_ANALISIS_20261111.json y PAC-01-C0-ANALISIS_20261111.md.
+No suites o motor repetidos, no gestion implementada/validada desde analisis.
+Recuperacion C0 queda historica y E5 readonly real conserva aceptacion.
+
+Decision C1.P1 segun PAC-01-C1-P1.md: NUEVA V14 de revision propiaINT/CAS y
+retirada explicita que conserva historicos. Endurecer escritor existente para
+cerrar bypass sin version; no-op aceptado incrementa revision y genera evento
+semantico. Nuevo edit_get separado mantiene snapshot datos/version; B conserva
+siete campos. Actor REQUEST ADM/REC reales sinPACRESmix, TXcommittable/PORTAL/
+OPEN; grant a destinatarios activos/verificados con membresia soloPACRES; retirada
+no revalida elegibilidad de concesion. Writer ACK5, edit_get8, API compatible
+posterior antes de instalar/activar. BILLING mantiene consumo gated porFINANCE.
+
+Ownership programador SOLO nuevo V14 y TEMP de plan/review; no SQL/HTTP/servicios,
+instalacion, Java/UI o verifieroperativo en P1. Candidatos y contactos sin cuenta
+son paquetes posteriores, no lookupglobal/altaautomatica/portal. Preparacion
+SQL no implica evidencia de motor: QA/integracion requieren gates separados.
+
+## D-87.AG: recuperacion de C0 en mismo Task/Run, 2026-11-11
+
+Orca recupero ctx_3853dfb7a02e abandoned/terminal_missing, Task ready; no nuevos
+mensajes de entrega. Lista del worktree y ps acreditan0terminales vivas y0no
+verificables antes del reemplazo. Supervisor no cierra ni envia trabajo a las
+terminales historicas o ajenas. Nuevo arranque por wrapper aprobado en mismo
+worktree, cuenta por proceso y --no-daemon; /status efectivo recuperapiura,
+sesion01a1cba3-2a55-7ac1-bf27-cae46a17ef72,5h84%/semanal66% observadas.
+
+Nuevo terminal term_d21b429f-8a40-4c9e-94d9-7bb1dcf8e1a0. run-use conserva
+run_624b9269b491, worker-start reutiliza task_cbe1631fad10 y crea
+ctx_1ca0fc8f62cf. Recibo outcome_unknown/turn_start_unobserved: NO repetir
+dispatch, abandonar o inferir fallo desde timeout. Lectura de transcript exacto
+prueba recepcion del preambulo y actividad real leyendo habilidades/fuentes;
+estado administrativo de arranque aun sin confirmar. Mismo objetivo y ownership.
+
+Guia PAC-01-C0-REANUDACION_20261111.md y msg_b42029c9ab35 orientan SOLO ruta
+canonical/continuacion del parcial; no reenvian Task ni amplian implementacion.
+695fuentes/726pines/301historicos revalidados iguales antes del arranque. E5
+conserva aceptacion localreal. Falta reporte/worker_done C0 y review independiente;
+sin producto/SQL/servicios/secretos modificados durante recuperacion.
+
 ## D-87.AF: C0 parcial por cuota; arquitectura preliminar, 2026-11-10
 
 Escalacion msg_stop_cc370d3de8c498ed0032a713, task_cbe1631fad10 /
