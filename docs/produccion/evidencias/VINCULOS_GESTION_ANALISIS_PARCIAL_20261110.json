@@ -1,0 +1,80 @@
+{
+  "date": "2026-11-10",
+  "taskId": "task_cbe1631fad10",
+  "dispatchId": "ctx_3853dfb7a02e",
+  "status": "PARTIAL_REVIEWED_NOT_ACCEPTED",
+  "escalation": "msg_stop_cc370d3de8c498ed0032a713",
+  "reason": "Programmer provider usage limit; next availability displayed 9:15 PM. No account/model/purchase bypass or automatic retry. Dispatch remains open.",
+  "artifactsFrozen": [
+    {
+      "name": "B5C0-analysis.md",
+      "sha256": "8F2FE168C4E418F8D3DA7DAE84E14673669815F0D4FD7A61BC7B8E51589DE3C0",
+      "bytes": 25121
+    },
+    {
+      "name": "B5C0-baseline.py",
+      "sha256": "195AC98951B3F6CC02D18EFA1A360E5A8FFF3936F417A0A02F5665E2BC55B85B",
+      "bytes": 1984
+    },
+    {
+      "name": "B5C0-evidence.py",
+      "sha256": "FE2E12F4F59B43207B88917775A5B355EF22F8B10B25B8875AA2E820AE08096A",
+      "bytes": 8019
+    },
+    {
+      "name": "B5C0-git-before-supervisor.txt",
+      "sha256": "402C8C708DA9B97DFCB00020CFABFC7FBD28FA39ED72F7127B216A9155A003C6",
+      "bytes": 62
+    },
+    {
+      "name": "B5C0-git-before-worker.txt",
+      "sha256": "3AF7BF1F9A0EB7E2C4051268CF8DE1A666544D9AF5E009EAC28D19D74575643A",
+      "bytes": 5484
+    },
+    {
+      "name": "B5C0-history-before.json",
+      "sha256": "28C967FA9AA835F3ECD3F17AEF8446CF7341989850AC23E49EBEF7AFE3F030D6",
+      "bytes": 42235
+    },
+    {
+      "name": "B5C0-inspect.py",
+      "sha256": "25A31B92379D6571E639AF0A3EA1A88A26F76513C2041F977C2B7202F6CA9443",
+      "bytes": 560
+    },
+    {
+      "name": "B5C0-pins-before.json",
+      "sha256": "1506BC04B7D29D15C4A42515EFF632A1F3C489378A46114992955A44C8A7C644",
+      "bytes": 123620
+    },
+    {
+      "name": "B5C0-source-before.json",
+      "sha256": "29FBAB82C2AB5612950481FF9BB3F2DBD8577D6CD3C3832A5515C4243D933297",
+      "bytes": 131933
+    },
+    {
+      "name": "B5C0-source-references.json",
+      "sha256": "5DD6B8E4BA7C795A2B604A3F9B2A8E46296F2E081174E2A14160284E26DAAECE",
+      "bytes": 69375
+    }
+  ],
+  "sourceHashesVerifiedUnchanged": 695,
+  "inputPinsVerifiedUnchanged": 726,
+  "historicalFilesVerifiedUnchanged": 301,
+  "referenceFilesHashesVerified": 37,
+  "referenceRangesVerified": 54,
+  "functionalAnalysisReviewedPartially": [
+    "Current Link DTO and patient_links schema have no link expectedRevision/version; physical locks do not expose stale-form conflicts",
+    "Legacy write requires grant-valid relationship/scopes/target membership even to deactivate; historical invalid or departed targets need explicit safe revocation design",
+    "Seven-field readonly GET stays frozen; future edit revision/candidates require separate contracts and SQL-only access",
+    "Responsible contact without account must stay separate from user/membership/portal authorization"
+  ],
+  "incomplete": [
+    "No final programmer report or worker_done",
+    "Reference R55 is cited but not emitted in references JSON; appendix/final conservation proof not completed",
+    "Source analysis is not installed-catalog, concurrency or functional QA evidence"
+  ],
+  "next": "Complete same C0 Task after provider permits; architect prepares preliminary contracts, then independent review before C1 implementation.",
+  "E5AcceptancePreserved": true,
+  "supervisorOperationalQueries": 0,
+  "productFilesEdited": 0
+}

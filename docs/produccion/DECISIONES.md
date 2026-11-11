@@ -1,6 +1,34 @@
 # Decisiones y contratos de integracion
 
+## D-87.AF: C0 parcial por cuota; arquitectura preliminar, 2026-11-10
+
+Escalacion msg_stop_cc370d3de8c498ed0032a713, task_cbe1631fad10 /
+ctx_3853dfb7a02e: limite de uso del programador, disponibilidad21:15 anunciada
+por proveedor. Dispatch abierto, terminal retenida; no worker_done o entrega
+final. No cambio de cuenta/modelo, compra, nuevo Run ni reintento inmediato.
+
+Supervisor congela10artefactos TEMP C0, contrasta695fuentes/726pines/301historicos
+intactos y54referencias/37SHA de archivos. Analisis parcial cita R55 que aun no
+esta en JSON, falta anexo/cierre/informe final. NO se acepta C0 como completada.
+VINCULOS_GESTION_ANALISIS_PARCIAL_20261110.json. E5 readonly real sigue aceptada.
+
+Revision parcial confirma DTO/tabla sin revision propia de vinculo y ausencia
+de CAS, desactivacion heredada que revalida concesion, y necesidad de selector
+tenant/SP y contacto administrativo independiente de cuenta portal. No nueva
+inspeccion del motor ni prueba funcional. Supervisor prepara
+PAC-01-C-ARQUITECTURA-PRELIMINAR.md: condiciones y decisiones pendientes, sin
+autorizar implementacion o aplicar migraciones. Reanudar mismo C0 cuando permita
+el proveedor, completar R55/anexo/informe/conservacion y revisar antes de C1.
+Las referencias documentales de C0 parcial quedan congeladas a su snapshot;
+el registro posterior del supervisor puede mover lineas/hashes de docs y exige
+referencias documentales actualizadas al cierre, sin alterar fuentes producto.
+
 ## D-87.AE: lectura de vinculos validada real; siguiente gestion, 2026-11-10
+
+Evidencia y ocho capturas publicadas 34cef1ae2b2f780ac136c9cfbeb00e21942184d5,
+origin/health/production-wave0 confirmado. C0 delegada task_cbe1631fad10 /
+ctx_3853dfb7a02e al mismo programador retenido, solo analisis antes de contrato
+final e implementacion. E5 no se repite; siguiente review por entrega Orca.
 
 task_c91a2e2ed153/ctx_5ae9ea240b92, una invocacion raw0/34s: siete controles
 completos,18 lecturas reales (15x200/2x401/1x404),15 auditorias exactas para200

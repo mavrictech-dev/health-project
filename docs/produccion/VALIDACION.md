@@ -1,5 +1,17 @@
 # Validacion y limites de evidencia
 
+## C0 parcial; limite de uso del programador, 2026-11-10
+
+Escalacion msg_stop_cc370d3de8c498ed0032a713: C0 task_cbe1631fad10 /
+ctx_3853dfb7a02e abierta, sin worker_done, proveedor anuncia21:15. Parcial
+congelada,695fuentes/726pines/301historicos intactos;54rangos/37SHA verificados.
+Falta R55/anexo/informe/cierre, C0 no aceptada completa. Supervisor verifica
+brechas de CAS y revocacion heredada y prepara arquitectura preliminar sin
+implementar. Evidencia VINCULOS_GESTION_ANALISIS_PARCIAL_20261110.json, D-87.AF,
+PAC-01-C-ARQUITECTURA-PRELIMINAR.md. Sin SQL/HTTP/DPAPI/servicios o producto.
+E5 readonly real conserva su aceptacion; reanudar mismo C0 sin cuenta/modelo/
+compra/Run alternos o reintentos inmediatos contra el limite conocido.
+
 ## B5E5: VALIDADA LOCAL REAL READONLY, 2026-11-10
 
 task_c91a2e2ed153/ctx_5ae9ea240b92, una invocacion raw0/34s: siete controles
