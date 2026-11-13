@@ -1,0 +1,29 @@
+{
+  "status": "VALIDATED_METADATA_DIAGNOSIS_ONLY",
+  "date": "2026-11-12",
+  "taskId": "task_d8a859935952",
+  "dispatchId": "ctx_8a5b6895111a",
+  "doneMessageId": "msg_bd2a594aa1ae",
+  "reportSha256": "875AC62ECD0D396C4A17C04E971EC5281CF0D51B5BB119D842CE90D53BCE0D24",
+  "verified": {"sources": 717, "preservedFiles": 45014, "artifacts": 67, "journalEntries": 17, "nativeCommands": 8, "mutations": 0, "metadataAttempts": 1},
+  "frame": {
+    "validated": true, "predicateCount": 12, "factCount": 17,
+    "onlyFalsePredicate": "xactState0",
+    "initialTranCount": 0, "initialXactState": 1, "optionsBit2": false,
+    "targetAbsent": true, "userDatabaseCount": 0,
+    "machineName": "EXACT", "machineNameBytes": 54,
+    "login": "EXPECTED_SA", "loginBytes": 4,
+    "major": 16, "edition": "DEVELOPER64", "transport": "TCP"
+  },
+  "nativeOutputExactReconstruction": {
+    "bytes": 715,
+    "sha256": "12C9B5068C7072902F72E01DEC15E298DDC7233A7018F7BF668327992242196F",
+    "headerPresent": false,
+    "meaning": "Validated controlled JSON plus LF matches native output exactly. -y0 produced no column header in this run."
+  },
+  "reviewSummary": "tmp/c1dockerdiag-e2-supervisor-20261112/review-summary.json",
+  "readinessAuthorized": false,
+  "nativeSupervisorCalls": 0,
+  "nextGate": "PAC-01-C1-DOCKER-P1-R2.md",
+  "someeInScope": false
+}

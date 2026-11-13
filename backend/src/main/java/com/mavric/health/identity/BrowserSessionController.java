@@ -22,9 +22,9 @@ public class BrowserSessionController {
         this.service=Objects.requireNonNull(service);this.access=Objects.requireNonNull(access);
         this.sql=null;this.settings=Objects.requireNonNull(settings);this.identityStore=Objects.requireNonNull(identityStore);
     }
-    @PostMapping("/browser/login") Object login(@Valid @RequestBody AuthController.Login p,HttpServletRequest req,HttpServletResponse res) {
+    @PostMapping("/browser/login") Object login(@Valid @RequestBody RucRequests.Login p,HttpServletRequest req,HttpServletResponse res) {
         if(identityStore!=null) {
-            var result=service.loginBrowser(p.email(),p.password(),(TenantRef)req.getAttribute("health.tenant"),TraceContext.address(req));
+            var result=service.loginBrowser(p.ruc(),p.email(),p.password(),(TenantRef)req.getAttribute("health.tenant"),TraceContext.address(req));
             if(result==null) throw databaseError();
             // Revalidate the internal carrier before writing headers; never return the carrier itself.
             var checked=new IdentityService.BrowserLogin(result.token(),result.user(),result.expiresAt(),result.csrfToken());
@@ -34,7 +34,7 @@ public class BrowserSessionController {
             cookieAfterCommit(res,cookie(checked.token(),Duration.ofHours(settings.sessionHours())));
             return response;
         }
-        var result=service.login(p.email(),p.password(),(TenantRef)req.getAttribute("health.tenant"),com.mavric.health.audit.TraceContext.address(req));String token=result.get("accessToken").toString();
+        var result=service.login(p.ruc(),p.email(),p.password(),(TenantRef)req.getAttribute("health.tenant"),com.mavric.health.audit.TraceContext.address(req));String token=result.get("accessToken").toString();
         var response=new LinkedHashMap<String,Object>();response.put("user",result.get("user"));response.put("expiresAt",result.get("expiresAt"));response.put("csrfToken",sql.one("SELECT csrf_token FROM auth_sessions WHERE token_hash=?",Checks.hash(token)).get("csrfToken"));
         res.addHeader("Set-Cookie",cookie(token,Duration.ofHours(settings.sessionHours())));return response;
     }
@@ -42,7 +42,7 @@ public class BrowserSessionController {
         var actor=access.actor();
         if(identityStore!=null) {
             var current=identityStore.currentSession(signedRequest(actor));
-            return Map.of("user",user(actor),"csrfToken",current.csrfToken(),"expiresAt",current.expiresAt().toString());
+            var result=new LinkedHashMap<String,Object>();result.put("user",user(actor));result.put("csrfToken",current.csrfToken());result.put("expiresAt",current.expiresAt().toString());if(signedRequest(actor).getAttribute("health.branch")!=null)result.put("branchId",signedRequest(actor).getAttribute("health.branch"));return result;
         }
         var current=sql.one("SELECT csrf_token,expires_at FROM auth_sessions WHERE token_hash=?",actor.tokenHash());
         Map<String,Object> user=new LinkedHashMap<>();user.put("id",actor.id());user.put("name",actor.name());user.put("email",actor.email());user.put("roles",actor.roles());user.put("tenantId",actor.tenantId());

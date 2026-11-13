@@ -70,8 +70,10 @@ public final class SqlServerAccountLifecycleStore {
             });
         } catch(RuntimeException failure) {throw SqlServerErrors.map(failure);}
     }
-    public record RegistrationOrganization(String name,String slug,String kind,String domain,String planId,String specialtyCode) {
+    public record RegistrationOrganization(String name,String slug,String kind,String domain,String planId,String specialtyCode,String ruc) {
+        public RegistrationOrganization(String name,String slug,String kind,String domain,String planId,String specialtyCode){this(name,slug,kind,domain,planId,specialtyCode,null);}
         public RegistrationOrganization {
+            com.mavric.health.shared.Ruc.require(ruc);
             if(name==null || name.isBlank() || name.length()>160 || kind==null || !Set.of("DOCTOR","CLINIC","HOSPITAL","VETERINARY","DENTAL","SPECIALTY_CENTER").contains(kind)
                     || domain==null || !Set.of("HUMAN","ANIMAL").contains(domain) || specialtyCode==null || specialtyCode.isBlank() || specialtyCode.length()>80) throw SqlServerErrors.invalid();
             com.mavric.health.tenancy.DomainRules.slug(slug);Checks.id(planId);
@@ -80,7 +82,8 @@ public final class SqlServerAccountLifecycleStore {
         @Override public String toString() {return "RegistrationOrganization[redacted]";}
     }
     public record RegistrationPlan(String id,int includedBranches,int includedProfessionals,int includedSpecialties) {}
-    public record CreatedTenant(String id,String slug,String kind,String domain,String status) {
+    public record CreatedTenant(String id,String slug,String kind,String domain,String status,String ruc,int revision) {
+        public CreatedTenant(String id,String slug,String kind,String domain,String status){this(id,slug,kind,domain,status,null,0);}
         @Override public String toString() {return "CreatedTenant[redacted]";}
     }
     private static SqlServerContext platformRegistration(HttpServletRequest request) {
@@ -103,13 +106,14 @@ public final class SqlServerAccountLifecycleStore {
         return registration(()-> {
             var context=platformRegistration(request);Checks.id(tenant);Checks.id(branch);Checks.id(owner);
             if(input==null || plan==null || !input.planId().equals(plan.id()) || plan.includedBranches()<1 || plan.includedProfessionals()<1 || plan.includedSpecialties()<1) throw SqlServerErrors.invalid();
-            var data=Map.of("name",input.name(),"slug",input.slug(),"kind",input.kind(),"domain",input.domain(),"timezone","America/Lima","branchName","Sede principal","address","","specialties",List.of(input.specialtyCode()),"subscription",Map.of("planId",plan.id(),"cycle","MONTHLY","branchQuota",plan.includedBranches(),"professionalQuota",plan.includedProfessionals(),"specialtyQuota",plan.includedSpecialties()));
+            var data=Map.of("name",input.name(),"ruc",input.ruc(),"slug",input.slug(),"kind",input.kind(),"domain",input.domain(),"timezone","America/Lima","branchName","Sede principal","address","","specialties",List.of(input.specialtyCode()),"subscription",Map.of("planId",plan.id(),"cycle","MONTHLY","branchQuota",plan.includedBranches(),"professionalQuota",plan.includedProfessionals(),"specialtyQuota",plan.includedSpecialties()));
             String json=new tools.jackson.databind.ObjectMapper().writeValueAsString(data);
             var values=rows(executor.execute(SqlServerProcedure.SAAS_TENANT_CREATE,context,tenant,branch,owner,json));
             if(values.size()!=1) throw SqlServerErrors.database();
             var row=values.getFirst();
             if(!tenant.equals(text(row,"id")) || !tenant.equals(text(row,"tenantId")) || !input.slug().equals(text(row,"slug")) || !input.kind().equals(text(row,"kind")) || !input.domain().equals(text(row,"domain")) || !"TRIAL".equals(text(row,"status"))) throw SqlServerErrors.database();
-            return new CreatedTenant(tenant,input.slug(),input.kind(),input.domain(),"TRIAL");
+            if(!input.ruc().equals(row.get("ruc")) || !(row.get("revision") instanceof Integer revision) || revision!=1)throw SqlServerErrors.database();
+            return new CreatedTenant(tenant,input.slug(),input.kind(),input.domain(),"TRIAL",input.ruc(),revision);
         });
     }
     public void issueRegistration(HttpServletRequest request,String hash,String user,Instant expiry,String mailId,String subject,String body,CreatedTenant created) {

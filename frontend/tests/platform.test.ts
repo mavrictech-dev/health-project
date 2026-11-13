@@ -4,12 +4,12 @@ import {ambiguousCreateStatus,buildTenantRequest,compatiblePlans,compatibleSpeci
 import type {PlatformPlan,PlatformSpecialty,TenantDraft} from '../src/lib/platform-types';
 const plan:PlatformPlan={planId:'plan-live',name:'Oferta configurada',description:'Fixture sintética',status:'PUBLISHED',version:7,kinds:['DOCTOR','CLINIC','HOSPITAL','VETERINARY','DENTAL','SPECIALTY_CENTER'],domains:['HUMAN','ANIMAL'],modules:['CORE','DENTAL'],includedBranches:2,includedProfessionals:1,includedSpecialties:3,maxBranches:4,maxProfessionals:8,maxSpecialties:5,baseMinor:10000,branchMinor:2000,professionalMinor:1000,annualDiscount:15};
 const catalog:PlatformSpecialty[]=[{code:'H_GENERAL',name:'Medicina general',domain:'HUMAN',dental:false},{code:'H_CARDIO',name:'Cardiología',domain:'HUMAN',dental:false},{code:'D_GENERAL',name:'Odontología',domain:'HUMAN',dental:true},{code:'V_GENERAL',name:'Veterinaria',domain:'ANIMAL',dental:false}];
-const draft=():TenantDraft=>({...emptyTenantDraft(),name:' Clínica sintética ',slug:'clinica-sintetica',ownerName:' Propietaria sintética ',ownerEmail:'OWNER@EXAMPLE.TEST',password:'SyntheticOnly123!',planId:plan.planId,branchQuota:'2',professionalQuota:'1',specialtyQuota:'3',specialties:['H_GENERAL'],address:' Dirección sintética '});
+const draft=():TenantDraft=>({...emptyTenantDraft(),ruc:'20000000001',name:' Clínica sintética ',slug:'clinica-sintetica',ownerName:' Propietaria sintética ',ownerEmail:'OWNER@EXAMPLE.TEST',password:'SyntheticOnly123!',planId:plan.planId,branchQuota:'2',professionalQuota:'1',specialtyQuota:'3',specialties:['H_GENERAL'],address:' Dirección sintética '});
 
 test('Tenant DTO matches the new-owner Java variant and does not carry demo/pricing/revision fields',()=>{
   const input=Object.assign(draft(),{tenantId:'must-not-leak',ownerUserId:'must-not-leak',expectedRevision:2,price:1});
   const output=buildTenantRequest(input,[plan],catalog);
-  assert.deepEqual(Object.keys(output).sort(),['name','slug','kind','domain','owner','timezone','branchName','address','specialties','subscription'].sort());
+  assert.deepEqual(Object.keys(output).sort(),['name','ruc','slug','kind','domain','owner','timezone','branchName','address','specialties','subscription'].sort());
   assert.deepEqual(output.owner,{name:'Propietaria sintética',email:'owner@example.test',password:'SyntheticOnly123!',domain:null,credential:null});
   assert.deepEqual(output.subscription,{planId:'plan-live',cycle:'MONTHLY',branchQuota:2,professionalQuota:1,specialtyQuota:3});
   assert.deepEqual(output.specialties,['H_GENERAL']);assert.equal(output.timezone,'America/Lima');assert.equal(output.address,'Dirección sintética');
@@ -67,3 +67,5 @@ test('reserved slugs, invalid lengths and ambiguous transport outcomes are handl
   for(const status of [0,200,201,500,503])assert.equal(ambiguousCreateStatus(status),true);
   for(const status of [400,403,409])assert.equal(ambiguousCreateStatus(status),false);
 });
+
+test('RUC is a mandatory eleven-digit string and survives request and review',()=>{for(const ruc of ['', '123','2000000000a',' 20000000001','???????????'])assert.throws(()=>buildTenantRequest({...draft(),ruc},[plan],catalog),/RUC/);assert.equal(buildTenantRequest(draft(),[plan],catalog).ruc,'20000000001');assert.equal(tenantReview(draft(),[plan],catalog).ruc,'20000000001');});

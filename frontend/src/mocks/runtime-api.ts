@@ -1,3 +1,4 @@
+import {mockCards,reviewTenantId,reviewUserId,reviewRuc,reviewBranchId} from './cards-api';
 import { useDemo } from '@/store/demo';
 import { actors, specialties } from '@/lib/spec';
 import { getSaas, getTenant } from '@/lib/saas';
@@ -20,12 +21,12 @@ function fail(message: string, status = 400): never { throw Object.assign(new Er
 
 export function mockUser() {
   const { context } = useDemo.getState();
-  return { id: `demo-${context.role}`, name: actors.find(a => a.id === context.role)?.name || 'Revisor de presentación', email: `${context.role.toLowerCase()}@example.test`, roles: [context.role], tenantId: ['SAD', 'SOP'].includes(context.role) ? null : context.org };
+  return { id: reviewUserId, name: actors.find(a => a.id === context.role)?.name || 'Revisor de presentación', email: `${context.role.toLowerCase()}@example.test`, roles: [context.role], tenantId: ['SAD', 'SOP'].includes(context.role) ? null : reviewTenantId() };
 }
 function host() {
   const { context, data } = useDemo.getState(), platform = ['SAD', 'SOP'].includes(context.role);
   const tenant = getTenant(data, context.org), organization = data.organizations.find(o => o.id === context.org);
-  return { platform, id: platform ? undefined : context.org, name: platform ? 'Health Project SaaS' : organization?.name, slug: tenant?.slug, kind: tenant?.kind, domain: tenant?.domain, baseDomain: 'health.demo', hostname: platform ? 'health.demo' : `${tenant?.slug || 'clinica'}.health.demo` };
+  return { platform, id: platform ? undefined : reviewTenantId(), ruc: platform?undefined:reviewRuc(), name: platform ? 'Health Project SaaS' : organization?.name, slug: tenant?.slug, kind: tenant?.kind, domain: tenant?.domain, baseDomain: 'health.demo', hostname: platform ? 'health.demo' : `${tenant?.slug || 'clinica'}.health.demo` };
 }
 function seed(): ReviewState {
   const createdAt = now();
@@ -89,16 +90,17 @@ useDemo.subscribe((next, previous) => {
 export async function mockApi(path: string, options: { method?: string; body?: unknown } = {}): Promise<unknown> {
   const url = new URL(path, 'https://demo.invalid'), route = url.pathname, params = url.searchParams, method = options.method || 'GET', body = (options.body || {}) as Row;
   const value = state();
+  const cards=mockCards(route,method,body,params);if(cards.handled){if(route==='/v1/auth/login'){activateMockSession();return {...cards.value as Row,user:mockUser(),csrfToken:'demo-no-server',expiresAt:new Date(Date.now()+86400000).toISOString()};}return cards.value;}
   if (route === '/public/context' && method === 'GET') return host();
   if (route === '/public/status' && method === 'GET') return { ...value.application, status: value.application.mode === 'OPEN' ? 'OPERATIONAL' : 'RESTRICTED' };
   if (route === '/auth/browser/session' && method === 'GET') {
     if (value.signedOut) fail('Sesión de demostración cerrada. Puedes volver a entrar con datos ficticios.', 401);
-    return { user: mockUser(), csrfToken: 'demo-no-server', expiresAt: new Date(Date.now() + 86400000).toISOString() };
+    return { user: mockUser(), branchId:reviewBranchId(), csrfToken: 'demo-no-server', expiresAt: new Date(Date.now() + 86400000).toISOString() };
   }
   if (route === '/auth/browser/login' && method === 'POST') {
     if (!body.email || !body.password) fail('Completa el correo ficticio y la contraseña de ejemplo.');
     activateMockSession(); record('users', mockUser().id, 'login.simulated', undefined, { outcome: 'Simulación de acceso completada' }, '/api/auth/browser/login', 'POST');
-    return { user: mockUser(), csrfToken: 'demo-no-server', expiresAt: new Date(Date.now() + 86400000).toISOString() };
+    return { user: mockUser(), branchId:reviewBranchId(), csrfToken: 'demo-no-server', expiresAt: new Date(Date.now() + 86400000).toISOString() };
   }
   if (route === '/auth/browser/session' && method === 'DELETE') { value.signedOut = true; value.sessions[0].revoked = true; save(); return {}; }
   if (route === '/auth/sessions' && method === 'GET') return value.sessions;
@@ -121,7 +123,7 @@ export async function mockApi(path: string, options: { method?: string; body?: u
     if (host().platform) {
       const store = useDemo.getState(), plan = getSaas(store.data).plans.find(plan => plan.id === body.planId);
       if (!plan) fail('Selecciona un plan compatible.');
-      await store.executeSaas('tenant.create', { name: String(body.organizationName || ''), slug: String(body.slug || ''), ownerName: String(body.name || ''), ownerEmail: String(body.email || ''), kind: String(body.kind), domain: String(body.domain), planId: plan.id, cycle: 'Mensual', branchQuota: plan.rate.includedBranches, professionalQuota: plan.rate.includedProfessionals, specialtyQuota: Math.max(plan.includedSpecialties, 1), specialties: [String(body.specialtyCode)], branchName: 'Sede principal' });
+      await store.executeSaas('tenant.create', { ruc:String(body.ruc||''),name: String(body.organizationName || ''), slug: String(body.slug || ''), ownerName: String(body.name || ''), ownerEmail: String(body.email || ''), kind: String(body.kind), domain: String(body.domain), planId: plan.id, cycle: 'Mensual', branchQuota: plan.rate.includedBranches, professionalQuota: plan.rate.includedProfessionals, specialtyQuota: Math.max(plan.includedSpecialties, 1), specialties: [String(body.specialtyCode)], branchName: 'Sede principal' });
     }
     value.mail.unshift({ id: id('demo-mail'), email: String(body.email), subject: 'Confirma tu correo · simulación', href: `/verificar/#token=${id('demo-verify')}`, purpose: 'verify', used: false }); save();
     return { message: 'Cuenta de ejemplo preparada. Abre el mensaje simulado que aparece debajo para completar la verificación.' };

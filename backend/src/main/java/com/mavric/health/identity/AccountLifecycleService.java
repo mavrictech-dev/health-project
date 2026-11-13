@@ -13,7 +13,11 @@ import com.mavric.health.tenancy.*;
 import jakarta.validation.constraints.*;
 @Service
 public class AccountLifecycleService {
-    public record Register(@NotBlank @Size(max=160) String name,@NotBlank @Email @Size(max=254) String email,@NotBlank String password,@Pattern(regexp="DOCTOR|CLINIC|HOSPITAL|VETERINARY|DENTAL|SPECIALTY_CENTER") String kind,@Pattern(regexp="HUMAN|ANIMAL") String domain,@Size(max=160) String organizationName,@Size(max=63) String slug,String planId,String specialtyCode,boolean acceptTerms) {}
+    public record Register(@NotBlank @Size(max=160) String name,@NotBlank @Email @Size(max=254) String email,@NotBlank String password,@Pattern(regexp="DOCTOR|CLINIC|HOSPITAL|VETERINARY|DENTAL|SPECIALTY_CENTER") String kind,@Pattern(regexp="HUMAN|ANIMAL") String domain,@Size(max=160) String organizationName,@Size(max=63) String slug,String planId,String specialtyCode,boolean acceptTerms,
+        @tools.jackson.databind.annotation.JsonDeserialize(using=RucRequests.Text.class) String ruc) {
+        public Register(String name,String email,String password,String kind,String domain,String organizationName,String slug,String planId,String specialtyCode,boolean acceptTerms){this(name,email,password,kind,domain,organizationName,slug,planId,specialtyCode,acceptTerms,null);}
+        @Override public String toString(){return "Registration[redacted]";}
+    }
     private final SqlServerAccountLifecycleStore sqlServer;private final Sql sql;private final IdentityService identity;private final Settings settings;private final PasswordEncoder passwords;
     private final java.util.concurrent.ConcurrentHashMap<String,Long> rate=new java.util.concurrent.ConcurrentHashMap<>();
     @Autowired public AccountLifecycleService(Sql sql,IdentityService identity,Settings settings,PasswordEncoder passwords) {this.sqlServer=null;this.sql=sql;this.identity=identity;this.settings=settings;this.passwords=passwords;}
@@ -35,6 +39,7 @@ public class AccountLifecycleService {
     public Map<String,Object> options(TenantRef tenant) {if(sqlServer!=null) return sqlOptions(tenant);if(tenant!=null) return Map.of("portal",true);return Map.of("plans",sql.rows("SELECT p.id,p.name,v.kinds,v.domains,v.included_branches,v.included_professionals,v.included_specialties,v.base_minor FROM plans p JOIN plan_versions v ON v.plan_id=p.id AND v.version=p.current_version WHERE p.status='PUBLISHED' ORDER BY v.base_minor"),"specialties",sql.rows("SELECT code,name,domain,dental FROM specialties ORDER BY name"));}
     @Transactional public void register(Register p,TenantRef tenant) {
         if(sqlServer!=null) {registerSql(p,tenant);return;}
+        if(tenant==null)throw unavailable();
         Checks.password(p.password());if(!p.acceptTerms()) throw ApiException.invalid("Confirma las condiciones de creación de cuenta.");
         if(sql.optional("SELECT id FROM users WHERE email=?",p.email().trim().toLowerCase(Locale.ROOT)).isPresent()) return;
         String u=identity.create(new IdentityService.UserInput(p.name(),p.email(),p.password(),tenant==null && "DOCTOR".equals(p.kind())?p.domain():null,null));String target=tenant==null?null:tenant.id();
@@ -70,7 +75,8 @@ public class AccountLifecycleService {
                 || input.email()==null || input.email().isBlank() || input.email().length()>254) throw ApiException.invalid("Datos de cuenta no validos.");
         Checks.password(input.password());
         if(!input.acceptTerms()) throw ApiException.invalid("Confirma las condiciones de creacion de cuenta.");
-        var organization=tenant==null?new SqlServerAccountLifecycleStore.RegistrationOrganization(input.organizationName(),input.slug(),input.kind(),input.domain(),input.planId(),input.specialtyCode()):null;
+        if(tenant==null)com.mavric.health.shared.Ruc.require(input.ruc());
+        var organization=tenant==null?new SqlServerAccountLifecycleStore.RegistrationOrganization(input.organizationName(),input.slug(),input.kind(),input.domain(),input.planId(),input.specialtyCode(),input.ruc()):null;
         String email=input.email().trim().toLowerCase(Locale.ROOT);
         sqlServer.required(()-> {
             if(sqlServer.emailExists(request,email)) return null;

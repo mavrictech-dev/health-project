@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-12",
+  "status": "RETURNED_FOR_OFFLINE_CORRECTION",
+  "taskId": "task_de0b6f78d791",
+  "dispatchId": "ctx_49d75d51c681",
+  "workerDoneMessage": "msg_7478f6fa6f60",
+  "reportSha256": "7FB0626338DB5D6891924A497A70E7F9D0BBA6DC1C9E6F0462DA9462F47DE684",
+  "artifactsVerified": 365,
+  "sourceHashes": [
+    {
+      "source": "C:\\Users\\maxmo\\orca\\workspaces\\Health Project\\health-programmer\\backend\\scripts\\verify-sqlserver-patient-link-management.sql",
+      "snapshot": "C:\\Users\\maxmo\\AppData\\Local\\Temp\\C1P2-snapshots\\backend\\scripts\\verify-sqlserver-patient-link-management.sql",
+      "sha256": "9476CEC9A4C3906AD9E0D17EA964ED63C4B353372F4F879EEAA13049600C1D4D",
+      "snapshotSha256": "9476CEC9A4C3906AD9E0D17EA964ED63C4B353372F4F879EEAA13049600C1D4D",
+      "bytes": 25298
+    },
+    {
+      "source": "C:\\Users\\maxmo\\orca\\workspaces\\Health Project\\health-programmer\\scripts\\verify-patient-link-management-sql.py",
+      "snapshot": "C:\\Users\\maxmo\\AppData\\Local\\Temp\\C1P2-snapshots\\scripts\\verify-patient-link-management-sql.py",
+      "sha256": "08F615F445A9C2F33BAFC0136B111C21FCBAAEF00CB45A231DF2A238670E46E6",
+      "snapshotSha256": "08F615F445A9C2F33BAFC0136B111C21FCBAAEF00CB45A231DF2A238670E46E6",
+      "bytes": 37386
+    },
+    {
+      "source": "C:\\Users\\maxmo\\orca\\workspaces\\Health Project\\health-programmer\\scripts\\tests\\test_patient_link_management_sql_verifier.py",
+      "snapshot": "C:\\Users\\maxmo\\AppData\\Local\\Temp\\C1P2-snapshots\\scripts\\tests\\test_patient_link_management_sql_verifier.py",
+      "sha256": "C79C83ACCADD150E2FFC44AB0A884179CE21488BB727B0F9F32345391A20EBC1",
+      "snapshotSha256": "C79C83ACCADD150E2FFC44AB0A884179CE21488BB727B0F9F32345391A20EBC1",
+      "bytes": 15888
+    }
+  ],
+  "referencesChecked": 12,
+  "supervisorMutableReferencesChangedSinceWorkerRead": [],
+  "conservation": {
+    "source": 707,
+    "pins": 726,
+    "history": 301,
+    "preserved-snapshots": 21,
+    "migrations": 25,
+    "previous-artifacts": 155
+  },
+  "sourcesAfter": 710,
+  "independentTests": {
+    "tests": 18,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": true,
+    "externalProcessBlocked": true,
+    "sqlEngineInvoked": false,
+    "testSourceSha256": "C79C83ACCADD150E2FFC44AB0A884179CE21488BB727B0F9F32345391A20EBC1"
+  },
+  "workerSyntaxEvidence": {
+    "report": "C:\\Users\\maxmo\\AppData\\Local\\Temp\\C1P2-parser-final.json",
+    "sha256": "4D676773E530AD13DB8AA38575C7D767E2AD27928A4E125B4664C77C9A1BDC81",
+    "completeFiles": 112,
+    "errorCount": 0,
+    "parser": "Microsoft.SqlServer.TransactSql.ScriptDom.TSql160Parser",
+    "assembly": "16.1.0.0",
+    "parserSha256": "4F871E08B829FB8F78D17BD1BD1F47FAE8A066BD60B86CFAD5B252EF724CC6ED",
+    "removed": "Only first SQLcmd :On Error exit line; all TSQL/GO/V14 preserved.",
+    "limitation": "Syntax only, not SQL binding, execution, ACL, CAS, JDBC, rollback or concurrency proof."
+  },
+  "finding": {
+    "id": "R-C1P2-01",
+    "severity": "blocking-before-operational-use",
+    "sourceLines": [
+      439,
+      447,
+      454,
+      458,
+      480
+    ],
+    "problem": "Failure discards phase/nonce/completed checks and transport evidence; a final-baseline failure replaces the primary error.",
+    "reproduction": "D:\\Mavric\\Health Project\\tmp\\c1p2-supervisor-20261112\\failure-observability.json",
+    "reproductionSha256": "616308064AC575B2CCC5862EDEA0E31F1AAD0B69F5CEAC3AD750E46D9A32ED8F",
+    "cases": [
+      "First phase PASS then second phase invalid frame yields only FRAME_INVALID with empty exception metadata.",
+      "Same invalid frame followed by final baseline drift yields only FINAL_BASELINE_DRIFT, losing the primary failure."
+    ],
+    "requiredCorrection": "Preserve structured primary and secondary failures, phase/stage/nonce, completed partial checks, raw transport metadata and fresh cleanup outcomes; durable local run evidence before transport, without raw row/secret dumps or retries."
+  },
+  "integrated": false,
+  "sqlEngineInvoked": false,
+  "someeAccess": false,
+  "limits": [
+    "18 model tests and parser do not validate SQL binding/rollback/CAS/JDBC or real SQLcmd wire.",
+    "The original tool fails closed; this finding concerns traceability and preservation of failure evidence before operational use."
+  ]
+}

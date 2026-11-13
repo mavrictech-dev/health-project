@@ -60,7 +60,7 @@ export function createSaasState(organizations: Organization[]): SaasState {
     const plan = plans.find(p => p.id === (solo ? 'plan-professional' : vet ? 'plan-vet' : kind === 'HOSPITAL' ? 'plan-hospital' : 'plan-center'))!;
     const codes = validCodes(solo ? ['H_GENERAL_MEDICINE', 'H_PEDIATRICS'] : vet ? vetCodes : humanCodes);
     const count = org.branches.filter(b => !b.external && !/Lugar externo/i.test(b.name)).length;
-    const tenant: Tenant = { id: org.id, kind, domain: vet ? 'ANIMAL' : 'HUMAN', status: 'Activo', slug: org.id.replace('org-', ''), ownerName: solo ? 'Dr. Mateo Mendoza' : vet ? 'Dra. Camila Silva' : 'Isabel García', ownerEmail: solo ? 'mateo@example.test' : vet ? 'camila@example.test' : 'administracion@example.test', created: SAAS_DATE, specialties: codes, subscription: newSubscription(plan, 'Mensual', Math.max(plan.rate.includedBranches, count), plan.rate.includedProfessionals) };
+    const tenant: Tenant = { id: org.id,ruc:'200000000'+String(organizations.indexOf(org)+1).padStart(2,'0'), kind, domain: vet ? 'ANIMAL' : 'HUMAN', status: 'Activo', slug: org.id.replace('org-', ''), ownerName: solo ? 'Dr. Mateo Mendoza' : vet ? 'Dra. Camila Silva' : 'Isabel García', ownerEmail: solo ? 'mateo@example.test' : vet ? 'camila@example.test' : 'administracion@example.test', created: SAAS_DATE, specialties: codes, subscription: newSubscription(plan, 'Mensual', Math.max(plan.rate.includedBranches, count), plan.rate.includedProfessionals) };
     state.tenants.push(tenant);
     const ids = solo ? ['pro-mateo'] : vet ? ['pro-camila'] : org.id === 'org-human' ? ['pro-mateo', 'pro-valeria', 'pro-andres'] : [];
     for (const id of ids) state.memberships.push({ id: `member-${org.id}-${id}`, tenantId: org.id, professionalId: id, specialties: id === 'pro-valeria' ? codes.filter(c => c.startsWith('D_')) : id === 'pro-andres' ? codes.filter(c => c === 'H_CARDIOLOGY') : codes.filter(c => !c.startsWith('D_')), branchIds: org.branches.map(b => b.id), status: 'Activo', owner: solo || vet });
@@ -169,8 +169,9 @@ export function runSaasCommand(input: DemoData, context: Context, command: SaasC
     if (!tenantKinds.some(k => k.id === kind) || !['HUMAN', 'ANIMAL'].includes(domain) || kind === 'VETERINARY' && domain !== 'ANIMAL' || !['VETERINARY', 'DOCTOR'].includes(kind) && domain !== 'HUMAN') throw new Error('Revisa el tipo y ámbito del cliente.');
     const ownerName = required(values, 'ownerName', 'el responsable de la cuenta'); const ownerEmail = email(required(values, 'ownerEmail', 'el correo del responsable'));
     const contract = subscriptionFromValues(state, { kind, domain }, values); const codes = list(values, 'specialties'); checkedSpecialties(codes, { kind, domain }, contract.specialtyQuota); checkSpecialtyModules(codes, contract.modules);
+    const ruc=required(values,'ruc','el RUC');if(!/^[0-9]{11}$/.test(ruc)||state.tenants.some(t=>t.ruc===ruc))throw new Error('El RUC requiere 11 digitos y debe ser unico.');
     const tenantId = id('tenant'); const branchId = id('branch');
-    const created: Tenant = { id: tenantId, kind, domain, ownerName, ownerEmail, slug, status: 'Prueba', created: SAAS_DATE, specialties: codes, subscription: contract };
+    const created: Tenant = { id: tenantId,ruc, kind, domain, ownerName, ownerEmail, slug, status: 'Prueba', created: SAAS_DATE, specialties: codes, subscription: contract };
     state.tenants.push(created); data.organizations.push({ id: tenantId, name, initials: name.split(' ').slice(0, 2).map(s => s[0]).join('').toUpperCase(), type: kind === 'DOCTOR' ? domain === 'ANIMAL' ? 'Veterinario independiente' : 'Profesional independiente' : domain === 'ANIMAL' ? 'Veterinaria' : kindLabel(kind), branches: [{ id: branchId, name: required(values, 'branchName', 'el nombre de la primera sede'), address: str(values, 'address'), status: 'Activa' }] });
     state.areas.push({ id: id('area'), tenantId, branchId, name: 'Consulta y atención', specialties: [...codes] });
     if (kind === 'DOCTOR') {
@@ -182,6 +183,7 @@ export function runSaasCommand(input: DemoData, context: Context, command: SaasC
     resultId = tenantId;
   } else if (command === 'tenant.edit') {
     if (!tenant || !org) throw new Error('Selecciona un cliente.');
+    const ruc=required(values,'ruc','el RUC');if(!/^[0-9]{11}$/.test(ruc)||state.tenants.some(t=>t.id!==tenantId&&t.ruc===ruc))throw new Error('El RUC requiere 11 digitos y debe ser unico.');tenant.ruc=ruc;
     const slug = required(values, 'slug', 'el identificador').toLowerCase(); if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || state.tenants.some(t => t.id !== tenantId && t.slug === slug)) throw new Error('El identificador no es válido o ya está ocupado.');
     org.name = required(values, 'name', 'el nombre'); org.initials = org.name.split(' ').slice(0, 2).map(s => s[0]).join('').toUpperCase(); tenant.slug = slug; tenant.ownerName = required(values, 'ownerName', 'el responsable'); tenant.ownerEmail = email(required(values, 'ownerEmail', 'el correo'));
   } else if (command === 'tenant.status') {

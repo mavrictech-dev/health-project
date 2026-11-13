@@ -1,0 +1,21 @@
+{
+  "taskId": "task_2a2555a90d6a",
+  "dispatchId": "ctx_108e83113ca0",
+  "userInstruction": "puedes hacer que continue",
+  "observedUtc": "2026-11-13T15:18:19Z",
+  "effectiveAccount": "recuperapiura@gmail.com",
+  "effectiveSession": "01a1cba3-2a55-7ac1-bf27-cae46a17ef72",
+  "effectiveFiveHourQuotaRemainingPercent": 100,
+  "effectiveWeeklyQuotaRemainingPercent": 28,
+  "operationEvidenceDirectoryObserved": false,
+  "captureIntentObserved": false,
+  "captureResultObserved": false,
+  "captureChildRecordObserved": false,
+  "ownedOperationalPythonProcessObserved": false,
+  "baselineReadyStillPresent": true,
+  "approvalSha256": "B6B9B4C0A4536468CDCD4A56E0C14F670A05C3CFBB0E3883D648842AB897FD19",
+  "sameDispatchAndAccount": true,
+  "newWorkerOrRetryStarted": false,
+  "diagnosticResultAvailable": false,
+  "action": "Send continuation to existing dispatch; revalidate frozen files and operation absence before one approved rollback diagnostic; no baseline writer rerun, no other account, no AgendlyCitas."
+}

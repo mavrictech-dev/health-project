@@ -23,6 +23,7 @@ public final class SqlServerSecurityStore {
                 SqlServerRequestContexts.from(request,SqlServerContext.Scope.REQUEST),slug)).map(row-> {
             Map<String,Object> result=new LinkedHashMap<>(row);
             for (String key:List.of("id","name","slug","kind","domain","status")) text(row,key,false);
+            if(!com.mavric.health.shared.Ruc.valid(text(row,"ruc",false)) || !(row.get("revision") instanceof Integer revision) || revision<1)throw inconsistent();
             if (!slug.equals(row.get("slug"))) throw inconsistent();
             result.put("modules",strings(row.get("modules")));
             return Collections.unmodifiableMap(result);

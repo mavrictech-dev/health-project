@@ -64,17 +64,26 @@ public class IdentityService {
         @Override public String toString() { return "BrowserLogin[redacted]"; }
     }
     @Transactional public BrowserLogin loginBrowser(String email,String password,TenantRef tenant,String address) {
+        return loginBrowser(null,email,password,tenant,address);
+    }
+    @Transactional public BrowserLogin loginBrowser(String ruc,String email,String password,TenantRef tenant,String address) {
         if(identityStore==null) throw databaseError();
+        validateLogin(ruc,email,password,tenant);
         HttpServletRequest request=hostRequest(tenant);
         request.removeAttribute("health.actor");
-        try { return identityStore.required(()->loginSql(email,password,tenant,address,request)); }
+        try { return identityStore.required(()->loginSql(ruc,email,password,tenant,address,request)); }
         catch(RuntimeException error) { request.removeAttribute("health.actor");throw SqlServerErrors.map(error); }
     }
     @Transactional public Map<String,Object> login(String email,String password,TenantRef tenant,String address) {
+        return login(null,email,password,tenant,address);
+    }
+    @Transactional public Map<String,Object> login(String ruc,String email,String password,TenantRef tenant,String address) {
+        validateLogin(ruc,email,password,tenant);
+        if(tenant!=null && identityStore==null)throw databaseError();
         if(identityStore!=null) {
             HttpServletRequest request=hostRequest(tenant);
             request.removeAttribute("health.actor");
-            try { return identityStore.required(()->bearer(loginSql(email,password,tenant,address,request))); }
+            try { return identityStore.required(()->bearer(loginSql(ruc,email,password,tenant,address,request))); }
             catch(RuntimeException error) { request.removeAttribute("health.actor");throw SqlServerErrors.map(error); }
         }
         limit(Checks.hash(address+":"+(tenant==null?"platform":tenant.id())+":"+email.toLowerCase(Locale.ROOT)));
@@ -104,7 +113,7 @@ public class IdentityService {
                     var user=identityStore.credentials(request,normalized(email)).orElseThrow(IdentityService::rejected);
                     if(!passwords.matches(password,user.passwordHash())) throw rejected();
                     identityStore.acceptInvitation(request,user.id());
-                    return bearer(loginSql(email,password,tenant,address,request));
+                    return bearer(loginSql(tenant.ruc(),email,password,tenant,address,request));
                 });
             } catch(RuntimeException error) { request.removeAttribute("health.actor");throw SqlServerErrors.map(error); }
         }
@@ -136,8 +145,19 @@ public class IdentityService {
         else identityStore.create(request,id,input.name().trim(),normalized(input.email()),hash,input.domain(),input.credential());
         return id;
     }
-    private BrowserLogin loginSql(String email,String password,TenantRef tenant,String address,HttpServletRequest request) {
+    public Map<String,Object> tenantSpace(String ruc,String address) {
+        if(identityStore==null)throw databaseError();Ruc.require(ruc);var request=request();
+        if(request.getAttribute("health.tenant")!=null)throw ApiException.forbidden();request=hostRequest(null);
+        limit(Checks.hash(address+":tenant-space"));
+        return Map.of("hostname",identityStore.tenantSpace(request,ruc,settings.baseDomain()));
+    }
+    private static void validateLogin(String ruc,String email,String password,TenantRef tenant){
+        if(email==null || email.isBlank() || email.length()>254 || !email.trim().matches("[^\\s@]+@[^\\s@]+") || password==null || password.isEmpty() || password.length()>128)throw ApiException.invalid("Datos de acceso no validos.");
+        if(tenant==null){if(ruc!=null)throw rejected();}else Ruc.require(ruc);
+    }
+    private BrowserLogin loginSql(String ruc,String email,String password,TenantRef tenant,String address,HttpServletRequest request) {
         limit(Checks.hash(address+":"+(tenant==null?"platform":tenant.id())+":"+email.toLowerCase(Locale.ROOT)));
+        if(tenant!=null && !identityStore.lockTenantRuc(request,Ruc.require(ruc))){identityStore.failed(request,null);throw rejected();}
         var found=identityStore.credentials(request,normalized(email));
         if(found.isEmpty() || found.get().locked() || !passwords.matches(password,found.get().passwordHash())) {
             identityStore.failed(request,found.map(SqlServerIdentityStore.Credentials::id).orElse(null));
@@ -157,7 +177,7 @@ public class IdentityService {
         byte[] bytes=new byte[32];random.nextBytes(bytes);
         String token=Base64.getUrlEncoder().withoutPadding().encodeToString(bytes),hash=Checks.hash(token);
         Instant expiry=Instant.now().plus(settings.sessionHours(),java.time.temporal.ChronoUnit.HOURS);
-        var saved=identityStore.saveSession(request,hash,user.id(),expiry);
+        var saved=identityStore.saveSession(request,hash,user.id(),expiry,ruc);
         BrowserLogin result=new BrowserLogin(token,new BrowserUser(user.id(),user.name(),user.email(),roles),saved.expiresAt(),saved.csrfToken());
         Actor actor=new Actor(user.id(),user.name(),user.email(),tenant==null?null:tenant.id(),roles,hash);
         publishAfterCommit(request,actor);

@@ -1,0 +1,27 @@
+{
+  "status": "FAILED_READONLY_RUN_REVIEWED_GUARD_IDENTIFIED",
+  "date": "2026-11-12",
+  "taskId": "task_57af93334ba8",
+  "dispatchId": "ctx_505c91e5a9b9",
+  "doneMessageId": "msg_8d729430c032",
+  "workerOutcome": "failed",
+  "reportSha256": "D3473E25D666EA24BA1D0114A226F85054EB845CB49E1B8257CD3EB582CA742D",
+  "verified": {"sources": 717, "preservedFiles": 44884, "artifacts": 56, "journalEntries": 17, "commands": 8, "sqlAttempts": 1, "mutations": 0},
+  "readiness": {"validated": false, "nativeExit": 16, "stdoutBytes": 0, "stderrBytes": 118, "sha256": "D9B43E05BED8ABBACDC477B7682D3E26DE9BAC04D149E4FF5CC396C45C07CF86"},
+  "controlledErrorReconstruction": {
+    "exactLengthAndSha256Match": true,
+    "messageNumber": 59999, "level": 16, "state": 1,
+    "server": "healthproject-c1qa-20261112", "line": 9,
+    "controlledMessage": "C1Docker isolated engine/sa/TCP prerequisite",
+    "meaning": "The controlled first guard rejected at least one predicate; SQL reached that guard. Individual predicate not yet established.",
+    "diagnosticGap": "Previous numeric-header regex omitted optional Server segment. An empty classification did not mean absent native headers."
+  },
+  "currentDatabaseAbsenceProven": false,
+  "dockerFinalState": "running",
+  "dockerFinalGuardsValidated": true,
+  "nativeSupervisorCalls": 0,
+  "reviewSummary": "tmp/c1dockerreconcile-e1-supervisor-20261112/review-summary.json",
+  "nextGate": "PAC-01-C1-DOCKER-DIAG-E1.md",
+  "provisioningAuthorizedByThisEvidence": false,
+  "someeInScope": false
+}

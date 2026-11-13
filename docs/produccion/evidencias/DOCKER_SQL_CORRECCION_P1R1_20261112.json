@@ -1,0 +1,31 @@
+{
+  "status": "VALIDATED_AND_INTEGRATED_OFFLINE_TOOLING",
+  "date": "2026-11-12",
+  "taskId": "task_7e08df97b219",
+  "dispatchId": "ctx_a5cdc7271f33",
+  "doneMessageId": "msg_5a9a923c55d6",
+  "reportSha256": "156A63217DF68BFC54278AF1AD015A804BB2D1576C7B4BD68AE65DF54A5A758E",
+  "sourceHashes": {
+    "scripts/health-sqlserver-docker-qa.py": "6F5FE6126410A1F0002184B6DE976125E4189109B5C4A019ED9C1DCBF032CA2A",
+    "scripts/tests/test_health_sqlserver_docker_qa.py": "D05D8A5D4C9C6977D9BAA48B4512A8FC28DDC5A5EDBD0D46FAD42DFF7B22E73A"
+  },
+  "verified": {
+    "artifacts": 10937, "originalP1AllArtifacts": 20868,
+    "references": 8, "sources": 715, "ownedChanges": 2, "unchangedSources": 713,
+    "pins": 726, "history": 301, "preservedSnapshots": 21,
+    "migrations": 25, "previousArtifacts": 155, "originalEvidence": 367,
+    "priorR1Artifacts": 5594
+  },
+  "independentTests": {"tests": 35, "failures": 0, "errors": 0, "skips": 0, "nativeProcessesSocketsBlocked": true},
+  "independentRegeneration": {"exactCompleteSqlFiles": 5, "modeledNativeCallsIdentical": 41, "mutationsUnchanged": 6, "changedTopLevelDefinition": "Provisioner"},
+  "findingClosed": "R-DockerP1-01",
+  "independentWitness": "tmp/c1dockerp1r1-supervisor-20261112/failure-cause-witness.json",
+  "reviewSummary": "tmp/c1dockerp1r1-supervisor-20261112/review-summary.json",
+  "integration": "tmp/c1dockerp1r1-supervisor-20261112/integration.json",
+  "sourceCountAfterIntegration": 717,
+  "provisioningAuthorized": false,
+  "innerSqlcmdPinMeasured": false,
+  "nativeSqlInvoked": false,
+  "someeInScope": false,
+  "nextGate": "PAC-01-C1-DOCKER-PIN-E1.md"
+}

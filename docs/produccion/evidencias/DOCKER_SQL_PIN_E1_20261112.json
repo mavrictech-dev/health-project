@@ -1,0 +1,32 @@
+{
+  "status": "VALIDATED_BINARY_PIN_ONLY",
+  "date": "2026-11-12",
+  "taskId": "task_4566834e8f63",
+  "dispatchId": "ctx_71ee27bd64f9",
+  "doneMessageId": "msg_70de13c6b5b4",
+  "reportSha256": "769104876EAB26D3D2107D2D0A1826E72C92C24FD7C36AA44E697F9F3FBEE2D3",
+  "innerSqlcmdSha256": "447775C5DA41E04AC04CEBDB2EB0DDED06213402342715040BEA49B58AB05ADC",
+  "image": "mcr.microsoft.com/mssql/server@sha256:4525e3efac9f3e241cb003bb2ff2a82818b502f37e12049d788b1a9fa7e13b7f",
+  "inspectionContainerId": "3b39d275c60a913fbcd8b63918b76a87c8e4b49f0bc89d645211230f7a36c202",
+  "verified": {"sources": 717, "preservedFiles": 44706, "artifacts": 56, "durableFiles": 38, "references": 10, "nativeCallsReviewed": 8, "mutationsReviewed": 2},
+  "independentInspect": "tmp/c1dockerpin-e1-supervisor-20261112/fresh-container-inspect.json",
+  "independentFinalState": "exited",
+  "independentFinalExitCode": 0,
+  "independentReadonlyInspectCalls": 1,
+  "hashExecutionRepeated": false,
+  "reviewSummary": "tmp/c1dockerpin-e1-supervisor-20261112/review-summary.json",
+  "reviewedProvisionManifest": {
+    "path": "tmp/c1dockerpin-e1-supervisor-20261112/reviewed-provision-manifest.json",
+    "sha256": "073BBFE5A07528B1498FA3D38FD0C8A6DA908127F7A5BF8B96E5E83FE720958E",
+    "scope": "One new provisioning Task under PAC-01-C1-DOCKER-PROVISION-E1.md, not general permission"
+  },
+  "sqlServerStartedInThisGate": false,
+  "sqlcmdExecutedInThisGate": false,
+  "sqlConnections": 0,
+  "databasesCreated": 0,
+  "volumesCreated": 0,
+  "credentialsGenerated": 0,
+  "someeInScope": false,
+  "nextGate": "PAC-01-C1-DOCKER-PROVISION-E1.md",
+  "authenticationProofPendingUntilReadinessBeforeDatabaseCreation": true
+}

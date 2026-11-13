@@ -78,8 +78,12 @@ class SqlServerProcedureContractTest {
         Map<String,SqlServerProcedure> catalog=new TreeMap<>();
         for (SqlServerProcedure procedure:SqlServerProcedure.values())
             assertNull(catalog.put(name(procedure),procedure),"Duplicate descriptor");
-        assertEquals(109,catalog.size());
-        assertNotNull(catalog.remove("usp_patient_links_list"),"Only the explicit V13 delta extends V8");
+        assertEquals(123,catalog.size());
+        for(String delta:List.of("usp_medical_services","usp_medical_agreements","usp_medical_catalog_save"))assertNotNull(catalog.remove(delta),"Explicit V17 delta");
+        for(String delta:procedures(resource("V16__patient_antecedents_consultations.sql")).keySet())assertNotNull(catalog.remove(delta),"Explicit V16 delta");
+        for(String delta:List.of("usp_identity_tenant_ruc_lock","usp_tenant_space_resolve","usp_tenant_profile_save","usp_tenant_session_save"))assertNotNull(catalog.remove(delta),"Explicit V15 delta");
+        assertNotNull(catalog.remove("usp_patient_links_list"),"Explicit V13 delta");
+        assertNotNull(catalog.remove("usp_patient_link_edit_get"),"Only explicit V14 management delta");
         assertEquals(publicNames(snapshot),catalog.keySet());
         assertFalse(catalog.containsKey("usp_request_context"));
         assertEquals(2,catalog.values().stream().filter(SqlServerProcedure::bootstrap).count());
@@ -89,10 +93,12 @@ class SqlServerProcedureContractTest {
 
     @TestFactory Stream<DynamicTest> eachPublicSignatureMatchesOrderTypeLengthNameAndDefaultFromSqlResources() throws Exception {
         Snapshot snapshot=snapshot();
-        return Arrays.stream(SqlServerProcedure.values()).filter(p->p!=SqlServerProcedure.PATIENT_LINKS_LIST).map(procedure -> DynamicTest.dynamicTest(name(procedure),()-> {
+        return Arrays.stream(SqlServerProcedure.values()).filter(p->p!=SqlServerProcedure.PATIENT_LINKS_LIST && p!=SqlServerProcedure.PATIENT_LINK_EDIT_GET && !Set.of(SqlServerProcedure.IDENTITY_TENANT_RUC_LOCK,SqlServerProcedure.TENANT_SPACE_RESOLVE,SqlServerProcedure.TENANT_PROFILE_SAVE,SqlServerProcedure.TENANT_SESSION_SAVE).contains(p)).map(procedure -> DynamicTest.dynamicTest(name(procedure),()-> {
             Contract contract=snapshot.procedures().get(name(procedure));
+            if(contract==null)contract=procedures(resource("V16__patient_antecedents_consultations.sql")).get(name(procedure));
+            if(contract==null)contract=procedures(resource("V17__clinical_catalog.sql")).get(name(procedure));
             assertNotNull(contract);
-            assertEquals(snapshot.access().get(contract.name()).equals("bootstrap"),procedure.bootstrap());
+            assertEquals("bootstrap".equals(snapshot.access().get(contract.name())),procedure.bootstrap());
             assertEquals(contract.parameters().size(),procedure.parameters().size(),"Explicit defaults may not be omitted");
             assertEquals("{call dbo."+contract.name()+"("+String.join(",",
                     Collections.nCopies(contract.parameters().size(),"?"))+")}",procedure.call());
@@ -129,6 +135,26 @@ class SqlServerProcedureContractTest {
         assertEquals(List.of(List.of("GRANT","EXECUTE","ON","OBJECT",":",":","dbo",".","usp_patient_links_list","TO","hp_runtime_executor",";"),List.of("DENY","EXECUTE","ON","OBJECT",":",":","dbo",".","usp_patient_links_list","TO","hp_bootstrap_executor",";")),permissions);
     }
 
+    @Test void v14FinalR1IsPinnedAndOnlyAddsEditReaderWithoutRelaxingHistoricParser() throws Exception {
+        String sql=resource("V14__patient_link_revision.sql");
+        assertEquals("418B1C1B864DE9A6E7AC20E0F641630422A8D2451B3D42F7E9B97FB835B0EA9A",HexFormat.of().withUpperCase().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(sql.getBytes(StandardCharsets.UTF_8))));
+        var parsed=procedures(sql);assertEquals(Set.of("usp_patient_link_edit_get"),parsed.keySet());
+        assertEquals(List.of(new SqlParameter("patient_id","char",36,0,null,false),new SqlParameter("user_id","char",36,0,null,false)),parsed.get("usp_patient_link_edit_get").parameters());
+        var descriptor=SqlServerProcedure.PATIENT_LINK_EDIT_GET;assertFalse(descriptor.bootstrap());assertEquals("{call dbo.usp_patient_link_edit_get(?,?)}",descriptor.call());
+        for(int i=0;i<2;i++){var actual=descriptor.parameters().get(i);assertEquals(i==0?"patient_id":"user_id",actual.sqlName());assertEquals(JDBCType.CHAR,actual.type());assertEquals(36,actual.length());assertTrue(actual.ascii());assertNull(actual.defaultLiteral());}
+        var tokens=lex(sql);int alters=0;var acl=new ArrayList<List<String>>();
+        for(int i=0;i<tokens.size()-1;i++){
+            if(is(tokens.get(i),"ALTER") && is(tokens.get(i+1),"PROCEDURE")){
+                alters++;var c=new Cursor(tokens,i);for(String token:List.of("ALTER","PROCEDURE","dbo",".","usp_patient_link_save","@patient_id","char","(","36",")",",","@input","nvarchar","(","max",")","AS"))c.expect(token);
+            }
+            if(is(tokens.get(i),"GRANT") || is(tokens.get(i),"DENY") || is(tokens.get(i),"REVOKE")){
+                var c=new Cursor(tokens,i);var statement=new ArrayList<String>();do{statement.add(c.take());}while(!statement.getLast().equals(";"));acl.add(statement);
+            }
+        }
+        assertEquals(1,alters);assertEquals(List.of(List.of("GRANT","EXECUTE","ON","OBJECT",":",":","dbo",".","usp_patient_link_edit_get","TO","hp_runtime_executor",";"),List.of("DENY","EXECUTE","ON","OBJECT",":",":","dbo",".","usp_patient_link_edit_get","TO","hp_bootstrap_executor",";")),acl);
+        assertEquals(List.of("patient_id","input"),SqlServerProcedure.PATIENT_LINK_SAVE.parameters().stream().map(SqlServerProcedure.Parameter::sqlName).toList());
+    }
+
     @Test void contextRemainsInternalAndAllTenParametersAreBoundAndClearedFromIndependentSqlTypes() throws Exception {
         Contract context=snapshot().procedures().get("usp_request_context");
         assertEquals(List.of("request_id","method","route","source_ip","user_agent","actor_id",
@@ -152,6 +178,31 @@ class SqlServerProcedureContractTest {
             verify(statement).close();
         }
         verify(connection,times(3)).prepareCall(anyString());
+    }
+
+    @Test void v15RucHasClosedDescriptorsObjectAclAndPreDdlLegacyGate() throws Exception {
+        String sql=resource("V15__tenant_ruc.sql");var parsed=procedures(sql);
+        Map<String,SqlServerProcedure> expected=Map.of("usp_identity_tenant_ruc_lock",SqlServerProcedure.IDENTITY_TENANT_RUC_LOCK,
+            "usp_tenant_space_resolve",SqlServerProcedure.TENANT_SPACE_RESOLVE,"usp_tenant_profile_save",SqlServerProcedure.TENANT_PROFILE_SAVE,"usp_tenant_session_save",SqlServerProcedure.TENANT_SESSION_SAVE);
+        assertEquals(expected.keySet(),parsed.keySet());
+        for(var entry:expected.entrySet()){
+            var signature=parsed.get(entry.getKey()).parameters();var descriptor=entry.getValue();assertFalse(descriptor.bootstrap());assertEquals(signature.size(),descriptor.parameters().size());
+            for(int i=0;i<signature.size();i++){var s=signature.get(i);var j=descriptor.parameters().get(i);assertEquals(s.name(),j.sqlName());assertEquals(s.jdbcType(),j.type());assertEquals(s.length(),j.length());assertEquals(s.defaultLiteral(),j.defaultLiteral());assertEquals(Set.of("char","varchar").contains(s.sqlType()),j.ascii());}
+        }
+        assertEquals(3,SqlServerProcedure.SESSION_SAVE.parameters().size(),"Platform signature stays compatible; tenant entry is explicit V15");
+        assertEquals(List.of("token_hash","user_id","expires_at","ruc"),SqlServerProcedure.TENANT_SESSION_SAVE.parameters().stream().map(SqlServerProcedure.Parameter::sqlName).toList());
+        var tokens=lex(sql);var permissions=new ArrayList<List<String>>();var alters=new HashSet<String>();
+        for(int i=0;i<tokens.size()-4;i++){
+            if(is(tokens.get(i),"ALTER")&&is(tokens.get(i+1),"PROCEDURE")){var c=new Cursor(tokens,i);c.expect("ALTER");c.expect("PROCEDURE");c.expect("dbo");c.expect(".");alters.add(c.take());}
+            if(is(tokens.get(i),"GRANT")||is(tokens.get(i),"DENY")||is(tokens.get(i),"REVOKE")){var c=new Cursor(tokens,i);var statement=new ArrayList<String>();do{statement.add(c.take());}while(!statement.getLast().equals(";"));permissions.add(statement);}
+        }
+        assertEquals(Set.of("usp_tenant_by_slug","usp_platform_tenants","usp_saas_tenant_create","usp_platform_audit","usp_session_save"),alters);
+        var acl=new ArrayList<List<String>>();for(String name:List.of("usp_tenant_session_save","usp_identity_tenant_ruc_lock","usp_tenant_space_resolve","usp_tenant_profile_save")){
+            acl.add(List.of("GRANT","EXECUTE","ON","OBJECT",":",":","dbo",".",name,"TO","hp_runtime_executor",";"));acl.add(List.of("DENY","EXECUTE","ON","OBJECT",":",":","dbo",".",name,"TO","hp_bootstrap_executor",";"));
+        }
+        assertEquals(acl,permissions);assertTrue(sql.indexOf("THROW 51003,N'HP_CONFLICT:BACKFILL_REQUIRED")<sql.indexOf("ALTER TABLE dbo.tenants ADD ruc"));
+        assertTrue(sql.contains("WITH(UPDLOCK,HOLDLOCK,INDEX(UQ_tenants_ruc))"));assertTrue(sql.contains("profile_revision=profile_revision+1"));
+        assertTrue(sql.contains("TENANT_PROFILE_UPDATED"));assertTrue(sql.contains("Tenant login requires the RUC session entry"));
     }
 
     private static CallableStatement emptyStatement() throws SQLException {

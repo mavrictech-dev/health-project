@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement(proxyTargetClass=true)
 @Import({SqlServerPersistenceConfiguration.class,SqlServerRuntimeStoresConfiguration.class,
         SqlServerIdentityConfiguration.class,SqlServerSecurityConfiguration.class,
-        SqlServerBusinessConfiguration.class,SqlServerPortalConfiguration.class,
+        SqlServerBusinessConfiguration.class,SqlServerPortalConfiguration.class,SqlServerCardsConfiguration.class,
         com.mavric.health.audit.AuditController.class,com.mavric.health.audit.TraceController.class,
         com.mavric.health.billing.api.FinanceController.class,com.mavric.health.clinical.api.ClinicalController.class,
         com.mavric.health.documents.api.DocumentController.class,com.mavric.health.hospital.api.HospitalController.class,

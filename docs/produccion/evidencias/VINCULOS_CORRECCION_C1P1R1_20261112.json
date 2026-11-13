@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-12",
+  "status": "ACCEPTED_OFFLINE_SOURCE_ONLY",
+  "taskId": "task_ab40e0008138",
+  "dispatchId": "ctx_ea90d3f41027",
+  "workerDoneMessage": "msg_82730ff23fd2",
+  "findingClosedInSource": "R-C1P1-01",
+  "sourceSha256": "B6E34ACA24F95874692C7A0C27F8A967D8E9FB8BFB604E22A976BA04E15C1B52",
+  "reportSha256": "CF6EE304C1592984CADE0C97655220EB4CF49BE20EDF2877D63DA3AA3B7409CD",
+  "deliveryArtifactsVerified": 26,
+  "referenceHashesVerified": 11,
+  "conservation": {
+    "sources": {
+      "checked": 696,
+      "authorizedChanges": [
+        "C:\\Users\\maxmo\\orca\\workspaces\\Health Project\\health-programmer\\backend\\src\\main\\resources\\db\\sqlserver\\V14__patient_link_revision.sql"
+      ]
+    },
+    "pins": {
+      "checked": 726,
+      "authorizedChanges": []
+    },
+    "history": {
+      "checked": 301,
+      "authorizedChanges": []
+    },
+    "snapshots": {
+      "checked": 21,
+      "authorizedChanges": []
+    },
+    "c0": {
+      "checked": 28,
+      "authorizedChanges": []
+    },
+    "firstDelivery": {
+      "checked": 34,
+      "authorizedChanges": []
+    },
+    "migrations": {
+      "checked": 24,
+      "authorizedChanges": [
+        "C:\\Users\\maxmo\\orca\\workspaces\\Health Project\\health-programmer\\backend\\src\\main\\resources\\db\\sqlserver\\V14__patient_link_revision.sql"
+      ]
+    }
+  },
+  "exactDelta": "Only the two approved runtime entry/comment replacements; all installation batches and other code identical",
+  "independentScriptDom160": {
+    "errors": 0,
+    "batches": 5,
+    "engineInvoked": false
+  },
+  "newPlannedCasesNotExecuted": 38,
+  "integration": {
+    "requested": true,
+    "destination": "D:\\Mavric\\Health Project\\backend\\src\\main\\resources\\db\\sqlserver\\V14__patient_link_revision.sql",
+    "complete": true
+  },
+  "runtimeValidated": false,
+  "migrationInstalled": false,
+  "someeAccess": false,
+  "remaining": [
+    "Compatible C2 API offline",
+    "Reviewed operational verifier",
+    "Real SQL/JDBC/Spring/pool and concurrent QA",
+    "Separate installation gate",
+    "Management UI and real QA"
+  ]
+}

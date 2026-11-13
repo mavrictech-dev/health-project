@@ -1,0 +1,47 @@
+{
+  "status": "RETURNED_FOR_FAILURE_CAUSE_PRESERVATION",
+  "date": "2026-11-12",
+  "taskId": "task_02ea91a3bac3",
+  "dispatchId": "ctx_bd6d28e485b3",
+  "doneMessageId": "msg_7a174185443d",
+  "reportSha256": "04051E522206ABD3F265BD0BB4F4DA1C71721729B09FC7769B8E68BE156E41B5",
+  "sourceHashes": {
+    "scripts/health-sqlserver-docker-qa.py": "0DC210069A6A486244385D683B06B433D140D25282F01D7C72AD3C7D88E282B9",
+    "scripts/tests/test_health_sqlserver_docker_qa.py": "EDDBE8379341C1AC83D53DAE5E2C60EDC521EC86B3EAE42A29E59398FFA138D2"
+  },
+  "verified": {
+    "artifacts": 17088, "references": 9, "sources": 715,
+    "previousSourcesUnchanged": 713, "ownedAdditions": 2,
+    "pins": 726, "history": 301, "preservedSnapshots": 21,
+    "migrations": 25, "previousArtifacts": 155,
+    "originalEvidence": 367, "priorR1Artifacts": 5594
+  },
+  "independentTests": {
+    "tests": 29, "failures": 0, "errors": 0, "skips": 0,
+    "nativeProcessesAndSocketsBlocked": true,
+    "summary": "tmp/c1dockerp1-supervisor-20261112/unittest-summary.json",
+    "log": "tmp/c1dockerp1-supervisor-20261112/unittest.log"
+  },
+  "independentSqlRegeneration": {"completeFiles": 5, "exactByteMatches": 5, "engineProof": false},
+  "finding": {
+    "id": "R-DockerP1-01",
+    "scenario": "Timeout during apply_v1_v13 plus evidence.end write failure",
+    "actualPrimary": "EVIDENCE_WRITE_FAILED",
+    "lostPrimary": "PROCESS_TIMEOUT_UNKNOWN",
+    "statusRemainsUnknown": true,
+    "lastAttemptOrder": 36,
+    "nativeProcessCount": 0,
+    "witness": "tmp/c1dockerp1-supervisor-20261112/failure-cause-witness.json"
+  },
+  "reviewSummary": "tmp/c1dockerp1-supervisor-20261112/review-summary.json",
+  "integrated": false,
+  "provisioningAuthorized": false,
+  "innerSqlcmdPinMeasured": false,
+  "nativeSqlExecuted": false,
+  "someeInScope": false,
+  "portabilityPending": {
+    "item": "Verify SQLCMDPASSWORD authentication with pinned ODBC sqlcmd flags including -X1 before real provisioning",
+    "status": "UNMEASURED_NOT_A_PROVEN_DEFECT",
+    "officialReference": "https://learn.microsoft.com/en-us/sql/tools/sqlcmd/sqlcmd-utility"
+  }
+}

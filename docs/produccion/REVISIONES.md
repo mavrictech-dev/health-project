@@ -1,5 +1,232 @@
 # Revisiones del supervisor
 
+## Tarjetas 4-7 y RUC: revision y QA local, 2026-11-13
+
+El coordinador implementa por instruccion directa del usuario (D-87.BN). Revisa
+y corrige el avance RUC, collation/preflight/compilacion SQL y sus pines. V1-V16
+pasan ensayo rollback + comprobacion vacia + instalacion/fresh; V17/V18 se aplican
+incrementalmente con version previa exigida. El usuario runtime solo ejecuta SP.
+
+Maven verify1118, frontend114/TypeScript/build demo y produccion, tooling43PASS.
+HTTP real62PASS contra SQL Server2022: RUC/alta/perfil/sede/JWT, antecedentes
+append-only/CAS, consulta idempotente y cita atomica en cuatro estados, catalogo
+y rechazo crossTenant, cierre. Tablas/DDL runtime denegados y241perfiles validos.
+18 capturas y QA Playwright con voz simulada, rechazo y ausencia de soporte.
+Detalles y limites en ENTREGA_TARJETAS_4_7_20261113.md. Somee no verificada.
+
+## V13.INSTALL.E1 FAILED revisada; causa BOM localizada, 2026-11-13
+
+Informe054FB697...8723:50artefactos/50pines/717fuentes/27refs freshhash,
+25journal/12intentos/11aceptados, QA102 U+FEFF raw100SHAexacto. Unico BOMwire
+coincide con cabeceraV13canonica intacta; POSTempty igualPRE/Dockerconforme,
+INSTALL/VERIFY no intentadas y no reciboROLLBACKexplicito. D-87.BK y evidencia
+DOCKER_SQL_V13_INSTALL_FALLO_20261113.json. Sin retry o nuevasconexiones.
+Ownership liberado para RUC.P1offline; corregir ensambladoBOM despues porencargo.
+
+## V13.INSTALL.E1 faseI aceptada; gate operativo condicionado, 2026-11-13
+
+Question msg_c9ea2edfa2af,50artefactos/717fuentes/27refs freshhash,6scripts
+regenerados byteexactos, codigo completo helper/protocol/capture revisado.
+15modelos propiosPASS, ausenciaapproval bloquea antesprocesos; nuevo
+approvalA169218A...7AC8 y capturegate admitidos sin ejecutar. D-87.BJ y
+DOCKER_SQL_V13_INSTALL_STAGE1_20261113.json. Autoriza una captura con QArollback
+y POSTempty antes de COMMITcondicional, no DBlista ni RUCimplementado.
+
+## P1.R3 aceptada/integrada con prueba real de241 perfiles, 2026-11-13
+
+Informe4684AE3C...680E,60artefactos/717fuentes/28refs freshhash y43tests propios
+PASS.37tests previos y definicionesproducto conservados salvo RAWrepresentacion;
+5corpus exactos/renderreconstruibles. Frame real241+2 exactos/JSONvalido yDocker
+conforme, sin otraSQLenreview. Integradas2fuentesROOTconbackup, manifestFUENTES
+935E2FFB...BCB8 validado sin procesos. D-87.BH/DOCKER_SQL_P1R3_20261113.json.
+Preparar workflowfullQArollback/POSTempty/COMMITcondicional/VERIFY con gate;
+ninguna autorizacion operativa se crea en esta integracion.
+
+## JSON-E1 aceptada y modelo de entrada4095 reproducido offline, 2026-11-13
+
+Informe44EA45DB...3FDC revisado:34artefactos/717fuentes/8referencias freshhash,
+17journal/8calls/1SQL, query/inventario byteexactos y frame independiente.
+95deltas,78JSONinvalidos,2controlesvalidos. Modelo LFcada4095bytesUTF8 y
+replacement enV_NEURO iguala241longitudes+hashes reales; sin nuevaSQL.
+D-87.BG/evidencia DOCKER_SQL_JSON_E1_20261113.json. P1.R3 renderer de transporte
+y prueba241readonly antes de integrar/instalar, canonicas/check intactos.
+
+## APPLY.DIAG.E1 aceptada como diagnostico real, 2026-11-13
+
+Done msg_4fc37fd15775, informeE98C85F8...8C51 revisado:588artefactos/717fuentes
+freshhash, ledgers56263iguales,21journal/10calls/2SQL. Rawstderr278 exacto al
+original, CHECK547 CK_specialties_profile_json; POSTvacio tipado igualprevio,
+Dockerfinaligualinicial. No fila/mecanismo/ROLLBACKexplicito/instalacionlista.
+D-87.BF/DOCKER_SQL_APPLY_DIAG_20261113.json.241profilescompletos JSON Python
+estrictoPASS, no prueba motor. JSON-E1 mide expresiones readonly antes de fix.
+
+## APPLY.DIAG.E1 detenida por cuota antes del diagnostico, 2026-11-12
+
+Escalation msg_stop_d9d99b5b49bd338575f7cd6b revisada. No worker_done;
+backgroundPython identificado file-only y READY posterior D2412584...2CD1,
+sin evidencia/capturaoperativa local. Cuota no acredita resultado de motor,
+no invalida faseI ni permite cambiar cuentas/crear otroworker. D-87.BD y
+DOCKER_SQL_APPLY_DIAG_CUOTA_20261112.json. Continuidad en mismaDispatch,
+lectura de resultado existente y revalidacion previa sin repetirbaseline.
+
+## APPLY.DIAG.E1 faseI validada; gate operativo resuelto, 2026-11-12
+
+msg_932b193836ca:506artefactos/717fuentes freshhash, ledgers55738iguales,
+helper/protocol/capture leidos completos, SQLprobe solo nonce/COMMITaROLLBACK,
+POSTsolo nonce. Nueve checks propios gate/parser/target PASS sin procesos,
+modelos worker offline11 y AST/scanner conservados. D-87.BC/DOCKER_SQL_APPLY_DIAG_STAGE1_20261112.json.
+Recibo bound B6B9B4C0...FD19 creado/admitido, autoriza UNA faseII diagnostica;
+ningun SQLreal ejecutado en review, no sourcefix ni instalacion lista.
+
+## SCHEMA-E1 FAILED conservada, metadata parcial de esquema vacio revisada, 2026-11-12
+
+Done msg_0c1aef444885: supervisor79artefactos/717fuentes freshhash, ledgers55654
+iguales,8callsreadonly/1SQLexit0/stderr0, raw699 estrictamente decodificado con
+nonce/tipos/guardasSQL y Dockerfinal conforme. Taskfailed por4hashesNULL; no
+reparse-to-PASS ni huella completa. Se aceptan SOLO observaciones independientes
+de conteos0 y ausenciaV13/V14/Flyway/configconforme. D-87.BB/evidencia
+DOCKER_SQL_SCHEMA_E1_20261112.json. No pruebas repetidas ni nuevasconexiones.
+Preparacion diagnostico rollback-only como siguiente encargo sujeto a gate.
+
+## DockerR2 faseII fallida revisada; esquema aun UNKNOWN, 2026-11-12
+
+Done msg_856a2e47d4b3, informeB169E444...77FB: 10558artefactos/717fuentes
+freshhash, ledgers55535iguales,45journal y4SQL completas regeneradas exactas.
+22intentos/21recibos; solo readiness/create/configure confirmados, applyexit16/
+stderr278, verify no intentada. Sin nuevas conexiones en review o tests repetidos.
+FaseIaceptada preservada y TaskFAILED conservada. D-87.BA y evidencia
+DOCKER_SQL_R2_STAGE2_FALLO_20261112.json. SCHEMA-E1 mide metadata actual,
+no permite reinstalacion ni presume rollback; BOMinterior solo observacion.
+
+## DockerR2 faseI aceptada e integrada, faseII autorizada una vez, 2026-11-12
+
+task_87e222cb1e24/ctx_186130c277cf question msg_4526df682c7f. Supervisor
+37tests propiosPASS/35ASTprevios/5SQLunadelta/5562artefactos/717fuentes yhelper
+reviewcompleta; backups2ROOTantes ycopiasSHAexactas. Historial45083previos
+preservado, modeloshelper27/7/22 ygateantesprocesos. D-87.AZ y
+DOCKER_SQL_R2_STAGE1_20261112.json. Approval4E0B86CA...211D bound ahelper/
+manifest/Task/CID paraUNAcontinuacion; operacionreal/noSQLbaseline aunpendientes.
+
+## DockerDIAG-E2 aceptada como diagnostico readonly, 2026-11-12
+
+task_d8a859935952/ctx_8a5b6895111a done msg_bd2a594aa1ae:67artefactos/717fuentes/
+45014previos/17journal/8callsreadonly contrastados.12predicados/17facts completos:
+solo xactState0false con count0/state1/optionsOFF, resto11true y targetAbsent.
+ReconstJSON715bytes exacta prueba output sinheader; no nuevaSQLen review.
+D-87.AY/DOCKER_SQL_DIAG_E2_20261112.json. Policyfix solo setupDocker, no SP o
+ACL/negocio; R2offline y faseIIcompletarDB sujetas a review/approval supervisor.
+
+## DockerDIAG-E1 fallida por opciones CLI incompatibles, 2026-11-12
+
+task_95951b66d6f4/ctx_8e07e7d7c41f doneFAILED msg_ebd61bb3ea3b. Supervisor
+66artefactos/717fuentes/44944previos/17journal y SQLcompletecontrastados.
+Query no ejecutada: -h/-y0 incompatibles por contrato supervisor, matchexacto
+stderr60/SHA. Dockerfinalrunningconforme,12predicadossinobservar. D-87.AX/
+DOCKER_SQL_DIAG_E1_FALLO_20261112.json. E2 nueva solo elimina-h y maneja
+headerestricto, no otros flags/SQL/guardas o mutaciones.
+
+## DockerRECONCILE-E1 fallida revisada, guarda identificada, 2026-11-12
+
+task_57af93334ba8/ctx_505c91e5a9b9 doneFAILED msg_8d729430c032. Supervisor
+56artefactos/717fuentes/44884preservados/17journal/8callsreadonly verificados.
+Sin frameDB, Dockerfinal runningconforme. Reconstruccionoffline exacta118bytes/
+SHA identifica Msg59999/IFengine_guard; helperno reconocia cabecera conServer.
+No predicadoindividual aun. D-87.AW/DOCKER_SQL_RECONCILE_E1_20261112.json;
+nuevaquerymetadata acotada en DIAG-E1, sin quitar guardas producto o mutarDB.
+
+## DockerPROVISION-E1 failed/UNKNOWN revisada, 2026-11-12
+
+task_99e9bf2490dd/ctx_325053f54833 doneFAILED msg_faf968dc66a4. Supervisor
+112artefactos/717fuentes/44768preservados/43journal y capturas contrastados,
+21intentos/20recibos y exit1readinessreadonly; solo volumen/create/start mutaron.
+Sin createDB o migracion intentadas, sin currentDBstate/causa nativa acreditados.
+DOCKER_SQL_PROVISION_E1_FALLO_20261112.json/D-87.AV. NoSQLextra o retry desde
+review; reconciliacionreadonly en tarea separada, E1fallida permanece historial.
+
+## DockerPIN-E1 validada solo hash binario, 2026-11-12
+
+task_4566834e8f63/ctx_71ee27bd64f9 done msg_70de13c6b5b4 revisado:56artefactos/
+38duraderos/10refs/717fuentes/44706preservados,8comandos/2mutaciones acotadas,
+salidasha447775C5...05ADC validada por bytes/hashes/journal. UNAinspectpropia
+porCID confirma exited0/guardas iguales, sin repetirhash. Pinaprobado y manifest
+supervisorNUEVO073BBFE5...0958E para UNAcreacion futura separada. D-87.AU y
+DOCKER_SQL_PIN_E1_20261112.json. NoSQLServer/sqlcmd/DB/volumen/credencial enPIN;
+auth/flags/readiness y provisioningreal todavia posteriores.
+
+## DockerP1R1 aceptada/integrada como tooling offline, 2026-11-12
+
+task_7e08df97b219/ctx_a5cdc7271f33 done msg_5a9a923c55d6 revisado:10937artefactos/
+20868P1preservados/8refs/715fuentes,35tests propiosPASS sinprocesos/socket,
+5SQL exactos/41callsmodeloiguales. Witnesspropio preserva causa/secondary/stats
+tras doblestoragefallo. R-DockerP1-01 cerrado,2fuentesroot integradas porSHA y
+717fuentes totales. DOCKER_SQL_CORRECCION_P1R1_20261112.json/D-87.AT. Sin motor,
+contenedor/DB o PROVISION; medir pin con inspeccionsha256sum en gate separado.
+
+## DockerP1 devuelta: causa nativa perdida ante fallo de evidencia, 2026-11-12
+
+task_02ea91a3bac3/ctx_bd6d28e485b3:17088artefactos/9refs/715fuentes contrastadas,
+29testspropiosPASS conrun/Popen/socket bloqueados,5SQLpropios byteexactos.
+R-DockerP1-01 reproducidooffline: applytimeout+endwritefail sustituye causa nativa
+porstorage; UNKNOWN/sinretry correctos pero sin causa necesaria para reconciliar.
+DOCKER_SQL_REVISION_P1_20261112.json, D-87.AS y contratoR1dosfuentes. NOintegrada,
+sinmotor/provisioning; pininner/compatibilidadtransporteposteriores pendientes.
+
+## C1.P2.R1 aceptada e integrada offline, 2026-11-12
+
+task_fb1af1bc6b9c/ctx_5780d57a96b6 done msg_78e1e01683e5:5592artefactos y
+710fuentes contrastados,2deltasowned;35tests propiosPASS sobre SHAfinales con
+run/Popen bloqueados,112SQL regenerados iguales y20defsAST conservadas.
+Journal/witnesses reales de filesystem ficticio preservan causa/fase/checks y
+errores secundarios, sin buffers nativos crudos. Tresfuentes integradas root,
+713fuentes resultantes. VINCULOS_VERIFICADOR_C1P2R1_20261112.json. No SQL/JDBC/
+CAS/ACL/rollback del motor probado. EntornoSQLStopped, arranque exclusivo
+Start-only preparado segun D-87.AP; no operacion de QA desde este PASSoffline.
+
+## C1.P2 devuelta por trazabilidad de fallo, 2026-11-12
+
+task_de0b6f78d791/ctx_49d75d51c681 done msg_7478f6fa6f60 revisada:365artefactos/
+12referencias,710fuentes con707previasintactas y3adiciones; pines726/historia301/
+snapshots21/migraciones25/155artefactos conservados.18tests propiosPASS con
+subprocess bloqueado. SQL111fases/112archivos parserPASS no acredita motor.
+R-C1P2-01 reproducido: error pierde fase/checks; finally puede reemplazar causa
+primaria. DEVUELTA sin integracion, correccion driver/tests segun P2-R1.
+VINCULOS_VERIFICADOR_C1P2_20261112.json; no SQL/Somee o instalacion ejecutados.
+
+## C2.P1 aceptada e integrada offline, 2026-11-12
+
+task_6a5942e84695/ctx_4e0c7835e695, done msg_1fe981349166.62artefactos/13refs
+y14rutas revisadas/integradas por SHA;9copias anteriores root preservadas.
+Supervisor recountXMLworker1082PASS/72suites y ejecuta Maven ROOTindependiente:
+1082/0fallos/0errores/0skip,raw0,48.021s.707fuentes postintegracion/pines726/
+historia301/snapshots21/90artefactos/migraciones25 conservados, jarprevio intacto.
+Decoder5/3 y validacionQ1/ACK5/edit8/autoridad/legacy cerrado aceptados como API
+offline. VINCULOS_API_C2P1_20261112.json. Sin motor/JDBC/auth/CSRFreal, frontend
+sin delta; no evidencia visual nueva. VerificadorPRE C1.P2 siguiente, V14 no
+instalada. Preparar jarcompatible separado antes de futura QA/instalacion.
+
+## C1.P1.R1 aceptada e integrada en fuente, 2026-11-12
+
+Task task_ab40e0008138/ctx_ea90d3f41027 done msg_82730ff23fd2 revisada de forma
+independiente:26artefactos/11refs/696fuentes, pines726/historia301/snapshots21/
+C028/primeraentrega34/migraciones24 conservados salvo unicoV14autorizado.
+Dos reemplazos exactos de frontera runtime; parser160propio0errores/5batches.
+RootV14 integrada por hashB6E34ACA...C1B52, sin ejecutar SQL. Defecto R-C1P1-01
+cerrado en fuente, no validacion JDBC/SQLreal;38casos siguen NO EJECUTADOS.
+Evidencia VINCULOS_CORRECCION_C1P1R1_20261112.json. C2.P1 definido antes de
+verifier/QA/instalacion. La devolucion original permanece como historial.
+
+## C1.P1 devuelta: frontera JDBC inicial, 2026-11-12
+
+Entrega task_610a2325b428/ctx_59a792d9cc2d revisada en fuente completa.
+32artefactos/695fuentes/726pines/301historicos/21snapshots/28artefactosC0
+conservados y parser160 independiente0errores/5batches. V14 no integrada:
+R-C1P1-01 bloquea ambos cuerpos, que rechazan TX implicita JDBC elegida pero
+aun no materializada antes de helper V10. Hallazgo estatico con trazabilidad
+executor/contexto/store/Access/V10 y fuentes oficiales; sin prueba de motor nueva.
+Correccion acotada segun PAC-01-C1-P1-R1.md. Evidencia supervisor
+evidencias/VINCULOS_REVISION_C1P1_20261112.json. C2/QA/instalacion pendientes;
+lectura B/E5 conserva aceptacion, no acceso Somee ni cambios de negocio.
+
 ## C0 aceptada estatica; C1.P1 SQL de revision y retirada, 2026-11-11
 
 C0 task_cbe1631fad10/ctx_1ca0fc8f62cf completa, entrega msg_ac0c0af0950a.
@@ -162,7 +389,7 @@ propiosPASS;8controles navegador propios,0writes/0errores, captura390 inspeccion
 Worker29links/28regresionA/demo13PASS; no contar interceptaciones como backend,
 SQL,persistencia,audit oTLSreal. Consulta opt-in/roles/paginacion/abort/errores
 aceptada, A sin regresion observada. Evidencia PACIENTES_VINCULOS_UI_20261110.json
-y16capturas. BackendQA estricto y QAreal pendientes, D-87.S/PAC-01-B4-PREPARACION.md.
+y18capturas. BackendQA estricto y QAreal pendientes, D-87.S/PAC-01-B4-PREPARACION.md.
 
 ## PAC-01.B2: INTEGRADA Y VALIDADA OFFLINE, 2026-11-10
 

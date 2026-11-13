@@ -184,8 +184,8 @@ def main():
 
     portal_user = member(host, admin, branch, "portal", ["PAC"])
     portal = login(user("portal")["email"], host)
-    link = {"userId": portal_user["id"], "relationship": "TITULAR", "active": True, "scopes": ["DOCUMENTS", "APPOINTMENTS", "BILLING"]}
-    api("PUT", "/api/patients/" + patient_a["id"] + "/links", link, host, rec)
+    link = {"userId": portal_user["id"], "expectedRevision": 0, "relationship": "TITULAR", "active": True, "scopes": ["DOCUMENTS", "APPOINTMENTS", "BILLING"]}
+    link_ack = api("PUT", "/api/patients/" + patient_a["id"] + "/links", link, host, rec)
     api("GET", "/api/patients", host=host, token=portal, expected=403)
     api("GET", "/api/portal/patients/" + patient_a2["id"] + "/documents", host=host, token=portal, expected=404)
     document = api("POST", "/api/documents", {"patientId": patient_a["id"], "encounterId": visit["id"], "title": "Informe QA", "type": "REPORT", "content": "Contenido ficticio"}, host, pro_token)
@@ -195,7 +195,7 @@ def main():
     api("PUT", "/api/documents/" + document["id"], {"expectedRevision": 2, "operation": "PUBLISH"}, host, pro_token)
     check(len(api("GET", "/api/portal/patients/" + patient_a["id"] + "/documents", host=host, token=portal)) == 1, "portal receives signed published documents")
     api("POST", "/api/documents", {"patientId": patient_a["id"], "originalId": document["id"], "title": "Adenda QA", "type": "ADDENDUM", "content": "Aclaración ficticia"}, host, pro_token)
-    api("PUT", "/api/patients/" + patient_a["id"] + "/links", dict(link, active=False), host, rec)
+    api("PUT", "/api/patients/" + patient_a["id"] + "/links", {"userId": portal_user["id"], "expectedRevision": link_ack["revision"], "active": False}, host, rec)
     api("GET", "/api/portal/patients/" + patient_a["id"] + "/documents", host=host, token=portal, expected=404)
     api("PUT", "/api/auth/password", {"currentPassword": PASSWORD, "newPassword": "short"}, host, portal, expected=400)
     api("PUT", "/api/auth/password", {"currentPassword": PASSWORD, "newPassword": "Changed-" + PASSWORD}, host, portal)

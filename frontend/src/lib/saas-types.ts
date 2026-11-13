@@ -13,7 +13,7 @@ export interface Subscription {
   rate: PlanRate; modules: ModuleId[]; nextRenewal: string;
 }
 export interface Tenant {
-  id: string; kind: TenantKind; domain: PatientDomain; status: TenantStatus; slug: string; ownerName: string; ownerEmail: string;
+  id: string; ruc?: string; kind: TenantKind; domain: PatientDomain; status: TenantStatus; slug: string; ownerName: string; ownerEmail: string;
   created: string; specialties: string[]; subscription: Subscription;
 }
 export interface ProfessionalIdentity { id: string; name: string; email: string; domain: PatientDomain; credential: string; color: string; avatar: string; }

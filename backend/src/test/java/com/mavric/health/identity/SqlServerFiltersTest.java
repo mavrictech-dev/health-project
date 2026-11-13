@@ -95,7 +95,7 @@ class SqlServerFiltersTest {
     }
 
     private static Map<String,Object> tenantRow() {
-        return Map.of("id",TENANT,"name","Synthetic","slug","clinic","kind","CLINIC","domain","HUMAN","status","ACTIVE","modules",List.of("CORE","DOCUMENTS"));
+        return Map.of("id",TENANT,"name","Synthetic","slug","clinic","kind","CLINIC","domain","HUMAN","status","ACTIVE","modules",List.of("CORE","DOCUMENTS"),"ruc","00000000001","revision",1);
     }
     private static Map<String,Object> sessionRow(String tenant,String platformRole) {
         Map<String,Object> row=new LinkedHashMap<>();

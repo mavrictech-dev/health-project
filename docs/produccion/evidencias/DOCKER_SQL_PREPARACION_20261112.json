@@ -1,0 +1,24 @@
+{
+  "status": "IMAGE_DOWNLOADED_TOOLING_PENDING",
+  "date": "2026-11-12",
+  "authorization": "User enabled Docker and instructed continuing work",
+  "context": "desktop-linux",
+  "endpoint": "npipe:////./pipe/dockerDesktopLinuxEngine",
+  "engineVersion": "29.8.2",
+  "platform": "linux/amd64",
+  "image": "mcr.microsoft.com/mssql/server@sha256:4525e3efac9f3e241cb003bb2ff2a82818b502f37e12049d788b1a9fa7e13b7f",
+  "imageId": "sha256:4525e3efac9f3e241cb003bb2ff2a82818b502f37e12049d788b1a9fa7e13b7f",
+  "dockerCli": {
+    "path": "C:/Program Files/Docker/Docker/resources/bin/docker.exe",
+    "sha256": "6C699720BB9523DEDB9EB5D22A49951EA9210DBDB1314A3554029EEE9BE76896"
+  },
+  "hostileDockerOverrideKeysObserved": [],
+  "windowsQaService": "Stopped",
+  "containersCreated": 0,
+  "volumesCreated": 0,
+  "databasesCreated": 0,
+  "sqlInvoked": false,
+  "someeInScope": false,
+  "legacyMysqlComposeStarted": false,
+  "contract": "docs/produccion/PAC-01-C1-DOCKER-P1.md"
+}

@@ -13,6 +13,9 @@ public final class Requests {
         @NotEmpty Set<String> kinds,@NotEmpty Set<String> domains,@NotEmpty Set<String> modules) { }
     public record Subscription(@NotBlank String planId,@NotNull @Pattern(regexp="MONTHLY|YEARLY") String cycle,@Min(1) int branchQuota,@Min(1) int professionalQuota,@Min(1) int specialtyQuota) { }
     public record Tenant(@NotBlank @Size(max=160) String name,@NotBlank String slug,@NotNull @Pattern(regexp="DOCTOR|CLINIC|HOSPITAL|VETERINARY|DENTAL|SPECIALTY_CENTER") String kind,@NotNull @Pattern(regexp="HUMAN|ANIMAL") String domain,
-        String ownerUserId,@Valid UserInput owner,@NotBlank String timezone,@NotBlank @Size(max=160) String branchName,@NotNull @Size(max=300) String address,@NotEmpty Set<String> specialties,@NotNull @Valid Subscription subscription) { }
+        String ownerUserId,@Valid UserInput owner,@NotBlank String timezone,@NotBlank @Size(max=160) String branchName,@NotNull @Size(max=300) String address,@NotEmpty Set<String> specialties,@NotNull @Valid Subscription subscription,
+        @NotBlank @Pattern(regexp="[0-9]{11}") @tools.jackson.databind.annotation.JsonDeserialize(using=com.mavric.health.identity.RucRequests.Text.class) String ruc) {
+        public Tenant(String name,String slug,String kind,String domain,String ownerUserId,UserInput owner,String timezone,String branchName,String address,Set<String> specialties,Subscription subscription){this(name,slug,kind,domain,ownerUserId,owner,timezone,branchName,address,specialties,subscription,null);}
+    }
     public record Status(@NotNull @Pattern(regexp="TRIAL|ACTIVE|SUSPENDED|CANCELLED") String status,@NotBlank @Size(max=500) String reason) { }
 }

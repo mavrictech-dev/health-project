@@ -16,7 +16,7 @@ import com.mavric.health.shared.*;
 /** Unwired appointment persistence. Executor and REQUIRED manager must share the future runtime datasource. */
 public final class SqlServerSchedulingStore {
  private static final Instant MIN=Instant.parse("0001-01-01T00:00:00Z"),MAX=Instant.parse("9999-12-31T23:59:59.999999Z");
- private static final Set<String> ROLES=Set.of("REC","PRO","ASI","AUD"),STATES=Set.of("REQUESTED","RESERVED","CONFIRMED","WAITING","CALLED","IN_CARE","COMPLETED","CANCELLED","WITHDRAWN");
+ private static final Set<String> ROLES=Set.of("REC","PRO","ASI","AUD"),STATES=Set.of("REQUESTED","RESERVED","CONFIRMED","WAITING","CALLED","IN_CARE","COMPLETED","CANCELLED","WITHDRAWN","NO_SHOW");
  private final SqlServerExecutor executor;private final TransactionTemplate transactions;private final ObjectMapper mapper;
  /** Read/change compatibility constructor; reserve requires the configured Spring mapper overload. */
  public SqlServerSchedulingStore(SqlServerExecutor executor,PlatformTransactionManager manager){this(executor,manager,null);}
@@ -50,7 +50,7 @@ public final class SqlServerSchedulingStore {
  public Map<String,Object> change(HttpServletRequest request,String id,Change p){return change(request,id,p,branch->{});}
  /** Server-only branch guard preserves legacy ordering; SP revalidates assignment under locks. */
  public Map<String,Object> change(HttpServletRequest request,String id,Change p,Consumer<String> branchGuard){return within(()->{
-  var c=writeContext(request,false);Checks.id(id);if(p==null || p.expectedRevision()<1 || p.status()==null || !Set.of("RESERVED","CONFIRMED","WAITING","CALLED","IN_CARE","COMPLETED","CANCELLED","WITHDRAWN").contains(p.status()))throw SqlServerErrors.invalid();
+  var c=writeContext(request,false);Checks.id(id);if(p==null || p.expectedRevision()<1 || p.status()==null || !Set.of("RESERVED","CONFIRMED","WAITING","CALLED","IN_CARE","COMPLETED","CANCELLED","WITHDRAWN","NO_SHOW").contains(p.status()))throw SqlServerErrors.invalid();
   var current=one(executor.execute(SqlServerProcedure.APPOINTMENT_GET,c,id),c.tenantId());if(!id.equals(current.get("id")))throw SqlServerErrors.database();
   Objects.requireNonNull(branchGuard).accept((String)current.get("branchId"));AppointmentStates.check((String)current.get("status"),p.status());
   boolean reschedule=p.startsAt()!=null || p.endsAt()!=null;

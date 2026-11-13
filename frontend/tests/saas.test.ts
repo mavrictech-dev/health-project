@@ -8,7 +8,7 @@ import type { SaasPlan, SaasValues } from '../src/lib/saas-types';
 
 const admin: Context = { org: 'org-human', branch: 'miraflores', role: 'SAD', patient: '', encounter: '', specialty: 'H_GENERAL_MEDICINE' };
 const customer: Context = { ...admin, role: 'ADM' };
-const solo: SaasValues = { name: 'Consultorio de Ana', slug: 'consulta-ana', ownerName: 'Dra. Ana Lima', ownerEmail: 'ana@example.test', kind: 'DOCTOR', domain: 'HUMAN', planId: 'plan-professional', cycle: 'Mensual', branchQuota: 1, professionalQuota: 1, specialtyQuota: 5, specialties: ['H_CARDIOLOGY'], branchName: 'Consultorio', address: 'Dirección de ejemplo' };
+const solo: SaasValues = { ruc:'20999999991',name: 'Consultorio de Ana', slug: 'consulta-ana', ownerName: 'Dra. Ana Lima', ownerEmail: 'ana@example.test', kind: 'DOCTOR', domain: 'HUMAN', planId: 'plan-professional', cycle: 'Mensual', branchQuota: 1, professionalQuota: 1, specialtyQuota: 5, specialties: ['H_CARDIOLOGY'], branchName: 'Consultorio', address: 'Dirección de ejemplo' };
 const planValues = (plan: SaasPlan): SaasValues => { const { rate, ...fields } = plan; return { ...fields, basePrice: rate.base / 100, branchPrice: rate.perBranch / 100, professionalPrice: rate.perProfessional / 100, annualDiscount: rate.annualDiscount, includedBranches: rate.includedBranches, includedProfessionals: rate.includedProfessionals }; };
 
 test('crear un profesional independiente crea su tenant, contrato, área e identidad sin copiar pacientes', () => {

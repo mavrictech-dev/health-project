@@ -14,17 +14,17 @@ export interface PlatformSpecialty {code:string;name:string;domain:PatientDomain
 export interface OwnerInput {name:string;email:string;password:string;domain:PatientDomain|null;credential:string|null;}
 /** Requests.Tenant, new-owner variant: ownerUserId is deliberately absent. */
 export interface TenantRequest {
-  name:string;slug:string;kind:TenantKind;domain:PatientDomain;owner:OwnerInput;
+  name:string;ruc:string;slug:string;kind:TenantKind;domain:PatientDomain;owner:OwnerInput;
   timezone:string;branchName:string;address:string;specialties:string[];
   subscription:{planId:string;cycle:BillingCycle;branchQuota:number;professionalQuota:number;specialtyQuota:number;};
 }
 export interface TenantDraft {
-  name:string;slug:string;kind:TenantKind;domain:PatientDomain;ownerName:string;ownerEmail:string;password:string;credential:string;
+  name:string;ruc:string;slug:string;kind:TenantKind;domain:PatientDomain;ownerName:string;ownerEmail:string;password:string;credential:string;
   timezone:string;branchName:string;address:string;specialties:string[];planId:string;cycle:BillingCycle;
   branchQuota:string;professionalQuota:string;specialtyQuota:string;
 }
 export interface PlatformTenant {
-  id:string;name:string;slug:string;kind:TenantKind;domain:PatientDomain;status:string;hostname:string;url:string;
+  id:string;name:string;ruc:string;revision:number;slug:string;kind:TenantKind;domain:PatientDomain;status:string;hostname:string;url:string;
   ownerName:string;ownerEmail:string;timezone:string;planName:string;planVersion:number;cycle:BillingCycle;
   branchQuota:number;professionalQuota:number;specialtyQuota:number;branchesUsed:number;professionalsUsed:number;specialtiesUsed:number;
 }

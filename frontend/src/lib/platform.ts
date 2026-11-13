@@ -1,7 +1,7 @@
 import {tenantKinds,type TenantDraft,type TenantKind,type PatientDomain,type PlatformPlan,type PlatformSpecialty,type TenantRequest,type TenantReview} from './platform-types';
 const reserved = new Set(['www','admin','api','app','saas','mail','support','status','auth','portal','localhost']);
 export function emptyTenantDraft():TenantDraft {
-  return {name:'',slug:'',kind:'CLINIC',domain:'HUMAN',ownerName:'',ownerEmail:'',password:'',credential:'',timezone:'America/Lima',branchName:'Sede principal',address:'',specialties:[],planId:'',cycle:'MONTHLY',branchQuota:'1',professionalQuota:'1',specialtyQuota:'1'};
+  return {name:'',ruc:'',slug:'',kind:'CLINIC',domain:'HUMAN',ownerName:'',ownerEmail:'',password:'',credential:'',timezone:'America/Lima',branchName:'Sede principal',address:'',specialties:[],planId:'',cycle:'MONTHLY',branchQuota:'1',professionalQuota:'1',specialtyQuota:'1'};
 }
 export function compatibleDomain(kind:TenantKind,domain:PatientDomain) {return kind==='DOCTOR' || (kind==='VETERINARY'?domain==='ANIMAL':domain==='HUMAN');}
 export function compatiblePlans(plans:PlatformPlan[],kind:TenantKind,domain:PatientDomain) {
@@ -14,6 +14,7 @@ function text(value:string,label:string,max:number) {const v=value.trim();if(!v|
 function quota(value:string,min:number,max:number,label:string) {if(!/^\d+$/.test(value)||!Number.isSafeInteger(Number(value))||Number(value)<min||Number(value)>max)throw Error(`${label}: usa un entero entre ${min} y ${max}.`);return Number(value);}
 export function buildTenantRequest(draft:TenantDraft,plans:PlatformPlan[],catalog:PlatformSpecialty[]):TenantRequest {
   if(!tenantKinds.includes(draft.kind)||!['HUMAN','ANIMAL'].includes(draft.domain)||!compatibleDomain(draft.kind,draft.domain))throw Error('El tipo de cliente y el ámbito no son compatibles.');
+  if(!/^[0-9]{11}$/.test(draft.ruc))throw Error('El RUC debe contener 11 dígitos.');
   const name=text(draft.name,'el nombre del cliente',160),slug=draft.slug.trim();
   if(slug.length>63||!slug.match(/^[a-z0-9]+(-[a-z0-9]+)*$/)||reserved.has(slug))throw Error('El subdominio debe usar minúsculas, números y guiones, sin nombres reservados.');
   const plan=compatiblePlans(plans,draft.kind,draft.domain).find(p=>p.planId===draft.planId);if(!plan)throw Error('Selecciona una oferta publicada compatible.');
@@ -33,11 +34,11 @@ export function buildTenantRequest(draft:TenantDraft,plans:PlatformPlan[],catalo
   if(draft.password.length<12||new TextEncoder().encode(draft.password).length>72)throw Error('La contraseña inicial necesita al menos 12 caracteres y como máximo 72 bytes.');
   if(draft.credential.trim().length>100)throw Error('La acreditación profesional admite hasta 100 caracteres.');
   if(draft.address.length>300)throw Error('La dirección admite hasta 300 caracteres.');
-  return {name,slug,kind:draft.kind,domain:draft.domain,owner:{name:ownerName,email,password:draft.password,domain:draft.kind==='DOCTOR'?draft.domain:null,credential:draft.credential.trim()||null},timezone,branchName:text(draft.branchName,'el nombre de la primera sede',160),address:draft.address.trim(),specialties,subscription:{planId:plan.planId,cycle:draft.cycle,branchQuota,professionalQuota,specialtyQuota}};
+  return {name,ruc:draft.ruc,slug,kind:draft.kind,domain:draft.domain,owner:{name:ownerName,email,password:draft.password,domain:draft.kind==='DOCTOR'?draft.domain:null,credential:draft.credential.trim()||null},timezone,branchName:text(draft.branchName,'el nombre de la primera sede',160),address:draft.address.trim(),specialties,subscription:{planId:plan.planId,cycle:draft.cycle,branchQuota,professionalQuota,specialtyQuota}};
 }
 export function tenantReview(draft:TenantDraft,plans:PlatformPlan[],catalog:PlatformSpecialty[]):TenantReview {
   const request=buildTenantRequest(draft,plans,catalog);
-  return {name:request.name,slug:request.slug,kind:request.kind,domain:request.domain,owner:{name:request.owner.name,email:request.owner.email,domain:request.owner.domain,credential:request.owner.credential},timezone:request.timezone,branchName:request.branchName,address:request.address,specialties:request.specialties,subscription:request.subscription};
+  return {name:request.name,ruc:request.ruc,slug:request.slug,kind:request.kind,domain:request.domain,owner:{name:request.owner.name,email:request.owner.email,domain:request.owner.domain,credential:request.owner.credential},timezone:request.timezone,branchName:request.branchName,address:request.address,specialties:request.specialties,subscription:request.subscription};
 }
 export function ambiguousCreateStatus(status:number) {return status===0||status>=500||(status>=200&&status<300);}
 export function money(value:number) {return new Intl.NumberFormat('es-PE',{style:'currency',currency:'PEN'}).format(value/100);}

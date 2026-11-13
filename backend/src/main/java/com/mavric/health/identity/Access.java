@@ -27,6 +27,8 @@ public class Access {
     public void write(String feature,String... roles) { roles(roles); TenantRef t=tenant(); if(!List.of("TRIAL","ACTIVE").contains(t.status())) throw new ApiException(403,"SUSPENDED","El cliente conserva sus datos; las operaciones están suspendidas."); module(feature); }
     public void module(String feature) { if(feature!=null && !tenant().modules().contains(feature)) throw new ApiException(403,"MODULE_NOT_INCLUDED","El contrato no incluye este módulo."); }
     public void branch(String id) {
+        Object selected=request.getAttribute("health.branch");
+        if(selected!=null && !selected.equals(id))throw ApiException.forbidden();
         if(accessStore!=null) {
             validatedSqlRequest();
             Checks.id(id);

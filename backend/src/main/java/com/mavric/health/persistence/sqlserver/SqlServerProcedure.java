@@ -7,6 +7,15 @@ import java.util.List;
 
 /** Closed V3-V6/V8 contracts plus the explicit V13 read; SQL defaults are explicit caller arguments. */
 public enum SqlServerProcedure {
+    MEDICAL_SERVICES("usp_medical_services"),
+    MEDICAL_AGREEMENTS("usp_medical_agreements"),
+    MEDICAL_CATALOG_SAVE("usp_medical_catalog_save",input("id",JDBCType.CHAR,36,null),input("kind",JDBCType.VARCHAR,10,null),input("input",JDBCType.NVARCHAR,-1,null)),
+    LOGIN_BRANCHES("usp_login_branches",input("ruc",JDBCType.NVARCHAR,-1,null)),
+    PATIENT_DNI_DIRECTORY("usp_patient_dni_directory",input("dni",JDBCType.NVARCHAR,-1,null)),
+    PATIENT_ANTECEDENTS("usp_patient_antecedents",input("patient_id",JDBCType.CHAR,36,null)),
+    PATIENT_ANTECEDENT_ADD("usp_patient_antecedent_add",input("id",JDBCType.CHAR,36,null),input("patient_id",JDBCType.CHAR,36,null),input("input",JDBCType.NVARCHAR,-1,null)),
+    CONSULTATIONS_LIST("usp_consultations_list",input("patient_id",JDBCType.CHAR,36,null)),
+    CONSULTATION_ADD("usp_consultation_add",input("id",JDBCType.CHAR,36,null),input("input",JDBCType.NVARCHAR,-1,null)),
     // V3 / runtime; arguments stay positional, including SQL defaults.
     TENANT_BY_SLUG("usp_tenant_by_slug",
             input("slug", JDBCType.VARCHAR, 63, null)),
@@ -25,6 +34,11 @@ public enum SqlServerProcedure {
             input("token_hash", JDBCType.CHAR, 64, null),
             input("user_id", JDBCType.CHAR, 36, null),
             input("expires_at", JDBCType.TIMESTAMP, 6, null)),
+    // V15 explicit RUC deltas; context carries the trusted host tenant.
+    IDENTITY_TENANT_RUC_LOCK("usp_identity_tenant_ruc_lock",input("ruc", JDBCType.NVARCHAR, -1, null)),
+    TENANT_SPACE_RESOLVE("usp_tenant_space_resolve",input("ruc", JDBCType.NVARCHAR, -1, null),input("base_domain", JDBCType.NVARCHAR, -1, null)),
+    TENANT_PROFILE_SAVE("usp_tenant_profile_save",input("tenant_id", JDBCType.CHAR, 36, null),input("input", JDBCType.NVARCHAR, -1, null)),
+    TENANT_SESSION_SAVE("usp_tenant_session_save",input("token_hash", JDBCType.CHAR, 64, null),input("user_id", JDBCType.CHAR, 36, null),input("expires_at", JDBCType.TIMESTAMP, 6, null),input("ruc", JDBCType.NVARCHAR, -1, null)),
     // V3 / runtime; arguments stay positional, including SQL defaults.
     SESSION_CURRENT("usp_session_current"),
     // V3 / runtime; arguments stay positional, including SQL defaults.
@@ -274,6 +288,10 @@ public enum SqlServerProcedure {
             input("limit", JDBCType.INTEGER, 0, "50"),
             input("offset", JDBCType.INTEGER, 0, "0")),
 
+    // Explicit V14/R1 management snapshot; B list remains the separate V13 entry.
+    PATIENT_LINK_EDIT_GET("usp_patient_link_edit_get",
+            input("patient_id", JDBCType.CHAR, 36, null),
+            input("user_id", JDBCType.CHAR, 36, null)),
     PATIENT_HISTORY("usp_patient_history",
             input("patient_id", JDBCType.CHAR, 36, null)),
     // V5 / runtime; arguments stay positional, including SQL defaults.

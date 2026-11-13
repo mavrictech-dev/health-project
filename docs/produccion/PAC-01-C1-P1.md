@@ -71,6 +71,18 @@ valores largos a IDs validos. Tenant/actor vienen de contexto confiable, nunca
 del JSON. Conservar cadena HostFilter/tenant/contexto; SQL revalida tenant,
 sesion vigente, actor activo/verificado y membresia actual, no hostname literal.
 
+Precision contractual C1.P1-Q1, 2026-11-11: validar tipo, longitud completa y
+forma canonica de IDs de SESSION_CONTEXT/JSON ANTES de cualquier conversion
+acotada. Las firmas CHAR(36) se conservan: dentro del cuerpo del SP se valida
+el valor recibido, sin afirmar que puede recuperarse una longitud original ya
+perdida en el binding SQL. C2 debe rechazar IDs HTTP no lowercase36 exactos
+antes de pasar argumentos al adaptador/RPC, sin trim/substrings/coercion; probar
+rechazo y cero llamadas SP para entradas largas. Documentar aparte la limitacion
+de llamadas SQL directas a parametros fijos, no marcarlas como negativas
+intraprocedimiento si SQL ya trunco el argumento. Sin cambiar firma/ownership.
+Base oficial: https://learn.microsoft.com/en-us/sql/t-sql/statements/create-procedure-transact-sql
+(seccion ANSI_WARNINGS y parametros).
+
 Actor interno ADM/REC sin plataforma ni PAC/RES mixtos, segun roles REALES en
 memberships; hp_actor_roles no concede permiso. Para gestion/lectura de edicion
 exigir guardas PORTAL, OPEN y tenant TRIAL/ACTIVE (como escritura). Esta lectura

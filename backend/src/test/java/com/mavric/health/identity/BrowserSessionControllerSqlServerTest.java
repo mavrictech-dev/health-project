@@ -36,7 +36,7 @@ class BrowserSessionControllerSqlServerTest {
     private static final String TOKEN="s".repeat(43),HASH=Checks.hash(TOKEN),CSRF="b".repeat(64),OPAQUE="d".repeat(64);
     private static final String EMAIL="qa@example.test",PASSWORD="Synthetic-Password-123";
     private static final Instant EXPIRY=Instant.parse("2030-11-04T12:34:56.123456Z");
-    private static final TenantRef REF=new TenantRef(TENANT,"Synthetic","clinic","CLINIC","HUMAN","ACTIVE",List.of("CORE"));
+    private static final TenantRef REF=new TenantRef(TENANT,"Synthetic","clinic","CLINIC","HUMAN","ACTIVE",List.of("CORE"),"00000000001",1);
     private final List<Fixture> fixtures=new ArrayList<>();
     private final ObjectMapper mapper=new ObjectMapper();
     final class Fixture {
@@ -56,9 +56,9 @@ class BrowserSessionControllerSqlServerTest {
             settings=new Settings("health.localhost",(secure?"https":"http")+"://health.localhost",8,null);
             controller=legacy?new BrowserSessionController(service,access,sql,settings):new BrowserSessionController(service,access,store,settings);
             request.setAttribute("health.tenant",tenant);request.setServerName("clinic.health.localhost");TraceContext.REQUEST.set(request);
-            when(service.loginBrowser(any(),any(),any(),any())).thenReturn(
+            when(service.loginBrowser(any(),any(),any(),any(),any())).thenReturn(
                     new IdentityService.BrowserLogin(TOKEN,new IdentityService.BrowserUser(ID,"Synthetic",EMAIL,List.of("ADM")),EXPIRY,CSRF));
-            when(service.login(any(),any(),any(),any())).thenReturn(Map.of("accessToken",TOKEN,"tokenType","Bearer",
+            when(service.login(any(),any(),any(),any(),any())).thenReturn(Map.of("accessToken",TOKEN,"tokenType","Bearer",
                     "expiresAt",EXPIRY.toString(),"user",Map.of("id",ID,"name","Synthetic","email",EMAIL,"roles",List.of("ADM"))));
             when(sql.one(anyString(),any(Object[].class))).thenReturn(Map.of("csrfToken",CSRF,"expiresAt",EXPIRY.toString()));
             when(sql.rows(anyString(),any(Object[].class))).thenReturn(List.of(sessionData()));
@@ -79,7 +79,7 @@ class BrowserSessionControllerSqlServerTest {
                 TraceContext.REQUEST.set(req);return req;
             });
             if(method==HttpMethod.POST)builder.contentType(MediaType.APPLICATION_JSON).content(
-                    "{\"email\":\""+EMAIL+"\",\"password\":\""+PASSWORD+"\"}");
+                    "{\"ruc\":\"00000000001\",\"email\":\""+EMAIL+"\",\"password\":\""+PASSWORD+"\"}");
             Errors errors=new Errors(mapper);
             return MockMvcBuilders.standaloneSetup(controller).setControllerAdvice(new Errors.Advice(errors)).build().perform(builder);
         }
@@ -125,10 +125,10 @@ class BrowserSessionControllerSqlServerTest {
             for(String forbidden:List.of(TOKEN,HASH,"accessToken","tokenType","passwordHash","lockedUntil"))assertFalse(json.contains(forbidden));
             flags(result.getResponse().getHeader("Set-Cookie"),secure,false);
             assertTrue(result.getResponse().getHeader("Set-Cookie").contains(TOKEN));
-            if(legacy)verify(f.service).login(eq(EMAIL),eq(PASSWORD),eq(REF),any());
+            if(legacy)verify(f.service).login(eq("00000000001"),eq(EMAIL),eq(PASSWORD),eq(REF),any());
             else {
-                verify(f.service).loginBrowser(eq(EMAIL),eq(PASSWORD),eq(REF),any());
-                verify(f.service,never()).login(any(),any(),any(),any());verifyNoInteractions(f.store);
+                verify(f.service).loginBrowser(eq("00000000001"),eq(EMAIL),eq(PASSWORD),eq(REF),any());
+                verify(f.service,never()).login(any(),any(),any(),any(),any());verifyNoInteractions(f.store);
             }
         }
     }
@@ -137,8 +137,8 @@ class BrowserSessionControllerSqlServerTest {
     void login401403429500HasNoSuccessCookieOrCredentialBody(boolean legacy) throws Exception {
         for(int status:List.of(401,403,429,500)) {
             Fixture f=new Fixture(legacy,false);ApiException error=new ApiException(status,"SAFE_ERROR","Operacion rechazada.");
-            if(legacy)doThrow(error).when(f.service).login(any(),any(),any(),any());
-            else doThrow(error).when(f.service).loginBrowser(any(),any(),any(),any());
+            if(legacy)doThrow(error).when(f.service).login(any(),any(),any(),any(),any());
+            else doThrow(error).when(f.service).loginBrowser(any(),any(),any(),any(),any());
             var result=f.http(HttpMethod.POST,"/api/auth/browser/login").andReturn();
             assertEquals(status,result.getResponse().getStatus());assertNull(result.getResponse().getHeader("Set-Cookie"));
             assertFalse(result.getResponse().getContentAsString().contains(TOKEN));assertFalse(result.getResponse().getContentAsString().contains(CSRF));
@@ -148,10 +148,10 @@ class BrowserSessionControllerSqlServerTest {
 
     @Test void legacyCsrfReadFailureAndMalformedTypedResultNeverSetSuccessCookie() {
         Fixture legacy=new Fixture(true,false);doThrow(new ApiException(500,"DATABASE_ERROR","Unavailable")).when(legacy.sql).one(anyString(),any(Object[].class));
-        assertThrows(ApiException.class,()->legacy.controller.login(new AuthController.Login(EMAIL,PASSWORD),legacy.request,legacy.response));
+        assertThrows(ApiException.class,()->legacy.controller.login(new RucRequests.Login("00000000001",EMAIL,PASSWORD),legacy.request,legacy.response));
         assertNull(legacy.response.getHeader("Set-Cookie"));
-        Fixture sql=new Fixture(false,false);doReturn(null).when(sql.service).loginBrowser(any(),any(),any(),any());
-        assertThrows(ApiException.class,()->sql.controller.login(new AuthController.Login(EMAIL,PASSWORD),sql.request,sql.response));
+        Fixture sql=new Fixture(false,false);doReturn(null).when(sql.service).loginBrowser(any(),any(),any(),any(),any());
+        assertThrows(ApiException.class,()->sql.controller.login(new RucRequests.Login("00000000001",EMAIL,PASSWORD),sql.request,sql.response));
         assertNull(sql.response.getHeader("Set-Cookie"));verifyNoInteractions(sql.store);
     }
 
@@ -250,15 +250,16 @@ class BrowserSessionControllerSqlServerTest {
             PasswordEncoder encoder=mock(PasswordEncoder.class);when(encoder.matches(any(),any())).thenReturn(true);
             when(f.store.required(any())).thenAnswer(inv->manager.outer(()->inv.<Supplier<?>>getArgument(0).get()));
             when(f.store.credentials(any(),any())).thenReturn(Optional.of(new Credentials(ID,"Synthetic",EMAIL,"synthetic-hash",null,true,false,null)));
+            when(f.store.lockTenantRuc(any(),anyString())).thenReturn(true);
             when(f.store.membership(any(),any())).thenReturn(Optional.of(new Membership(ID,List.of("ADM"))));
-            when(f.store.saveSession(any(),any(),any(),any())).thenAnswer(inv-> {
+            when(f.store.saveSession(any(),any(),any(),any(),any())).thenAnswer(inv-> {
                 assertNull(f.response.getHeader("Set-Cookie"));assertNull(f.request.getAttribute("health.actor"));
                 return new SavedSession(CSRF,EXPIRY);
             });
             var service=new IdentityService(f.store,f.access,encoder,f.settings);
             controller=new BrowserSessionController(service,f.access,f.store,f.settings);
         }
-        Object login() { return controller.login(new AuthController.Login(EMAIL,PASSWORD),f.request,f.response); }
+        Object login() { return controller.login(new RucRequests.Login("00000000001",EMAIL,PASSWORD),f.request,f.response); }
     }
 
     @Test void realServiceAndControllerWithoutOuterTransactionSetCookieOnlyAfterSaveAndCommit() {
@@ -266,7 +267,7 @@ class BrowserSessionControllerSqlServerTest {
         assertEquals(CSRF,body.get("csrfToken"));assertEquals(EXPIRY.toString(),body.get("expiresAt"));
         assertNotNull(unit.f.request.getAttribute("health.actor"));flags(unit.f.response.getHeader("Set-Cookie"),false,false);
         assertEquals(List.of("begin:0","commit"),unit.manager.events);
-        verify(unit.f.store,times(1)).saveSession(any(),any(),any(),any());verify(unit.f.store,never()).currentSession(any());
+        verify(unit.f.store,times(1)).saveSession(any(),any(),any(),any(),any());verify(unit.f.store,never()).currentSession(any());
     }
 
     @Test void cookieAndActorWaitForOuterCommitAndRemainAbsentOnRollbackAndCommitFailure() {
@@ -311,8 +312,8 @@ class BrowserSessionControllerSqlServerTest {
             context.registerBean(Sql.class,()->f.sql);context.registerBean(Settings.class,()->f.settings);
             context.registerBean(BrowserSessionController.class);context.refresh();
             var controller=context.getBean(BrowserSessionController.class);
-            controller.login(new AuthController.Login(EMAIL,PASSWORD),f.request,f.response);
-            verify(f.service).login(any(),any(),any(),any());verify(f.service,never()).loginBrowser(any(),any(),any(),any());
+            controller.login(new RucRequests.Login("00000000001",EMAIL,PASSWORD),f.request,f.response);
+            verify(f.service).login(any(),any(),any(),any(),any());verify(f.service,never()).loginBrowser(any(),any(),any(),any(),any());
             assertEquals(0,context.getBeanNamesForType(javax.sql.DataSource.class).length);
             assertEquals(0,context.getBeanNamesForType(SqlServerIdentityStore.class).length);
         }

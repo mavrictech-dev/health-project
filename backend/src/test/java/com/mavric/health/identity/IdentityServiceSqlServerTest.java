@@ -28,7 +28,7 @@ class IdentityServiceSqlServerTest {
     private static final String ID="00000000-0000-4000-8000-000000000001",TENANT="00000000-0000-4000-8000-000000000002";
     private static final String EMAIL="qa@example.test",PASSWORD="Synthetic-Password-123",HASH="synthetic-password-hash";
     private static final Instant STORED_EXPIRY=Instant.parse("2030-11-04T12:34:56.123456Z");
-    private static final TenantRef REF=new TenantRef(TENANT,"Synthetic","clinic","CLINIC","HUMAN","ACTIVE",List.of("CORE"));
+    private static final TenantRef REF=new TenantRef(TENANT,"Synthetic","clinic","CLINIC","HUMAN","ACTIVE",List.of("CORE"),"00000000001",1);
     private static final Settings SETTINGS=new Settings("health.localhost","http://health.localhost",8,null);
     private final List<Fixture> fixtures=new ArrayList<>();
 
@@ -52,8 +52,9 @@ class IdentityServiceSqlServerTest {
                 assertTrue(TransactionSynchronizationManager.isActualTransactionActive());
                 order.add("credentials");if(credentialFailure!=null)throw credentialFailure;return credentials;
             });
+            when(store.lockTenantRuc(any(),anyString())).thenReturn(true);
             when(store.membership(any(),any())).thenAnswer(inv->{order.add("membership");return membership;});
-            when(store.saveSession(any(),any(),any(),any())).thenAnswer(inv-> {
+            when(store.saveSession(any(),any(),any(),any(),any())).thenAnswer(inv-> {
                 assertTrue(TransactionSynchronizationManager.isActualTransactionActive());
                 assertNull(request.getAttribute("health.actor"),"No candidate before persistence/commit");
                 assertNull(SecurityContextHolder.getContext().getAuthentication());
@@ -71,9 +72,9 @@ class IdentityServiceSqlServerTest {
             Actor actor=new Actor(ID,"Synthetic",EMAIL,TENANT,List.of(role),"a".repeat(64));
             request.setAttribute("health.actor",actor);when(access.actor()).thenReturn(actor);
         }
-        Map<String,Object> login() { return service.login(EMAIL,PASSWORD,REF,"127.0.0.1"); }
+        Map<String,Object> login() { return service.login("00000000001",EMAIL,PASSWORD,REF,"127.0.0.1"); }
         void noSessionWriteOrActor() {
-            verify(store,never()).saveSession(any(),any(),any(),any());
+            verify(store,never()).saveSession(any(),any(),any(),any(),any());
             assertNull(request.getAttribute("health.actor"));assertNull(SecurityContextHolder.getContext().getAuthentication());
         }
     }
@@ -90,7 +91,7 @@ class IdentityServiceSqlServerTest {
 
     @Test void loginReturnsExactBearerShapeStoredExpiryAndRandomTokenWithoutCredentialOrCsrfExposure() {
         Fixture f=new Fixture();Instant before=Instant.now();
-        Map<String,Object> response=f.service.login(" QA@EXAMPLE.TEST ",PASSWORD,REF,"127.0.0.1");
+        Map<String,Object> response=f.service.login("00000000001"," QA@EXAMPLE.TEST ",PASSWORD,REF,"127.0.0.1");
         assertEquals(Set.of("accessToken","tokenType","expiresAt","user"),response.keySet());
         assertEquals("Bearer",response.get("tokenType"));assertEquals(STORED_EXPIRY.toString(),response.get("expiresAt"));
         String token=(String)response.get("accessToken");assertTrue(token.matches("[A-Za-z0-9_-]{43}"));
@@ -117,7 +118,7 @@ class IdentityServiceSqlServerTest {
             if(mode==0)f.credentials=Optional.empty();
             if(mode==1)f.credentials=Optional.of(credentials(null,true,true));
             final String password=mode==2?"wrong":PASSWORD;
-            ApiException error=assertThrows(ApiException.class,()->f.service.login(EMAIL,password,REF,"127.0.0.1"));
+            ApiException error=assertThrows(ApiException.class,()->f.service.login("00000000001",EMAIL,password,REF,"127.0.0.1"));
             assertEquals(401,error.status);assertEquals("INVALID_CREDENTIALS",error.code);f.noSessionWriteOrActor();
             verify(f.store).failed(f.request,mode==0?null:ID);
             if(mode<2)verify(f.encoder,never()).matches(any(),any());
@@ -129,7 +130,7 @@ class IdentityServiceSqlServerTest {
         ApiException error=assertThrows(ApiException.class,f::login);assertEquals(403,error.status);assertEquals("EMAIL_UNVERIFIED",error.code);
         verify(f.encoder).matches(PASSWORD,HASH);verify(f.store,never()).failed(any(),nullable(String.class));f.noSessionWriteOrActor();
         Fixture wrong=new Fixture();wrong.credentials=f.credentials;
-        assertEquals(401,assertThrows(ApiException.class,()->wrong.service.login(EMAIL,"wrong",REF,"127.0.0.1")).status);
+        assertEquals(401,assertThrows(ApiException.class,()->wrong.service.login("00000000001",EMAIL,"wrong",REF,"127.0.0.1")).status);
         verify(wrong.store).failed(wrong.request,ID);wrong.noSessionWriteOrActor();
     }
 
@@ -193,7 +194,7 @@ class IdentityServiceSqlServerTest {
         ApiException error=assertThrows(ApiException.class,commit::login);
         assertEquals(500,error.status);assertEquals("DATABASE_ERROR",error.code);assertFalse(error.toString().contains("private"));
         assertNull(commit.request.getAttribute("health.actor"));assertNull(SecurityContextHolder.getContext().getAuthentication());
-        verify(commit.store,times(1)).saveSession(any(),any(),any(),any());
+        verify(commit.store,times(1)).saveSession(any(),any(),any(),any(),any());
     }
 
     @Test void actorPublicationWaitsForOuterTransactionCommitAndDoesNotTreatRequiredJoinAsCommit() {
@@ -314,11 +315,11 @@ class IdentityServiceSqlServerTest {
 
     @Test void browserLoginSharesOneAuthenticationSaveAndCarriesSameStoredCsrfExpiryWithRedactedDiagnostics() {
         Fixture f=new Fixture();
-        var result=f.service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1");
+        var result=f.service.loginBrowser("00000000001",EMAIL,PASSWORD,REF,"127.0.0.1");
         assertEquals(STORED_EXPIRY,result.expiresAt());assertEquals("b".repeat(64),result.csrfToken());
         assertTrue(result.token().matches("[A-Za-z0-9_-]{43}"));assertEquals(Checks.hash(result.token()),f.savedHash);
         assertEquals(List.of("credentials","membership","save"),f.order);
-        verify(f.store,times(1)).saveSession(any(),any(),any(),any());
+        verify(f.store,times(1)).saveSession(any(),any(),any(),any(),any());
         assertEquals(new IdentityService.BrowserUser(ID,"Synthetic",EMAIL,List.of("ADM")),result.user());
         assertEquals("BrowserLogin[redacted]",result.toString());assertEquals("BrowserUser[redacted]",result.user().toString());
         List<String> roles=new ArrayList<>(List.of("ADM"));
@@ -336,47 +337,47 @@ class IdentityServiceSqlServerTest {
             if(mode==2)f.credentials=Optional.of(credentials(null,false,false));
             if(mode==3)f.membership=Optional.empty();
             String password=mode==4?"wrong":PASSWORD;
-            ApiException error=assertThrows(ApiException.class,()->f.service.loginBrowser(EMAIL,password,REF,"127.0.0.1"));
+            ApiException error=assertThrows(ApiException.class,()->f.service.loginBrowser("00000000001",EMAIL,password,REF,"127.0.0.1"));
             assertEquals(mode==2?403:401,error.status);f.noSessionWriteOrActor();
         }
         Fixture host=new Fixture();
         assertEquals(401,assertThrows(ApiException.class,()->host.service.loginBrowser(EMAIL,PASSWORD,null,"127.0.0.1")).status);
         verifyNoInteractions(host.store);
         Fixture rate=new Fixture();rate.credentials=Optional.empty();
-        for(int i=0;i<10;i++)assertThrows(ApiException.class,()->rate.service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1"));
-        assertEquals(429,assertThrows(ApiException.class,()->rate.service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1")).status);
+        for(int i=0;i<10;i++)assertThrows(ApiException.class,()->rate.service.loginBrowser("00000000001",EMAIL,PASSWORD,REF,"127.0.0.1"));
+        assertEquals(429,assertThrows(ApiException.class,()->rate.service.loginBrowser("00000000001",EMAIL,PASSWORD,REF,"127.0.0.1")).status);
         verify(rate.store,times(10)).credentials(any(),any());rate.noSessionWriteOrActor();
     }
 
     @Test void browserLoginWaitsForOuterCommitAndPublishesNothingOnRollbackOrCommitFailure() {
         Fixture committed=new Fixture();
         committed.manager.outer(()-> {
-            committed.service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1");
+            committed.service.loginBrowser("00000000001",EMAIL,PASSWORD,REF,"127.0.0.1");
             assertNull(committed.request.getAttribute("health.actor"));return true;
         });
         assertNotNull(committed.request.getAttribute("health.actor"));
         Fixture rollback=new Fixture();
         assertThrows(ApiException.class,()->rollback.manager.outer(()-> {
-            rollback.service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1");throw new ApiException(409,"CONFLICT","Later failure");
+            rollback.service.loginBrowser("00000000001",EMAIL,PASSWORD,REF,"127.0.0.1");throw new ApiException(409,"CONFLICT","Later failure");
         }));
         assertNull(rollback.request.getAttribute("health.actor"));
         Fixture failed=new Fixture();failed.manager.failCommit=true;
-        assertEquals(500,assertThrows(ApiException.class,()->failed.service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1")).status);
+        assertEquals(500,assertThrows(ApiException.class,()->failed.service.loginBrowser("00000000001",EMAIL,PASSWORD,REF,"127.0.0.1")).status);
         assertNull(failed.request.getAttribute("health.actor"));assertNull(SecurityContextHolder.getContext().getAuthentication());
     }
 
     @Test void browserLoginFailsSafelyOnLegacyConstructorWithoutAnySqlOrRecorderUse() {
         Sql sql=mock(Sql.class);AttemptRecorder recorder=mock(AttemptRecorder.class);
         IdentityService service=new IdentityService(sql,mock(Access.class),mock(PasswordEncoder.class),SETTINGS,recorder);
-        assertEquals(500,assertThrows(ApiException.class,()->service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1")).status);
+        assertEquals(500,assertThrows(ApiException.class,()->service.loginBrowser("00000000001",EMAIL,PASSWORD,REF,"127.0.0.1")).status);
         verifyNoInteractions(sql,recorder);
     }
 
     @Test void malformedSavedBrowserResultRollsBackWithoutActorOrSecondSessionWrite() {
         Fixture f=new Fixture();
-        doReturn(new SavedSession("private-invalid",STORED_EXPIRY)).when(f.store).saveSession(any(),any(),any(),any());
-        assertEquals(500,assertThrows(ApiException.class,()->f.service.loginBrowser(EMAIL,PASSWORD,REF,"127.0.0.1")).status);
+        doReturn(new SavedSession("private-invalid",STORED_EXPIRY)).when(f.store).saveSession(any(),any(),any(),any(),any());
+        assertEquals(500,assertThrows(ApiException.class,()->f.service.loginBrowser("00000000001",EMAIL,PASSWORD,REF,"127.0.0.1")).status);
         assertNull(f.request.getAttribute("health.actor"));assertEquals(List.of("begin:0","rollback"),f.manager.events);
-        verify(f.store,times(1)).saveSession(any(),any(),any(),any());
+        verify(f.store,times(1)).saveSession(any(),any(),any(),any(),any());
     }
 }

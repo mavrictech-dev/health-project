@@ -21,7 +21,10 @@ public class HostFilter extends OncePerRequestFilter {
             if(slug.isPresent()) {
                 var row=securityStore!=null?securityStore.tenantBySlug(req,slug.get()).orElseThrow(ApiException::missing):
                         sql.one("SELECT t.id,t.name,t.slug,t.kind,t.domain,t.status,v.modules FROM tenants t JOIN subscriptions s ON s.tenant_id=t.id JOIN plan_versions v ON v.plan_id=s.plan_id AND v.version=s.plan_version WHERE t.slug=?",slug.get());
-                req.setAttribute("health.tenant",new TenantRef(row.get("id").toString(),row.get("name").toString(),slug.get(),row.get("kind").toString(),row.get("domain").toString(),row.get("status").toString(),securityStore!=null?modules(row.get("modules")):sql.strings(row.get("modules"))));
+                if(securityStore!=null && (!(row.get("revision") instanceof Integer revision) || revision<1 || !Ruc.valid((String)row.get("ruc"))))throw invalidResult();
+                req.setAttribute("health.tenant",securityStore!=null?
+                    new TenantRef(row.get("id").toString(),row.get("name").toString(),slug.get(),row.get("kind").toString(),row.get("domain").toString(),row.get("status").toString(),modules(row.get("modules")),(String)row.get("ruc"),(Integer)row.get("revision")):
+                    new TenantRef(row.get("id").toString(),row.get("name").toString(),slug.get(),row.get("kind").toString(),row.get("domain").toString(),row.get("status").toString(),sql.strings(row.get("modules"))));
             }
             chain.doFilter(req,res);
         } catch(ApiException e) { errors.write(req,res,e); }

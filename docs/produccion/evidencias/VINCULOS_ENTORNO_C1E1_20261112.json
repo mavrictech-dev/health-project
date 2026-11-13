@@ -1,0 +1,32 @@
+{
+  "status": "BLOCKED_ENVIRONMENT_BEFORE_SQL",
+  "observedUtc": "2026-11-12T20:27:50.0841939Z",
+  "run": "run_624b9269b491",
+  "orcaMessagesPending": 0,
+  "qaTaskDispatched": false,
+  "service": {"name": "MSSQL$HEALTHPROJECTQA", "status": "Stopped", "startType": "Manual"},
+  "currentTokenAdministrator": false,
+  "launch": {
+    "receipt": "tmp/c1p2-e1-20261112/environment/start-qa-launch.json",
+    "sha256": "776991EF8F84AE70FB1D2B23042FB41617FDB2CD301746D631EF17BAE7291E30",
+    "status": "launch_failed",
+    "utc": "2026-11-12T20:26:47.6250137Z",
+    "exceptionType": "System.InvalidOperationException",
+    "hresult": -2146233079,
+    "nativeCode": null,
+    "scriptEntered": false,
+    "scriptOutcomeExists": false,
+    "underlyingReasonKnown": false,
+    "automaticRetry": false
+  },
+  "wrapper": {
+    "path": "tmp/c1p2-e1-20261112/environment/start-reviewed.ps1",
+    "sha256": "55DCE414B0C0F6ADC190F9049297736E5EFC9AF718EAE7FBF9BF08138C8C2887"
+  },
+  "protectedFingerprintBeforeAndAfter": "d05a8223ee7af186e702e7e9d51e65adf3a341be307346820b78b8c849bfcff3",
+  "protectedFingerprintUnchanged": true,
+  "sqlInvoked": false,
+  "v14Installed": false,
+  "someeInScope": false,
+  "next": "Administrator must make the isolated QA service available; supervisor verifies OS before new QA dispatch. No automatic launch retry."
+}

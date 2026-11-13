@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-12",
+  "status": "DEVUELTA_PARA_CORRECCION_OFFLINE",
+  "taskId": "task_610a2325b428",
+  "dispatchId": "ctx_59a792d9cc2d",
+  "source": {
+    "path": "C:\\Users\\maxmo\\orca\\workspaces\\Health Project\\health-programmer\\backend\\src\\main\\resources\\db\\sqlserver\\V14__patient_link_revision.sql",
+    "sha256": "461DD6AD33264505CE983174B0C7E5CC66E3F9B66C3D65D6A141B8A7937F7714",
+    "lines": 808
+  },
+  "report": {
+    "path": "C:\\Users\\maxmo\\AppData\\Local\\Temp\\C1P1-programmer-report.json",
+    "sha256": "2F8E221A66EB7C5CB094AA59256184587976AFA4950B21D22936E86CC9B338E0"
+  },
+  "checks": {
+    "sources": {
+      "checked": 695,
+      "changed": []
+    },
+    "pins": {
+      "checked": 726,
+      "changed": []
+    },
+    "history": {
+      "checked": 301,
+      "changed": []
+    },
+    "snapshots": {
+      "checked": 21,
+      "changed": []
+    },
+    "c0Artifacts": {
+      "checked": 28,
+      "changed": []
+    },
+    "deliveryArtifacts": {
+      "checked": 32,
+      "changed": []
+    },
+    "sourceContract": {
+      "explicitAck5": true,
+      "explicitEdit8": true,
+      "withdrawalPreservesHistoricalColumns": true,
+      "newRolePermissions": 2
+    }
+  },
+  "findings": [
+    {
+      "id": "R-C1P1-01",
+      "severity": "blocking",
+      "title": "Both new entry bodies reject a fresh caller-selected JDBC implicit transaction",
+      "sourceLines": [
+        488,
+        695
+      ],
+      "evidence": [
+        "Both entry bodies test physical @@TRANCOUNT before accepted usp_require_transaction V10 can materialize the caller-selected implicit transaction.",
+        "SqlServerExecutor calls request_context then business RPC; request_context only sets SESSION_CONTEXT and contains no table read.",
+        "SqlServerPatientStore.link enters TransactionTemplate without a preceding business read; Access.write checks in-memory actor/tenant/modules.",
+        "C0 section1 explicitly preserves V10 transaction semantics and first-write support."
+      ],
+      "inference": "A fresh setAutoCommit(false) connection can enter either RPC with @@TRANCOUNT=0 and receive51000 before its accepted V10 boundary. This inference is from code and documented SQL/JDBC semantics, not a new engine execution.",
+      "requestedFix": "Use the accepted V10 helper to materialize only a caller-selected implicit transaction before requiring a committable external transaction in both new procedure bodies. Preserve autocommit/doom rejection and caller-owned commit/rollback; migration preflight stays unchanged."
+    }
+  ],
+  "officialSources": [
+    "https://learn.microsoft.com/en-us/sql/connect/jdbc/reference/setautocommit-method-sqlserverconnection",
+    "https://learn.microsoft.com/en-us/sql/t-sql/statements/set-implicit-transactions-transact-sql"
+  ],
+  "independentSyntax": {
+    "parser": "TSql160Parser",
+    "errors": 0,
+    "batches": 5,
+    "sourceSha256": "461DD6AD33264505CE983174B0C7E5CC66E3F9B66C3D65D6A141B8A7937F7714",
+    "engineInvoked": false
+  },
+  "correctionTaskId": "task_ab40e0008138",
+  "notIntegrated": true,
+  "migrationInstalled": false,
+  "engineInvoked": false,
+  "someeAccess": false,
+  "qaExecuted": false,
+  "limits": [
+    "Static inspection and hashes do not prove SQL compilation, locking, CAS, permission enforcement, audit or JDBC execution."
+  ]
+}

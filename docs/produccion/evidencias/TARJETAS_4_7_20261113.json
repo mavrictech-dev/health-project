@@ -1,0 +1,398 @@
+{
+  "date": "2026-11-13",
+  "scope": "Tarjetas 4-7 y RUC/acceso; local sintetico",
+  "backendTests": 1118,
+  "frontendTests": 114,
+  "dockerToolTests": 43,
+  "httpRealChecks": 62,
+  "database": "health_project_c1_docker_qa_20261112",
+  "sqlServerVersion": "2022",
+  "somee": "PENDIENTE: conexion exclusiva de Health Project",
+  "runtime": "EXECUTE sobre SP; tablas y DDL denegados",
+  "clinicalChecks": [
+    {
+      "method": "GET",
+      "path": "/public/context",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/auth/login",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/v1/auth/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/negocios/20000000001/sucursales",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/negocios/20000000002/sucursales",
+      "status": 403
+    },
+    {
+      "method": "POST",
+      "path": "/v1/auth/sucursal",
+      "status": 403
+    },
+    {
+      "method": "POST",
+      "path": "/v1/auth/sucursal",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/auth/browser/session",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/pacientes",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/pacientes/directorio?dni=99614913",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/pacientes/71e731cf-2eb4-43b1-a020-2458a883e5e9/antecedentes",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/pacientes/71e731cf-2eb4-43b1-a020-2458a883e5e9/antecedentes",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/pacientes/71e731cf-2eb4-43b1-a020-2458a883e5e9/antecedentes",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/pacientes/71e731cf-2eb4-43b1-a020-2458a883e5e9/antecedentes",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "path": "/v1/pacientes/71e731cf-2eb4-43b1-a020-2458a883e5e9/antecedentes",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 403
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "path": "/v1/pacientes/71e731cf-2eb4-43b1-a020-2458a883e5e9/consultas",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/pacientes/71e731cf-2eb4-43b1-a020-2458a883e5e9/antecedentes",
+      "status": 401
+    },
+    {
+      "method": "POST",
+      "path": "/appointments",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/appointments/f493012a-d03f-4788-bd53-ceeda894ded9",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/appointments",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/appointments/410bf176-13c1-472e-97de-548ebf32f0a7",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/appointments",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/appointments/8319f66c-eb9e-413a-8b95-6e21565007cc",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/appointments",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/appointments/373d3838-24e3-4b17-811e-6ff8925dbfcc",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 200
+    },
+    {
+      "method": "DELETE",
+      "path": "/auth/browser/session",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/auth/browser/session",
+      "status": 401
+    }
+  ],
+  "rucCatalogChecks": [
+    {
+      "method": "POST",
+      "path": "/auth/browser/login",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/platform/plans",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/platform/tenants",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/platform/tenants/6b59d867-cb0d-47ef-8411-ffc1f331533f/profile",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/platform/tenants/6b59d867-cb0d-47ef-8411-ffc1f331533f/profile",
+      "status": 409
+    },
+    {
+      "method": "PUT",
+      "path": "/platform/tenants/6b59d867-cb0d-47ef-8411-ffc1f331533f/profile",
+      "status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/public/tenant-space",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/auth/register",
+      "status": 202
+    },
+    {
+      "method": "GET",
+      "path": "/platform/tenants",
+      "status": 200
+    },
+    {
+      "method": "DELETE",
+      "path": "/auth/browser/session",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/auth/login",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/catalogo/servicios",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/catalogo/servicios",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/catalogo/servicios",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/catalogo/servicios",
+      "status": 409
+    },
+    {
+      "method": "POST",
+      "path": "/v1/catalogo/convenios",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/catalogo/convenios",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/catalogo/convenios",
+      "status": 400
+    },
+    {
+      "method": "DELETE",
+      "path": "/auth/browser/session",
+      "status": 200
+    }
+  ],
+  "browser": {
+    "mode": "Datos ficticios; API simulada. SQL Server verificado por separado.",
+    "screenshots": [
+      "HP-acceso-01-ruc-correo-contrasena.png",
+      "HP-acceso-02-seleccion-sucursal.png",
+      "HP-ruc-03-registro-negocio.png",
+      "HP-ruc-04-alta-tenant-saas.png",
+      "HP-ruc-05-edicion-tenant-ruc.png",
+      "HP4-catalogo-01-tarifario-servicios-convenios.png",
+      "HP4-catalogo-02-registro-servicio.png",
+      "HP4-catalogo-03-registro-convenio.png",
+      "HP5-pacientes-01-directorio.png",
+      "HP5-pacientes-02-filiacion-busqueda-dni.png",
+      "HP5-pacientes-03-antecedentes-versiones-autor-fecha.png",
+      "HP5-pacientes-04-nueva-version-antecedentes.png",
+      "HP6-historia-texto-01-formulario-estados.png",
+      "HP6-historia-texto-02-consulta-guardada.png",
+      "HP6-historia-texto-03-movil.png",
+      "HP7-dictado-01-campo-activo-texto-agregado.png",
+      "HP7-dictado-02-permiso-denegado-escritura-manual.png",
+      "HP7-dictado-03-navegador-sin-voz-entrada-manual.png"
+    ],
+    "browserErrors": [],
+    "checks": [
+      "RUC + correo + contraseña",
+      "Selección de sucursal",
+      "Alta de paciente",
+      "Autocompletado DNI",
+      "Antecedentes e historial con autor y fecha",
+      "Cuatro campos y estados",
+      "Dictado agrega solo al campo elegido",
+      "Micrófono denegado conserva escritura manual",
+      "Consulta guardada",
+      "Vista móvil sin desbordamiento",
+      "Tarifario y convenios",
+      "Registro de servicio",
+      "Registro público con RUC",
+      "Alta y edición de tenant con RUC"
+    ]
+  },
+  "migrationHashes": {
+    "V10__jdbc_implicit_transaction_boundary.sql": "486862353A929D799EF54007B4DB8A005F438D60502C0E8970297F7238690CA0",
+    "V11__canonical_generated_uuids.sql": "F512C6D44917612B53850E29C320C85925A3C92936951BC1A5CD39807AD72EF1",
+    "V12__independent_professional_conflict.sql": "516F1BD3583B51792A75045C90342FAB8236C2D7830B154EF811939980876438",
+    "V13__patient_links_read.sql": "667D8C0731557625C662285DC0E56C885B57E50E7AFA5AF63EBEA2030E3ACF51",
+    "V14__patient_link_revision.sql": "418B1C1B864DE9A6E7AC20E0F641630422A8D2451B3D42F7E9B97FB835B0EA9A",
+    "V15__tenant_ruc.sql": "8B38567C4BB99559F013368119E1BC1D62CD477CDE3685D4C91FA5FF4D3F7E3E",
+    "V16__patient_antecedents_consultations.sql": "8BAA87C6E3B9617792738F820FEDD9E9783CF13C682CE63BE75AF352F548433F",
+    "V17__clinical_catalog.sql": "A90BA275B1074FBC0C322839DED77FC182BC93435A3A1FCA4389409698E16B99",
+    "V18__consultation_appointment_status.sql": "AF7B93A4F13F0A9E347BB449684620B60D04275CDD71797781E72E055F182AD5",
+    "V1__schema.sql": "ED1DCB3E6BD4F2AC1F9B11DE9AA7D1053DB0E71CA3610E21801CC60D51FE4A0A"
+  },
+  "screenshotHashes": {
+    "HP-acceso-01-ruc-correo-contrasena.png": "f11c1469f91657ed32674216db2306c0aa0de85b442eb375265680b082dc4f38",
+    "HP-acceso-02-seleccion-sucursal.png": "c58ac6a3444efb5f47547bb3807d0dcf40a72958949df8742a5d78b7d74b0695",
+    "HP-ruc-03-registro-negocio.png": "35e2a4768628012cc02765ccb5cc58e438037b1eacaccaafa2612445879dce55",
+    "HP-ruc-04-alta-tenant-saas.png": "8be297d13db42fd22650ab80219fbd33c9dad8dfaa23dc5fe15327cf50bfdefc",
+    "HP-ruc-05-edicion-tenant-ruc.png": "ad731d117fb2b360ef7381ccbd2c8378d00b0088f2e2d882e8b95b35a099838d",
+    "HP4-catalogo-01-tarifario-servicios-convenios.png": "5a1e295116bf4cf2dc8772c43357187341f164c02db9a1ba0683704c01e0ac7c",
+    "HP4-catalogo-02-registro-servicio.png": "6c3c468518fbc81c10b3fa3a5fba64713736265a728e35941eee67021a716bbe",
+    "HP4-catalogo-03-registro-convenio.png": "fe11728cbc5d54fbe95fef94d7310eb4e576f4f287d4aa4f0429fc8b57abd728",
+    "HP5-pacientes-01-directorio.png": "4875bc167963ce15024c35694e52eed1f21a85ee6d9e5c7da2bf889bc8518193",
+    "HP5-pacientes-02-filiacion-busqueda-dni.png": "8a569d904283bd2fa8c25058cdc3756b73ca8a1214de60c9afbc8707f472fde3",
+    "HP5-pacientes-03-antecedentes-versiones-autor-fecha.png": "abd513562a01b4afef0c5bd53daabd560071f79d48e58b10f249021fa785c909",
+    "HP5-pacientes-04-nueva-version-antecedentes.png": "6da845273ed9d9c89986ef4cb66d532cfeda6d3c7f64ac0d656a72b0237ca689",
+    "HP6-historia-texto-01-formulario-estados.png": "977bb47684ffa0819167c550964f91c0bfb596b257575f605430831ad17059c6",
+    "HP6-historia-texto-02-consulta-guardada.png": "27c3e5fcf6afe0c0b063adde51996ba808953d57888942a4ba7077d063ed6f00",
+    "HP6-historia-texto-03-movil.png": "6da1398d5be8ef2ba1f8f41fab4789b4c492eedf14445ac4265c4c0121ec7a91",
+    "HP7-dictado-01-campo-activo-texto-agregado.png": "a4c8130737cbb12ff9fbe0a165df8dc4561d0488f0d377dcd30eea1f1c6fc28d",
+    "HP7-dictado-02-permiso-denegado-escritura-manual.png": "e018ed1982848466e7871354fa4ec56bcb38613aa3ee7f8e51df3a16aabdf1d3",
+    "HP7-dictado-03-navegador-sin-voz-entrada-manual.png": "7c49c8d33f008f0e4cfeb8b982fa3a2774ba9f9a17543720cd61de17b8edb35a"
+  }
+}

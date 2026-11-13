@@ -2,7 +2,7 @@
 export interface LiveUser { id: string; roles: string[]; tenantId?: string | null }
 export interface LiveHost { platform: boolean; id?: string }
 export const accessPaths = ['/acceso', '/portal/acceso', '/operacion/acceso', '/saas/acceso', '/recuperar', '/registro', '/verificar', '/restablecer', '/invitacion'];
-export type LiveView = 'home' | 'patients' | 'clients' | 'organization' | 'trace' | 'monitor' | 'support' | 'account';
+export type LiveView = 'home' | 'patients' | 'clients' | 'organization' | 'clinical' | 'catalog' | 'trace' | 'monitor' | 'support' | 'account';
 export const organizationPath = '/app/configuracion/organizacion';
 export function liveBase(user: LiveUser) {
   return user.roles.includes('SAD') ? '/saas' : user.roles.includes('SOP') ? '/operacion' : user.roles.some(r => ['PAC','RES'].includes(r)) ? '/portal' : '/app';
@@ -17,6 +17,8 @@ export function liveEntries(user: LiveUser) {
     { path: base+'/inicio', label: 'Mi espacio', view: 'home' as LiveView },
     ...(user.roles.includes('SAD') ? [{ path: '/saas/clientes', label: 'Clientes', view: 'clients' as LiveView }] : []),
     ...(base==='/app'&&!!user.tenantId&&!user.roles.some(r=>['SAD','SOP','PAC','RES'].includes(r))&&user.roles.some(r=>['ADM','REC','PRO','ASI','AUD'].includes(r)) ? [{ path: '/app/pacientes', label: 'Pacientes', view: 'patients' as LiveView }] : []),
+    ...(base==='/app'&&!!user.tenantId&&user.roles.some(r=>['PRO','ASI','AUD'].includes(r))?[{path:'/app/consulta',label:'Consulta m?dica',view:'clinical' as LiveView}]:[]),
+    ...(base==='/app'&&!!user.tenantId&&user.roles.some(r=>['ADM','REC','PRO','ASI','AUD'].includes(r))?[{path:'/app/tarifario',label:'Tarifario y convenios',view:'catalog' as LiveView}]:[]),
     ...(base==='/app'&&!!user.tenantId&&user.roles.includes('ADM') ? [{ path: organizationPath, label: 'Organización y sedes', view: 'organization' as LiveView }] : []),
     ...(audit ? [{ path: base+'/trazabilidad', label: 'Trazabilidad', view: 'trace' as LiveView }, { path: base+'/monitor', label: 'Estado de la aplicación', view: 'monitor' as LiveView }] : []),
     { path: base+'/soporte', label: 'Solicitudes de soporte', view: 'support' as LiveView },

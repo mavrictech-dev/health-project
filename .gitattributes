@@ -4,3 +4,11 @@
 *.cmd text eol=crlf
 *.png binary
 *.ico binary
+
+# Reviewed artifacts use byte hashes; preserve their committed bytes on Windows.
+backend/src/main/resources/db/sqlserver/V1[4-8]__*.sql -text whitespace=cr-at-eol
+backend/scripts/verify-sqlserver-patient-link-management.sql -text whitespace=cr-at-eol
+scripts/verify-patient-link-management-sql.py -text whitespace=cr-at-eol
+scripts/health-sqlserver-docker-qa.py -text whitespace=cr-at-eol
+scripts/tests/test_health_sqlserver_docker_qa.py -text whitespace=cr-at-eol
+scripts/tests/test_patient_link_management_sql_verifier.py -text whitespace=cr-at-eol

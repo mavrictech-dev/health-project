@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-12",
+  "status": "VALIDATED_AND_INTEGRATED_OFFLINE_API",
+  "taskId": "task_6a5942e84695",
+  "dispatchId": "ctx_4e0c7835e695",
+  "workerDoneMessage": "msg_1fe981349166",
+  "reportSha256": "A33CD5F2DC7B96463BB6E896CEEE864129175E1EFD20A1D7E258A7AEE14AB010",
+  "artifactsVerified": 62,
+  "referencesVerified": 13,
+  "conservationBeforeIntegration": {
+    "sourceBefore": 697,
+    "sourceAfter": 702,
+    "authorizedModified": 9,
+    "authorizedAdded": 5,
+    "unchangedExisting": 688,
+    "pins": 726,
+    "history": 301,
+    "preserved-snapshots": 21,
+    "c0-artifacts": 28,
+    "first-delivery": 34,
+    "all-previous-artifacts": 90,
+    "migrations": 25
+  },
+  "workerTestCountsIndependentlyRecounted": {
+    "tests": 1082,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "workerTestSuiteCount": 72,
+  "sourceReview": [
+    "Raw-token strict decoder5/3; no global mapper edits",
+    "Canonical IDs before business RPC",
+    "Management authority and closed legacy fallback",
+    "One RPC and exact ACK5/edit8 with rollback on inconsistent output",
+    "Opaque immutable historical JSON",
+    "Closed historical catalog/parser and pinned V14 delta",
+    "Harness migrated, not executed; prior readonly controller unchanged"
+  ],
+  "files": [
+    {
+      "path": "backend/src/main/java/com/mavric/health/patients/domain/Requests.java",
+      "sha256": "C23959BAB7800F375CE5472E14C22A39F388E3C944018DA2F7FDC2F9F8441590",
+      "new": false
+    },
+    {
+      "path": "backend/src/main/java/com/mavric/health/patients/api/PatientController.java",
+      "sha256": "286BCE49EF0C5985E8677233FB23D894A0D0AFD13564BF608F0B44C6179AB1A8",
+      "new": false
+    },
+    {
+      "path": "backend/src/main/java/com/mavric/health/patients/application/PatientService.java",
+      "sha256": "1855F35D943F595E2B48BC1560876125CF1374EDC054D530B018EF090AABC1C4",
+      "new": false
+    },
+    {
+      "path": "backend/src/main/java/com/mavric/health/persistence/sqlserver/SqlServerPatientStore.java",
+      "sha256": "C3A31CDCC78CAC41C523A432B82EB98F12367C92EE8AC91B474028D434683188",
+      "new": false
+    },
+    {
+      "path": "backend/src/main/java/com/mavric/health/persistence/sqlserver/SqlServerProcedure.java",
+      "sha256": "338739C2CCDA91C6A6A8C623B32B6FC7FCD324B5623567942EEB389F06E80187",
+      "new": false
+    },
+    {
+      "path": "backend/src/test/java/com/mavric/health/persistence/sqlserver/SqlServerPatientStoreTest.java",
+      "sha256": "0861C435BCF903FA9F6767B7777B2D45BA25E3892418BEB32FEB41E5A78701CE",
+      "new": false
+    },
+    {
+      "path": "backend/src/test/java/com/mavric/health/persistence/sqlserver/SqlServerProcedureContractTest.java",
+      "sha256": "40895C3B65562BDC5305892E2BFED347B1164F0AE56A48A46CB6C3D5AED088FD",
+      "new": false
+    },
+    {
+      "path": "backend/src/test/java/com/mavric/health/patients/application/PatientServiceSqlServerTest.java",
+      "sha256": "6E0CD70B65C98F0797CA373A7D627481B5A7D5B37D04CDF481F26E61E4FDABFD",
+      "new": false
+    },
+    {
+      "path": "backend/scripts/verify-api.py",
+      "sha256": "914D0F5075C7A79EAEA4CC49BF706AE59141C1D8EA1E2F3C8E774EB951707721",
+      "new": false
+    },
+    {
+      "path": "backend/src/main/java/com/mavric/health/patients/domain/LinkDeserializer.java",
+      "sha256": "52BA2A72A8A64F8F19A47BE88FDBD1EFF4F110F6D47C41E2F68C9D680AEDAF8E",
+      "new": true
+    },
+    {
+      "path": "backend/src/test/java/com/mavric/health/patients/domain/LinkDeserializerTest.java",
+      "sha256": "AA41A03B712273C0B864504188819C80FEF3E15CF50F551A1D83F3402E3BAC78",
+      "new": true
+    },
+    {
+      "path": "backend/src/test/java/com/mavric/health/patients/api/PatientLinkManagementControllerSqlServerTest.java",
+      "sha256": "1962311EE8FE12BADA1599081C187CEAAB9DE0B5FDA0674DA10AF68F5FDE9442",
+      "new": true
+    },
+    {
+      "path": "backend/src/test/java/com/mavric/health/persistence/sqlserver/SqlServerPatientLinkManagementStoreTest.java",
+      "sha256": "6F15FCD16239DBDD9CCCCD6264E1A67F96C09E153BF8AA979D2EDECCC4E8CF1F",
+      "new": true
+    },
+    {
+      "path": "backend/src/test/java/com/mavric/health/patients/application/PatientLinkManagementServiceSqlServerTest.java",
+      "sha256": "F5343E075215C57AEAFD4320570D99E81F2DF6EF918FEE96DC66F4D2765E5C6B",
+      "new": true
+    }
+  ],
+  "integration": {
+    "complete": true,
+    "backupDirectory": "D:\\Mavric\\Health Project\\tmp\\c2p1-supervisor-20261112\\before"
+  },
+  "independentRootTests": {
+    "executed": true,
+    "command": "mvn --batch-mode --no-transfer-progress --log-file <local evidence> -o test",
+    "exitCode": 0,
+    "counts": {
+      "tests": 1082,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "suiteCount": 72,
+    "logSha256": "E0F7A0646AB8EBE5CEBE619133F8292D38E394C605AA1DBBA7827046B21E1CC7",
+    "summaryPath": "D:\\Mavric\\Health Project\\tmp\\c2p1-supervisor-20261112\\root-test-summary.json"
+  },
+  "migrationInstalled": false,
+  "liveSqlOrJdbc": false,
+  "realAuthOrCasProvenByModels": false,
+  "someeAccess": false,
+  "postIntegrationSourceCount": 707,
+  "postIntegrationSourceManifest": "D:\\Mavric\\Health Project\\tmp\\c2p1-supervisor-20261112\\sources-after-integration.json",
+  "protectedPinsAndHistoryReverified": true,
+  "remaining": [
+    "Reviewed rollback-only SQL verifier",
+    "Real SQL/JDBC/Spring/pool and concurrent QA",
+    "Separate V14 installation gate",
+    "Candidates, contacts, management UI and integrated real QA"
+  ]
+}

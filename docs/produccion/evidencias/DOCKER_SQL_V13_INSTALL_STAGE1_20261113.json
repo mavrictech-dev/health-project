@@ -1,0 +1,22 @@
+{
+  "taskId": "task_7a1bed038dbc",
+  "dispatchId": "ctx_14ff3400841b",
+  "question": "msg_c9ea2edfa2af",
+  "stage1ReportSha256": "C64E1EC2D3CD5B049D1ACB3E509D1DA49DC820AF4E82E3BD9384F0711F4670B7",
+  "review": "tmp/c1docker-v13-install-supervisor-20261113/review.json",
+  "freshArtifactsHashed": 50,
+  "freshSourcesHashed": 717,
+  "freshReferencesHashed": 27,
+  "payloadsIndependentlyRegenerated": 6,
+  "independentOfflineModelsPass": 15,
+  "conditionalPlanExact": true,
+  "sourceChanges": 0,
+  "nativeProcessesDuringReview": 0,
+  "scope": "QA_ROLLBACK_THEN_INSTALL_EXISTING_V1_V13_ONCE",
+  "approvalPath": "tmp/c1docker-v13-install-20261113/approval.json",
+  "approvalSha256": "A169218A460EA44C44659D0F6EB108B49986EC364F3ED57A437F656C0FF07AC8",
+  "newApprovalAdmissionAndCaptureGatePass": true,
+  "operationResult": "PENDING",
+  "rucTaskStillQueued": "task_9755cf937929",
+  "installationReady": false
+}

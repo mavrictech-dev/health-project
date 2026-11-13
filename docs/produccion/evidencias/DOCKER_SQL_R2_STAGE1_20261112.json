@@ -1,0 +1,40 @@
+{
+  "status": "OFFLINE_FIX_INTEGRATED_PHASE_II_APPROVED_ONCE",
+  "date": "2026-11-12",
+  "taskId": "task_87e222cb1e24",
+  "dispatchId": "ctx_186130c277cf",
+  "questionId": "msg_4526df682c7f",
+  "stage1ReportSha256": "049F40AF7CD268DFD2E781B5F3A3A71C2507622C59791A2DFF08D50F9BE209FC",
+  "sourcePins": {
+    "scripts/health-sqlserver-docker-qa.py": "C65743A57479BE15BC27D821D682478367C5DF2AE93F550E31CEC84E89A951A6",
+    "scripts/tests/test_health_sqlserver_docker_qa.py": "C85FF9D231212B9DDC95C5169C537F1F5B209158ABAD1E10D5F57C2DAD2C0B06"
+  },
+  "verification": {
+    "sources": 717, "ownedWorkerDeltas": 2, "rootSourceUpdates": 2,
+    "preservedPreviousFilesExcludingOwnedLiveFiles": 45083, "stage1Artifacts": 5562,
+    "independentTests": 37, "failures": 0, "errors": 0, "skips": 0,
+    "previousTestMethodsUnchanged": 35, "nativeProcessesAndSocketsBlockedDuringTests": true,
+    "completeSqlFilesCompared": 5, "onlyChangedTopLevelDefinition": "engine_guard",
+    "preCommitBoundaryUnchanged": true,
+    "helperSuccessModelCommands": 27, "helperReadinessFailureModelStopsAt": 7,
+    "helperApplyTimeoutModelStopsAt": 22, "helperMissingApprovalBlocks": true
+  },
+  "reviewSummary": "tmp/c1dockerp1r2-supervisor-20261112/review-summary.json",
+  "integrationApproval": "tmp/c1dockerp1r2-supervisor-20261112/integration-approval.json",
+  "newManifest": {
+    "path": "tmp/c1docker-r2-complete-20261112/reviewed-complete-manifest.json",
+    "sha256": "665C9ED529EF24B1A0737086DD273F32280A237CC7896D284AE0F8DA42DB9E29"
+  },
+  "approval": {
+    "path": "tmp/c1docker-r2-complete-20261112/approval.json",
+    "sha256": "4E0B86CA7C7548AE19C42DC66D071DAF098D6F73455BE69C1863C1C15425211D",
+    "scope": "COMPLETE_EXISTING_C1_DOCKER_V1_V13_ONCE",
+    "helperSha256": "62B8CD4E675F1F1184C3F0E4E0EC949ECD04CF3AE0733214DDFFDCF115B5213C",
+    "captureSha256": "6DF679DE9CBB59E946CD7760F1EA6477D25E546F5EBDDEB1E68B1F91DFD19929",
+    "planSha256": "B0DE8E2ED449AF926431CEE20955D054276AF3E950093D072F82CA1403CA6CBC"
+  },
+  "nativeExecutionPerformedBySupervisor": false,
+  "databaseCreatedByThisReview": false,
+  "someeInScope": false,
+  "phaseIIResult": "PENDING"
+}

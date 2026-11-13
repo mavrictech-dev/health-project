@@ -20,6 +20,7 @@ public class PlatformController {
     @GetMapping("/tenants") Object tenants(@RequestParam(defaultValue="100") int limit) { return service.tenants(limit); }
     @PostMapping("/tenants") Object tenant(@Valid @RequestBody Tenant p) { return service.create(p); }
     @GetMapping("/tenants/{id}") Object tenant(@PathVariable String id) { return service.tenant(id); }
+    @PutMapping("/tenants/{id}/profile") Object profile(@PathVariable String id,@Valid @RequestBody com.mavric.health.identity.RucRequests.Profile p) {return service.profile(id,p);}
     @PutMapping("/tenants/{id}/status") Object status(@PathVariable String id,@Valid @RequestBody Status p) { return service.status(id,p); }
     @GetMapping("/tenants/{id}/configuration") Object config(@PathVariable String id) { return organization.configuration(id); }
     @PutMapping("/tenants/{id}/subscription") Object subscription(@PathVariable String id,@Valid @RequestBody Subscription p) { return organization.subscription(id,p); }

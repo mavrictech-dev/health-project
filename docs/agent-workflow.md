@@ -1,5 +1,348 @@
 # Orquestacion Codex de Health Project
 
+## Continuidad directa por instruccion del usuario, 2026-11-13
+
+El usuario pide que el coordinador implemente por falta de cuota del programador
+y entregue capturas/enlaces GitHub. D-87.BN prevalece para este encargo sobre la
+delegacion habitual. Se conserva worktree del programador; su dispatch RUC esta
+abandoned/terminal_missing, sin worker_done ficticio. La entrega local de RUC y
+tarjetas4-7 se registra en docs/produccion/ENTREGA_TARJETAS_4_7_20261113.md.
+Somee requiere conexion separada; no usar AgendlyCitas.
+
+## RUC.P1 excepcion de compatibilidad publica resuelta, 2026-11-13
+
+Question msg_d4263a9f2910: conservarPOSTregister202neutro/emailExists y errores
+vigentes, sinACKRUC/revisionpublico ficticio. D-87.BM. RUC/revision reales en
+SP/CreatedTenant interno y vistasautorizadas. Ownership extra solo test
+AccountLifecycleControllerSqlServerTest.java, no controllerproduccion. Worker
+reporta primeros3cambios dentroownership, sin pruebasPASS aun; continuarP1.
+
+## RUC.P1 ownership ampliado para resolver preauth exacto, 2026-11-13
+
+Question msg_38b3532a9ded revisada: se aprueban SessionFilter.java y prueba
+SessionFilterRucSpaceTest.java SOLO POST /api/public/tenant-space, despues
+de limpiar actor/context y sin RPCsesion/cookieprevia/CSRF de sesion. D-87.BL.
+Contrato HTTP{ruc}->{hostname} canonico/plataforma/SP/ratelimit, no login o
+bypass general. Continuar mismaTask/Dispatch OFFLINE, no nuevo worker o SQLreal.
+
+## V13 fallida settled y revisada; RUC.P1 liberada para implementacion, 2026-11-13
+
+Done msg_582d7fc2a51e FAILED conservada. D-87.BK, raw102U+FEFF identifica
+cabeceraBOMinteriorV13, POSTempty y Dockerconforme, sinINSTALL/VERIFY.
+Task9755cf937929 RUC.P1 puestaREADY manualmente: dependencia era ownership,
+ya liberado al settled de Docker; no se marca Dockercompleted o reintenta.
+Se conserva historial y se procede misma cuenta/programador soloOFFLINE.
+CorreccionassemblerBOM e instalacion quedan pendientes separadas, no se pierden.
+RUC.P1 mismoTask9755cf937929 actualizadoREADY porCLI y dispatch solicitado.
+IdentityOnly ambosroles conformes; /status efectivo recuperapiura/sesion
+01a1cba3-2a55-7ac1-bf27-cae46a17ef72,20%5h/15%weekly. No se cambia cuenta,
+se crea otroprogramador o se inicia QAreal. OwnershipRUC segun contratoP1.
+
+## Gate V13 resuelto; una operacion condicionada pendiente, 2026-11-13
+
+Question msg_c9ea2edfa2af revisada;50artefactos/717fuentes/27refs/6SQL y15modelos
+propiosPASS, sin procesos nativos. D-87.BJ. Nuevo approvalA169218A...7AC8 bound
+aTask/Dispatch/paquete/target autoriza porreply UNA captura QArollback ->
+POSTempty -> COMMITcondicional -> VERIFYfresh. No sondear inbox ni reenviar.
+RUC.P1 task_9755cf937929 sigue pending por ownership, requisito preservado.
+
+## Nuevo requisito RUC confirmado, implementacion secuencial, 2026-11-13
+
+Usuario solicita RUC para alta/BD/edicion/login y confirma correo como usuario.
+D-87.BI/RUC-01-CONTRATO.md/RUC-01-P1.md registran arquitectura y aceptacion
+SQL/API/UI/QA. No implementar durante paqueteDockercongelado actual: unico
+programador retenido, primero cerrar/conciliar Task task_7a1bed038dbc y luego
+despachar RUC.P1 con ownership explicito. Requisito nuevo se suma al objetivo,
+no autorizaSomee/AgendlyCitas, publicacion o relleno ficticio de datos legacy.
+RUC.P1 task_9755cf937929 creada pending en Orca con dependencia de ownership
+task_7a1bed038dbc. No iniciar otro dispatch en terminal ocupada; al cerrarse,
+review supervisor antes de despachar. Si Docker termina failed, conservar su
+resultado y revisar/replanificar dependencia de RUCoffline, no bloquearla por
+una dependencia tecnica inexistente ni reenviar instalacion automaticamente.
+
+## P1.R3 integrada; siguiente paquete V13 sujeto a gate supervisor, 2026-11-13
+
+Done msg_a3b12b4bbec4 revisado:43tests propiosPASS/60artefactos/717fuentes,
+prueba real241+2exactosvalidos.2fuentes ROOT integradasSHA14CCA63F...6E8A4/
+4965F837...163FE, backupspropios. D-87.BH y manifestFUENTES935E2FFB...BCB8,
+no approval operativo. V13.INSTALL.E1 prepara helper/planes offline y ask
+antes de QArollback+instalacioncondicional; sin nuevo gate al usuario.
+Task task_7a1bed038dbc ready con dependenciaR3aceptada. Ambos IdentityOnly
+conformes y /status efectivo recuperapiura/sesion retenida
+01a1cba3-2a55-7ac1-bf27-cae46a17ef72,62%5h/22%weekly. Se solicita dispatch
+en mismo worktree/terminal, soloTEMP hasta gate; sin cuentasglobales o relanzar.
+
+## JSON-E1 diagnostico aceptado; correccion del transporte acotada, 2026-11-13
+
+Done msg_17266fee53c9 revisado:34artefactos/717fuentes/8refs, frame241 y
+query/inventario exactos. Modelo inputLF4095bytesUTF8 reproduce241huellas;
+95modificadas/78invalidas, no cambio de catalogo/check. D-87.BG.
+P1.R3 ownership2fuentesworker, lexer/renderer de whitespace seguro, RAWoriginal/
+payloadfinal coherentes y UNAqueryreadonly de241 para probar correccion. No
+instalacion/ROOTintegration hasta review, no Somee/AgendlyCitas u otrosrecursos.
+P1.R3 task_bd0cc2f207fe ready con dependenciaJSON-E1 aceptada. IdentityOnly
+ambosroles conformes y /status efectivo recuperapiura/sesion retenida
+01a1cba3-2a55-7ac1-bf27-cae46a17ef72,73%5h/24%weekly. Dispatch solicitado
+en worktree/terminal retenidos, ownership2fuentesworker y TEMPnuevo.
+
+## Diagnostico real aceptado; siguiente evaluacion constante readonly, 2026-11-13
+
+Task task_2a2555a90d6a settled succeeded comoDIAGNOSTICO, done msg_4fc37fd15775.
+Supervisor588artefactos/717fuentes/10calls/2SQL y error278SHAexacto/POSTvacio
+verificados; CHECK547 identificado, fila y semantica de expresion aun pendientes.
+D-87.BF y DOCKER_SQL_APPLY_DIAG_20261113.json. JSON-E1 nuevo contrato solo
+constantes del seed/metadata; sin INSERT/fix/COMMIT o cambiar canonicas/check.
+Misma cuenta/sesion retenidas con identidad efectiva antes de nuevo dispatch.
+JSON-E1 task_d0728d98a4cf creada ready con dependencia APPLY.DIAG.E1 aceptada.
+Ambos IdentityOnly conformes y /status efectivo recuperapiura/sesion retenida
+01a1cba3-2a55-7ac1-bf27-cae46a17ef72,84%5h/25%weekly. Se solicita dispatch
+en terminal/worktree existentes, sin seleccion global o cuentas nuevas.
+
+## Continuidad solicitada por usuario con cuota restablecida, 2026-11-13
+
+Misman cuenta/sesion del programador verificadas porIdentityOnly y /status:
+100%5h/28%weekly. Task/Dispatch actuales abiertas; se envia continuacion por
+Orca, sin relanzar ni reasignar. D-87.BE y
+DOCKER_SQL_APPLY_DIAG_REANUDACION_20261113.json. BaselineREADY existente,
+sin captura/evidenciaoperativa; no rerun del writer exclusivo. Revalidar pines
+y ausencia antes de UNA pruebaROLLBACK ya autorizada, scope original intacto.
+
+## Dispatch diagnostica abierta, cuota temporal del programador, 2026-11-12
+
+Escalation msg_stop_d9d99b5b49bd338575f7cd6b: limite de uso con reset23:38local,
+sin worker_done. Task/Dispatch actuales se conservan, no worker-start/retry/
+abandon ni otra cuenta. D-87.BD. Background file-only termino dejandoREADY
+D2412584...2CD1; no evidencia ni captureintent/result/childrecord operativos.
+Cuando se reanude: leer resultado original, no rerun baseline con archivos
+exclusivos existentes; revalidar pines/target/ausencia de ejecucion y contabilizar
+solo deltas documentales supervisor autorizados antes de UNA faseII ya aprobada.
+
+## Gate APPLY.DIAG.E1 resuelto por supervisor, 2026-11-12
+
+Question msg_932b193836ca revisada,506artefactos/717fuentes/9checks propios PASS
+sin procesos; contrato de probeROLLBACK+POST validado. D-87.BC y evidencia
+DOCKER_SQL_APPLY_DIAG_STAGE1_20261112.json. Nuevo approvalB6B9B4C0...FD19
+bound aTask/Dispatch/helper/protocol/capture/SQL/plan/target autoriza UNA faseII
+por reply; no repetir task/worker-start o ejecutar desde supervisor. Esperar
+resultado por Orca, no sondear inbox ni presentar diagnostico como instalacion.
+
+## SCHEMA-E1 cerrada FAILED; conteos actuales observados y nuevo diagnostico, 2026-11-12
+
+Done msg_0c1aef444885, informe7A69168E...696D revisado:79artefactos/717fuentes,
+8calls/1SQLexit0, Dockerfinalconforme. Taskfailed por hashesNULL no se reescribe;
+supervisor verifica raw699 y observa esquema vacio/configvalida al leer, sin
+huella completa/instalacionlista/causaapply acreditadas. D-87.BB. No nullableSQLretry.
+APPLY.DIAG.E1 prepara probeoriginal conROLLBACKfinal en vezCOMMIT y metadataPOST,
+soloTEMP hasta ask/review/approval interno. Sin sourcefix o conexion externa.
+Task task_2a2555a90d6a ready con dependenciaDIAG-E2 aceptada; dispatch solicitado
+en terminal retenida. Ambos IdentityOnly conformes y /status efectivo nuevo
+recuperapiura/sesion01a1cba3-2a55-7ac1-bf27-cae46a17ef72,17%5h/31%weekly.
+Sin seleccionar cuenta global, relanzar proceso o reutilizar approval R2.
+
+## R2 faseII FAILED revisada; lectura del esquema como paso siguiente, 2026-11-12
+
+Done msg_856a2e47d4b3 asentado FAILED: faseI integrada permanece aceptada,
+create/configure confirmados, apply22exit16/278bytes, verify no intentada.
+Supervisor10558artefactos/717fuentes/45journal/4SQLbyteexactas, D-87.BA.
+SCHEMA-E1 nuevo contrato: solo metadata en DB propia y analisis offline del
+payload original, sin apply/retry o reutilizar approval consumido. Estado
+de esquema UNKNOWN hasta frame valido revisado; ningun acceso AgendlyCitas.
+SCHEMA-E1 task_a76b261e1fd5 creada ready con dependencia DIAG-E2 aceptada,
+no de TaskR2failed. Identidad stored arquitecto/programador comprobada y
+/status efectivo recuperapiura, sesion01a1cba3-2a55-7ac1-bf27-cae46a17ef72,
+29%5h/32%weekly. Se solicita dispatch en terminal/worktree retenidos, sin
+cambio global de cuentas o nueva sesion.
+
+## R2 faseI integrada, gate supervisor faseII resuelto, 2026-11-12
+
+Pregunta msg_4526df682c7f revisada:37tests propiosPASS/35ASTprevios/5SQL solo
+clausulaguarda/5562artefactos.2fuentesROOT integradasSHA C65743A5...51A6/
+C85FF9D2...0B06,717fuentes; helper/capture revisados. D-87.AZ y
+DOCKER_SQL_R2_STAGE1_20261112.json. Nuevo manifest665C9ED5...9E29 yrecibo
+approval4E0B86CA...211D autorizanFASEIIUNAvez conCID/runlabelpropios: readiness/
+create/configure/V1-V13/freshverify. No PROVISION/start/otrosrecursos/V14/retry;
+esperar cierre y evidencia real, no confundir aprobacion de fuentes con DBlista.
+
+## DiagnosticoE2 validado; R2 con gate interno de revision, 2026-11-12
+
+Done msg_bd2a594aa1ae revisado:67artefactos/717fuentes/45014preservados/17journal,
+frame12/17 valido, solo state0false con count0/state1/optionsOFF; DBausente.
+D-87.AY/DOCKER_SQL_DIAG_E2_20261112.json. R2 contrato2fuentesoffline para
+engine_guardcount0/estado0o1, manteniendo rechazoTXexterna/doom. Worker debe ask
+con snapshot/helperSHA y parar; supervisor revisa/integra/fija approval antes de
+UNAcontinuacion con recursospropios/readinessfresh/V1-V13. Sin PROVISIONreplay
+o V14/otros targets. No permiso extra alusuario, decision del arquitecto porOrca.
+
+## DIAG-E1 fallida revisada; E2 corregida sin-h, 2026-11-12
+
+DoneFAILED msg_ebd61bb3ea3b procesado:66artefactos/717fuentes/44944preservados/
+17journal contrastados. Conflicto-h/-y0 del contrato supervisor, metadata no
+ejecutada. D-87.AX/DOCKER_SQL_DIAG_E1_FALLO_20261112.json. DIAG-E2 nuevoencargo
+readonly conservaSQL salvo nonce, retira solo-h/-1 y parsea headerexacto antes
+deJSONcerrado; no readiness/provision aunque diagnosticoPASSE. Sin mutaciones.
+
+## Error de guardas identificado offline; DIAG acotada siguiente, 2026-11-12
+
+DoneFAILED msg_8d729430c032 revisado:56artefactos/717fuentes/44884preservados/
+17journal/8callsreadonly. Matchoffline118bytes+SHA identifica Msg59999 de IF
+engine_guard; parserheader omitia Server. Predicadoindividual/DBausencia aun
+sinacreditar. D-87.AW/DOCKER_SQL_RECONCILE_E1_20261112.json. DIAG-E1 contrato
+UNAquery nueva de metadata para descomponer booleans/longitudes/enums, no
+repetirPROVISION/readiness o relajar guardas de migracion/producto. Sin mutaciones.
+
+## ProvisioningE1 fallida revisada; readonly siguiente, 2026-11-12
+
+DoneFAILED msg_faf968dc66a4 revisado:112artefactos/717fuentes/44768preservados/
+43journal,21intentos/20recibos. Readinessraw1/UNKNOWN; no createDB/apply intentadas.
+D-87.AV/DOCKER_SQL_PROVISION_E1_FALLO_20261112.json. No inferir causanativa o
+estadoDB. RECONCILE-E1 contrato nuevo sololectura del CIDpropio/volumen/pin y
+UNAconexionmaster con readinessoriginal, sin reejecutarPROVISION o mutaciones.
+
+## PinDocker validado; provisioningone-shot siguiente, 2026-11-12
+
+Done msg_70de13c6b5b4:56artefactos/38duraderos/10refs/717fuentes/44706preservados
+verificados,8comandos/2mutaciones. Supervisorinspectreadonly nueva confirma
+CID3b39d275...36c202 exited0/guardasexactas; pin447775C5...05ADC aprobado sin
+repetirsha o SQL. D-87.AU/DOCKER_SQL_PIN_E1_20261112.json. ManifestNUEVO
+073BBFE5...0958E aprobado para UNencargo PAC-01-C1-DOCKER-PROVISION-E1.md,
+readiness antesCREATE DB, V1-V13solo, stopprimerfallo/sinretry. No provisionreal
+ejecutado desde review ni uso de Windows/Somee/composeMySQL.
+
+## DockerP1R1 aceptada/integrada; pin binario siguiente, 2026-11-12
+
+Done msg_5a9a923c55d6 revisado:10937artefactos/20868P1preservados/715fuentes,
+35tests propiosPASS sinrun/Popen/socket,5SQL/41callsmodelo exactos y witness
+duradero causaPRIMARIA/secundarios.2fuentesroot integradas porSHA,717fuentes.
+D-87.AT/DOCKER_SQL_CORRECCION_P1R1_20261112.json. No PROVISION/SQLreal.
+PIN-E1 contrato: un contenedor exclusivo sha256sum/read-only/networknone,
+sin SQLServer/volumen/puerto/credencial/DB; verificar pin antes de manifest real.
+
+## DockerP1 revisada y devuelta, 2026-11-12
+
+Done msg_7a174185443d procesado:17088artefactos/9refs/715fuentes preservadas,
+supervisor29testsPASS sinprocesos/socket y5SQL byteexactos. No integracion.
+WitnessR-DockerP1-01 pierde timeoutoriginal si evidence.end tambienfalla;
+P1-R1 contrato2fuentes para conservar primario/secundario/metadata, sin cambiar
+SQL/transportes o permitir operacion. D-87.AS/DOCKER_SQL_REVISION_P1_20261112.json.
+
+## Docker habilitado: preparacion SQL separada, 2026-11-12
+
+ctx_bd6d28e485b3/task_02ea91a3bac3 activo confirmado msg_5a0e405370c6; baseline
+713/pines726/historia301/migraciones25 intactos. P1-Q1 resuelve pininnerSQLcmd
+pendiente en candidato, provision bloqueado antes de procesos hasta medir en
+otro gate, y sa NUEVO exclusivo para migracion/owner, nunca runtime. Sin ampliar
+ownership ni permitir Docker/SQL real al worker offline.
+
+Dockerdesktop-linux29.8.2/Linuxamd64 verificado, imagenoficial2022 descargada y
+digestpin4525e3ef...13b7f. WindowsQA sigueStopped; no ejecutar runnerLPC contra
+otro target ni composeMySQLheredado. D-87.AR/PAC-01-C1-DOCKER-P1.md fija
+dosfuentes nuevas de tooling+tests OFFLINE, provisioningreal/adaptadorPRE
+posteriores. Identidades ambosroles y /statusprogramador/mismasesion verificados.
+No contenedor/volumen/DB creados ni cambio de Windows/cuentasglobales/Somee.
+
+## Entorno E1 bloqueado antes de SQL, contrato preparado, 2026-11-12
+
+Orcacheck sinmensajes. Una solicitud de elevacion RunAs fallo antes de lanzar
+wrapper: InvalidOperationException/HRESULT-2146233079, sin causa nativa probada.
+Sin entered/outcome, QAStopped/Manual/noadmin y fingerprint protegido igual.
+No retry ni SQL. D-87.AQ/VINCULOS_ENTORNO_C1E1_20261112.json conservan evidencia.
+PAC-01-C1-QA-E1.md preparado, sinTask/Dispatch; exige OS verificado tras resolver
+arranque administrativo local antes de delegar una sola corridaPRErollback.
+No se adelantan jar/instalacion/HTTP/UI ni se usa otra base.
+
+## P2R1 aceptada/integrada; entorno local pendiente de arranque, 2026-11-12
+
+done msg_78e1e01683e5 task_fb1af1bc6b9c/ctx_5780d57a96b6 revisado:5592artefactos,
+710fuentes/2deltas,35tests propiosPASS sobreSHAfinales,112SQL iguales,20defsAST
+intactas/transporte revisado.3herramientas root nuevas por SHA,713fuentes.
+VINCULOS_VERIFICADOR_C1P2R1_20261112.json/D-87.AP; no motor o instalacionV14.
+SQLQAStopped/Manual y tokennoadmin. Start-only previo copiado con SOLO namespace
+y fingerprintactual d05a8223...fcff3; wrapper55DCE414...C2887 parse0. Requiere
+elevacion Windows/plan exactoStart y proteccion antes/despues, sin configuracion
+o servicios ajenos; PRE no se encarga hasta OSverified y contrato posterior.
+
+## P2 devuelta en revision: evidencia del primer fallo, 2026-11-12
+
+P2R1 estado msg_c981ba590fc9: journal/fallos preparados,34testsworkerPASS y SQL
+igual. Supervisor lee delta y ejecuta35testsactualesPASS con run/Popenbloqueados;
+evidencia propia tmp/c1p2r1-supervisor-20261112. Esperar informe/hashfinal y
+worker_done antes de integracion; no SQL/mainreal o motor desde estos modelos.
+
+P2.R1 task_fb1af1bc6b9c/ctx_5780d57a96b6 inicio confirmado por msg_c7a608c17281:
+710fuentes/367artefactos previos preservados, contrato/witness leidos. Solo
+driver/tests activos, sin transporte real; esperar entrega para revision.
+Recibo inicial sin inicio observado no se reenvio ni abandono.
+
+task_de0b6f78d791/ctx_49d75d51c681 done msg_7478f6fa6f60 revisada:
+365artefactos/12refs/710fuentes/pines726/historia301/snapshots21/migraciones25/
+155artefactosprevios contrastados y18tests propiosPASS con subprocess bloqueado.
+WitnessOFFLINE R-C1P2-01: segundo frameinvalido pierdefase/checks, fallo final
+puede ocultar causa inicial. P2 no integrada ni operativa. P2-R1 contrato SOLO
+driver/tests para journalduradero y fallos estructurados; SQL/matriz inmutables.
+VINCULOS_VERIFICADOR_C1P2_20261112.json, D-87.AO. Sin SQL/HTTP/Somee/servicios.
+
+## C2 integrada/validada offline; verificadorPRE siguiente, 2026-11-12
+
+C1.P2 task_de0b6f78d791/ctx_49d75d51c681 inicio confirmado por msg_b536c8608b47:
+707fuentes/25migraciones/726pines/historia/snapshots/155artefactos preservados.
+Recibo inicial sin arranque observado no se reenvio. Herramientas offline aun
+en preparacion, sin ejecucion o entrega final. Supervisor prepara secuencia
+PAC-01-C1-QA-SECUENCIA.md/D-87.AN: PRErollback -> jarcompatible separado ->
+instalacionreconciliada -> R1/JDBC/pool/2conexiones -> HTTP/UI, gates propios.
+
+task_6a5942e84695/ctx_4e0c7835e695 done msg_1fe981349166 revisada:62artefactos/
+13refs/14fuentes integradas por SHA con backups, worker1082recontadas y Maven
+ROOTpropio1082PASS/72suites/raw0 en48.021s.707fuentes y726pines/historia301/
+snapshots21/90artefactos/migraciones25 verificados. VINCULOS_API_C2P1_20261112.json;
+D-87.AM. APIoffline aceptada, no SQL/CAS/auth/CSRFreal; jarprevio intacto/V14ausente.
+PAC-01-C1-P2.md define3rutasnuevas deverificador PRErollback+tests OFFLINE,
+sin motor o modificacion de runners existentes. PREconTXabierta no acredita
+fronteraR1fisica0/autocommit/JDBC ni2conexiones. QA/instalacion y jarcompatible
+ennamespace nuevo quedan gates posteriores; Somee/AgendlyCitas excluidos.
+
+## R1 aceptada/integrada offline; C2.P1 lista, 2026-11-12
+
+C2.P1 task_6a5942e84695/ctx_4e0c7835e695 recibo inicial sin inicio observado
+no se reenvio. msg_46a07450a774 acredita implementacion/236testsafectadosPASS,
+Mavencompleto-o en curso. Supervisor revisa fuentes y suites mientras espera
+informe final; no integracionAPI, motor o QAreal desde esta evidencia parcial.
+
+Done msg_82730ff23fd2 task_ab40e0008138/ctx_ea90d3f41027 revisado:26artefactos/
+11refs/696fuentes/726pines/301historicos/21snapshots/28C0/34primeraentrega y
+delta de dosbloques exacto, parser160propio0errores/5batches. RootV14 nueva
+integrada por hashB6E34ACA...C1B52; no SQL ni instalacion,38casos no ejecutados.
+VINCULOS_CORRECCION_C1P1R1_20261112.json; D-87.AL. Baseline siguiente697fuentes.
+Contrato PAC-01-C2-P1.md activa APIoffline con ownership exacto; diez rutas
+existentes semanticamente iguales entre worktrees (Requests soloCRLF/LF).
+No sync/reset del worker, niSomee/servicios/UI. Verifier/QAreal posteriores.
+
+## C1.P1 revisada y devuelta para frontera JDBC, 2026-11-12
+
+C2/API preparada en PAC-01-C2-PREPARACION.md y D-87.AK mientras R1 activa:
+contrato PUTestricto5/3, lectorindividual8 y ACK5, decoderlocal/IDs antesRPC,
+autoridad/rollback y ownership de consumidores/tests. SIN Dispatch ni fuentes
+producto nuevas; revisar R1 y fijar hash antes de encargar C2. Instalacion/QA
+real/UI siguen gates posteriores; no Somee/AgendlyCitas.
+
+R1 task_ab40e0008138/ctx_ea90d3f41027 despachada con --keep-open. Recibo inicial
+sin inicio observado no se reenvio; msg_22428e4a1b27 confirma lectura/baseline
+y actividad para corregir los dos cuerpos. Baseline696 y34archivos primera
+entrega preservados por worker. Esperar informe para revision independiente.
+
+Continuidad local autorizada mientras usuario solicita base Somee independiente;
+AgendlyCitas excluida. C1.P1 task_610a2325b428/ctx_59a792d9cc2d succeeded de
+preparacion, no aprobada. Supervisor verifica32artefactos/695fuentes/726pines/
+301historicos/21snapshots/28artefactosC0 y parser1600errores/5batches.
+R-C1P1-01: ambos cuerpos nuevos rechazan @@TRANCOUNT0 antes de materializar TX
+JDBC implicita ya elegida; preservar V10 con helper y guard committable posterior.
+Contrato PAC-01-C1-P1-R1.md, evidencia VINCULOS_REVISION_C1P1_20261112.json.
+Ownership programador SOLO V14/worktree y nuevos TEMP C1P1R1, offline; no
+instalacion/Java/UI/SQL/HTTP/DPAPI/servicios. C2/API compatible sigue posterior.
+Run unico revinculado a term_1e0ed3e5-0062-447e-bfa9-bec410e83ed0; terminal
+retenida actual programador term_21ee7227-54e3-4fa0-9f38-1529d5835c99.
+/status confirma recuperapiura y misma sesion01a1cba3-2a55-7ac1-bf27-cae46a17ef72,
+5h100%/weekly58%; IdentityOnly ambos roles coincide, sin cambio global de cuentas.
+
 ## C0 aceptada estatica; C1.P1 SQL de revision y retirada, 2026-11-11
 
 C0 task_cbe1631fad10/ctx_1ca0fc8f62cf completa, entrega msg_ac0c0af0950a.

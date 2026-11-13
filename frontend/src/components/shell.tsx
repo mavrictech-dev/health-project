@@ -18,6 +18,7 @@ const nav: { title: string; items: NavEntry[] }[] = [
     { label: 'Recepción', icon: ClipboardList, path: '/app/recepcion' },
     { label: 'Pacientes', icon: Users, path: '/app/pacientes', children: [['Directorio', '/app/pacientes'], ['Duplicados', '/app/pacientes/duplicados']] },
     { label: 'Atención clínica', icon: Stethoscope, path: '/app/atencion' },
+    { label: 'Consulta médica', icon: ClipboardList, path: '/app/consulta' },
   ] },
   { title: 'GESTIÓN CLÍNICA', items: [
     { label: 'Órdenes y resultados', icon: ClipboardList, path: '/app/ordenes' },
@@ -30,6 +31,7 @@ const nav: { title: string; items: NavEntry[] }[] = [
     { label: 'Veterinaria', icon: PawPrint, path: '/app/veterinaria/poblaciones', children: [['Poblaciones', '/app/veterinaria/poblaciones'], ['Programas sanitarios', '/app/veterinaria/programas']] },
   ] },
   { title: 'ORGANIZACIÓN', items: [
+    { label: 'Tarifario y convenios', icon: CreditCard, path: '/app/tarifario' },
     { label: 'Finanzas', icon: CreditCard, path: '/app/finanzas/caja', children: [['Caja y cuentas', '/app/finanzas/caja'], ['Presupuestos', '/app/finanzas/presupuestos'], ['Comprobantes', '/app/finanzas/comprobantes'], ['Honorarios', '/app/finanzas/honorarios']] },
     { label: 'Almacén', icon: Package, path: '/app/inventario', children: [['Inventario y lotes', '/app/inventario'], ['Compras', '/app/compras']] },
     { label: 'Reportes', icon: Activity, path: '/app/reportes' },

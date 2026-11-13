@@ -110,7 +110,7 @@ public class SqlServerIdentityStoreTest {
             assertFalse(credentials.locked());assertNull(credentials.lockedUntil());assertTrue(credentials.emailVerified());
             assertFalse(credentials.toString().contains("hash"));
             assertEquals(List.of("ADM"),f.store.membership(f.request,ID).orElseThrow().roles());
-            var saved=f.store.saveSession(f.request,HASH,ID,EXPIRY);
+            var saved=f.store.saveSession(f.request,HASH,ID,EXPIRY,"00000000001");
             assertEquals(EXPIRY,saved.expiresAt());assertFalse(saved.toString().contains("bbbb"));
             f.store.acceptInvitation(f.request,ID);
             f.actor();assertEquals("old-hash",f.store.passwordHash(f.request));
@@ -119,13 +119,13 @@ public class SqlServerIdentityStoreTest {
             return Boolean.TRUE;
         });
         assertEquals(List.of(SqlServerProcedure.USER_CREATE,SqlServerProcedure.IDENTITY_CREDENTIALS,
-                SqlServerProcedure.IDENTITY_MEMBERSHIP,SqlServerProcedure.SESSION_SAVE,SqlServerProcedure.INVITATION_ACCEPT,
+                SqlServerProcedure.IDENTITY_MEMBERSHIP,SqlServerProcedure.TENANT_SESSION_SAVE,SqlServerProcedure.INVITATION_ACCEPT,
                 SqlServerProcedure.IDENTITY_PASSWORD_HASH,SqlServerProcedure.PASSWORD_CHANGE,
                 SqlServerProcedure.SESSION_REVOKE,SqlServerProcedure.LOGIN_FAILURE),f.calls.stream().map(Call::procedure).toList());
         assertEquals(Arrays.asList(ID,"Synthetic","qa@example.test","hash",null,null),f.calls.get(0).parameters());
         assertEquals(List.of("qa@example.test"),f.calls.get(1).parameters());
         assertEquals(List.of(ID,TENANT,true),f.calls.get(2).parameters());
-        assertEquals(List.of(HASH,ID,EXPIRY),f.calls.get(3).parameters());
+        assertEquals(List.of(HASH,ID,EXPIRY,"00000000001"),f.calls.get(3).parameters());
         assertEquals(List.of(ID),f.calls.get(4).parameters());assertEquals(List.of(),f.calls.get(5).parameters());
         assertEquals(List.of("new-hash"),f.calls.get(6).parameters());
         assertEquals(Collections.singletonList(null),f.calls.get(7).parameters());assertEquals(Collections.singletonList(null),f.calls.get(8).parameters());
@@ -170,14 +170,14 @@ public class SqlServerIdentityStoreTest {
 
     @Test void sessionSaveMustValidateSingleResultCsrfAndStoredExpiryWithoutInventingClientValue() {
         Fixture f=new Fixture();f.add(saved());
-        assertEquals(EXPIRY,f.store.saveSession(f.request,HASH,ID,EXPIRY.plusSeconds(10)).expiresAt());
+        assertEquals(EXPIRY,f.store.saveSession(f.request,HASH,ID,EXPIRY.plusSeconds(10),"00000000001").expiresAt());
         for(Map<String,Object> row:List.<Map<String,Object>>of(Map.of("csrfToken","private","expiresAt",EXPIRY.toString()),
                 Map.of("csrfToken","a".repeat(64),"expiresAt",7),Map.of("csrfToken","a".repeat(64),"expiresAt","2026-11-04T00:00:00"),
                 Map.of("csrfToken","a".repeat(64),"expiresAt","2026-11-04T00:00:00.000000001Z"))) {
             Fixture bad=new Fixture();bad.add(row);
-            safe500(()->bad.store.saveSession(bad.request,HASH,ID,EXPIRY));assertEquals("rollback",bad.manager.events.getLast());
+            safe500(()->bad.store.saveSession(bad.request,HASH,ID,EXPIRY,"00000000001"));assertEquals("rollback",bad.manager.events.getLast());
         }
-        Fixture empty=new Fixture();empty.empty();safe500(()->empty.store.saveSession(empty.request,HASH,ID,EXPIRY));
+        Fixture empty=new Fixture();empty.empty();safe500(()->empty.store.saveSession(empty.request,HASH,ID,EXPIRY,"00000000001"));
     }
 
     @Test void membershipTypesStatusAndIdentityAreValidatedBeforeCommit() {
@@ -200,7 +200,7 @@ public class SqlServerIdentityStoreTest {
     @Test void acceptThenSaveErrorRollsBackEntireRequiredUnitWithoutPartialCommit() {
         Fixture f=new Fixture();f.noRows();f.empty();
         safe500(()->f.store.required(()-> {
-            f.store.acceptInvitation(f.request,ID);return f.store.saveSession(f.request,HASH,ID,EXPIRY);
+            f.store.acceptInvitation(f.request,ID);return f.store.saveSession(f.request,HASH,ID,EXPIRY,"00000000001");
         }));
         assertEquals(0,Collections.frequency(f.manager.events,"commit"));
         assertEquals(1,Collections.frequency(f.manager.events,"begin:0"));

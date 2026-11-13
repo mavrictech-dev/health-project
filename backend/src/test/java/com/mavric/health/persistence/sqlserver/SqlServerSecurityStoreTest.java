@@ -22,7 +22,7 @@ class SqlServerSecurityStoreTest {
     private static final String USER="00000000-0000-4000-8000-000000000020";
     private static final String REQUEST="00000000-0000-4000-8000-000000000030";
     private static final String HASH="a".repeat(64);
-    private static final TenantRef TENANT_REF=new TenantRef(TENANT,"Synthetic","clinic","CLINIC","HUMAN","ACTIVE",List.of("CORE"));
+    private static final TenantRef TENANT_REF=new TenantRef(TENANT,"Synthetic","clinic","CLINIC","HUMAN","ACTIVE",List.of("CORE"),"00000000001",1);
     private static final Actor ACTOR=new Actor(USER,"Synthetic","qa@example.test",TENANT,List.of("ADM"),HASH);
 
     record Call(SqlServerProcedure procedure,SqlServerContext context,List<Object> parameters) {}
@@ -59,7 +59,7 @@ class SqlServerSecurityStoreTest {
         return new SqlServerExecutor.Result(sets,List.of(0));
     }
     private static Map<String,Object> tenant() {
-        return Map.of("id",TENANT,"name","Synthetic","slug","clinic","kind","CLINIC","domain","HUMAN","status","ACTIVE","modules",List.of("CORE","DOCUMENTS"));
+        return Map.of("id",TENANT,"name","Synthetic","slug","clinic","kind","CLINIC","domain","HUMAN","status","ACTIVE","modules",List.of("CORE","DOCUMENTS"),"ruc","00000000001","revision",1);
     }
     private static Map<String,Object> session() {
         Map<String,Object> row=new LinkedHashMap<>();

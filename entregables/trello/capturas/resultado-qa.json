@@ -1,0 +1,40 @@
+{
+  "mode": "Datos ficticios; API simulada. SQL Server verificado por separado.",
+  "screenshots": [
+    "HP-acceso-01-ruc-correo-contrasena.png",
+    "HP-acceso-02-seleccion-sucursal.png",
+    "HP-ruc-03-registro-negocio.png",
+    "HP-ruc-04-alta-tenant-saas.png",
+    "HP-ruc-05-edicion-tenant-ruc.png",
+    "HP4-catalogo-01-tarifario-servicios-convenios.png",
+    "HP4-catalogo-02-registro-servicio.png",
+    "HP4-catalogo-03-registro-convenio.png",
+    "HP5-pacientes-01-directorio.png",
+    "HP5-pacientes-02-filiacion-busqueda-dni.png",
+    "HP5-pacientes-03-antecedentes-versiones-autor-fecha.png",
+    "HP5-pacientes-04-nueva-version-antecedentes.png",
+    "HP6-historia-texto-01-formulario-estados.png",
+    "HP6-historia-texto-02-consulta-guardada.png",
+    "HP6-historia-texto-03-movil.png",
+    "HP7-dictado-01-campo-activo-texto-agregado.png",
+    "HP7-dictado-02-permiso-denegado-escritura-manual.png",
+    "HP7-dictado-03-navegador-sin-voz-entrada-manual.png"
+  ],
+  "browserErrors": [],
+  "checks": [
+    "RUC + correo + contraseña",
+    "Selección de sucursal",
+    "Alta de paciente",
+    "Autocompletado DNI",
+    "Antecedentes e historial con autor y fecha",
+    "Cuatro campos y estados",
+    "Dictado agrega solo al campo elegido",
+    "Micrófono denegado conserva escritura manual",
+    "Consulta guardada",
+    "Vista móvil sin desbordamiento",
+    "Tarifario y convenios",
+    "Registro de servicio",
+    "Registro público con RUC",
+    "Alta y edición de tenant con RUC"
+  ]
+}

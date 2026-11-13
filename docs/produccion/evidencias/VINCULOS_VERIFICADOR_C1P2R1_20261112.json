@@ -1,0 +1,86 @@
+{
+  "date": "2026-11-12",
+  "status": "VALIDATED_AND_INTEGRATED_OFFLINE_TOOLING",
+  "taskId": "task_fb1af1bc6b9c",
+  "dispatchId": "ctx_5780d57a96b6",
+  "workerDoneMessage": "msg_78e1e01683e5",
+  "reportSha256": "8B620A4C8375AC23F9D74C7993404ECE02F5865DE1A17C3277A50D77EC88FD24",
+  "artifactsVerified": 5592,
+  "conservation": {
+    "sources": 710,
+    "authorizedChanges": 2,
+    "unchangedSources": 708,
+    "pins": 726,
+    "history": 301,
+    "preserved-snapshots": 21,
+    "migrations": 25,
+    "previous-artifacts": 155,
+    "original-evidence": 367
+  },
+  "independentTests": {
+    "tests": 35,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": true,
+    "subprocessRunAndPopenBlocked": true,
+    "sqlEngineInvoked": false,
+    "sourceHashes": {
+      "scripts/verify-patient-link-management-sql.py": "CEB2C952D04D7E2A56BCED90A19224A747ACDD55A5455C6DB7C8222CBAA0CC22",
+      "scripts/tests/test_patient_link_management_sql_verifier.py": "33F2C0552E81879F99221EF7559D272F8BBD19CACF6BDA5EE92097F15320968E"
+    }
+  },
+  "unchangedGeneratedSqlCount": 112,
+  "unchangedPhaseCount": 111,
+  "unchangedDefinitions": [
+    "Failure",
+    "need",
+    "digest",
+    "strict_json",
+    "command",
+    "Phase",
+    "matrix",
+    "sections",
+    "hash_expression",
+    "baseline_parts",
+    "validate_manifest",
+    "load_bundle",
+    "nonce",
+    "baseline_sql",
+    "phase_sql",
+    "frame",
+    "baseline_response",
+    "phase_response",
+    "environment",
+    "executable"
+  ],
+  "transportReview": "Invocation, flags, target, deadlines and environment unchanged; timeout-only sanitized metadata added",
+  "findingClosed": "R-C1P2-01 in offline code and durable model witnesses",
+  "files": [
+    {
+      "path": "backend/scripts/verify-sqlserver-patient-link-management.sql",
+      "sha256": "9476CEC9A4C3906AD9E0D17EA964ED63C4B353372F4F879EEAA13049600C1D4D"
+    },
+    {
+      "path": "scripts/verify-patient-link-management-sql.py",
+      "sha256": "CEB2C952D04D7E2A56BCED90A19224A747ACDD55A5455C6DB7C8222CBAA0CC22"
+    },
+    {
+      "path": "scripts/tests/test_patient_link_management_sql_verifier.py",
+      "sha256": "33F2C0552E81879F99221EF7559D272F8BBD19CACF6BDA5EE92097F15320968E"
+    }
+  ],
+  "integration": {
+    "complete": true,
+    "postSourceCount": 713,
+    "manifest": "D:\\Mavric\\Health Project\\tmp\\c1p2r1-supervisor-20261112\\sources-after-integration.json"
+  },
+  "operativeExecutionAuthorized": false,
+  "sqlEngineInvoked": false,
+  "someeAccess": false,
+  "migrationInstalled": false,
+  "limitations": [
+    "No native SQLcmd wire, SQL compilation/binding, business CAS/ACL/rollback or JDBC proof.",
+    "Original parser112 syntax evidence remains; unchanged generated SQL was not parsed again."
+  ]
+}

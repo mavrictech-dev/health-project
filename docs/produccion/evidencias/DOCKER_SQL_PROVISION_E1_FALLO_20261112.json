@@ -1,0 +1,33 @@
+{
+  "status": "FAILED_RUN_REVIEWED_NO_RETRY",
+  "date": "2026-11-12",
+  "taskId": "task_99e9bf2490dd",
+  "dispatchId": "ctx_325053f54833",
+  "doneMessageId": "msg_faf968dc66a4",
+  "workerOutcome": "failed",
+  "runtimeOutcome": "UNKNOWN",
+  "reportSha256": "8912FE4438D41842DB3098B4AC2208E0404FC0302DC344BC7BB1F286E5185BF6",
+  "verified": {"sources": 717, "preservedFiles": 44768, "artifacts": 112, "journalEntries": 43, "attempts": 21, "acceptedReceipts": 20},
+  "primaryFailure": {
+    "code": "PROCESS_RECEIPT_INVALID", "phase": "readiness", "order": 21,
+    "nativeExit": 1, "stdoutBytes": 0, "stderrBytes": 531,
+    "stderrSha256": "6F793782E7C53DCA9200A32497AD5B2CA799BBF44DAECB621EF510120AA6230C",
+    "underlyingNativeReasonKnown": false
+  },
+  "secondaryFailures": [],
+  "nativeMutationStages": ["volume_create", "container_create", "start_once"],
+  "resources": {
+    "container": "4d599e57d7f605f42385d2ff627f83287366b6a12e2b9825b03222c42a9bec67",
+    "volume": "healthproject-c1qa-20261112-data",
+    "runLabel": "a52e4ded46af4fe29d9f16a28b938719"
+  },
+  "databaseCreationAttempted": false,
+  "migrationAttempted": false,
+  "currentDatabaseExistenceVerified": false,
+  "retryAttempted": false,
+  "cleanupAttempted": false,
+  "nativeCallsPerformedBySupervisorReview": 0,
+  "reviewSummary": "tmp/c1dockerprovision-e1-supervisor-20261112/review-summary.json",
+  "nextGate": "PAC-01-C1-DOCKER-RECONCILE-E1.md",
+  "someeInScope": false
+}

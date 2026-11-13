@@ -91,13 +91,36 @@ public final class SqlServerIdentityStore {
     }
 
     public SavedSession saveSession(HttpServletRequest request,String hash,String userId,Instant expires) {
+        return saveSession(request,hash,userId,expires,null);
+    }
+    public SavedSession saveSession(HttpServletRequest request,String hash,String userId,Instant expires,String ruc) {
         return required(()-> {
-            Map<String,Object> row=optional(executor.execute(SqlServerProcedure.SESSION_SAVE,
-                    SqlServerRequestContexts.from(request,SqlServerContext.Scope.IDENTITY),hash,userId,expires))
+            var context=SqlServerRequestContexts.from(request,SqlServerContext.Scope.IDENTITY);
+            if(context.tenantId()!=null)com.mavric.health.shared.Ruc.require(ruc);else if(ruc!=null)throw ApiException.forbidden();
+            Map<String,Object> row=optional(context.tenantId()==null?executor.execute(SqlServerProcedure.SESSION_SAVE,context,hash,userId,expires):
+                    executor.execute(SqlServerProcedure.TENANT_SESSION_SAVE,context,hash,userId,expires,ruc))
                     .orElseThrow(SqlServerIdentityStore::inconsistent);
             return savedSession(row);
         });
     }
+    /** Holds the trusted host tenant row until the outer login transaction ends. */
+    public boolean lockTenantRuc(HttpServletRequest request,String ruc){return required(()->{
+        com.mavric.health.shared.Ruc.require(ruc);var c=SqlServerRequestContexts.from(request,SqlServerContext.Scope.IDENTITY);
+        if(c.tenantId()==null || c.actorId()!=null)throw ApiException.forbidden();
+        var found=optional(executor.execute(SqlServerProcedure.IDENTITY_TENANT_RUC_LOCK,c,ruc));if(found.isEmpty())return false;
+        var row=found.get();if(!row.keySet().equals(Set.of("id","ruc","revision")) || !c.tenantId().equals(text(row,"id",false)) || !ruc.equals(text(row,"ruc",false)) || !(row.get("revision") instanceof Integer revision) || revision<1)throw inconsistent();return true;
+    });}
+    /** Anonymous platform lookup, no password/session/authentication is involved. */
+    public String tenantSpace(HttpServletRequest request,String ruc,String baseDomain){return required(()->{
+        com.mavric.health.shared.Ruc.require(ruc);var c=SqlServerRequestContexts.from(request,SqlServerContext.Scope.IDENTITY);
+        if(c.tenantId()!=null || c.actorId()!=null)throw ApiException.forbidden();
+        if(baseDomain==null || baseDomain.length()>253 || !baseDomain.matches("[a-z0-9]+([.-][a-z0-9]+)*"))throw inconsistent();
+        var row=optional(executor.execute(SqlServerProcedure.TENANT_SPACE_RESOLVE,c,ruc,baseDomain)).orElseThrow(ApiException::missing);
+        if(!row.keySet().equals(Set.of("hostname")))throw inconsistent();String host=text(row,"hostname",false);
+        try{var slug=com.mavric.health.tenancy.DomainRules.resolve(host,baseDomain);
+            if(host.length()>253 || slug.isEmpty() || !(slug.get()+"."+baseDomain).equals(host))throw inconsistent();
+        }catch(RuntimeException poisoned){throw inconsistent();}return host;
+    });}
 
     public SavedSession currentSession(HttpServletRequest request) {
         return required(()->savedSession(optional(executor.execute(SqlServerProcedure.SESSION_CURRENT,

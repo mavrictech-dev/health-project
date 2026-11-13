@@ -1,0 +1,25 @@
+{
+  "status": "FAILED_DIAGNOSTIC_CLIENT_FLAGS_REVIEWED",
+  "date": "2026-11-12",
+  "taskId": "task_95951b66d6f4",
+  "dispatchId": "ctx_8e07e7d7c41f",
+  "doneMessageId": "msg_ebd61bb3ea3b",
+  "workerOutcome": "failed",
+  "reportSha256": "15CA5590AAD7650200DB15FFB2698D4C63622746747B3F6EBC3AEA5F5AF5AF8B",
+  "verified": {"sources": 717, "preservedFiles": 44944, "artifacts": 66, "journalEntries": 17, "nativeCommands": 8, "mutations": 0},
+  "controlledCliError": {
+    "exactLengthAndSha256Match": true,
+    "bytes": 60,
+    "sha256": "D5C9A771DA8D65C0CE8C7A31073A2274E438CE72F6A71CD86E00C603F4A4C3F4",
+    "text": "Sqlcmd: The -h and the -y 0 options are mutually exclusive.",
+    "causeOwner": "Supervisor contract added incompatible -h -1 alongside -y0"
+  },
+  "metadataQueryExecuted": false,
+  "predicateValuesObserved": false,
+  "productChanges": 0,
+  "dockerFinalState": "running",
+  "supervisorNativeCalls": 0,
+  "reviewSummary": "tmp/c1dockerdiag-e1-supervisor-20261112/review-summary.json",
+  "nextGate": "PAC-01-C1-DOCKER-DIAG-E2.md",
+  "someeInScope": false
+}

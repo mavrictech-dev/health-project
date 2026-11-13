@@ -54,10 +54,61 @@ public final class SqlServerPatientStore {
   }
   return List.copyOf(rows);
  });}
+ private static SqlServerContext managementContext(HttpServletRequest request){
+  var c=context(request,"PORTAL",Set.of("ADM","REC"));
+  if(c.roles().contains("PAC") || c.roles().contains("RES"))throw ApiException.forbidden();
+  if(!canonical(c.requestId()))throw SqlServerErrors.database();
+  return c;
+ }
+ private static void managementId(String id){if(!com.mavric.health.patients.domain.Requests.linkId(id))throw SqlServerErrors.invalid();}
+ private static Map<String,Object> managementRow(SqlServerExecutor.Result result,Set<String> keys){
+  if(result==null || result.resultSets().size()!=1 || result.resultSets().getFirst().size()!=1)throw SqlServerErrors.database();
+  var row=result.resultSets().getFirst().getFirst();
+  if(row==null || !row.keySet().equals(keys))throw SqlServerErrors.database();
+  return row;
+ }
  public Map<String,Object> link(HttpServletRequest request,String patient,com.mavric.health.patients.domain.Requests.Link input){return within(()->{
-  var c=context(request,"PORTAL",Set.of("ADM","REC"));Checks.id(patient);if(input==null || input.relationship()==null || input.relationship().isBlank() || input.relationship().length()>80 || input.scopes()==null || input.scopes().isEmpty())throw SqlServerErrors.invalid();Checks.id(input.userId());var scopes=new ArrayList<String>();for(Object value:input.scopes()){if(!(value instanceof String scope) || !Set.of("APPOINTMENTS","DOCUMENTS","BILLING").contains(scope))throw SqlServerErrors.invalid();scopes.add(scope);}String body;try{body=mapper.writeValueAsString(Map.of("userId",input.userId(),"relationship",input.relationship(),"active",input.active(),"scopes",List.copyOf(scopes)));}catch(tools.jackson.core.JacksonException invalid){throw SqlServerErrors.invalid();}
-  var result=executor.execute(SqlServerProcedure.PATIENT_LINK_SAVE,c,patient,body);if(result==null || result.resultSets().size()!=1 || result.resultSets().getFirst().size()!=1)throw SqlServerErrors.database();var row=result.resultSets().getFirst().getFirst();if(!c.tenantId().equals(id(row,"tenantId")) || !patient.equals(id(row,"patientId")) || !input.userId().equals(id(row,"userId")))throw SqlServerErrors.database();Object values=field(row,"scopes");if(!(values instanceof List<?> list) || list.isEmpty())throw SqlServerErrors.database();var stored=new ArrayList<String>();for(Object value:list){if(!(value instanceof String scope) || !Set.of("APPOINTMENTS","DOCUMENTS","BILLING").contains(scope) || stored.contains(scope))throw SqlServerErrors.database();stored.add(scope);}return Map.of("tenantId",c.tenantId(),"patientId",patient,"userId",input.userId(),"relationship",text(row,"relationship",false),"active",bool(row,"active"),"scopes",List.copyOf(stored));
+  var c=managementContext(request);managementId(patient);
+  if(input==null || !input.valid())throw SqlServerErrors.invalid();
+  var body=new LinkedHashMap<String,Object>();body.put("userId",input.userId());body.put("expectedRevision",input.expectedRevision());body.put("active",input.active());
+  if(input.active()){body.put("relationship",input.relationship());body.put("scopes",input.scopes());}
+  String payload;try{payload=mapper.writeValueAsString(body);}catch(tools.jackson.core.JacksonException invalid){throw SqlServerErrors.invalid();}
+  var row=managementRow(executor.execute(SqlServerProcedure.PATIENT_LINK_SAVE,c,patient,payload),Set.of("tenantId","patientId","userId","active","revision"));
+  if(!c.tenantId().equals(id(row,"tenantId")) || !patient.equals(id(row,"patientId")) || !input.userId().equals(id(row,"userId"))
+   || !input.active().equals(bool(row,"active")) || (long)integer(row,"revision")!=(long)input.expectedRevision()+1L)throw SqlServerErrors.database();
+  return Collections.unmodifiableMap(new LinkedHashMap<>(row));
  });}
+ public Map<String,Object> linkEdit(HttpServletRequest request,String patient,String user){return within(()->{
+  var c=managementContext(request);managementId(patient);managementId(user);
+  var row=managementRow(executor.execute(SqlServerProcedure.PATIENT_LINK_EDIT_GET,c,patient,user),Set.of("tenantId","patientId","userId","userName","relationship","active","scopes","revision"));
+  if(!c.tenantId().equals(id(row,"tenantId")) || !patient.equals(id(row,"patientId")) || !user.equals(id(row,"userId"))
+   || text(row,"userName",false).length()>160 || text(row,"relationship",false).length()>80)throw SqlServerErrors.database();
+  bool(row,"active");integer(row,"revision");
+  var out=new LinkedHashMap<>(row);out.put("scopes",linkJson(field(row,"scopes")));
+  return Collections.unmodifiableMap(out);
+ });}
+ /** Iterative, immutable JSON-data copy. Cycles, executable/custom values and nonfinite numbers fail closed. */
+ private record LinkJsonCopy(Object value,java.util.function.Consumer<Object> done,boolean complete){}
+ private static Object linkJson(Object value){
+  var tasks=new ArrayDeque<LinkJsonCopy>();var ancestors=Collections.newSetFromMap(new IdentityHashMap<Object,Boolean>());var root=new Object[1];
+  tasks.push(new LinkJsonCopy(value,v->root[0]=v,false));
+  while(!tasks.isEmpty()){
+   var task=tasks.pop();if(task.complete()){task.done().accept(null);continue;}var source=task.value();
+   if(source==null || source instanceof String || source instanceof Boolean || source instanceof Byte || source instanceof Short || source instanceof Integer || source instanceof Long || source instanceof BigInteger || source instanceof BigDecimal
+    || source instanceof Double n && Double.isFinite(n) || source instanceof Float f && Float.isFinite(f)){task.done().accept(source);continue;}
+   if(!(source instanceof Map<?,?>) && !(source instanceof List<?>) || !ancestors.add(source))throw SqlServerErrors.database();
+   if(source instanceof List<?> list){
+    var copy=new ArrayList<Object>(Collections.nCopies(list.size(),null));
+    tasks.push(new LinkJsonCopy(source,ignored->{ancestors.remove(source);task.done().accept(Collections.unmodifiableList(copy));},true));
+    for(int i=list.size()-1;i>=0;i--){int index=i;tasks.push(new LinkJsonCopy(list.get(i),v->copy.set(index,v),false));}
+   }else{
+    var entries=new ArrayList<>(((Map<?,?>)source).entrySet());var copy=new LinkedHashMap<String,Object>();
+    tasks.push(new LinkJsonCopy(source,ignored->{ancestors.remove(source);task.done().accept(Collections.unmodifiableMap(copy));},true));
+    for(int i=entries.size()-1;i>=0;i--){var entry=entries.get(i);if(!(entry.getKey() instanceof String key))throw SqlServerErrors.database();tasks.push(new LinkJsonCopy(entry.getValue(),v->copy.put(key,v),false));}
+   }
+  }
+  return root[0];
+ }
  public Map<String,Object> history(HttpServletRequest request,String patient){return within(()->{
   var c=context(request,null,Set.of("PRO","ASI","AUD"));Checks.id(patient);var result=executor.execute(SqlServerProcedure.PATIENT_HISTORY,c,patient);if(result==null || result.resultSets().size()!=4)throw SqlServerErrors.database();var sets=result.resultSets();if(sets.get(0).size()>200 || sets.get(1).size()>1000 || sets.get(2).size()>200 || sets.get(3).size()!=1)throw SqlServerErrors.database();var limits=sets.get(3).getFirst();if(!patient.equals(id(limits,"patientId")) || integer(limits,"encountersLimit")!=200 || integer(limits,"entriesLimit")!=1000 || integer(limits,"documentsLimit")!=200)throw SqlServerErrors.database();var encounters=sets.get(0).stream().map(row->encounter(row,c.tenantId(),patient)).toList();var entries=sets.get(1).stream().map(row->entry(row,c.tenantId())).toList();var documents=sets.get(2).stream().map(row->document(row,c.tenantId(),patient)).toList();return Map.of("patientId",patient,"encounters",encounters,"entries",entries,"documents",documents,"limits",Map.of("encounters",200,"entries",1000,"documents",200));
  });}
