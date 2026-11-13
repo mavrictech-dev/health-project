@@ -16,4 +16,5 @@ public class SqlServerCardsConfiguration {
     @Bean SqlServerCardsStore cardsStore(@Qualifier("sqlServerRuntimeExecutor") SqlServerExecutor executor,@Qualifier("sqlServerRuntimeTransactionManager") PlatformTransactionManager manager,ObjectMapper mapper){return new SqlServerCardsStore(executor,manager,mapper);}
     @Bean BranchAuthController branchAuthController(IdentityService identity,Access access,SqlServerCardsStore store,BranchTokens tokens,Settings settings){return new BranchAuthController(identity,access,store,tokens,settings);}
     @Bean CardsController cardsController(Access access,SqlServerCardsStore store){return new CardsController(access,store);}
+    @Bean AgendaController agendaController(Access access,SqlServerCardsStore store){return new AgendaController(access,store);}
 }

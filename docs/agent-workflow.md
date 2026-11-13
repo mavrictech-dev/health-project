@@ -1,5 +1,13 @@
 # Orquestacion Codex de Health Project
 
+## HP8 por continuidad directa, 2026-11-13
+
+El usuario agrega agenda diaria/semanal, captura manual y guiada por voz y
+estado de cobro/archeo. Se implementa por el coordinador conforme D-87.BN/BO,
+sin reactivar el programador sin cuota. HP8 validada localmente con SQL/API/UI
+y14capturas; informe docs/produccion/HP8-AGENDA-20261113.md. La autorizacion
+de commit/push se limita a health/production-wave0; sin main/despliegue/Somee.
+
 ## Continuidad directa por instruccion del usuario, 2026-11-13
 
 El usuario pide que el coordinador implemente por falta de cuota del programador

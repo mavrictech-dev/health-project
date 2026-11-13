@@ -1,0 +1,33 @@
+{
+  "mode": "Demostración con datos ficticios y voz simulada; API Java/SQL verificada por separado.",
+  "screenshots": [
+    "HP8-01-calendario-diario.png",
+    "HP8-02-calendario-semanal.png",
+    "HP8-03-modal-agendamiento-manual.png",
+    "HP8-04-revision-reserva-manual.png",
+    "HP8-05-cita-registrada.png",
+    "HP8-06-pagado-medio-de-pago.png",
+    "HP8-07-arqueo-por-medio-de-pago.png",
+    "HP8-08-voz-paso-1-nombres.png",
+    "HP8-09-voz-paso-2-apellidos.png",
+    "HP8-10-voz-paso-3-nacimiento.png",
+    "HP8-11-voz-paso-4-horario.png",
+    "HP8-12-revision-datos-capturados-por-voz.png",
+    "HP8-13-microfono-denegado-captura-manual.png",
+    "HP8-14-agenda-movil.png"
+  ],
+  "browserErrors": [],
+  "checks": [
+    "Día y semana",
+    "Click en horario abre modal",
+    "Revisión antes de guardar",
+    "Reserva manual",
+    "Pagado y medio de pago",
+    "Arqueo por fecha de registro",
+    "Nombres → Apellidos → Nacimiento → Horario",
+    "Fechas y horas en español",
+    "Reserva con paciente nuevo por voz",
+    "Permiso de micrófono denegado conserva entrada manual",
+    "Móvil sin desbordamiento"
+  ]
+}

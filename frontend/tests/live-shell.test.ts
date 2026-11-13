@@ -33,7 +33,7 @@ test('tenant audit permissions and portal membership do not silently fall back t
     assert.equal(liveRoute('/app/inicio',user(role,'tenant-a'),tenant).kind,'forbidden');
     assert.equal(liveRoute('/portal/monitor',user(role,'tenant-a'),tenant).kind,'forbidden');
   }
-  assert.equal(liveRoute('/app/agenda',user('PRO','tenant-a'),tenant).kind,'unavailable');
+  assert.deepEqual(liveRoute('/app/agenda',user('PRO','tenant-a'),tenant),{kind:'allowed',view:'agenda'});
   assert.equal(liveRoute('/saas/planes',user('SAD'),platform).kind,'unavailable');
   assert.equal(liveRoute('/app/unknown',user('PRO','tenant-a'),tenant).kind,'unavailable');
 });

@@ -1,5 +1,17 @@
 # Revisiones del supervisor
 
+## HP8 implementada y verificada localmente, 2026-11-13
+
+D-87.BO. Revision de calendario/zonahoraria, formularios, captura por voz y
+revision antes de reservar; cabeceraIdempotency-Key, reuso de paciente y
+proteccion de respuestas ambiguas. SQL V19: cobroCAS e idempotente, arqueo
+neto por registro, historial inmutable, roles/sucursal y NO_SHOW liberado.
+
+Mavenverify1124 y frontend120/builds/TypeScriptPASS;40HTTP Java+SQLServer2022
+propiosPASS. SQL real deniega tablas alruntime yUPDATEhistorial aladmin;241
+perfilesvalidos/43tablas/152SP/34triggers.14capturasPlaywright revisadas, voz
+simulada y movil sin overflow. Informe HP8-AGENDA-20261113.md; Someependiente.
+
 ## Tarjetas 4-7 y RUC: revision y QA local, 2026-11-13
 
 El coordinador implementa por instruccion directa del usuario (D-87.BN). Revisa

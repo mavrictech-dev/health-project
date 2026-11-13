@@ -13,6 +13,7 @@ a los intentos anteriores, no a esta nueva validacion.
 | HP5 DEV-PACIENTE | VALIDADA LOCAL | Filiacion/DNI/antecedentes append-only con autor y fecha |
 | HP6 DEV-HISTORIA-TXT | VALIDADA LOCAL; SOMEE PENDIENTE | Consulta y estados de cita atomicos/idempotentes |
 | HP7 DEV-HISTORIA-VOICE | VALIDADA UI CON VOZ SIMULADA | Campo aislado, permisos y ausencia de soporte; sin audio real |
+| HP8 DEV-AGENDA | VALIDADA LOCAL; SOMEE PENDIENTE | Dia/semana, manual/voz guiada, cobros y arqueo; HP8-AGENDA-20261113.md;1124Java/120frontend/40HTTP/14capturas |
 
 Actualizacion de cuentas 2026-11-09 (D-82): arquitecto mendozadeafabisa@gmail.com,
 programador recuperapiura@gmail.com. Ambos/status nuevos verificados; cuotas

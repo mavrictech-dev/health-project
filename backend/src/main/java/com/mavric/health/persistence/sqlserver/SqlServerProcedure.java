@@ -7,6 +7,10 @@ import java.util.List;
 
 /** Closed V3-V6/V8 contracts plus the explicit V13 read; SQL defaults are explicit caller arguments. */
 public enum SqlServerProcedure {
+    AGENDA_CONTEXT("usp_agenda_context",input("branch_id",JDBCType.CHAR,36,null)),
+    AGENDA_LIST("usp_agenda_list",input("branch_id",JDBCType.CHAR,36,null),input("from",JDBCType.TIMESTAMP,6,null),input("to",JDBCType.TIMESTAMP,6,null),input("professional_id",JDBCType.CHAR,36,"NULL")),
+    AGENDA_COLLECTION_SUMMARY("usp_agenda_collection_summary",input("branch_id",JDBCType.CHAR,36,null),input("from",JDBCType.TIMESTAMP,6,null),input("to",JDBCType.TIMESTAMP,6,null)),
+    AGENDA_COLLECTION_SAVE("usp_agenda_collection_save",input("appointment_id",JDBCType.CHAR,36,null),input("branch_id",JDBCType.CHAR,36,null),input("request_id",JDBCType.CHAR,36,null),input("expected_revision",JDBCType.INTEGER,0,null),input("status",JDBCType.VARCHAR,7,null),input("amount_minor",JDBCType.INTEGER,0,null),input("payment_method",JDBCType.VARCHAR,8,null)),
     MEDICAL_SERVICES("usp_medical_services"),
     MEDICAL_AGREEMENTS("usp_medical_agreements"),
     MEDICAL_CATALOG_SAVE("usp_medical_catalog_save",input("id",JDBCType.CHAR,36,null),input("kind",JDBCType.VARCHAR,10,null),input("input",JDBCType.NVARCHAR,-1,null)),

@@ -33,7 +33,7 @@ def main():
  pre=(':On Error exit\n'+guards+M.empty_guard()+"SELECT N'EMPTY_QA_DATABASE' state;\n").encode()
  sql(pre,'pre')
  sources=sorted((ROOT/'backend/src/main/resources/db/sqlserver').glob('V*.sql'),key=lambda p:int(p.name.split('__')[0][1:]))
- if [int(p.name.split('__')[0][1:]) for p in sources]!=list(range(1,19)):raise RuntimeError('Expected V1 through V18 exactly')
+ if [int(p.name.split('__')[0][1:]) for p in sources]!=list(range(1,20)):raise RuntimeError('Expected V1 through V19 exactly')
  (folder/'sources.json').write_text(json.dumps({p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in sources},indent=2))
  body=b'\n'.join(p.read_bytes().removeprefix(b'\xef\xbb\xbf') for p in sources)
  opening=(':On Error exit\n'+guards+M.empty_guard()+'BEGIN TRANSACTION;\nGO\n').encode()
@@ -42,10 +42,10 @@ def main():
   v14=sources[boundary-1].read_text(encoding='utf-8-sig');declaration=v14[v14.index('DECLARE @modules TABLE'):v14.index('IF EXISTS(SELECT 1 FROM @modules')]
   query="SELECT e.name,e.full_hash,e.statement_hash,CONVERT(char(64),HASHBYTES('SHA2_256',CONVERT(varbinary(max),TRIM(N' '+NCHAR(9)+NCHAR(10)+NCHAR(13) FROM REPLACE(REPLACE(m.definition,NCHAR(13)+NCHAR(10),NCHAR(10)),NCHAR(13),NCHAR(10))))),2) actual_hash,m.uses_ansi_nulls,m.uses_quoted_identifier,m.is_schema_bound,m.is_recompiled,m.execute_as_principal_id,CONVERT(varchar(max),CONVERT(varbinary(max),m.definition),2) definition_hex FROM @modules e JOIN sys.sql_modules m ON m.object_id=OBJECT_ID(N'dbo.'+e.name) FOR JSON PATH;\nROLLBACK TRANSACTION;\n"
   sql(opening+b'\n'.join(p.read_bytes().removeprefix(b'\xef\xbb\xbf') for p in sources[:boundary-1])+b'\n'+declaration.encode()+query.encode(),'diagnose-v14');print('Rollback diagnostic: '+str(folder));return
- checks=b"\nIF @@TRANCOUNT<>1 OR XACT_STATE()<>1 THROW 59999,'Migration transaction lost',1;\nIF COL_LENGTH('dbo.tenants','ruc') IS NULL OR OBJECT_ID('dbo.usp_consultation_add','P') IS NULL THROW 59999,'Missing cards schema',1;\n"
+ checks=b"\nIF @@TRANCOUNT<>1 OR XACT_STATE()<>1 THROW 59999,'Migration transaction lost',1;\nIF COL_LENGTH('dbo.tenants','ruc') IS NULL OR OBJECT_ID('dbo.usp_consultation_add','P') IS NULL OR OBJECT_ID('dbo.usp_agenda_collection_save','P') IS NULL THROW 59999,'Missing cards schema',1;\n"
  sql(opening+body+checks+b'ROLLBACK TRANSACTION;\nSELECT N\'REHEARSAL_PASSED\' state;\n','rehearsal')
  sql(pre,'after-rehearsal')
- sql(opening+body+checks+b"EXEC sys.sp_addextendedproperty @name=N'health_schema_version',@value=N'18';\nCOMMIT TRANSACTION;\nSELECT N'INSTALLED_V18' state;\n",'install')
+ sql(opening+body+checks+b"EXEC sys.sp_addextendedproperty @name=N'health_schema_version',@value=N'19';\nCOMMIT TRANSACTION;\nSELECT N'INSTALLED_V19' state;\n",'install')
  verify=(':On Error exit\n'+guards+"SELECT (SELECT COUNT(*) FROM sys.tables WHERE is_ms_shipped=0) tables,(SELECT COUNT(*) FROM sys.procedures WHERE is_ms_shipped=0) procedures,(SELECT COUNT(*) FROM dbo.specialties WHERE ISJSON(profile,OBJECT)=1) profiles;\n").encode()
  sql(verify,'verify');print('V1–V16 rehearsal, empty postcheck, install and fresh verification passed. Evidence: '+str(folder))
 

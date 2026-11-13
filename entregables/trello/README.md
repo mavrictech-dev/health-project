@@ -21,3 +21,10 @@ La comprobación en Somee queda pendiente de su conexión exclusiva de Health Pr
 · [API](https://github.com/mavrictech-dev/health-project/tree/health/production-wave0/backend/src/main/java/com/mavric/healthcards)
 · [SQL](https://github.com/mavrictech-dev/health-project/tree/health/production-wave0/backend/src/main/resources/db/sqlserver)
 · [Frontend](https://github.com/mavrictech-dev/health-project/tree/health/production-wave0/frontend/src/components)
+
+
+## HP8 agregada
+
+[Lista de tareas para Trello](hp8/TAREAS_TRELLO.md), 14 capturas nuevas en
+`hp8/capturas` y paquete `hp8/HP8-Agenda-Trello.zip`. Las 18 capturas anteriores
+se conservan.

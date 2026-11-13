@@ -87,10 +87,10 @@ useDemo.subscribe((next, previous) => {
   }
 });
 
-export async function mockApi(path: string, options: { method?: string; body?: unknown } = {}): Promise<unknown> {
+export async function mockApi(path: string, options: { method?: string; body?: unknown; idempotencyKey?:string } = {}): Promise<unknown> {
   const url = new URL(path, 'https://demo.invalid'), route = url.pathname, params = url.searchParams, method = options.method || 'GET', body = (options.body || {}) as Row;
   const value = state();
-  const cards=mockCards(route,method,body,params);if(cards.handled){if(route==='/v1/auth/login'){activateMockSession();return {...cards.value as Row,user:mockUser(),csrfToken:'demo-no-server',expiresAt:new Date(Date.now()+86400000).toISOString()};}return cards.value;}
+  const cards=mockCards(route,method,body,params,options.idempotencyKey);if(cards.handled){if(route==='/v1/auth/login'){activateMockSession();return {...cards.value as Row,user:mockUser(),csrfToken:'demo-no-server',expiresAt:new Date(Date.now()+86400000).toISOString()};}return cards.value;}
   if (route === '/public/context' && method === 'GET') return host();
   if (route === '/public/status' && method === 'GET') return { ...value.application, status: value.application.mode === 'OPEN' ? 'OPERATIONAL' : 'RESTRICTED' };
   if (route === '/auth/browser/session' && method === 'GET') {

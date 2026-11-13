@@ -27,7 +27,7 @@ public class Errors {
         private ResponseEntity<?> result(int status,String code,String detail,HttpServletRequest req) { return ResponseEntity.status(status).contentType(MediaType.APPLICATION_PROBLEM_JSON).body(errors.body(status,code,detail,req)); }
         @ExceptionHandler(ApiException.class) public ResponseEntity<?> api(ApiException e,HttpServletRequest req) { return result(e.status,e.code,e.getMessage(),req); }
         @ExceptionHandler(MethodArgumentNotValidException.class) public ResponseEntity<?> validation(MethodArgumentNotValidException e,HttpServletRequest req) { return result(400,"VALIDATION_FAILED",e.getBindingResult().getFieldErrors().stream().map(f->f.getField()+": "+f.getDefaultMessage()).distinct().collect(java.util.stream.Collectors.joining("; ")),req); }
-        @ExceptionHandler({HttpMessageNotReadableException.class,IllegalArgumentException.class}) public ResponseEntity<?> invalid(Exception e,HttpServletRequest req) { return result(400,"INVALID_REQUEST","Formato o campos no válidos.",req); }
+        @ExceptionHandler({HttpMessageNotReadableException.class,IllegalArgumentException.class,org.springframework.web.method.annotation.MethodArgumentTypeMismatchException.class,org.springframework.web.bind.MissingServletRequestParameterException.class}) public ResponseEntity<?> invalid(Exception e,HttpServletRequest req) { return result(400,"INVALID_REQUEST","Formato o campos no válidos.",req); }
         @ExceptionHandler(DataAccessException.class) public ResponseEntity<?> database(DataAccessException e,HttpServletRequest req) {
             Throwable c=e; while(c.getCause()!=null) c=c.getCause();
             if(c instanceof SQLException sql && "45000".equals(sql.getSQLState())) {

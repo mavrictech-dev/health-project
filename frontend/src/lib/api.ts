@@ -12,7 +12,7 @@ export function errorMessage(error: unknown) {
 let csrfToken = '';
 let csrfRevision = 0;
 export function setCsrf(value: string) { csrfToken = value; csrfRevision++; }
-export async function api<T = unknown>(path: string, options: { method?: string; body?: unknown; signal?: AbortSignal } = {}): Promise<T> {
+export async function api<T = unknown>(path: string, options: { method?: string; body?: unknown; signal?: AbortSignal; idempotencyKey?:string } = {}): Promise<T> {
   if (isMockMode) {
     options.signal?.throwIfAborted();
     const { mockApi } = await import('@/mocks/runtime-api');
@@ -30,7 +30,7 @@ export async function api<T = unknown>(path: string, options: { method?: string;
   try {
     response = await fetch(`/api${path}`, {
       method, credentials: 'same-origin', cache: 'no-store', signal: options.signal,
-      headers: { 'Content-Type': 'application/json', ...(csrfToken && !['GET','HEAD','OPTIONS'].includes(method) ? { 'X-CSRF-Token': csrfToken } : {}) },
+      headers: { 'Content-Type': 'application/json', ...(options.idempotencyKey?{'Idempotency-Key':options.idempotencyKey}:{}), ...(csrfToken && !['GET','HEAD','OPTIONS'].includes(method) ? { 'X-CSRF-Token': csrfToken } : {}) },
       body: options.body === undefined ? undefined : JSON.stringify(options.body),
     });
   } catch (error) {

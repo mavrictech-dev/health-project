@@ -1,5 +1,16 @@
 # Decisiones y contratos de integracion
 
+## D-87.BO: HP8 agenda y cobros manuales, 2026-11-13
+
+El usuario agrega HP8 y ordena implementarla y entregar las tareas. Continua
+la implementacion directa autorizada en D-87.BN. Dia/semana, reserva manual,
+voz Nombres-Apellidos-Nacimiento-Horario y revision explicita. Cobros manuales
+PENDING/PAID enPEN y medio obligatorio al pagar; no proveedor o cargo real.
+Arqueo por fecha de registro y sucursal con compensaciones/historial inmutable.
+V19 suma cuatroSP y dos tablas con runtimeEXECUTE; libera horarioNO_SHOW.
+1124Java/120frontend/40HTTP reales y14capturasPASS. HP8-AGENDA-20261113.md y
+HP8_AGENDA_20261113.json. Somee sigue pendiente, AgendlyCitas excluida.
+
 ## D-87.BN: implementacion directa y entrega de tarjetas 4-7, 2026-11-13
 
 El usuario ordena que el coordinador termine la implementacion por falta de cuota

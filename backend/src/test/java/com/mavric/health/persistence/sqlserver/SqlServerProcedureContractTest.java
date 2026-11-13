@@ -78,7 +78,8 @@ class SqlServerProcedureContractTest {
         Map<String,SqlServerProcedure> catalog=new TreeMap<>();
         for (SqlServerProcedure procedure:SqlServerProcedure.values())
             assertNull(catalog.put(name(procedure),procedure),"Duplicate descriptor");
-        assertEquals(123,catalog.size());
+        assertEquals(127,catalog.size());
+        for(String delta:List.of("usp_agenda_context","usp_agenda_list","usp_agenda_collection_save","usp_agenda_collection_summary"))assertNotNull(catalog.remove(delta),"Explicit V19 delta");
         for(String delta:List.of("usp_medical_services","usp_medical_agreements","usp_medical_catalog_save"))assertNotNull(catalog.remove(delta),"Explicit V17 delta");
         for(String delta:procedures(resource("V16__patient_antecedents_consultations.sql")).keySet())assertNotNull(catalog.remove(delta),"Explicit V16 delta");
         for(String delta:List.of("usp_identity_tenant_ruc_lock","usp_tenant_space_resolve","usp_tenant_profile_save","usp_tenant_session_save"))assertNotNull(catalog.remove(delta),"Explicit V15 delta");
@@ -97,6 +98,7 @@ class SqlServerProcedureContractTest {
             Contract contract=snapshot.procedures().get(name(procedure));
             if(contract==null)contract=procedures(resource("V16__patient_antecedents_consultations.sql")).get(name(procedure));
             if(contract==null)contract=procedures(resource("V17__clinical_catalog.sql")).get(name(procedure));
+            if(contract==null)contract=procedures(resource("V19__agenda_collections.sql")).get(name(procedure));
             assertNotNull(contract);
             assertEquals("bootstrap".equals(snapshot.access().get(contract.name())),procedure.bootstrap());
             assertEquals(contract.parameters().size(),procedure.parameters().size(),"Explicit defaults may not be omitted");

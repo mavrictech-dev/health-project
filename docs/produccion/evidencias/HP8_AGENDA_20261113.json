@@ -1,0 +1,268 @@
+{
+  "date": "2026-11-13",
+  "card": "HP8 DEV-AGENDA",
+  "state": "VALIDADA LOCAL; SOMEE PENDIENTE",
+  "synthetic": true,
+  "backendTests": 1124,
+  "frontendTests": 120,
+  "realApiChecks": [
+    {
+      "method": "POST",
+      "path": "/v1/auth/login",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/auth/sucursal",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/agenda/contexto?branchId=93000000-0000-4000-8000-000000000001",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/agenda/contexto?branchId=93000000-0000-4000-8000-000000000002",
+      "status": 403
+    },
+    {
+      "method": "GET",
+      "path": "/v1/agenda/citas?branchId=93000000-0000-4000-8000-000000000001&from=not-a-date&to=2026-11-14T05:00:00Z",
+      "status": 400
+    },
+    {
+      "method": "GET",
+      "path": "/v1/agenda/citas?from=2026-11-13T05:00:00Z&to=2026-11-14T05:00:00Z",
+      "status": 400
+    },
+    {
+      "method": "GET",
+      "path": "/patients?limit=20",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/appointments",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/appointments",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/appointments",
+      "status": 409
+    },
+    {
+      "method": "GET",
+      "path": "/v1/agenda/citas?branchId=93000000-0000-4000-8000-000000000001&from=2026-11-28T00:00:00Z&to=2026-11-29T00:00:00Z",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/agenda/citas?branchId=93000000-0000-4000-8000-000000000001&from=2026-11-13T22:23:37.684446Z&to=2026-11-22T22:23:37.684446Z",
+      "status": 400
+    },
+    {
+      "method": "GET",
+      "path": "/v1/agenda/arqueo?branchId=93000000-0000-4000-8000-000000000001&from=2026-11-28T00:00:00Z&to=2026-11-29T00:00:00Z",
+      "status": 403
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/agenda/citas/d36e0726-aa13-456e-91c4-d0d33896e676/cobro",
+      "status": 403
+    },
+    {
+      "method": "DELETE",
+      "path": "/auth/browser/session",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/auth/login",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/auth/sucursal",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/agenda/arqueo?branchId=93000000-0000-4000-8000-000000000001&from=2026-11-13T05:00:00Z&to=2026-11-14T05:00:00Z",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/agenda/citas/d36e0726-aa13-456e-91c4-d0d33896e676/cobro",
+      "status": 400
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/agenda/citas/d36e0726-aa13-456e-91c4-d0d33896e676/cobro",
+      "status": 400
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/agenda/citas/d36e0726-aa13-456e-91c4-d0d33896e676/cobro",
+      "status": 400
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/agenda/citas/d36e0726-aa13-456e-91c4-d0d33896e676/cobro",
+      "status": 403
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/agenda/citas/d36e0726-aa13-456e-91c4-d0d33896e676/cobro",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/agenda/citas/d36e0726-aa13-456e-91c4-d0d33896e676/cobro",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/agenda/arqueo?branchId=93000000-0000-4000-8000-000000000001&from=2026-11-13T05:00:00Z&to=2026-11-14T05:00:00Z",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/agenda/citas/d36e0726-aa13-456e-91c4-d0d33896e676/cobro",
+      "status": 409
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/agenda/citas/d36e0726-aa13-456e-91c4-d0d33896e676/cobro",
+      "status": 409
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/agenda/citas/d36e0726-aa13-456e-91c4-d0d33896e676/cobro",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/agenda/arqueo?branchId=93000000-0000-4000-8000-000000000001&from=2026-11-13T05:00:00Z&to=2026-11-14T05:00:00Z",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/agenda/citas/d36e0726-aa13-456e-91c4-d0d33896e676/cobro",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v1/agenda/arqueo?branchId=93000000-0000-4000-8000-000000000001&from=2026-11-13T05:00:00Z&to=2026-11-14T05:00:00Z",
+      "status": 200
+    },
+    {
+      "method": "PUT",
+      "path": "/v1/agenda/citas/d36e0726-aa13-456e-91c4-d0d33896e676/cobro",
+      "status": 403
+    },
+    {
+      "method": "GET",
+      "path": "/v1/agenda/citas?branchId=93000000-0000-4000-8000-000000000001&from=2026-11-28T00:00:00Z&to=2026-11-29T00:00:00Z",
+      "status": 401
+    },
+    {
+      "method": "GET",
+      "path": "/v1/agenda/citas?branchId=93000000-0000-4000-8000-000000000001&from=2026-11-28T00:00:00Z&to=2026-11-29T00:00:00Z",
+      "status": 200
+    },
+    {
+      "method": "DELETE",
+      "path": "/auth/browser/session",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/auth/login",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/auth/sucursal",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v1/consultas",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/appointments",
+      "status": 200
+    },
+    {
+      "method": "DELETE",
+      "path": "/auth/browser/session",
+      "status": 200
+    }
+  ],
+  "browser": {
+    "mode": "Demostración con datos ficticios y voz simulada; API Java/SQL verificada por separado.",
+    "screenshots": [
+      "HP8-01-calendario-diario.png",
+      "HP8-02-calendario-semanal.png",
+      "HP8-03-modal-agendamiento-manual.png",
+      "HP8-04-revision-reserva-manual.png",
+      "HP8-05-cita-registrada.png",
+      "HP8-06-pagado-medio-de-pago.png",
+      "HP8-07-arqueo-por-medio-de-pago.png",
+      "HP8-08-voz-paso-1-nombres.png",
+      "HP8-09-voz-paso-2-apellidos.png",
+      "HP8-10-voz-paso-3-nacimiento.png",
+      "HP8-11-voz-paso-4-horario.png",
+      "HP8-12-revision-datos-capturados-por-voz.png",
+      "HP8-13-microfono-denegado-captura-manual.png",
+      "HP8-14-agenda-movil.png"
+    ],
+    "browserErrors": [],
+    "checks": [
+      "Día y semana",
+      "Click en horario abre modal",
+      "Revisión antes de guardar",
+      "Reserva manual",
+      "Pagado y medio de pago",
+      "Arqueo por fecha de registro",
+      "Nombres → Apellidos → Nacimiento → Horario",
+      "Fechas y horas en español",
+      "Reserva con paciente nuevo por voz",
+      "Permiso de micrófono denegado conserva entrada manual",
+      "Móvil sin desbordamiento"
+    ]
+  },
+  "database": "health_project_c1_docker_qa_20261112",
+  "sqlSchemaVersion": 19,
+  "tables": 43,
+  "procedures": 152,
+  "triggers": 34,
+  "runtimeTableAccess": "DENIED (229)",
+  "historyUpdates": "DENIED (51003), immutable",
+  "profilesJson": 241,
+  "migrationSha256": "6DDA200D857B80BE100BA4C9CC1254E3A98CB48CB6709063129907502850F9C4",
+  "screenshotHashes": {
+    "HP8-01-calendario-diario.png": "47a6bec27bd847775894639c02351dcdf3355aa14eac6922a1ce075e79e37cb2",
+    "HP8-02-calendario-semanal.png": "3aba6b62847f4be288d212aee87b55a2979cd1ecfe29c580115ef952481c7c79",
+    "HP8-03-modal-agendamiento-manual.png": "bbca04cc01455a761c7d6726137553a6f11190e07105ea4d8eff5f2e1cfec256",
+    "HP8-04-revision-reserva-manual.png": "7476d3daf7d949971cd4e8d30bc185f4335bf5a430f1b5ec9a2e7485c4fb7549",
+    "HP8-05-cita-registrada.png": "1364c3fda8ebdd3ef2c5062e9a96c7c5281ee54d976b3a9be8f29bfe99eb0c50",
+    "HP8-06-pagado-medio-de-pago.png": "9387a9970d68258262cf753f0d97ef83a6c33f8d9d7c74b78aaf1fe6a5421f99",
+    "HP8-07-arqueo-por-medio-de-pago.png": "6d9ce37c1d9e6bf4e8f5a4d55033aee2571907eb5cb268f322d03b57d3d23ea1",
+    "HP8-08-voz-paso-1-nombres.png": "7ae46da133c234d75c9df656a0fec96a22cdb12a3b5420c2e98ca46ee460ea8f",
+    "HP8-09-voz-paso-2-apellidos.png": "dc617f8c3594ba6bc2805dc8153f2cc6dde85e3c77e7244793fc4e5ba21ea793",
+    "HP8-10-voz-paso-3-nacimiento.png": "d553de8b5bbba86c3276d8ae46595b38d10aa1a706412888fbcc97d5a4ad838c",
+    "HP8-11-voz-paso-4-horario.png": "627376f1922cf3fb686791da9c40f931744479972dc890c797f306450f1a77fd",
+    "HP8-12-revision-datos-capturados-por-voz.png": "274c4ef24cbac1de82ee4cacff3ca523a78e3d462b953c855ebce7935b62a5a9",
+    "HP8-13-microfono-denegado-captura-manual.png": "aec7c8aa34dfdcab4f4ee8389bc66ff4b67a3e99459e5acd6ed7c631072b06ab",
+    "HP8-14-agenda-movil.png": "2ef9d43ff0836298b85855516c2a3250a6f7bce087e321c97067de8c670313a0"
+  }
+}
