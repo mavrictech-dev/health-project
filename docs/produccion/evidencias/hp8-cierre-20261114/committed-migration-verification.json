@@ -1,0 +1,83 @@
+{
+  "commit": "b29303ff8205e4d6a29e5662f252ef2b66445595",
+  "canonicalFiles": 19,
+  "allExact": true,
+  "migrations": [
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V10__jdbc_implicit_transaction_boundary.sql",
+      "sha256": "486862353a929d799ef54007b4db8a005f438d60502c0e8970297f7238690ca0"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V11__canonical_generated_uuids.sql",
+      "sha256": "f512c6d44917612b53850e29c320c85925a3c92936951bc1a5cd39807ad72ef1"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V12__independent_professional_conflict.sql",
+      "sha256": "516f1bd3583b51792a75045c90342fab8236c2d7830b154ef811939980876438"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V13__patient_links_read.sql",
+      "sha256": "667d8c0731557625c662285dc0e56c885b57e50e7afa5af63ebea2030e3acf51"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V14__patient_link_revision.sql",
+      "sha256": "418b1c1b864de9a6e7ac20e0f641630422a8d2451b3d42f7e9b97fb835b0ea9a"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V15__tenant_ruc.sql",
+      "sha256": "8b38567c4bb99559f013368119e1bc1d62cd477cde3685d4c91fa5ff4d3f7e3e"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V16__patient_antecedents_consultations.sql",
+      "sha256": "8baa87c6e3b9617792738f820fedd9e9783cf13c682ce63be75af352f548433f"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V17__clinical_catalog.sql",
+      "sha256": "a90ba275b1074fbc0c322839ded77fc182bc93435a3a1fca4389409698e16b99"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V18__consultation_appointment_status.sql",
+      "sha256": "af7b93a4f13f0a9e347bb449684620b60d04275cdd71797781e72e055f182ad5"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V19__agenda_collections.sql",
+      "sha256": "6dda200d857b80be100ba4c9cc1254e3a98cb48cb6709063129907502850f9c4"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V1__schema.sql",
+      "sha256": "ed1dcb3e6bd4f2ac1f9b11de9aa7d1053db0e71ca3610e21801cc60d51fe4a0a"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V2__catalog_seed.sql",
+      "sha256": "f672c8856ab6a150ae1967e85b8baf9df07f2615f4db8445263f11f322a1a885"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V3__identity_infrastructure_procedures.sql",
+      "sha256": "b4ebe83471354e2027315d95e1657afde72ad2c19c508e2ef764c2356f940ce0"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V4__saas_organization_procedures.sql",
+      "sha256": "9640cd1215f27eb6789e7b79c11291aa37bc89f61b2112f678d364c2112654dc"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V5__clinical_procedures.sql",
+      "sha256": "d2352d8fe6a6f8f84c62179f7a643027866a17229064b9b0ce3d96f60fcd9ece"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V6__operations_procedures.sql",
+      "sha256": "5b007234afce7a435fe9220111249e537a22b467ed922cfdb45c3bec69949458"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V7__audit_triggers.sql",
+      "sha256": "c5657fa2329ab306d93ddda99efce52f95285575c8437295666b35670dbadf1f"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V8__execution_permissions.sql",
+      "sha256": "63ca532ad7f16650dfd27891a7093ea4b0cee3c264ca35537d81a9100c067f4e"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V9__appointment_window_days.sql",
+      "sha256": "9a0c1f96b66adb7de833310a5bda1797cae9c0f39e7a2d435cde7eebb62edc04"
+    }
+  ]
+}

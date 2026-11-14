@@ -1,5 +1,10 @@
 # Orquestacion Codex de Health Project
 
+Paquete local de la revisión cerrada: fuentes b29303f,708archivos,ZIP34.842.200bytes,
+manifest y lectura completa verificados. HP8_RELEASE_20261114.json y
+SALIDA_PRODUCCION_20261114.md. Solo preparación; sin despliegue o aprobación del
+destino. Las actualizaciones de metadatos siguientes no cambian código probado.
+
 ## R1 aceptada: revisión cerrada y fuentes de salida preparadas, 2026-11-14
 
 Done msg_8dbdf027d49f, task_81906d33c50e/ctx_38f36396ce9b succeeded/settled;

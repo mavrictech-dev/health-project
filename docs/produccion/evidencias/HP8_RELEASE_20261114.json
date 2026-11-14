@@ -1,0 +1,23 @@
+{
+  "sourceCommit": "b29303ff8205e4d6a29e5662f252ef2b66445595",
+  "candidate": "health-hp8-rc-20261114",
+  "archive": "tmp/health-production-candidate-20261114/health-hp8-rc-20261114.zip",
+  "fileCount": 708,
+  "archiveBytes": 34842200,
+  "archiveSha256": "a689096e7d1686ffc493799e5a857bd4448ed0a79b7b23d5f5bfd2cd0688afab",
+  "manifestSha256": "7f5d3bc85090a288804046b10ebc44a62e121c753d98c8a058919ad89f5ca3da",
+  "roundtripVerified": true,
+  "deployed": false,
+  "productionApproved": false,
+  "state": "CANDIDATE_PREPARED_NOT_PRODUCTION_APPROVED",
+  "backendTests": 1162,
+  "frontendTests": 126,
+  "syntheticScreenshots": 42,
+  "imagesBuilt": false,
+  "sqlExecutedThisCut": false,
+  "targetValidated": false,
+  "scope": "local review and packaging only; external go-live gates open",
+  "mainPreserved": "0b24487c77055a081f6e76f0b18bc544ce4b1958",
+  "payloadFiles": 708,
+  "archiveEntries": 709
+}

@@ -5,8 +5,9 @@ Actualización 2026-11-14: REVISIÓN HP8 CERRADA LOCAL. R1 aceptada e integrada:
 propiasPASS. Perfil productivo35tests incluidos en1162; JARreal rechazaJWTausente,
 V1–V19 canónicas en checkouts true/false y Compose/nginx-t offlinePASS. D-87.BR;
 HP8-CIERRE-REVISION-20261114.md. P1FAILED/parcial conserva historial, superada porR1.
-Configuración preparada para empaquetar; condiciones de producción siguen
-ABIERTAS en SALIDA_PRODUCCION_20261114.md. Sin destino/SQLrealnuevo/despliegue.
+Candidato local generado y verificado desde b29303f:708archivos,ZIP34.842.200bytes,
+manifestSHA256/roundtrip exactos; HP8_RELEASE_20261114.json. Las condiciones de
+producción siguen ABIERTAS en SALIDA_PRODUCCION_20261114.md. Sin despliegue.
 
 Actualizacion 2026-11-13: por instruccion directa del usuario, el coordinador
 completa RUC y tarjetas4-7. Estado local VALIDADO, pendiente Somee. D-87.BN;
@@ -24,7 +25,7 @@ a los intentos anteriores, no a esta nueva validacion.
 | HP8 DEV-AGENDA | VALIDADA LOCAL; SOMEE PENDIENTE | Dia/semana, manual/voz guiada, cobros y arqueo; HP8-AGENDA-20261113.md;1124Java/120frontend/40HTTP/14capturas |
 | HP8.QA.P1 | FAILED/PARCIAL HISTÓRICA; SUPERADA POR R1 | Informe/capturas preservados; falloV13 resuelto sin cambiar pin o SQL |
 | HP8.CIERRE.R1 | VALIDADA LOCAL E INTEGRADA | task_81906d33c50e/ctx_38f36396ce9b; supervisor1162/126/42capturas y36SHA/171artefactos; HP8_CIERRE_20261114.json |
-| REL-01.PREP | CONFIGURACIÓN VALIDADA LOCAL; EMPAQUETADO SIGUIENTE | SALIDA_PRODUCCION_20261114.md; destino/imágenes/recuperación/piloto abiertos; sin despliegue |
+| REL-01.PREP | CANDIDATO PREPARADO Y VERIFICADO LOCAL | Fuenteb29303f/708archivos/ZIP ymanifestSHA256; HP8_RELEASE_20261114.json; destino/imágenes/recuperación/piloto abiertos |
 
 Actualizacion de cuentas 2026-11-09 (D-82): arquitecto mendozadeafabisa@gmail.com,
 programador recuperapiura@gmail.com. Ambos/status nuevos verificados; cuotas

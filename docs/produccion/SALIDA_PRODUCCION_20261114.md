@@ -1,7 +1,7 @@
 # Preparación de salida — Health Project
 
-Fecha: 14 de noviembre de 2026. Estado: FUENTES REVISADAS Y CONFIGURACIÓN
-PREPARADA; empaquetado local por generar, producción NO autorizada.
+Fecha: 14 de noviembre de 2026. Estado: CANDIDATO LOCAL PREPARADO Y VERIFICADO;
+producción NO autorizada y condiciones del destino pendientes.
 Este documento define la salida de RUC y HP4–HP8; no convierte el
 backlog clínico completo ni los 241 perfiles en funcionalidades habilitadas.
 
@@ -15,8 +15,26 @@ ni sustituye contabilidad, conciliación bancaria o comprobantes fiscales.
 
 Código base: 8a6a6ae, rama health/production-wave0. P1 parcial se conserva como
 fallida; el nuevo cierre R1 está aceptado e integrado con revisión independiente.
-Ver HP8-CIERRE-R1-20261114.md. El SHA final y las huellas del paquete se fijarán
-después de integrar y verificar; un SHA base no identifica por sí solo el candidato.
+Ver HP8-CIERRE-R1-20261114.md. El candidato se generó del commit de fuentes
+revisadas `b29303ff8205e4d6a29e5662f252ef2b66445595`; su recibo registra las
+huellas, sin depender del SHA base anterior.
+
+## Paquete concreto
+
+Archivo local, excluido de Git:
+`tmp/health-production-candidate-20261114/health-hp8-rc-20261114.zip`.
+34.842.200 bytes; 708 archivos con manifest individual SHA256 y verificación de
+lectura completa del ZIP. Incluye JAR probado y fuentes backend, frontend runtime,
+SQL canónico V1–V19, templates productivos y procedimiento de salida. No contiene
+credenciales, almacenes de secretos, node_modules, backups/datos SQL u out-demo.
+
+- SHA256 ZIP: `a689096e7d1686ffc493799e5a857bd4448ed0a79b7b23d5f5bfd2cd0688afab`.
+- SHA256 manifest: `7f5d3bc85090a288804046b10ebc44a62e121c753d98c8a058919ad89f5ca3da`.
+- Recibo versionado: [HP8_RELEASE_20261114.json](evidencias/HP8_RELEASE_20261114.json).
+
+El ZIP conserva los documentos del commit fuente, anteriores al recibo de
+empaquetado; manifest y recibo fijan el resultado final. Las imágenes no se han
+construido ni seleccionado y no se ha validado un destino productivo.
 
 ## Topología preparada
 
@@ -46,7 +64,7 @@ la base exclusiva aún requieren confirmación del propietario.
 | --- | --- | --- |
 | Cierre HP8 | Diff aprobado, Maven clean verify1162/0, frontend126/check/build y 42capturas propias | Supervisor + programador; VALIDADA LOCAL |
 | Reproducibilidad V1–V19 | SHA canónica preservada, índices y checkouts true/false; SQL y pins sin alterar | Supervisor + programador; VALIDADA LOCAL |
-| Paquete de aplicación | JAR, frontend runtime, configuración y SQL V1–V19 con manifest SHA256 y revisión de secretos | Supervisor; FUENTES ACEPTADAS, EMPAQUETADO SIGUIENTE |
+| Paquete de aplicación | 708archivos/ZIP34.842.200bytes; manifest SHA256/roundtrip exactos; HP8_RELEASE_20261114.json | Supervisor; PREPARADO Y VERIFICADO LOCAL |
 | Destino exclusivo | Host Java21/Docker, dominio base y subdominios, SQL Server y red/almacenamiento identificados | Propietario/operación; PENDIENTE |
 | SQL instalado | Motor/compatibilidad, versión y huellas, permisos EXECUTE-only y seed241; sin reaplicar a ciegas | Migrador + QA; validación LOCAL previa, destino PENDIENTE |
 | HTTPS y JDBC | Certificados válidos del destino, cookies Secure, CA/hostname negativos, aislamiento de proxy | Operación + QA; destino PENDIENTE |

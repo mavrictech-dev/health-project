@@ -1,0 +1,80 @@
+"""Build a local reviewed candidate; never starts a service or reads credentials."""
+from pathlib import Path
+import hashlib
+import json
+import subprocess
+import zipfile
+
+root = Path(__file__).resolve().parents[2]
+output = root / 'tmp/health-production-candidate-20261114'
+assert not output.exists(), 'Candidate already exists; preserve it'
+assert subprocess.check_output(['git', 'branch', '--show-current'], cwd=root, text=True).strip() == 'health/production-wave0'
+assert not subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], cwd=root), 'Commit reviewed sources first'
+revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root, text=True).strip()
+tracked = subprocess.check_output(['git', 'ls-files', '-z'], cwd=root).decode().split('\0')
+selected = set()
+for rel in tracked:
+    if rel.startswith('backend/') and '/target/' not in rel:
+        selected.add(rel)
+for rel in ['.gitattributes', 'README.md', 'compose.production.yaml', 'deploy/production/nginx.conf.template',
+            'deploy/production/production.env.example', 'deploy/production/README.md',
+            'docs/produccion/SALIDA_PRODUCCION_20261114.md',
+            'docs/produccion/HP8-CIERRE-REVISION-20261114.md']:
+    assert (root / rel).is_file(), rel
+    selected.add(rel)
+jar = root / 'backend/target/health-project-0.1.0.jar'
+assert jar.is_file()
+selected.add(jar.relative_to(root).as_posix())
+assert (root / 'frontend/out/index.html').is_file()
+for item in (root / 'frontend/out').rglob('*'):
+    assert not item.is_symlink(), item
+    if item.is_file():
+        selected.add(item.relative_to(root).as_posix())
+
+sha = lambda raw: hashlib.sha256(raw).hexdigest()
+with zipfile.ZipFile(jar) as app:
+    for source in (root / 'backend/src/main/resources/db/sqlserver').glob('V*__*.sql'):
+        assert app.read('BOOT-INF/classes/db/sqlserver/' + source.name) == source.read_bytes(), source.name
+    assert app.read('META-INF/spring.factories') == (root / 'backend/src/main/resources/META-INF/spring.factories').read_bytes()
+    assert app.read('BOOT-INF/classes/application-production.yml') == (root / 'backend/src/main/resources/application-production.yml').read_bytes()
+    assert app.read('BOOT-INF/classes/com/mavric/healthsqlserver/ProductionProfileGuard.class')
+
+files = []
+for rel in sorted(selected):
+    path = root / rel
+    assert path.is_file() and not path.is_symlink(), rel
+    assert path.resolve().is_relative_to(root.resolve()), rel
+    assert '/out-demo/' not in rel and '/tmp/' not in rel and not rel.endswith(('.dpapi', '.log')), rel
+    assert path.name != '.env' and path.name != 'auth.json', rel
+    if path.name.startswith('.env'):
+        assert path.name == '.env.example', rel
+    raw = path.read_bytes()
+    files.append({'path': rel, 'bytes': len(raw), 'sha256': sha(raw)})
+manifest = {
+    'candidate': 'health-hp8-rc-20261114', 'sourceCommit': revision,
+    'state': 'PREPARED_NOT_DEPLOYMENT_AUTHORIZED', 'files': files,
+    'evidenceRepository': 'https://github.com/mavrictech-dev/health-project/tree/' + revision + '/docs/produccion',
+    'contains': ['reviewed backend source and tested JAR', 'runtime static frontend',
+                 'canonical SQL sources', 'production templates and runbook'],
+    'excludes': ['credentials and secret stores', 'demo export', 'SQL backups and data', 'node_modules'],
+    'databaseExecutedByPackager': False, 'imagesBuilt': False, 'targetValidated': False, 'deployed': False,
+}
+output.mkdir()
+manifest_raw = (json.dumps(manifest, ensure_ascii=False, indent=2) + '\n').encode()
+(output / 'manifest.json').write_bytes(manifest_raw)
+archive = output / 'health-hp8-rc-20261114.zip'
+with zipfile.ZipFile(archive, 'w', zipfile.ZIP_DEFLATED, compresslevel=6) as package:
+    package.writestr('manifest.json', manifest_raw)
+    for file in files:
+        package.write(root / file['path'], file['path'])
+with zipfile.ZipFile(archive) as package:
+    assert set(package.namelist()) == {'manifest.json', *(f['path'] for f in files)}
+    for file in files:
+        assert sha(package.read(file['path'])) == file['sha256'], file['path']
+receipt = {'sourceCommit': revision, 'candidate': manifest['candidate'],
+           'archive': archive.relative_to(root).as_posix(), 'fileCount': len(files),
+           'archiveBytes': archive.stat().st_size, 'archiveSha256': sha(archive.read_bytes()),
+           'manifestSha256': sha(manifest_raw), 'roundtripVerified': True,
+           'deployed': False, 'productionApproved': False}
+(output / 'receipt.json').write_text(json.dumps(receipt, indent=2) + '\n', encoding='utf-8')
+print(json.dumps(receipt, indent=2))
