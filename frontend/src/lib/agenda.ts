@@ -15,7 +15,8 @@ export function zonedInstant(date:string,time:string,timezone:string){
  const target=Date.parse(date+'T'+time+':00Z');let value=target;
  for(let i=0;i<4;i++){const p=zonedParts(new Date(value),timezone),difference=target-Date.parse(p.date+'T'+p.time+':00Z');value+=difference;if(difference===0)break;}
  const p=zonedParts(new Date(value),timezone);if(p.date!==date||p.time!==time)throw Error('Ese horario no existe en la zona horaria del negocio.');
- for(const shift of [-3600000,3600000]){const other=zonedParts(new Date(value+shift),timezone);if(other.date===date&&other.time===time)throw Error('Ese horario es ambiguo por un cambio de hora. Elige otro horario.');}
+ // Compare the offsets on both sides of a transition: some clocks move by 30 minutes or two hours.
+ for(const shift of [-86400000,86400000]){const probe=value+shift,local=zonedParts(new Date(probe),timezone),offset=Date.parse(local.date+'T'+local.time+':00Z')-probe,candidate=target-offset,other=zonedParts(new Date(candidate),timezone);if(candidate!==value&&other.date===date&&other.time===time)throw Error('Ese horario es ambiguo por un cambio de hora. Elige otro horario.');}
  return new Date(value).toISOString();
 }
 export function calendarWindow(anchor:string,mode:'day'|'week',timezone:string){const weekday=(new Date(anchor+'T12:00:00Z').getUTCDay()+6)%7,start=mode==='week'?addCalendarDays(anchor,-weekday):anchor,days=mode==='week'?7:1;return {dates:Array.from({length:days},(_,i)=>addCalendarDays(start,i)),from:zonedInstant(start,'00:00',timezone),to:zonedInstant(addCalendarDays(start,days),'00:00',timezone)};}

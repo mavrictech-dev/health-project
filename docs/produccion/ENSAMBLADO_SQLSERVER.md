@@ -1,5 +1,13 @@
 # Ensamblado SQL Server: contrato y estado
 
+## Referencia actual: 14 de noviembre de 2026
+
+La composición runtime y pruebas SQL/HTTP locales avanzaron hasta RUC/HP4–HP8;
+consultar HP8-AGENDA-20261113.md, ENTREGA_TARJETAS_4_7_20261113.md y
+HP8-CIERRE-REVISION-20261114.md. La salida productiva se prepara en
+SALIDA_PRODUCCION_20261114.md; no está desplegada ni aprobada. Las factories,
+arranque y permisos descritos como faltantes abajo son hallazgos históricos.
+
 ## Corte vigente: 6 de noviembre de 2026
 
 Consultar [el informe de avances y pendientes](INFORME_AVANCE_2026-11-06.md).

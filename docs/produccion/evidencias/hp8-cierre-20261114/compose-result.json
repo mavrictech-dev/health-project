@@ -1,0 +1,12 @@
+{
+  "exit": 0,
+  "composeSha256": "5073d1ed92fb8a7917c79ff3ccc9a9d389d9ecacd4c814732215714c28fa4e8e",
+  "syntheticConfiguration": true,
+  "serviceCount": 2,
+  "backendPortsPublished": false,
+  "gatewayLoopbackOnly": true,
+  "secretValuesInEnvironment": false,
+  "runtimeOnly": true,
+  "sqlExecuted": false,
+  "dockerEngineStarted": false
+}

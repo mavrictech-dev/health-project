@@ -1,5 +1,20 @@
 # Revisiones del supervisor
 
+## HP8.CIERRE.R1 aceptada e integrada, 2026-11-14
+
+Done msg_8dbdf027d49f revisado:36fuentes/171artefactos exactos; ochoP1 preservadas
+y ochoB integradas. Revisión funcional/diff y nueva comprobación propia:
+1162Maven/126frontend/check/builds,42capturas sintéticas,6gruposHTTPsimulado,
+RUC/HP4–HP7 y voz/manual PASS. Migraciones19 canónicas/pins intactos e índices/
+checkouts independientes true/false exactos. Perfil productivo validado por
+35tests incluidos, factory automática y JARreal rechazaJWTausente. Compose y
+nginx-t propiosPASS; sin motorSQL, contenedores o proxyTLS reales en este corte.
+
+Se acepta código y preparación LOCAL, no salida/piloto. P1failed conserva
+historial, resuelto mediante R1; fallos anteriores documentados, no borrados.
+Detalle: HP8-CIERRE-REVISION-20261114.md, evidencia HP8_CIERRE_20261114.json.
+Paquete/condiciones: SALIDA_PRODUCCION_20261114.md. Sin main/despliegue/Somee.
+
 ## HP8 implementada y verificada localmente, 2026-11-13
 
 D-87.BO. Revision de calendario/zonahoraria, formularios, captura por voz y

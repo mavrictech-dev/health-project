@@ -1,5 +1,15 @@
 # Correccion de persistencia a SQL Server
 
+## Corte vigente: 14 de noviembre de 2026
+
+Runtime SQL Server compuesto y acceso por SP validados localmente en las entregas
+documentadas: RUC/HP4–HP7 y HP8 (13nov). V1–V19, 43tablas/152SP/34triggers y
+241perfiles corresponden a esa evidencia de motor, no a una comprobación nueva.
+Cierre HP8 y preparación productiva en HP8-CIERRE-REVISION-20261114.md y
+SALIDA_PRODUCCION_20261114.md. MySQL/Compose heredados no son el motor objetivo;
+el destino productivo aún no está aprobado. Se conserva el diagnóstico inicial
+siguiente como historial fechado, incluidas brechas que ya fueron resueltas.
+
 Actualizacion 2026-11-12 (D-87.AR): usuario habilito Docker y autoriza continuar.
 Dockerdesktop-linux operativo; imagen oficialSQL2022 descargada por digest.
 Se prepara entorno sintetico NUEVO separado segun PAC-01-C1-DOCKER-P1.md.

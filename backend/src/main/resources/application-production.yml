@@ -1,0 +1,60 @@
+# Runtime only. Setup/migrations use a separate reviewed process and principal.
+spring:
+  config:
+    import: "configtree:${HEALTH_PRODUCTION_SECRETS_DIR:/run/secrets/}"
+  main:
+    allow-bean-definition-overriding: false
+    lazy-initialization: false
+  datasource:
+    url: ''
+    username: ''
+    password: ''
+  flyway:
+    enabled: false
+    url: ''
+    user: ''
+    password: ''
+  sql:
+    init:
+      mode: never
+health:
+  sqlserver:
+    mode: runtime
+    jobs:
+      enabled: false
+    runtime:
+      server-name: ${HEALTH_SQLSERVER_SERVER}
+      port: ${HEALTH_SQLSERVER_PORT:1433}
+      database-name: ${HEALTH_SQLSERVER_DATABASE}
+      username: ${HEALTH_SQLSERVER_RUNTIME_USER}
+      # password is the health.sqlserver.runtime.password config-tree file.
+      trust-server-certificate: false
+  bootstrap:
+    email: ''
+    password: ''
+  base-domain: ${HEALTH_BASE_DOMAIN}
+  public-origin: ${HEALTH_PUBLIC_ORIGIN}
+  session-hours: 8
+server:
+  address: 0.0.0.0
+  port: 8080
+  forward-headers-strategy: none
+  error:
+    include-message: never
+    include-stacktrace: never
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      group:
+        liveness:
+          include: [livenessState]
+        readiness:
+          include: [readinessState, db]
+      show-details: never
+      show-components: never

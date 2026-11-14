@@ -1,0 +1,170 @@
+[
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-ui/manual-fallback-mobile.png",
+    "sha256": "d8ce25bdb7936b1490cf077d20d59345a466807b83d92ccbf7631dba90619098"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-ui/manual-fallback.png",
+    "sha256": "9d59c0d2f0a899cfa4d4dfb2726328624fa10a31dd4839f2c59c101c708a219f"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-ui/selected-patient-filtered-mobile.png",
+    "sha256": "4d9a54fde23547abf1df1178161d01ebc245d06b36afc9c470dd85091b82e00c"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-ui/selected-patient-filtered.png",
+    "sha256": "63d856163322bf22be2101975115951320e672e7718bee3a6e71a2d0f2a9a7cd"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-ui/voice-denied-after-names.png",
+    "sha256": "a5b99880ce65abe403fc594c78d02def239216b963290e1234a0fe49e1014904"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-runtime-http/booking-lost-response.png",
+    "sha256": "93932596b0979c7b46dee8e6d814174f3d9c7c6c715f2adbe7f6df08afcbd753"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-runtime-http/collection-lost-response.png",
+    "sha256": "d81e263f1c75e17113b2cd9d0cf6875694ec45f9a3103db0addac974a0184869"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-runtime-http/collection-stale-revision.png",
+    "sha256": "172682ca628cfde31e9adca2c01e7ea2a1201c730f698c9c140a786450c1a5f5"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-runtime-http/patient-unknown-response.png",
+    "sha256": "b99bd3c6929a20edcdfd2ba380004a36e2a2f5e635e4cb23aa1f646006bb33a2"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-runtime-http/runtime-agenda-mobile.png",
+    "sha256": "002addfebafe2ae0438c350c95008e36ddbac5a3e48c8ff45c9f89662459e27e"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-agenda/HP8-01-calendario-diario.png",
+    "sha256": "bf9d86e8b70630861256fcf60c77e795dc2a4693c408287c1cf09bdea2c8412c"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-agenda/HP8-02-calendario-semanal.png",
+    "sha256": "05127d26b27bb43a34f8373172a7efb7701bbfc2e0b182b2bd8a297492db2b9a"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-agenda/HP8-03-modal-agendamiento-manual.png",
+    "sha256": "4be91c49d4b82e73202f5756411127ab1d5d4e48f285cda90595a68dfed3a1c7"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-agenda/HP8-04-revision-reserva-manual.png",
+    "sha256": "3217366a1ccf9f023db631f68b8e8cbf18db0b49758e956486613c141764d66f"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-agenda/HP8-05-cita-registrada.png",
+    "sha256": "84645f5ddbacea8979e9b2a530037f8200e58edae43d92b43c74a1909bbda0ff"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-agenda/HP8-06-pagado-medio-de-pago.png",
+    "sha256": "b3ce97f3a32839fdbcb6011c2ac8029ce13a9a2a1f26db4cbc1c21ea8b998f21"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-agenda/HP8-07-arqueo-por-medio-de-pago.png",
+    "sha256": "2ff12a298a6581cdb900a4a3824dd0510e8b81782b4f6b0058dcd60b4f655032"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-agenda/HP8-08-voz-paso-1-nombres.png",
+    "sha256": "4abd8f3f37a7f21c9e8a2e6441fc3bf59e546a071b287981d2304159232b169b"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-agenda/HP8-09-voz-paso-2-apellidos.png",
+    "sha256": "c75e0125115b317e425b4373f6b4488767a932cbe5b0a460d17fd57b9bda90b4"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-agenda/HP8-10-voz-paso-3-nacimiento.png",
+    "sha256": "6181a1b5250a1fa70e32406d8e306efd64b8d5c7ef5fd8f4fd29fac0e096565c"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-agenda/HP8-11-voz-paso-4-horario.png",
+    "sha256": "348f897bb36b8bd4184c53ec1ce1169be1785469e9f070b27932c242ab2555d3"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-agenda/HP8-12-revision-datos-capturados-por-voz.png",
+    "sha256": "919dc314ba584d615d6246fbebb56bdb6844921e2e91ba817011b9b75119611f"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-agenda/HP8-13-microfono-denegado-captura-manual.png",
+    "sha256": "a87ebfdbc333a9048e9fc606c30e11c195d2ce17898f889b9cdf19fc773a7b13"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/independent-agenda/HP8-14-agenda-movil.png",
+    "sha256": "1f8aa5149185d0b722a41a0df28e6c629b66230aeb3f6c8a8af7254d4d9ec032"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP-acceso-01-ruc-correo-contrasena.png",
+    "sha256": "29e30e61385d4093c21497db2ccc4b7ffa27849dd5f4298cbd822d5f54a07aba"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP-acceso-02-seleccion-sucursal.png",
+    "sha256": "c58ac6a3444efb5f47547bb3807d0dcf40a72958949df8742a5d78b7d74b0695"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP-ruc-03-registro-negocio.png",
+    "sha256": "35e2a4768628012cc02765ccb5cc58e438037b1eacaccaafa2612445879dce55"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP-ruc-04-alta-tenant-saas.png",
+    "sha256": "8be297d13db42fd22650ab80219fbd33c9dad8dfaa23dc5fe15327cf50bfdefc"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP-ruc-05-edicion-tenant-ruc.png",
+    "sha256": "ad731d117fb2b360ef7381ccbd2c8378d00b0088f2e2d882e8b95b35a099838d"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP4-catalogo-01-tarifario-servicios-convenios.png",
+    "sha256": "5a1e295116bf4cf2dc8772c43357187341f164c02db9a1ba0683704c01e0ac7c"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP4-catalogo-02-registro-servicio.png",
+    "sha256": "6c3c468518fbc81c10b3fa3a5fba64713736265a728e35941eee67021a716bbe"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP4-catalogo-03-registro-convenio.png",
+    "sha256": "fe11728cbc5d54fbe95fef94d7310eb4e576f4f287d4aa4f0429fc8b57abd728"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP5-pacientes-01-directorio.png",
+    "sha256": "4875bc167963ce15024c35694e52eed1f21a85ee6d9e5c7da2bf889bc8518193"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP5-pacientes-02-filiacion-busqueda-dni.png",
+    "sha256": "8a569d904283bd2fa8c25058cdc3756b73ca8a1214de60c9afbc8707f472fde3"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP5-pacientes-03-antecedentes-versiones-autor-fecha.png",
+    "sha256": "abd513562a01b4afef0c5bd53daabd560071f79d48e58b10f249021fa785c909"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP5-pacientes-04-nueva-version-antecedentes.png",
+    "sha256": "6da845273ed9d9c89986ef4cb66d532cfeda6d3c7f64ac0d656a72b0237ca689"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP6-historia-texto-01-formulario-estados.png",
+    "sha256": "977bb47684ffa0819167c550964f91c0bfb596b257575f605430831ad17059c6"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP6-historia-texto-02-consulta-guardada.png",
+    "sha256": "c29bf9f64920b97086eea51b3bf70c6f478b51fc0ab86dacdc93a070cac46a85"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP6-historia-texto-03-movil.png",
+    "sha256": "fcb2fa2f4cd02abb8ed6f2b09457ac0787e970efcd8d596930aa929bd84422a6"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP7-dictado-01-campo-activo-texto-agregado.png",
+    "sha256": "a4c8130737cbb12ff9fbe0a165df8dc4561d0488f0d377dcd30eea1f1c6fc28d"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP7-dictado-02-permiso-denegado-escritura-manual.png",
+    "sha256": "e018ed1982848466e7871354fa4ec56bcb38613aa3ee7f8e51df3a16aabdf1d3"
+  },
+  {
+    "path": "docs/produccion/evidencias/hp8-cierre-20261114/cards-regression-final/HP7-dictado-03-navegador-sin-voz-entrada-manual.png",
+    "sha256": "7c49c8d33f008f0e4cfeb8b982fa3a2774ba9f9a17543720cd61de17b8edb35a"
+  }
+]

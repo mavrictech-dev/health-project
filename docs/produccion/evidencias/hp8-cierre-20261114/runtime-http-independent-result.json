@@ -1,0 +1,5 @@
+{
+    "command":  "runtime-http-qa.cjs port18429",
+    "exit":  0,
+    "mode":  "runtime frontend intercepted synthetic HTTP"
+}

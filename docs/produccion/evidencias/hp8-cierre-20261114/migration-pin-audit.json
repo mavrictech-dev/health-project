@@ -1,0 +1,86 @@
+[
+  {
+    "version": 1,
+    "supervisorPinned": true,
+    "workerPinned": false,
+    "gitPinned": true
+  },
+  {
+    "version": 2,
+    "supervisorPinned": true,
+    "workerPinned": false,
+    "gitPinned": true
+  },
+  {
+    "version": 3,
+    "supervisorPinned": true,
+    "workerPinned": false,
+    "gitPinned": true
+  },
+  {
+    "version": 4,
+    "supervisorPinned": true,
+    "workerPinned": false,
+    "gitPinned": true
+  },
+  {
+    "version": 5,
+    "supervisorPinned": true,
+    "workerPinned": false,
+    "gitPinned": true
+  },
+  {
+    "version": 6,
+    "supervisorPinned": true,
+    "workerPinned": true,
+    "gitPinned": false
+  },
+  {
+    "version": 7,
+    "supervisorPinned": true,
+    "workerPinned": true,
+    "gitPinned": false
+  },
+  {
+    "version": 8,
+    "supervisorPinned": true,
+    "workerPinned": true,
+    "gitPinned": false
+  },
+  {
+    "version": 9,
+    "supervisorPinned": true,
+    "workerPinned": true,
+    "gitPinned": false
+  },
+  {
+    "version": 10,
+    "supervisorPinned": true,
+    "workerPinned": false,
+    "gitPinned": true
+  },
+  {
+    "version": 11,
+    "supervisorPinned": true,
+    "workerPinned": true,
+    "gitPinned": false
+  },
+  {
+    "version": 12,
+    "supervisorPinned": true,
+    "workerPinned": true,
+    "gitPinned": false
+  },
+  {
+    "version": 13,
+    "supervisorPinned": true,
+    "workerPinned": true,
+    "gitPinned": false
+  },
+  {
+    "version": 14,
+    "supervisorPinned": true,
+    "workerPinned": true,
+    "gitPinned": true
+  }
+]

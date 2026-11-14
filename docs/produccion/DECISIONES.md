@@ -1,5 +1,65 @@
 # Decisiones y contratos de integracion
 
+## D-87.BR: cierre revisado HP8 y configuración productiva aceptados localmente, 2026-11-14
+
+R1 task_81906d33c50e/ctx_38f36396ce9b succeeded/settled, done msg_8dbdf027d49f.
+Supervisor verificó36SHA de fuentes y171artefactos sin discrepancias; integró
+ocho fuentes B exactas y conserva ochoP1. Fábricas SpringBoot4.1.1 contrastadas
+con jar instalado/bytecode y documentación oficial; ampliación META-INF autorizada
+por replyc61fb49ee081. V1–V19 preservan SQL/pins/BOM originales; protección-text
+y dos índices/checkouts independientes PASS19x2blobs+archivos. No mutación SQL.
+
+Supervisor cleanverify1162/0fallos/0errores/0omitidos, frontend126/check/builds,
+42capturas nuevas/recorridos sintéticos y selección visual propia PASS. Perfil35
+tests reales de ConfigData/factory con driver simulado/sin conexión; JAR real
+sinJWT rechaza HP_PRODUCTION_JWT antes de servidor. Compose config y nginx-t
+propios PASS; nginxWindows solo sintaxis, Dockerdaemon apagado y preservado.
+Fallos previos/harness y fuente SQL ausente se conservan resueltos en informe;
+no se cambian expectativas para aparentar PASS. P1failed permanece histórica.
+
+Revisión CERRADA LOCAL; configuración de salida aceptada para empaquetado.
+HP8-CIERRE-REVISION-20261114.md/HP8_CIERRE_20261114.json y
+SALIDA_PRODUCCION_20261114.md fijan evidencia/condiciones. No aprobación de
+producción: faltan imágenes Linux/destino exclusivo/grants/DNS-TLS/red,
+recuperación/reversión/carga/seguridad y aceptación clínica/piloto.
+No Somee/AgendlyCitas, main, datos reales o despliegue. Supervisor puede publicar
+solo fuentes revisadas en health/production-wave0 conforme excepción vigente.
+
+## D-87.BQ: cierre HP8 y preparación productiva, 2026-11-14
+
+Usuario ordena cerrar revisión y preparar salida a producción. Se conserva la
+prohibición de desplegar/main/datos reales. P1 task_03a2c125e1f5 sigue failed:
+su informe msg_ece3df8dee17 y 166 artefactos fueron contrastados sin discrepancias;
+ocho fuentes congeladas e integradas provisionalmente para revisión independiente.
+Supervisor Maven clean verify1127/0 y frontend126/checkPASS; builds/visual en curso.
+
+V13 del supervisor conserva SHA667D8C...ACF51; el blob Git había normalizado un
+newline y el checkout Windows todos. Se autoriza exclusivamente restaurar bytes
+canónicos y proteger con -text, sin cambiar SQL aplicado, pins o ejecutar motor.
+R1 task_81906d33c50e/ctx_38f36396ce9b tiene fases A reproducibilidad y B configuración
+productiva SQL Server separada del Compose MySQL histórico. Fuente/ownership y
+aceptación: HP8-CIERRE-R1-20261114.md. FaseA workerPASS1127/126/builds y checkout
+aislado autocrlftrue/false. No equivale aún a aceptación final de B o del destino.
+
+Terminal anterior ausente y proceso de sesión inexistente; se recuperó la misma
+sesión01a1d797-f52b-70e2-90bc-66a6b1a23e51 en terminal nueva9914da39. IdentityOnly
+ambos roles conformes; /status efectivo recuperapiura con66%5h/65%weekly, launcher
+por proceso/--no-daemon. No se cambia cuenta global o cierra una sesión ajena.
+Msg_1fe3969aaaa7 aprobado: guard de arranque productivo adicional único; no se
+modifican selector, Settings, BranchTokens o QA. Errores redactados y negativos
+reales de configuración sin conexión SQL. Condiciones de salida/reversión en
+SALIDA_PRODUCCION_20261114.md; destino, recuperación y piloto aún pendientes.
+
+## D-87.BP: retorno al programador para revision HP8, 2026-11-13
+
+El usuario pide delegar al programador. Identidad efectiva recuperapiura verificada
+con /status y cuota disponible; cuenta por proceso/--no-daemon. Se prepara nuevo
+paquete HP8.QA.P1 desde8a6a6ae en workspace hijo Orca separado para evitar colision
+con el trabajo previo sin commit. Revision de requisitos/seguridad/UI y correcciones
+acotadas; contrato HP8-PROGRAMADOR-REVISION-20261113.md. No se reescribe resultado
+RUC abandonado ni se invalida la entrega local existente. Supervisor revisa antes
+de integrar; Somee sigue pendiente y AgendlyCitas excluida.
+
 ## D-87.BO: HP8 agenda y cobros manuales, 2026-11-13
 
 El usuario agrega HP8 y ordena implementarla y entregar las tareas. Continua

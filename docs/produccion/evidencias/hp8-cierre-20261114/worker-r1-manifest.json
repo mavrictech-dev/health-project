@@ -1,0 +1,816 @@
+{
+  "taskId": "task_81906d33c50e",
+  "dispatchId": "ctx_38f36396ce9b",
+  "base": "8a6a6aeab6c40a3ec114e0175289b75e7a3022e4",
+  "branch": "Maczz09/health-programmer-hp8-review",
+  "root": "C:\\Users\\maxmo\\orca\\workspaces\\Health Project\\health-programmer-hp8-review",
+  "outcome": "succeeded",
+  "acceptance": "PREPARED_FOR_SUPERVISOR_REVIEW_NOT_PRODUCTION_APPROVAL",
+  "phaseA": {
+    "phase": "A",
+    "status": "PASS",
+    "exits": {
+      "phase-a-maven": 0,
+      "phase-a-frontend-test": 0,
+      "phase-a-frontend-check": 0,
+      "phase-a-build-production": 0,
+      "phase-a-build-demo": 0
+    },
+    "backendTests": {
+      "tests": 1127,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "frontendTests": 126,
+    "p1Preserved": {
+      "backend/src/test/java/com/mavric/healthcards/AgendaControllerTest.java": "778e215a784e23a13c29032237601cc5a23d2d992ce4b168fbb64c4642e375d9",
+      "frontend/scripts/agenda-trello-qa.cjs": "2dd1832b0f30f1d596bf2a8c73f2b8715aba491279feaf45363ba9d8f444d7b3",
+      "frontend/src/components/agenda-voice.tsx": "73095b38e01ea9b8bf109e02bf0ccc5aa0cd0b3ff64624fe1358eedb1daee10c",
+      "frontend/src/components/runtime-agenda.tsx": "5e09b24350a2530a8acd81f79b90f69869f7a997ebeccb6660ba8501c052e89b",
+      "frontend/src/lib/agenda.ts": "937b20663787b43abb677abd3626c4091f94ed194ee78bedaf96c89af97904e2",
+      "frontend/src/mocks/agenda-api.ts": "6ed3855e7dafeb71b862f1679bfcfd6c73b224f6e422240b73d00c0065adc3cf",
+      "frontend/tests/agenda-api-transport.test.ts": "b6fbde8c629470854d3db45d40c55a613331ecef9da30fe2898210096c6e7d4c",
+      "frontend/tests/agenda.test.ts": "36d23b1651dd0a7aaaf7cbaeed9be3f1d61f71099b25069c81116c68abfee009"
+    },
+    "canonicalV13Sha256": "667d8c0731557625c662285dc0e56c885b57e50e7afa5af63ebea2030e3acf51",
+    "restorationEvidence": "phase-a-restoration.json",
+    "sqlExecuted": false
+  },
+  "phaseAAddendum": {
+    "phase": "A_ADDENDUM",
+    "status": "PASS",
+    "mavenExit": 0,
+    "backend": {
+      "tests": 1127,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "migrationSources": 19,
+    "autocrlfCheckouts": 2,
+    "p1Preserved": true,
+    "frontendEvidenceRetained": "phase-a-summary.json",
+    "sqlExecuted": false
+  },
+  "phaseBBackend": {
+    "status": "PASS",
+    "backendFinal": {
+      "tests": 1162,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "productionProfileTests": 35,
+    "mavenExit": 0,
+    "jarSha256": "5884fbe58b671a338433a1946353a0c2dca2a024cd3956aa2abf98c1e8534055",
+    "jarCanonicalMigrationMatches": {
+      "backend/src/main/resources/db/sqlserver/V1__schema.sql": true,
+      "backend/src/main/resources/db/sqlserver/V2__catalog_seed.sql": true,
+      "backend/src/main/resources/db/sqlserver/V3__identity_infrastructure_procedures.sql": true,
+      "backend/src/main/resources/db/sqlserver/V4__saas_organization_procedures.sql": true,
+      "backend/src/main/resources/db/sqlserver/V5__clinical_procedures.sql": true,
+      "backend/src/main/resources/db/sqlserver/V6__operations_procedures.sql": true,
+      "backend/src/main/resources/db/sqlserver/V7__audit_triggers.sql": true,
+      "backend/src/main/resources/db/sqlserver/V8__execution_permissions.sql": true,
+      "backend/src/main/resources/db/sqlserver/V9__appointment_window_days.sql": true,
+      "backend/src/main/resources/db/sqlserver/V10__jdbc_implicit_transaction_boundary.sql": true,
+      "backend/src/main/resources/db/sqlserver/V11__canonical_generated_uuids.sql": true,
+      "backend/src/main/resources/db/sqlserver/V12__independent_professional_conflict.sql": true,
+      "backend/src/main/resources/db/sqlserver/V13__patient_links_read.sql": true,
+      "backend/src/main/resources/db/sqlserver/V14__patient_link_revision.sql": true,
+      "backend/src/main/resources/db/sqlserver/V15__tenant_ruc.sql": true,
+      "backend/src/main/resources/db/sqlserver/V16__patient_antecedents_consultations.sql": true,
+      "backend/src/main/resources/db/sqlserver/V17__clinical_catalog.sql": true,
+      "backend/src/main/resources/db/sqlserver/V18__consultation_appointment_status.sql": true,
+      "backend/src/main/resources/db/sqlserver/V19__agenda_collections.sql": true
+    },
+    "factoryResourceLocation": "META-INF/spring.factories",
+    "factoryAndProfilePackagedExactly": true,
+    "guardClassPackaged": true,
+    "secretFilesPackaged": false,
+    "packagedNegativeSmoke": {
+      "commandContainsSecrets": false,
+      "expectedRejectionExit": 1,
+      "safeCode": "HP_PRODUCTION_JWT",
+      "serverDisabled": true
+    },
+    "sqlExecuted": false
+  },
+  "phaseBOffline": {
+    "phase": "B_OFFLINE_CONFIG",
+    "status": "PASS",
+    "composeExit": 0,
+    "composeVersion": "Docker Compose version v5.6.0",
+    "serviceNames": [
+      "backend",
+      "gateway"
+    ],
+    "mandatoryInputNegatives": [
+      {
+        "key": "HEALTH_BACKEND_IMAGE",
+        "expectedRejectionExit": 1
+      },
+      {
+        "key": "HEALTH_GATEWAY_IMAGE",
+        "expectedRejectionExit": 1
+      },
+      {
+        "key": "HEALTH_SQLSERVER_SERVER",
+        "expectedRejectionExit": 1
+      },
+      {
+        "key": "HEALTH_SQLSERVER_DATABASE",
+        "expectedRejectionExit": 1
+      },
+      {
+        "key": "HEALTH_SQLSERVER_RUNTIME_USER",
+        "expectedRejectionExit": 1
+      },
+      {
+        "key": "HEALTH_BASE_DOMAIN",
+        "expectedRejectionExit": 1
+      },
+      {
+        "key": "HEALTH_PUBLIC_ORIGIN",
+        "expectedRejectionExit": 1
+      },
+      {
+        "key": "HEALTH_SQL_PASSWORD_FILE",
+        "expectedRejectionExit": 1
+      },
+      {
+        "key": "HEALTH_JWT_SECRET_FILE",
+        "expectedRejectionExit": 1
+      }
+    ],
+    "publicBindings": [
+      {
+        "mode": "ingress",
+        "host_ip": "127.0.0.1",
+        "target": 8080,
+        "published": "18080",
+        "protocol": "tcp"
+      }
+    ],
+    "nginxExit": 0,
+    "nginxExecutable": "D:\\Mavric\\Health Project\\tmp\\hp8-supervisor-20261114\\nginx-validator\\nginx-1.28.0\\nginx.exe",
+    "nginxExecutableSha256": "53530836391897ea218d8040acdd467cd4832efab597e534d7c670e0e6c94b3c",
+    "nginxVersion": "nginx version: nginx/1.28.0",
+    "envsubstFilterPattern": "^HEALTH_BASE_DOMAIN$",
+    "nginxVariablesPreserved": true,
+    "nginxRenderedSha256": "9c6696b89a4feae13c2e2a63c5e0db4ff3952bc5a16e4b7f0072fb95c4d4c7f2",
+    "validationLimits": [
+      "Windows syntax only",
+      "No Linux image/container started",
+      "No TLS/proxy traffic",
+      "No daemon start",
+      "No SQL or real credentials"
+    ],
+    "dockerComposeUpBuildPull": false,
+    "sqlExecuted": false,
+    "serverStarted": false
+  },
+  "approvedAdditionalMessages": [
+    "msg_c321b0be200b",
+    "msg_5689c61d013f",
+    "msg_c61fb49ee081",
+    "msg_19ea2d9cfa0d",
+    "msg_05059532e9d9"
+  ],
+  "frozenSourcesSha256": [
+    {
+      "path": ".gitattributes",
+      "sha256": "b7e6da4c4e5cb279b5e53c80cfbc8c7e3b4cb246ee5b5c5ef96284e1d1f2b7f6",
+      "bytes": 743,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/java/com/mavric/healthsqlserver/ProductionProfileGuard.java",
+      "sha256": "90715ba85225c5baa7be987892507c955005621ebc1a71234146a2ec6638085a",
+      "bytes": 4756,
+      "scope": "B"
+    },
+    {
+      "path": "backend/src/main/resources/META-INF/spring.factories",
+      "sha256": "c2faca7dd2def57af075e9a9356b9a6d576ec3e3678cada78381306e1aee11fd",
+      "bytes": 108,
+      "scope": "B"
+    },
+    {
+      "path": "backend/src/main/resources/application-production.yml",
+      "sha256": "a9504b7557f2fc2fdc12c879370a0d553da89e280bc5779f84f2588a0de02e8f",
+      "bytes": 1397,
+      "scope": "B"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V10__jdbc_implicit_transaction_boundary.sql",
+      "sha256": "486862353a929d799ef54007b4db8a005f438d60502c0e8970297f7238690ca0",
+      "bytes": 758,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V11__canonical_generated_uuids.sql",
+      "sha256": "f512c6d44917612b53850e29c320c85925a3c92936951bc1a5cd39807ad72ef1",
+      "bytes": 8178,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V12__independent_professional_conflict.sql",
+      "sha256": "516f1bd3583b51792a75045c90342fab8236c2d7830b154ef811939980876438",
+      "bytes": 4669,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V13__patient_links_read.sql",
+      "sha256": "667d8c0731557625c662285dc0e56c885b57e50e7afa5af63ebea2030e3acf51",
+      "bytes": 4852,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V14__patient_link_revision.sql",
+      "sha256": "418b1c1b864de9a6e7ac20e0f641630422a8d2451b3d42f7e9b97fb835b0ea9a",
+      "bytes": 57580,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V15__tenant_ruc.sql",
+      "sha256": "8b38567c4bb99559f013368119e1bc1d62cd477cde3685d4c91fa5ff4d3f7e3e",
+      "bytes": 71582,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V16__patient_antecedents_consultations.sql",
+      "sha256": "8baa87c6e3b9617792738f820fedd9e9783cf13c682ce63be75af352f548433f",
+      "bytes": 12332,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V17__clinical_catalog.sql",
+      "sha256": "a90ba275b1074fbc0c322839ded77fc182bc93435a3a1fca4389409698e16b99",
+      "bytes": 8391,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V18__consultation_appointment_status.sql",
+      "sha256": "af7b93a4f13f0a9e347bb449684620b60d04275cdd71797781e72e055f182ad5",
+      "bytes": 5896,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V19__agenda_collections.sql",
+      "sha256": "6dda200d857b80be100ba4c9cc1254e3a98cb48cb6709063129907502850f9c4",
+      "bytes": 19316,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V1__schema.sql",
+      "sha256": "ed1dcb3e6bd4f2ac1f9b11de9aa7d1053db0e71ca3610e21801cc60d51fe4a0a",
+      "bytes": 46488,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V2__catalog_seed.sql",
+      "sha256": "f672c8856ab6a150ae1967e85b8baf9df07f2615f4db8445263f11f322a1a885",
+      "bytes": 998355,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V3__identity_infrastructure_procedures.sql",
+      "sha256": "b4ebe83471354e2027315d95e1657afde72ad2c19c508e2ef764c2356f940ce0",
+      "bytes": 47577,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V4__saas_organization_procedures.sql",
+      "sha256": "9640cd1215f27eb6789e7b79c11291aa37bc89f61b2112f678d364c2112654dc",
+      "bytes": 46361,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V5__clinical_procedures.sql",
+      "sha256": "d2352d8fe6a6f8f84c62179f7a643027866a17229064b9b0ce3d96f60fcd9ece",
+      "bytes": 41341,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V6__operations_procedures.sql",
+      "sha256": "5b007234afce7a435fe9220111249e537a22b467ed922cfdb45c3bec69949458",
+      "bytes": 43979,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V7__audit_triggers.sql",
+      "sha256": "c5657fa2329ab306d93ddda99efce52f95285575c8437295666b35670dbadf1f",
+      "bytes": 111608,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V8__execution_permissions.sql",
+      "sha256": "63ca532ad7f16650dfd27891a7093ea4b0cee3c264ca35537d81a9100c067f4e",
+      "bytes": 64124,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/main/resources/db/sqlserver/V9__appointment_window_days.sql",
+      "sha256": "9a0c1f96b66adb7de833310a5bda1797cae9c0f39e7a2d435cde7eebb62edc04",
+      "bytes": 1052,
+      "scope": "A_BINARY_REPRODUCIBILITY"
+    },
+    {
+      "path": "backend/src/test/java/com/mavric/health/ProductionProfileTest.java",
+      "sha256": "0eddd428f9a043b596233659f342790aed3c3e281795d67df50c168be82835b1",
+      "bytes": 12270,
+      "scope": "B"
+    },
+    {
+      "path": "backend/src/test/java/com/mavric/healthcards/AgendaControllerTest.java",
+      "sha256": "778e215a784e23a13c29032237601cc5a23d2d992ce4b168fbb64c4642e375d9",
+      "bytes": 5852,
+      "scope": "P1_FROZEN"
+    },
+    {
+      "path": "compose.production.yaml",
+      "sha256": "5073d1ed92fb8a7917c79ff3ccc9a9d389d9ecacd4c814732215714c28fa4e8e",
+      "bytes": 3012,
+      "scope": "B"
+    },
+    {
+      "path": "deploy/production/README.md",
+      "sha256": "4a9ee84dbeb1a4965f9819114e2dcd305296aa3993cca418b3e2e956628d7b93",
+      "bytes": 7308,
+      "scope": "B"
+    },
+    {
+      "path": "deploy/production/nginx.conf.template",
+      "sha256": "1eed79429478f923de97aa9394eeb0352ac31ec98d076fd628f279180347fe77",
+      "bytes": 2193,
+      "scope": "B"
+    },
+    {
+      "path": "deploy/production/production.env.example",
+      "sha256": "a8a719d344ed76feb17c2ae898b4a9e374a42d878fe439ee16faf3a0e5500d61",
+      "bytes": 1188,
+      "scope": "B"
+    },
+    {
+      "path": "frontend/scripts/agenda-trello-qa.cjs",
+      "sha256": "2dd1832b0f30f1d596bf2a8c73f2b8715aba491279feaf45363ba9d8f444d7b3",
+      "bytes": 7651,
+      "scope": "P1_FROZEN"
+    },
+    {
+      "path": "frontend/src/components/agenda-voice.tsx",
+      "sha256": "73095b38e01ea9b8bf109e02bf0ccc5aa0cd0b3ff64624fe1358eedb1daee10c",
+      "bytes": 6309,
+      "scope": "P1_FROZEN"
+    },
+    {
+      "path": "frontend/src/components/runtime-agenda.tsx",
+      "sha256": "5e09b24350a2530a8acd81f79b90f69869f7a997ebeccb6660ba8501c052e89b",
+      "bytes": 25562,
+      "scope": "P1_FROZEN"
+    },
+    {
+      "path": "frontend/src/lib/agenda.ts",
+      "sha256": "937b20663787b43abb677abd3626c4091f94ed194ee78bedaf96c89af97904e2",
+      "bytes": 8370,
+      "scope": "P1_FROZEN"
+    },
+    {
+      "path": "frontend/src/mocks/agenda-api.ts",
+      "sha256": "6ed3855e7dafeb71b862f1679bfcfd6c73b224f6e422240b73d00c0065adc3cf",
+      "bytes": 8601,
+      "scope": "P1_FROZEN"
+    },
+    {
+      "path": "frontend/tests/agenda-api-transport.test.ts",
+      "sha256": "b6fbde8c629470854d3db45d40c55a613331ecef9da30fe2898210096c6e7d4c",
+      "bytes": 7186,
+      "scope": "P1_FROZEN"
+    },
+    {
+      "path": "frontend/tests/agenda.test.ts",
+      "sha256": "36d23b1651dd0a7aaaf7cbaeed9be3f1d61f71099b25069c81116c68abfee009",
+      "bytes": 3595,
+      "scope": "P1_FROZEN"
+    }
+  ],
+  "migrations": [
+    {
+      "version": 1,
+      "path": "backend/src/main/resources/db/sqlserver/V1__schema.sql",
+      "beforeSha256": "01854c1df6808ccbf4826228851af0a69eb73f2fcbe3695a2889800d837dcb56",
+      "headBlobSha256": "ed1dcb3e6bd4f2ac1f9b11de9aa7d1053db0e71ca3610e21801cc60d51fe4a0a",
+      "canonicalSha256": "ed1dcb3e6bd4f2ac1f9b11de9aa7d1053db0e71ca3610e21801cc60d51fe4a0a",
+      "canonicalLength": 46488,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "26806f4015143a63d352aa0c88302ee3a46d7887"
+    },
+    {
+      "version": 2,
+      "path": "backend/src/main/resources/db/sqlserver/V2__catalog_seed.sql",
+      "beforeSha256": "6beca0d4bff109b3ad011f90324561f6b6e618566dfbaca99e24e1f5728adf72",
+      "headBlobSha256": "f672c8856ab6a150ae1967e85b8baf9df07f2615f4db8445263f11f322a1a885",
+      "canonicalSha256": "f672c8856ab6a150ae1967e85b8baf9df07f2615f4db8445263f11f322a1a885",
+      "canonicalLength": 998355,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "0c87433560f6bd8ff604a5c31100cc0edb44485f"
+    },
+    {
+      "version": 3,
+      "path": "backend/src/main/resources/db/sqlserver/V3__identity_infrastructure_procedures.sql",
+      "beforeSha256": "70260aa6514dceeec3f9a5e1b66d12999faf9836f8d5937ffe271a43efb04231",
+      "headBlobSha256": "b4ebe83471354e2027315d95e1657afde72ad2c19c508e2ef764c2356f940ce0",
+      "canonicalSha256": "b4ebe83471354e2027315d95e1657afde72ad2c19c508e2ef764c2356f940ce0",
+      "canonicalLength": 47577,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "24b77e34701c1be3f7a2e77f5a415113bf878286"
+    },
+    {
+      "version": 4,
+      "path": "backend/src/main/resources/db/sqlserver/V4__saas_organization_procedures.sql",
+      "beforeSha256": "b69535b78b1157742378acb6f5e8453f4f6544be3ac5881d36fbfdc25bdf3124",
+      "headBlobSha256": "9640cd1215f27eb6789e7b79c11291aa37bc89f61b2112f678d364c2112654dc",
+      "canonicalSha256": "9640cd1215f27eb6789e7b79c11291aa37bc89f61b2112f678d364c2112654dc",
+      "canonicalLength": 46361,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "71c67162c5113b16fa07f3226f48f47ecbdd2667"
+    },
+    {
+      "version": 5,
+      "path": "backend/src/main/resources/db/sqlserver/V5__clinical_procedures.sql",
+      "beforeSha256": "eeafca090420f3f661a61838ba1e98c2e2ca1eb2c3d5d67b7ea66e99b8d1c312",
+      "headBlobSha256": "d2352d8fe6a6f8f84c62179f7a643027866a17229064b9b0ce3d96f60fcd9ece",
+      "canonicalSha256": "d2352d8fe6a6f8f84c62179f7a643027866a17229064b9b0ce3d96f60fcd9ece",
+      "canonicalLength": 41341,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "437e5b204b02bb9c0536089167ab931961f74cd1"
+    },
+    {
+      "version": 6,
+      "path": "backend/src/main/resources/db/sqlserver/V6__operations_procedures.sql",
+      "beforeSha256": "5b007234afce7a435fe9220111249e537a22b467ed922cfdb45c3bec69949458",
+      "headBlobSha256": "4a8539629c916007563a0b96b997897191dbd00aa84fb3c8e6ed5284ae5afeab",
+      "canonicalSha256": "5b007234afce7a435fe9220111249e537a22b467ed922cfdb45c3bec69949458",
+      "canonicalLength": 43979,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "b0a73eea615e62d7fb08aaf9c7942f4c193d45ac"
+    },
+    {
+      "version": 7,
+      "path": "backend/src/main/resources/db/sqlserver/V7__audit_triggers.sql",
+      "beforeSha256": "c5657fa2329ab306d93ddda99efce52f95285575c8437295666b35670dbadf1f",
+      "headBlobSha256": "56602e981c437e3b5a3057e8483d2ffce1491d046f478dc544906e4be3af42dc",
+      "canonicalSha256": "c5657fa2329ab306d93ddda99efce52f95285575c8437295666b35670dbadf1f",
+      "canonicalLength": 111608,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "77d6c54acff980347d31e711f472a248a6a8bf59"
+    },
+    {
+      "version": 8,
+      "path": "backend/src/main/resources/db/sqlserver/V8__execution_permissions.sql",
+      "beforeSha256": "63ca532ad7f16650dfd27891a7093ea4b0cee3c264ca35537d81a9100c067f4e",
+      "headBlobSha256": "3d162d64b43001c1c63ed1084ef0797531d712155cea11a1ce1269a6fca555bd",
+      "canonicalSha256": "63ca532ad7f16650dfd27891a7093ea4b0cee3c264ca35537d81a9100c067f4e",
+      "canonicalLength": 64124,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "09df135007ec3e24918b5b0747230fd9b707047e"
+    },
+    {
+      "version": 9,
+      "path": "backend/src/main/resources/db/sqlserver/V9__appointment_window_days.sql",
+      "beforeSha256": "9a0c1f96b66adb7de833310a5bda1797cae9c0f39e7a2d435cde7eebb62edc04",
+      "headBlobSha256": "5f8161b8e763ac50d4e12d9604ad0fb1c7ab02545c8782d2e73955939a5a69d0",
+      "canonicalSha256": "9a0c1f96b66adb7de833310a5bda1797cae9c0f39e7a2d435cde7eebb62edc04",
+      "canonicalLength": 1052,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "eaef5d6e10bb18bb427eb355e1f7b5859f7ec6b8"
+    },
+    {
+      "version": 10,
+      "path": "backend/src/main/resources/db/sqlserver/V10__jdbc_implicit_transaction_boundary.sql",
+      "beforeSha256": "559024305b5fa47db5c09008083234a4b8752b1ec71135bb6a71ed5500431c0e",
+      "headBlobSha256": "486862353a929d799ef54007b4db8a005f438d60502c0e8970297f7238690ca0",
+      "canonicalSha256": "486862353a929d799ef54007b4db8a005f438d60502c0e8970297f7238690ca0",
+      "canonicalLength": 758,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "af097f55315d7bf2969a9a3da61112e7d444143e"
+    },
+    {
+      "version": 11,
+      "path": "backend/src/main/resources/db/sqlserver/V11__canonical_generated_uuids.sql",
+      "beforeSha256": "f512c6d44917612b53850e29c320c85925a3c92936951bc1a5cd39807ad72ef1",
+      "headBlobSha256": "f03282dfa74f207c49ea52eb6b35e7b691df0f6a73bfe8f58df6b156beb3f368",
+      "canonicalSha256": "f512c6d44917612b53850e29c320c85925a3c92936951bc1a5cd39807ad72ef1",
+      "canonicalLength": 8178,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "cfbd9eb67e8d0918faa47a5dc079358a648dc220"
+    },
+    {
+      "version": 12,
+      "path": "backend/src/main/resources/db/sqlserver/V12__independent_professional_conflict.sql",
+      "beforeSha256": "516f1bd3583b51792a75045c90342fab8236c2d7830b154ef811939980876438",
+      "headBlobSha256": "5fec650fdd577d79f1ec0f6e07ae635555a0fc23f6fb173c42d924fe41d11e4c",
+      "canonicalSha256": "516f1bd3583b51792a75045c90342fab8236c2d7830b154ef811939980876438",
+      "canonicalLength": 4669,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "5f4e836dbf39e12dd1edc5078d7f6ae2fcc1c8b1"
+    },
+    {
+      "version": 13,
+      "path": "backend/src/main/resources/db/sqlserver/V13__patient_links_read.sql",
+      "beforeSha256": "667d8c0731557625c662285dc0e56c885b57e50e7afa5af63ebea2030e3acf51",
+      "headBlobSha256": "aeec3bbde0e04571ef8efb20271800e1b060f80b14ba32c32a592d0109fc379f",
+      "canonicalSha256": "667d8c0731557625c662285dc0e56c885b57e50e7afa5af63ebea2030e3acf51",
+      "canonicalLength": 4852,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "b65085ba17fe5cf606a2561c2ac9d272e4918a88"
+    },
+    {
+      "version": 14,
+      "path": "backend/src/main/resources/db/sqlserver/V14__patient_link_revision.sql",
+      "beforeSha256": "418b1c1b864de9a6e7ac20e0f641630422a8d2451b3d42f7e9b97fb835b0ea9a",
+      "headBlobSha256": "418b1c1b864de9a6e7ac20e0f641630422a8d2451b3d42f7e9b97fb835b0ea9a",
+      "canonicalSha256": "418b1c1b864de9a6e7ac20e0f641630422a8d2451b3d42f7e9b97fb835b0ea9a",
+      "canonicalLength": 57580,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "ea461b2622abff27ce0d556af36daad9d6c43495"
+    },
+    {
+      "version": 15,
+      "path": "backend/src/main/resources/db/sqlserver/V15__tenant_ruc.sql",
+      "beforeSha256": "8b38567c4bb99559f013368119e1bc1d62cd477cde3685d4c91fa5ff4d3f7e3e",
+      "headBlobSha256": "8b38567c4bb99559f013368119e1bc1d62cd477cde3685d4c91fa5ff4d3f7e3e",
+      "canonicalSha256": "8b38567c4bb99559f013368119e1bc1d62cd477cde3685d4c91fa5ff4d3f7e3e",
+      "canonicalLength": 71582,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "d04e9742f90689134557b86a3163dd88356e069f"
+    },
+    {
+      "version": 16,
+      "path": "backend/src/main/resources/db/sqlserver/V16__patient_antecedents_consultations.sql",
+      "beforeSha256": "8baa87c6e3b9617792738f820fedd9e9783cf13c682ce63be75af352f548433f",
+      "headBlobSha256": "8baa87c6e3b9617792738f820fedd9e9783cf13c682ce63be75af352f548433f",
+      "canonicalSha256": "8baa87c6e3b9617792738f820fedd9e9783cf13c682ce63be75af352f548433f",
+      "canonicalLength": 12332,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "d59191cb80890ffb12cd8065e20412e03b91031c"
+    },
+    {
+      "version": 17,
+      "path": "backend/src/main/resources/db/sqlserver/V17__clinical_catalog.sql",
+      "beforeSha256": "a90ba275b1074fbc0c322839ded77fc182bc93435a3a1fca4389409698e16b99",
+      "headBlobSha256": "a90ba275b1074fbc0c322839ded77fc182bc93435a3a1fca4389409698e16b99",
+      "canonicalSha256": "a90ba275b1074fbc0c322839ded77fc182bc93435a3a1fca4389409698e16b99",
+      "canonicalLength": 8391,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "33fa5f4952191a71d03867428809ff0598107cfc"
+    },
+    {
+      "version": 18,
+      "path": "backend/src/main/resources/db/sqlserver/V18__consultation_appointment_status.sql",
+      "beforeSha256": "af7b93a4f13f0a9e347bb449684620b60d04275cdd71797781e72e055f182ad5",
+      "headBlobSha256": "af7b93a4f13f0a9e347bb449684620b60d04275cdd71797781e72e055f182ad5",
+      "canonicalSha256": "af7b93a4f13f0a9e347bb449684620b60d04275cdd71797781e72e055f182ad5",
+      "canonicalLength": 5896,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "1f42cc50c7c8765fb87a476c9a58ecf59f68b9f7"
+    },
+    {
+      "version": 19,
+      "path": "backend/src/main/resources/db/sqlserver/V19__agenda_collections.sql",
+      "beforeSha256": "6dda200d857b80be100ba4c9cc1254e3a98cb48cb6709063129907502850f9c4",
+      "headBlobSha256": "6dda200d857b80be100ba4c9cc1254e3a98cb48cb6709063129907502850f9c4",
+      "canonicalSha256": "6dda200d857b80be100ba4c9cc1254e3a98cb48cb6709063129907502850f9c4",
+      "canonicalLength": 19316,
+      "normalizationMatches": true,
+      "bomPreserved": true,
+      "canonicalGitBlob": "f58e50fe5ceeec50d36b40186ab7b1647c0bd8f2"
+    }
+  ],
+  "p1SourcesUnchanged": true,
+  "userIndexUnchanged": true,
+  "gitConfigUnchanged": true,
+  "initialTracked": 813,
+  "changedTrackedFromR1Start": [
+    ".gitattributes",
+    "backend/src/main/resources/db/sqlserver/V10__jdbc_implicit_transaction_boundary.sql",
+    "backend/src/main/resources/db/sqlserver/V13__patient_links_read.sql",
+    "backend/src/main/resources/db/sqlserver/V1__schema.sql",
+    "backend/src/main/resources/db/sqlserver/V2__catalog_seed.sql",
+    "backend/src/main/resources/db/sqlserver/V3__identity_infrastructure_procedures.sql",
+    "backend/src/main/resources/db/sqlserver/V4__saas_organization_procedures.sql",
+    "backend/src/main/resources/db/sqlserver/V5__clinical_procedures.sql"
+  ],
+  "unchangedTrackedFromR1Start": 805,
+  "productBFiles": [
+    "backend/src/main/java/com/mavric/healthsqlserver/ProductionProfileGuard.java",
+    "backend/src/main/resources/META-INF/spring.factories",
+    "backend/src/main/resources/application-production.yml",
+    "backend/src/test/java/com/mavric/health/ProductionProfileTest.java",
+    "compose.production.yaml",
+    "deploy/production/nginx.conf.template",
+    "deploy/production/production.env.example",
+    "deploy/production/README.md"
+  ],
+  "outsideOwnershipChanged": [],
+  "reportSha256": "36977568b96f5d157c6e42ee8238213f37dec238fd4bb4b0a3a5d9b2164c4e4c",
+  "artifactsSha256": {
+    "addendum-before/gitattributes.txt": "40acbb2c5e733069f2a7cd5510cef29f8b3b0aff3d791546d8e5a3918c23ff47",
+    "addendum-before/V10__jdbc_implicit_transaction_boundary.sql": "559024305b5fa47db5c09008083234a4b8752b1ec71135bb6a71ed5500431c0e",
+    "addendum-before/V11__canonical_generated_uuids.sql": "f512c6d44917612b53850e29c320c85925a3c92936951bc1a5cd39807ad72ef1",
+    "addendum-before/V12__independent_professional_conflict.sql": "516f1bd3583b51792a75045c90342fab8236c2d7830b154ef811939980876438",
+    "addendum-before/V1__schema.sql": "01854c1df6808ccbf4826228851af0a69eb73f2fcbe3695a2889800d837dcb56",
+    "addendum-before/V2__catalog_seed.sql": "6beca0d4bff109b3ad011f90324561f6b6e618566dfbaca99e24e1f5728adf72",
+    "addendum-before/V3__identity_infrastructure_procedures.sql": "70260aa6514dceeec3f9a5e1b66d12999faf9836f8d5937ffe271a43efb04231",
+    "addendum-before/V4__saas_organization_procedures.sql": "b69535b78b1157742378acb6f5e8453f4f6544be3ac5881d36fbfdc25bdf3124",
+    "addendum-before/V5__clinical_procedures.sql": "eeafca090420f3f661a61838ba1e98c2e2ca1eb2c3d5d67b7ea66e99b8d1c312",
+    "addendum-before/V6__operations_procedures.sql": "5b007234afce7a435fe9220111249e537a22b467ed922cfdb45c3bec69949458",
+    "addendum-before/V7__audit_triggers.sql": "c5657fa2329ab306d93ddda99efce52f95285575c8437295666b35670dbadf1f",
+    "addendum-before/V8__execution_permissions.sql": "63ca532ad7f16650dfd27891a7093ea4b0cee3c264ca35537d81a9100c067f4e",
+    "addendum-before/V9__appointment_window_days.sql": "9a0c1f96b66adb7de833310a5bda1797cae9c0f39e7a2d435cde7eebb62edc04",
+    "addendum-restoration.exit.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "addendum-restoration.log": "49f3ed882be551d38307006e7f426dcfb5ab319b39671e3d6a151f51abaaff8c",
+    "all19-checkout-autocrlf-false/.gitattributes": "b7e6da4c4e5cb279b5e53c80cfbc8c7e3b4cb246ee5b5c5ef96284e1d1f2b7f6",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V10__jdbc_implicit_transaction_boundary.sql": "486862353a929d799ef54007b4db8a005f438d60502c0e8970297f7238690ca0",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V11__canonical_generated_uuids.sql": "f512c6d44917612b53850e29c320c85925a3c92936951bc1a5cd39807ad72ef1",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V12__independent_professional_conflict.sql": "516f1bd3583b51792a75045c90342fab8236c2d7830b154ef811939980876438",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V13__patient_links_read.sql": "667d8c0731557625c662285dc0e56c885b57e50e7afa5af63ebea2030e3acf51",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V14__patient_link_revision.sql": "418b1c1b864de9a6e7ac20e0f641630422a8d2451b3d42f7e9b97fb835b0ea9a",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V15__tenant_ruc.sql": "8b38567c4bb99559f013368119e1bc1d62cd477cde3685d4c91fa5ff4d3f7e3e",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V16__patient_antecedents_consultations.sql": "8baa87c6e3b9617792738f820fedd9e9783cf13c682ce63be75af352f548433f",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V17__clinical_catalog.sql": "a90ba275b1074fbc0c322839ded77fc182bc93435a3a1fca4389409698e16b99",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V18__consultation_appointment_status.sql": "af7b93a4f13f0a9e347bb449684620b60d04275cdd71797781e72e055f182ad5",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V19__agenda_collections.sql": "6dda200d857b80be100ba4c9cc1254e3a98cb48cb6709063129907502850f9c4",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V1__schema.sql": "ed1dcb3e6bd4f2ac1f9b11de9aa7d1053db0e71ca3610e21801cc60d51fe4a0a",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V2__catalog_seed.sql": "f672c8856ab6a150ae1967e85b8baf9df07f2615f4db8445263f11f322a1a885",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V3__identity_infrastructure_procedures.sql": "b4ebe83471354e2027315d95e1657afde72ad2c19c508e2ef764c2356f940ce0",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V4__saas_organization_procedures.sql": "9640cd1215f27eb6789e7b79c11291aa37bc89f61b2112f678d364c2112654dc",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V5__clinical_procedures.sql": "d2352d8fe6a6f8f84c62179f7a643027866a17229064b9b0ce3d96f60fcd9ece",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V6__operations_procedures.sql": "5b007234afce7a435fe9220111249e537a22b467ed922cfdb45c3bec69949458",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V7__audit_triggers.sql": "c5657fa2329ab306d93ddda99efce52f95285575c8437295666b35670dbadf1f",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V8__execution_permissions.sql": "63ca532ad7f16650dfd27891a7093ea4b0cee3c264ca35537d81a9100c067f4e",
+    "all19-checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V9__appointment_window_days.sql": "9a0c1f96b66adb7de833310a5bda1797cae9c0f39e7a2d435cde7eebb62edc04",
+    "all19-checkout-autocrlf-true/.gitattributes": "b7e6da4c4e5cb279b5e53c80cfbc8c7e3b4cb246ee5b5c5ef96284e1d1f2b7f6",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V10__jdbc_implicit_transaction_boundary.sql": "486862353a929d799ef54007b4db8a005f438d60502c0e8970297f7238690ca0",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V11__canonical_generated_uuids.sql": "f512c6d44917612b53850e29c320c85925a3c92936951bc1a5cd39807ad72ef1",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V12__independent_professional_conflict.sql": "516f1bd3583b51792a75045c90342fab8236c2d7830b154ef811939980876438",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V13__patient_links_read.sql": "667d8c0731557625c662285dc0e56c885b57e50e7afa5af63ebea2030e3acf51",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V14__patient_link_revision.sql": "418b1c1b864de9a6e7ac20e0f641630422a8d2451b3d42f7e9b97fb835b0ea9a",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V15__tenant_ruc.sql": "8b38567c4bb99559f013368119e1bc1d62cd477cde3685d4c91fa5ff4d3f7e3e",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V16__patient_antecedents_consultations.sql": "8baa87c6e3b9617792738f820fedd9e9783cf13c682ce63be75af352f548433f",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V17__clinical_catalog.sql": "a90ba275b1074fbc0c322839ded77fc182bc93435a3a1fca4389409698e16b99",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V18__consultation_appointment_status.sql": "af7b93a4f13f0a9e347bb449684620b60d04275cdd71797781e72e055f182ad5",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V19__agenda_collections.sql": "6dda200d857b80be100ba4c9cc1254e3a98cb48cb6709063129907502850f9c4",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V1__schema.sql": "ed1dcb3e6bd4f2ac1f9b11de9aa7d1053db0e71ca3610e21801cc60d51fe4a0a",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V2__catalog_seed.sql": "f672c8856ab6a150ae1967e85b8baf9df07f2615f4db8445263f11f322a1a885",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V3__identity_infrastructure_procedures.sql": "b4ebe83471354e2027315d95e1657afde72ad2c19c508e2ef764c2356f940ce0",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V4__saas_organization_procedures.sql": "9640cd1215f27eb6789e7b79c11291aa37bc89f61b2112f678d364c2112654dc",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V5__clinical_procedures.sql": "d2352d8fe6a6f8f84c62179f7a643027866a17229064b9b0ce3d96f60fcd9ece",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V6__operations_procedures.sql": "5b007234afce7a435fe9220111249e537a22b467ed922cfdb45c3bec69949458",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V7__audit_triggers.sql": "c5657fa2329ab306d93ddda99efce52f95285575c8437295666b35670dbadf1f",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V8__execution_permissions.sql": "63ca532ad7f16650dfd27891a7093ea4b0cee3c264ca35537d81a9100c067f4e",
+    "all19-checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V9__appointment_window_days.sql": "9a0c1f96b66adb7de833310a5bda1797cae9c0f39e7a2d435cde7eebb62edc04",
+    "all19-index-autocrlf-false": "9d04505bbecf53a4a8d8840734dde7098ad7592915827581adb4d2c56c9746e0",
+    "all19-index-autocrlf-true": "9d04505bbecf53a4a8d8840734dde7098ad7592915827581adb4d2c56c9746e0",
+    "baseline.json": "f3007d95282f1c7691e80fa2756b461aeb0fc66e9e18ca1b61b16e6c74545ffc",
+    "checkout-autocrlf-false/.gitattributes": "40acbb2c5e733069f2a7cd5510cef29f8b3b0aff3d791546d8e5a3918c23ff47",
+    "checkout-autocrlf-false/backend/src/main/resources/db/sqlserver/V13__patient_links_read.sql": "667d8c0731557625c662285dc0e56c885b57e50e7afa5af63ebea2030e3acf51",
+    "checkout-autocrlf-true/.gitattributes": "40acbb2c5e733069f2a7cd5510cef29f8b3b0aff3d791546d8e5a3918c23ff47",
+    "checkout-autocrlf-true/backend/src/main/resources/db/sqlserver/V13__patient_links_read.sql": "667d8c0731557625c662285dc0e56c885b57e50e7afa5af63ebea2030e3acf51",
+    "compose-negative-HEALTH_BACKEND_IMAGE.exit.txt": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "compose-negative-HEALTH_BACKEND_IMAGE.stderr.txt": "a4698a9cbcc31410c7e7e54696bc55d64c736ef0bb3a6b578d860e16ed9d817c",
+    "compose-negative-HEALTH_BACKEND_IMAGE.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compose-negative-HEALTH_BASE_DOMAIN.exit.txt": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "compose-negative-HEALTH_BASE_DOMAIN.stderr.txt": "4c813735866cb7d0d01066a8d9c189602b6c4c83c97dc5dbca642c8546200b6f",
+    "compose-negative-HEALTH_BASE_DOMAIN.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compose-negative-HEALTH_GATEWAY_IMAGE.exit.txt": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "compose-negative-HEALTH_GATEWAY_IMAGE.stderr.txt": "452f3a6f06c642c87574ae95404e5c5748db1e6c0e02a220a0f89033ff76335f",
+    "compose-negative-HEALTH_GATEWAY_IMAGE.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compose-negative-HEALTH_JWT_SECRET_FILE.exit.txt": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "compose-negative-HEALTH_JWT_SECRET_FILE.stderr.txt": "4a8a80396e07fee56dc3a5b4d163a06ebc774d47fc16ba98e861822ca4956353",
+    "compose-negative-HEALTH_JWT_SECRET_FILE.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compose-negative-HEALTH_PUBLIC_ORIGIN.exit.txt": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "compose-negative-HEALTH_PUBLIC_ORIGIN.stderr.txt": "891cae9a60f1452351769a4f8c2ab356fd2bca83c5c0732559493f72eed5a65b",
+    "compose-negative-HEALTH_PUBLIC_ORIGIN.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compose-negative-HEALTH_SQL_PASSWORD_FILE.exit.txt": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "compose-negative-HEALTH_SQL_PASSWORD_FILE.stderr.txt": "911b7c34a211868de87cd23c5f60be592292e82e5d3783dff4fd49f7ca5a01b1",
+    "compose-negative-HEALTH_SQL_PASSWORD_FILE.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compose-negative-HEALTH_SQLSERVER_DATABASE.exit.txt": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "compose-negative-HEALTH_SQLSERVER_DATABASE.stderr.txt": "e9b0a7de6eeea657cb24ea51d4a99c1342181a63d98b2ed5f70bd58566d98b3c",
+    "compose-negative-HEALTH_SQLSERVER_DATABASE.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compose-negative-HEALTH_SQLSERVER_RUNTIME_USER.exit.txt": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "compose-negative-HEALTH_SQLSERVER_RUNTIME_USER.stderr.txt": "a207a90523ab7cb7600580e6c1715e7c7668c7f362766c0febfd352d6adfda50",
+    "compose-negative-HEALTH_SQLSERVER_RUNTIME_USER.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compose-negative-HEALTH_SQLSERVER_SERVER.exit.txt": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "compose-negative-HEALTH_SQLSERVER_SERVER.stderr.txt": "97488cda2608e7f8b4d22babef6ab61c5b3e2d0a1a5f1b640383c7e379f968b8",
+    "compose-negative-HEALTH_SQLSERVER_SERVER.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compose-version.exit.txt": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "compose-version.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "compose-version.stdout.txt": "4f7bc473b6b7b0611c1ae98478d841ebc2ba9f903a8d82e244deb090fe6669e5",
+    "contract-supervisor.txt": "cc44229bf586864abcbe78335a72046a647f00531a81d67c5ea49e827eeaf3c4",
+    "final-maven-clean-verify.exit.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "final-maven-clean-verify.log": "25656adb01f43aecf1450b001546b3cacd6141b4a3b56e09153e4ec675d9110c",
+    "freeze_delivery.py": "0fe95ad466a1cb9d3c9055e4fd8cf2c99a1c8cf85589dd38e19c7d90e2ed133b",
+    "gitattributes-before.txt": "9b6a9f7bd4025aaf0744a9b3608ad67fab7744211b64f6988feea1202ed33ed8",
+    "index-autocrlf-false": "5310fde49b16570fb29726bc956ac1ad65032462b8fa3283dab59d6f593524fe",
+    "index-autocrlf-true": "5310fde49b16570fb29726bc956ac1ad65032462b8fa3283dab59d6f593524fe",
+    "INFORME.md": "36977568b96f5d157c6e42ee8238213f37dec238fd4bb4b0a3a5d9b2164c4e4c",
+    "initializer-registration-diagnostic.json": "128d720885fbcd5b46c74a6d317014137d7a9af5c729f074726b49eb17a799cb",
+    "nginx-offline-prefix/logs/error.log": "5b2f3bd41d4350adaee42b8cfe76ba8bf1633a4f7df8da3027059f4384c83ebb",
+    "nginx-offline-prefix/logs/nginx.pid": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "nginx-offline-prefix/nginx.conf": "a88dc23cf9dca5b750646afe279f407b24d0179580b735aca1c94b74e1d02d1b",
+    "nginx-offline-prefix/production.rendered.conf": "9c6696b89a4feae13c2e2a63c5e0db4ff3952bc5a16e4b7f0072fb95c4d4c7f2",
+    "nginx-version.exit.txt": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "nginx-version.stderr.txt": "c085696e0f34b344aecafea087faae02eb80f399ea4512e18f5f8422e24d614d",
+    "nginx-version.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "offline-config-fixtures/jwt-key.synthetic": "9042d54fd9fe4a50eab00b6330adf77891c2e1d21570a8cb03c136e4eefe7b16",
+    "offline-config-fixtures/missing-HEALTH_BACKEND_IMAGE.env": "6a478ef6a29f50311b7cca03db38fb29f9338c2440daf89790f5ffbf15106d14",
+    "offline-config-fixtures/missing-HEALTH_BASE_DOMAIN.env": "3eb6f0b6ab44e7fedc732452ef11071e03a160fc015c2539d5212e7afb116f45",
+    "offline-config-fixtures/missing-HEALTH_GATEWAY_IMAGE.env": "bc40dd0dfd683e64e30d7b2a90935af5d50148884003d8dc39544ea327096b15",
+    "offline-config-fixtures/missing-HEALTH_JWT_SECRET_FILE.env": "fb5e71401f73ba3404c27b062fe32c8d67b6239fc1ceb58ee29d459c6d16856a",
+    "offline-config-fixtures/missing-HEALTH_PUBLIC_ORIGIN.env": "2e23248fa79179e6a75c085a3d79ca36d48fecc6d2662ee78f4ed42c571fe68a",
+    "offline-config-fixtures/missing-HEALTH_SQL_PASSWORD_FILE.env": "6635de9c7cb231acd3cf4ee7a06f7ce56efb269dadc86f3a719027f76ed6fafa",
+    "offline-config-fixtures/missing-HEALTH_SQLSERVER_DATABASE.env": "1f6f8308723c9e7909c895cd8a6890444e88eeea53f27aa2e0be0636520f2483",
+    "offline-config-fixtures/missing-HEALTH_SQLSERVER_RUNTIME_USER.env": "ca72f94f817af55e022712ca0d7edbd1ae5fc6844dfd9f3b9a83cd268d3dd3df",
+    "offline-config-fixtures/missing-HEALTH_SQLSERVER_SERVER.env": "59be93287fccc6808fbad2d1e5e56432f69cacca59bbc7329f6eed4c9d1eac7f",
+    "offline-config-fixtures/production.synthetic.env": "3789a9b9b82e4128cc0506df41f8610c8e6b694db3fac220c8db038460130cbd",
+    "offline-config-fixtures/sql-password.synthetic": "9042d54fd9fe4a50eab00b6330adf77891c2e1d21570a8cb03c136e4eefe7b16",
+    "packaged-negative-configtree/health.sqlserver.runtime.password": "03a4c9621b7341d647883e9229e7efc9c74c8f660ec48944d220a29965e1f428",
+    "packaged-negative-smoke.exit.txt": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "packaged-negative-smoke.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "packaged-negative-smoke.stdout.txt": "30d2a20cb440afaf48e28a7a206e0523d4c47806398ad83bd9eda226dec5721b",
+    "packaging-verification.exit.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "packaging-verification.log": "4b0054bf907b13ffc505a21e432cd9667ae6fc8560c4093925ca73830aa0f1c7",
+    "phase-a-addendum-maven.exit.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "phase-a-addendum-maven.log": "beb7a39587965838bc13f1b900084640160dab2849ade1908d00539f44791ab9",
+    "phase-a-addendum-summary.json": "81af4c006fba04537c6fe783a1883874b2140584de42bad63e742b6e220861e5",
+    "phase-a-addendum.json": "19dc655ee37bb1e0da75abba8740e65892112a350f165178994cfa7473c648c8",
+    "phase-a-build-demo.exit.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "phase-a-build-demo.log": "4a3c68dce6cec56795d6003e4272420b9a65fb01ee30eec64774e11f45a1af89",
+    "phase-a-build-production.exit.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "phase-a-build-production.log": "364e0fa651388a6f6b4dece7f2940ce6d8f13172193a620b817f63b03e20ca0d",
+    "phase-a-frontend-check.exit.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "phase-a-frontend-check.log": "f9387a8aa616dbb09b1a5ec09f5f9bc424a1165258e3aaa5c27316b6cf144bc4",
+    "phase-a-frontend-test.exit.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "phase-a-frontend-test.log": "9825cccaa0716423fe6adacf243a69c9a074024d8fd9bc4e32d1d8461859ea83",
+    "phase-a-maven.exit.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "phase-a-maven.log": "75ac200e7616a0080d57bedc58373b5129c6727ea855e754926d69e868bc3d01",
+    "phase-a-restoration.json": "01100044a417b0b2bd93fb15c82db03f356254af4067f20f21993dd1e079ef46",
+    "phase-a-summary.json": "16c1a3194c038f599a8df76dcb2eacd48f9bfb4a2fb06ae01af6df5608d51769",
+    "phase-b-compose-config.exit.txt": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "phase-b-compose-config.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "phase-b-compose-config.stdout.txt": "362f945fed2d40726664439084aa9ee7fd7a9bc56ad2fca16318d94c2478d91c",
+    "phase-b-final-backend-summary.json": "7d96cb011d2d7e755988e73685e5cbc1c449e4429de4c2d3e017a462295b78ba",
+    "phase-b-nginx-test-attempt1.exit.txt": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "phase-b-nginx-test-attempt1.stderr.txt": "23b9b7eaafb74d39749c12531a90d5e6082ed477e743aaea0415c3dc9e08adcf",
+    "phase-b-nginx-test-attempt1.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "phase-b-nginx-test.exit.txt": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "phase-b-nginx-test.stderr.txt": "a5697f41560e5f07609ca79f875643465149ae94c2261b5dab81fe0858cb87f4",
+    "phase-b-nginx-test.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "phase-b-offline-config-r2.exit.txt": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+    "phase-b-offline-config-r2.log": "88c60678968d767aa1a47bc29ecb2d38ec2f525cc3b06c3e7760e77501213546",
+    "phase-b-offline-config-r3.exit.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "phase-b-offline-config-r3.log": "bf609cdbd20412a25517e0c87d62c0c2350b3bba3853649981967b04c7a0b805",
+    "phase-b-offline-config-summary.json": "e01a9d2e2f789d36e350f1c367414832f1a01ee12076499fce267c1ff8b1679f",
+    "phase-b-offline-config.exit.txt": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+    "phase-b-offline-config.log": "37eda5c5e65ca3c63c86a8f0a437b6d462c6e0c0818df45f1860609047289016",
+    "phase-b-profile-test-r2.exit.txt": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+    "phase-b-profile-test-r2.log": "b4eb830b6e3e0280c092d27065b89c14e2c1f01bcba3c525a2b5f8c78732ac32",
+    "phase-b-profile-test-r3.exit.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "phase-b-profile-test-r3.log": "e449dfa3696ee43aea8e272c0f75bc0c0149fe8b02457ed130693a50617418c9",
+    "phase-b-profile-test.exit.txt": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+    "phase-b-profile-test.log": "267df1820d3c17d2ea57a3bcb9d3d57a9fdcc9f47634337237113d455f0ee635",
+    "phase_a_addendum.py": "70935908d7213ee5f9fe215d227d7bac31c07546b1f7f23fad6eb14c57f2a45a",
+    "phase_a_restore.py": "fb399d40b994d4e9f5a54ee3ad2df4efcd0e8b080c24ff8449f66d2cf8b81531",
+    "restoration.log": "1bf495be1966f393e07a978800051e6c3b8031d943fe1dbfb5e5a66d430fc4ee",
+    "v13-checkout-before.sql": "4b493dd0a2155059087fbd59a0bd4b1b40a4d44b44d4cefd5b8c517c008ca755",
+    "validate_production_artifacts.py": "2184d614773e1958a5a6f607ce611811078cfdd76152f6ade8c1c07a39e32840",
+    "verify_packaging.py": "15dccd9617a05825a8f6351ec4a9c561f3d0ff1ed5402a924e7388286f9db9ba"
+  },
+  "sqlExecuted": false,
+  "deploymentExecuted": false,
+  "dockerDaemonStarted": false,
+  "dockerImageBuildPull": false,
+  "projectZipCreated": false,
+  "productionGatesRemainOpen": true
+}

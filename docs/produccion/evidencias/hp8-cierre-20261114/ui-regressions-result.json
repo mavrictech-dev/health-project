@@ -1,0 +1,14 @@
+{
+  "mode": "Demo sintética; SpeechRecognition/SpeechSynthesis simulados, sin micrófono físico.",
+  "manualFallback": {
+    "firstName": "Ana",
+    "lastName": "Rojas"
+  },
+  "preservedTime": "13:30",
+  "selectedPatient": {
+    "id": "94000000-0000-4000-8000-000000000001",
+    "identifier": "00000001",
+    "nameDisabled": true
+  },
+  "errors": []
+}

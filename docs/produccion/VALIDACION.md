@@ -1,5 +1,18 @@
 # Validacion y limites de evidencia
 
+## HP8 cierre local y preparación productiva, 2026-11-14
+
+Revisión independiente cerrada según HP8-CIERRE-REVISION-20261114.md y
+evidencias/HP8_CIERRE_20261114.json. Supervisor1162Java/126frontend/check/builds,
+42capturas nuevas y recorridos sintéticosPASS;19SQL preservadas byte por byte
+en índices/checkouts true/false; factory/perfil35tests sin conexión y JARreal
+sinJWT rechazado antes de servidor. Composeconfig/nginxWindows-tPASS; sin
+Dockerdaemon, despliegue, SQLrealnuevo, Somee, audio físico o datos reales.
+Se conservan fallos de desarrollo/harness resueltos y P1failed histórica.
+35tests del perfil están incluidos en1162, no se suman aparte. EvidenciaSQL40/62
+del13nov conserva fecha. Preparación aceptada no acredita destino, grants,
+TLS/red/imagenLinux, recuperación/carga/seguridad o aceptación clínica/piloto.
+
 ## C0 aceptada estatica; C1.P1 SQL de revision y retirada, 2026-11-11
 
 C0 task_cbe1631fad10/ctx_1ca0fc8f62cf completa, entrega msg_ac0c0af0950a.

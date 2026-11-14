@@ -1,0 +1,7 @@
+{
+  "source": "https://nginx.org/download/nginx-1.28.0.zip",
+  "archiveSha256": "db8c7a529f84c819702bd1c50926b27d961a48b4f72fc7c46b30314fc2bbfd7c",
+  "executableSha256": "53530836391897ea218d8040acdd467cd4832efab597e534d7c670e0e6c94b3c",
+  "version": "nginx version: nginx/1.28.0",
+  "scope": "temporary syntax validation only; no server or Docker started"
+}

@@ -1,0 +1,5 @@
+{
+    "command":  "mvnw.cmd -o clean verify",
+    "exit":  0,
+    "seconds":  99.8750422
+}

@@ -1,0 +1,37 @@
+const {chromium}=require('../../frontend/node_modules/playwright');
+const fs=require('node:fs');const path=require('node:path');const assert=require('node:assert/strict');
+const base=process.env.HP_AGENDA_PREVIEW||'http://127.0.0.1:18328',fixed=process.env.HP8_EXPECT_FIXED==='1';
+const output=path.join(__dirname,process.env.HP8_UI_RUN||(fixed?'ui-regressions-after':'ui-regressions-before'));
+(async()=>{
+ fs.mkdirSync(output,{recursive:true});const browser=await chromium.launch({channel:'chrome',headless:true});
+ try{const page=await browser.newPage({viewport:{width:1440,height:1100}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.addInitScript(()=>{window.SpeechRecognition=class{start(){window.__activeSpeech=this;}abort(){this.onend?.();}};Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{cancel(){},speak(u){queueMicrotask(()=>u.onend?.());}}});});
+ await page.goto(base);await page.getByRole('button',{name:/Medicina humana/}).click();await page.waitForURL('**/app/inicio/');
+ await page.evaluate(()=>{const v=JSON.parse(localStorage.getItem('health-project-demo-v1'));v.state.context.role='REC';localStorage.setItem('health-project-demo-v1',JSON.stringify(v));});
+ await page.goto(base+'/app/agenda/');await page.locator('.branch-choices button').first().click();await page.locator('.agenda-event').first().waitFor();
+ await page.getByRole('button',{name:'Nueva cita',exact:true}).click();await page.getByLabel('Hora de la cita',{exact:true}).fill('13:30');await page.getByRole('button',{name:'Usar asistente de voz',exact:true}).click();await page.getByRole('button',{name:'Iniciar asistente',exact:true}).click();
+ for(const answer of ['Ana','Rojas']){await page.waitForFunction(()=>typeof window.__activeSpeech?.onresult==='function');await page.evaluate(answer=>window.__activeSpeech.onresult({resultIndex:0,results:[{isFinal:true,0:{transcript:answer}}]}),answer);await page.waitForFunction(()=>!!window.__activeSpeech?.onerror);}
+ await page.locator('.voice-steps .current').filter({hasText:'Fecha de nacimiento'}).waitFor();
+ await page.evaluate(()=>window.__activeSpeech.onerror({error:'not-allowed'}));await page.getByText('No se autorizó el micrófono. Puedes seguir escribiendo.').waitFor();
+ await page.screenshot({path:path.join(output,'voice-denied-after-names.png'),fullPage:true});
+ await page.getByRole('button',{name:'Volver al formulario',exact:true}).click();
+ const manualFallback={firstName:await page.getByLabel('Nombres',{exact:true}).inputValue(),lastName:await page.getByLabel('Apellidos',{exact:true}).inputValue()};
+ const preservedTime=await page.getByLabel('Hora de la cita',{exact:true}).inputValue();
+ await page.screenshot({path:path.join(output,'manual-fallback.png'),fullPage:true});
+ await page.setViewportSize({width:390,height:844});await page.screenshot({path:path.join(output,'manual-fallback-mobile.png'),fullPage:true});
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+ await page.setViewportSize({width:1440,height:1100});
+ await page.getByLabel('Buscar paciente por nombre o DNI',{exact:true}).fill('');
+ await page.locator('#agenda-patient option[value="94000000-0000-4000-8000-000000000001"]').waitFor({state:'attached'});
+ await page.getByLabel('Paciente',{exact:true}).selectOption('94000000-0000-4000-8000-000000000001');
+ await page.getByLabel('Buscar paciente por nombre o DNI',{exact:true}).fill('sin coincidencias');await page.waitForTimeout(500);
+ const selectedPatient={id:await page.getByLabel('Paciente',{exact:true}).inputValue(),identifier:await page.getByLabel('DNI / Identificador',{exact:true}).inputValue(),nameDisabled:await page.getByLabel('Nombres',{exact:true}).isDisabled()};
+ await page.screenshot({path:path.join(output,'selected-patient-filtered.png'),fullPage:true});
+ await page.setViewportSize({width:390,height:844});await page.screenshot({path:path.join(output,'selected-patient-filtered-mobile.png'),fullPage:true});
+ assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+ const result={mode:'Demo sintética; SpeechRecognition/SpeechSynthesis simulados, sin micrófono físico.',manualFallback,preservedTime,selectedPatient,errors};
+ fs.writeFileSync(path.join(output,'result.json'),JSON.stringify(result,null,2));
+ if(fixed){assert.deepEqual(manualFallback,{firstName:'Ana',lastName:'Rojas'});assert.equal(preservedTime,'13:30');assert.equal(selectedPatient.id,'94000000-0000-4000-8000-000000000001');assert.equal(selectedPatient.identifier,'00000001');assert.equal(selectedPatient.nameDisabled,true);assert.deepEqual(errors,[]);}
+ console.log(JSON.stringify(result));
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

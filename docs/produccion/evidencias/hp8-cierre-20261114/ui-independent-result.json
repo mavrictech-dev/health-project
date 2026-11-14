@@ -1,0 +1,5 @@
+{
+    "command":  "ui-regressions.cjs",
+    "exit":  0,
+    "mode":  "demo synthetic voice"
+}

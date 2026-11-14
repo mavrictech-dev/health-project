@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-14",
+  "state": "REVIEW_CLOSED_VALIDATED_LOCAL",
+  "baseCommit": "8a6a6aeab6c40a3ec114e0175289b75e7a3022e4",
+  "branch": "health/production-wave0",
+  "workerR1": {
+    "task": "task_81906d33c50e",
+    "dispatch": "ctx_38f36396ce9b",
+    "doneMessage": "msg_8dbdf027d49f",
+    "state": "succeeded",
+    "sourcesVerified": 36,
+    "artifactsVerified": 171
+  },
+  "independent": {
+    "backendTests": 1162,
+    "backendFailures": 0,
+    "backendErrors": 0,
+    "backendSkipped": 0,
+    "frontendTests": 126,
+    "typecheckExit": 0,
+    "runtimeBuildExit": 0,
+    "demoBuildExit": 0,
+    "freshSyntheticScreenshots": 42,
+    "browserErrors": [],
+    "migrationFilesCompared": 19,
+    "autocrlfRuns": [
+      "true",
+      "false"
+    ],
+    "migrationSqlSemanticsUnchanged": true,
+    "expectedPinsChanged": false,
+    "composeConfigExit": 0,
+    "nginxSyntaxExit": 0,
+    "nginxScope": "Windows syntax only; no running nginx",
+    "realPackagedJarRejectsMissingJwt": true,
+    "jarSha256": "d9a5f09ee0f9260c8b3db4ac6f57ad7b89792317775b1cecad6ddb20f69e59b0",
+    "sqlExecuted": false,
+    "voice": "simulated events; no physical audio"
+  },
+  "priorRealSqlEvidence": {
+    "date": "2026-11-13",
+    "cards47": "TARJETAS_4_7_20261113.json",
+    "agenda": "HP8_AGENDA_20261113.json",
+    "rerunInThisCut": false
+  },
+  "production": {
+    "configurationPrepared": true,
+    "approved": false,
+    "deployed": false,
+    "mainChanged": false,
+    "dockerEngineStarted": false,
+    "imagesBuilt": false,
+    "targetCredentialsPresent": false,
+    "openConditions": [
+      "exclusive Java/SQL target and domain",
+      "reviewed Linux images and runtime rehearsal",
+      "effective SQL permissions and real DNS/TLS/network",
+      "backup/restore and rollback rehearsal",
+      "load/security and monitoring",
+      "clinical/privacy/pilot acceptance and final authorization"
+    ]
+  }
+}

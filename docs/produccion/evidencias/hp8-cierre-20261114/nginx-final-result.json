@@ -1,0 +1,8 @@
+{
+  "templateSha256": "1eed79429478f923de97aa9394eeb0352ac31ec98d076fd628f279180347fe77",
+  "exit": 0,
+  "syntaxOnly": true,
+  "serverStarted": false,
+  "platform": "Windows validator; Linux image integration remains pending",
+  "priorAttempt": "nginx-result.json: missing temporary parent, syntax had passed"
+}

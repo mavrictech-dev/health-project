@@ -1,5 +1,39 @@
 # Orquestacion Codex de Health Project
 
+## R1 aceptada: revisión cerrada y fuentes de salida preparadas, 2026-11-14
+
+Done msg_8dbdf027d49f, task_81906d33c50e/ctx_38f36396ce9b succeeded/settled;
+trabajador retenido vivo. Supervisor contrasta36fuentes/171artefactos, integra
+ochoB y preserva ochoP1. Verificación propia1162Java/126frontend/check/builds,
+42capturas sintéticas,19SQL exactas en índice/checkout true/false, Compose y
+nginx-tPASS. JARreal sinJWT rechaza antes de servidor. Ampliación spring.factories
+autorizada por replyc61fb49ee081; no main/selector/Settings/BranchTokens o QA.
+D-87.BR; HP8-CIERRE-REVISION-20261114.md. Se prepara paquete local y publicación
+de fuentes revisadas solo health/production-wave0. Condiciones reales del destino
+en SALIDA_PRODUCCION_20261114.md; sin SQLrealnuevo/Somee/despliegue/datosreales.
+
+## Cierre HP8 y preparación productiva, 2026-11-14
+
+Usuario solicita cierre/release. P1failed preservada; supervisor verifica166artefactos
+y ocho fuentesSHA. Nuevo R1task_81906d33c50e/ctx_38f36396ce9b, contrato
+HP8-CIERRE-R1-20261114.md. Terminal anterior ausente/proceso sesión inexistente:
+se recupera misma sesión01a1d797 en term_9914da39-6d36-4e99-8ab4-1b06a48393c6,
+IdentityOnly ambosroles y/status recuperapiura66%5h/65%weekly, --no-daemon.
+No reenvío de receipt turn_start_unobserved; inicio confirmado por msg_c7244a421783.
+FaseA workerPASS1127/126/builds y checkouttrue/false; faseB guard solicitado
+msg_1fe3969aaaa7 aprobado por reply5689c61d y contrato, sin rutas adicionales.
+Supervisor integra provisionalmente ochoP1 tras hashes;1127Java/126frontend/check
+propiosPASS; builds/visual/reviewB pendientes. D-87.BQ. No SQLreal/Somee/despliegue.
+
+## Retorno a delegacion por pedido del usuario, 2026-11-13
+
+Se prepara HP8.QA.P1 para recuperapiura@gmail.com: revision de HP8, correcciones
+acotadas, regresion HP4-7 y capturas. /status efectivo conforme, cuota5h100% y
+weekly84%; launcher por proceso/--no-daemon. Nuevo workspace Orca
+health-programmer-hp8-review desde8a6a6ae; anterior sucio preservado, dispatch
+RUC abandonado no se reescribe. Contrato HP8-PROGRAMADOR-REVISION-20261113.md.
+Supervisor conserva docs/tablero/revision/integracion; sin Somee o despliegue.
+
 ## HP8 por continuidad directa, 2026-11-13
 
 El usuario agrega agenda diaria/semanal, captura manual y guiada por voz y

@@ -1,0 +1,20 @@
+{
+  "mode": "Frontend runtime de producción con HTTP interceptado sintético; sin Java/SQL/micrófono físico.",
+  "checks": [
+    "Revisión explícita sin escritura previa",
+    "Respuesta de reserva perdida: misma clave/cuerpo, una cita sintética",
+    "Importe positivo y reintento de cobro conservan requestId/revisión/cuerpo",
+    "Conflicto HTTP409 visible sin movimiento añadido",
+    "Alta con respuesta desconocida se consulta y reutiliza sin repetir POSTpaciente",
+    "Permisos UI verificados para REC/PRO/ADM/CAJ/AUD/ASI/PAC"
+  ],
+  "roleChecks": [
+    "PRO",
+    "ADM",
+    "CAJ",
+    "AUD",
+    "ASI",
+    "PAC"
+  ],
+  "errors": []
+}

@@ -1,0 +1,5 @@
+{
+    "command":  "mvnw.cmd -o clean verify after production profile integration",
+    "exit":  0,
+    "seconds":  59.5026095
+}

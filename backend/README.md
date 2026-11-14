@@ -1,8 +1,15 @@
 # Health Project — backend
 
-Java 21 + Spring Boot 4.1.1, monolito modular, MySQL 8.4 y procedimientos almacenados. El contrato HTTP y las reglas se encuentran en [la guía de arquitectura](../docs/backend/01_Plan_Arquitectura_y_Construccion.md) y [la referencia de API](../docs/backend/02_API_y_Recorridos.md).
+Java21 + Spring Boot4.1.1, monolito modular. El objetivo vigente es SQL Server
+y acceso runtime 100% por SP parametrizados con principal EXECUTE-only; migrador
+y bootstrap separados. Ver [preparación productiva y reversión](../docs/produccion/SALIDA_PRODUCCION_20261114.md)
+y [evidencia de revisión](../docs/produccion/HP8-CIERRE-REVISION-20261114.md).
+Las instrucciones MySQL siguientes describen el entorno heredado de desarrollo,
+no la salida a producción. El contrato HTTP se documenta en
+[arquitectura](../docs/backend/01_Plan_Arquitectura_y_Construccion.md) y
+[API](../docs/backend/02_API_y_Recorridos.md).
 
-## Ejecutar en Docker
+## Entorno Docker MySQL heredado
 
 Desde la raíz del proyecto, con Docker Desktop iniciado:
 

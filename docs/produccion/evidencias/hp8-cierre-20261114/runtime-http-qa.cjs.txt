@@ -1,0 +1,65 @@
+// Production static frontend against intercepted synthetic HTTP. No Java/SQL connection.
+const {chromium}=require('../../frontend/node_modules/playwright');
+const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');const {randomUUID}=require('node:crypto');
+const base='http://127.0.0.1:18429',output=path.join(__dirname,process.env.HP8_HTTP_RUN||'runtime-http-capturas');
+const tenantId='92000000-0000-4000-8000-000000000001',branchId='93000000-0000-4000-8000-000000000001',patientId='94000000-0000-4000-8000-000000000001',professionalId='91000000-0000-4000-8000-000000000001';
+const today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Lima',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+const next=new Date(today+'T12:00Z');next.setUTCDate(next.getUTCDate()+1);const tomorrow=next.toISOString().slice(0,10);
+const patient={id:patientId,tenantId,name:'Paciente existente QA',identifier:'QA-EXISTENTE',domain:'HUMAN',birthDate:'1992-05-12',species:null,contact:{firstName:'Paciente',lastName:'existente QA'},allergies:[],revision:1,createdAt:'2026-11-13T15:00:00Z'};
+async function setup(browser,role='REC'){
+ const page=await browser.newPage({viewport:{width:1440,height:1080}}),state={requests:[],errors:[],patients:[patient],appointments:[],bookingReceipts:new Map(),collectionReceipts:new Map(),loseBooking:true,loseCollection:true,losePatient:true,conflict:false};
+ page.on('pageerror',e=>state.errors.push(e.message));
+ await page.route('**/api/**',async route=>{
+  const req=route.request(),url=new URL(req.url()),p=url.pathname,method=req.method(),body=req.postDataJSON();
+  state.requests.push({path:p,method,body,key:req.headers()['idempotency-key'],csrf:req.headers()['x-csrf-token']});
+  const send=(data,status=200)=>route.fulfill({status,contentType:'application/json',body:JSON.stringify(data)});
+  if(p==='/api/public/context')return send({platform:false,id:tenantId,ruc:'20000000001',name:'Health Project QA sintética',domain:'HUMAN',hostname:'127.0.0.1'});
+  if(p==='/api/auth/browser/session')return send({user:{id:professionalId,tenantId,name:'Operador QA',email:'qa@example.test',roles:[role]},branchId,csrfToken:'csrf-synthetic-only',expiresAt:'2035-01-01T00:00:00Z'});
+  if(p==='/api/v1/negocios/20000000001/sucursales')return send([{id:branchId,name:'Sucursal QA sintética'}]);
+  if(p==='/api/public/status')return send({mode:'OPEN',message:'Entorno de prueba'});
+  if(p==='/api/v1/agenda/contexto')return send({timezone:'America/Lima',domain:'HUMAN',professionals:[{id:professionalId,name:'Profesional QA',specialtyCode:'H_GENERAL_MEDICINE',specialtyName:'Medicina general'}]});
+  if(p==='/api/v1/agenda/citas')return send({rows:state.appointments.filter(a=>Date.parse(a.startsAt)<Date.parse(url.searchParams.get('to'))&&Date.parse(a.endsAt)>Date.parse(url.searchParams.get('from'))),hasMore:false});
+  if(p==='/api/v1/agenda/arqueo')return send([]);
+  if(p==='/api/patients'&&method==='GET'){const query=(url.searchParams.get('query')||'').toLowerCase();return send(state.patients.filter(p=>(p.name+' '+p.identifier).toLowerCase().includes(query)));}
+  if(p==='/api/patients'&&method==='POST'){const created={...body,id:randomUUID(),tenantId,revision:1,createdAt:new Date().toISOString()};state.patients.push(created);if(state.losePatient){state.losePatient=false;return route.abort('connectionfailed');}return send(created);}
+  if(p==='/api/appointments'&&method==='POST'){
+   const key=req.headers()['idempotency-key'];assert.equal(req.headers()['x-csrf-token'],'csrf-synthetic-only');assert.ok(key);
+   if(state.bookingReceipts.has(key))return send(state.bookingReceipts.get(key));
+   const person=state.patients.find(p=>p.id===body.patientId),saved={...body,id:randomUUID(),patientName:person.name,identifier:person.identifier,professionalName:'Profesional QA',revision:1,collectionStatus:'PENDING',amountMinor:0,paymentMethod:null,collectionRevision:0};
+   state.appointments.push(saved);state.bookingReceipts.set(key,{...saved});if(state.loseBooking){state.loseBooking=false;return route.abort('connectionfailed');}return send(saved);
+  }
+  const collection=/^\/api\/v1\/agenda\/citas\/([^/]+)\/cobro$/.exec(p);
+  if(collection&&method==='PUT'){
+   const a=state.appointments.find(a=>a.id===collection[1]);assert.equal(req.headers()['x-csrf-token'],'csrf-synthetic-only');
+   if(state.collectionReceipts.has(body.requestId))return send(state.collectionReceipts.get(body.requestId));
+   if(state.conflict)return send({detail:'Cobro actualizado por otra sesión de QA.'},409);
+   Object.assign(a,{collectionStatus:body.status,amountMinor:body.amountMinor,paymentMethod:body.paymentMethod,collectionRevision:a.collectionRevision+1});
+   const saved={appointmentId:a.id,status:a.collectionStatus,amountMinor:a.amountMinor,paymentMethod:a.paymentMethod,revision:a.collectionRevision};state.collectionReceipts.set(body.requestId,saved);
+   if(state.loseCollection){state.loseCollection=false;return route.abort('connectionfailed');}return send(saved);
+  }
+  state.errors.push('Unexpected API '+method+' '+p);return send({detail:'Ruta no prevista en harness'},500);
+ });
+ return {page,state};
+}
+(async()=>{fs.mkdirSync(output,{recursive:true});const browser=await chromium.launch({channel:'chrome',headless:true});const checks=[];
+ try{
+  const {page,state}=await setup(browser);await page.goto(base+'/app/agenda/');await page.getByRole('button',{name:'Nueva cita',exact:true}).waitFor();
+  await page.getByRole('button',{name:'Nueva cita',exact:true}).click();await page.getByLabel('Paciente',{exact:true}).selectOption(patientId);await page.getByLabel('Fecha de la cita',{exact:true}).fill(tomorrow);await page.getByLabel('Hora de la cita',{exact:true}).fill('10:00');
+  await page.getByRole('button',{name:'Revisar cita',exact:true}).click();assert.equal(state.requests.filter(r=>r.method==='POST').length,0);checks.push('Revisión explícita sin escritura previa');
+  await page.getByRole('button',{name:'Confirmar cita',exact:true}).click();await page.getByRole('button',{name:'Reintentar confirmación',exact:true}).waitFor();assert.equal(await page.getByRole('button',{name:'Corregir datos',exact:true}).isDisabled(),true);await page.screenshot({path:path.join(output,'booking-lost-response.png'),fullPage:true});
+  await page.getByRole('button',{name:'Reintentar confirmación',exact:true}).click();await page.getByText('Cita registrada en la agenda de esta sucursal.',{exact:true}).waitFor();
+  const booking=state.requests.filter(r=>r.path==='/api/appointments');assert.equal(booking.length,2);assert.equal(booking[0].key,booking[1].key);assert.deepEqual(booking[0].body,booking[1].body);assert.equal(state.appointments.length,1);checks.push('Respuesta de reserva perdida: misma clave/cuerpo, una cita sintética');
+  await page.locator('.agenda-event').first().click();await page.getByLabel('Estatus de cobro',{exact:true}).selectOption('PAID');await page.getByLabel('Importe en soles',{exact:true}).fill('0');await page.getByRole('button',{name:'Guardar estado de cobro',exact:true}).click();assert.equal(state.requests.some(r=>r.method==='PUT'),false);
+  await page.getByLabel('Importe en soles',{exact:true}).fill('95.50');await page.getByLabel('Medio de Pago',{exact:true}).selectOption('YAPE');await page.getByRole('button',{name:'Guardar estado de cobro',exact:true}).click();await page.getByRole('button',{name:'Reintentar confirmación',exact:true}).waitFor();assert.equal(await page.getByLabel('Importe en soles',{exact:true}).isDisabled(),true);await page.screenshot({path:path.join(output,'collection-lost-response.png'),fullPage:true});
+  await page.getByRole('button',{name:'Reintentar confirmación',exact:true}).click();await page.getByText('Estado de cobro guardado y arqueo actualizado.',{exact:true}).waitFor();
+  const collection=state.requests.filter(r=>r.method==='PUT');assert.equal(collection.length,2);assert.deepEqual(collection[0].body,collection[1].body);assert.equal(state.collectionReceipts.size,1);checks.push('Importe positivo y reintento de cobro conservan requestId/revisión/cuerpo');
+  await page.locator('.agenda-event').first().click();state.conflict=true;await page.getByLabel('Medio de Pago',{exact:true}).selectOption('CARD');await page.getByRole('button',{name:'Guardar estado de cobro',exact:true}).click();await page.getByRole('alert').filter({hasText:'Cobro actualizado por otra sesión de QA.'}).waitFor();assert.equal(state.collectionReceipts.size,1);await page.screenshot({path:path.join(output,'collection-stale-revision.png'),fullPage:true});await page.getByRole('button',{name:'Recargar y cerrar',exact:true}).click();state.conflict=false;checks.push('Conflicto HTTP409 visible sin movimiento añadido');
+  await page.getByRole('button',{name:'Nueva cita',exact:true}).click();await page.getByLabel('Nombres',{exact:true}).fill('Nueva');await page.getByLabel('Apellidos',{exact:true}).fill('Identidad QA');await page.getByLabel('Fecha de nacimiento',{exact:true}).fill('1990-04-12');await page.getByLabel('DNI / Identificador',{exact:true}).fill('QA-NUEVA');await page.getByLabel('Hora de la cita',{exact:true}).fill('12:00');await page.getByRole('button',{name:'Revisar cita',exact:true}).click();await page.getByRole('button',{name:'Confirmar cita',exact:true}).click();await page.getByRole('button',{name:'Comprobar registro del paciente',exact:true}).waitFor();assert.equal(await page.getByRole('button',{name:'Reintentar confirmación',exact:true}).isDisabled(),true);
+  await page.screenshot({path:path.join(output,'patient-unknown-response.png'),fullPage:true});await page.getByRole('button',{name:'Comprobar registro del paciente',exact:true}).click();await page.getByRole('button',{name:'Confirmar cita',exact:true}).waitFor();await page.getByRole('button',{name:'Confirmar cita',exact:true}).click();await page.getByText('Cita registrada en la agenda de esta sucursal.',{exact:true}).waitFor();assert.equal(state.requests.filter(r=>r.path==='/api/patients'&&r.method==='POST').length,1);assert.equal(state.patients.length,2);assert.equal(state.appointments.length,2);checks.push('Alta con respuesta desconocida se consulta y reutiliza sin repetir POSTpaciente');
+  await page.setViewportSize({width:390,height:844});await page.screenshot({path:path.join(output,'runtime-agenda-mobile.png'),fullPage:true});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert.deepEqual(state.errors,[]);
+  const roleChecks=[];
+  for(const role of ['PRO','ADM','CAJ','AUD','ASI','PAC']){const q=await setup(browser,role),summaryResponse=['ADM','CAJ','AUD'].includes(role)?q.page.waitForResponse(r=>r.url().includes('/api/v1/agenda/arqueo')):null;await q.page.goto(base+'/app/agenda/');if(role==='PAC'){await q.page.getByRole('heading',{name:'No tienes acceso a esta ruta',exact:true}).waitFor();assert.equal(q.state.requests.some(r=>r.path.startsWith('/api/v1/agenda')),false);}else{await q.page.locator('.agenda-title').waitFor();assert.equal(await q.page.getByRole('button',{name:'Nueva cita',exact:true}).isEnabled(),role==='PRO','canBook '+role);if(summaryResponse)await summaryResponse;assert.equal(q.state.requests.some(r=>r.path==='/api/v1/agenda/arqueo'),['ADM','CAJ','AUD'].includes(role),'canReconcile '+role);}assert.deepEqual(q.state.errors,[]);roleChecks.push(role);await q.page.close();}
+  checks.push('Permisos UI verificados para REC/PRO/ADM/CAJ/AUD/ASI/PAC');
+  fs.writeFileSync(path.join(output,'result.json'),JSON.stringify({mode:'Frontend runtime de producción con HTTP interceptado sintético; sin Java/SQL/micrófono físico.',checks,roleChecks,requests:state.requests,errors:state.errors},null,2));console.log(JSON.stringify({checks,roleChecks,errors:state.errors}));
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

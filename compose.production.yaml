@@ -1,0 +1,80 @@
+name: health-project-production
+
+# Reviewed images must already exist locally. This file does not build, pull or provision SQL.
+services:
+  backend:
+    image: ${HEALTH_BACKEND_IMAGE:?Set a reviewed immutable backend image reference}
+    pull_policy: never
+    restart: unless-stopped
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=67108864,mode=1777
+    environment:
+      SPRING_PROFILES_ACTIVE: production
+      HEALTH_SQLSERVER_SERVER: ${HEALTH_SQLSERVER_SERVER:?Set the exclusive external SQL Server TLS hostname}
+      HEALTH_SQLSERVER_PORT: ${HEALTH_SQLSERVER_PORT:-1433}
+      HEALTH_SQLSERVER_DATABASE: ${HEALTH_SQLSERVER_DATABASE:?Set the exclusive Health Project database}
+      HEALTH_SQLSERVER_RUNTIME_USER: ${HEALTH_SQLSERVER_RUNTIME_USER:?Set an EXECUTE-only runtime principal}
+      HEALTH_BASE_DOMAIN: ${HEALTH_BASE_DOMAIN:?Set the approved public base domain}
+      HEALTH_PUBLIC_ORIGIN: ${HEALTH_PUBLIC_ORIGIN:?Set the approved HTTPS origin}
+    secrets:
+      - source: sql_runtime_password
+        target: health.sqlserver.runtime.password
+      - source: jwt_signing_key
+        target: HEALTH_JWT_SECRET
+    expose: ['8080']
+    networks: [application, database-egress]
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -q --header="Host: $$HEALTH_BASE_DOMAIN" -O /dev/null http://127.0.0.1:8080/actuator/health/readiness']
+      interval: 15s
+      timeout: 12s
+      retries: 5
+      start_period: 60s
+
+  gateway:
+    image: ${HEALTH_GATEWAY_IMAGE:?Set a reviewed immutable nginx-compatible image reference}
+    pull_policy: never
+    restart: unless-stopped
+    user: '101:101'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    ports:
+      - '127.0.0.1:${HEALTH_GATEWAY_PORT:-18080}:8080'
+    environment:
+      HEALTH_BASE_DOMAIN: ${HEALTH_BASE_DOMAIN:?Set the approved public base domain}
+      NGINX_ENVSUBST_FILTER: '^HEALTH_BASE_DOMAIN$$'
+    tmpfs:
+      - /etc/nginx/conf.d:rw,noexec,nosuid,size=1048576,uid=101,gid=101,mode=0750
+      - /var/cache/nginx:rw,noexec,nosuid,size=16777216,uid=101,gid=101,mode=0750
+      - /var/run:rw,noexec,nosuid,size=1048576,uid=101,gid=101,mode=0750
+    volumes:
+      - type: bind
+        source: ./deploy/production/nginx.conf.template
+        target: /etc/nginx/templates/default.conf.template
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ./frontend/out
+        target: /usr/share/nginx/html
+        read_only: true
+        bind:
+          create_host_path: false
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks: [application]
+
+secrets:
+  sql_runtime_password:
+    file: ${HEALTH_SQL_PASSWORD_FILE:?Set the protected external runtime password file path}
+  jwt_signing_key:
+    file: ${HEALTH_JWT_SECRET_FILE:?Set the protected external stable JWT key file path}
+
+networks:
+  application:
+    internal: true
+  database-egress: {}

@@ -1,0 +1,64 @@
+# Included in http{} by the reviewed nginx image; envsubst replaces ONLY HEALTH_BASE_DOMAIN.
+map $http_x_forwarded_proto $health_https_termination {
+    default 0;
+    https 1;
+}
+
+server {
+    listen 8080 default_server;
+    server_name _;
+    access_log off;
+    return 421;
+}
+
+server {
+    listen 8080;
+    server_name ${HEALTH_BASE_DOMAIN} *.${HEALTH_BASE_DOMAIN};
+    root /usr/share/nginx/html;
+    server_tokens off;
+    access_log off;
+    client_max_body_size 1m;
+
+    # The only supported ingress is the dedicated HTTPS terminator on this host.
+    # It must overwrite Host and X-Forwarded-Proto, never append client headers.
+    if ($health_https_termination = 0) { return 400; }
+
+    add_header X-Content-Type-Options nosniff always;
+    add_header X-Frame-Options SAMEORIGIN always;
+    add_header Referrer-Policy same-origin always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+    add_header Cache-Control "no-store" always;
+
+    resolver 127.0.0.11 valid=5s ipv6=off;
+    set $health_backend http://backend:8080;
+
+    location /api/ {
+        proxy_pass $health_backend;
+        proxy_set_header Host $host;
+        proxy_set_header Authorization $http_authorization;
+        # The application validates its canonical Host and configured HTTPS origin.
+        # It does not trust a client-supplied forwarding chain.
+        proxy_set_header Forwarded "";
+        proxy_set_header X-Forwarded-Host "";
+        proxy_set_header X-Forwarded-Proto "";
+        proxy_set_header X-Forwarded-For "";
+        proxy_set_header X-Real-IP "";
+        proxy_connect_timeout 5s;
+        proxy_read_timeout 30s;
+        proxy_send_timeout 30s;
+    }
+
+    location ^~ /actuator { return 404; }
+    location = /demo { return 404; }
+    location ^~ /demo/ { return 404; }
+    location ~ (^|/)\. { return 404; }
+
+    # Windows static exports store this RSC segment in a directory.
+    location ~ ^(?<export_route>.*)/(?<export_segment>__next\.\$c\$path)\.__PAGE__\.txt$ {
+        default_type text/x-component;
+        try_files $export_route/$export_segment/__PAGE__.txt =404;
+    }
+    location / {
+        try_files $uri $uri/index.html =404;
+    }
+}
