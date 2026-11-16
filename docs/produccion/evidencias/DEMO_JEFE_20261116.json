@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-16",
+  "baseProduct": "b0d0fe59b208ba346e543d68985a3487bb678039",
+  "productCodeChanged": false,
+  "install": {
+    "ciExit": 0,
+    "testExit": 0,
+    "typecheckExit": 0,
+    "demoBuildExit": 0
+  },
+  "frontendTests": 126,
+  "cards": {
+    "command": "cards-regression-qa.cjs",
+    "exit": 0,
+    "scope": "clean demo RUC HP4-7"
+  },
+  "agenda": {
+    "command": "agenda-trello-qa.cjs",
+    "exit": 0,
+    "scope": "clean demo HP8 simulated voice"
+  },
+  "presentation": {
+    "base": "http://127.0.0.1:18528",
+    "mode": "compiled standalone demo with synthetic fixtures",
+    "checks": [
+      "Portada: seis recorridos, sin login",
+      "Abre AdministraciÃƒÂ³n SaaS",
+      "SaaS: clientes disponibles",
+      "Abre Medicina humana",
+      "Abre OdontologÃƒÂ­a",
+      "Abre Veterinaria",
+      "Portada mÃƒÂ³vil390 en tres temas sin overflow"
+    ],
+    "apiRequests": [],
+    "errors": [],
+    "physicalAudioTested": false
+  },
+  "portablePresentation": {
+    "base": "http://127.0.0.1:3002",
+    "mode": "compiled standalone demo with synthetic fixtures",
+    "checks": [
+      "Portada: seis recorridos, sin login",
+      "Abre AdministraciÃƒÂ³n SaaS",
+      "SaaS: clientes disponibles",
+      "Abre Medicina humana",
+      "Abre OdontologÃƒÂ­a",
+      "Abre Veterinaria",
+      "Portada mÃƒÂ³vil390 en tres temas sin overflow"
+    ],
+    "apiRequests": [],
+    "errors": [],
+    "physicalAudioTested": false
+  },
+  "portable": {
+    "date": "2026-11-16",
+    "sourceBase": "b0d0fe59b208ba346e543d68985a3487bb678039",
+    "archive": "tmp/demo-jefe-20261116/health-project-demo-jefe-20261116.zip",
+    "archiveBytes": 1674776,
+    "archiveSha256": "0f2902d89c97c182f3c1c43d061cd44b91b178124e986c6dce1aebb5bc753255",
+    "manifestSha256": "1d4d3d3545f062b188c0c706ca556563c63f203689155db5dbe8bcf9b4b786fc",
+    "payloadFiles": 457,
+    "archiveEntries": 458,
+    "roundtripVerified": true,
+    "noDatabase": true,
+    "noCredentials": true,
+    "nodeRequired": "24",
+    "deployed": false,
+    "docsAdjustedForPortable": true,
+    "githubAsset": "entregables/demo/health-project-demo-20261116.zip",
+    "sourceProductUnchangedSince": "b0d0fe59b208ba346e543d68985a3487bb678039"
+  },
+  "sourceDocsLinksVerified": true,
+  "databaseExecuted": false,
+  "backendTestsRerun": false,
+  "physicalAudioTested": false,
+  "publishedWebsite": false,
+  "deployed": false,
+  "productionApproved": false,
+  "reviewedFilesSha256": {
+    "README.md": "9fbd920dde3bf16acc5d822f3a4df1476a02707fbee4502d06527e3195ef3b79",
+    "frontend/GUIA_PRESENTACION.md": "a848189fb17ac6b93756ecc8dc41030feb68db33ce9ba315c8c05b71a2ce0da7",
+    "frontend/README.md": "db83a02fae98f7e1a31d732585af9958a264980a6411264fcfa6819761e2eaf8",
+    "entregables/demo/LEEME.md": "05737c4808d49d2b80826f6045c60654f98604cdc3b8d9701a14d9558169cdf5",
+    "docs/produccion/DEMO_JEFE_20261116.md": "6fa39a13e0904c64ae5ff1550964a8409938e91c7d6eed3b03621dede282456c"
+  },
+  "preview": {
+    "temporaryQaPort18528Stopped": true,
+    "portableDemoPort": 3002,
+    "portableDemoPid": 13476,
+    "keptOpenForUser": true,
+    "externalWebsitePublished": false
+  }
+}

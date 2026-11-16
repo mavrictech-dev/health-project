@@ -1,5 +1,11 @@
 # Health Project · frontend de presentación
 
+Instalación desde cero y guía para mostrar la entrega HP4–HP8:
+[README principal](../README.md#instalar-y-abrir-la-demo) y
+[guion de diez minutos](GUIA_PRESENTACION.md). Descargar la rama
+`health/production-wave0`; `build:demo` y `preview:demo` no requieren backend ni SQL.
+El sistema conectado utiliza SQL Server; esta presentación usa datos ficticios.
+
 Demo interactiva en español de un sistema para medicina humana, odontología y veterinaria. Frontend con datos ficticios: Next.js, TypeScript, shadcn/ui sobre Base UI y Tailwind CSS. Incluye temas blanco, negro y navy; formularios en paneles derechos con fondo desenfocado.
 
 **Presentación publicada:** [health-project-demo.vercel.app](https://health-project-demo.vercel.app).

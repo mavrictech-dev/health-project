@@ -1,5 +1,11 @@
 # Tablero de ejecucion
 
+Actualización 2026-11-16: demo para jefe preparada y verificada con instalación
+limpia,126frontend/check/builddemoPASS y recorridos de navegador sintéticos.
+README y guion completos; ZIP portátil incluido en entregables/demo, con manifest
+ySHA256 verificados. DEMO_JEFE_20261116.md/D-87.BS. Sin cambios de producto o
+dependencias, sin SQL/Java realnuevo, main o despliegue. Producción sigue pendiente.
+
 Actualización 2026-11-14: REVISIÓN HP8 CERRADA LOCAL. R1 aceptada e integrada:
 36fuentes/171artefactos exactos,1162Java/126frontend/check/builds y42capturas
 propiasPASS. Perfil productivo35tests incluidos en1162; JARreal rechazaJWTausente,
@@ -17,6 +23,7 @@ a los intentos anteriores, no a esta nueva validacion.
 
 | Entrega actual | Estado | Evidencia |
 | --- | --- | --- |
+| DEMO-JEFE-01 | VALIDADA DEMO LOCAL; LISTA PARA PRESENTAR | README.md/GUIA_PRESENTACION.md;ZIP1.674.776bytes/Node24;126tests y0API/0erroresJS de portada/navegación; DEMO_JEFE_20261116.md |
 | RUC/Acceso/sucursal/JWT | VALIDADA LOCAL | Alta/edicion/login/aislamiento y cookies; SQL+HTTP real |
 | HP4 DEV-CATALOG | VALIDADA LOCAL | Tarifario, servicios, convenios; SQL+HTTP y UI |
 | HP5 DEV-PACIENTE | VALIDADA LOCAL | Filiacion/DNI/antecedentes append-only con autor y fecha |

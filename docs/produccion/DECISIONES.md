@@ -1,5 +1,24 @@
 # Decisiones y contratos de integracion
 
+## D-87.BS: demo para jefe y documentación de instalación, 2026-11-16
+
+Usuario solicita preparar presentación, subir aGitHub e incluir instalación en
+README. Se documenta enREADME.md (nombre estándar), guion actualizado y paquete
+portátil de demo de1.674.776bytes, estático/sincredenciales/SQL. Fuentes de producto
+b0d0fe5 intactas. Snapshot limpio +npmci/test126/check/builddemo y recorridos
+RUC/HP4–8/portada/SaaS/especialidades sintéticosPASS; ZIPextraído sinnode_modules
+tambiénPASS/0API/0erroresJS. FechaSQL13nov/Java14nov conserva alcance histórico.
+
+Supervisor único escritor de documentación y verificador independiente de código
+aprobado. Orca16nov rechaza run-use no_active_sender_terminal en sesión escritorio;
+no se inventa handle/Task/worker_done. Programador retenido recuperado idle sin
+encargo; IdentityOnly ambosroles coincide. No se implementa producto ni se editan
+fuentes de su worktree. Informe DEMO_JEFE_20261116.md registra detalle y evidencia.
+
+Autorización de entrega/push enhealth/production-wave0 permanece: subir código,
+README y ZIPficticio revisados; no main, publicación de sitio/Vercel o despliegue.
+La demo no habilita uso clínico real; condiciones productivas siguen abiertas.
+
 ## D-87.BR: cierre revisado HP8 y configuración productiva aceptados localmente, 2026-11-14
 
 R1 task_81906d33c50e/ctx_38f36396ce9b succeeded/settled, done msg_8dbdf027d49f.

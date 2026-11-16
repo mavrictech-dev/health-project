@@ -1,5 +1,19 @@
 # Orquestacion Codex de Health Project
 
+## Demo para jefe y documentación, 2026-11-16
+
+Pedido usuario: demo/GitHub/READMEinstalación. Repo limpio b0d0fe5 confirmado.
+IdentityOnly ambosroles conforme. Runtime e9321c38 carece de terminal propio del
+coordinador en esta sesión de escritorio: run-use falla no_active_sender_terminal;
+no se pasa handle ajeno ni se altera configuración global. Sesión retenida del
+programador01a1d797 recuperada, terminal term_ae4c0cb7-c0b2-41a0-8b93-659defa95453,
+idle sin Task/Dispatch nueva. No worker_done ficticio o edición de su worktree.
+
+Supervisor completa documentación y verificación independiente de producto ya
+aprobado. No nueva implementación: README/guion,126tests/check/builddemo snapshot
+limpio y navegador/ZIPportátilPASS. D-87.BS/DEMO_JEFE_20261116.md; push solo rama
+autorizada de fuentes/docs/ZIPficticio; sin main/sitio público/SQL/despliegue.
+
 Paquete local de la revisión cerrada: fuentes b29303f,708archivos,ZIP34.842.200bytes,
 manifest y lectura completa verificados. HP8_RELEASE_20261114.json y
 SALIDA_PRODUCCION_20261114.md. Solo preparación; sin despliegue o aprobación del

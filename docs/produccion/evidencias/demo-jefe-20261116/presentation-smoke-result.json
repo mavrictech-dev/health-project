@@ -1,0 +1,16 @@
+{
+  "base": "http://127.0.0.1:18528",
+  "mode": "compiled standalone demo with synthetic fixtures",
+  "checks": [
+    "Portada: seis recorridos, sin login",
+    "Abre Administración SaaS",
+    "SaaS: clientes disponibles",
+    "Abre Medicina humana",
+    "Abre Odontología",
+    "Abre Veterinaria",
+    "Portada móvil390 en tres temas sin overflow"
+  ],
+  "apiRequests": [],
+  "errors": [],
+  "physicalAudioTested": false
+}

@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-16",
+  "sourceBase": "b0d0fe59b208ba346e543d68985a3487bb678039",
+  "archive": "tmp/demo-jefe-20261116/health-project-demo-jefe-20261116.zip",
+  "archiveBytes": 1674776,
+  "archiveSha256": "0f2902d89c97c182f3c1c43d061cd44b91b178124e986c6dce1aebb5bc753255",
+  "manifestSha256": "1d4d3d3545f062b188c0c706ca556563c63f203689155db5dbe8bcf9b4b786fc",
+  "payloadFiles": 457,
+  "archiveEntries": 458,
+  "roundtripVerified": true,
+  "noDatabase": true,
+  "noCredentials": true,
+  "nodeRequired": "24",
+  "deployed": false,
+  "docsAdjustedForPortable": true,
+  "githubAsset": "entregables/demo/health-project-demo-20261116.zip",
+  "sourceProductUnchangedSince": "b0d0fe59b208ba346e543d68985a3487bb678039"
+}

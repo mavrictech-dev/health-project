@@ -1,5 +1,16 @@
 # Revisiones del supervisor
 
+## Demo para jefe y README revisados, 2026-11-16
+
+Sin cambios de producto. Guía completa desde clone de rama hasta preview local,
+guion10min actualizado, reset pororigen/sesión y límites demo/SQLproductivo.
+Snapshotgit limpio +npmci offline/126tests/check/builddemoPASS. Navegador:
+RUC/HP4–8 y7grupos de presentaciónPASS/0API/0erroresJS; portada390tres temas.
+ZIPportátil sin dependencias/npm/SQL probado tras extracción; manifestSHA y
+1.674.776bytes exactos, entregables/demo/SHA256.json. Inspección visual propia
+portada desktop/navy móvil y agenda móvil. Informe DEMO_JEFE_20261116.md.
+Preparación para reunión aceptada; producción no se revalida en esta entrega.
+
 ## HP8.CIERRE.R1 aceptada e integrada, 2026-11-14
 
 Done msg_8dbdf027d49f revisado:36fuentes/171artefactos exactos; ochoP1 preservadas
