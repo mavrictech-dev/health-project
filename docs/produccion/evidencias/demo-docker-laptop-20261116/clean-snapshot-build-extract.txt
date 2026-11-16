@@ -1,0 +1,12 @@
+#25 [gateway build 8/8] RUN npm run check && npm run build
+#25 [gateway build 8/8] RUN npm run check && npm run build
+#25 [gateway build 8/8] RUN npm run check && npm run build
+#26 35.95 [INFO] Tests run: 43, Failures: 0, Errors: 0, Skipped: 0
+#26 35.96 [INFO] BUILD SUCCESS
+#25 [gateway build 8/8] RUN npm run check && npm run build
+#25 39.31 ? Compiled successfully in 15.4s
+#25 [gateway build 8/8] RUN npm run check && npm run build
+#25 66.63 ? Generating static pages using 6 workers (87/87) in 2.2s
+#26 84.77 [INFO] Tests run: 1162, Failures: 0, Errors: 0, Skipped: 0
+#26 85.98 [INFO] BUILD SUCCESS
+#36 1.156 {"sqlExecuted":false,"canonicalSources":19,"offline":"PASS","batches":277}

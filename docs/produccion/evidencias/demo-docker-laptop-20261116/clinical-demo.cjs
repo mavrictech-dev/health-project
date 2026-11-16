@@ -1,0 +1,34 @@
+// Independent supervisor QA; real API through the isolated Docker gateway.
+const {chromium}=require('/qa/node_modules/playwright');
+const fs=require('node:fs/promises'),net=require('node:net'),assert=require('node:assert/strict');
+const output='/output/supervisor-clinical',port=Number(process.env.DEMO_PORT||18090);
+const base=`http://reunion.health.localhost:${port}`,patient='a4000000-0000-4000-8000-000000000001';
+const marker='Ejemplo para la reunión; sin uso asistencial. Supervisor 20261116.';
+let server,browser,context,created=false;const sockets=new Set();
+(async()=>{
+ await fs.mkdir(output);created=true;
+ server=net.createServer(client=>{const upstream=net.connect(80,'gateway');for(const s of [client,upstream]){sockets.add(s);s.on('close',()=>sockets.delete(s));s.on('error',()=>{client.destroy();upstream.destroy();});}client.pipe(upstream);upstream.pipe(client);});
+ await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(port,'::',resolve);});
+ browser=await chromium.launch({headless:true});context=await browser.newContext({viewport:{width:1440,height:1000},locale:'es-PE',timezoneId:'America/Lima'});
+ const page=await context.newPage(),pageErrors=[],serverErrors=[];page.setDefaultTimeout(25000);
+ page.on('pageerror',e=>pageErrors.push(e.message));page.on('response',r=>{if(new URL(r.url()).pathname.startsWith('/api/')&&r.status()>=500)serverErrors.push({path:new URL(r.url()).pathname,status:r.status()});});
+ await page.goto(base+'/acceso/');await page.getByLabel('RUC del Negocio',{exact:true}).fill('20000000001');
+ await page.getByLabel('Correo electrónico',{exact:true}).fill('profesional@example.test');await page.getByLabel('Contraseña',{exact:true}).fill(process.env.DEMO_APP_PASSWORD);
+ await page.getByRole('button',{name:'Iniciar sesión',exact:true}).click();await page.getByRole('heading',{name:'Selecciona una sucursal',exact:true}).waitFor();await page.getByRole('button',{name:/Sede principal · ejemplo/}).click();await page.waitForURL(base+'/app/inicio/');
+ await page.goto(base+'/app/pacientes/');await page.getByLabel('Buscar por nombre o identificador',{exact:true}).fill('DEMO-001');await page.getByRole('button',{name:'Buscar',exact:true}).click();
+ await page.getByRole('button',{name:'Ver ficha de Paciente ficticio de reunión',exact:true}).click();await page.getByRole('heading',{name:'Ficha administrativa',exact:true}).waitFor();await page.getByText('DEMO-001',{exact:true}).last().waitFor();await page.screenshot({path:output+'/01-paciente-desktop.png',fullPage:true});
+ await page.getByRole('button',{name:'Ver antecedentes',exact:true}).click();await page.getByRole('heading',{name:'Antecedentes del paciente',exact:true}).waitFor();
+ await page.getByRole('button',{name:'Registrar nueva versión',exact:true}).click();await page.getByLabel('Personales',{exact:true}).fill(marker);
+ const antecedentResponse=page.waitForResponse(r=>new URL(r.url()).pathname===`/api/v1/pacientes/${patient}/antecedentes`&&r.request().method()==='POST');
+ await page.getByRole('button',{name:'Guardar nueva versión',exact:true}).click();const ar=await antecedentResponse;assert.equal(ar.status(),200);const antecedent=await ar.json();await page.getByText(marker,{exact:true}).waitFor();
+ await page.screenshot({path:output+'/02-antecedente-desktop.png',fullPage:true});
+ await page.goto(base+'/app/consulta/');await page.getByRole('heading',{name:'Consulta médica',exact:true}).waitFor();await page.locator(`#clinical-patient option[value="${patient}"]`).waitFor({state:'attached'});await page.getByLabel('Paciente',{exact:true}).selectOption(patient);
+ await page.getByLabel('Anamnesis / Motivo',{exact:true}).fill(marker);await page.getByLabel('Examen físico',{exact:true}).fill('Texto ficticio para probar el formulario.');await page.getByLabel('Diagnóstico',{exact:true}).fill('Ejemplo sin evaluación clínica.');await page.getByLabel('Tratamiento / Indicaciones',{exact:true}).fill('Prueba de instalación; sin indicaciones médicas.');
+ const savedResponse=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/v1/consultas'&&r.request().method()==='POST');
+ await page.getByRole('button',{name:'Guardar consulta',exact:true}).click();const saved=await savedResponse;assert.equal(saved.status(),200);const consultation=await saved.json();assert.ok(consultation.id);await page.getByText('Consulta guardada. La ficha quedó asociada al paciente y a esta sucursal.',{exact:true}).waitFor();
+ await page.reload();await page.locator('.consultation-history').getByText(marker,{exact:true}).waitFor();
+ const persisted=await page.evaluate(async id=>{const r=await fetch(`/api/v1/pacientes/${id}/consultas`,{cache:'no-store'});if(!r.ok)throw new Error('Consultation read '+r.status);return r.json();},patient);assert.equal(persisted.filter(x=>x.id===consultation.id).length,1);assert.equal(persisted.find(x=>x.id===consultation.id).anamnesis,marker);
+ await page.screenshot({path:output+'/03-consulta-persistida-desktop.png',fullPage:true});await page.setViewportSize({width:390,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await page.screenshot({path:output+'/04-consulta-persistida-mobile.png',fullPage:true});
+ assert.deepEqual(pageErrors,[]);assert.deepEqual(serverErrors,[]);
+ await fs.writeFile(output+'/result.json',JSON.stringify({status:'PASS',patientId:patient,antecedentId:antecedent.id,antecedentVersion:antecedent.version,consultationId:consultation.id,consultationPersistedAfterReload:true,synthetic:true,mockedRequests:false,pageErrors,serverErrors,physicalAudioTested:false,hostRuntimeDependencies:false},null,2));console.log('CLINICAL_DEMO_PASS');
+})().catch(async e=>{const error=String(e.stack||e).replaceAll(process.env.DEMO_APP_PASSWORD||'no-secret-match','[redacted]');console.error(error);if(created)await fs.writeFile(output+'/FAILED.json',JSON.stringify({status:'FAILED',error},null,2));process.exitCode=1;}).finally(async()=>{await context?.request.dispose();await context?.close();await browser?.close();for(const socket of sockets)socket.destroy();server?.close();});

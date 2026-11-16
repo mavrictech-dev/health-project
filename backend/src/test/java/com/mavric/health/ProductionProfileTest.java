@@ -26,6 +26,17 @@ import static org.mockito.Mockito.*;
 
 /** Real ConfigData + factory discovery + SpringApplication; no embedded server, SQL or provider traffic. */
 class ProductionProfileTest {
+    private static ch.qos.logback.classic.Level originalRootLevel;
+
+    @BeforeAll static void preserveRootLogging() {
+        originalRootLevel = ((ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME)).getLevel();
+    }
+
+    // Class callbacks also surround every dynamic executable created by @TestFactory.
+    @AfterAll static void restoreRootLogging() {
+        ((ch.qos.logback.classic.Logger) org.slf4j.LoggerFactory.getLogger(org.slf4j.Logger.ROOT_LOGGER_NAME)).setLevel(originalRootLevel);
+    }
+
     @TempDir Path temporary;
     static final String CANARY = "private-input-canary";
     record Inputs(Map<String,Object> properties,Path secrets) { }

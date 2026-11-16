@@ -1,0 +1,6 @@
+﻿{
+    "baselineFiles":  821,
+    "deliveryFiles":  14,
+    "baselinePreserved":  820,
+    "onlyChangedExistingFile":  "backend/src/test/java/com/mavric/health/ProductionProfileTest.java"
+}

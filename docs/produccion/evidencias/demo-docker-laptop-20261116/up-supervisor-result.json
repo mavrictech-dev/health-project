@@ -1,0 +1,6 @@
+{
+    "command":  "docker compose -p health-meeting-demo --env-file \u003cindependent-demo-env\u003e -f compose.demo.yaml up -d --build",
+    "exit":  0,
+    "scope":  "health-meeting-demo",
+    "source":  "supervisor checkout, reviewed 14 files"
+}

@@ -4,10 +4,11 @@ Aplicación clínica SaaS para organizaciones humanas, odontológicas y veterina
 pacientes, historia clínica, agenda, catálogo y administración por organización y
 sucursal. Esta entrega está en la rama **`health/production-wave0`**.
 
-**Para enseñar la aplicación:** usa la demo independiente de esta guía. Funciona
-con datos ficticios, sin cuentas, contraseñas, backend ni base de datos.
-Puedes instalarla desde el código o [descargar el ZIP portátil](https://github.com/mavrictech-dev/health-project/raw/refs/heads/health/production-wave0/entregables/demo/health-project-demo-20261116.zip)
-ya compilado; ambos requieren Node.js 24.
+**Lista para la reunión:** descarga desde GitHub y arranque con Docker, sin ZIP.
+Frontend, API Java y SQL Server funcionan conectados con datos ficticios.
+La [revisión del 16 de noviembre](docs/produccion/DEMO_DOCKER_LAPTOP_REVISION_20261116.md)
+verificó acceso, pacientes, antecedentes, consulta, agenda, cobro y persistencia.
+La presentación estática con Node.js se conserva como alternativa secundaria.
 
 **Sistema conectado:** los recorridos RUC y HP4–HP8 están validados localmente.
 El cierre del 14 de noviembre pasó 1.162 pruebas backend y 126 frontend. La puesta
@@ -15,7 +16,163 @@ en producción con pacientes reales aún requiere validar el destino, seguridad,
 recuperación y aceptación del piloto. Las demás pantallas de diseño de la demo
 no representan módulos clínicos aprobados.
 
-## Instalar y abrir la demo
+## Instalar y abrir la demo conectada con Docker
+
+Esta es la instalación para la reunión: navegador → frontend y API Java →
+SQL Server 2022, con una clínica y cuentas ficticias. El stack se construyó y
+probó en Docker Linux/amd64: 1.162 pruebas backend, navegador real y persistencia
+tras reiniciar Java y repetir el arranque. No requiere herramientas de desarrollo
+instaladas en el host. La laptop de la reunión debe cumplir los requisitos siguientes.
+
+### Requisitos de la laptop
+
+1. Instala [Git](https://git-scm.com/install/windows).
+2. Instala y abre [Docker Desktop](https://docs.docker.com/desktop/setup/install/windows-install/).
+   En Windows utiliza el backend WSL2 y **contenedores Linux**. Sigue el
+   instalador de Docker si necesitas habilitar virtualización o WSL2 y reiniciar.
+3. Utiliza un equipo **Intel/AMD de 64 bits (x86_64)**. Esta imagen SQL Server no
+   tiene soporte nativo ARM/AppleSilicon; no se presenta la emulación como una
+   instalación verificada. Consulta [requisitos oficiales de SQL Server](https://learn.microsoft.com/en-us/sql/linux/install-upgrade/setup?view=sql-server-ver16).
+4. Reserva memoria y disco para las imágenes y la compilación. Docker Desktop
+   documenta 8 GB de RAM del sistema para WSL2; este Compose limita SQL a 3 GB y el
+   motor a 2.048 MB, además de frontend/Java durante el build. Revisa los requisitos
+   del enlace de Docker para tu versión de Windows. Necesitas Internet para la
+   primera descarga y compilación.
+
+**No instales Node.js, Java, Maven, Python o SQL Server en la laptop para esta
+opción**: se compilan y ejecutan dentro de Docker. Usa Chrome o Edge.
+
+Comprueba que Docker Desktop ya está iniciado:
+
+```powershell
+git --version
+docker version
+docker compose version
+docker info --format '{{.OSType}}/{{.Architecture}}'
+```
+
+El último comando debe indicar Linux y arquitectura x86_64/amd64. Si solo aparece
+el cliente Docker y falla la conexión al servidor, abre Docker Desktop y espera
+a que el motor quede disponible antes de continuar.
+
+### Descargar y arrancar por primera vez
+
+En PowerShell, desde la carpeta donde guardarás la entrega:
+
+```powershell
+git clone --branch health/production-wave0 --single-branch https://github.com/mavrictech-dev/health-project.git health-project-reunion
+cd health-project-reunion
+if (-not (Test-Path -LiteralPath .env.demo)) { Copy-Item -LiteralPath .env.demo.example -Destination .env.demo }
+docker compose -p health-meeting-demo --env-file .env.demo -f compose.demo.yaml config --quiet
+docker compose -p health-meeting-demo --env-file .env.demo -f compose.demo.yaml up -d --build
+docker compose -p health-meeting-demo --env-file .env.demo -f compose.demo.yaml ps -a
+```
+
+Todos los comandos Docker se ejecutan desde la raíz del repositorio. El nombre
+explícito `health-meeting-demo` mantiene esta demo separada de otros stacks.
+La primera vez se descargan imágenes y dependencias; hazlo antes de la reunión.
+`setup` es un proceso de una sola ejecución: su estado final esperado es
+**Exited(0)**. SQL, backend y gateway deben quedar levantados; SQL y backend
+deben pasar a **healthy** antes de abrir la aplicación.
+
+`.env.demo` está ignorado por Git. La plantilla contiene contraseñas públicas de
+ejemplo EXCLUSIVAS para este entorno local ficticio. No añadas credenciales de
+una base existente ni uses estos valores en producción. Si cambias los valores,
+hazlo antes de la primera inicialización y conserva después el mismo archivo.
+No vuelvas a copiar la plantilla encima de una configuración ya inicializada.
+
+### Abrir, iniciar sesión y presentar
+
+Abre [http://reunion.health.localhost:18090/acceso/](http://reunion.health.localhost:18090/acceso/).
+Credenciales de ejemplo de la plantilla:
+
+| Campo | Valor para la reunión |
+| --- | --- |
+| RUC | `20000000001` |
+| Correo de profesional/recepción | `profesional@example.test` |
+| Contraseña de aplicación | `Meeting_App_2026_Only!` |
+| Sucursal | Sede principal · ejemplo |
+| Paciente preparado | Paciente ficticio de reunión · `DEMO-001` |
+
+También se prepara `admin@example.test` para administración de la clínica. La
+cuenta de plataforma `plataforma@example.test` entra por el dominio base
+[http://health.localhost:18090/acceso/](http://health.localhost:18090/acceso/).
+Las cuentas comparten la contraseña de aplicación de ejemplo; si cambiaste
+`DEMO_APP_PASSWORD`, utiliza tu valor. No confundas esa contraseña con las
+contraseñas internas de SQL/runtime/bootstrap.
+
+Guion conectado: [frontend/GUIA_PRESENTACION.md](frontend/GUIA_PRESENTACION.md).
+Muestra acceso y sucursal, paciente, cita futura con revisión, cobro/arqueo y
+consulta. Los datos se guardan en el SQL Server del stack y deben sobrevivir a
+la recarga y los reinicios; no dependen del almacenamiento de la demo estática.
+La voz es opcional y puede depender de Internet/permisos del navegador. Conserva
+la entrada manual para la reunión y utiliza solo datos ficticios.
+
+![Agenda conectada y citas conservadas tras volver a arrancar el stack](docs/produccion/evidencias/demo-docker-laptop-20261116/agenda/11-desktop-persistencia-segundo-up.png)
+
+Captura del ensayo con datos ficticios. El arqueo se agrupa por el día del
+registro del cobro, que puede ser distinto del día de la cita.
+
+### Reabrir, detener y actualizar
+
+Para otra reunión, desde la misma carpeta y con el mismo `.env.demo`:
+
+```powershell
+docker compose -p health-meeting-demo --env-file .env.demo -f compose.demo.yaml up -d
+```
+
+No hace falta reconstruir si no cambió el código. Para detener sin perder datos:
+
+```powershell
+docker compose -p health-meeting-demo --env-file .env.demo -f compose.demo.yaml stop
+```
+
+Para quitar los contenedores y la red conservando el volumen SQL:
+
+```powershell
+docker compose -p health-meeting-demo --env-file .env.demo -f compose.demo.yaml down
+```
+
+No añadas `-v` ni borres volúmenes: ahí se conservan los datos de las pruebas.
+Reabrir una ventana privada no borra los datos de esta demo conectada. El setup
+reconoce una instalación completa y no debe repetir las migraciones ni fixtures.
+
+Para actualizar una copia sin cambios locales, conservando `.env.demo`:
+
+```powershell
+git switch health/production-wave0
+git pull --ff-only
+docker compose -p health-meeting-demo --env-file .env.demo -f compose.demo.yaml up -d --build
+```
+
+Si tienes cambios locales, consérvalos y revisa las diferencias antes de actualizar.
+Un cambio inesperado de versión, huella o estado de instalación debe detener el
+setup; conserva el volumen y el diagnóstico. No reapliques SQL ni borres la base
+para resolver un error.
+
+### Diagnóstico del stack Docker
+
+```powershell
+docker compose -p health-meeting-demo --env-file .env.demo -f compose.demo.yaml ps -a
+docker compose -p health-meeting-demo --env-file .env.demo -f compose.demo.yaml logs --tail=80 setup backend gateway
+```
+
+| Problema | Qué revisar |
+| --- | --- |
+| No encuentra `.env.demo` | Ejecuta la copia inicial de la plantilla desde la raíz, solo si aún no existe |
+| `docker version` no muestra servidor | Inicia Docker Desktop en modo Linux/WSL2 |
+| Build interrumpido o exit 137 | Revisa memoria/disco asignados a Docker y conserva el error; no borres datos para liberar espacio |
+| SQL tarda en quedar healthy | Consulta los logs de `sql`; verifica memoria, arquitectura y la configuración inicial |
+| `setup` termina distinto de 0 | Conserva logs/volumen; no arranca una demo correcta hasta resolver la causa |
+| Dominio no abre | Usa Chrome/Edge con la URL completa `.localhost`; comprueba que gateway publicó 18090 |
+| Puerto 18090 ocupado | Cambia solo `DEMO_PORT` en `.env.demo` antes de arrancar; usa ese puerto también en ambas URLs |
+| Login falla | Comprueba RUC/correo y `DEMO_APP_PASSWORD`; conserva la configuración usada al inicializar |
+| Micrófono denegado | Continúa por captura manual |
+
+No publiques el puerto SQL ni Java: solo el gateway escucha en loopback.
+No uses los comandos de esta demo sobre otro proyecto Docker.
+
+## Alternativa: demo estática con Node.js
 
 ### 1. Requisitos
 
@@ -37,7 +194,7 @@ node --version
 npm --version
 ```
 
-Si PowerShell bloquea `npm.ps 1`, usa `npm.cmd` en los comandos siguientes.
+Si PowerShell bloquea `npm.ps1`, usa `npm.cmd` en los comandos siguientes.
 No necesitas cambiar la política de ejecución de Windows.
 
 ### 2. Descargar la entrega
@@ -86,7 +243,7 @@ npm run preview:demo
 Adapta la ruta a la carpeta donde la descargaste. Solo necesitas recompilar si
 actualizas el código. No vuelvas a instalar dependencias antes de cada reunión.
 
-## Guion para enseñarla en diez minutos
+### Guion de la presentación estática
 
 | Tiempo | Recorrido | Qué mostrar |
 | --- | --- | --- |
@@ -108,7 +265,7 @@ Las pruebas anteriores de voz usaron eventos simulados, no un micrófono físico
 
 ![Agenda semanal con datos ficticios](docs/produccion/evidencias/demo-jefe-20261116/HP8-02-calendario-semanal.png)
 
-## Reiniciar los datos de presentación
+### Reiniciar los datos de presentación estática
 
 Los cambios se guardan en el navegador y origen de la demo (`127.0.0.1:3002`).
 No se comparten entre equipos ni se envían al backend.
@@ -125,26 +282,14 @@ memoria durante la sesión y deben volver a seleccionarse después de recargar.
 Usa únicamente datos ficticios. Cobros, correos, firmas y documentos de la demo
 son simulaciones: no procesan dinero ni certifican o envían documentos reales.
 
-## Compartir con otro equipo
+### Compartir la presentación estática con otro equipo
 
 Comparte este README para que el destinatario siga la instalación rápida.
 GitHub aloja el código; abrir el repositorio no ejecuta la aplicación.
 
-También puedes [descargar el ZIP portátil](https://github.com/mavrictech-dev/health-project/raw/refs/heads/health/production-wave0/entregables/demo/health-project-demo-20261116.zip)
-y descomprimirlo completamente. Con Node.js 24 instalado, abre una terminal en la
-carpeta donde está `LEEME.md` y ejecuta:
-
-```text
-node frontend/scripts/preview-static.cjs --demo
-```
-
-Abre `http://127.0.0.1:3002`. No necesitas npm, Git, descargar dependencias ni
-Java/SQL para esta opción. Las instrucciones también van dentro del ZIP y en
-[entregables/demo/LEEME.md](entregables/demo/LEEME.md); su huella está en
-[SHA256.json](entregables/demo/SHA256.json).
-
-Este paquete es distinto del candidato productivo del 14 de noviembre. El
-preview escucha en loopback; cada equipo ejecuta su propia copia.
+La entrega portátil ZIP fue retirada por pedido del usuario. El código se
+obtiene por Git; el stack Docker de reunión se prepara por separado de la demo
+estática y del candidato productivo del 14 de noviembre.
 
 ## Desarrollo y comprobaciones
 
@@ -161,9 +306,10 @@ Next.js, normalmente `http://localhost:3000`. Para una reunión utiliza el build
 compilado con `preview:demo`. `localhost`, `127.0.0.1` y puertos distintos tienen
 almacenamiento independiente porque son orígenes diferentes.
 
-## Instalar el sistema conectado a SQL Server
+## Preparar un despliegue productivo
 
-Es una instalación diferente de la demo. El backend usa **Java 21/Spring Boot y
+Es una instalación diferente de la demo local. No uses el instalador, los
+principales o las credenciales de reunión en producción. El backend usa **Java 21/Spring Boot y
 SQL Server 2022**, con acceso runtime exclusivamente por SP parametrizados. El
 usuario runtime no debe tener acceso directo a tablas ni DDL. Migración y
 bootstrap utilizan principales y procesos separados.
@@ -239,12 +385,12 @@ desplegado una instalación productiva habilitada para pacientes reales.
 heredado. No son la instalación SQL Server vigente. El archivo separado es
 `compose.production.yaml`; ejecutarlo requiere completar y validar el destino.
 
-## Solución de problemas de la demo
+## Solución de problemas de la alternativa estática
 
 | Problema | Solución |
 | --- | --- |
 | `node` o `npm` no se encuentra | Instala Node 24 y abre una terminal nueva |
-| PowerShell bloquea `npm.ps 1` | Usa `npm.cmd ci`, `npm.cmd run build:demo` y `npm.cmd run preview:demo` |
+| PowerShell bloquea `npm.ps1` | Usa `npm.cmd ci`, `npm.cmd run build:demo` y `npm.cmd run preview:demo` |
 | Puerto 3002 ocupado | Detén tu otra demo con Ctrl+C o utiliza otro puerto, como se indica abajo |
 | Falta `out-demo/index.html` | Desde `frontend`, ejecuta `npm run build:demo` y espera el resultado correcto |
 | Aparece login/API sin datos | Comprueba que usaste `build:demo`, `preview:demo` y la dirección 3002 |

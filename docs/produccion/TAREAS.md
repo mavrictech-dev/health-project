@@ -1,5 +1,16 @@
 # Tablero de ejecucion
 
+Actualización vigente 2026-11-16: DEMO.DOCKER.LAPTOP VALIDADA E INTEGRADA LOCAL.
+Task_5ee0aa4919a6/ctx_fc37233ae5c6; entrega msg_405724745376 aceptada tras revisión.
+14fuentes/131artefactos exactos,19SQL canónicas; build propio43/1162testsPASS.
+SQL completo,4denegacionesruntime, navegador real sinmock, RUC/sedes/cita/cobro/
+arqueo/CSRF y misma sesión/datos después de restart/segundoupPASS. ADM/SAD y
+paciente/antecedente/consulta persistidaPASS,19capturas propias. Un502previsto
+solo durante restart documentado. Siete contenedores previos exactos; main intacto.
+README y guion completos Git+Docker; sinZIP, alternativa estática secundaria.
+DEMO_DOCKER_LAPTOP_REVISION_20261116.md/D-87.BV. Aceptada para reunión; producción
+conserva gates. Los estados previos siguientes son historial.
+
 Actualización 2026-11-16: demo para jefe preparada y verificada con instalación
 limpia,126frontend/check/builddemoPASS y recorridos de navegador sintéticos.
 README y guion completos; ZIP portátil incluido en entregables/demo, con manifest
@@ -23,7 +34,8 @@ a los intentos anteriores, no a esta nueva validacion.
 
 | Entrega actual | Estado | Evidencia |
 | --- | --- | --- |
-| DEMO-JEFE-01 | VALIDADA DEMO LOCAL; LISTA PARA PRESENTAR | README.md/GUIA_PRESENTACION.md;ZIP1.674.776bytes/Node24;126tests y0API/0erroresJS de portada/navegación; DEMO_JEFE_20261116.md |
+| DEMO.DOCKER.LAPTOP | VALIDADA; LISTA PARA REUNIÓN LOCAL | README/guion Git+Docker;43/1162tests,19capturas propias;SQL/API/UI reales y persistencia; DEMO_DOCKER_LAPTOP_REVISION_20261116.md |
+| DEMO-JEFE-01 | HISTÓRICA; ALTERNATIVA ESTÁTICA | DEMO_JEFE_20261116.md; Node24/126tests; ZIP retirado por pedido posterior |
 | RUC/Acceso/sucursal/JWT | VALIDADA LOCAL | Alta/edicion/login/aislamiento y cookies; SQL+HTTP real |
 | HP4 DEV-CATALOG | VALIDADA LOCAL | Tarifario, servicios, convenios; SQL+HTTP y UI |
 | HP5 DEV-PACIENTE | VALIDADA LOCAL | Filiacion/DNI/antecedentes append-only con autor y fecha |

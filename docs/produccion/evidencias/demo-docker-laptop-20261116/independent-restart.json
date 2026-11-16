@@ -1,0 +1,7 @@
+{
+    "restartExit":  0,
+    "before":  "5548a628b84ac16a75c607fc64a511decb29eafe3705de850396fd7c5a8a2b76|2026-11-16T16:40:45.122197823Z|healthy",
+    "after":  "5548a628b84ac16a75c607fc64a511decb29eafe3705de850396fd7c5a8a2b76|2026-11-16T16:43:57.968617652Z|healthy",
+    "gatewayStatus":  200,
+    "scope":  "health-meeting-demo"
+}

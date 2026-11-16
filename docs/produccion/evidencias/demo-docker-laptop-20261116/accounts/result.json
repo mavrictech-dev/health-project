@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "accounts": [
+    {
+      "email": "admin@example.test",
+      "role": "ADM",
+      "origin": "http://reunion.health.localhost:18090",
+      "finalPath": "/app/configuracion/organizacion/",
+      "pageErrors": [],
+      "serverErrors": []
+    },
+    {
+      "email": "plataforma@example.test",
+      "role": "SAD",
+      "origin": "http://health.localhost:18090",
+      "finalPath": "/saas/clientes/",
+      "pageErrors": [],
+      "serverErrors": []
+    }
+  ],
+  "mockedRequests": false,
+  "physicalAudioTested": false,
+  "hostRuntimeDependencies": false
+}

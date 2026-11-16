@@ -1,0 +1,6 @@
+{
+    "scope":  "health-meeting-demo",
+    "exitCode":  0,
+    "backend":  "healthy",
+    "hostStatus":  200
+}

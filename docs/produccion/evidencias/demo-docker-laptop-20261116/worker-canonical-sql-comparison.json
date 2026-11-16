@@ -1,0 +1,116 @@
+﻿[
+    {
+        "file":  "V1__schema.sql",
+        "workerSha256":  "ED1DCB3E6BD4F2AC1F9B11DE9AA7D1053DB0E71CA3610E21801CC60D51FE4A0A",
+        "canonicalSupervisorSha256":  "ED1DCB3E6BD4F2AC1F9B11DE9AA7D1053DB0E71CA3610E21801CC60D51FE4A0A",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V2__catalog_seed.sql",
+        "workerSha256":  "F672C8856AB6A150AE1967E85B8BAF9DF07F2615F4DB8445263F11F322A1A885",
+        "canonicalSupervisorSha256":  "F672C8856AB6A150AE1967E85B8BAF9DF07F2615F4DB8445263F11F322A1A885",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V3__identity_infrastructure_procedures.sql",
+        "workerSha256":  "B4EBE83471354E2027315D95E1657AFDE72AD2C19C508E2EF764C2356F940CE0",
+        "canonicalSupervisorSha256":  "B4EBE83471354E2027315D95E1657AFDE72AD2C19C508E2EF764C2356F940CE0",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V4__saas_organization_procedures.sql",
+        "workerSha256":  "9640CD1215F27EB6789E7B79C11291AA37BC89F61B2112F678D364C2112654DC",
+        "canonicalSupervisorSha256":  "9640CD1215F27EB6789E7B79C11291AA37BC89F61B2112F678D364C2112654DC",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V5__clinical_procedures.sql",
+        "workerSha256":  "D2352D8FE6A6F8F84C62179F7A643027866A17229064B9B0CE3D96F60FCD9ECE",
+        "canonicalSupervisorSha256":  "D2352D8FE6A6F8F84C62179F7A643027866A17229064B9B0CE3D96F60FCD9ECE",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V6__operations_procedures.sql",
+        "workerSha256":  "5B007234AFCE7A435FE9220111249E537A22B467ED922CFDB45C3BEC69949458",
+        "canonicalSupervisorSha256":  "5B007234AFCE7A435FE9220111249E537A22B467ED922CFDB45C3BEC69949458",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V7__audit_triggers.sql",
+        "workerSha256":  "C5657FA2329AB306D93DDDA99EFCE52F95285575C8437295666B35670DBADF1F",
+        "canonicalSupervisorSha256":  "C5657FA2329AB306D93DDDA99EFCE52F95285575C8437295666B35670DBADF1F",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V8__execution_permissions.sql",
+        "workerSha256":  "63CA532AD7F16650DFD27891A7093EA4B0CEE3C264CA35537D81A9100C067F4E",
+        "canonicalSupervisorSha256":  "63CA532AD7F16650DFD27891A7093EA4B0CEE3C264CA35537D81A9100C067F4E",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V9__appointment_window_days.sql",
+        "workerSha256":  "9A0C1F96B66ADB7DE833310A5BDA1797CAE9C0F39E7A2D435CDE7EEBB62EDC04",
+        "canonicalSupervisorSha256":  "9A0C1F96B66ADB7DE833310A5BDA1797CAE9C0F39E7A2D435CDE7EEBB62EDC04",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V10__jdbc_implicit_transaction_boundary.sql",
+        "workerSha256":  "486862353A929D799EF54007B4DB8A005F438D60502C0E8970297F7238690CA0",
+        "canonicalSupervisorSha256":  "486862353A929D799EF54007B4DB8A005F438D60502C0E8970297F7238690CA0",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V11__canonical_generated_uuids.sql",
+        "workerSha256":  "F512C6D44917612B53850E29C320C85925A3C92936951BC1A5CD39807AD72EF1",
+        "canonicalSupervisorSha256":  "F512C6D44917612B53850E29C320C85925A3C92936951BC1A5CD39807AD72EF1",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V12__independent_professional_conflict.sql",
+        "workerSha256":  "516F1BD3583B51792A75045C90342FAB8236C2D7830B154EF811939980876438",
+        "canonicalSupervisorSha256":  "516F1BD3583B51792A75045C90342FAB8236C2D7830B154EF811939980876438",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V13__patient_links_read.sql",
+        "workerSha256":  "667D8C0731557625C662285DC0E56C885B57E50E7AFA5AF63EBEA2030E3ACF51",
+        "canonicalSupervisorSha256":  "667D8C0731557625C662285DC0E56C885B57E50E7AFA5AF63EBEA2030E3ACF51",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V14__patient_link_revision.sql",
+        "workerSha256":  "418B1C1B864DE9A6E7AC20E0F641630422A8D2451B3D42F7E9B97FB835B0EA9A",
+        "canonicalSupervisorSha256":  "418B1C1B864DE9A6E7AC20E0F641630422A8D2451B3D42F7E9B97FB835B0EA9A",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V15__tenant_ruc.sql",
+        "workerSha256":  "8B38567C4BB99559F013368119E1BC1D62CD477CDE3685D4C91FA5FF4D3F7E3E",
+        "canonicalSupervisorSha256":  "8B38567C4BB99559F013368119E1BC1D62CD477CDE3685D4C91FA5FF4D3F7E3E",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V16__patient_antecedents_consultations.sql",
+        "workerSha256":  "8BAA87C6E3B9617792738F820FEDD9E9783CF13C682CE63BE75AF352F548433F",
+        "canonicalSupervisorSha256":  "8BAA87C6E3B9617792738F820FEDD9E9783CF13C682CE63BE75AF352F548433F",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V17__clinical_catalog.sql",
+        "workerSha256":  "A90BA275B1074FBC0C322839DED77FC182BC93435A3A1FCA4389409698E16B99",
+        "canonicalSupervisorSha256":  "A90BA275B1074FBC0C322839DED77FC182BC93435A3A1FCA4389409698E16B99",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V18__consultation_appointment_status.sql",
+        "workerSha256":  "AF7B93A4F13F0A9E347BB449684620B60D04275CDD71797781E72E055F182AD5",
+        "canonicalSupervisorSha256":  "AF7B93A4F13F0A9E347BB449684620B60D04275CDD71797781E72E055F182AD5",
+        "byteEqual":  true
+    },
+    {
+        "file":  "V19__agenda_collections.sql",
+        "workerSha256":  "6DDA200D857B80BE100BA4C9CC1254E3A98CB48CB6709063129907502850F9C4",
+        "canonicalSupervisorSha256":  "6DDA200D857B80BE100BA4C9CC1254E3A98CB48CB6709063129907502850F9C4",
+        "byteEqual":  true
+    }
+]

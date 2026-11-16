@@ -1,85 +1,115 @@
-# Demo de Health Project para la reunión
+# Health Project: guion para la reunión de pruebas
 
-Esta presentación utiliza datos ficticios y operaciones locales del navegador.
-No requiere credenciales ni SQL Server. Instalación:
-[README principal](../README.md#instalar-y-abrir-la-demo).
+La modalidad principal es la **demo conectada en Docker**: frontend runtime,
+API Java y SQL Server local. Se utilizan exclusivamente datos ficticios.
+Instalación: [README principal](../README.md#instalar-y-abrir-la-demo-conectada-con-docker).
+Ensayo conectado del 16 de noviembre aprobado: acceso, paciente, antecedente,
+consulta persistida, cita/cobro, administración y reinicios. Consulta la
+[revisión y evidencia](../docs/produccion/DEMO_DOCKER_LAPTOP_REVISION_20261116.md).
 
-## Preparación
+## Preparación antes de la reunión
 
-1. Desde `frontend`, ejecuta `npm run build:demo` y espera a que termine.
-2. Inicia `npm run preview:demo` y abre `http://127.0.0.1:3002` en una ventana
-   privada nueva. Mantén la terminal abierta.
-3. Comprueba las seis entradas de la portada, zoom 100% y la resolución del proyector.
-4. Ensaya por escritura. La voz depende de navegador, permisos y servicios del
-   proveedor; no es necesaria para completar la presentación.
+1. Descarga la rama `health/production-wave0` y sigue la instalación Docker del
+   README. Haz la primera descarga/build con anticipación.
+2. Comprueba `ps -a`: SQL/backend saludables, gateway levantado y setup terminado
+   con código 0. No instales Node/Java/SQL en la laptop para esta modalidad.
+3. Abre `http://reunion.health.localhost:18090/acceso/` en Chrome o Edge. Si
+   cambiaste DEMO_PORT, usa el mismo puerto en las URLs.
+4. Entra con RUC `20000000001`, correo `profesional@example.test` y la contraseña
+   `Meeting_App_2026_Only!` de la plantilla. Si cambiaste DEMO_APP_PASSWORD antes
+   de inicializar, utiliza tu valor. Selecciona Sede principal · ejemplo.
+5. Comprueba el paciente `DEMO-001` y ensaya el recorrido por escritura. La voz
+   depende del navegador y sus servicios; no es necesaria para presentar.
 
-Puedes comenzar así: «Esta demo permite recorrer la experiencia con datos
-ficticios. Los flujos principales tienen pruebas locales de frontend y backend;
-la habilitación productiva y clínica del destino tiene su propio cierre».
+Puedes comenzar así: «Esta instalación de pruebas conecta la interfaz con Java
+y SQL Server. Vamos a probar acceso, pacientes, agenda e historia con datos
+ficticios. El uso con pacientes reales requiere su aceptación productiva y clínica».
 
-## Recorrido de diez minutos
+## Recorrido conectado de diez minutos
 
-### Entrada y navegación — un minuto
+| Tiempo | Recorrido | Resultado que puedes comprobar |
+| --- | --- | --- |
+| 1 min | Acceso y sucursal | RUC/correo/contraseña y selección de sede desde el servidor |
+| 2 min | Pacientes | Buscar DEMO-001; ficha e historial de antecedentes con autor/fecha |
+| 3 min | Agenda y cobro | Día/semana, cita futura, revisión, pago manual y arqueo |
+| 2 min | Consulta escrita | Registrar ejemplo, recuperar la consulta tras recargar |
+| 2 min | Administración y cierre | Clínica/SaaS con su cuenta; resumen de lo probado y próximos pasos |
 
-Entra por **Medicina humana**. Muestra espacio, organización/sucursal y temas
-blanco, negro y navy. El acceso conectado usa RUC + correo + contraseña y sede;
-las entradas de presentación no exigen autenticarse.
+### Paciente y antecedentes
 
-### Agenda y recepción — tres minutos
+En **Pacientes**, busca `DEMO-001` o el nombre del paciente ficticio preparado.
+Muestra la ficha. Si registras un antecedente, escribe «Ejemplo para la reunión;
+sin uso asistencial» y enseña la versión, autor y fecha. No uses nombres,
+documentos, historias o archivos de personas reales.
 
-1. Abre **Espacio de demostración** y cambia al rol **Recepción**.
-2. En **Agenda**, selecciona la sucursal si aparece el selector.
-3. Alterna **Día** y **Semana** y muestra el filtro de profesional.
-4. Pulsa **Nueva cita**, selecciona paciente existente y profesional. Elige mañana
-   y un horario libre. Enseña **Revisar cita** antes de **Confirmar cita**.
-5. Abre la cita, selecciona **Pagado**, importe y medio. Guarda; es un cobro ficticio.
-6. Vuelve a **Hoy** para ver el arqueo: agrupa por fecha de registro del cobro,
-   aunque la cita esté programada para mañana.
+### Agenda, reserva y cobro
 
-Como opción adicional: **Agendar por voz**, Nombres → Apellidos → Nacimiento →
-Horario. Revisa y corrige antes de reservar. Si falla el micrófono, vuelve al
-formulario y continúa escribiendo. Usa solo identificadores ficticios en altas.
+1. Abre **Agenda**. Alterna **Día** y **Semana** y comprueba la sucursal.
+2. Pulsa **Nueva cita**, selecciona el paciente preparado y el profesional.
+   Elige mañana y un horario que esté libre. Enseña la pantalla de revisión
+   antes de **Confirmar cita**.
+3. Recarga la página: la cita debe recuperarse desde la API y SQL Server.
+4. Abre la cita y registra **Pagado**, un importe de ejemplo y el medio de pago.
+   Se trata de un registro manual de prueba: no realiza un cargo ni envía dinero.
+5. Vuelve a **Hoy** para mostrar el arqueo. Se agrupa por el día de registro del
+   cobro, aunque la cita esté programada para mañana.
 
-### Pacientes e historia — dos minutos
+Como opción adicional, muestra **Agendar por voz** y la alternativa manual.
+Ensaya el micrófono antes de la reunión. La evidencia de voz previa utilizó
+eventos simulados y no acredita el micrófono físico de esta laptop.
 
-Abre **Pacientes**, busca una ficha preparada por DNI o nombre y muestra sus
-antecedentes con autor, fecha e historial. En consulta, muestra anamnesis, examen
-físico, diagnóstico y tratamiento, y el estado de cita si se vincula. Usa textos
-de ejemplo y no incorpores datos de pacientes reales.
+### Consulta e historia
 
-### Administración SaaS — dos minutos
+Abre la consulta del paciente preparado y escribe ejemplos en anamnesis,
+examen físico, diagnóstico y tratamiento. Revisa antes de guardar. Si vinculas
+una cita, muestra el resultado de atención seleccionado. Recarga y recupera
+la consulta para comprobar persistencia. No presentes estos textos como una
+evaluación médica, firma certificada o documento clínico emitido.
 
-Regresa a la portada y entra por **Administración SaaS**. Muestra clientes,
-planes, sedes y capacidades. Puedes abrir el formulario de alta y su revisión.
-Estas operaciones locales no aprovisionan infraestructura ni procesan pagos.
+### Administración
 
-### Especialidades y siguiente etapa — dos minutos
+Para administración de la clínica utiliza `admin@example.test` en el mismo
+tenant/RUC. Para plataforma entra en `http://health.localhost:18090/acceso/`
+con `plataforma@example.test`. Ambas cuentas usan la contraseña de aplicación
+de la plantilla. Mantén separadas las funciones de profesional, administración
+de clínica y plataforma: los permisos proceden del servidor.
 
-Desde la portada entra por **Odontología** o **Veterinaria**. Muestra gráficos,
-fichas por especie o responsables como alcance visual del producto. Los perfiles
-y procesos avanzados requieren validación profesional antes del uso asistencial.
+Muestra la clínica, sedes y plan preparados. La creación de clientes no contrata
+infraestructura externa, envía correo real ni procesa pagos de suscripción.
+La demo estática secundaria ofrece vistas de diseño de especialidades; no las
+confundas con módulos clínicos habilitados en esta instalación conectada.
 
-## Repetir la demo
+## Repetir y cerrar
 
-Cierra todas las ventanas privadas y abre una nueva para una sesión limpia.
-También puedes borrar los datos de sitio del origen de esta demo y recargar.
-**Restaurar escenario** restaura el escenario principal; agenda/catálogos y otros
-simuladores mantienen almacenes separados. Para un reinicio completo utiliza
-una nueva sesión privada o borra los datos del sitio.
+Los datos de esta modalidad están en el volumen SQL del proyecto Docker. Una
+ventana privada o borrar datos del navegador NO restaura el escenario. No borres
+el volumen ni reapliques migraciones entre reuniones. Conserva `.env.demo`,
+especialmente las contraseñas y la clave JWT estable de esta instalación.
 
-`localhost`, `127.0.0.1` y puertos distintos tienen almacenes independientes.
-Los adjuntos de ejemplo permanecen en memoria y se seleccionan de nuevo tras recargar.
+Para detener conservando los datos, desde la raíz:
 
-## Qué podemos afirmar
+```powershell
+docker compose -p health-meeting-demo --env-file .env.demo -f compose.demo.yaml stop
+```
 
-- La demo es navegable sin backend y muestra formularios, roles, estados y vistas
-  de escritorio/móvil con datos sintéticos.
-- RUC y HP4–HP8 tienen evidencia local SQL/API; la revisión del 14 de noviembre cerró
-  con 1.162 pruebas backend y 126 frontend, sin fallos.
-- La demo y la instalación productiva son entregas distintas. Esta reunión no
-  verifica SQL de un proveedor, certificados, recuperación o carga del destino.
-- Los dictados de la evidencia anterior fueron simulados. Ensaya por separado el
-  micrófono del portátil. Firmas y cobros de esta presentación son ficticios.
+Para reabrir:
 
-Al terminar pulsa **Ctrl+C** en la terminal del preview. No hay que limpiar
-ninguna base de datos: los cambios de presentación pertenecen al navegador.
+```powershell
+docker compose -p health-meeting-demo --env-file .env.demo -f compose.demo.yaml up -d
+```
+
+El README incluye diagnóstico y actualización. No utilices `down -v`, limpiezas
+globales de Docker ni comandos de otros stacks de Health Project.
+
+## Alternativa: presentación estática
+
+Si eliges la [alternativa Node.js](../README.md#alternativa-demo-estática-con-nodejs),
+ejecuta `npm ci`, `npm run build:demo` y `npm run preview:demo` desde frontend.
+Abre `http://127.0.0.1:3002`. Esa presentación usa API simulada y almacenamiento
+del navegador; no demuestra persistencia SQL, login real ni permisos del servidor.
+
+En esa modalidad puedes seleccionar rol Recepción mediante **Espacio de
+demostración**, recorrer SaaS/Humana/Odontología/Veterinaria y los tres temas.
+Para limpiar todos sus almacenes abre una sesión privada nueva tras cerrar
+las anteriores, o borra solo los datos del origen de esa demo. Los adjuntos de
+ejemplo permanecen en memoria. Para detener el preview pulsa Ctrl+C.

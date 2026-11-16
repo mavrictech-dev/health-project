@@ -1,5 +1,18 @@
 # Revisiones del supervisor
 
+## Demo Docker conectada aceptada, 2026-11-16
+
+Revisión cerrada: [DEMO_DOCKER_LAPTOP_REVISION_20261116.md](DEMO_DOCKER_LAPTOP_REVISION_20261116.md).
+14fuentes/131artefactos exactos,19SQL canónicas y baseline preservados; cambio
+existente limitado al testlogging autorizado. Build propio DockerLinux43/1162PASS.
+QA independiente real: RUC/sucursal, cita/cobro/arqueo, CSRF403, persistencia misma
+sesión trasrestart/up; ADM/SAD y paciente/antecedente/consultaPASS.19capturas propias.
+Un502delsondeo durante reinicio previsto se conserva; sin errores de página.
+Setup --verify y4denegacionesPASS; puerto host200/hostextraño421. Siete contenedores
+anteriores y main intactos. README/guion Git+Docker completos; ZIP retirado según
+pedido posterior, alternativa Node secundaria. D-87.BV. Aceptación local para
+reunión; producción sigue separada. El apartado estático siguiente es histórico.
+
 ## Demo para jefe y README revisados, 2026-11-16
 
 Sin cambios de producto. Guía completa desde clone de rama hasta preview local,

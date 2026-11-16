@@ -1,0 +1,86 @@
+﻿[
+    {
+        "path":  ".dockerignore",
+        "sha256":  "961d5ad3591d898761c178c1ca10aada882c840b7777bbd8ff8815f33d8806ec",
+        "bytes":  401,
+        "kind":  "new"
+    },
+    {
+        "path":  ".env.demo.example",
+        "sha256":  "d17054acad2f2c2f0c8678dba7f3b4ec89a965b9ee380a7dcff5592a2dc8b868",
+        "bytes":  362,
+        "kind":  "new"
+    },
+    {
+        "path":  "backend/src/main/resources/application-local-demo.yml",
+        "sha256":  "a320884187c171b568d76f927f2b1d444aec22608a00527f4e549c1a63b8955e",
+        "bytes":  1168,
+        "kind":  "new"
+    },
+    {
+        "path":  "backend/src/test/java/com/mavric/health/ProductionProfileTest.java",
+        "sha256":  "b4d8e3bcaba2c6c9c451f2a86e0bf45a6f20d9d5348cefb2aa19fa669d1cbe41",
+        "bytes":  12822,
+        "kind":  "authorized-test-fix"
+    },
+    {
+        "path":  "compose.demo.yaml",
+        "sha256":  "351d55ff2f55d2716ede9f1e4cff473e5f7f4ace3cd410af9b889b6e239cef94",
+        "bytes":  3682,
+        "kind":  "new"
+    },
+    {
+        "path":  "docker/demo/backend.Dockerfile",
+        "sha256":  "77a702cb9328c3945620a113171e3829b6950dbd0f4651fa4ebde436c64b6d65",
+        "bytes":  1505,
+        "kind":  "new"
+    },
+    {
+        "path":  "docker/demo/frontend.Dockerfile",
+        "sha256":  "686dba72105ba55ea5ab7886a103d1131ee6824b1622a17b74470687dce33483",
+        "bytes":  542,
+        "kind":  "new"
+    },
+    {
+        "path":  "docker/demo/GUIA_TECNICA.md",
+        "sha256":  "4fbec12a8191d1961c529422873f600010d4e5f364274f8931eeae258d4c50ee",
+        "bytes":  8619,
+        "kind":  "new"
+    },
+    {
+        "path":  "docker/demo/migrations.sha256",
+        "sha256":  "c4d2cdc32d0473a0effd23d66f865f89418163b5ea2a0542b9666ea05f1659c9",
+        "bytes":  1852,
+        "kind":  "new"
+    },
+    {
+        "path":  "docker/demo/nginx.conf",
+        "sha256":  "1d2ec95d745e5c7b0d61a3f92231e3ae1942866bce3e20303364b6669673f56d",
+        "bytes":  1197,
+        "kind":  "new"
+    },
+    {
+        "path":  "docker/demo/qa/Dockerfile",
+        "sha256":  "6c5bce553e2f0ca32fefc4128647286406e4602dbdce61ca16f5c52f1d63556c",
+        "bytes":  290,
+        "kind":  "new"
+    },
+    {
+        "path":  "docker/demo/qa/run.cjs",
+        "sha256":  "2251fcb4a622e595b5df9e676697961fa2688b06803cb282a90bbf9c3a76d142",
+        "bytes":  11792,
+        "kind":  "new"
+    },
+    {
+        "path":  "docker/demo/setup/DemoSetup.java",
+        "sha256":  "02be1d79428a4aca1bdd196b23331303106cc1bf75e445502b85948466f32837",
+        "bytes":  18076,
+        "kind":  "new"
+    },
+    {
+        "path":  "frontend/.dockerignore",
+        "sha256":  "c550ead91b3339b4b31d1fd3075eaa62af86c3831706c433e06770e36ab3d05b",
+        "bytes":  120,
+        "kind":  "new"
+    }
+]

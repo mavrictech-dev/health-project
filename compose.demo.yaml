@@ -1,0 +1,121 @@
+name: health-meeting-demo
+services:
+  sql:
+    image: mcr.microsoft.com/mssql/server@sha256:4525e3efac9f3e241cb003bb2ff2a82818b502f37e12049d788b1a9fa7e13b7f
+    platform: linux/amd64
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_PID: Developer
+      MSSQL_SA_PASSWORD: ${DEMO_SQL_SA_PASSWORD:?Copy .env.demo.example to .env.demo}
+      MSSQL_COLLATION: Latin1_General_100_CI_AS_SC
+      MSSQL_MEMORY_LIMIT_MB: '2048'
+    labels:
+      com.mavric.health.scope: health-meeting-demo-v1
+    volumes:
+      - sql-data:/var/opt/mssql
+    networks: [meeting]
+    mem_limit: 3g
+    healthcheck:
+      test: ['CMD-SHELL', 'SQLCMDPASSWORD="$$MSSQL_SA_PASSWORD" /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -C -b -Q "SET NOCOUNT ON; SELECT 1" -o /dev/null']
+      interval: 5s
+      timeout: 5s
+      retries: 40
+      start_period: 20s
+    restart: unless-stopped
+
+  setup:
+    build:
+      context: .
+      dockerfile: docker/demo/backend.Dockerfile
+      target: setup
+    environment:
+      DEMO_STACK_SCOPE: health-meeting-demo-v1
+      DEMO_SQL_SA_PASSWORD: ${DEMO_SQL_SA_PASSWORD:?Copy the example}
+      DEMO_RUNTIME_PASSWORD: ${DEMO_RUNTIME_PASSWORD:?Copy the example}
+      DEMO_BOOTSTRAP_PASSWORD: ${DEMO_BOOTSTRAP_PASSWORD:?Copy the example}
+      DEMO_APP_PASSWORD: ${DEMO_APP_PASSWORD:?Copy the example}
+    labels:
+      com.mavric.health.scope: health-meeting-demo-v1
+    depends_on:
+      sql:
+        condition: service_healthy
+    networks: [meeting]
+    restart: 'no'
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/demo/backend.Dockerfile
+      target: backend
+    environment:
+      SPRING_PROFILES_ACTIVE: local-demo
+      HEALTH_SQLSERVER_RUNTIME_PASSWORD: ${DEMO_RUNTIME_PASSWORD:?Copy the example}
+      HEALTH_JWT_SECRET: ${DEMO_JWT_SECRET:?A stable local-only key is mandatory}
+      DEMO_PORT: ${DEMO_PORT:-18090}
+    labels:
+      com.mavric.health.scope: health-meeting-demo-v1
+    depends_on:
+      setup:
+        condition: service_completed_successfully
+    networks: [meeting]
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -q --header="Host: health.localhost" -O /dev/null http://127.0.0.1:8080/actuator/health/readiness']
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+    restart: unless-stopped
+
+  gateway:
+    build:
+      context: .
+      dockerfile: docker/demo/frontend.Dockerfile
+    labels:
+      com.mavric.health.scope: health-meeting-demo-v1
+    ports:
+      - '127.0.0.1:${DEMO_PORT:-18090}:80'
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks: [meeting, frontdoor]
+    restart: unless-stopped
+
+  qa:
+    profiles: [qa]
+    build:
+      context: .
+      dockerfile: docker/demo/qa/Dockerfile
+    environment:
+      DEMO_PORT: ${DEMO_PORT:-18090}
+      DEMO_APP_PASSWORD: ${DEMO_APP_PASSWORD:?Copy the example}
+      QA_RUN_ID: ${QA_RUN_ID:-meeting-review}
+      QA_WAIT_RESTART: ${QA_WAIT_RESTART:-false}
+    labels:
+      com.mavric.health.scope: health-meeting-demo-v1
+    networks: [meeting]
+    extra_hosts:
+      - health.localhost:127.0.0.1
+      - reunion.health.localhost:127.0.0.1
+    volumes:
+      - ${DEMO_QA_OUTPUT:-./tmp/demo-docker-laptop-20261116/browser}:/output
+    shm_size: 1g
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: 'no'
+
+networks:
+  frontdoor:
+    labels:
+      com.mavric.health.scope: health-meeting-demo-v1
+  meeting:
+    internal: true
+    labels:
+      com.mavric.health.scope: health-meeting-demo-v1
+volumes:
+  sql-data:
+    labels:
+      com.mavric.health.scope: health-meeting-demo-v1

@@ -1,0 +1,51 @@
+# LOCAL SYNTHETIC MEETING ONLY: encrypted SQL with trust for this private stack's self-signed certificate.
+# This exception must never be copied to the production profile.
+health:
+  sqlserver:
+    mode: runtime
+    jobs:
+      enabled: false
+    runtime:
+      server-name: sql
+      port: 1433
+      database-name: health_meeting_demo
+      username: hp_meeting_runtime
+      password: ${HEALTH_SQLSERVER_RUNTIME_PASSWORD:}
+      trust-server-certificate: true
+  bootstrap:
+    email: ''
+    password: ''
+  base-domain: health.localhost
+  public-origin: http://health.localhost:${DEMO_PORT:18090}
+  session-hours: 8
+spring:
+  main:
+    allow-bean-definition-overriding: false
+  datasource:
+    url: ''
+    username: ''
+    password: ''
+  flyway:
+    enabled: false
+    url: ''
+    user: ''
+    password: ''
+  sql:
+    init:
+      mode: never
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      group:
+        liveness:
+          include: [livenessState]
+        readiness:
+          include: [readinessState, db]
+      show-details: never
+      show-components: never
+server:
+  address: 0.0.0.0
+  port: 8080
+  forward-headers-strategy: none

@@ -1,0 +1,372 @@
+{
+  "status": "PASS",
+  "runId": "supervisor-20261116",
+  "appointmentId": "4c2158f5-1ad0-4c0e-8fbd-96d469f70773",
+  "date": "2026-11-17",
+  "time": "11:00",
+  "canonicalOrigin": "http://reunion.health.localhost:18090",
+  "synthetic": true,
+  "playwright": "1.56.1",
+  "browser": "141.0.7390.37",
+  "steps": [
+    {
+      "check": "Real browser reservation after explicit review",
+      "appointmentId": "4c2158f5-1ad0-4c0e-8fbd-96d469f70773",
+      "date": "2026-11-17",
+      "time": "11:00"
+    },
+    {
+      "check": "Real manual YAPE receipt and branch reconciliation",
+      "amountMinor": 9550,
+      "paymentMethod": "YAPE",
+      "priorNetMinor": 28650,
+      "resultNetMinor": 38200,
+      "priorReceipts": 3,
+      "resultReceipts": 4
+    },
+    {
+      "check": "Real missing-CSRF request denied",
+      "status": 403
+    },
+    {
+      "check": "Same browser session and paid appointment after backend restart",
+      "restartPerformed": true
+    },
+    {
+      "check": "Same browser session, appointment and unique fixture after second up",
+      "secondUpPerformed": true
+    }
+  ],
+  "pageErrors": [],
+  "serverErrors": [
+    {
+      "path": "/api/public/status",
+      "status": 502,
+      "phase": "controlled-after-restart"
+    }
+  ],
+  "expectedDowntime": [
+    {
+      "path": "/api/public/status",
+      "status": 502,
+      "phase": "controlled-after-restart"
+    }
+  ],
+  "http": [
+    {
+      "method": "GET",
+      "path": "/api/public/context",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/browser/session",
+      "status": 401,
+      "phase": "active"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/context",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/browser/session",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/sucursal",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/context",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/browser/session",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/negocios/20000000001/sucursales",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/context",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/browser/session",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/negocios/20000000001/sucursales",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/status",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/contexto",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/arqueo",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/citas",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/citas",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/arqueo",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/patients",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "POST",
+      "path": "/api/appointments",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/arqueo",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/citas",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/agenda/citas/4c2158f5-1ad0-4c0e-8fbd-96d469f70773/cobro",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/citas",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/arqueo",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/citas",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/arqueo",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/citas",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/citas",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/status",
+      "status": 502,
+      "phase": "controlled-after-restart"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/context",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/browser/session",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/negocios/20000000001/sucursales",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/status",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/contexto",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/citas",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/arqueo",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/status",
+      "status": 200,
+      "phase": "controlled-after-second-up"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/status",
+      "status": 200,
+      "phase": "controlled-after-second-up"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/status",
+      "status": 200,
+      "phase": "controlled-after-second-up"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/status",
+      "status": 200,
+      "phase": "controlled-after-second-up"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/status",
+      "status": 200,
+      "phase": "controlled-after-second-up"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/status",
+      "status": 200,
+      "phase": "controlled-after-second-up"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/status",
+      "status": 200,
+      "phase": "controlled-after-second-up"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/status",
+      "status": 200,
+      "phase": "controlled-after-second-up"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/context",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/browser/session",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/negocios/20000000001/sucursales",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/public/status",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/contexto",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/citas",
+      "status": 200,
+      "phase": "active"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/agenda/arqueo",
+      "status": 200,
+      "phase": "active"
+    }
+  ],
+  "physicalAudioTested": false,
+  "mockedRequests": false,
+  "hostRuntimeDependencies": false
+}

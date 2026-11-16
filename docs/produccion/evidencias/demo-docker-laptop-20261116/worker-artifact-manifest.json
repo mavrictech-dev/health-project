@@ -1,0 +1,657 @@
+﻿[
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/artifact-secret-audit.json",
+        "sha256":  "73934c94716780061b0afbe25e82fc442b35fc178f916e4a2369632ffe8675fb",
+        "bytes":  192
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/backend-after-restart.json",
+        "sha256":  "8eb2d824a6968e1211f05f930ad470f3cbd5a3c94f63d6940191ca72e67c36b5",
+        "bytes":  234
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/backend-before-restart.json",
+        "sha256":  "ee9e1137ca5bf9fa1bcc8fa8d8f92d2234371bb3cdcb15102a48c923f07418b9",
+        "bytes":  207
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/backend-c-after-restart.json",
+        "sha256":  "929bf86313de5d1c14f78057549e867e10196c0ef790fbb0c8163f478291b4e6",
+        "bytes":  168
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/backend-c-before-restart.json",
+        "sha256":  "4312d470b5eabce81e114a0d542b52b32b44ff3ccdbcb1b9127a62c4b3338c56",
+        "bytes":  168
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/backend-c-restart.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/backend-c-restart.log",
+        "sha256":  "08214c4293f97dd704b257b70997cd0fcb5cef8ef72174a510f431935a59d2e5",
+        "bytes":  922
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/backend-d-after-restart.json",
+        "sha256":  "f5807de36b8d116f0baa379a5f730a6a03dbb62e3678f12ac0009d0344c9f263",
+        "bytes":  168
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/backend-d-before-restart.json",
+        "sha256":  "929bf86313de5d1c14f78057549e867e10196c0ef790fbb0c8163f478291b4e6",
+        "bytes":  168
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/backend-d-restart.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/backend-d-restart.log",
+        "sha256":  "08214c4293f97dd704b257b70997cd0fcb5cef8ef72174a510f431935a59d2e5",
+        "bytes":  922
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/backend-restart.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/backend-restart.log",
+        "sha256":  "4cdbe3fc3449f1a76112a5c5c1b076f86668b0c10d9c36cce317992ef7ec79bc",
+        "bytes":  922
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/baseline-comparison.json",
+        "sha256":  "97ba8f221f2d2bbe69a7e130ee8b22049bc74ff95dbfa56b3716f239625e6435",
+        "bytes":  118
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-a/FAILED.json",
+        "sha256":  "21c2d4a7b7a76fca5d0d542213444676de8a814b028a8241d5bdb84721881593",
+        "bytes":  450
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-a/FAILED.png",
+        "sha256":  "40a2dc25f014fb6cb6094d1aa95336e484d8e4fba456a7c9df190a60dc77de11",
+        "bytes":  7675
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-b/01-desktop-sucursales.png",
+        "sha256":  "b9032c600a2da7efbf0ece35daa3003118c3fa83688873a63b2a5aac56130b8e",
+        "bytes":  81255
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-b/02-desktop-agenda-inicial.png",
+        "sha256":  "0a87d721d1832b8befa69030572b1b2226a17f6eb26dae324055e5ba4cdb69a0",
+        "bytes":  89278
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-b/03-desktop-reserva-formulario.png",
+        "sha256":  "1763be1ec6f949360bde9a5f0aabbeede174b29215ca9d790410a3cc373e0ed1",
+        "bytes":  196339
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-b/04-desktop-revision-explicita.png",
+        "sha256":  "a5a68c2a90031d0f2e50856872ef12544073e8641567382fea6722432d79dfdc",
+        "bytes":  181864
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-b/05-desktop-cita-guardada.png",
+        "sha256":  "db432209d6335083236c35ca356a9fe5ed402ef0f261903c937204094e3ef645",
+        "bytes":  111010
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-b/06-desktop-cobro-manual-ficticio.png",
+        "sha256":  "ba1ef9966bf5a909b15c74ff3711a5444c4ec55a6c4c7720175efb09f33f0337",
+        "bytes":  188059
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-b/07-desktop-arqueo-real.png",
+        "sha256":  "0eb4de42185b6a4ce71879927aa14b9cbf003d19379f62491ecc3da0bba2c883",
+        "bytes":  112005
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-b/08-mobile-semana-real.png",
+        "sha256":  "6664b07b0273006e002fe733e844806797b8a539f4a3ed3aced875f8b86dbcaf",
+        "bytes":  81948
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-b/09-mobile-dia-real.png",
+        "sha256":  "3a08ba2f4525c898728f9eedf22ae5fc82cbde40956fc746920ef4fc21375761",
+        "bytes":  78977
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-b/after-restart.json",
+        "sha256":  "8cc41034e86973bbf071ec8c7334de309a06b344c0b2c37ed34868a91e1647be",
+        "bytes":  219
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-b/FAILED.json",
+        "sha256":  "444207666e7625f85677abad4fd24bbfad439fdf27d1c8256c8729ad5cddc04f",
+        "bytes":  870
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-b/FAILED.png",
+        "sha256":  "7b529be9b65c0b3ea56593295340061cf74fd962991f11286e6b81894853371b",
+        "bytes":  108299
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-b/resume-after-restart",
+        "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes":  0
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/01-desktop-sucursales.png",
+        "sha256":  "b9032c600a2da7efbf0ece35daa3003118c3fa83688873a63b2a5aac56130b8e",
+        "bytes":  81255
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/02-desktop-agenda-inicial.png",
+        "sha256":  "25febf556f4155a2293fdd93be03ede7fd8aa89ff75de1f4f50670fd4723872d",
+        "bytes":  89496
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/03-desktop-reserva-formulario.png",
+        "sha256":  "2b1e2619fa439f85f3b39d5712939ee24647cca9d7330fc3b29314e12765410a",
+        "bytes":  200613
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/04-desktop-revision-explicita.png",
+        "sha256":  "02d0f1291035f3c23f31f8838b2eab1a342d475caa1c19dc7965e177cc603778",
+        "bytes":  185322
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/05-desktop-cita-guardada.png",
+        "sha256":  "fd4d56af73123b166b52d59c6cc3b2a4149858d88197c92d0e8d1ed9fdddde9e",
+        "bytes":  113697
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/06-desktop-cobro-manual-ficticio.png",
+        "sha256":  "bde776e366280646e3b475c8d73ea40d964a1b19727a7d9dbf11489f68e21e95",
+        "bytes":  191994
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/07-desktop-arqueo-real.png",
+        "sha256":  "358f23d185da856ead10f091ccd9384ad1e1a126719c41aad99ab66722076dda",
+        "bytes":  111498
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/08-mobile-semana-real.png",
+        "sha256":  "1bad656f4ac87bc40b8cac689ad9e3d9c3e8439375d3458ab94bc8b63e1febe8",
+        "bytes":  83303
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/09-mobile-dia-real.png",
+        "sha256":  "2df3c9c5939db7515eb1ae4e2b332dec3aee03a8d44d1f8a3220518b3cd51f91",
+        "bytes":  78383
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/10-desktop-persistencia-restart.png",
+        "sha256":  "568771148af151fb97e78082bb8fe8e23ff36c3e892376fa6704fa6f37daa21d",
+        "bytes":  109034
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/11-desktop-persistencia-segundo-up.png",
+        "sha256":  "568771148af151fb97e78082bb8fe8e23ff36c3e892376fa6704fa6f37daa21d",
+        "bytes":  109034
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/after-restart.json",
+        "sha256":  "ba259e5136e443d88730b425794e19d8fd232dc19774451857d4e4ac533fe5b0",
+        "bytes":  219
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/after-second-up.json",
+        "sha256":  "ba259e5136e443d88730b425794e19d8fd232dc19774451857d4e4ac533fe5b0",
+        "bytes":  219
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/result.json",
+        "sha256":  "5b656374bd5197a9ac70fe4ba48a63155020c6080ce0d179fa0124e38616addb",
+        "bytes":  6945
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/resume-after-restart",
+        "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes":  0
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-c/resume-after-second-up",
+        "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes":  0
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/01-desktop-sucursales.png",
+        "sha256":  "b9032c600a2da7efbf0ece35daa3003118c3fa83688873a63b2a5aac56130b8e",
+        "bytes":  81255
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/02-desktop-agenda-inicial.png",
+        "sha256":  "25febf556f4155a2293fdd93be03ede7fd8aa89ff75de1f4f50670fd4723872d",
+        "bytes":  89496
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/03-desktop-reserva-formulario.png",
+        "sha256":  "e26401303e78d25f51da5de245a4a396e937562d563751ad860bb66218a10a6a",
+        "bytes":  204629
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/04-desktop-revision-explicita.png",
+        "sha256":  "d3b4be25edbde68b6873d866ec4183df47d41359f56eba4f0b17d5a1fe3006b5",
+        "bytes":  188705
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/05-desktop-cita-guardada.png",
+        "sha256":  "b5e987bdb19580bba2641bf81f7feb3977610d90e588bc094908e2915c1e97ab",
+        "bytes":  115702
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/06-desktop-cobro-manual-ficticio.png",
+        "sha256":  "1febfb23fcbc7e93fa305d39221eddea5f509c574ae560d0a0b279f75efc2607",
+        "bytes":  195841
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/07-desktop-arqueo-real.png",
+        "sha256":  "076b2bafb20f98ef4478e28000e01302a3d9fa2bece84c448240f84851067100",
+        "bytes":  113574
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/08-mobile-semana-real.png",
+        "sha256":  "07bf27801d521f38a59971d755f6c05182b5e287d22354d0d06a84cc5a277575",
+        "bytes":  86723
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/09-mobile-dia-real.png",
+        "sha256":  "9db64c7df59787651b923cde1394b856a25f81400c4ff4f7d3393036b925a5cf",
+        "bytes":  80459
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/10-desktop-persistencia-restart.png",
+        "sha256":  "bc153cf5f7c5ca82d08f606a69ca6fc3bb9d5ae23dd2889cd8bae179bd2390d3",
+        "bytes":  110639
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/11-desktop-persistencia-segundo-up.png",
+        "sha256":  "bc153cf5f7c5ca82d08f606a69ca6fc3bb9d5ae23dd2889cd8bae179bd2390d3",
+        "bytes":  110639
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/after-restart.json",
+        "sha256":  "28b8203f70a3cb0d39d414f4fe2ee04f0c32cee1aadc35476fa47ae37f9835b6",
+        "bytes":  219
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/after-second-up.json",
+        "sha256":  "28b8203f70a3cb0d39d414f4fe2ee04f0c32cee1aadc35476fa47ae37f9835b6",
+        "bytes":  219
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/result.json",
+        "sha256":  "c1e83ebbb0c35c9e5d4839512d76c7ffab3731c03b629f00570d45d4a124f211",
+        "bytes":  6809
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/resume-after-restart",
+        "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes":  0
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/browser/worker-20261116-d/resume-after-second-up",
+        "sha256":  "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes":  0
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/build-attempt1.exit.txt",
+        "sha256":  "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/build-attempt1.log",
+        "sha256":  "d837f21c900919cd16a2e33996879afadfeb29afa4be2a7e77f1862f5d598c59",
+        "bytes":  265272
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/build-attempt2.exit.txt",
+        "sha256":  "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/build-attempt2.log",
+        "sha256":  "ee16b6a6ad6a28dfdab40c416ba60d9b364595562f0d1aa48b65e2ba591fb098",
+        "bytes":  222362
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/build-attempt3.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/build-attempt3.log",
+        "sha256":  "5d61fa8436ca23670ce428005440fab6acbd0fec2db93b4970761c6f8064d2ba",
+        "bytes":  222076
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/canonical-sql-comparison.json",
+        "sha256":  "a42acc775eb6b3ccc09bc25402f106bc9388e329685748436b9887d3abe53a13",
+        "bytes":  5641
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/compose-config.json",
+        "sha256":  "440379ce6b4dea0eca27b9e44dcf62d9bb230ae4c7a51962207fba6aec7a216a",
+        "bytes":  14808
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/compose-final-config.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/default-services.txt",
+        "sha256":  "c04416b5586473788bc6079c5e830b8ad1607c86231fee8868af4d33e47a87c1",
+        "bytes":  62
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/delivery.patch",
+        "sha256":  "6e2f58c8094a4f54a89fd22b1f67e38ef550255f0c70aab43675dd72fe3917c9",
+        "bytes":  53499
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/delivery-patch-stat.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/delivery-patch-stat.txt",
+        "sha256":  "e44f6ad13689a07e5a017965fa0da2d96d2252e3ed7b1f2c3a204219716f1c87",
+        "bytes":  1982
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/docker-resources.txt",
+        "sha256":  "69f60ef936db83b1873e74ed6212c6248f92e5ff84b5894a70f9151524f95487",
+        "bytes":  29
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/docker-server.txt",
+        "sha256":  "e4371f7163923ce182908f11d7ecea2dc072eb3b4987529ec48db9c73a132a9a",
+        "bytes":  23
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/existing-health-after.txt",
+        "sha256":  "b9521f50cd4547c01842baf5aebae73fd96f33eacc17935e14c715d3e4f79786",
+        "bytes":  1446
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/existing-health-before.txt",
+        "sha256":  "b9521f50cd4547c01842baf5aebae73fd96f33eacc17935e14c715d3e4f79786",
+        "bytes":  1446
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/final-qa-source-image.json",
+        "sha256":  "47f3e98049240c766832f3d0ec47377f0bf337eaadbdb99ef8fe156fe4363f5b",
+        "bytes":  252
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/frontdoor-labels.json",
+        "sha256":  "12af04fcb708f611e5d6887be07a39996a22b5d1bc8f9e7eaec6ebbeb4fbf84f",
+        "bytes":  286
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/gateway-port-fix.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/gateway-port-fix.log",
+        "sha256":  "2fec2ef901791018dc84874a9e87dfe822f40aa397473bc193a297297fa3feee",
+        "bytes":  1504
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/git-status-final.txt",
+        "sha256":  "31e9a5e96001c7a353057c5f34898194463714f21b5dac6950cec7079b4d8771",
+        "bytes":  1795
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/health-after-restart.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/health-after-restart.json",
+        "sha256":  "208493a3e9b4c2cab416a73f2683a2fdfd2db6919befcca37e08e0049dfadae8",
+        "bytes":  36
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/images-final.txt",
+        "sha256":  "501f1cde205aac6934122b0ac3be45fcd672429abd8e5dac6187d49667e61574",
+        "bytes":  492
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/INFORME.md",
+        "sha256":  "b875024a4dc6a9be733e1be5790eef4498467bf02c264220ea3bb690c46399be",
+        "bytes":  15974
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/networks-final.txt",
+        "sha256":  "f777835509ff9652df6cce097e55f58214817c2666e1b20f572bec18415431fa",
+        "bytes":  636
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/preservation-summary.json",
+        "sha256":  "ccdb765f62dc56b18831959fcc5603bd8c615102652d37e60ea918220b5e3c01",
+        "bytes":  198
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/production-test.diff",
+        "sha256":  "c76c8222f49c0c65fcbd79d2b0c49706e48784c0ff304362c684282e9c2f0574",
+        "bytes":  2632
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/PROGRESO.md",
+        "sha256":  "e13075c0edf0af566f616614e044291a538dcee4aa014decb2e85ce1df9bdde0",
+        "bytes":  1625
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/ps-final.txt",
+        "sha256":  "f8bf44a05d728b11a65e1f8a0a6f3c722524033a99bd0144a44b4d01cde17076",
+        "bytes":  1162
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/ps-first.txt",
+        "sha256":  "5a354a553cd59bfcab728b846285e6146b180af4c02a2c128fb79d3d8348c819",
+        "bytes":  1155
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/ps-port-fixed.txt",
+        "sha256":  "c96cc435d61f10c2dc2a3df7a8844bad214e6844e9069a51e58c5c0be45c86c2",
+        "bytes":  1132
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-build.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-build.log",
+        "sha256":  "db5731b640c4b5e5eccf6af115ace7ec274cfb10d42af0c5ad76d179670f82ab",
+        "bytes":  19772
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-build-c.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-build-c.log",
+        "sha256":  "a09ae71babceee04eb1fe36bcf63b960fc4d683aff46fc3fa372e8ba888b8e37",
+        "bytes":  4630
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-build-d.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-build-d.log",
+        "sha256":  "7f3bf318fd255bea5a93c3be9729e3a4c30da553c87059f12bbdb1344bfef843",
+        "bytes":  4746
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-build-final.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-build-final.log",
+        "sha256":  "168cc87b78c891450eeef666d55a55d63c6019544efc3edb0a81825f4b9724a1",
+        "bytes":  4606
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-output-existing-negative.actual-exit.txt",
+        "sha256":  "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-output-existing-negative.json",
+        "sha256":  "eacca0a412fa4e91d30bd7d3628b72ab2d35346e499788ecb0d54313d1702de5",
+        "bytes":  210
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-output-existing-negative.log",
+        "sha256":  "7d82789f8547282f52055a553170d6483bdce4313781b19d30b36f93701cb6b0",
+        "bytes":  1292
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-run-a.exit.txt",
+        "sha256":  "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-run-a.log",
+        "sha256":  "f15602667c3b745bd8bf02735adc820ed372f514eb6f897fc832ad5e7e8e0acb",
+        "bytes":  1654
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-run-b.exit.txt",
+        "sha256":  "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-run-b.log",
+        "sha256":  "6bc86907ac59d92fff020dcae15927f86eb6c119d2f471437e1dd6e98a311056",
+        "bytes":  2116
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-run-c.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-run-c.log",
+        "sha256":  "a17d3674b29e87258ca3782615cc8cf8dbb2036dbeeff5869ebc0e8c8af8306c",
+        "bytes":  2248
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-run-d.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-run-d.log",
+        "sha256":  "f8a17b6500125338ce1c1f6e6533a7a816228b91b52524a9fc92c4b84d222420",
+        "bytes":  2250
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-source-in-image.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/qa-source-in-image.log",
+        "sha256":  "86b874b8da32c57829db0be80464373beb03ec2f05ee2953bc4cfe5c7bb974aa",
+        "bytes":  1116
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/scope-before-second-up.json",
+        "sha256":  "a4ee99fa5094485684cc2270075e1fd2cf8e7f50fddb336d8f6e477dd576499d",
+        "bytes":  1759
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/scope-final.json",
+        "sha256":  "d6b864ffcefd471056c97dc502b0faedb5962ba976cec11ab6ba7dda4c95f781",
+        "bytes":  2699
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/setup-c-repeat.log",
+        "sha256":  "e4118af8199850d6ff4f9bd97b9b59f9b67e88b4b9038c5f4449e9d639169ebc",
+        "bytes":  282
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/setup-d-repeat.log",
+        "sha256":  "355ccb47846811c8853834ecb97cbfa77312b2c3999a71ebcbb0166632d71d2d",
+        "bytes":  282
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/setup-first.log",
+        "sha256":  "af0ac5b9d07f2b56a51f889363f6b851de83c84a78c9fe67129ec19762c8f45f",
+        "bytes":  171
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/source-baseline.json",
+        "sha256":  "d4ba4586ddab9653da572675d516ad0762ea1034294cab438eaa074d301e5ded",
+        "bytes":  107799
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/source-manifest.json",
+        "sha256":  "8ff5abbfa5569abbc9bc60b37c55a826e749a954e059bf6e4c17b7be94a83d38",
+        "bytes":  2864
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/up-c-repeat.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/up-c-repeat.log",
+        "sha256":  "0a4e09bc5eef68a0a4b5c2b27a17c78d3d270ebfaa06a781c1c9d39bccf3ce00",
+        "bytes":  1774
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/up-d-repeat.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/up-d-repeat.log",
+        "sha256":  "2cccdc6690cde33c7834456feb5fabf6ca1f3dc154647ab51b00bcdc1418a54d",
+        "bytes":  1796
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/up-first.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/up-first.log",
+        "sha256":  "99a7f6e3a8296620d8fac5b4fac23cbdb10b41f20a787ba0d27fe069d3793d9a",
+        "bytes":  19334
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/up-second.exit.txt",
+        "sha256":  "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+        "bytes":  3
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/up-second.log",
+        "sha256":  "3cc0046be3cf42923c74aefbe9f80d3b557bc1bdca2be6b6ade78f7e4a467a85",
+        "bytes":  1796
+    },
+    {
+        "path":  "tmp/demo-docker-laptop-20261116/volume-final.txt",
+        "sha256":  "eebc0944755830f1e5d00b76c71aa8faf68967d41aabfcd7d14cba26754a1c9a",
+        "bytes":  313
+    }
+]

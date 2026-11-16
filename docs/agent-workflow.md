@@ -1,5 +1,46 @@
 # Orquestacion Codex de Health Project
 
+## Demo Docker: revisión independiente cerrada, 2026-11-16
+
+Task_5ee0aa4919a6/ctx_fc37233ae5c6 finalizado por entrega msg_405724745376,
+procesada completa sin deliveryId; check posterior sin mensajes. Programador
+retuvo su worktree y no hizo commit/push. Supervisor verificó 14 fuentes/131
+artefactos exactos y preservación de821fuentes (solo testlogging autorizado).
+Reconstrucción propia Docker: 43 tests ordenados misma JVM y1162verifyPASS.
+QA propia con ChromiumDocker: loginRUC/sedes, reserva/cobro/arqueo/CSRF,
+restart/segundoup/sesión y datos persistidos, ADM/SAD y consulta/antecedentePASS.
+19capturas nuevas; siete contenedores Health anteriores y main intactos.
+
+README/guion/evidencias cerrados. D-87.BV y
+[revisión](produccion/DEMO_DOCKER_LAPTOP_REVISION_20261116.md). Aceptada para
+reunión local; publicación limitada a health/production-wave0, sin ZIP ni despliegue.
+Bloques EN_CURSO siguientes describen hitos anteriores, no pendientes actuales.
+
+## Demo Docker: build y setup reales, QA en curso, 2026-11-16
+
+Task_5ee0aa4919a6/ctx_fc37233ae5c6 activo en programador retenido. Mensajes
+5b089623/d3d2b516/ea9558fd/07456e0 recibidos y procesados; sin deliveryId.
+Reply50ce8d47 amplía SOLO ProductionProfileTest para restaurar logging global;
+reply5c5d2ada autoriza QAheadlessDocker aislado. SQL19fuentes/4denegaciones y
+backendhealthy reportados; gateway redfrontdoor propia corrige publicación de
+puerto con redinterna. No se interpretan build/setup como QAcompleta.
+Supervisor prepara README y guion: Git+Docker, cuentas ficticias, repetición y
+preservación de volumen; retiroZIP previo conservado. D-87.BU. Esperar informe,
+revisar fuentes/manifiesto, integrar y repetir QA de forma independiente.
+
+## Continuidad Docker para laptop, 2026-11-16
+
+Usuario precisa sinZIP y conDocker completo. ContratoDEMO_DOCKER_LAPTOP_20261116.md;
+task_5ee0aa4919a6 lista. Se verifica que terminalterm_0823e94e-6aa6-46c6-a331-
+25e99606501a corresponde a MISMA sesión actual01a1da95 por/status yCODEX_THREAD_ID:
+cuenta arquitectomendozadeafabisa; proceso27624no-daemon. Puede usarse --from
+propio legítimamente: run-use existentePASS, sin prestarsehandle/identidad.
+El bloqueo anterior de sesión sinenvOrca queda resuelto por esta identificación.
+Programadorterm_ae4c0cb7-c0b2-41a0-8b93-659defa95453/status recuperapiura,
+sesión retenida01a1d797/80%5h81%weekly/no-daemon, producto normalizado coincideROOT.
+Se conserva trabajo anterior y se delegan solo rutasnuevas en suworktree.
+Supervisor retiraZIP y documenta; revisión/QA independientes antesdepush.
+
 ## Demo para jefe y documentación, 2026-11-16
 
 Pedido usuario: demo/GitHub/READMEinstalación. Repo limpio b0d0fe5 confirmado.

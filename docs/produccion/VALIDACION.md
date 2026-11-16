@@ -1,5 +1,18 @@
 # Validacion y limites de evidencia
 
+## Demo Docker conectada: evidencia real nueva, 2026-11-16
+
+[Revisión cerrada](DEMO_DOCKER_LAPTOP_REVISION_20261116.md) y
+[evidencias](evidencias/demo-docker-laptop-20261116/). Worker instala SQL nuevo
+completo con19fuentes canónicas; supervisor reconstruye y verifica43tests en
+orden mismaJVM/1162verify, SQL y4denegaciones reales, navegador sin interceptarAPI,
+RUC/sedes/cita/cobro/arqueo/CSRF y persistencia trasrestart/segundoup en misma sesión.
+ADM/SAD/paciente/antecedente/consulta adicionalesPASS;19capturas propias, móvil
+390x844 es viewport. Un502depublic/status previsto durante restart documentado.
+Siete contenedores anteriores exactos; main intacto. No hostNode/Java/SQL/Python,
+audio físico, otra laptop física, ARM nativo, correo/pagos externos o despliegue.
+Demo local aceptada; la evidencia del14nov conserva su fecha y gates productivos.
+
 ## HP8 cierre local y preparación productiva, 2026-11-14
 
 Revisión independiente cerrada según HP8-CIERRE-REVISION-20261114.md y

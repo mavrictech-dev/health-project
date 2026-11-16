@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "patientId": "a4000000-0000-4000-8000-000000000001",
+  "antecedentId": "dd52a809-e8b1-480c-b5ba-efb3910784b2",
+  "antecedentVersion": 1,
+  "consultationId": "9da4dabf-f13a-4fca-b05b-2d49e6004a69",
+  "consultationPersistedAfterReload": true,
+  "synthetic": true,
+  "mockedRequests": false,
+  "pageErrors": [],
+  "serverErrors": [],
+  "physicalAudioTested": false,
+  "hostRuntimeDependencies": false
+}

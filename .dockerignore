@@ -1,0 +1,19 @@
+# Backend/setup context is an allowlist. Never send host credentials, builds or QA captures.
+**
+!backend/
+!backend/pom.xml
+!backend/src/
+!backend/src/**
+!docker/
+!docker/demo/
+!docker/demo/**
+!frontend/
+!frontend/package.json
+!frontend/package-lock.json
+!frontend/tsconfig.json
+!frontend/next.config.ts
+!frontend/eslint.config.mjs
+!frontend/src/
+!frontend/src/**
+!frontend/public/
+!frontend/public/**

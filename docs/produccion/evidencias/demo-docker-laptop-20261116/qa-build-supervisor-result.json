@@ -1,0 +1,4 @@
+{
+    "command":  "Docker QA build from supervisor source",
+    "exit":  0
+}

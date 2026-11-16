@@ -1,5 +1,65 @@
 # Decisiones y contratos de integracion
 
+## D-87.BV: demo Docker conectada aceptada para reunión, 2026-11-16
+
+Entrega msg_405724745376, task_5ee0aa4919a6/ctx_fc37233ae5c6, revisada de forma
+independiente. 14 fuentes/131 artefactos SHA exactos, 19 SQL canónicas preservadas;
+820/821 fuentes del baseline intactas y único test existente autorizado restaura
+logging. Supervisor reconstruye: 43 tests ordenados misma JVM y1162 verifyPASS.
+Navegador real sin APIs simuladas: RUC/dos sedes, reserva revisada/cobro/arqueo,
+CSRF403, misma sesión/cita después de restart y segundo up, fixtures sin repetición.
+ADM/SAD reales y paciente/antecedente/consulta persistida adicionalesPASS.
+
+19 capturas propias; inspección visual desktop/móvil. Un502 de public/status
+solo durante reinicio deliberado queda documentado; cero errores de página.
+Setup --verify realPASS y4denegaciones runtime, puerto host200/hostajeno421.
+Siete contenedores Health previos exactos y main intacto. SQL/backendhealthy,
+gateway loopback18090; volumen conservado. No hostNode/Java/Python/SQL.
+
+Se acepta integración y commit/push a health/production-wave0 conforme al permiso
+vigente y pedido directo GitHub, sinZIP. README y guion principales son Docker;
+la alternativa estática es secundaria. No merge/main/despliegue/pacientes reales.
+Otra laptop física, ARM y audio físico no se acreditan. Producción conserva gates.
+Detalle: [revisión cerrada](DEMO_DOCKER_LAPTOP_REVISION_20261116.md) y
+[evidencias](evidencias/demo-docker-laptop-20261116/). D-87.BT/BU quedan históricas.
+
+## D-87.BU: aislar test Linux y completar QA Docker real, 2026-11-16
+
+Mismo task_5ee0aa4919a6/ctx_fc37233ae5c6. Build Linux reveló logging rootOFF
+que ProductionProfileTest dejaba activo; se autoriza SOLO ese archivo de test
+por reply50ce8d47, snapshot/restauración al final de clase también para factories.
+Mantener35casos, asserts y fuente productiva. Verificar orden REAL por nombre
+completo ProductionProfileTest antes de MonitorServiceSqlServerTest en mismaJVM,
+sin forks nuevos, omisiones o cambio de expectativas. No editar Monitor.
+
+Ante CUA no disponible, reply5c5d2ada autoriza Chromium headless en contenedor QA
+propio, versiónfijada, única redmeeting/destino gateway, sin navegador personal,
+dependencias delhost, interceptar APIs o usar datos reales. ForwarderTCP dentro
+runner conserva Host/Origin/puerto; capturas/reporte parametrizados para revisión
+independiente sin reset ni sobreescritura. Detalle en contrato actualizado.
+Solo stackhealth-meeting-demo, proyecto-p explícito, recursos previos preservados.
+
+README/guion se preparan para instalación Git+Docker sin ZIP. Primer setup real
+reportadoINSTALLED19fuentes/4denegaciones/healthy; navegador/restart/upsegundo y
+aceptación supervisora aún pendientes. Configuración productiva no se modifica.
+
+## D-87.BT: reunión con stack Docker completo desde GitHub, sin ZIP, 2026-11-16
+
+Usuario sustituye entrega portátil por «sube a github nomas sin zip» y «con el
+docker y todo». Se elimina ZIP/LEEME/SHA del checkout, preservando copia local e
+historial sinforcepush. Se encarga stackaislado nuevo health-meeting-demo,
+frontendruntime+backend+SQLServer2022, setup separado y runtimeEXECUTE-only/SP.
+Datos de prueba ficticios, login/negocio y restart reales, sin hostNode/Java/SQL.
+Ownership, límites y aceptación en DEMO_DOCKER_LAPTOP_20261116.md; supervisión
+posterior obligatoria. No cambia configuración productiva ni fuentes SQL aplicadas.
+
+Se identifica terminalPROPIA supervisor0823e94e por/status sesión01a1da95 idéntica
+aCODEX_THREAD_ID, cuenta mendozadeafabisa/no-daemon. run-use con --from propio
+funciona; no se suplanta otra sesión. Programador/status recuperapiura/sesión
+retenida01a1d797,80%5h/81%weekly. Task task_5ee0aa4919a6 preparada.
+Dockerdisponible, solo operaciones sobre stack nuevo; preservar recursosviejos
+de Health Project y otrosproyectos. Sin producción/main/datosreales ni gastos.
+
 ## D-87.BS: demo para jefe y documentación de instalación, 2026-11-16
 
 Usuario solicita preparar presentación, subir aGitHub e incluir instalación en

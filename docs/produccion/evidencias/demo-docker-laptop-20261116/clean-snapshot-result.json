@@ -1,0 +1,12 @@
+{
+    "snapshot":  "staged tree, Windows checkout-index",
+    "retiredZipAbsent":  true,
+    "sourceContentsEqualIgnoringGitEol":  14,
+    "privateEnvAbsentBeforeExampleCopy":  true,
+    "localLinks":  24,
+    "canonicalSqlFilesByteExact":  19,
+    "candidateTree":  "865c87e000bfa69f5a8eeaf6eb44ca81a2bde278",
+    "composeConfigExit":  0,
+    "windowsCheckoutCRLF":  true,
+    "status":  "PASS"
+}

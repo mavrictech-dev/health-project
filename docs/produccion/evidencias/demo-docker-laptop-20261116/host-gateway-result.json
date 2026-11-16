@@ -1,0 +1,8 @@
+{
+    "target":  "127.0.0.1:18090",
+    "canonicalHost":  "reunion.health.localhost",
+    "status":  200,
+    "ruc":  "20000000001",
+    "unknownHostStatus":  421,
+    "realHostPortVerified":  true
+}
