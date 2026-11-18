@@ -2,7 +2,7 @@
 
 Aplicación clínica SaaS para organizaciones humanas, odontológicas y veterinarias:
 pacientes, historia clínica, agenda, catálogo y administración por organización y
-sucursal. Esta entrega está en la rama **`health/production-wave0`**.
+sucursal. La entrega para descargar e instalar está en la rama **`main`**.
 
 **Lista para la reunión:** descarga desde GitHub y arranque con Docker, sin ZIP.
 Frontend, API Java y SQL Server funcionan conectados con datos ficticios.
@@ -60,7 +60,7 @@ a que el motor quede disponible antes de continuar.
 En PowerShell, desde la carpeta donde guardarás la entrega:
 
 ```powershell
-git clone --branch health/production-wave0 --single-branch https://github.com/mavrictech-dev/health-project.git health-project-reunion
+git clone --branch main --single-branch https://github.com/mavrictech-dev/health-project.git health-project-reunion
 cd health-project-reunion
 if (-not (Test-Path -LiteralPath .env.demo)) { Copy-Item -LiteralPath .env.demo.example -Destination .env.demo }
 docker compose -p health-meeting-demo --env-file .env.demo -f compose.demo.yaml config --quiet
@@ -80,6 +80,38 @@ ejemplo EXCLUSIVAS para este entorno local ficticio. No añadas credenciales de
 una base existente ni uses estos valores en producción. Si cambias los valores,
 hazlo antes de la primera inicialización y conserva después el mismo archivo.
 No vuelvas a copiar la plantilla encima de una configuración ya inicializada.
+
+### Qué se crea automáticamente en la primera instalación
+
+Una persona que descargue el proyecto en otra laptop solo necesita seguir los
+comandos anteriores. Docker instala SQL Server y el servicio `setup` crea la
+base **`health_meeting_demo`**, aplica las 19 migraciones V1–V19 y deja preparados
+**43 tablas, 152 procedimientos almacenados y 34 triggers**. No hay que crear la
+base, ejecutar el archivo SQL consolidado ni registrar usuarios manualmente.
+
+Las credenciales se configuran en `.env.demo` antes del primer arranque y se
+utilizan para crear estos accesos:
+
+| Acceso creado | Usuario | Contraseña tomada de |
+| --- | --- | --- |
+| Administración del SQL del contenedor | `sa` | `DEMO_SQL_SA_PASSWORD` |
+| Aplicación Java → SQL, solo ejecución de SP aprobados | `hp_meeting_runtime` | `DEMO_RUNTIME_PASSWORD` |
+| Creación inicial de la cuenta de plataforma | `hp_meeting_bootstrap` | `DEMO_BOOTSTRAP_PASSWORD` |
+| Plataforma de la aplicación | `plataforma@example.test` | `DEMO_APP_PASSWORD` |
+| Administración de la clínica ficticia | `admin@example.test` | `DEMO_APP_PASSWORD` |
+| Profesional y recepción | `profesional@example.test` | `DEMO_APP_PASSWORD` |
+
+El setup crea también la clínica de ejemplo, RUC `20000000001`, dos sedes y el
+paciente `DEMO-001`. Las contraseñas de las cuentas de aplicación se guardan como
+hash BCrypt. Java utiliza únicamente el usuario SQL runtime; las credenciales de
+administración y bootstrap quedan en el proceso de instalación separado.
+
+Al volver a arrancar, el instalador reconoce la base completa y verifica su
+versión y permisos: conserva los datos y no vuelve a crear cuentas ni cambia
+contraseñas. Guarda `.env.demo` junto a tu instalación y conserva el volumen SQL.
+Editar contraseñas en ese archivo después de instalar no actualiza las que ya
+están almacenadas. La plantilla y estas cuentas corresponden a pruebas locales
+con datos ficticios; los requisitos de producción se describen más abajo.
 
 ### Abrir, iniciar sesión y presentar
 
@@ -140,7 +172,7 @@ reconoce una instalación completa y no debe repetir las migraciones ni fixtures
 Para actualizar una copia sin cambios locales, conservando `.env.demo`:
 
 ```powershell
-git switch health/production-wave0
+git switch main
 git pull --ff-only
 docker compose -p health-meeting-demo --env-file .env.demo -f compose.demo.yaml up -d --build
 ```
@@ -202,7 +234,7 @@ No necesitas cambiar la política de ejecución de Windows.
 Abre una terminal en la carpeta donde quieras guardar el proyecto:
 
 ```text
-git clone --branch health/production-wave0 --single-branch https://github.com/mavrictech-dev/health-project.git
+git clone --branch main --single-branch https://github.com/mavrictech-dev/health-project.git
 cd health-project
 cd frontend
 ```

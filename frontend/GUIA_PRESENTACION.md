@@ -9,8 +9,9 @@ consulta persistida, cita/cobro, administración y reinicios. Consulta la
 
 ## Preparación antes de la reunión
 
-1. Descarga la rama `health/production-wave0` y sigue la instalación Docker del
-   README. Haz la primera descarga/build con anticipación.
+1. Descarga la rama `main` y sigue la instalación Docker del README. Haz la
+   primera descarga/build con anticipación: el setup crea la base SQL Server,
+   sus procedimientos y las cuentas con las contraseñas de `.env.demo`.
 2. Comprueba `ps -a`: SQL/backend saludables, gateway levantado y setup terminado
    con código 0. No instales Node/Java/SQL en la laptop para esta modalidad.
 3. Abre `http://reunion.health.localhost:18090/acceso/` en Chrome o Edge. Si

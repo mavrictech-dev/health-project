@@ -1,5 +1,42 @@
 # Decisiones y contratos de integracion
 
+## D-88: autorizacion puntual para trasladar la entrega completa a main, 2026-11-18
+
+El usuario solicita directamente «pasalo todo a la rama main». Se autoriza al
+supervisor a incorporar la entrega completa revisada de health/production-wave0
+y el archivo SQL consolidado a main, y publicarla en origin/main mediante push
+normal. Este pedido sustituye para esta operacion la prohibicion anterior de
+main. No autoriza push forzado, despliegue, cambios de cuentas ni trabajo sobre
+los worktrees retenidos de los programadores.
+
+Preintegracion: raiz/rama/worktrees comprobados; origin actualizado mediante
+fetch. Main local y remoto en 0b24487c77055a081f6e76f0b18bc544ce4b1958 son
+antecesores de f9b5d17cabd28b5700df54aa4df52341c4ff6ab1, con 128 commits por
+incorporar y sin divergencia. Se prepara avance fast-forward, sin resolver
+conflictos ni reescribir historial. El unico archivo local pendiente era
+entregables/sqlserver/Health_Project_SQLServer_Completo_20261116.sql.
+
+SQL revisado de nuevo: 19 fuentes V1-V19 identicas byte a byte, salvo el BOM
+inicial retirado al concatenar; indice completo de 152 SP. SHA256 del consolidado:
+75e3ae289091e241fbccad1db20e739c0f5196077a921943636a672d939cb140.
+Se preservan sus bytes en Git mediante .gitattributes. Es una recopilacion para
+revision, no un instalador autonomo ni una ejecucion contra una base existente.
+
+El codigo de aplicacion permanece en el corte revisado D-87.BV. Se conserva la
+fecha de las verificaciones de esa entrega (43/1162 backend, frontend/build y
+SQL/API/UI reales locales); no se presentan como pruebas repetidas el 18nov.
+Los gates productivos de SALIDA_PRODUCCION_20261114.md siguen abiertos.
+
+Durante la preparacion el usuario precisa que la primera instalacion realizada
+por externos debe crear SQL Server/base y credenciales. El setup Docker vigente
+ya implementa ese comportamiento: contenedor SQL con sa, CREATE DATABASE,
+V1-V19, logins/users runtime y bootstrap separados y altas de cuentas de
+aplicacion por SP, con BCrypt y valores iniciales de .env.demo. La rama de base
+existente exige marker COMPLETE, manifest y catalogo exactos, comprueba permisos
+y conserva datos/cuentas sin reaplicar. Se documenta expresamente en README y
+guion, con descarga y actualizacion desde main. No se cambia codigo de setup,
+SQL ni perfiles; el alcance sigue siendo la instalacion local sintetica.
+
 ## D-87.BV: demo Docker conectada aceptada para reunión, 2026-11-16
 
 Entrega msg_405724745376, task_5ee0aa4919a6/ctx_fc37233ae5c6, revisada de forma

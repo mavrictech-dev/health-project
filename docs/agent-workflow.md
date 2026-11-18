@@ -1,5 +1,16 @@
 # Orquestacion Codex de Health Project
 
+## Traslado a main por pedido directo, 2026-11-18
+
+El usuario autoriza integrar la entrega completa revisada y el SQL consolidado
+en main y publicarla en origin/main. D-88 registra alcance y preintegracion:
+main local/remoto es antecesor del corte f9b5d17, sin divergencia; se prepara
+fast-forward con las 19 fuentes SQL y el indice de 152 SP verificados.
+El supervisor realiza la integracion; no hay implementacion nueva ni cambios en
+los worktrees retenidos. La restriccion historica de main queda sustituida solo
+para esta entrega. Los gates de produccion y la prohibicion de push forzado y
+despliegue permanecen vigentes.
+
 ## Demo Docker: revisión independiente cerrada, 2026-11-16
 
 Task_5ee0aa4919a6/ctx_fc37233ae5c6 finalizado por entrega msg_405724745376,

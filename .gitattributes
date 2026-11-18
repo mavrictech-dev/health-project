@@ -13,3 +13,4 @@ scripts/verify-patient-link-management-sql.py -text whitespace=cr-at-eol
 scripts/health-sqlserver-docker-qa.py -text whitespace=cr-at-eol
 scripts/tests/test_health_sqlserver_docker_qa.py -text whitespace=cr-at-eol
 scripts/tests/test_patient_link_management_sql_verifier.py -text whitespace=cr-at-eol
+entregables/sqlserver/*.sql -text whitespace=cr-at-eol

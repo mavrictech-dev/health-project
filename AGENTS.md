@@ -46,6 +46,12 @@ hacer push de entregas revisadas a health/production-wave0 en el origin de
 Health Project. No autoriza merge en main, push forzado ni despliegue. Los
 trabajadores mantienen la prohibicion de commit/push salvo encargo explicito.
 
+Excepcion puntual (usuario, 2026-11-18): el pedido directo «pasalo todo a la rama
+main» autoriza al supervisor a integrar y publicar en origin/main la entrega
+revisada de health/production-wave0, incluido el SQL consolidado para revision.
+Sustituye la restriccion de main solo para esta entrega; no autoriza push forzado,
+despliegue ni cambios en los worktrees de los programadores.
+
 ## Persistencia vigente (aclaracion del usuario, 2026-11-03)
 
 La arquitectura objetivo es SQL Server y 100 % de acceso de datos mediante

@@ -1,5 +1,11 @@
 # Tablero de ejecucion
 
+Actualizacion vigente 2026-11-18: el usuario autoriza trasladar toda la entrega
+revisada a main y publicarla en origin/main (D-88). Alcance: corte f9b5d17 y SQL
+consolidado V1-V19/152 SP, con verificacion de fuentes; integracion fast-forward.
+Esta autorizacion sustituye el limite de rama anterior para esta entrega.
+Los gates productivos siguen abiertos; no es autorizacion de despliegue.
+
 Actualización vigente 2026-11-16: DEMO.DOCKER.LAPTOP VALIDADA E INTEGRADA LOCAL.
 Task_5ee0aa4919a6/ctx_fc37233ae5c6; entrega msg_405724745376 aceptada tras revisión.
 14fuentes/131artefactos exactos,19SQL canónicas; build propio43/1162testsPASS.
